@@ -131,6 +131,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
   flex-shrink: 0;
 }
 .tl-dot.active { background: var(--cyan); box-shadow: 0 0 0 3px rgba(78,201,184,0.25); }
+.tl-dot.past   { background: var(--text3); opacity: 0.5; }
 .tl-dot.future { background: var(--bg3); border: 2px solid var(--border2); }
 
 /* Lab card */
@@ -362,8 +363,8 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 
           <!-- ENTRY 1: Dec 2025 — HISTORICAL -->
           <div class="tl-entry">
-            <div class="tl-dot active"></div>
-            <div class="lab-card active-entry" onclick="openLabEntry()">
+            <div class="tl-dot past"></div>
+            <div class="lab-card" style="cursor:default;opacity:0.8;">
               <div class="lab-card-header">
                 <div class="lab-card-top">
                   <div>
@@ -404,22 +405,66 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
             </div>
           </div>
 
-          <!-- ENTRY 2: ~Mar 2026 — Future / Pending -->
+          <!-- ENTRY 2: Apr 2026 — ACTIVE -->
           <div class="tl-entry">
-            <div class="tl-dot future"></div>
-            <div class="future-card">
-              <div class="future-card-label">⏳ Planned · ~March–April 2026</div>
-              <div class="future-card-title">Follow-up Panel · 8–12 weeks on SEP</div>
-              <div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--text3);line-height:1.6;">
-                Gate markers: ApoB, LDL-P, TG, HDL, Ferritin, hs-CRP, HbA1c<br>
-                If all 8 gates pass → SEP-L activated<br>
-                If TG 150–200 → Hold SEP-L, no de-escalation<br>
-                If 2+ worsen → Re-enter SEP reset 4–6 wks
+            <div class="tl-dot active"></div>
+            <div class="lab-card active-entry" onclick="openLabEntry()">
+              <div class="lab-card-header">
+                <div class="lab-card-top">
+                  <div>
+                    <div class="lab-card-date">April 24, 2026 · Fasting</div>
+                    <div class="lab-card-title">Function Health Panel</div>
+                    <div class="lab-card-sub">Quest Diagnostics · 40+ markers · Full cardiometabolic</div>
+                  </div>
+                  <div class="lab-card-source">Apr 2026</div>
+                </div>
+              </div>
+              <div class="lab-card-metrics">
+                <div class="lcm"><div class="lcm-val val-hi">102</div><div class="lcm-name">ApoB</div></div>
+                <div class="lcm"><div class="lcm-val val-hi">167</div><div class="lcm-name">TG</div></div>
+                <div class="lcm"><div class="lcm-val val-hi">1299</div><div class="lcm-name">LDL-P</div></div>
+                <div class="lcm"><div class="lcm-val val-lo">9</div><div class="lcm-name">Ferritin</div></div>
+                <div class="lcm"><div class="lcm-val val-lo">29</div><div class="lcm-name">HDL</div></div>
+                <div class="lcm"><div class="lcm-val val-hi">1.9</div><div class="lcm-name">hs-CRP</div></div>
+              </div>
+              <!-- Protocol activated by this result -->
+              <div class="proto-pill sep" onclick="event.stopPropagation();openProtocol('sep','apr2026')">
+                <div class="proto-pill-icon">🔴</div>
+                <div class="proto-pill-text">
+                  <div class="proto-pill-label">→ Activated Protocol</div>
+                  <div class="proto-pill-name">SEP Reset · Phase 2</div>
+                  <div class="proto-pill-reason">TG ✓ LDL-P ✓ improved · ApoB 102 · Ferritin 9 · HbA1c 5.8 · hs-CRP 1.9 still failing</div>
+                </div>
+                <div class="proto-pill-chevron">›</div>
+              </div>
+              <!-- Gate progress mini -->
+              <div class="gate-mini">
+                <div class="gm-item"><div class="gm-dot fail"></div><span>ApoB <span class="val fail">102</span></span></div>
+                <div class="gm-item"><div class="gm-dot pass"></div><span>TG <span class="val pass">167</span></span></div>
+                <div class="gm-item"><div class="gm-dot pass"></div><span>LDL-P <span class="val pass">1299</span></span></div>
+                <div class="gm-item"><div class="gm-dot fail"></div><span>Ferritin <span class="val fail">9</span></span></div>
+                <div class="gm-item"><div class="gm-dot fail"></div><span>HDL <span class="val fail">29</span></span></div>
+                <div class="gm-item"><div class="gm-dot fail"></div><span>hs-CRP <span class="val fail">1.9</span></span></div>
               </div>
             </div>
           </div>
 
-          <!-- ENTRY 3: SEP-L — future -->
+          <!-- ENTRY 3: ~Jul–Aug 2026 — Future / Pending -->
+          <div class="tl-entry">
+            <div class="tl-dot future"></div>
+            <div class="future-card">
+              <div class="future-card-label">⏳ Planned · ~July–August 2026</div>
+              <div class="future-card-title">Follow-up Panel · 8–12 weeks on SEP Phase 2</div>
+              <div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--text3);line-height:1.6;">
+                Gate markers: ApoB, LDL-P, TG, HDL, Ferritin, hs-CRP, HbA1c, AST/ALT<br>
+                If all 8 gates pass → SEP-L activated<br>
+                If TG 150–180 → Hold SEP-L, continue Phase 2<br>
+                If 2+ worsen → Re-evaluate protocol
+              </div>
+            </div>
+          </div>
+
+          <!-- ENTRY 4: SEP-L — future -->
           <div class="tl-entry">
             <div class="tl-dot future"></div>
             <div class="future-card">
@@ -469,7 +514,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
           <div class="lab-cat-title">Lipids & Lipoproteins</div>
           <div class="lab-row"><div class="lab-row-name">Total Cholesterol</div><div class="lab-row-val val-ok">179</div><div class="lab-row-range">&lt;200</div><div class="lab-row-flag">✓</div></div>
           <div class="lab-row"><div class="lab-row-name">HDL</div><div class="lab-row-val val-lo">29</div><div class="lab-row-range">≥40</div><div class="lab-row-flag">⚠️</div></div>
-          <div class="lab-row"><div class="lab-row-name">Triglycerides</div><div class="lab-row-val val-hi">277</div><div class="lab-row-range">&lt;150</div><div class="lab-row-flag">🔴</div></div>
+          <div class="lab-row"><div class="lab-row-name">Triglycerides</div><div class="lab-row-val val-hi">167</div><div class="lab-row-range">&lt;150</div><div class="lab-row-flag">⚠️</div></div>
           <div class="lab-row"><div class="lab-row-name">LDL-C</div><div class="lab-row-val val-ok">93</div><div class="lab-row-range">&lt;100</div><div class="lab-row-flag">✓</div></div>
           <div class="lab-row"><div class="lab-row-name">ApoB</div><div class="lab-row-val val-hi">102</div><div class="lab-row-range">&lt;90</div><div class="lab-row-flag">🔴</div></div>
           <div class="lab-row"><div class="lab-row-name">Lp(a)</div><div class="lab-row-val val-ok">41</div><div class="lab-row-range">&lt;75</div><div class="lab-row-flag">✓</div></div>
@@ -517,12 +562,12 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 
         <!-- Protocol link from within labs -->
         <div class="sec-label" style="margin-top:4px;">Activated Protocol</div>
-        <div class="proto-pill sep" style="border-radius:var(--r-md);border:1px solid rgba(224,112,96,0.3);background:rgba(224,112,96,0.07);" onclick="openProtocol('sep','dec2025')">
+        <div class="proto-pill sep" style="border-radius:var(--r-md);border:1px solid rgba(224,112,96,0.3);background:rgba(224,112,96,0.07);" onclick="openProtocol('sep','apr2026')">
           <div class="proto-pill-icon">🔴</div>
           <div class="proto-pill-text">
             <div class="proto-pill-label">Activated by this result set</div>
-            <div class="proto-pill-name">SEP Reset · Phase 1</div>
-            <div class="proto-pill-reason">5 gate failures → decongestive force protocol · 8–16 wk reset</div>
+            <div class="proto-pill-name">SEP Reset · Phase 2</div>
+            <div class="proto-pill-reason">5 gates still failing · Phase 2 intensified clearance + muscle disposal · 8–12 wk</div>
           </div>
           <div class="proto-pill-chevron">›</div>
         </div>
