@@ -360,7 +360,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 
         <div class="timeline">
 
-          <!-- ENTRY 1: Dec 2025 — ACTIVE -->
+          <!-- ENTRY 1: Dec 2025 — HISTORICAL -->
           <div class="tl-entry">
             <div class="tl-dot active"></div>
             <div class="lab-card active-entry" onclick="openLabEntry()">
@@ -444,24 +444,24 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <div class="lab-full-header">
           <div class="lfh-top">
             <div>
-              <div class="lfh-date">December 3, 2025 · Fasting · Quest</div>
+              <div class="lfh-date">April 24, 2026 · Fasting · Quest</div>
               <div class="lfh-title">Function Health Panel</div>
             </div>
             <div class="lfh-badge">SZ648122W</div>
           </div>
-          <div class="lfh-activated">→ Activated: <strong>SEP Reset Phase 1</strong> · 5 of 8 gates failing</div>
+          <div class="lfh-activated">→ Activated: <strong>SEP Reset Phase 2</strong> · 5 of 8 gates failing (TG ✓ LDL-P ✓ AST/ALT ✓)</div>
         </div>
 
         <!-- Gate status -->
         <div class="sec-label">Transition Gate Status</div>
-        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">ApoB</div><div class="gate-row-val fail">114</div><div class="gate-row-target">goal ≤90</div></div>
-        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">LDL-P</div><div class="gate-row-val fail">2157</div><div class="gate-row-target">goal ≤1400</div></div>
-        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">Triglycerides</div><div class="gate-row-val fail">277</div><div class="gate-row-target">goal ≤180</div></div>
-        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">Ferritin</div><div class="gate-row-val fail">7</div><div class="gate-row-target">goal ≥30</div></div>
-        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">hs-CRP</div><div class="gate-row-val fail">2.6</div><div class="gate-row-target">goal ≤1.5</div></div>
-        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">HDL</div><div class="gate-row-val fail">29</div><div class="gate-row-target">goal ≥35</div></div>
-        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">HbA1c</div><div class="gate-row-val fail">5.7%</div><div class="gate-row-target">goal ≤5.6</div></div>
-        <div class="gate-row"><div class="gdot pass"></div><div class="gate-row-label">AST / ALT</div><div class="gate-row-val pass">20 / 29</div><div class="gate-row-target">normal ✓</div></div>
+        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">ApoB</div><div class="gate-row-val fail">102</div><div class="gate-row-target">goal ≤90 (−12 needed)</div></div>
+        <div class="gate-row"><div class="gdot pass"></div><div class="gate-row-label">LDL-P</div><div class="gate-row-val pass">1299</div><div class="gate-row-target">goal ≤1400 ✓</div></div>
+        <div class="gate-row"><div class="gdot pass"></div><div class="gate-row-label">Triglycerides</div><div class="gate-row-val pass">167</div><div class="gate-row-target">goal ≤180 ✓</div></div>
+        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">Ferritin</div><div class="gate-row-val fail">9</div><div class="gate-row-target">goal ≥30 (+21 needed)</div></div>
+        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">hs-CRP</div><div class="gate-row-val fail">1.9</div><div class="gate-row-target">goal ≤1.5 (−0.4 needed)</div></div>
+        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">HDL</div><div class="gate-row-val fail">29</div><div class="gate-row-target">goal ≥35 (+6 needed)</div></div>
+        <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">HbA1c</div><div class="gate-row-val fail">5.8%</div><div class="gate-row-target">goal ≤5.6 (−0.2 needed)</div></div>
+        <div class="gate-row"><div class="gdot pass"></div><div class="gate-row-label">AST / ALT</div><div class="gate-row-val pass">19 / 32</div><div class="gate-row-target">normal ✓</div></div>
 
         <div class="divider"></div>
 
@@ -470,26 +470,26 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
           <div class="lab-row"><div class="lab-row-name">Total Cholesterol</div><div class="lab-row-val val-ok">179</div><div class="lab-row-range">&lt;200</div><div class="lab-row-flag">✓</div></div>
           <div class="lab-row"><div class="lab-row-name">HDL</div><div class="lab-row-val val-lo">29</div><div class="lab-row-range">≥40</div><div class="lab-row-flag">⚠️</div></div>
           <div class="lab-row"><div class="lab-row-name">Triglycerides</div><div class="lab-row-val val-hi">277</div><div class="lab-row-range">&lt;150</div><div class="lab-row-flag">🔴</div></div>
-          <div class="lab-row"><div class="lab-row-name">LDL-C</div><div class="lab-row-val val-hi">110</div><div class="lab-row-range">&lt;100</div><div class="lab-row-flag">🔴</div></div>
-          <div class="lab-row"><div class="lab-row-name">ApoB</div><div class="lab-row-val val-hi">114</div><div class="lab-row-range">&lt;90</div><div class="lab-row-flag">🔴</div></div>
+          <div class="lab-row"><div class="lab-row-name">LDL-C</div><div class="lab-row-val val-ok">93</div><div class="lab-row-range">&lt;100</div><div class="lab-row-flag">✓</div></div>
+          <div class="lab-row"><div class="lab-row-name">ApoB</div><div class="lab-row-val val-hi">102</div><div class="lab-row-range">&lt;90</div><div class="lab-row-flag">🔴</div></div>
           <div class="lab-row"><div class="lab-row-name">Lp(a)</div><div class="lab-row-val val-ok">41</div><div class="lab-row-range">&lt;75</div><div class="lab-row-flag">✓</div></div>
         </div>
 
         <div class="lab-cat">
           <div class="lab-cat-title">LDL Fractionation</div>
-          <div class="lab-row"><div class="lab-row-name">LDL Particle #</div><div class="lab-row-val val-hi">2157</div><div class="lab-row-range">&lt;1138</div><div class="lab-row-flag">🔴</div></div>
-          <div class="lab-row"><div class="lab-row-name">LDL Small</div><div class="lab-row-val val-hi">401</div><div class="lab-row-range">&lt;142</div><div class="lab-row-flag">🔴</div></div>
+          <div class="lab-row"><div class="lab-row-name">LDL Particle #</div><div class="lab-row-val val-hi">1299</div><div class="lab-row-range">&lt;1138</div><div class="lab-row-flag">🔴</div></div>
+          <div class="lab-row"><div class="lab-row-name">LDL Small</div><div class="lab-row-val val-hi">242</div><div class="lab-row-range">&lt;142</div><div class="lab-row-flag">🔴</div></div>
           <div class="lab-row"><div class="lab-row-name">LDL Pattern</div><div class="lab-row-val val-hi">B</div><div class="lab-row-range">A ideal</div><div class="lab-row-flag">🔴</div></div>
-          <div class="lab-row"><div class="lab-row-name">LDL Peak Size</div><div class="lab-row-val val-hi">207.4Å</div><div class="lab-row-range">&gt;222.9Å</div><div class="lab-row-flag">🔴</div></div>
-          <div class="lab-row"><div class="lab-row-name">HDL Large</div><div class="lab-row-val val-ok">7386</div><div class="lab-row-range">&gt;6729</div><div class="lab-row-flag">✓</div></div>
+          <div class="lab-row"><div class="lab-row-name">LDL Peak Size</div><div class="lab-row-val val-hi">205.7Å</div><div class="lab-row-range">&gt;222.9Å</div><div class="lab-row-flag">🔴</div></div>
+          <div class="lab-row"><div class="lab-row-name">HDL Large</div><div class="lab-row-val val-hi">4652</div><div class="lab-row-range">&gt;6729</div><div class="lab-row-flag">⚠️</div></div>
         </div>
 
         <div class="lab-cat">
           <div class="lab-cat-title">Iron & CBC</div>
-          <div class="lab-row"><div class="lab-row-name">Ferritin</div><div class="lab-row-val val-hi" style="color:var(--coral2)">7</div><div class="lab-row-range">38–380</div><div class="lab-row-flag">🔴</div></div>
-          <div class="lab-row"><div class="lab-row-name">TIBC</div><div class="lab-row-val val-hi">457</div><div class="lab-row-range">250–425</div><div class="lab-row-flag">⚠️</div></div>
-          <div class="lab-row"><div class="lab-row-name">Iron Total</div><div class="lab-row-val val-ok">128</div><div class="lab-row-range">50–180</div><div class="lab-row-flag">✓</div></div>
-          <div class="lab-row"><div class="lab-row-name">Hemoglobin</div><div class="lab-row-val val-lo">13.1</div><div class="lab-row-range">13.2–17.1</div><div class="lab-row-flag">⚠️</div></div>
+          <div class="lab-row"><div class="lab-row-name">Ferritin</div><div class="lab-row-val val-hi" style="color:var(--coral2)">9</div><div class="lab-row-range">38–380</div><div class="lab-row-flag">🔴</div></div>
+          <div class="lab-row"><div class="lab-row-name">TIBC</div><div class="lab-row-val val-ok">421</div><div class="lab-row-range">250–425</div><div class="lab-row-flag">✓</div></div>
+          <div class="lab-row"><div class="lab-row-name">Iron Total</div><div class="lab-row-val val-ok">89</div><div class="lab-row-range">50–180</div><div class="lab-row-flag">✓</div></div>
+          <div class="lab-row"><div class="lab-row-name">Hemoglobin</div><div class="lab-row-val val-ok">13.7</div><div class="lab-row-range">13.2–17.1</div><div class="lab-row-flag">⚠️</div></div>
         </div>
 
         <div class="lab-cat">
@@ -500,10 +500,10 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 
         <div class="lab-cat">
           <div class="lab-cat-title">Metabolic & Hormonal</div>
-          <div class="lab-row"><div class="lab-row-name">HbA1c</div><div class="lab-row-val val-hi">5.7%</div><div class="lab-row-range">&lt;5.7%</div><div class="lab-row-flag">⚠️</div></div>
-          <div class="lab-row"><div class="lab-row-name">Glucose (fasting)</div><div class="lab-row-val val-ok">97</div><div class="lab-row-range">65–99</div><div class="lab-row-flag">✓</div></div>
-          <div class="lab-row"><div class="lab-row-name">Insulin</div><div class="lab-row-val val-ok">12.2</div><div class="lab-row-range">≤18.4</div><div class="lab-row-flag">✓</div></div>
-          <div class="lab-row"><div class="lab-row-name">hs-CRP</div><div class="lab-row-val val-hi">2.6</div><div class="lab-row-range">&lt;1.0 opt</div><div class="lab-row-flag">⚠️</div></div>
+          <div class="lab-row"><div class="lab-row-name">HbA1c</div><div class="lab-row-val val-hi">5.8%</div><div class="lab-row-range">&lt;5.7%</div><div class="lab-row-flag">🔴</div></div>
+          <div class="lab-row"><div class="lab-row-name">Glucose (fasting)</div><div class="lab-row-val val-ok">98</div><div class="lab-row-range">65–99</div><div class="lab-row-flag">✓</div></div>
+          <div class="lab-row"><div class="lab-row-name">Insulin</div><div class="lab-row-val val-ok">8.7</div><div class="lab-row-range">≤18.4</div><div class="lab-row-flag">✓</div></div>
+          <div class="lab-row"><div class="lab-row-name">hs-CRP</div><div class="lab-row-val val-hi">1.9</div><div class="lab-row-range">&lt;1.0 opt</div><div class="lab-row-flag">⚠️</div></div>
           <div class="lab-row"><div class="lab-row-name">SHBG</div><div class="lab-row-val val-lo">9</div><div class="lab-row-range">10–50</div><div class="lab-row-flag">⚠️</div></div>
           <div class="lab-row"><div class="lab-row-name">Testosterone</div><div class="lab-row-val" style="color:var(--text2)">303</div><div class="lab-row-range">250–1100</div><div class="lab-row-flag">—</div></div>
           <div class="lab-row"><div class="lab-row-name">RBC Magnesium</div><div class="lab-row-val val-hi">6.9</div><div class="lab-row-range">4.0–6.4</div><div class="lab-row-flag">⚠️</div></div>
@@ -512,7 +512,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
           <div class="lab-row"><div class="lab-row-name">DHEA-S</div><div class="lab-row-val val-ok">229</div><div class="lab-row-range">61–442</div><div class="lab-row-flag">✓</div></div>
           <div class="lab-row"><div class="lab-row-name">TSH</div><div class="lab-row-val val-ok">0.92</div><div class="lab-row-range">0.40–4.50</div><div class="lab-row-flag">✓</div></div>
           <div class="lab-row"><div class="lab-row-name">GGT</div><div class="lab-row-val val-ok">9</div><div class="lab-row-range">3–95</div><div class="lab-row-flag">✓</div></div>
-          <div class="lab-row"><div class="lab-row-name">AST / ALT</div><div class="lab-row-val val-ok">20 / 29</div><div class="lab-row-range">normal</div><div class="lab-row-flag">✓</div></div>
+          <div class="lab-row"><div class="lab-row-name">AST / ALT</div><div class="lab-row-val val-ok">19 / 32</div><div class="lab-row-range">normal</div><div class="lab-row-flag">✓</div></div>
         </div>
 
         <!-- Protocol link from within labs -->
@@ -538,24 +538,24 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <div class="proto-origin-banner" onclick="navigate('labs','Protocol · SEP Reset')">
           <div class="pob-left">
             <div class="pob-label">⬆ Activated by lab results</div>
-            <div class="pob-date">Function Health · Dec 3, 2025</div>
-            <div class="pob-metrics">ApoB 114 · TG 277 · LDL-P 2157 · Ferritin 7 · hs-CRP 2.6</div>
+            <div class="pob-date">Function Health · Apr 24, 2026</div>
+            <div class="pob-metrics">ApoB 102 · TG 167 · LDL-P 1299 · Ferritin 9 · HbA1c 5.8 · hs-CRP 1.9</div>
           </div>
           <div class="pob-arrow">›</div>
         </div>
 
         <div class="proto-phase-badge">
           <div class="proto-phase-dot"></div>
-          SEP Reset · Phase 1 · Active
+          SEP Reset · Phase 2 · Active
         </div>
 
         <div class="scr-head">
           <h2>SEP Protocol</h2>
-          <p>Signal-Explicit Partitioning · Decongestive Reset · 8–16 wks</p>
+          <p>Signal-Explicit Partitioning · Phase 2 · Intensified Clearance + Muscle Disposal · 8–12 wks</p>
         </div>
 
         <div class="info-box">
-          <strong>Why SEP?</strong> Hepatic VLDL overproduction + insulin resistance + iron deficiency + lipid export failure. This protocol forces cholesterol excretion via bile export, fiber binding, and sterol displacement — while repairing iron and suppressing upstream AMPK signals.
+          <strong>Why SEP Phase 2?</strong> TG and LDL-P improved; ApoB, HDL, Ferritin, HbA1c, and hs-CRP remain failing. Phase 2 intensifies: omega-3 therapy (2–3 g EPA+DHA/day), mandatory post-meal walks for insulin/A1c, BALT shifted to afternoon, iron protected in dedicated 2:30 PM window, berberine anchored at lunch and conditional at dinner. Core diet and sleep unchanged.
         </div>
 
         <div class="ptabs">
@@ -589,19 +589,19 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 
         <!-- GATES TAB -->
         <div class="ptab-section" id="ptab-gates">
-          <div class="info-box">All 8 gates must pass to transition to <strong>SEP-L</strong>. Currently 5 failing. Retest at 8–12 weeks.</div>
-          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">ApoB ≤ 90</div><div class="gate-row-val fail">114 H</div><div class="gate-row-target">−24 needed</div></div>
-          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">LDL-P ≤ 1400</div><div class="gate-row-val fail">2157 H</div><div class="gate-row-target">−757 needed</div></div>
-          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">TG ≤ 180</div><div class="gate-row-val fail">277 H</div><div class="gate-row-target">−97 needed</div></div>
-          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">Ferritin ≥ 30</div><div class="gate-row-val fail">7 L</div><div class="gate-row-target">+23 needed</div></div>
-          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">hs-CRP ≤ 1.5</div><div class="gate-row-val fail">2.6 H</div><div class="gate-row-target">−1.1 needed</div></div>
+          <div class="info-box">All 8 gates must pass to transition to <strong>SEP-L</strong>. Currently 5 failing (3 new passes: TG, LDL-P, AST/ALT). Retest at 8–12 weeks.</div>
+          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">ApoB ≤ 90</div><div class="gate-row-val fail">102 H</div><div class="gate-row-target">−12 needed</div></div>
+          <div class="gate-row"><div class="gdot pass"></div><div class="gate-row-label">LDL-P ≤ 1400</div><div class="gate-row-val pass">1299 ✓</div><div class="gate-row-target">passing</div></div>
+          <div class="gate-row"><div class="gdot pass"></div><div class="gate-row-label">TG ≤ 180</div><div class="gate-row-val pass">167 ✓</div><div class="gate-row-target">passing</div></div>
+          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">Ferritin ≥ 30</div><div class="gate-row-val fail">9 L</div><div class="gate-row-target">+21 needed</div></div>
+          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">hs-CRP ≤ 1.5</div><div class="gate-row-val fail">1.9 H</div><div class="gate-row-target">−0.4 needed</div></div>
           <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">HDL ≥ 35</div><div class="gate-row-val fail">29 L</div><div class="gate-row-target">+6 needed</div></div>
-          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">HbA1c ≤ 5.6</div><div class="gate-row-val fail">5.7% H</div><div class="gate-row-target">−0.1 needed</div></div>
-          <div class="gate-row"><div class="gdot pass"></div><div class="gate-row-label">AST/ALT Normal</div><div class="gate-row-val pass">20/29 ✓</div><div class="gate-row-target">hold</div></div>
+          <div class="gate-row"><div class="gdot fail"></div><div class="gate-row-label">HbA1c ≤ 5.6</div><div class="gate-row-val fail">5.8% H</div><div class="gate-row-target">−0.2 needed</div></div>
+          <div class="gate-row"><div class="gdot pass"></div><div class="gate-row-label">AST/ALT Normal</div><div class="gate-row-val pass">19/32 ✓</div><div class="gate-row-target">hold</div></div>
 
           <div style="margin-top:16px;" class="info-box">
-            If TG 150–200 after retest → hold SEP-L, no de-escalation yet.<br>
-            If 2+ markers worsen → re-enter SEP reset for 4–6 weeks.
+            Realistic 8–12 week targets (Phase 2): TG 110–140 · ApoB 90–98 · LDL-P 1050–1200 · HDL 32–36 · HbA1c 5.6–5.7 · LDL-small 170–220<br>
+            If 2+ markers worsen → re-evaluate protocol.
           </div>
         </div>
 
@@ -664,75 +664,92 @@ const SCHEDULE = {
   Mon:[
     {t:'6:00–6:30',b:'waking',l:'On Waking',items:[{e:'🌿',n:'Triphala',d:'3–5 g'}]},
     {t:'6:30–7:00',b:'early',l:'Early Morning',items:[{e:'🥦',n:'Sulforaphane Core',d:'½–1 tsp'}]},
-    {t:'7:30–8:30',b:'breakfast',l:'Breakfast',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
-    {t:'10:00–11:00',b:'midmorn',l:'Mid-Morning',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'7:30–8:30',b:'breakfast',l:'Breakfast · Resistance A',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'},{e:'☀️',n:'Vitamin D3',d:'2000 IU'},{e:'🦐',n:'Astaxanthin',d:'8 mg'},{e:'💨',n:'NO Core',d:'½–1 tsp'}]},
+    {t:'10:30',b:'midmorn',l:'Mid-Morning',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
     {t:'12:00–12:20',b:'prelunch',l:'Pre-Lunch',items:[{e:'🌾',n:'Psyllium Husk',d:'5 g'},{e:'🌾',n:'Beta-glucan',d:'3 g'}]},
-    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'},{e:'☀️',n:'Vitamin D3',d:'2000 IU'},{e:'🦐',n:'Astaxanthin',d:'8 mg'},{e:'💨',n:'NO Core',d:'½–1 tsp'}]},
-    {t:'3:00–4:30',b:'afternoon',l:'Mid-Afternoon',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
-    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
+    {t:'12:45–1:00',b:'early',l:'Post-Lunch Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min · non-negotiable'}]},
+    {t:'2:30',b:'afternoon',l:'Iron Window',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'4:30',b:'afternoon',l:'Afternoon',items:[{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'}]},
+    {t:'7:45',b:'early',l:'Post-Dinner Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min · non-negotiable'}]},
     {t:'9:30–10:30',b:'bedtime',l:'Bedtime',items:[{e:'🍯',n:'Brahma/Agastya/Amukkura Rasayanam',d:'1 tsp with milk'}]},
   ],
   Tue:[
     {t:'6:00–6:30',b:'waking',l:'On Waking',items:[{e:'🌿',n:'Triphala',d:'3–5 g'}]},
-    {t:'7:30–8:30',b:'breakfast',l:'Breakfast',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
-    {t:'10:00–11:00',b:'midmorn',l:'Mid-Morning',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'7:30–8:30',b:'breakfast',l:'Breakfast · Zone 2',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
+    {t:'10:30',b:'midmorn',l:'Mid-Morning',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
     {t:'12:00–12:20',b:'prelunch',l:'Pre-Lunch',items:[{e:'🌾',n:'Psyllium Husk',d:'5 g'},{e:'🌾',n:'Beta-glucan',d:'3 g'}]},
-    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
-    {t:'3:00–4:30',b:'afternoon',l:'Mid-Afternoon',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
-    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
+    {t:'12:45–1:00',b:'early',l:'Post-Lunch Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
+    {t:'2:30',b:'afternoon',l:'Afternoon',items:[{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'}]},
+    {t:'7:45',b:'early',l:'Post-Dinner Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
     {t:'9:30–10:30',b:'bedtime',l:'Bedtime',items:[{e:'💤',n:'Magnesium Glycinate',d:'200 mg'}]},
   ],
   Wed:[
     {t:'6:00–6:30',b:'waking',l:'On Waking',items:[{e:'🌿',n:'Triphala',d:'3–5 g'}]},
     {t:'6:30–7:00',b:'early',l:'Early Morning',items:[{e:'🥦',n:'Sulforaphane Core',d:'½–1 tsp'}]},
-    {t:'7:30–8:30',b:'breakfast',l:'Breakfast',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
-    {t:'10:00–11:00',b:'midmorn',l:'Mid-Morning',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'7:30–8:30',b:'breakfast',l:'Breakfast · Resistance B',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
+    {t:'10:30',b:'midmorn',l:'Mid-Morning',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
     {t:'12:00–12:20',b:'prelunch',l:'Pre-Lunch',items:[{e:'🌾',n:'Psyllium Husk',d:'5 g'},{e:'🌾',n:'Beta-glucan',d:'3 g'}]},
-    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'},{e:'☀️',n:'Vitamin D3',d:'2000 IU'},{e:'🦐',n:'Astaxanthin',d:'8 mg'},{e:'💨',n:'NO Core',d:'½–1 tsp'}]},
-    {t:'3:00–4:30',b:'afternoon',l:'Mid-Afternoon',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
-    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'12:30–1:30',b:'lunch',l:'Lunch + HIIT Finisher',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'},{e:'☀️',n:'Vitamin D3',d:'2000 IU'},{e:'🦐',n:'Astaxanthin',d:'8 mg'},{e:'💨',n:'NO Core',d:'½–1 tsp'}]},
+    {t:'12:45–1:00',b:'early',l:'Post-Lunch Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
+    {t:'2:30',b:'afternoon',l:'Iron Window',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'4:30',b:'afternoon',l:'Afternoon',items:[{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'💊',n:'Niacin (optional)',d:'50 mg flush · 1×/wk'}]},
+    {t:'7:45',b:'early',l:'Post-Dinner Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
     {t:'9:30–10:30',b:'bedtime',l:'Bedtime',items:[{e:'🍯',n:'Brahma/Agastya/Amukkura Rasayanam',d:'1 tsp with milk'},{e:'💤',n:'Magnesium Glycinate',d:'200 mg'}]},
   ],
   Thu:[
     {t:'6:00–6:30',b:'waking',l:'On Waking',items:[{e:'🌿',n:'Triphala',d:'3–5 g'}]},
-    {t:'7:30–8:30',b:'breakfast',l:'Breakfast',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
-    {t:'10:00–11:00',b:'midmorn',l:'Mid-Morning',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'7:30–8:30',b:'breakfast',l:'Breakfast · Zone 2',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
+    {t:'10:30',b:'midmorn',l:'Mid-Morning',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
     {t:'12:00–12:20',b:'prelunch',l:'Pre-Lunch',items:[{e:'🌾',n:'Psyllium Husk',d:'5 g'},{e:'🌾',n:'Beta-glucan',d:'3 g'}]},
-    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
-    {t:'3:00–4:30',b:'afternoon',l:'Mid-Afternoon',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
-    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
+    {t:'12:45–1:00',b:'early',l:'Post-Lunch Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
+    {t:'2:30',b:'afternoon',l:'Afternoon',items:[{e:'🍫',n:'Polyphenol Pulse',d:'½–1 tsp'}]},
+    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'}]},
+    {t:'7:45',b:'early',l:'Post-Dinner Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
     {t:'9:30–10:30',b:'bedtime',l:'Bedtime',items:[{e:'💤',n:'Magnesium Glycinate',d:'200 mg'}]},
   ],
   Fri:[
     {t:'6:00–6:30',b:'waking',l:'On Waking',items:[{e:'🌿',n:'Triphala',d:'3–5 g'}]},
-    {t:'7:30–8:30',b:'breakfast',l:'Breakfast',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
-    {t:'10:00–11:00',b:'midmorn',l:'Mid-Morning',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'6:30–7:00',b:'early',l:'Early Morning',items:[{e:'🥦',n:'Sulforaphane Core',d:'½–1 tsp'}]},
+    {t:'7:30–8:30',b:'breakfast',l:'Breakfast · Resistance C',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'},{e:'☀️',n:'Vitamin D3',d:'2000 IU'},{e:'🦐',n:'Astaxanthin',d:'8 mg'},{e:'💨',n:'NO Core',d:'½–1 tsp'}]},
+    {t:'10:30',b:'midmorn',l:'Mid-Morning',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
     {t:'12:00–12:20',b:'prelunch',l:'Pre-Lunch',items:[{e:'🌾',n:'Psyllium Husk',d:'5 g'},{e:'🌾',n:'Beta-glucan',d:'3 g'}]},
-    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
-    {t:'3:00–4:30',b:'afternoon',l:'Mid-Afternoon',items:[{e:'🍫',n:'Polyphenol Pulse',d:'½–1 tsp'}]},
-    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
+    {t:'12:45–1:00',b:'early',l:'Post-Lunch Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
+    {t:'2:30',b:'afternoon',l:'Iron Window',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'4:30',b:'afternoon',l:'Afternoon',items:[{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'}]},
+    {t:'7:45',b:'early',l:'Post-Dinner Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
     {t:'9:30–10:30',b:'bedtime',l:'Bedtime',items:[{e:'🍯',n:'Brahma/Agastya/Amukkura Rasayanam',d:'1 tsp with milk'}]},
   ],
   Sat:[
     {t:'6:00–6:30',b:'waking',l:'On Waking',items:[{e:'🌿',n:'Triphala',d:'3–5 g'}]},
-    {t:'6:30–7:00',b:'early',l:'Early Morning',items:[{e:'🥦',n:'Sulforaphane Core',d:'½–1 tsp'}]},
-    {t:'7:30–8:30',b:'breakfast',l:'Breakfast',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
-    {t:'10:00–11:00',b:'midmorn',l:'Mid-Morning',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'7:30–8:30',b:'breakfast',l:'Breakfast · HIIT',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
+    {t:'10:30',b:'midmorn',l:'Mid-Morning',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
     {t:'12:00–12:20',b:'prelunch',l:'Pre-Lunch',items:[{e:'🌾',n:'Psyllium Husk',d:'5 g'},{e:'🌾',n:'Beta-glucan',d:'3 g'}]},
-    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'},{e:'☀️',n:'Vitamin D3',d:'2000 IU'},{e:'🦐',n:'Astaxanthin',d:'8 mg'},{e:'💨',n:'NO Core',d:'½–1 tsp'}]},
-    {t:'3:00–4:30',b:'afternoon',l:'Mid-Afternoon',items:[{e:'🛡',n:'NAC',d:'600 mg'}]},
-    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
+    {t:'12:45–1:00',b:'early',l:'Post-Lunch Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
+    {t:'2:00',b:'afternoon',l:'Afternoon',items:[{e:'🍫',n:'Polyphenol Pulse',d:'½–1 tsp'}]},
+    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'}]},
+    {t:'7:45',b:'early',l:'Post-Dinner Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
     {t:'9:30–10:30',b:'bedtime',l:'Bedtime',items:[{e:'💤',n:'Magnesium Glycinate',d:'200 mg'}]},
   ],
   Sun:[
     {t:'6:00–6:30',b:'waking',l:'On Waking',items:[{e:'🌿',n:'Triphala',d:'3–5 g'}]},
-    {t:'7:30–8:30',b:'breakfast',l:'Breakfast',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
-    {t:'10:00–11:00',b:'midmorn',l:'Mid-Morning',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'7:30–8:30',b:'breakfast',l:'Breakfast · Long Walk',items:[{e:'🥤',n:'Smoothie',d:'1 serving'},{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🔥',n:'Curcumin',d:'500 mg'},{e:'🧬',n:'Vitamin B12',d:'500 mcg'},{e:'⚡',n:'CoQ10',d:'100 mg'}]},
     {t:'12:00–12:20',b:'prelunch',l:'Pre-Lunch',items:[{e:'🌾',n:'Psyllium Husk',d:'5 g'},{e:'🌾',n:'Beta-glucan',d:'3 g'}]},
-    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA 600 + DHA 400 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
-    {t:'3:00–4:30',b:'afternoon',l:'Mid-Afternoon',items:[{e:'🍫',n:'Polyphenol Pulse',d:'½–1 tsp'}]},
-    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
-    {t:'9:30–10:30',b:'bedtime',l:'Bedtime',items:[{e:'💤',n:'Magnesium Glycinate',d:'200 mg'}]},
+    {t:'12:30–1:30',b:'lunch',l:'Lunch',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'},{e:'🩸',n:'Berberine',d:'500 mg'},{e:'🌱',n:'Plant Sterols',d:'1500 mg'}]},
+    {t:'12:45–1:00',b:'early',l:'Post-Lunch Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
+    {t:'2:30',b:'afternoon',l:'Iron Window',items:[{e:'🧲',n:'Iron Bisglycinate',d:'25 mg'},{e:'🍊',n:'Vitamin C',d:'500 mg'}]},
+    {t:'4:30',b:'afternoon',l:'Afternoon',items:[{e:'🌶',n:'BALT Powder',d:'1 tsp'}]},
+    {t:'6:30–7:30',b:'dinner',l:'Dinner',items:[{e:'✨',n:'Portfolio+',d:'2 Tbsp'},{e:'🌱',n:'Plant Sterols',d:'500 mg'},{e:'💪',n:'Taurine',d:'1000 mg'},{e:'🫁',n:'Silymarin',d:'200 mg'},{e:'🧠',n:'Omega-3',d:'EPA+DHA 1000 mg'}]},
+    {t:'7:45',b:'early',l:'Post-Dinner Walk',items:[{e:'🚶',n:'Walk',d:'10–15 min'}]},
+    {t:'9:30–10:30',b:'bedtime',l:'Bedtime',items:[{e:'🍯',n:'Brahma/Agastya/Amukkura Rasayanam',d:'1 tsp with milk'}]},
   ],
 };
 
@@ -740,25 +757,26 @@ const SUPPS = [
   {e:'🌿',n:'Triphala',d:'3–5 g',f:'7×/wk',note:'On waking, empty stomach. Reduce dose if loose stools.'},
   {e:'🥦',n:'Sulforaphane Core',d:'½–1 tsp',f:'5×/wk',note:'Mon/Tue/Wed/Thu/Sat. Empty stomach preferred. Skip on Polyphenol Pulse days.'},
   {e:'✨',n:'Portfolio+',d:'2 Tbsp × 2/day',f:'14×/wk',note:'Breakfast + Lunch + Dinner. Never dry. Contains flaxseed, psyllium, sesame, sumac, oat bran, artichoke, bergamot, kelp.'},
-  {e:'🧠',n:'Omega-3 (BrainMD)',d:'EPA 600 + DHA 400 mg',f:'14×/wk',note:'Breakfast + Lunch. With fat-containing meals only.'},
-  {e:'🩸',n:'Berberine (Toniiq)',d:'500 mg',f:'14×/wk',note:'Breakfast + Dinner. With meals only. ≥2h from iron.'},
+  {e:'🧠',n:'Omega-3 (BrainMD)',d:'EPA+DHA 1000 mg × 2–3/day',f:'21×/wk',note:'Breakfast + Lunch + Dinner (2–3 g/day EPA+DHA total). With fat-containing meals. Prior OmegaCheck 2.8% — omega-3 lane significantly underpowered; therapeutic dose now target.'},
+  {e:'🩸',n:'Berberine (Toniiq)',d:'500 mg',f:'7–14×/wk',note:'Lunch daily (fixed). Dinner only if dinner contains rice/roti/grain/starch — skip if protein + vegetables only. Take 1–2 days off per week. ≥2h from iron. Fasting insulin improved 12.2→8.7; issue is now post-meal disposal not fasting control.'},
   {e:'🔥',n:'Curcumin (NatureWise)',d:'500 mg',f:'7×/wk',note:'Breakfast. With fat. Piperine-enhanced.'},
   {e:'🧬',n:'Vitamin B12',d:'500 mcg',f:'7×/wk',note:'Breakfast. Morning preferred for energy alignment.'},
   {e:'⚡',n:'CoQ10 (Doctor\'s Best)',d:'100 mg',f:'7×/wk',note:'Breakfast. Kaneka ubiquinone. With meals, fat improves absorption.'},
-  {e:'🧲',n:'Iron Bisglycinate (Solgar)',d:'25 mg',f:'7×/wk',note:'Mid-morning with Vitamin C. ≥2h from fiber, tea, coffee, Portfolio+, magnesium.'},
-  {e:'🍊',n:'Vitamin C (Sports Research)',d:'500 mg',f:'7×/wk',note:'Always co-taken with iron. Liposomal. Recycles iron to ferrous form.'},
+  {e:'🧲',n:'Iron Bisglycinate (Solgar)',d:'25 mg',f:'4× Mon/Wed/Fri/Sun',note:'2:30 PM in fully protected window. ≥2–3h from tea, coffee, cocoa, fiber, psyllium, beta-glucan, Portfolio+, calcium, magnesium, zinc, dairy. Always co-taken with Vitamin C. Ferritin only 7→9 — iron remains a bottleneck; window protection is paramount.'},
+  {e:'🍊',n:'Vitamin C (Sports Research)',d:'500 mg',f:'4× Mon/Wed/Fri/Sun',note:'2:30 PM only, co-taken with iron in protected window. Liposomal. Keeps iron in ferrous (absorbable) form.'},
   {e:'🌾',n:'Psyllium Husk',d:'5 g',f:'7×/wk',note:'Pre-lunch. ≥2h from iron and medications.'},
   {e:'🌾',n:'Beta-glucan',d:'3 g',f:'7×/wk',note:'Pre-lunch. Same spacing rules as psyllium.'},
   {e:'🌱',n:'Plant Sterols (LongLifeNutri)',d:'1500 mg lunch + 500 mg dinner',f:'14×/wk',note:'With meals only. ≥2h from iron.'},
   {e:'☀️',n:'Vitamin D3 + K2 (Sports Research)',d:'2000 IU',f:'3× Mon/Wed/Sat',note:'With fat-containing meal. D3 125 mcg + K2 MK-7 100 mcg.'},
   {e:'🦐',n:'Astaxanthin (Sports Research)',d:'8 mg',f:'3× Mon/Wed/Sat',note:'With fat meal. Algal oil. LDL membrane protection.'},
   {e:'💨',n:'NO Core (Beetroot + Arugula)',d:'½–1 tsp',f:'3× Mon/Wed/Sat',note:'Daytime/lunch only. Never evening. Can be stimulating.'},
-  {e:'🛡',n:'NAC (Nutricost)',d:'600 mg',f:'5× Mon–Thu,Sat',note:'Mid-afternoon, away from heavy meals if possible.'},
-  {e:'🍫',n:'Polyphenol Pulse',d:'½–1 tsp',f:'2× Fri/Sun',note:'Mid-afternoon only. Max 2×/week. Skip sulforaphane these days.'},
+  {e:'🛡',n:'NAC (Nutricost)',d:'600 mg',f:'5× Mon–Thu,Sat',note:'10:30 AM. Moved from mid-afternoon — some people find NAC activating; morning avoids sleep interference. Keep ≥1h from iron (iron now at 2:30 PM on iron days, so no conflict).'},
+  {e:'🍫',n:'Polyphenol Pulse',d:'½–1 tsp',f:'2× Thu/Sat',note:'2:30 PM (Thu) or 2:00 PM (Sat). Max 2×/week. Hormesis requires spacing — daily becomes noise. Thu and Sat are non-iron days with no BALT conflict.'},
+  {e:'💊',n:'Niacin — flush (optional)',d:'50 mg flush',f:'1× Wed',note:'Optional — not in core stack. With dinner Wed only. Start 50 mg 1×/wk; if tolerated increase to 2×/wk. Do NOT start with 500 mg or no-flush form. Monitor: A1c, fasting glucose, uric acid (currently 6.2), ALT/AST. Mechanistically fits low HDL + high TG + VLDL suppression phenotype, but A1c 5.8 and uric acid require caution.'},
   {e:'💪',n:'Taurine (Nutricost)',d:'1000 mg',f:'7×/wk',note:'Dinner. Conjugates bile acids → increases cholesterol excretion.'},
   {e:'🫁',n:'Silymarin (Zazzee)',d:'200 mg',f:'7×/wk',note:'Dinner. 30:1 extract. Hepatocyte membrane protection.'},
-  {e:'🌶',n:'BALT Powder',d:'1 tsp',f:'7×/wk',note:'Dinner. Black cumin + amla + turmeric + pippali blend. NRF2 + insulin sensitivity.'},
-  {e:'💤',n:'Magnesium Glycinate (Bronson)',d:'200 mg',f:'4× Tue/Thu/Sat/Sun',note:'Bedtime. Albion chelate. ≥2h from iron.'},
+  {e:'🌶',n:'BALT Powder',d:'1 tsp',f:'5× Mon/Tue/Wed/Fri/Sun',note:'2:30 PM (Tue) or 4:30 PM (iron days: Mon/Wed/Fri/Sun). Moved from dinner — observed stimulation effect. Not Polyphenol Pulse days (Thu/Sat). Black cumin + amla + turmeric + pippali: NRF2 + insulin sensitivity.'},
+  {e:'💤',n:'Magnesium Glycinate (Bronson)',d:'200 mg',f:'3× Tue/Thu/Sat',note:'Bedtime. Albion chelate. Iron now at 2:30 PM — ≥7h separation at bedtime is sufficient.'},
   {e:'🍯',n:'Brahma/Agastya/Amukkura Rasayanam',d:'1 tsp with milk',f:'3× Mon/Wed/Fri',note:'Bedtime. Alternating rasayana on non-magnesium nights.'},
 ];
 
@@ -773,6 +791,9 @@ const CAVEATS = [
   {e:'💨',n:'NO Core — Daytime only',condition:'Never after 4 PM',reason:'Nitric oxide is stimulating — disrupts sleep if taken late'},
   {e:'🍫',n:'Polyphenol Pulse — Max 2×',condition:'Mid-afternoon · skip the week if a dose is missed',reason:'Hormesis requires spacing. Daily → noise, not signal.'},
   {e:'🌿',n:'Triphala — Empty stomach',condition:'On waking only · reduce if loose stools appear',reason:'Predictable GI clearance and detox signaling on empty stomach'},
+  {e:'🚶',n:'Post-meal walks — Non-negotiable',condition:'10–15 min after lunch + after dinner daily',reason:'Highest-yield single change for A1c and TG without diet modification. Glucose sink + triglyceride clearance. Not optional.'},
+  {e:'🩸',n:'Berberine at dinner — Conditional',condition:'Only if dinner contains rice, roti, grain, or starch. Skip on protein + vegetable dinners. 1–2 days off/week.',reason:'Fasting insulin improved 12.2→8.7; issue is now post-prandial disposal. Berberine as a targeted tool, not background noise.'},
+  {e:'💊',n:'Niacin — Caution',condition:'50 mg flush only · 1× Wed · Monitor A1c + glucose + uric acid quarterly',reason:'A1c 5.8 and uric acid 6.2 are risk factors. Niacin can impair glucose tolerance and elevate uric acid. Keep it optional and pulse-dosed.'},
 ];
 
 const SITUATIONS = [
@@ -785,6 +806,9 @@ const SITUATIONS = [
   {trigger:'Travel day',title:'Priority core pack',action:'Portfolio+ + Omega-3 + Berberine only',why:'Highest ROI, lowest complexity. Everything else optional.'},
   {trigger:'Illness / fever',title:'Pause signal lanes',action:'Hold Polyphenol Pulse + NO Core until recovered',why:'Avoid adding hormetic stress during acute immune response'},
   {trigger:'Ferritin normalized ≥40',title:'Reduce iron frequency',action:'Drop to 3× per week',why:'Iron is corrective, not indefinite. Oxidation risk rises.'},
+  {trigger:'HIIT session',title:'Keep it short',action:'30 sec hard + 90 sec easy × 4–6 rounds. Not on heavy leg day.',why:'Short HIIT is the goal. Longer sessions add recovery debt without proportional metabolic benefit at this stage.'},
+  {trigger:'Dinner low-carb',title:'Skip berberine at dinner',action:'Omit berberine if dinner is protein + vegetables only',why:'Berberine targets post-prandial glucose disposal. Low-carb dinner has minimal spike to blunt.'},
+  {trigger:'Niacin flush reaction',title:'Normal response',action:'Stay with 50 mg. Take with dinner + a small amount of food. Do not increase dose if flushing is persistent.',why:'Flushing is prostaglandin-mediated. Aspirin 325 mg 30 min before can reduce it. Persistent severe flush = discontinue.'},
   {trigger:'Sleep disruption',title:'Move NO Core earlier',action:'Shift to 10–11 AM instead of lunch',why:'Nitric oxide stimulation needs more buffer before sleep'},
 ];
 
@@ -811,11 +835,11 @@ function goBack() {
   history.pop();
   const prev = history[history.length-1] || 'home';
   history.pop();
-  const labels = {home:'Agni',labs:'Lab Results · Dec 2025',protocol:'SEP Protocol'};
+  const labels = {home:'Agni',labs:'Lab Results · Apr 2026',protocol:'SEP Protocol'};
   navigate(prev, labels[prev]);
 }
 
-function openLabEntry() { navigate('labs','Lab Results · Dec 2025'); }
+function openLabEntry() { navigate('labs','Lab Results · Apr 2026'); }
 function openProtocol(p, src) { navigate('protocol','SEP Protocol'); }
 
 /* ─── CLOCK ─────────────────────────────────────────────────── */
