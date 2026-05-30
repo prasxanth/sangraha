@@ -36,11 +36,11 @@ The ten apps cover: a full-featured project and milestone tracker (**Project Das
 
 ## Apps
 
-> Both project-management apps live in `project_mgmt/`.
+> Both project-management apps live in `planning/`.
 
 ### Project Dashboard
 
-**File:** `project_mgmt/project_dashboard.html`
+**File:** `planning/project_dashboard.html`
 
 A full-featured personal project and milestone tracker. All data — projects, milestones, tasks, settings — is stored in `localStorage` and fully exportable/importable as a single JSON file, enabling exact state round-trips across devices or sessions.
 
@@ -73,13 +73,13 @@ DB = {
 
 **Drag-and-drop reordering:** All three levels — projects in the sidebar, milestones within a project, and tasks within a milestone — support mouse and touch drag-and-drop. Order is saved immediately on every drop.
 
-**How to use:** Open `project_mgmt/project_dashboard.html` in any browser. Use the **＋ Project** button to add a project, then add milestones and tasks within each project. Export regularly to back up state.
+**How to use:** Open `planning/project_dashboard.html` in any browser. Use the **＋ Project** button to add a project, then add milestones and tasks within each project. Export regularly to back up state.
 
 ---
 
 ### Gantt Planner
 
-**File:** `project_mgmt/gantt_planner.html`
+**File:** `planning/gantt_planner.html`
 
 A full-featured interactive Gantt chart app for planning and tracking projects on a visual timeline. All data is stored in `localStorage` and fully exportable/importable as JSON or Mermaid markdown.
 
@@ -113,7 +113,7 @@ A full-featured interactive Gantt chart app for planning and tracking projects o
 }
 ```
 
-**How to use:** Open `project_mgmt/gantt_planner.html` in any browser. The sample project loads automatically on first run. Use the toolbar to add swim lanes and tasks, or **Import** a saved JSON.
+**How to use:** Open `planning/gantt_planner.html` in any browser. The sample project loads automatically on first run. Use the toolbar to add swim lanes and tasks, or **Import** a saved JSON.
 
 ---
 
