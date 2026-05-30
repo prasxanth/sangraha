@@ -11,6 +11,7 @@ A collection of personal single-file web apps — project management, metabolic 
 - [Overview](#overview)
 - [Apps](#apps)
   - [Project Dashboard](#project-dashboard)
+  - [Gantt Planner](#gantt-planner)
   - [Agni](#agni)
   - [Jyotish Sādhana](#jyotish-sādhana)
   - [Kena Upaniṣad](#kena-upaniṣad)
@@ -29,15 +30,17 @@ A collection of personal single-file web apps — project management, metabolic 
 
 This repository contains a suite of personal knowledge and practice tools. Each app is a single self-contained HTML file: no server, no build step, no dependencies to install. Open any file directly in a browser, or — on iOS — use Safari's **Add to Home Screen** to install it as a standalone app with its own icon, title, and full-screen launch. All apps work fully offline.
 
-The nine apps cover: a full-featured project and milestone tracker (**Project Dashboard**), a metabolic health protocol system driven by blood lab data (**Agni**), a Vedic astrology daily spiritual practice (**Jyotish Sādhana**), a verse-by-verse study companion for the Kena Upaniṣad (**Kena Upaniṣad**), an interactive memorization game for the same text (**Kena Game**), a Yoga Sūtra learning course (**Yoga Sudhakara**), a personal reading library with thematic browsing and stats (**Marginalia**), a classical I Ching divination oracle (**I Ching Oracle**), and a health-protocol recipe reference with daily checklist (**Recipes**). The books app is backed by a CSV database that can be updated via a small Python script.
+The ten apps cover: a full-featured project and milestone tracker (**Project Dashboard**), a swim-lane Gantt chart with critical-path and dependency tracking (**Gantt Planner**), a metabolic health protocol system driven by blood lab data (**Agni**), a Vedic astrology daily spiritual practice (**Jyotish Sādhana**), a verse-by-verse study companion for the Kena Upaniṣad (**Kena Upaniṣad**), an interactive memorization game for the same text (**Kena Game**), a Yoga Sūtra learning course (**Yoga Sudhakara**), a personal reading library with thematic browsing and stats (**Marginalia**), a classical I Ching divination oracle (**I Ching Oracle**), and a health-protocol recipe reference with daily checklist (**Recipes**). The project management apps and the books app each live in their own subfolder; all others are single root-level files. The books app is backed by a CSV database that can be updated via a small Python script.
 
 ---
 
 ## Apps
 
+> Both project-management apps live in `project_mgmt/`.
+
 ### Project Dashboard
 
-**File:** `project_dashboard.html`
+**File:** `project_mgmt/project_dashboard.html`
 
 A full-featured personal project and milestone tracker. All data — projects, milestones, tasks, settings — is stored in `localStorage` and fully exportable/importable as a single JSON file, enabling exact state round-trips across devices or sessions.
 
@@ -70,7 +73,47 @@ DB = {
 
 **Drag-and-drop reordering:** All three levels — projects in the sidebar, milestones within a project, and tasks within a milestone — support mouse and touch drag-and-drop. Order is saved immediately on every drop.
 
-**How to use:** Open `project_dashboard.html` in any browser. Use the **＋ Project** button to add a project, then add milestones and tasks within each project. Export regularly to back up state.
+**How to use:** Open `project_mgmt/project_dashboard.html` in any browser. Use the **＋ Project** button to add a project, then add milestones and tasks within each project. Export regularly to back up state.
+
+---
+
+### Gantt Planner
+
+**File:** `project_mgmt/gantt_planner.html`
+
+A full-featured interactive Gantt chart app for planning and tracking projects on a visual timeline. All data is stored in `localStorage` and fully exportable/importable as JSON or Mermaid markdown.
+
+**Key features:**
+
+- **Swim lanes:** Color-coded horizontal lanes (e.g., Planning, Design, Development, Testing, Launch), each with an optional Critical flag.
+- **Task groups:** Optional named groups that nest tasks within a lane — shown as collapsible indented rows.
+- **Tasks:** Each task carries a name, start date, end date, owner, progress (0–100%), color label(s), finish-to-start dependencies, optional milestone flag, and a per-task critical override.
+- **Critical path:** Toggle (⚡) highlights the longest dependency chain end-to-end; sidebar stat shows total critical-path task count.
+- **Dependency arrows:** Toggle (🔗) renders visual connector lines between dependent tasks on the canvas.
+- **Zoom levels:** Day · Week · Month · Quarter — switch on the fly to see a sprint or a full roadmap.
+- **Today line:** Toggle (📅) draws a vertical marker for the current date.
+- **Lock / Unlock:** 🔒 Locked mode prevents accidental edits; ✏ Editing mode enables all interactions.
+- **Filters:** Filter tasks by label or owner; active filters shown as chips; one-click clear.
+- **Holiday manager:** Built-in default public holiday set; add or remove dates via the duration popover.
+- **Column visibility & resizing:** Sidebar columns (Name, Start, End, Duration, Owner, Progress, Labels, Deps) are independently show/hide and pixel-precise drag-resizable; widths persist.
+- **Export:** JSON (full state round-trip) · Mermaid `.md` (Gantt diagram for docs).
+- **Import:** Load a previously exported JSON to restore an exact session.
+- **Editable title:** Project name in the top bar is inline-editable and persisted.
+- **Sample project:** Ships with a "Product Launch 2025" dataset (5 lanes, 15 tasks, milestones, deps) to explore all features immediately.
+
+**Data model:**
+```
+{
+  title: string,
+  swimLanes: [{ id, name, color, isCritical }],
+  taskGroups: [{ id, laneId, name, isCritical }],
+  labels: [{ id, name, color }],
+  tasks: [{ id, lane, groupId, labels[], name, start, end, owner,
+             notes, deps[], isMilestone, progress, color, isCritical }]
+}
+```
+
+**How to use:** Open `project_mgmt/gantt_planner.html` in any browser. The sample project loads automatically on first run. Use the toolbar to add swim lanes and tasks, or **Import** a saved JSON.
 
 ---
 
@@ -84,15 +127,15 @@ A lab-directed metabolic protocol system built on the principle: *each lab resul
 
 - **Timeline (Home):** Chronological lab entries showing panel date, source, key cardiometabolic markers (ApoB, TG, LDL-P, Ferritin, HDL, hs-CRP), pass/fail gate summary, and a direct link to the activated protocol. Future planned retests appear as pending entries.
 - **Labs:** Full detail view for a result set — all gate statuses with current value, target, and delta needed. Shows which protocol was activated and why (e.g., "5 of 8 gates failing → decongestive force protocol").
-- **Protocol — SEP Reset · Phase 1:** The active Signal-Explicit Partitioning (SEP) Reset is an 8–16 week cardiometabolic decongestive protocol targeting hepatic VLDL overproduction, insulin resistance, iron deficiency, and lipid export failure. Six protocol tabs:
-  - **Schedule** — day-by-day (Mon–Sun) plan
-  - **Supps** — 25 supplements with dose, timing, and supply chain notes
-  - **Gates** — 8 transition gates (ApoB ≤90, LDL-P ≤1400, TG ≤180, Ferritin ≥30, hs-CRP ≤1.5, HDL ≥35, HbA1c ≤5.6, AST/ALT normal) with current status and delta needed
-  - **Caveats** — protocol-specific cautions
-  - **Situations** — conditional adjustments for edge-case scenarios
-  - **SEP-L** — the next phase; side-by-side comparison of SEP Phase 1 vs. SEP-L (Reversal Phase), which activates only after all 8 gates pass
+- **Protocol — SEP Reset · Phase 2:** The active Signal-Explicit Partitioning (SEP) Reset Phase 2 is an 8–12 week intensified clearance + muscle disposal protocol targeting ApoB, HDL, Ferritin, HbA1c, and hs-CRP. Six protocol tabs:
+  - **Schedule** — day-by-day (Mon–Sun) plan with iron window (2:30 PM Mon/Wed/Fri/Sun), NAC at 10:30 AM, BALT in afternoon, post-meal walks, and optional Wed niacin
+  - **Supps** — 25 supplements with dose, timing, and supply chain notes (Omega-3 increased to 3 g EPA+DHA/day; niacin added as optional pulse)
+  - **Gates** — 8 transition gates with current status: TG ✓ · LDL-P ✓ · AST/ALT ✓ passing; ApoB · Ferritin · hs-CRP · HDL · HbA1c still failing
+  - **Caveats** — protocol-specific cautions (post-meal walks non-negotiable, conditional dinner berberine, niacin monitoring)
+  - **Situations** — conditional adjustments for HIIT, low-carb dinners, niacin flush, and edge-case scenarios
+  - **SEP-L** — the next phase; side-by-side comparison of SEP Phase 2 vs. SEP-L (Reversal Phase), which activates only after all 8 gates pass
 
-The December 3, 2025 Function Health panel (Quest Diagnostics, fasting, 40+ markers) is the current active entry. Follow-up panel planned for March–April 2026.
+**Timeline:** December 3, 2025 panel (historical, Phase 1 activated) → **April 24, 2026 panel (active, Phase 2 activated; TG 167 ✓ LDL-P 1299 ✓ new passes)** → follow-up planned ~July–August 2026.
 
 **How to use:** Open `agni.html` in any browser. On iPhone: Safari → Share → Add to Home Screen → launches as **Agni**.
 
@@ -328,6 +371,7 @@ The `apple-touch-icon` is inlined as an SVG data URI — no separate image file 
 | App | Icon | Home Screen Name |
 |---|---|---|
 | Project Dashboard | No icon defined (uses Safari default) | Project Dashboard |
+| Gantt Planner | No icon defined (uses Safari default) | Gantt Planner |
 | Agni | Dark amber with Agni flame motif | Agni |
 | Jyotish Sādhana | Deep amber radial gradient with white ॐ | Jyotish Sādhana |
 | Kena Upaniṣad | Deep violet radial gradient with केन | Kena Upaniṣad |
