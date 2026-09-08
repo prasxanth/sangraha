@@ -2,7 +2,7 @@
 
 > *saṃgraha* (संग्रह) — Sanskrit for *compendium*, a curated gathering of knowledge and practice.
 
-A collection of personal single-file web apps — project management, metabolic tracking, Vedic sādhana, Upaniṣadic study and memorization, Yoga, a reading library, I Ching divination, and health recipes — each designed to live on an iPhone home screen.
+A collection of personal single-file web apps — project management, metabolic tracking, Vedic astrology timing, Vedic sādhana, Upaniṣadic study and memorization, Yoga, a reading library, I Ching divination, and health recipes — each designed to live on an iPhone home screen.
 
 ---
 
@@ -13,6 +13,7 @@ A collection of personal single-file web apps — project management, metabolic 
   - [Project Dashboard](#project-dashboard)
   - [Gantt Planner](#gantt-planner)
   - [Agni](#agni)
+  - [Astrology Engine](#astrology-engine)
   - [Jyotish Sādhana](#jyotish-sādhana)
   - [Kena Upaniṣad](#kena-upaniṣad)
   - [Kena Game](#kena-game)
@@ -30,7 +31,7 @@ A collection of personal single-file web apps — project management, metabolic 
 
 This repository contains a suite of personal knowledge and practice tools. Each app is a single self-contained HTML file: no server, no build step, no dependencies to install. Open any file directly in a browser, or — on iOS — use Safari's **Add to Home Screen** to install it as a standalone app with its own icon, title, and full-screen launch. All apps work fully offline.
 
-The ten apps cover: a full-featured project and milestone tracker (**Project Dashboard**), a swim-lane Gantt chart with critical-path and dependency tracking (**Gantt Planner**), a metabolic health protocol system driven by blood lab data (**Agni**), a Vedic astrology daily spiritual practice (**Jyotish Sādhana**), a verse-by-verse study companion for the Kena Upaniṣad (**Kena Upaniṣad**), an interactive memorization game for the same text (**Kena Game**), a Yoga Sūtra learning course (**Yoga Sudhakara**), a personal reading library with thematic browsing and stats (**Marginalia**), a classical I Ching divination oracle (**I Ching Oracle**), and a health-protocol recipe reference with daily checklist (**Recipes**). The project management apps and the books app each live in their own subfolder; all others are single root-level files. The books app is backed by a CSV database that can be updated via a small Python script.
+The eleven apps cover: a full-featured project and milestone tracker (**Project Dashboard**), a swim-lane Gantt chart with critical-path and dependency tracking (**Gantt Planner**), a metabolic health protocol system driven by blood lab data (**Agni**), a birth-driven Vedic/Western/Saju timing engine with heatmaps and natal rankings (**Astrology Engine**), a Vedic astrology daily spiritual practice (**Jyotish Sādhana**), a verse-by-verse study companion for the Kena Upaniṣad (**Kena Upaniṣad**), an interactive memorization game for the same text (**Kena Game**), a Yoga Sūtra learning course (**Yoga Sudhakara**), a personal reading library with thematic browsing and stats (**Marginalia**), a classical I Ching divination oracle (**I Ching Oracle**), and a health-protocol recipe reference with daily checklist (**Recipes**). The project management apps and the books app each live in their own subfolder; all others are single root-level files. The books app is backed by a CSV database that can be updated via a small Python script.
 
 ---
 
@@ -138,6 +139,37 @@ A lab-directed metabolic protocol system built on the principle: *each lab resul
 **Timeline:** December 3, 2025 panel (historical, Phase 1 activated) → **April 24, 2026 panel (active, Phase 2 activated; TG 167 ✓ LDL-P 1299 ✓ new passes)** → follow-up planned ~July–August 2026.
 
 **How to use:** Open `agni.html` in any browser. On iPhone: Safari → Share → Add to Home Screen → launches as **Agni**.
+
+---
+
+### Astrology Engine
+
+**File:** `astrology_engine.html`
+
+A birth-driven multi-system timing and natal evidence engine that generates a heatmap of life-dimension scores across the full lifespan, drawing from three independent astrological traditions simultaneously. All calculation is client-side — no server, no external API required, though optional Swiss Ephemeris WASM and BaZi library providers can be loaded for higher precision.
+
+**Key tabs:**
+
+- **Heatmap & Actions:** The primary view. After entering a birth profile, the engine scores 12 life dimensions (Career, Wealth, Marriage, Family, Children, Vitality, Mind, Spiritual, Reinvention, Learning, Autonomy, Mentorship) across the entire life timeline and renders a color-coded heatmap. Click any cell for the phase breakdown, quick decision lens (Leverage / Protect), and a full Phase Action Playbook with prioritized recommendations. A cycle-zoom hierarchy lets you drill from Mahadasha → Antardasha → Pratyanatardasha → Sookshma → Prana.
+- **Natal Maps & Rankings:** Two natal support matrices — Planet × Life-dimension and House × Life-dimension — calculated from the birth chart and the selected structural evidence layers (D1 through D60). Separate ranked lists for Planet Influence, Planet Benefit/Support, House Salience, and House Benefit/Support.
+- **Validation:** A six-chart golden validation suite that tests the internal fallback calculator against known public birth charts. Checks Western Sun/Moon/Asc/MC, Vedic Moon/nakshatra/pada/starting Vimshottari lord, BaZi Four Pillars, and dasha continuity invariants. Results displayed as pass/fail/warn with a banner showing overall status.
+- **Integration Guide:** Full plug-in contract with code examples for adding dynamic calculator systems or importing externally generated static timing intervals as JSON. Includes Vimshottari recursion formula, Saju conventions, regression invariants, and handoff rules.
+
+**Calculation systems:**
+- **Vedic (Jyotish):** Vimshottari dasha hierarchy recursed to Prana depth using Lahiri/Krishnamurti/Raman/Fagan-Bradley ayanamsa. Natal evidence from D1 plus domain-routed divisional charts (D2–D60) in Integrated mode.
+- **Western:** Natal chart plus transits/profections sampled at configurable intervals.
+- **Saju (Korean Four Pillars):** Daeun, year, month, and season cycles; direction and start-age follow year-stem polarity and sex, with manual overrides.
+
+**Toolbar controls:** All-life view or time-zoom drill-down (Mahadasha / year / sub-period), system selector, dimension selector (12 dimensions, multi-select), natal evidence layer picker (Integrated / D1-only / D1+primary / Custom), contrast mode (Relative / Absolute / Percentile), CSV export, and profile/config export.
+
+**Profile inputs:** Name, birth date, birth time (to the second), city, country, auto-resolve or manual lat/lon, UTC offset, timezone ID, sex, ayanamsa, house system (Whole Sign / Placidus), birth-time confidence, life horizon (80/100/120 years), Saju Yongsin, Daeun start age, and sampling mode.
+
+**Plug-in architecture:**
+- **Dynamic plug-ins:** Register a `calculator(ctx)` function at runtime that receives the birth profile and chart and returns 12 domain scores.
+- **Static plug-ins:** Import externally calculated date-interval arrays as JSON with domain scores and a missing-data policy (renormalize or neutral 0).
+- Coverage-aware weighting: a system missing a date or domain is automatically renormalized rather than dragging other scores toward zero.
+
+**How to use:** Open `astrology_engine.html` in any browser. Enter birth details and click **Recalculate profile**. On iPhone: Safari → Share → Add to Home Screen → launches as **Astro Engine**.
 
 ---
 
@@ -373,6 +405,7 @@ The `apple-touch-icon` is inlined as an SVG data URI — no separate image file 
 | Project Dashboard | No icon defined (uses Safari default) | Project Dashboard |
 | Gantt Planner | No icon defined (uses Safari default) | Gantt Planner |
 | Agni | Dark amber with Agni flame motif | Agni |
+| Astrology Engine | Dark navy with ♌ glyph | Astro Engine |
 | Jyotish Sādhana | Deep amber radial gradient with white ॐ | Jyotish Sādhana |
 | Kena Upaniṣad | Deep violet radial gradient with केन | Kena Upaniṣad |
 | Kena Game | No icon defined (uses Safari default) | Kena · Memorization |
