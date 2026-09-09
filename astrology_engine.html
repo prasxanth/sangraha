@@ -5,27 +5,25 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Astro Engine">
+<meta name="apple-mobile-web-app-title" content="Kāla">
 <meta name="theme-color" content="#0a0d12">
-<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIyIiBmaWxsPSIjMGEwZDEyIi8+PHRleHQgeT0iLjllbSIgZm9udC1zaXplPSI3NSIgeD0iMTIiPuKpjDwvdGV4dD48L3N2Zz4=">
-<title>Dynamic Astrology Evidence & Timing Engine</title>
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIyIiBmaWxsPSIjMGEwZDEyIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iMzIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhmYjBmZiIgc3Ryb2tlLXdpZHRoPSIyLjUiIG9wYWNpdHk9Ii43Ii8+PHRleHQgeD0iNTAiIHk9IjU3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjMwIiBmaWxsPSIjOGZiMGZmIiBmb250LWZhbWlseT0ic3lzdGVtLXVpIj7inIo8L3RleHQ+PC9zdmc+">
+<title>Kāla · Astrology Engine</title>
 <style>
 :root{
  --bg:#0a0d12;--panel:#101720;--panel2:#151e29;--panel3:#1b2633;--line:#273647;
  --text:#edf3fa;--muted:#91a2b6;--accent:#8fb0ff;--label:182px;--cell:82px;
  --g2:#0d8c5a;--g1:#59b77f;--n:#c8ae57;--b1:#c47a49;--b2:#a93e4a;
- --safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
- --safe-l:env(safe-area-inset-left,0px);--safe-r:env(safe-area-inset-right,0px);
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding-bottom:var(--safe-b)}
-header{position:sticky;top:0;z-index:30;background:rgba(10,13,18,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:var(--safe-t)}
-.wrap{max-width:1700px;margin:auto;padding:14px 16px;padding-left:max(16px,var(--safe-l));padding-right:max(16px,var(--safe-r))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{position:sticky;top:0;z-index:30;background:rgba(10,13,18,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1700px;margin:auto;padding:14px 16px}
 h1{margin:0;font-size:20px}.sub{color:var(--muted);font-size:12px;line-height:1.45;margin-top:4px}
 .toolbar{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;align-items:center}
-button,select,input{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 9px;font-size:12px;min-height:36px}
+button,select,input{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 9px;font-size:12px}
 button{cursor:pointer}button:hover{border-color:#58708e}.primary{border-color:var(--accent)}
-main{max-width:1700px;margin:auto;padding:14px 16px 28px;padding-left:max(16px,var(--safe-l));padding-right:max(16px,var(--safe-r))}
+main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 .small{font-size:11px;color:var(--muted);line-height:1.5}.big{font-size:21px;font-weight:750}
 .badge{display:inline-block;border:1px solid var(--line);padding:2px 6px;border-radius:999px;font-size:9px}
 .good{border-color:#2f8f67;color:#8fe0b8}.warn{border-color:#a88540;color:#e2c27d}.bad{border-color:#984b54;color:#eda1aa}
@@ -51,8 +49,7 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px;padding-left:max(16px,v
 .rankingsWrap{max-width:1600px;margin:0 auto;padding:0 0 28px}.rankGrid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rankPanel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}.rankList{display:grid;gap:7px}.rankCard{width:100%;display:grid;grid-template-columns:36px minmax(120px,1fr) 64px;gap:8px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:9px;padding:8px 9px;background:#101822;color:var(--text);cursor:pointer}.rankCard.active{border-color:#88a9d8}.rankNum{font-size:15px;font-weight:900;text-align:center;opacity:.8}.rankName{font-size:12px;font-weight:800}.rankSub{font-size:9px;color:var(--muted);margin-top:2px}.rankScore{text-align:right}.rankScore .n{font-size:16px;font-weight:900}.rankDetail{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px;margin-top:12px;min-height:180px}.rankDetailGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:11px}.rankDetailBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px}.rankDetailBox h4{margin:0 0 5px;font-size:10px}.rankDetailBox p,.rankDetailBox li{font-size:10px;line-height:1.5;color:#c6d1df}
 .guideCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px}.guideGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.guideBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px}.guideBox h4{margin:0 0 6px;font-size:11px}.guideBox p,.guideBox li{font-size:10px;line-height:1.5;color:#c8d3e0}.code{white-space:pre-wrap;background:#0a0f15;border:1px solid var(--line);border-radius:8px;padding:9px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;line-height:1.5;color:#b9c8d9;overflow:auto}
 @media(max-width:1000px){.profileGrid{grid-template-columns:1fr 1fr 1fr}.gridtop,.rankGrid2,.guideGrid{grid-template-columns:1fr}.rankDetailGrid{grid-template-columns:1fr}.priorityGrid{grid-template-columns:1fr}}
-@media(max-width:650px){:root{--label:126px;--cell:70px}.wrap,main{padding-left:max(9px,var(--safe-l));padding-right:max(9px,var(--safe-r))}.profileGrid{grid-template-columns:1fr 1fr}.components{grid-template-columns:repeat(2,1fr)}.decision{grid-template-columns:1fr}.multiDrop{min-width:100%}.appTabs{padding:0 9px;overflow-x:auto;-webkit-overflow-scrolling:touch}.h1{font-size:16px}}
-@media(max-width:430px){:root{--label:110px;--cell:64px}.profileGrid{grid-template-columns:1fr}.wrap{padding-left:max(12px,var(--safe-l));padding-right:max(12px,var(--safe-r))}.heatwrap{max-height:55vh}button,select,input{min-height:44px}}
+@media(max-width:650px){:root{--label:126px;--cell:70px}.wrap,main{padding-left:9px;padding-right:9px}.profileGrid{grid-template-columns:1fr 1fr}.components{grid-template-columns:repeat(2,1fr)}.decision{grid-template-columns:1fr}.multiDrop{min-width:100%}.appTabs{padding:0 9px;overflow-x:auto}}
 
 .staticImportGrid{display:grid;grid-template-columns:1.2fr .55fr .8fr;gap:7px;margin-top:8px}
 .staticImportGrid input,.staticImportGrid select,.staticImportGrid textarea{width:100%;background:#0d131b;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:10px}
@@ -166,15 +163,182 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px;padding-left:max(16px,v
 .layerOff{opacity:.55}
 .evidenceTrace{font-size:8px;color:var(--muted);margin-top:3px;line-height:1.35}
 
+/* ── PWA SHELL (follows sangraha agni.html pattern) ─────── */
+:root{
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+/* Shell always present */
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+.status-bar{height:var(--safe-t);background:var(--bg);flex-shrink:0}
+#content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
+
+/* Mobile bottom nav */
+.mobile-bottom-nav{
+  flex-shrink:0;
+  display:flex;overflow-x:auto;
+  background:var(--panel2);border-top:1px solid var(--line);
+  padding-bottom:var(--safe-b);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.mobile-bottom-nav::-webkit-scrollbar{display:none}
+.mbn-btn{
+  flex:0 0 auto;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;padding:8px 10px;
+  border:none;background:transparent;cursor:pointer;
+  color:var(--muted);font-size:8px;letter-spacing:.04em;text-transform:uppercase;
+  min-width:50px;-webkit-tap-highlight-color:transparent;
+}
+.mbn-btn .icon{font-size:17px;line-height:1}
+.mbn-btn.active{color:var(--accent)}
+.mbn-btn:active{opacity:.5}
+
+/* Override sticky header — fixed via flex shell */
+header{position:relative!important;top:auto!important;flex-shrink:0}
+
+/* Desktop: top tabs visible, bottom nav hidden */
+@media(min-width:769px){
+  .mobile-bottom-nav{display:none}
+  #profilePanel{display:block!important}
+  #toolbarPanel{display:flex!important}
+  #profileSummaryStrip{display:none!important}
+  #profileToggleBtn{display:none}
+}
+
+/* Mobile overrides */
+@media(max-width:768px){
+  html,body{overflow:hidden;height:100%;height:100dvh}
+  body{overscroll-behavior:none}
+  header .wrap{padding:10px 12px 8px}
+  h1{font-size:15px!important}
+  header .sub{font-size:10px}
+  .appTabs{display:none!important}
+  main{padding-bottom:4px}
+  .wrap,main{padding-left:10px!important;padding-right:10px!important}
+  /* grid collapses */
+  .profileGrid{grid-template-columns:1fr 1fr!important}
+  .gridtop,.dharmaGridTop,.dharmaGrid2{grid-template-columns:1fr!important}
+  .rankGrid2{grid-template-columns:1fr!important}
+  .priorityGrid{grid-template-columns:1fr!important}
+  .deityGrid{grid-template-columns:1fr 1fr!important}
+  .dharmaEvidenceGrid{grid-template-columns:1fr 1fr!important}
+  .receivedGrid,.reconcileGrid{grid-template-columns:1fr 1fr!important}
+  .validationSummary{grid-template-columns:1fr 1fr!important}
+  .components{grid-template-columns:repeat(2,1fr)!important}
+  .decision{grid-template-columns:1fr!important}
+  /* toolbar: horizontal scroll */
+  .toolbar{overflow-x:auto;flex-wrap:nowrap!important;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none}
+  .toolbar::-webkit-scrollbar{display:none}
+  .toolbar button,.toolbar select,.toolbar details{white-space:nowrap;flex-shrink:0}
+  .multiDrop{min-width:auto!important}
+  .multiDrop summary{min-width:120px}
+  .multiDrop .multiDropMenu{max-width:min(96vw,420px);left:0}
+  /* compact padding */
+  .card,.hierarchyCard,.playbookCard,.dharmaCard,.natalMapCard,.guideCard,.rankPanel{padding:9px}
+  .tip{max-width:min(320px,90vw)}
+  /* lane tracks still scroll horizontally inside their container */
+  .laneWrap{-webkit-overflow-scrolling:touch}
+  .heatwrap{max-height:55vh}
+  .playbookWrap{max-height:320px}
+}
+
+.dharmaHero{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+.dharmaHero h2{font-size:17px;margin:0 0 5px}
+.dharmaControls{display:flex;gap:8px;flex-wrap:wrap;min-width:315px;justify-content:flex-end}
+.dharmaControls label{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;display:flex;flex-direction:column;gap:4px}
+.dharmaControls input,.dharmaControls select{min-width:140px}
+.dharmaNotice{font-size:10px;line-height:1.5;margin:0 0 10px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:#dce7f3}
+.dharmaGridTop{display:grid;grid-template-columns:1.08fr .92fr;gap:10px;margin-bottom:10px}
+.dharmaGrid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.dharmaCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
+.dharmaCardHead{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:9px;flex-wrap:wrap}
+.dharmaCardHead h3{font-size:13px;margin:0}
+.pathBars{display:grid;gap:7px;margin-top:10px}
+.pathRow{display:grid;grid-template-columns:126px 1fr 48px;gap:8px;align-items:center}
+.pathName{font-size:10px;font-weight:800}
+.pathTrack{height:18px;background:#0b1118;border:1px solid var(--line);border-radius:999px;overflow:hidden;position:relative}
+.pathNatal,.pathCurrent{position:absolute;left:0;top:0;height:100%;border-radius:999px}
+.pathNatal{background:rgba(143,176,255,.36)}
+.pathCurrent{height:7px;top:5px;background:rgba(237,243,250,.88)}
+.pathVal{text-align:right;font-size:9px;color:var(--muted)}
+.deityGrid{display:grid;grid-template-columns:repeat(4,minmax(170px,1fr));gap:8px}
+.deityCard{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px}
+.deityCard .rank{font-size:8px;color:var(--muted)}
+.deityCard .name{font-size:13px;font-weight:850;margin:3px 0}
+.deityCard .score{font-size:18px;font-weight:900}
+.deityCard .why{font-size:9px;color:var(--muted);line-height:1.45;margin-top:5px}
+.ishtaIndicator{margin-top:9px;padding:9px;background:#0d141d;border:1px solid var(--line);border-radius:9px;font-size:10px;line-height:1.5}
+.textGrid{display:grid;gap:7px}
+.textCard{display:grid;grid-template-columns:32px 1fr 42px;gap:8px;align-items:start;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:8px}
+.textCard .n{font-size:9px;color:var(--muted);font-weight:800}
+.textCard .title{font-size:10px;font-weight:850}
+.textCard .meta{font-size:8px;color:var(--muted);line-height:1.4;margin-top:3px}
+.textCard .tscore{text-align:right;font-size:10px;font-weight:850}
+.routineGrid{display:grid;gap:8px}
+.routineBlock{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px}
+.routineBlock h4{font-size:10px;margin:0 0 5px}
+.routineBlock ul{font-size:9px;line-height:1.5;margin:0 0 0 16px;padding:0;color:#dce7f3}
+.timingPath{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0}
+.timingPill{font-size:9px;border:1px solid var(--line);border-radius:999px;padding:4px 7px;background:var(--panel2)}
+.timingTheme{font-size:10px;line-height:1.5;margin-top:7px}
+.dharmaEvidenceGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.evidenceCard{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:8px}
+.evidenceCard b{font-size:10px}.evidenceCard .small{font-size:8px}
+.dharmaBoundary{margin-top:10px;background:#111923;border:1px dashed #53657a;border-radius:10px;padding:10px;font-size:9px;line-height:1.5;color:#b9c6d5}
+@media(max-width:1000px){.dharmaGridTop,.dharmaGrid2{grid-template-columns:1fr}.deityGrid{grid-template-columns:repeat(2,1fr)}.dharmaEvidenceGrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.dharmaHero{display:block}.dharmaControls{justify-content:flex-start;margin-top:10px}.deityGrid,.dharmaEvidenceGrid{grid-template-columns:1fr}.pathRow{grid-template-columns:110px 1fr 40px}}
+
+
+.receivedCard{border-color:#3c5269}
+.receivedGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.receivedGrid label{font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;display:flex;flex-direction:column;gap:4px}
+.receivedGrid input{width:100%;background:#0d131b}
+.receivedActions{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:9px;padding-top:8px;border-top:1px solid var(--line)}
+.subsectionTitle{font-size:9px;text-transform:uppercase;letter-spacing:.09em;font-weight:850;color:#c6d4e3;margin:12px 0 7px}
+.reconcileGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.reconcileBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px}
+.reconcileBox h4{font-size:10px;margin:0 0 5px}.reconcileBox .small{font-size:8px}
+.conflictFlag{border-color:#a88540;background:rgba(168,133,64,.08)}
+.okFlag{border-color:#2f8f67;background:rgba(47,143,103,.06)}
+.microTag{display:inline-block;font-size:8px;padding:2px 5px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-right:4px}
+@media(max-width:1000px){.receivedGrid,.reconcileGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.receivedGrid,.reconcileGrid{grid-template-columns:1fr}}
+
+
+.devataEvidence{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
+.devataEvidence .ev{font-size:7px;border:1px solid var(--line);border-radius:999px;padding:2px 5px;color:var(--muted)}
+.devataBand{font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:#c8d5e4;font-weight:850;margin-top:5px}
+.devataMeter{height:5px;background:#0b1118;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:6px}
+.devataMeter>div{height:100%;background:#dce7f3}
+
+
+.orientationCard{border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:9px}
+.orientationCard .name{font-weight:850;font-size:11px}
+.orientationCard .score{font-family:var(--mono);font-size:16px;margin-top:2px}
+.orientationCard .why{font-size:8px;color:var(--muted);margin-top:4px;line-height:1.45}
+.evidencePills{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.evidencePills span{font-size:7px;border:1px solid var(--line);border-radius:999px;padding:2px 5px;color:var(--muted)}
+.elementBar{height:6px;background:#0b1118;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:5px 0}
+.elementBar>div{height:100%;background:#dce7f3}
+.systemCalcNote{font-size:8px;color:var(--muted);line-height:1.5}
+
 </style>
 </head>
 <body>
+<div id="app">
+<div class="status-bar"></div>
 <header>
  <div class="wrap">
-  <h1>Dynamic Astrology Evidence & Timing Engine</h1>
-  <div class="sub">Birth-driven calculation for arbitrary profiles. Natal structural evidence and timing are separate layers: Vedic timing is generated recursively to <b>Prana dasha</b>, Western uses natal + transits/profections, and Saju uses Four Pillars + Daeun/year/season. No lifetime dasha table is embedded.</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+   <div>
+    <h1>Kāla <span style="font-size:12px;font-weight:400;color:var(--muted)">Astrology Engine</span></h1>
+    <div class="sub">Vedic · Western · Saju · multi-system timing from birth profile</div>
+   </div>
+   <button id="profileToggleBtn" onclick="toggleProfilePanel()" style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:11px;color:var(--muted);cursor:pointer;white-space:nowrap;flex-shrink:0">⚙ Profile</button>
+  </div>
 
-  <div class="profileCard">
+  <div class="profileCard" id="profilePanel" style="display:none">
    <div class="profileGrid">
     <div class="field"><label>Name</label><input id="pName" value="Prashanth Kumar"></div>
     <div class="field"><label>Birth date</label><input id="pDate" type="date" value="1982-03-13"></div>
@@ -208,7 +372,15 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px;padding-left:max(16px,v
    </div>
   </div>
 
-  <div class="toolbar">
+  <!-- compact status strip shown when profile panel is hidden -->
+  <div id="profileSummaryStrip" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center">
+   <span id="stripName" style="font-size:11px;font-weight:700;color:var(--text)">Prashanth Kumar</span>
+   <span id="stripDate" style="font-size:11px;color:var(--muted)">13 Mar 1982 · 22:55</span>
+   <span id="stripLoc" style="font-size:11px;color:var(--muted)">Khartoum, Sudan</span>
+   <span id="stripDasha" class="badge" style="font-size:9px">—</span>
+  </div>
+
+  <div class="toolbar" id="toolbarPanel" style="display:none">
    <button id="homeBtn" class="primary">All life</button>
    <details class="multiDrop timeZoomDrop" id="timeZoomDrop">
     <summary id="timeZoomSummary">Time zoom</summary>
@@ -266,10 +438,14 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px;padding-left:max(16px,v
 <div class="appTabs">
  <button class="appTabBtn active" id="heatmapTabBtn">Heatmap & actions</button>
  <button class="appTabBtn" id="rankingsTabBtn">Natal maps & rankings</button>
+ <button class="appTabBtn" id="dharmaTabBtn">Vedic · Dharma</button>
+ <button class="appTabBtn" id="westernPathTabBtn">Western · Inner Path</button>
+ <button class="appTabBtn" id="sajuCultivationTabBtn">Saju · Cultivation</button>
  <button class="appTabBtn" id="validationTabBtn">Validation</button>
  <button class="appTabBtn" id="guideTabBtn">Integration guide</button>
 </div>
 
+<div id="content">
 <main>
  <div class="tabPanel active" id="heatmapTab">
   <div class="gridtop">
@@ -364,6 +540,180 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px;padding-left:max(16px,v
  </div>
 
  
+
+ <div class="tabPanel" id="dharmaTab">
+  <div class="dharmaHero">
+   <div>
+    <h2>Spiritual path · Dharma · Practice</h2>
+    <div class="small">Three layers are kept separate: <b>received/established practice</b> (does not change with astrology), <b>classical chart indicators</b> (natal), and <b>timing emphasis</b> (Mahadasha → Prana). D1 + D9 + D20 provide the structural spiritual evidence; D60 remains optional and confidence-gated.</div>
+   </div>
+   <div class="dharmaControls">
+    <label>Practice date <input type="date" id="dharmaDate"></label>
+    <label>Daily routine <select id="dharmaIntensity"><option value="10">10 min core</option><option value="20" selected>20 min core</option><option value="40">40 min full</option></select></label>
+   </div>
+  </div>
+
+  <div class="dharmaNotice" id="dharmaNotice"></div>
+
+  <div class="dharmaCard receivedCard">
+   <div class="dharmaCardHead"><h3>1 · Received / established dharma anchors</h3><span class="badge good">precedence layer</span></div>
+   <div class="small">These are <b>not calculated from the horoscope</b>. Family/Kula anchors come from family tradition. An Iṣṭa belongs here only when you personally establish/receive one; a prior algorithmic suggestion must never be promoted into this field. The chart may corroborate or suggest, but it must not silently create religious identity.</div>
+   <div class="receivedGrid">
+    <label>Kuladevata / family protector<input id="dharmaKuladevata" value="Yoga Narasimha"></label>
+    <label>Kula / family Devi<input id="dharmaKulaDevi" value="Aṅgāla Parameśvarī"></label>
+    <label>Established / received Iṣṭa (optional)<input id="dharmaEstablishedIshta" value="" placeholder="None recorded — do not infer from chart"></label>
+    <label>Guru / Sampradaya note<input id="dharmaGuruLineage" placeholder="Optional"></label>
+   </div>
+   <div class="receivedActions">
+    <button type="button" id="assignDharmaProfileBtn">Assign anchors to current profile</button>
+    <button type="button" id="clearDharmaProfileBtn">Clear anchors</button>
+    <span class="small" id="receivedProfileStatus">—</span>
+   </div>
+  </div>
+
+  <div class="dharmaGridTop">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>2 · Core spiritual path</h3><span class="badge" id="dharmaEvidenceBadge">—</span></div>
+    <div class="small">Natal orientation is intentionally more stable than dasha timing. <b>Current emphasis</b> blends 72% natal structure with 28% active Vimshottari activation. This is an engine weighting, not a classical percentage.</div>
+    <div id="dharmaPathBars" class="pathBars"></div>
+   </div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>3 · Current timing lens</h3><span class="badge" id="dharmaTimingBadge">—</span></div>
+    <div id="dharmaTiming"></div>
+   </div>
+  </div>
+
+  <div class="dharmaCard">
+   <div class="dharmaCardHead"><h3>Devata assessment · classical-first</h3><span class="small">Kula → Karakāṃśa → dharma/Guru → D20 → timing</span></div>
+   <div id="ishtaIndicator" class="ishtaIndicator"></div>
+
+   <div class="subsectionTitle">Natal devatā channels · independently derived</div>
+   <div class="small" style="margin-bottom:8px">The ranking below is rebuilt from chart geometry and disclosed classical/structural rules. It does <b>not</b> use the old “Top 5 Deities” ranking as an input. Scores are relative evidence-strength inside this engine — not probabilities, efficacy claims, or declarations of Iṣṭa.</div>
+   <div id="deityGrid" class="deityGrid"></div>
+
+   <div class="subsectionTitle">Current Mahādaśā / sub-period practice overlay</div>
+   <div id="devataTimingOverlay" class="routineGrid"></div>
+
+   <div class="subsectionTitle">Specialized forms · secondary, not core rank</div>
+   <div id="specializedDevataGrid" class="routineGrid"></div>
+  </div>
+
+  <div class="dharmaGrid2">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Texts · daily anchors + study sequence</h3><span class="small">recitation ≠ curriculum</span></div>
+    <div class="subsectionTitle">Suggested daily anchor texts</div>
+    <div id="dailyTextAnchors" class="textGrid"></div>
+    <div class="subsectionTitle">Suggested study phase from prior Sādhana model</div>
+    <div id="textGrid" class="textGrid"></div>
+    <details class="rankSummaryDetails"><summary>Additional chart-derived reading affinities</summary><div id="textAffinityGrid" class="textGrid" style="margin-top:8px"></div></details>
+   </div>
+
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Daily Sanātana Dharma practice</h3><span class="small" id="routineDuration">—</span></div>
+    <div id="routineGrid" class="routineGrid"></div>
+   </div>
+  </div>
+
+  <div class="dharmaGrid2">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Mind-calming & witnessing micro-practices</h3><span class="small">short enough to use during the day</span></div>
+    <div id="mindCalmingGrid" class="routineGrid"></div>
+   </div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Why the engine chose this</h3><span class="small">auditable evidence</span></div>
+    <div class="dharmaEvidenceGrid" id="dharmaEvidenceGrid"></div>
+   </div>
+  </div>
+
+  <div class="dharmaBoundary">
+   <b>Interpretive boundary.</b> D20 is classically a worship/upāsanā varga; the exact D1/D9/D20 weights and the path scores here are engine modeling choices rather than scriptural percentages. Family Kuladevata, received Guru/Sampradaya instructions and an established Iṣṭa take precedence. Jaimini-style Iṣṭa indications are shown separately and may differ by chara-kāraka/aspect/tie-break convention. Public devotional/study practices only; no bija, tantric, nyāsa or initiation-dependent practice is auto-prescribed. Relative model scores are not efficacy claims.
+  </div>
+ </div>
+
+
+ <div class="tabPanel" id="westernPathTab">
+  <div class="dharmaHero">
+   <div>
+    <h2>Western · Inner Path</h2>
+    <div class="small">System-native psychological/spiritual orientation only — <b>no deity mapping</b>. Natal structure is derived from the current tropical chart: 9th/12th houses and rulers, Jupiter, Saturn, Neptune, Moon, Nodes, relevant aspects and angles. Annual profection + live transits form a separate timing overlay.</div>
+   </div>
+   <div class="dharmaControls">
+    <label>Interpretation date <input type="date" id="westernPathDate"></label>
+   </div>
+  </div>
+
+  <div class="dharmaNotice" id="westernPathNotice"></div>
+
+  <div class="dharmaGridTop">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Natal orientation</h3><span class="badge" id="westernNatalBadge">—</span></div>
+    <div class="small">Relative evidence scores describe <b>salience</b>, not goodness or certainty. They are calculated from the current birth profile; no Prashanth-specific ranking table is used.</div>
+    <div id="westernOrientationGrid" class="deityGrid"></div>
+   </div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Current timing lens</h3><span class="badge" id="westernTimingBadge">—</span></div>
+    <div id="westernTimingGrid" class="routineGrid"></div>
+   </div>
+  </div>
+
+  <div class="dharmaGrid2">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Practice / development fit</h3><span class="small">derived from natal orientation + current activation</span></div>
+    <div id="westernPracticeGrid" class="routineGrid"></div>
+   </div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Auditable evidence</h3><span class="small">houses · rulers · aspects · profection · transits</span></div>
+    <div id="westernEvidenceGrid" class="dharmaEvidenceGrid"></div>
+   </div>
+  </div>
+
+  <div class="dharmaBoundary">
+   <b>Interpretive boundary.</b> This is a Western-astrology psychological/meaning framework, not a religious identity engine. Neptune is treated as imagination/transcendence plus a need for reality-testing; Saturn as discipline/structure; Jupiter as meaning/philosophy; the 9th/12th axes as worldview/contemplation. Profections and transits change emphasis, not natal identity.
+  </div>
+ </div>
+
+ <div class="tabPanel" id="sajuCultivationTab">
+  <div class="dharmaHero">
+   <div>
+    <h2>BaZi / Saju · Cultivation & Regulation</h2>
+    <div class="small">System-native self-cultivation only — <b>no deity layer</b>. The engine derives Day Master polarity/element, visible Five-Element balance, Ten-God relationships, an explicitly modeled useful/favorable-element estimate, then overlays Daeun + annual + solar-month activation.</div>
+   </div>
+   <div class="dharmaControls">
+    <label>Cultivation date <input type="date" id="sajuCultivationDate"></label>
+   </div>
+  </div>
+
+  <div class="dharmaNotice" id="sajuCultivationNotice"></div>
+
+  <div class="dharmaGridTop">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Natal elemental regulation</h3><span class="badge" id="sajuNatalBadge">—</span></div>
+    <div id="sajuElementGrid" class="deityGrid"></div>
+    <div class="subsectionTitle">Useful / favorable elements</div>
+    <div id="sajuUsefulGrid" class="routineGrid"></div>
+   </div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Ten-God structure</h3><span class="small">relative to the current Day Master</span></div>
+    <div id="sajuTenGodGrid" class="routineGrid"></div>
+   </div>
+  </div>
+
+  <div class="dharmaGrid2">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Daeun · year · month overlay</h3><span class="badge" id="sajuTimingBadge">—</span></div>
+    <div id="sajuTimingGrid" class="routineGrid"></div>
+   </div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Current cultivation focus</h3><span class="small">elemental regulation translated into practical behavior</span></div>
+    <div id="sajuPracticeGrid" class="routineGrid"></div>
+   </div>
+  </div>
+
+  <div class="dharmaBoundary">
+   <b>Interpretive boundary.</b> “Useful/Favorable Element” is a BaZi modeling term here, not a deity. The internal estimate uses visible stems + branch main qi, seasonal weighting and Day-Master support/drain balance. Full traditional Yong-Shen adjudication can depend on hidden stems, combinations, transformations, climate regulation and school conventions; a manually supplied profile value takes precedence and is shown as such.
+  </div>
+ </div>
+
  <div class="tabPanel" id="validationTab">
   <div class="card" style="margin-bottom:12px">
    <h3 style="font-size:14px">Cross-profile golden validation suite</h3>
@@ -616,6 +966,7 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
         <li><b>D2 Hora</b>: wealth/resources.</li>
         <li><b>D4 Chaturthamsa</b>: home/property/foundations.</li>
         <li><b>D12 Dwadashamsa</b>: parents/ancestry/family inheritance.</li>
+        <li><b>D20 Vimsamsa</b>: spiritual practice, devotion and sadhana orientation; routed primarily to the Spiritual dimension.</li>
         <li><b>D60 Shashtiamsa</b>: advanced corroboration only. It is half-degree sensitive, confidence-weighted, disabled by default, and its mapping convention is explicitly selectable because contemporary calculation conventions differ.</li>
       </ul>
     </div>
@@ -624,7 +975,7 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
       <ul>
         <li>The visible <b>Natal evidence</b> dropdown is specifically a <b>Vedic/Jyotish</b> control and appears only while at least one selected system exposes <code>structuralFamilies:["Vedic"]</code>.</li>
         <li>The built-in Vedic/Jyotish system exposes that family; built-in Western and Saju do not.</li>
-        <li>If multiple selected Jyotish providers expose the Vedic family, the UI shows the D1/D9/D10/D2/D4/D12/D60 selector <b>once</b>.</li>
+        <li>If multiple selected Jyotish providers expose the Vedic family, the UI shows the D1/D9/D10/D2/D4/D12/D20/D60 selector <b>once</b>.</li>
         <li>Deselecting all Vedic/Jyotish providers hides the dropdown and prevents the Vedic natal maps from being presented as active evidence.</li>
         <li>The generic structural-layer registry remains extensible to Western, Saju or custom systems, but those future families should surface through their own family-appropriate UI rather than this Jyotish-specific dropdown.</li>
       </ul>
@@ -636,10 +987,68 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
   calculator: (ctx) => [...]
 });</div>
     </div>
+
+    <div class="guideBox"><h4>Dharma & practice model</h4>
+      <ul>
+        <li>The Dharma tab is visible only while Vedic/Jyotish is selected.</li>
+        <li>Core path scoring uses D1/D9/D20 structural evidence, the 5th/9th/12th (and supporting 8th/4th/6th/10th) houses, and planet × Spiritual/Mentorship/Learning metrics.</li>
+        <li>Current practice emphasis is <b>72% natal + 28% active Vimshottari timing</b>; Mahadasha/Antardasha/etc. can change emphasis without replacing the core path.</li>
+        <li>Deity rankings are devotional affinities only. Kuladevata, Guru, Sampradaya and initiated Ishta Devata always supersede algorithmic ranking.</li>
+        <li>The Jaimini-style indicator uses a disclosed 7-charakaraka convention (classical planets, nodes excluded), D9 Karakamsha and the 12th from Karakamsha. It is one signal, not religious authority.</li>
+        <li>Routine output deliberately limits itself to public devotional, study, meditation and seva practices; initiation-dependent mantra/tantra is never auto-prescribed.</li>
+      </ul>
+    </div>
+
+    <div class="guideBox"><h4>Dharma reconciliation invariant</h4>
+      <ul>
+        <li>Never promote a chart-derived deity suggestion into an established personal Iṣṭa. Never rank an inherited Kuladevata, Guru/Sampradaya instruction or genuinely established personal Iṣṭa against chart-derived devotional affinities.</li>
+        <li>Keep three layers explicit: <b>received practice</b>, <b>natal/classical indicator</b>, and <b>dasha-sensitive supporting emphasis</b>.</li>
+        <li>The Jaimini check must disclose the chara-kāraka scheme. The built-in comparison shows both 7-kāraka and 8-kāraka (Rahu reverse-degree) schemes.</li>
+        <li>For the Prashanth regression, both schemes resolve Sun as Atmakaraka; Sun is in Gemini D9, so the 12th from Karakāṃśa is Taurus, occupied by Venus and Rahu. Show both indicator planets. Do not manufacture Dakṣiṇāmūrti — or any single Iṣṭa — from that geometry.</li>
+        <li>Daily recitation anchors and long-form study curriculum are separate. A text may be recited daily while its full study is scheduled later.</li>
+        <li>Do not display arbitrary “efficacy %” for mantra, witnessing, deity practice or mind-calming routines.</li>
+      </ul>
+    </div>
+
+    
+    <div class="guideBox"><h4>System-native practice / cultivation tabs</h4>
+      <ul>
+        <li><b>Vedic · Dharma</b> appears only when a selected provider exposes the Vedic practice/structural family. It uses D1/D9/D20, Karakāṃśa, Vimshottari and explicit received-practice metadata.</li>
+        <li><b>Western · Inner Path</b> appears only when a selected Western-family system is enabled. It derives tropical 9th/12th structure, rulers, Jupiter/Saturn/Neptune/Moon/Nodes, dynamically computed planet houses (including outer planets), natal aspects, profection and transits from the current profile.</li>
+        <li><b>Saju · Cultivation</b> appears only when a selected Saju-family system is enabled. It derives Day Master, Five Elements, Ten Gods, useful/favorable-element estimate, Daeun, annual and solar-month activation dynamically.</li>
+        <li>There is deliberately <b>no deity mapping</b> in Western or BaZi/Saju. Each tab uses concepts native to its own system.</li>
+        <li>Dynamic built-ins calculate from arbitrary birth profiles. External dynamic plug-ins can opt into a tab using <code>practiceFamily</code>; static interval systems remain supported but do not become hidden natal calculators.</li>
+      </ul>
+    </div>
+<div class="guideBox"><h4>Classical-first devatā engine</h4>
+      <ul>
+        <li>The old “Top 5 Deities” file is <b>not</b> an input to devatā ranking. It is historical output only.</li>
+        <li>Ranking order is built from: 12th from D9 Karakāṃśa → 9th from Karakāṃśa → D20 9th → D20 8th corroboration → lower-weight D1 9th/5th/12th evidence.</li>
+        <li>Multiple occupants of the 12th from Karakāṃśa remain multiple indicators. The engine does not collapse them into a single Iṣṭa.</li>
+        <li>Mahādaśā/AD/PD/Sookshma/Prana are a <b>practice overlay</b>, not natal deity identity.</li>
+        <li>Dakṣiṇāmūrti is not a core-ranking ID. It can appear only as a specialized refinement of a sufficiently strong Śiva/Guru contemplative channel.</li>
+        <li>Bhairava is specialized/secondary when 8th-house/Rahu transformation is strong; it is not automatically promoted into the core daily list.</li>
+        <li>For Prashanth, a regression checks D9 Sun Gemini; D9 Venus + Rahu Taurus; D20 Asc Gemini; D20 Jupiter + Saturn Aquarius; D20 Venus + Rahu + Ketu Capricorn; and the qualitative order Devī/Durgā → Śrī/Lakṣmī → Guru–Śiva → Viṣṇu.</li>
+      </ul>
+    </div>
    </div>
   </div>
  </div>
 </main>
+</div><!-- #content -->
+
+<!-- Mobile bottom nav (hidden on desktop via CSS) -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav">
+ <button class="mbn-btn active" id="mbn-heatmap" onclick="switchTab('heatmap')"><span class="icon">📊</span>Heat</button>
+ <button class="mbn-btn" id="mbn-rankings" onclick="switchTab('rankings')"><span class="icon">⭐</span>Natal</button>
+ <button class="mbn-btn" id="mbn-dharma" onclick="switchTab('dharma')"><span class="icon">🕉</span>Dharma</button>
+ <button class="mbn-btn" id="mbn-westernPath" onclick="switchTab('westernPath')"><span class="icon">🌙</span>Western</button>
+ <button class="mbn-btn" id="mbn-sajuCultivation" onclick="switchTab('sajuCultivation')"><span class="icon">☯</span>Saju</button>
+ <button class="mbn-btn" id="mbn-validation" onclick="switchTab('validation')"><span class="icon">✓</span>Validate</button>
+ <button class="mbn-btn" id="mbn-guide" onclick="switchTab('guide')"><span class="icon">📖</span>Guide</button>
+</nav>
+
+</div><!-- #app -->
 
 <div class="tip" id="tip"></div>
 
@@ -745,7 +1154,16 @@ let profile=null,chart=null,dashaRoot=[],prefix=[],calendarYear=null;
 let cycleFamilyKey="vimshottari",cycleContextKey="hierarchy",cycleSelection=null;
 let scoreCache=new Map(),periodCache=new Map(),cycleCache=new Map(),structuralCache=new Map(),rankings={planets:[],houses:[],planetBenefit:[],houseBenefit:[]};
 let selectedSystemIds=new Set(["Vedic","Western","Saju"]),selectedDimensionsSet=new Set(DOMAINS);
-let structuralEvidenceMode="integrated",enabledStructuralLayerIds=new Set(["D1","D9","D10","D2","D4","D12"]),d60Convention="absolute";
+let structuralEvidenceMode="integrated",enabledStructuralLayerIds=new Set(["D1","D9","D10","D2","D4","D12","D20"]),d60Convention="absolute";
+let receivedDharma={
+ ownerKey:"1982-03-13|22:55:00|khartoum|sudan",
+ kuladevata:"Yoga Narasimha",
+ kulaDevi:"Aṅgāla Parameśvarī",
+ establishedIshta:"",
+ guruLineage:"",
+ source:"User-confirmed family/Kula anchors · no established Iṣṭa recorded"
+};
+
 let COLOR_RANGE={min:-2,max:2};
 const CYCLE_FAMILIES={
  vimshottari:{key:"vimshottari",label:"Vedic · Vimshottari",contexts:[{id:"hierarchy",label:"Dasha · Mahadasha → Prana"}]},
@@ -757,9 +1175,9 @@ const CYCLE_FAMILIES={
  western_profection:{key:"western_profection",label:"Western · Annual profections",contexts:[{id:"annual",label:"Annual profection · house & lord"}]}
 };
 let SYSTEMS={
- Vedic:{id:"Vedic",name:"Built-in: Vedic / Jyotish",active:true,targetShare:null,cycleKeys:["vimshottari"],structuralFamilies:["Vedic"],calculator:ctx=>scoreVedicAt(ctx.ms)},
- Western:{id:"Western",name:"Built-in: Western",active:true,targetShare:null,cycleKeys:["western_profection"],structuralFamilies:[],calculator:ctx=>scoreWesternAt(ctx.ms)},
- Saju:{id:"Saju",name:"Built-in: Saju",active:true,targetShare:null,cycleKeys:["saju"],structuralFamilies:[],calculator:ctx=>scoreSajuAt(ctx.ms)}
+ Vedic:{id:"Vedic",name:"Built-in: Vedic / Jyotish",active:true,targetShare:null,cycleKeys:["vimshottari"],structuralFamilies:["Vedic"],practiceFamily:"Vedic",calculator:ctx=>scoreVedicAt(ctx.ms)},
+ Western:{id:"Western",name:"Built-in: Western",active:true,targetShare:null,cycleKeys:["western_profection"],structuralFamilies:[],practiceFamily:"Western",calculator:ctx=>scoreWesternAt(ctx.ms)},
+ Saju:{id:"Saju",name:"Built-in: Saju",active:true,targetShare:null,cycleKeys:["saju"],structuralFamilies:[],practiceFamily:"Saju",calculator:ctx=>scoreSajuAt(ctx.ms)}
 };
 let WEIGHTS=structuredClone(CANONICAL_WEIGHTS);
 
@@ -771,7 +1189,7 @@ const STRUCTURAL_ROUTING={
  Children:{D1:.75,D9:.25},
  Vitality:{D1:.85,D9:.15},
  Mind:{D1:.85,D9:.15},
- Spiritual:{D1:.55,D9:.35,D60:.10},
+ Spiritual:{D1:.45,D9:.20,D20:.30,D60:.05},
  Reinvention:{D1:.70,D9:.20,D60:.10},
  Learning:{D1:.65,D9:.25,D10:.10},
  Autonomy:{D1:.70,D10:.20,D9:.10},
@@ -784,6 +1202,7 @@ const STRUCTURAL_LAYERS={
  D2:{id:"D2",name:"D2 · Hora",systemFamily:"Vedic",division:2,role:"Wealth · resources · accumulation",sensitivity:"low",enabledByDefault:true},
  D4:{id:"D4",name:"D4 · Chaturthamsa",systemFamily:"Vedic",division:4,role:"Home · property · foundations",sensitivity:"moderate",enabledByDefault:true},
  D12:{id:"D12",name:"D12 · Dwadashamsa",systemFamily:"Vedic",division:12,role:"Parents · ancestry · inherited family patterns",sensitivity:"moderate",enabledByDefault:true},
+ D20:{id:"D20",name:"D20 · Vimsamsa",systemFamily:"Vedic",division:20,role:"Spiritual practice · devotion · sadhana orientation",sensitivity:"moderate",enabledByDefault:true},
  D60:{id:"D60",name:"D60 · Shashtiamsa",systemFamily:"Vedic",division:60,role:"Advanced corroboration · overall fine condition",sensitivity:"extreme",enabledByDefault:false,advanced:true}
 };
 function registerStructuralLayer(def={}){
@@ -946,6 +1365,7 @@ function vargaSignIndex(lon,n,opts={}){
  if(n===9){let start=[0,9,6,3][s%4];return(start+p)%12}
  if(n===10){let start=s%2===0?s:(s+8)%12;return(start+p)%12}
  if(n===12)return(s+p)%12;
+ if(n===20){let start=s%3===0?0:s%3===1?8:4;return(start+p)%12}
  if(n===60){
   let mode=opts.d60Convention||d60Convention||"absolute";
   if(mode==="natal")return(s+p)%12;
@@ -985,6 +1405,7 @@ function vargaSyntheticInvariant(){
   ["D9 Gemini start",vargaSignIndex(60.1,9),6],["D9 Cancer start",vargaSignIndex(90.1,9),3],
   ["D10 Aries start",vargaSignIndex(.1,10),0],["D10 Taurus start",vargaSignIndex(30.1,10),9],
   ["D12 Taurus second",vargaSignIndex(32.6,12),2],
+  ["D20 Aries start",vargaSignIndex(.1,20),0],["D20 Taurus start",vargaSignIndex(30.1,20),8],["D20 Gemini start",vargaSignIndex(60.1,20),4],
   ["D60 absolute first",vargaSignIndex(.1,60,{d60Convention:"absolute"}),0],
   ["D60 absolute second",vargaSignIndex(.6,60,{d60Convention:"absolute"}),1]
  ];
@@ -1190,7 +1611,135 @@ function sajuFallbackAt(ms,p=profile){
 function parseLibraryPillar(v){if(!v)return null;let txt=typeof v==="string"?v:(v.pillar||v.name||v.stemBranch||v.gz||v.ganzhi||`${v.stem||""}${v.branch||""}`),roman=String(txt).replace(/[-\s]/g,""),si=CH_STEMS.findIndex(x=>roman.toLowerCase().startsWith(x.toLowerCase())),bi=CH_BRANCH.findIndex(x=>roman.toLowerCase().endsWith(x.toLowerCase()));return(si>=0&&bi>=0)?pillar(si,bi):null}
 function tryBaziBirth(){if(!baziLib)return null;let local=new Date(chart.birthMs+profile.tz*3600000),attempts=[],fns=["computeFourPillars","getFourPillars","bazi","calculateBazi","calculate"];for(const fn of fns){if(typeof baziLib[fn]==="function")attempts.push(()=>baziLib[fn](local));if(typeof baziLib.default?.[fn]==="function")attempts.push(()=>baziLib.default[fn](local))}for(const run of attempts){try{let r=run(),o=r?.pillars||r,yy=parseLibraryPillar(o?.year||o?.yearPillar),mm=parseLibraryPillar(o?.month||o?.monthPillar),dd=parseLibraryPillar(o?.day||o?.dayPillar),hh=parseLibraryPillar(o?.hour||o?.hourPillar);if(yy&&mm&&dd&&hh)return{year:yy,month:mm,day:dd,hour:hh}}catch(e){}}return null}
 function jieStartAge(){if(profile.daeunAge!=null&&Number.isFinite(profile.daeunAge))return profile.daeunAge;let b=new Date(chart.birthMs+profile.tz*3600000),stemYang=chart.sajuBirth.year.stemIndex%2===0,forward=(profile.sex==="male")===stemYang,terms=[[1,6],[2,4],[3,6],[4,5],[5,6],[6,6],[7,7],[8,8],[9,8],[10,8],[11,7],[12,7]],candidates=[];for(let yy=b.getUTCFullYear()-1;yy<=b.getUTCFullYear()+1;yy++)for(const[mo,da]of terms)candidates.push(Date.UTC(yy,mo-1,da,12));let bm=Date.UTC(b.getUTCFullYear(),b.getUTCMonth(),b.getUTCDate(),b.getUTCHours(),b.getUTCMinutes()),target=forward?Math.min(...candidates.filter(x=>x>bm)):Math.max(...candidates.filter(x=>x<bm)),days=Math.abs(target-bm)/86400000;chart.daeunDirection=forward?1:-1;return days/3}
-function inferYongsin(){if(profile.yongsin!=="auto")return profile.yongsin;let season=chart.sajuBirth.month.season;if(season.includes("Winter"))return"Fire";if(season.includes("Spring"))return"Fire";if(season.includes("Summer"))return"Water";if(season.includes("Autumn"))return"Wood";return"Wood"}
+function inferYongsin(){if(profile.yongsin!=="auto")return profile.yongsin;return estimateUsefulElements(chart.sajuBirth).primary}
+
+const FIVE_ELEMENTS=["Wood","Fire","Earth","Metal","Water"];
+const ELEMENT_PRODUCES={Wood:"Fire",Fire:"Earth",Earth:"Metal",Metal:"Water",Water:"Wood"};
+const ELEMENT_CONTROLS={Wood:"Earth",Earth:"Water",Water:"Fire",Fire:"Metal",Metal:"Wood"};
+const BRANCH_MAIN_STEM=[9,5,0,1,4,2,3,5,6,7,4,8]; // Zi..Hai main qi
+function elementProducerOf(el){return FIVE_ELEMENTS.find(x=>ELEMENT_PRODUCES[x]===el)}
+function elementControllerOf(el){return FIVE_ELEMENTS.find(x=>ELEMENT_CONTROLS[x]===el)}
+function tenGodForStemIndex(dmStem,otherStem){
+ let dmEl=STEM_EL[dmStem],el=STEM_EL[otherStem],samePol=(dmStem%2)===(otherStem%2);
+ if(el===dmEl)return samePol?"Companion / Friend":"Rob Wealth";
+ if(ELEMENT_PRODUCES[dmEl]===el)return samePol?"Eating God":"Hurting Officer";
+ if(ELEMENT_CONTROLS[dmEl]===el)return samePol?"Indirect Wealth":"Direct Wealth";
+ if(ELEMENT_CONTROLS[el]===dmEl)return samePol?"Seven Killings":"Direct Officer";
+ if(ELEMENT_PRODUCES[el]===dmEl)return samePol?"Indirect Resource":"Direct Resource";
+ return"Unclassified";
+}
+function baziVisibleSymbols(pillars){
+ let out=[];
+ for(const key of["year","month","day","hour"]){
+  let p=pillars[key];if(!p)continue;
+  out.push({pillar:key,part:"stem",stemIndex:p.stemIndex,element:p.stemElement,weight:key==="month"?1.05:1});
+  out.push({pillar:key,part:"branch",stemIndex:BRANCH_MAIN_STEM[p.branchIndex],element:p.branchElement,
+            weight:key==="month"?1.70:key==="day"?1.12:1});
+ }
+ return out;
+}
+function baziElementBalance(pillars){
+ let totals=Object.fromEntries(FIVE_ELEMENTS.map(e=>[e,0])),symbols=baziVisibleSymbols(pillars);
+ for(const x of symbols)totals[x.element]+=x.weight;
+ let sum=Object.values(totals).reduce((a,b)=>a+b,0)||1,
+     pct=Object.fromEntries(FIVE_ELEMENTS.map(e=>[e,100*totals[e]/sum])),
+     dm=pillars.day.stemElement,resource=elementProducerOf(dm),
+     support=(totals[dm]+totals[resource])/sum,
+     state=support>=.56?"strong":support<=.42?"weak":"balanced";
+ return{totals,pct,sum,dayMasterElement:dm,resourceElement:resource,supportRatio:support,state,symbols};
+}
+function estimateUsefulElements(pillars){
+ let b=baziElementBalance(pillars),dm=b.dayMasterElement,
+     output=ELEMENT_PRODUCES[dm],wealth=ELEMENT_CONTROLS[dm],officer=elementControllerOf(dm),resource=elementProducerOf(dm),
+     candidates=[];
+ if(b.state==="weak"){
+  candidates=[resource,dm];
+ }else if(b.state==="strong"){
+  candidates=[output,wealth,officer].sort((a,c)=>b.pct[a]-b.pct[c]);
+ }else{
+  // Balanced DM: favor underrepresented flow elements, with gentle priority to output/resource.
+  candidates=[output,resource,wealth,officer,dm].filter((x,i,a)=>a.indexOf(x)===i)
+    .sort((a,c)=>(b.pct[a]-(a===output||a===resource?2:0))-(b.pct[c]-(c===output||c===resource?2:0)));
+ }
+ let primary=candidates[0],secondary=candidates[1]||dm;
+ return{...b,primary,secondary,candidates,
+   rationale:b.state==="weak"
+     ?`Day Master is modeled weak; Resource (${resource}) and Companion (${dm}) restore support.`
+     :b.state==="strong"
+       ?`Day Master is modeled strong; Output (${output}), Wealth (${wealth}) and Officer (${officer}) provide drainage/regulation.`
+       :`Day Master is modeled balanced; underrepresented flow elements are favored rather than adding more of the dominant element.`};
+}
+function baziTenGodAssessment(pillars){
+ let dm=pillars.day.stemIndex,rows=[];
+ for(const x of baziVisibleSymbols(pillars)){
+  if(x.pillar==="day"&&x.part==="stem")continue;
+  rows.push({...x,tenGod:tenGodForStemIndex(dm,x.stemIndex)});
+ }
+ let groups={
+  Resource:["Direct Resource","Indirect Resource"],
+  Companion:["Companion / Friend","Rob Wealth"],
+  Output:["Eating God","Hurting Officer"],
+  Wealth:["Direct Wealth","Indirect Wealth"],
+  Authority:["Direct Officer","Seven Killings"]
+ },summary=[];
+ for(const [group,names] of Object.entries(groups)){
+  let score=rows.filter(x=>names.includes(x.tenGod)).reduce((a,x)=>a+x.weight,0);
+  summary.push({group,score,rows:rows.filter(x=>names.includes(x.tenGod))});
+ }
+ summary.sort((a,b)=>b.score-a.score);
+ return{dmStem:dm,dmLabel:CH_STEMS[dm],dmElement:STEM_EL[dm],dmPolarity:dm%2===0?"Yang":"Yin",rows,summary};
+}
+function sajuTimingAssessment(ms){
+ let useful=estimateUsefulElements(chart.sajuBirth),tg=baziTenGodAssessment(chart.sajuBirth),
+     dy=daeunAt(ms),cur=sajuFallbackAt(ms),layers=[];
+ if(dy)layers.push({level:"Daeun",pillar:dy,weight:.50});
+ layers.push({level:"Year",pillar:cur.year,weight:.30});
+ layers.push({level:"Solar month",pillar:cur.month,weight:.20});
+ for(const l of layers){
+  l.stemTenGod=tenGodForStemIndex(chart.sajuBirth.day.stemIndex,l.pillar.stemIndex);
+  l.elements=[l.pillar.stemElement,l.pillar.branchElement];
+  l.usefulHits=l.elements.filter(e=>[useful.primary,useful.secondary].includes(e));
+  l.dominantRepeats=l.elements.filter(e=>useful.pct[e]>=30);
+ }
+ let currentSupport=layers.reduce((a,l)=>a+l.weight*(l.usefulHits.length/2),0),
+     currentOverload=layers.reduce((a,l)=>a+l.weight*(l.dominantRepeats.length/2),0);
+ return{useful,tenGod:tg,daeun:dy,current:cur,layers,currentSupport,currentOverload};
+}
+const SAJU_CULTIVATION_BY_ELEMENT={
+ Wood:{title:"Wood · growth & direction",body:"Favor learning, planning, gradual expansion, movement and contact with living systems. Convert ideas into a directional next step."},
+ Fire:{title:"Fire · expression & warmth",body:"Favor visible expression, social warmth, creative output and decisive communication. Use enthusiasm to complete rather than scatter."},
+ Earth:{title:"Earth · grounding & completion",body:"Favor regular routines, practical stewardship, completion, tidying and dependable cadence. Reduce unnecessary switching."},
+ Metal:{title:"Metal · structure & boundaries",body:"Favor editing, prioritization, clear standards, boundaries and simplification. Decide what not to carry."},
+ Water:{title:"Water · reflection & adaptability",body:"Favor quiet thinking, research, recovery, listening and flexible strategy. Allow information to settle before forcing closure."}
+};
+const SAJU_TENGOD_CULTIVATION={
+ Resource:"Study, reflection and replenishment are natural channels; avoid turning preparation into indefinite delay.",
+ Companion:"Peer exchange and self-definition matter; cooperate without dissolving boundaries.",
+ Output:"Expression, making and communication are important regulators; ship something concrete.",
+ Wealth:"Stewardship, execution and resource management are important; make commitments measurable.",
+ Authority:"Structure, responsibility and standards are important; distinguish useful discipline from rigidity."
+};
+function sajuCultivationAssessment(ms){
+ let t=sajuTimingAssessment(ms),u=t.useful,
+     primary=profile.yongsin!=="auto"?profile.yongsin:u.primary,
+     secondary=u.secondary,
+     topTG=t.tenGod.summary.slice(0,3);
+ return{...t,displayPrimary:primary,displaySecondary:secondary,
+   usefulSource:profile.yongsin!=="auto"?"manual profile override":"dynamic visible-chart estimate",
+   practices:[
+    {title:`Primary · ${SAJU_CULTIVATION_BY_ELEMENT[primary].title}`,body:SAJU_CULTIVATION_BY_ELEMENT[primary].body},
+    {title:`Secondary · ${SAJU_CULTIVATION_BY_ELEMENT[secondary].title}`,body:SAJU_CULTIVATION_BY_ELEMENT[secondary].body},
+    ...topTG.slice(0,2).map(x=>({title:`Ten-God emphasis · ${x.group}`,body:SAJU_TENGOD_CULTIVATION[x.group]}))
+   ]};
+}
+function sajuCultivationSyntheticInvariant(){
+ let names=[0,1,2,3,4,5,6,7,8,9].map(i=>tenGodForStemIndex(0,i)),
+     want=["Companion / Friend","Rob Wealth","Eating God","Hurting Officer","Indirect Wealth","Direct Wealth","Seven Killings","Direct Officer","Indirect Resource","Direct Resource"],
+     tgOk=names.every((x,i)=>x===want[i]),bal=chart?.sajuBirth?baziElementBalance(chart.sajuBirth):null,
+     balOk=!!bal&&Math.abs(Object.values(bal.pct).reduce((a,b)=>a+b,0)-100)<1e-6;
+ return{ok:tgOk&&balOk,detail:`Jia Ten-God map ${tgOk?"PASS":"FAIL"} · element balance ${balOk?"100%":"FAIL"}`};
+}
+
 function daeunAt(ms){let age=(ms-chart.birthMs)/YEAR_MS,start=chart.daeunStartAge,dir=chart.daeunDirection||1;if(age<start)return null;let k=Math.floor((age-start)/10),baseStem=chart.sajuBirth.month.stemIndex,baseBranch=chart.sajuBirth.month.branchIndex,step=dir*(k+1);return pillar((baseStem+step%10+10)%10,(baseBranch+step%12+12)%12)}
 function elementRelation(el,target){const prod={Wood:"Fire",Fire:"Earth",Earth:"Metal",Metal:"Water",Water:"Wood"},ctrl={Wood:"Earth",Earth:"Water",Water:"Fire",Fire:"Metal",Metal:"Wood"};if(el===target)return 1.5;if(prod[el]===target)return 1;if(prod[target]===el)return .35;if(ctrl[el]===target)return -.75;if(ctrl[target]===el)return -.45;return 0}
 function seasonElement(ms){let m=new Date(ms).getUTCMonth()+1;if([12,1,2].includes(m))return"Water";if([3,4,5].includes(m))return"Wood";if([6,7,8].includes(m))return"Fire";return"Metal"}
@@ -1250,6 +1799,150 @@ function angularSep(a,b){let d=Math.abs(norm(a-b));return Math.min(d,360-d)}
 function closestAspect(sep){let defs=[{a:0,v:1,orb:5},{a:60,v:.65,orb:4},{a:90,v:-.8,orb:4.5},{a:120,v:.8,orb:4.5},{a:180,v:-.9,orb:5}],best=null;for(const x of defs){let o=Math.abs(sep-x.a);if(o<=x.orb&&(!best||o<best.o))best={...x,o,strength:1-o/x.orb}}return best}
 function calcTransitSet(ms){let key="tr:"+Math.round(ms/3600000);if(scoreCache.has(key))return scoreCache.get(key);let jd=jdFromMs(ms),o={};for(const[n,c,id]of TRANSIT_BODIES)o[n]=calcPlanet(n,c,id,jd);scoreCache.set(key,o);return o}
 function scoreWesternAt(ms){let key="w:"+Math.round(ms/86400000);if(scoreCache.has(key))return scoreCache.get(key);let trans=calcTransitSet(ms),points={Sun:chart.tropical.Sun.lon,Moon:chart.tropical.Moon.lon,Mercury:chart.tropical.Mercury.lon,Venus:chart.tropical.Venus.lon,Mars:chart.tropical.Mars.lon,Jupiter:chart.tropical.Jupiter.lon,Saturn:chart.tropical.Saturn.lon,Asc:chart.tropAsc,MC:chart.tropMC},out=[];let age=Math.max(0,Math.floor((ms-chart.birthMs)/YEAR_MS)),ph=(age%12)+1,ascSign=signIndex(chart.tropAsc),lord=rulerOfSignIndex(ascSign+ph-1);for(let di=0;di<12;di++){let num=0,den=0;for(const body of Object.keys(trans)){let prof=WESTERN_TRANSIT_PROFILE[body]||Array(12).fill(0),best=0,bestAbs=0;for(const lon of Object.values(points)){let asp=closestAspect(angularSep(trans[body].lon,lon));if(asp){let val=asp.v*asp.strength;if(Math.abs(val)>bestAbs){bestAbs=Math.abs(val);best=val}}}if(bestAbs){num+=prof[di]*best;den+=bestAbs}}let transit=den?clamp(num/Math.max(1,den)*1.6,-2,2):0,houseBase=HOUSE_PROFILE[ph]?.[di]||0,lordBase=WESTERN_TRANSIT_PROFILE[lord]?.[di]||0,profection=clamp((houseBase+lordBase)/2,-2,2);out[di]=clamp(.7*transit+.3*profection,-2,2)}scoreCache.set(key,out);return out}
+
+const WESTERN_INNER_PATH_MODELS={
+ "Inquiry & Philosophy":{
+   planets:{Jupiter:1,Mercury:.85,Sun:.48,Saturn:.28},houses:{9:1,3:.58,11:.34,5:.25},
+   practice:"Structured reading, comparative philosophy, writing and teaching. Test ideas by articulating them clearly."
+ },
+ "Contemplation & Solitude":{
+   planets:{Neptune:1,Moon:.72,Saturn:.56,Pluto:.34},houses:{12:1,8:.48,4:.40,9:.25},
+   practice:"Quiet sitting, reflective journaling and periodic solitude. Preserve ordinary routines so introspection remains grounded."
+ },
+ "Meaning & Transcendence":{
+   planets:{Jupiter:1,Neptune:.88,Moon:.48,Sun:.38},houses:{9:1,12:.72,5:.38,4:.25},
+   practice:"Meaning-making through philosophy, gratitude, art, nature or non-dogmatic spiritual reflection; keep symbolism distinguishable from evidence."
+ },
+ "Discipline & Embodiment":{
+   planets:{Saturn:1,Mars:.62,Sun:.50},houses:{6:1,10:.72,1:.55,2:.28},
+   practice:"A repeatable schedule, physical embodiment, responsibility and completion. Favor consistency over intensity."
+ },
+ "Imagination & Intuition":{
+   planets:{Neptune:1,Moon:.88,Pluto:.46,Uranus:.34},houses:{12:1,8:.64,5:.60,4:.34},
+   practice:"Creative work, dream/symbol journaling and spacious reflection paired with explicit reality-testing and external feedback."
+ },
+ "Service & Ethical Action":{
+   planets:{Saturn:.86,Jupiter:.78,Sun:.62,Mars:.52},houses:{6:1,10:.68,11:.58,9:.44},
+   practice:"Translate values into service, stewardship and concrete obligations. Use behavior—not only insight—as the integration test."
+ },
+ "Community & Teaching":{
+   planets:{Jupiter:1,Mercury:.82,Sun:.55,Uranus:.30},houses:{11:1,9:.82,3:.62,10:.42},
+   practice:"Learn in community, exchange ideas, mentor or teach. Favor reciprocal dialogue over solitary certainty."
+ }
+};
+const WESTERN_SPIRITUAL_BODIES=["Sun","Moon","Mercury","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","Rahu","Ketu"];
+function westernHouseSign(h){
+ h=+h;
+ if(chart.houseSystem==="W"||!Array.isArray(chart.tropCusps)||chart.tropCusps.length!==12)
+   return(signIndex(chart.tropAsc)+h-1)%12;
+ return signIndex(chart.tropCusps[h-1]);
+}
+function westernHouseRuler(h){return rulerOfSignIndex(westernHouseSign(h))}
+function westernAspectName(a){return({0:"conjunction",60:"sextile",90:"square",120:"trine",180:"opposition"})[a]||`${a}° aspect`}
+function westernNatalAspectEvidence(){
+ let focus=["Jupiter","Saturn","Neptune","Moon","Mercury","Sun","Rahu","Ketu"],out=[];
+ for(let i=0;i<focus.length;i++)for(let j=i+1;j<focus.length;j++){
+  let a=chart.tropical[focus[i]],b=chart.tropical[focus[j]];if(!a||!b)continue;
+  let asp=closestAspect(angularSep(a.lon,b.lon));if(!asp)continue;
+  out.push({a:focus[i],b:focus[j],aspect:asp.a,orb:asp.o,strength:asp.strength,
+            polarity:asp.v>0?"flow":asp.v<0?"tension":"neutral"});
+ }
+ return out.sort((x,y)=>y.strength-x.strength);
+}
+function westernProfectionAt(ms){
+ let age=Math.max(0,Math.floor((ms-chart.birthMs)/YEAR_MS)),
+     house=(age%12)+1,sign=westernHouseSign(house),lord=rulerOfSignIndex(sign);
+ return{age,house,sign,lord};
+}
+function westernTransitActivations(ms){
+ let tr=calcTransitSet(ms),natalNames=["Sun","Moon","Mercury","Jupiter","Saturn","Neptune","Rahu","Ketu"],
+     transNames=["Jupiter","Saturn","Uranus","Neptune","Pluto"],out=[];
+ for(const t of transNames){
+  if(!tr[t])continue;
+  for(const n of natalNames){
+   let natal=chart.tropical[n];if(!natal)continue;
+   let asp=closestAspect(angularSep(tr[t].lon,natal.lon));if(!asp)continue;
+   out.push({transit:t,natal:n,aspect:asp.a,orb:asp.o,strength:asp.strength,polarity:asp.v>0?"flow":"pressure"});
+  }
+ }
+ return out.sort((a,b)=>b.strength-a.strength);
+}
+function westernInnerPathAssessment(ms){
+ let aspects=westernNatalAspectEvidence(),prof=westernProfectionAt(ms),transits=westernTransitActivations(ms),
+     entries=[];
+ for(const [name,m] of Object.entries(WESTERN_INNER_PATH_MODELS)){
+  let raw=0,reasons=[];
+  // Planetary condition becomes meaningful through actual house placement.
+  for(const [p,pw] of Object.entries(m.planets)){
+   let x=chart.tropical[p];if(!x)continue;
+   let h=x.house||houseOf(x.lon,chart.tropAsc,profile.house,chart.tropCusps),
+       hw=m.houses[h]||0;
+   raw+=5*pw+12*pw*hw;
+   if(hw>.3)reasons.push({w:12*pw*hw,text:`${p} in H${h}`});
+  }
+  // Occupants and rulers of the modeled houses.
+  for(const [hs,hw] of Object.entries(m.houses)){
+   let h=+hs,occ=WESTERN_SPIRITUAL_BODIES.filter(p=>{
+     let x=chart.tropical[p];if(!x)return false;
+     return (x.house||houseOf(x.lon,chart.tropAsc,profile.house,chart.tropCusps))===h;
+   });
+   raw+=occ.length*3.5*hw;
+   if(occ.length)reasons.push({w:3.5*hw*occ.length,text:`H${h} occupied by ${occ.join("/")}`});
+   let ruler=westernHouseRuler(h),rw=m.planets[ruler]||.22;
+   raw+=4*hw*rw;
+   if(hw>=.55)reasons.push({w:4*hw*rw,text:`H${h} ruler ${ruler}`});
+  }
+  // Natal aspects increase salience; hard aspects are not treated as "bad", only more demanding.
+  for(const a of aspects){
+   let rel=((m.planets[a.a]||0)+(m.planets[a.b]||0))/2;
+   if(!rel)continue;
+   let w=5*rel*a.strength;raw+=w;
+   if(w>1.2)reasons.push({w,text:`${a.a} ${westernAspectName(a.aspect)} ${a.b} · ${a.polarity}`});
+  }
+  // Current activation kept separate from natal score.
+  let timingRaw=0,timingReasons=[];
+  let phw=m.houses[prof.house]||0,plw=m.planets[prof.lord]||0;
+  timingRaw+=16*phw+9*plw;
+  if(phw||plw)timingReasons.push({w:16*phw+9*plw,text:`Annual profection H${prof.house} · lord ${prof.lord}`});
+  for(const t of transits){
+   let rel=((m.planets[t.transit]||.18)+(m.planets[t.natal]||.18))/2;
+   let w=8*rel*t.strength;timingRaw+=w;
+   if(w>1.2)timingReasons.push({w,text:`t.${t.transit} ${westernAspectName(t.aspect)} n.${t.natal} · ${t.polarity}`});
+  }
+  entries.push({name,raw,timingRaw,practice:m.practice,reasons:reasons.sort((a,b)=>b.w-a.w),timingReasons:timingReasons.sort((a,b)=>b.w-a.w)});
+ }
+ let max=Math.max(1,...entries.map(x=>x.raw)),maxT=Math.max(1,...entries.map(x=>x.timingRaw));
+ for(const x of entries){
+  x.natalScore=100*x.raw/max;
+  x.timingScore=100*x.timingRaw/maxT;
+  x.currentScore=.76*x.natalScore+.24*x.timingScore; // disclosed engine weighting, not classical percentage
+ }
+ entries.sort((a,b)=>b.natalScore-a.natalScore);
+ let cautions=[];
+ let nep=chart.tropical.Neptune;
+ if(nep){
+  for(const n of ["Sun","Moon","Mercury","Jupiter"]){
+   let x=chart.tropical[n];if(!x)continue;let a=closestAspect(angularSep(nep.lon,x.lon));
+   if(a&&a.v<0&&a.strength>.35)cautions.push(`Natal Neptune ${westernAspectName(a.a)} ${n}: pair intuition/imagination with explicit reality-testing.`);
+  }
+ }
+ return{orientations:entries,profection:prof,transits,aspects,cautions};
+}
+function westernPracticePlan(assessment){
+ let top=[...assessment.orientations].sort((a,b)=>b.currentScore-a.currentScore).slice(0,3);
+ return top.map((x,i)=>({title:`${i+1} · ${x.name}`,body:x.practice,
+   note:`Natal ${x.natalScore.toFixed(0)} · timing ${x.timingScore.toFixed(0)} · current ${x.currentScore.toFixed(0)} relative evidence`}));
+}
+function westernInnerPathSyntheticInvariant(){
+ if(!chart)return{ok:false,detail:"no chart"};
+ let a=westernInnerPathAssessment(chart.birthMs+20*YEAR_MS),
+     b=westernInnerPathAssessment(chart.birthMs+21*YEAR_MS),
+     scores=a.orientations.map(x=>x.natalScore),
+     ok=a.orientations.length===Object.keys(WESTERN_INNER_PATH_MODELS).length&&
+        scores.every(Number.isFinite)&&a.profection.house!==b.profection.house;
+ return{ok,detail:`${a.orientations.length} natal paths · profection H${a.profection.house}→H${b.profection.house}`};
+}
+
 function scoreSajuAt(ms){let key="s:"+Math.round(ms/86400000);if(scoreCache.has(key))return scoreCache.get(key);let dy=daeunAt(ms),yr=sajuFallbackAt(ms).year,se=seasonElement(ms),target=chart.yongsin,parts=[];if(dy)parts.push({w:.5,els:[dy.stemElement,dy.branchElement]});else parts.push({w:.5,els:[chart.sajuBirth.month.stemElement,chart.sajuBirth.month.branchElement]});parts.push({w:.35,els:[yr.stemElement,yr.branchElement]});parts.push({w:.15,els:[se]});let out=[];for(let di=0;di<12;di++){let v=0;for(const p of parts){let sub=0;for(const el of p.els){let rel=elementRelation(el,target),prof=ELEMENT_PROFILE[el]?.[di]||0;sub+=.7*rel+.3*prof}sub/=p.els.length;v+=p.w*sub}out[di]=clamp(v,-2,2)}scoreCache.set(key,out);return out}
 
 function activeSystems(){return Object.values(SYSTEMS).filter(x=>x.active)}
@@ -1264,6 +1957,18 @@ function selectedStructuralFamilies(){
  return out;
 }
 function hasSelectedStructuralFamily(family){return selectedStructuralFamilies().includes(family)}
+function selectedPracticeFamilies(){
+ let out=[],seen=new Set();
+ for(const sys of selectedSystems()){
+  let fam=sys.practiceFamily||null;
+  if(fam&&!seen.has(fam)){seen.add(fam);out.push(fam)}
+  // Structural-family Vedic providers inherit the Vedic practice family.
+  if((sys.structuralFamilies||[]).includes("Vedic")&&!seen.has("Vedic")){seen.add("Vedic");out.push("Vedic")}
+ }
+ return out;
+}
+function hasSelectedPracticeFamily(family){return selectedPracticeFamilies().includes(family)}
+
 
 function effectiveNominalWeight(domain,id){return WEIGHTS[domain]?.[id]??0}
 function scoreSystemAt(id,ms){let sys=SYSTEMS[id];if(!sys)return Array(12).fill(null);try{return sys.calculator({ms,profile,chart,domainNames:DOMAINS})}catch(e){console.error("system calculator",id,e);return Array(12).fill(null)}}
@@ -1303,7 +2008,7 @@ function ensureCycleFamily(){
 }
 
 function recommendedStructuralLayers(){
- return new Set(["D1","D9","D10","D2","D4","D12"]);
+ return new Set(["D1","D9","D10","D2","D4","D12","D20"]);
 }
 function primaryLayerForDomain(domain){
  let r=STRUCTURAL_ROUTING[domain]||{D1:1};
@@ -1833,6 +2538,10 @@ function runValidationSuite(){
  }
  let ws=wholeSignSyntheticInvariant();if(ws.ok)syntheticPass++;else syntheticFail++;
  let vg=vargaSyntheticInvariant();if(vg.ok)syntheticPass++;else syntheticFail++;
+ let jx=prashanthJaiminiRegression();if(!jx||(jx.ok&&jx.noAutoIshta))syntheticPass++;else syntheticFail++;
+ let dx=prashanthDevataRegression();if(!dx||dx.ok)syntheticPass++;else syntheticFail++;
+ let wx=westernInnerPathSyntheticInvariant();if(wx.ok)syntheticPass++;else syntheticFail++;
+ let sx=sajuCultivationSyntheticInvariant();if(sx.ok)syntheticPass++;else syntheticFail++;
  $("validationTable").innerHTML=`<tr><th>Chart</th><th>Western</th><th>Vedic / Vimshottari anchor</th><th>BaZi</th><th>Synthetic invariants</th><th>Status</th></tr>`+
  rows.map(r=>{
   let c=n=>r.checks.find(x=>x.name===n),cls=x=>x.pass?"testPass":"testFail";
@@ -1851,7 +2560,11 @@ function runValidationSuite(){
  ?`<b>Cross-profile suite passed.</b> ${requiredPass} required public-chart anchors and ${syntheticPass} synthetic invariants passed in <b>${mode}</b> mode. This validates the tested range and algorithms; it does not eliminate convention differences near Vedic/BaZi boundaries.`
  :`<b>Validation failed.</b> ${requiredFail} required checks and ${syntheticFail} synthetic invariants failed. Treat arbitrary-profile timing as <b>UNVALIDATED</b> until corrected.`;
  $("validationBanner").innerHTML+=`<div class="testDetail" style="margin-top:5px">Whole Sign invariant: <b class="${ws.ok?"testPass":"testFail"}">${ws.ok?"PASS":"FAIL"}</b> · ${ws.detail}</div>
- <div class="testDetail">Varga mapping invariant: <b class="${vg.ok?"testPass":"testFail"}">${vg.ok?"PASS":"FAIL"}</b> · ${vg.detail}</div>`;
+ <div class="testDetail">Varga mapping invariant: <b class="${vg.ok?"testPass":"testFail"}">${vg.ok?"PASS":"FAIL"}</b> · ${vg.detail}</div>
+ <div class="testDetail">Jaimini regression: <b class="${!jx||(jx.ok&&jx.noAutoIshta)?"testPass":"testFail"}">${!jx||(jx.ok&&jx.noAutoIshta)?"PASS":"FAIL"}</b>${jx?" · Sun AK → Gemini Karakāṃśa → Taurus 12th → Venus + Rahu · no auto-Iṣṭa":""}</div>
+ <div class="testDetail">Classical-first devatā regression: <b class="${!dx||dx.ok?"testPass":"testFail"}">${!dx||dx.ok?"PASS":"FAIL"}</b>${dx?" · "+dx.expected:""}</div>
+ <div class="testDetail">Western inner-path dynamic invariant: <b class="${wx.ok?"testPass":"testFail"}">${wx.ok?"PASS":"FAIL"}</b> · ${wx.detail}</div>
+ <div class="testDetail">Saju cultivation / Ten-God invariant: <b class="${sx.ok?"testPass":"testFail"}">${sx.ok?"PASS":"FAIL"}</b> · ${sx.detail}</div>`;
  return{all,requiredPass,requiredFail,syntheticPass,syntheticFail,rows};
 }
 
@@ -2167,6 +2880,596 @@ function aggregateStructuralMetrics(type,entity,di,family="Vedic"){
 function planetDimensionMetrics(name,di){return aggregateStructuralMetrics("planet",name,di)}
 function houseDimensionMetrics(h,di){return aggregateStructuralMetrics("house",h,di)}
 
+function normalizedMetricSignal(m){
+ let support01=clamp((m.support+2)/4,0,1),influence01=clamp(m.influence/100,0,1),rel=clamp(m.relevance??.5,0,1);
+ return 100*clamp(.56*influence01+.29*support01+.15*rel,0,1);
+}
+const DHARMA_PATHS={
+ "Jnana / Vedanta":{planets:{Jupiter:1,Mercury:.82,Ketu:1,Sun:.45,Saturn:.28},houses:{9:1,12:.82,5:.42,8:.28}},
+ "Bhakti / Devotion":{planets:{Moon:1,Venus:.86,Jupiter:.72,Sun:.45,Mercury:.22},houses:{5:1,9:.72,4:.62,12:.52}},
+ "Karma / Seva":{planets:{Sun:.86,Mars:.82,Saturn:.82,Jupiter:.42,Mercury:.30},houses:{10:.82,6:1,11:.54,9:.38}},
+ "Raja / Dhyana":{planets:{Ketu:1,Saturn:.82,Moon:.62,Jupiter:.55,Sun:.36,Mars:.28},houses:{12:1,9:.62,8:.55,5:.42}},
+ "Mantra / Upasana":{planets:{Ketu:.94,Mercury:.82,Rahu:.68,Moon:.55,Jupiter:.48,Venus:.38},houses:{5:1,8:.72,9:.58,12:.72}},
+ "Grihastha Dharma":{planets:{Venus:.86,Moon:.84,Jupiter:.78,Sun:.50,Mars:.22},houses:{4:1,7:.78,2:.68,9:.48,5:.42}}
+};
+const LORD_PRACTICE={
+ Sun:{theme:"clarity, dharma, disciplined visibility",deities:["Surya","Shiva / Dakshinamurti"],practice:"simple Surya upasana, integrity practice, disciplined self-offering",weekday:"Sunday"},
+ Moon:{theme:"devotion, receptivity, emotional purification",deities:["Devi / Lalita / Durga","Shiva / Dakshinamurti"],practice:"gentle nama-japa, devotional reading, quiet reflection",weekday:"Monday"},
+ Mars:{theme:"tapas, courage, protection and disciplined action",deities:["Hanuman / Skanda","Ganesha"],practice:"seva, physical discipline, Hanuman/Skanda devotion",weekday:"Tuesday"},
+ Mercury:{theme:"study, discrimination, mantra and synthesis",deities:["Vishnu / Narayana","Ganesha"],practice:"scriptural study, clear japa, teaching/learning service",weekday:"Wednesday"},
+ Jupiter:{theme:"guru, wisdom, dharma and transmission",deities:["Guru / Brihaspati","Vishnu / Narayana","Shiva / Dakshinamurti"],practice:"guru-vandana, Vedanta/Gita study, charity and teaching",weekday:"Thursday"},
+ Venus:{theme:"devotion, harmony, gratitude and sacred beauty",deities:["Lakshmi","Devi / Lalita / Durga"],practice:"Lakshmi/Devi devotion, gratitude, relationship dharma, arts as offering",weekday:"Friday"},
+ Saturn:{theme:"discipline, humility, endurance and seva",deities:["Hanuman / Skanda","Shiva / Dakshinamurti"],practice:"consistent seva, simplicity, repetition, patience",weekday:"Saturday"},
+ Rahu:{theme:"grounding amid intensity, discernment and unconventional inquiry",deities:["Devi / Lalita / Durga","Ganesha"],practice:"grounding devotion, simple protective prayer, avoid novelty-seeking in advanced practices",weekday:"Saturday"},
+ Ketu:{theme:"detachment, inwardness, moksha and obstacle-clearing",deities:["Ganesha","Shiva / Dakshinamurti"],practice:"meditation, simple Ganesha/Shiva devotion, study of impermanence and Self",weekday:"Tuesday"}
+};
+const DEVATA_CHANNEL_META={
+ Devi:{id:"Devi",name:"Durgā / Devī",band:"Śakti · protection · containment"},
+ Lakshmi:{id:"Lakshmi",name:"Śrī / Lakṣmī",band:"Śrī · harmony · auspiciousness"},
+ Shiva:{id:"Shiva",name:"Guru–Sadāśiva / Śiva",band:"Guru · jñāna · contemplative dharma"},
+ Vishnu:{id:"Vishnu",name:"Viṣṇu / Nārāyaṇa",band:"Sustaining dharma · order · steadiness"},
+ Ganesha:{id:"Ganesha",name:"Gaṇeśa",band:"Obstacle-clearing · mantra support"},
+ Gayatri:{id:"Gayatri",name:"Gāyatrī / Sāvitrī",band:"Buddhi-śuddhi · illumination · current practice"}
+};
+
+const DHARMA_TEXTS=[
+ {title:"Bhagavad Gita",kind:"Itihasa · universal foundation",paths:{"Jnana / Vedanta":.85,"Bhakti / Devotion":.72,"Karma / Seva":1,"Grihastha Dharma":.55},deities:["Vishnu","Guru"]},
+ {title:"Katha & Mundaka Upanishads",kind:"Sruti · Vedanta",paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.66},deities:["Shiva","Guru"]},
+ {title:"Mandukya Upanishad + Karika",kind:"Sruti / Vedanta · advanced study",paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.94},deities:["Shiva","Guru"]},
+ {title:"Patanjali Yoga Sutras",kind:"Yoga-darsana",paths:{"Raja / Dhyana":1,"Jnana / Vedanta":.55},deities:["Shiva"]},
+ {title:"Vishnu Sahasranama",kind:"Itihasa · nama recitation",paths:{"Bhakti / Devotion":1,"Grihastha Dharma":.48},deities:["Vishnu"]},
+ {title:"Srimad Bhagavatam · selected skandhas",kind:"Purana · bhakti",paths:{"Bhakti / Devotion":1,"Jnana / Vedanta":.38},deities:["Vishnu"]},
+ {title:"Sri Rudram / Namakam-Chamakam",kind:"Vedic liturgy · tradition-guided",paths:{"Bhakti / Devotion":.62,"Mantra / Upasana":.82,"Raja / Dhyana":.35},deities:["Shiva"]},
+ {title:"Dakshinamurti Stotra",kind:"Stotra · Vedanta",paths:{"Jnana / Vedanta":.94,"Bhakti / Devotion":.38},deities:["Shiva","Guru"]},
+ {title:"Devi Mahatmyam",kind:"Purana · Shakta upasana",paths:{"Bhakti / Devotion":.84,"Mantra / Upasana":.88},deities:["Devi"]},
+ {title:"Lalita Sahasranama",kind:"Sahasranama · Shakta devotion",paths:{"Bhakti / Devotion":.92,"Mantra / Upasana":.72,"Grihastha Dharma":.38},deities:["Devi","Lakshmi"]},
+ {title:"Ganapati Atharvashirsha",kind:"Atharvana tradition · Ganesha",paths:{"Mantra / Upasana":.84,"Jnana / Vedanta":.32},deities:["Ganesha"]},
+ {title:"Sundara Kanda",kind:"Ramayana · bhakti / courage",paths:{"Bhakti / Devotion":.72,"Karma / Seva":.82},deities:["Hanuman"]},
+ {title:"Aditya Hridayam",kind:"Ramayana · Surya upasana",paths:{"Karma / Seva":.72,"Bhakti / Devotion":.38},deities:["Surya"]}
+];
+function dharmaDateMs(){
+ let v=$("dharmaDate")?.value||$("inspectDate")?.value||profile?.date;
+ let ms=Date.parse(v+"T12:00:00Z");
+ return Number.isFinite(ms)?ms:chart.birthMs;
+}
+function planetDharmaSignal(name){
+ let spi=planetDimensionMetrics(name,DOMAINS.indexOf("Spiritual")),
+     men=planetDimensionMetrics(name,DOMAINS.indexOf("Mentorship")),
+     lea=planetDimensionMetrics(name,DOMAINS.indexOf("Learning"));
+ return .58*normalizedMetricSignal(spi)+.24*normalizedMetricSignal(men)+.18*normalizedMetricSignal(lea);
+}
+function houseDharmaSignal(h){
+ let spi=houseDimensionMetrics(h,DOMAINS.indexOf("Spiritual")),
+     men=houseDimensionMetrics(h,DOMAINS.indexOf("Mentorship"));
+ return .78*normalizedMetricSignal(spi)+.22*normalizedMetricSignal(men);
+}
+function scorePathModel(model){
+ let num=0,den=0;
+ for(const [p,w] of Object.entries(model.planets||{})){num+=planetDharmaSignal(p)*w;den+=w}
+ for(const [h,w] of Object.entries(model.houses||{})){num+=houseDharmaSignal(+h)*w;den+=w}
+ return den?clamp(num/den,0,100):50;
+}
+function lordPathAffinity(lord,pathName){
+ let m=DHARMA_PATHS[pathName],w=m?.planets?.[lord]||0;
+ return clamp(42+58*w,0,100);
+}
+function currentDharmaPathScores(ms){
+ let active=activePathAt(ms,5),weights=VEDIC_LEVEL_WEIGHTS.slice(0,active.length),
+     den=weights.reduce((a,b)=>a+b,0)||1,out={};
+ for(const path of Object.keys(DHARMA_PATHS)){
+  let natal=scorePathModel(DHARMA_PATHS[path]),timing=0;
+  for(let i=0;i<active.length;i++)timing+=lordPathAffinity(active[i],path)*weights[i];
+  timing/=den;
+  out[path]={natal,current:clamp(.72*natal+.28*timing,0,100),timing};
+ }
+ return{active,paths:out};
+}
+const JAIMINI_MODERN_ASSOCIATIONS={
+ Sun:["Śiva","Rāma"],Moon:["Gaurī / Pārvatī"],Mars:["Skanda / Subrahmaṇya","Narasimha"],
+ Mercury:["Viṣṇu"],Jupiter:["Guru / Sambaśiva","Viṣṇu"],Venus:["Lakṣmī"],
+ Saturn:["Nārāyaṇa / Viṣṇu","Hanumān"],Rahu:["Durgā"],Ketu:["Gaṇeśa","Skanda"]
+};
+const JAIMINI_CLASSICAL_12TH_NOTES={
+ Sun:"BPHS deity verses are commonly read with Sun + Ketu → Śiva.",
+ Moon:"BPHS deity verses are commonly read with Moon + Ketu → Gaurī.",
+ Mars:"BPHS deity verses are commonly read with Mars + Ketu → Subrahmaṇya.",
+ Venus:"BPHS translations vary; a common English reading gives Venus + Ketu → Lakṣmī. Modern occupant tables often simplify Venus → Lakṣmī.",
+ Rahu:"BPHS directly associates Rahu in the 12th from Karakāṃśa with Durgā / a fierce deity.",
+ Ketu:"Ketu alone is associated with Gaṇeśa or Subrahmaṇya in common BPHS translations.",
+ Mercury:"Mercury + Saturn is associated with Viṣṇu in common BPHS translations.",
+ Saturn:"Mercury + Saturn is associated with Viṣṇu; Saturn has additional conditional readings.",
+ Jupiter:"Jupiter is associated with Śiva/Sambaśiva in some classical readings."
+};
+
+function dharmaProfileKey(p=profile){
+ if(!p)return"";
+ return`${p.date}|${p.time}|${String(p.city||"").trim().toLowerCase()}|${String(p.country||"").trim().toLowerCase()}`;
+}
+function receivedDharmaApplies(){return !!profile&&receivedDharma.ownerKey===dharmaProfileKey(profile)}
+function atmakarakaByScheme(scheme="7"){
+ let rows=CLASSICAL.map(name=>({name,score:norm(chart.sidereal[name].lon)%30,raw:norm(chart.sidereal[name].lon)%30}));
+ if(scheme==="8"){
+  let rd=norm(chart.sidereal.Rahu.lon)%30;
+  rows.push({name:"Rahu",score:30-rd,raw:rd,reversed:true});
+ }
+ return rows.sort((a,b)=>b.score-a.score)[0];
+}
+function jaiminiIshtaResolution(scheme="7"){
+ let ak=atmakarakaByScheme(scheme),d9=buildVargaChart("D9");
+ if(!ak||!d9?.planets?.[ak.name])return null;
+ let karakamsha=d9.planets[ak.name].sign,twelfth=(karakamsha+11)%12,
+     occupants=[...CLASSICAL,"Rahu","Ketu"].filter(n=>d9.planets[n]?.sign===twelfth),
+     lord=rulerOfSignIndex(twelfth),
+     indicators=occupants.length?occupants:[lord],
+     resolution=occupants.length?"occupant(s) present":"empty 12th · lord fallback",
+     modernCandidates=indicators.flatMap(x=>JAIMINI_MODERN_ASSOCIATIONS[x]||[x]),
+     classicalNotes=indicators.map(x=>JAIMINI_CLASSICAL_12TH_NOTES[x]).filter(Boolean),
+     unique=occupants.length===1;
+ return{
+   scheme,ak:ak.name,akScore:ak.score,akRaw:ak.raw,karakamsha,twelfth,occupants,lord,indicators,resolution,
+   modernCandidates,classicalNotes,
+   unique,
+   conclusion:unique
+     ?`One occupant indicator (${occupants[0]}), but deity naming still depends on the textual/lineage mapping used.`
+     :occupants.length>1
+       ?`Multiple occupants (${occupants.join(" + ")}): no single Iṣṭa is resolved by geometry alone. Preserve the indicators and disclose the school-specific interpretation.`
+       :`No occupant: lord/aspect fallback is lower-confidence and school-dependent.`
+ };
+}
+function prashanthJaiminiRegression(){
+ if(!isGoldenPrashanth())return null;
+ let r7=jaiminiIshtaResolution("7"),r8=jaiminiIshtaResolution("8"),
+     wantOcc=["Rahu","Venus"].sort().join("|"),
+     ok=r7?.ak==="Sun"&&r8?.ak==="Sun"&&SIGNS[r7.karakamsha]==="Gemini"&&SIGNS[r7.twelfth]==="Taurus"&&
+        r7.occupants.slice().sort().join("|")===wantOcc;
+ return{ok,r7,r8,noAutoIshta:receivedDharma.establishedIshta==="",note:"Geometry regression only · does not establish an Iṣṭa."};
+}
+
+function prashanthDevataRegression(ms=Date.UTC(2026,8,8,12)){
+ if(!isGoldenPrashanth())return null;
+ let a=classicalDevataAssessment(ms),d20=a.d20,d9=a.d9,
+     byId=Object.fromEntries(a.channels.map(x=>[x.id,x])),
+     expectedD20={
+      asc:2,Sun:3,Moon:11,Mercury:0,Venus:9,Mars:7,Jupiter:10,Saturn:10,Rahu:9,Ketu:9
+     },
+     d20ok=d20?.ascSign===expectedD20.asc&&Object.entries(expectedD20).filter(([k])=>k!=="asc").every(([k,v])=>d20.planets[k]?.sign===v),
+     d9ok=d9?.planets?.Sun?.sign===2&&d9?.planets?.Venus?.sign===1&&d9?.planets?.Rahu?.sign===1,
+     orderOk=(byId.Devi?.natalScore||0)>(byId.Lakshmi?.natalScore||0)&&
+             (byId.Lakshmi?.natalScore||0)>(byId.Shiva?.natalScore||0)&&
+             (byId.Shiva?.natalScore||0)>(byId.Vishnu?.natalScore||0),
+     noDakAsCore=!a.channels.some(x=>x.id==="Dakshinamurti");
+ return{ok:d20ok&&d9ok&&orderOk&&noDakAsCore,d20ok,d9ok,orderOk,noDakAsCore,
+   expected:"Devī/Durgā > Śrī/Lakṣmī > Guru–Śiva > Viṣṇu; Dakṣiṇāmūrti only specialized, never core/Iṣṭa"};
+}
+
+function devataAccumulator(){
+ let m={};
+ for(const [id,meta] of Object.entries(DEVATA_CHANNEL_META))
+   m[id]={...meta,natalRaw:0,timingRaw:0,reasons:[],direct:false};
+ return m;
+}
+function addDevataEvidence(acc,id,points,reason,{direct=false,timing=false}={}){
+ if(!acc[id]||!Number.isFinite(points)||points<=0)return;
+ if(timing)acc[id].timingRaw+=points;else acc[id].natalRaw+=points;
+ if(direct&&!timing)acc[id].direct=true;
+ acc[id].reasons.push({points,reason,timing,direct});
+}
+function d1HouseOccupants(h){
+ return[...CLASSICAL,"Rahu","Ketu"].filter(n=>chart.sidereal[n]?.house===h);
+}
+function d20HouseOccupants(h){
+ let d20=buildVargaChart("D20");if(!d20)return[];
+ return[...CLASSICAL,"Rahu","Ketu"].filter(n=>d20.planets[n]?.house===h);
+}
+function devataFromPlanetEvidence(acc,p,points,reason,opts={}){
+ // Deliberately compact mappings: these are channel mappings, not an Iṣṭa lookup table.
+ const map={
+  Rahu:[["Devi",1]],
+  Venus:[["Lakshmi",1],["Devi",.22]],
+  Jupiter:[["Shiva",1],["Vishnu",.72]],
+  Saturn:[["Shiva",.72],["Vishnu",.62]],
+  Mercury:[["Vishnu",.78],["Ganesha",.55],["Gayatri",.55]],
+  Ketu:[["Ganesha",1],["Shiva",.48]],
+  Sun:[["Shiva",.68],["Vishnu",.25]],
+  Moon:[["Devi",.72],["Lakshmi",.28]],
+  Mars:[["Ganesha",.25]]
+ };
+ for(const [id,w] of (map[p]||[]))addDevataEvidence(acc,id,points*w,`${reason}: ${p}`,opts);
+}
+function timingDevataOverlay(active){
+ let out=[];
+ const rule={
+  Mercury:{name:"Gāyatrī / Sāvitrī + study",why:"Mercury timing favors buddhi-śuddhi, discrimination, study and clear mantra.",ids:["Gayatri","Vishnu","Ganesha"]},
+  Venus:{name:"Śrī / Lakṣmī + Devī",why:"Venus timing emphasizes gratitude, harmony, relationship dharma and Śrī/Devī devotion.",ids:["Lakshmi","Devi"]},
+  Saturn:{name:"Śiva / disciplined seva",why:"Saturn timing favors simplicity, endurance, repetition, humility and contemplative steadiness.",ids:["Shiva","Vishnu"]},
+  Rahu:{name:"Durgā / grounding",why:"Rahu timing favors containment, boundary protection and avoiding novelty-seeking in advanced practice.",ids:["Devi"]},
+  Jupiter:{name:"Guru–Śiva / Nārāyaṇa",why:"Jupiter timing favors Guru principle, scripture, charity and teaching.",ids:["Shiva","Vishnu"]},
+  Ketu:{name:"Gaṇeśa / inwardness",why:"Ketu timing favors obstacle-clearing, detachment and inward contemplation.",ids:["Ganesha","Shiva"]},
+  Sun:{name:"Śiva / Sūrya dharma",why:"Sun timing favors integrity, clarity and disciplined self-offering.",ids:["Shiva"]},
+  Moon:{name:"Devī / devotional settling",why:"Moon timing favors receptivity, gentle devotion and emotional purification.",ids:["Devi"]},
+  Mars:{name:"Protective seva",why:"Mars timing favors disciplined action and protective service rather than adding contemplative complexity.",ids:["Ganesha"]}
+ };
+ for(let i=0;i<active.length;i++){
+  let lord=active[i],r=rule[lord];if(!r)continue;
+  out.push({level:LEVELS[i],lord,...r,weight:VEDIC_LEVEL_WEIGHTS[i]||0});
+ }
+ return out;
+}
+function classicalDevataAssessment(ms){
+ let acc=devataAccumulator(),j7=jaiminiIshtaResolution("7"),j8=jaiminiIshtaResolution("8"),
+     j=j7||j8,d9=buildVargaChart("D9"),d20=buildVargaChart("D20");
+
+ // 1) Highest-priority chart-derived layer: 12th from Karakamsa.
+ // Preserve individual occupants rather than collapsing multiple indicators into one Iṣṭa.
+ if(j){
+  for(const p of j.occupants){
+   if(p==="Rahu")addDevataEvidence(acc,"Devi",42,"12th from Karakāṃśa occupied by Rahu · direct Durgā/Śakti signal",{direct:true});
+   else if(p==="Venus")addDevataEvidence(acc,"Lakshmi",34,"12th from Karakāṃśa occupied by Venus · Śrī/Lakṣmī association; textual mapping varies",{direct:true});
+   else devataFromPlanetEvidence(acc,p,28,"12th from Karakāṃśa occupant",{direct:true});
+  }
+  if(!j.occupants.length)devataFromPlanetEvidence(acc,j.lord,14,"12th from Karakāṃśa empty · sign-lord fallback",{direct:false});
+
+  // 2) Dharma/Guru channel: 9th from Karakamsa in D9.
+  let ninth=(j.karakamsha+8)%12,
+      ninthOcc=[...CLASSICAL,"Rahu","Ketu"].filter(n=>d9?.planets?.[n]?.sign===ninth);
+  for(const p of ninthOcc)devataFromPlanetEvidence(acc,p,18,"9th from Karakāṃśa · dharma/Guru corroboration");
+ }
+
+ // 3) D20: 9th = upasana/Guru corroboration; 8th = transformative/mantra secondary support.
+ for(const p of d20HouseOccupants(9))devataFromPlanetEvidence(acc,p,18,"D20 9th house · spiritual/Guru corroboration");
+ for(const p of d20HouseOccupants(8))devataFromPlanetEvidence(acc,p,7,"D20 8th house · transformative/mantra support");
+
+ // 4) D1 classical spiritual houses, deliberately lower weight than Karakamsa/D20.
+ for(const p of d1HouseOccupants(9))devataFromPlanetEvidence(acc,p,7,"D1 9th house · dharma");
+ for(const p of d1HouseOccupants(5))devataFromPlanetEvidence(acc,p,5,"D1 5th house · mantra/pūrva-puṇya");
+ for(const p of d1HouseOccupants(12))devataFromPlanetEvidence(acc,p,5,"D1 12th house · mokṣa/retreat");
+
+ // 5) Timing is a separate overlay and never changes natal religious identity.
+ let active=activePathAt(ms,5),overlay=timingDevataOverlay(active);
+ for(const o of overlay){
+  for(const id of o.ids)addDevataEvidence(acc,id,10*(o.weight||.1),`${o.level} ${o.lord} · current practice emphasis`,{timing:true});
+ }
+
+ let arr=Object.values(acc),maxNatal=Math.max(1,...arr.map(x=>x.natalRaw));
+ for(const x of arr){
+  x.natalScore=100*x.natalRaw/maxNatal;
+  x.timingScore=Math.min(100,100*x.timingRaw/Math.max(1,...arr.map(y=>y.timingRaw)));
+  x.displayScore=x.natalScore;
+  x.tier=x.direct&&x.natalScore>=65?"Direct Karakāṃśa signal":
+         x.natalScore>=65?"Strong corroborated channel":
+         x.natalScore>=40?"Supporting channel":
+         x.natalScore>0?"Secondary channel":"No material natal signal";
+ }
+ arr.sort((a,b)=>b.natalScore-a.natalScore);
+ return{channels:arr,active,overlay,j7,j8,d9,d20};
+}
+function specializedDevataAssessment(ms,assessment){
+ let out=[],d20=assessment.d20,d1Rahu=chart.sidereal.Rahu?.house,
+     d20Rahu=d20?.planets?.Rahu?.house,shiva=assessment.channels.find(x=>x.id==="Shiva"),
+     mercury=planetDharmaSignal("Mercury"),jupiter=planetDharmaSignal("Jupiter"),ketu=planetDharmaSignal("Ketu");
+
+ if((d1Rahu===8||d20Rahu===8)){
+  out.push({name:"Bhairava",status:"Specialized / secondary",why:"Rahu/8th-house transformation supports a fierce boundary-and-shadow discipline, but this is not sufficient to make Bhairava a core daily devatā. Treat as lineage-sensitive and optional."});
+ }
+ if((shiva?.natalScore||0)>=45 && (mercury+jupiter+ketu)/3>=50){
+  out.push({name:"Dakṣiṇāmūrti",status:"Possible Śiva/Guru contemplative form",why:"The Śiva/Guru channel plus cognition, jñāna and inwardness can make Dakṣiṇāmūrti a fitting contemplative form. This is a refinement of the Śiva/Guru channel — not an independently established Iṣṭa."});
+ }
+ return out;
+}
+function deityScores(ms,pathState){
+ // Compatibility wrapper: downstream text scoring consumes the new classical-first channels.
+ return classicalDevataAssessment(ms).channels.map(x=>({id:x.id,name:x.name,score:x.natalScore,reasons:x.reasons.map(r=>r.reason)}));
+}
+function textScores(pathState,deities){
+ let p=pathState.paths,dmap=Object.fromEntries(deities.map(x=>[x.id,x.score]));
+ return DHARMA_TEXTS.map(t=>{
+  let pn=0,pd=0;
+  for(const [path,w] of Object.entries(t.paths)){pn+=(p[path]?.current||50)*w;pd+=w}
+  let pathScore=pd?pn/pd:50,
+      deityScore=t.deities.length?avg(t.deities.map(id=>dmap[id]??50)):50,
+      score=clamp(.72*pathScore+.28*deityScore,0,100);
+  return{...t,score};
+ }).sort((a,b)=>b.score-a.score);
+}
+const PRIOR_SUGGESTED_DAILY_TEXT_ANCHORS=[
+ {title:"Kena Upaniṣad 1.1–1.2",meta:"Morning · witness question + recognition · source routine"},
+ {title:"Gāyatrī Mantra · Ṛgveda 3.62.10",meta:"Morning · ×21 minimal / ×108 full · source routine"},
+ {title:"Bhagavad Gītā 2.47 / 2.48",meta:"Midday · alternate ×1 · action without attachment / equanimity"},
+ {title:"Om Namaḥ Śivāya",meta:"Evening · ×11–54 · settling / release"},
+ {title:"Kena Upaniṣad 2.4",meta:"Night · optional recognition verse"}
+];
+const PRIOR_SUGGESTED_STUDY_CURRICULUM=[
+ {a:44,b:47,title:"Pātañjala Yoga Sūtras",meta:"Foundation / vessel-building · Samādhi 1.1–1.4, 1.12–1.16, 1.17–1.20, 1.30–1.32; Sādhana 2.1, 2.26–2.29"},
+ {a:44,b:47,title:"Bhagavad Gītā",meta:"Companion · chapters 2, 6, 12; equanimity in action"},
+ {a:47,b:50,title:"Kena Upaniṣad",meta:"Identity-anchor · whole text, especially 1.1–1.9"},
+ {a:47,b:50,title:"Ātmabodha",meta:"Bridge · ordered Advaita understanding"},
+ {a:50,b:55,title:"Vivekacūḍāmaṇi",meta:"Discrimination · selected sections"},
+ {a:50,b:55,title:"Kaṭha Upaniṣad",meta:"Discrimination / deathlessness / chariot of mind"},
+ {a:55,b:60,title:"Aṣṭāvakra Gītā",meta:"Non-dual shock · only after witness/stability matures"},
+ {a:58,b:62,title:"Māṇḍūkya Upaniṣad + Kārikā",meta:"Compression · advanced; overlaps late Aṣṭāvakra phase"},
+ {a:62,b:200,title:"Dakṣiṇāmūrti Stotra",meta:"Transmission / contemplative home"},
+ {a:62,b:200,title:"Upadeśa Sāhasrī",meta:"Late-life companion · stabilization / transmission"}
+];
+function ageAtMs(ms){
+ let by=new Date(chart.birthMs),d=new Date(ms),age=d.getUTCFullYear()-by.getUTCFullYear(),
+     bm=by.getUTCMonth(),bd=by.getUTCDate(),dm=d.getUTCMonth(),dd=d.getUTCDate();
+ if(dm<bm||(dm===bm&&dd<bd))age--;
+ return Math.max(0,age);
+}
+function currentReceivedCurriculum(ms){
+ let age=ageAtMs(ms);
+ return{age,items:PRIOR_SUGGESTED_STUDY_CURRICULUM.filter(x=>age>=x.a&&age<x.b)};
+}
+function mindCalmingPlan(timing){
+ let lead=timing[0],secondary=timing[1];
+ return[
+  {title:"30–60 second reset",items:["Take 3 comfortable, unforced breaths; let the exhale finish completely.","Relax jaw, shoulders and hands.","Notice once: “this thought / feeling is seen.” Do not analyze the witness.","Choose the next concrete action only."]},
+  {title:"Overthinking / recursion",items:["Do not repeat “who sees?” recursively.","Use one recognition: “seen.” Then stop seeking an answer.","If analysis is needed, write the question down and schedule it; otherwise return attention to the present task."]},
+  {title:"Emotional spike",items:["Name the experience simply: fear, anger, urgency, sadness — without explaining it.","Feel one bodily location for 2–3 breaths.","Delay the response until the body has settled enough to choose words deliberately."]},
+  {title:"Before a meeting / decision",items:["Pause for 2–5 seconds.","Recall Gītā 2.48 in meaning: act steadily without gripping success/failure.","State one intention: truthful, useful, proportionate. Then act."]},
+  {title:"Night de-loading",items:["Review only three points: where was I clear, where did I get captured, what can be released now?","No scorekeeping, prediction or causal-field certainty.","End with body → breath → thoughts → all noticed; then stop the review."]},
+  {title:"Current timing overlay",items:[`${lead?.lord||"Natal"}: ${lead?.theme||"steady practice"}.`,secondary?`${secondary.lord}: secondary emphasis — ${secondary.theme}.`:"Keep the routine simple and consistent."]}
+ ];
+}
+
+function timingPracticeText(active){
+ return active.map((lord,i)=>{
+  let x=LORD_PRACTICE[lord]||{theme:"balanced practice",practice:"steady simple practice",weekday:"—"};
+  return{level:LEVELS[i],lord,...x};
+ });
+}
+function routinePlan(intensity,topDeity,topPath,timing){
+ let applies=receivedDharmaApplies(),lead=timing[0],sub=timing[1],
+     kula=receivedDharma.kuladevata||"Kuladevata",devi=receivedDharma.kulaDevi||"family Devi",
+     ishta=(receivedDharma.establishedIshta||"").trim(),
+     receivedAnchorText=ishta?`${kula} → ${devi} → ${ishta}`:`${kula} → ${devi}; no established Iṣṭa recorded — do not auto-insert a chart suggestion`;
+ if(applies){
+  if(intensity===10)return[
+   {title:"Morning · ~6 min",items:["3 comfortable slow breaths or brief nāḍī-śodhana without strain.","Kena 1.1–1.2 once slowly; Gāyatrī ×21.","30–60 sec silent witnessing: “this is seen.”"]},
+   {title:"Midday · ~1 min ×2",items:["3 breaths → 2–5 sec witnessing → Gītā 2.47 or 2.48 in meaning."]},
+   {title:"Evening · ~2 min",items:["Om Namaḥ Śivāya ×11 or quiet prayer; short silence afterward."]},
+   {title:"Night · ~1 min",items:["Three-question review: clear / captured / release; finish with simple witnessing."]},
+   {title:"Received anchors · optional short form",items:[`${receivedAnchorText}. Preserve family/received anchors rather than replacing them with chart rankings.`]}
+  ];
+  if(intensity===40)return[
+   {title:"Morning · 20–25 min",items:["Nāḍī Śodhana or comfortable diaphragmatic breathing 3–5 min; no forced retention.","Kena 1.1–1.2 ×3–5; rest in meaning.","Gāyatrī ×108.","Silent sitting 5–10 min; close with 10–30 sec “this is seen.”"]},
+   {title:"Midday · 2–3 min ×2–3",items:["3 slow breaths → 2–5 sec witnessing.","Alternate Gītā 2.47 / 2.48 ×1; sit with the meaning briefly."]},
+   {title:"Evening · 10–15 min",items:["Comfortable exhale-lengthened breathing 2–3 min if it feels easy.","Om Namaḥ Śivāya ×21–54.","Silent meditation 3–8 min; let the day settle."]},
+   {title:"Night · 4–6 min",items:["Review: where clear? where captured? what can be released?","2–5 min witnessing; optional Kena 2.4 in meaning."]},
+   {title:"Received devatā sequence · when part of your established routine",items:[`${kula} and ${devi}: use only the counts/order you actually follow in family practice.${ishta?` Established Iṣṭa: ${ishta}, at your received/adopted count.`:` No established Iṣṭa is recorded.`}`,`Do not add a chart-suggested deity to the received sequence automatically.`]},
+   {title:"Timing overlay",items:[`${lead?.lord||"Natal"}: ${lead?.practice||"steady practice"}.`,sub?`${sub.lord}: ${sub.practice}.`:""]}
+  ];
+  return[
+   {title:"Morning · 10–12 min",items:["2–3 min comfortable breathing / nāḍī-śodhana.","Kena 1.1–1.2 ×1–3; Gāyatrī ×21.","3–5 min silent sitting; close with “this is seen.”"]},
+   {title:"Midday · 1–2 min ×2",items:["3 breaths → brief witnessing → Gītā 2.47 or 2.48 ×1."]},
+   {title:"Evening · 5–7 min",items:["2 min comfortable breathing.","Om Namaḥ Śivāya ×11–21.","2–3 min quiet sitting."]},
+   {title:"Night · 2 min",items:["Three-question review; no analysis spiral.","Body, breath and thoughts are seen; stop there."]},
+   {title:"Received anchors · optional",items:[`${receivedAnchorText}. Keep only the order you actually follow.`]},
+   {title:"Timing overlay",items:[`${lead?.lord||"Natal"}: ${lead?.practice||"steady practice"}.`,sub?`${sub.lord}: ${sub.theme}.`:""]}
+  ];
+ }
+ // Generic chart-only fallback when no received practice profile is assigned.
+ if(intensity===10)return[
+  {title:"Morning · 6 min",items:[`Namaskāra to your own Kuladevata / Guru / ${topDeity?.name||"chosen divine form"}.`,`4 min simple nāma-japa or established mantra; 1 min silence.`]},
+  {title:"Day · micro",items:["3 breaths + one witnessing recognition before consequential action."]},
+  {title:"Evening · 3 min",items:["Quiet prayer / japa and release of the day."]},
+  {title:"Timing",items:[`${lead?.lord||"Natal"}: ${lead?.practice||"steady practice"}.`]}
+ ];
+ return[
+  {title:"Morning",items:["Comfortable breath settling; established japa; short scripture reading; silent sitting."]},
+  {title:"Midday",items:["Three breaths; witness the current mind-state; act without gripping outcome."]},
+  {title:"Evening",items:["Simple prayer/japa; short meditation; release accumulated mental load."]},
+  {title:"Night",items:["Brief non-judgmental review; witnessing close."]},
+  {title:"Timing",items:[`${lead?.lord||"Natal"}: ${lead?.practice||"steady practice"}.`,sub?`${sub.lord}: ${sub.practice}.`:""]}
+ ];
+}
+
+
+function practiceDateMs(id){
+ let el=$(id),v=el?.value||$("inspectDate")?.value||profile.date;
+ let ms=Date.parse(v+"T12:00:00Z");
+ return Number.isFinite(ms)?ms:chart.birthMs;
+}
+function initializePracticeDateInput(id){
+ let el=$(id);if(!el||!chart)return;
+ let by=new Date(chart.birthMs).getUTCFullYear();
+ el.min=profile.date;el.max=`${by+profile.horizon}-12-31`;
+ if(!el.value)el.value=$("inspectDate")?.value||profile.date;
+}
+function renderSystemAwarePracticeTabs(){
+ let defs=[
+  {family:"Vedic",btn:"dharmaTabBtn",panel:"dharmaTab"},
+  {family:"Western",btn:"westernPathTabBtn",panel:"westernPathTab"},
+  {family:"Saju",btn:"sajuCultivationTabBtn",panel:"sajuCultivationTab"}
+ ];
+ for(const x of defs){
+  let show=hasSelectedPracticeFamily(x.family)||(x.family==="Vedic"&&hasSelectedStructuralFamily("Vedic"));
+  if($(x.btn))$(x.btn).hidden=!show;
+  if(!show&&$(x.panel)?.classList.contains("active"))switchTab("heatmap");
+ }
+}
+function renderWesternInnerPathTab(){
+ let btn=$("westernPathTabBtn"),panel=$("westernPathTab"),enabled=hasSelectedPracticeFamily("Western");
+ if(!btn||!panel)return;
+ btn.hidden=!enabled;if(!enabled)return;
+ initializePracticeDateInput("westernPathDate");
+ let ms=practiceDateMs("westernPathDate"),a=westernInnerPathAssessment(ms),
+     top=[...a.orientations].sort((x,y)=>y.currentScore-x.currentScore),
+     natalTop=a.orientations.slice(0,3),practice=westernPracticePlan(a),
+     p=a.profection;
+ $("westernNatalBadge").textContent=`Tropical · ${chart.houseSystem==="W"?"Whole Sign":"Placidus"}`;
+ $("westernNatalBadge").className="badge good";
+ $("westernTimingBadge").textContent=`Age ${p.age} · H${p.house} · ${p.lord}`;
+ $("westernTimingBadge").className="badge good";
+ $("westernPathNotice").innerHTML=`<b>${natalTop[0]?.name||"—"}</b> is the strongest natal inner-path orientation; on ${fmt(ms)}, <b>${top[0]?.name||"—"}</b> has the strongest combined natal + timing emphasis. These are system-native Western categories, not deity or lineage claims.`;
+ $("westernOrientationGrid").innerHTML=a.orientations.map((x,i)=>`<div class="orientationCard">
+   <div class="name">${i+1} · ${x.name}</div><div class="score">${x.natalScore.toFixed(0)} <span class="small">natal evidence</span></div>
+   <div class="elementBar"><div style="width:${x.natalScore.toFixed(1)}%"></div></div>
+   <div class="why">${x.practice}</div>
+   <div class="evidencePills">${x.reasons.slice(0,4).map(r=>`<span>${r.text}</span>`).join("")}</div>
+  </div>`).join("");
+ let transitTop=a.transits.slice(0,5);
+ $("westernTimingGrid").innerHTML=`<div class="routineBlock"><h4>Annual profection · House ${p.house}</h4><ul>
+   <li>${SIGNS[p.sign]} profection · traditional ruler <b>${p.lord}</b>.</li>
+   <li>Timing activates the natal chart; it does not replace the natal orientation.</li></ul></div>`+
+   (transitTop.length?transitTop.map(t=>`<div class="routineBlock"><h4>Transit · ${t.transit} ${westernAspectName(t.aspect)} ${t.natal}</h4><ul><li>Orb ${t.orb.toFixed(2)}° · ${t.polarity} · activation strength ${Math.round(t.strength*100)} relative.</li></ul></div>`).join("")
+   :`<div class="routineBlock"><h4>Major slow-planet aspects</h4><ul><li>No tight Jupiter–Pluto transit aspect to the selected natal inner-path points at this date.</li></ul></div>`);
+ $("westernPracticeGrid").innerHTML=practice.map(x=>`<div class="routineBlock"><h4>${x.title}</h4><ul><li>${x.body}</li><li class="systemCalcNote">${x.note}</li></ul></div>`).join("")+
+   (a.cautions.length?`<div class="routineBlock"><h4>Reality-testing note</h4><ul>${a.cautions.slice(0,3).map(x=>`<li>${x}</li>`).join("")}</ul></div>`:"");
+ $("westernEvidenceGrid").innerHTML=[
+  ["9th-house ruler",westernHouseRuler(9),`H9 begins in ${SIGNS[westernHouseSign(9)]}`],
+  ["12th-house ruler",westernHouseRuler(12),`H12 begins in ${SIGNS[westernHouseSign(12)]}`],
+  ["Natal aspects",String(a.aspects.length),a.aspects.slice(0,3).map(x=>`${x.a} ${westernAspectName(x.aspect)} ${x.b}`).join(" · ")||"none tight"],
+  ["Timing engine","Profection + transits","Annual house/lord plus Jupiter/Saturn/Uranus/Neptune/Pluto aspects"]
+ ].map(([k,v,n])=>`<div><b>${k}</b><span>${v}</span><small>${n}</small></div>`).join("");
+}
+function renderSajuCultivationTab(){
+ let btn=$("sajuCultivationTabBtn"),panel=$("sajuCultivationTab"),enabled=hasSelectedPracticeFamily("Saju");
+ if(!btn||!panel)return;
+ btn.hidden=!enabled;if(!enabled||!chart?.sajuBirth)return;
+ initializePracticeDateInput("sajuCultivationDate");
+ let ms=practiceDateMs("sajuCultivationDate"),a=sajuCultivationAssessment(ms),u=a.useful,tg=a.tenGod,
+     dm=`${tg.dmPolarity} ${tg.dmElement} · ${tg.dmLabel}`;
+ $("sajuNatalBadge").textContent=`Day Master · ${dm}`;
+ $("sajuNatalBadge").className="badge good";
+ $("sajuTimingBadge").textContent=a.daeun?`Daeun ${a.daeun.label}`:"Pre-Daeun";
+ $("sajuTimingBadge").className="badge good";
+ $("sajuCultivationNotice").innerHTML=`Current Day Master: <b>${dm}</b>. Visible-chart support ratio ${Math.round(u.supportRatio*100)}% → modeled <b>${u.state}</b>. Primary favorable element: <b>${a.displayPrimary}</b> (${a.usefulSource}). This is elemental regulation, not deity selection.`;
+ $("sajuElementGrid").innerHTML=FIVE_ELEMENTS.slice().sort((x,y)=>u.pct[y]-u.pct[x]).map(e=>`<div class="orientationCard">
+   <div class="name">${e}</div><div class="score">${u.pct[e].toFixed(1)}%</div>
+   <div class="elementBar"><div style="width:${u.pct[e].toFixed(1)}%"></div></div>
+   <div class="why">${e===tg.dmElement?"Day Master element":e===u.resourceElement?"Resource element":"visible stems + branch main qi"}</div>
+  </div>`).join("");
+ $("sajuUsefulGrid").innerHTML=`<div class="routineBlock"><h4>${a.displayPrimary} · primary</h4><ul><li>${SAJU_CULTIVATION_BY_ELEMENT[a.displayPrimary].body}</li></ul></div>
+ <div class="routineBlock"><h4>${a.displaySecondary} · secondary</h4><ul><li>${SAJU_CULTIVATION_BY_ELEMENT[a.displaySecondary].body}</li><li>${u.rationale}</li></ul></div>`;
+ $("sajuTenGodGrid").innerHTML=tg.summary.map(x=>`<div class="routineBlock"><h4>${x.group} · ${x.score.toFixed(2)} visible weight</h4><ul>
+   <li>${SAJU_TENGOD_CULTIVATION[x.group]}</li>
+   <li>${x.rows.length?x.rows.map(r=>`${r.pillar} ${r.part}: ${r.tenGod}`).join(" · "):"No strong visible occurrence."}</li></ul></div>`).join("");
+ $("sajuTimingGrid").innerHTML=a.layers.map(l=>`<div class="routineBlock"><h4>${l.level} · ${l.pillar.label}</h4><ul>
+   <li>${l.pillar.stemElement} stem · ${l.pillar.branchElement} branch · stem Ten God: <b>${l.stemTenGod}</b>.</li>
+   <li>${l.usefulHits.length?`Favorable-element contact: ${l.usefulHits.join(" + ")}.`:"No direct primary/secondary favorable-element contact in the visible stem/branch pair."}</li>
+   ${l.dominantRepeats.length?`<li>Repeats already-dominant natal element: ${l.dominantRepeats.join(" + ")} — favor regulation over amplification.</li>`:""}</ul></div>`).join("");
+ $("sajuPracticeGrid").innerHTML=a.practices.map(x=>`<div class="routineBlock"><h4>${x.title}</h4><ul><li>${x.body}</li></ul></div>`).join("")+
+   `<div class="routineBlock"><h4>Current balance signal</h4><ul><li>Useful-element contact index: ${(100*a.currentSupport).toFixed(0)} relative.</li><li>Dominant-element repetition index: ${(100*a.currentOverload).toFixed(0)} relative.</li></ul></div>`;
+}
+
+function renderDharmaTab(){
+ let btn=$("dharmaTabBtn"),panel=$("dharmaTab"),vedic=hasSelectedPracticeFamily("Vedic")||hasSelectedStructuralFamily("Vedic");
+ if(!btn||!panel)return;
+ btn.hidden=!vedic;
+ if(!vedic){
+  if(panel.classList.contains("active"))switchTab("heatmap");
+  return;
+ }
+ let date=$("dharmaDate");
+ if(date&&!date.value){
+  date.min=profile.date;date.max=$("inspectDate").max;
+  date.value=$("inspectDate").value||profile.date;
+ }
+ let ms=dharmaDateMs(),state=currentDharmaPathScores(ms),
+     paths=Object.entries(state.paths).map(([name,v])=>({name,...v})).sort((a,b)=>b.current-a.current),
+     assessment=classicalDevataAssessment(ms),deities=assessment.channels,
+     texts=textScores(state,deities),
+     timing=timingPracticeText(state.active),
+     intensity=+$("dharmaIntensity").value||20,topPath=paths[0]?.name||"balanced dharma",
+     topDeity=deities[0],evidence=evidenceWeightsForDomain("Spiritual","Vedic"),
+     applies=receivedDharmaApplies(),jr7=assessment.j7,jr8=assessment.j8,
+     jreg=prashanthJaiminiRegression(),curr=currentReceivedCurriculum(ms);
+
+ // Keep editable UI synchronized with explicit received state without changing ownership silently.
+ if(document.activeElement!==$("dharmaKuladevata"))$("dharmaKuladevata").value=receivedDharma.kuladevata||"";
+ if(document.activeElement!==$("dharmaKulaDevi"))$("dharmaKulaDevi").value=receivedDharma.kulaDevi||"";
+ if(document.activeElement!==$("dharmaEstablishedIshta"))$("dharmaEstablishedIshta").value=receivedDharma.establishedIshta||"";
+ if(document.activeElement!==$("dharmaGuruLineage"))$("dharmaGuruLineage").value=receivedDharma.guruLineage||"";
+ $("receivedProfileStatus").innerHTML=applies
+   ?`Applied to <b>${profile.name}</b> · ${receivedDharma.source}`
+   :`<span class="layerWarn">Stored anchors belong to another profile; not used as current-profile authority until reassigned.</span>`;
+
+ $("dharmaEvidenceBadge").textContent=`${structuralEvidenceLabel()} · ${Object.keys(evidence).join("+")}`;
+ $("dharmaEvidenceBadge").className="badge good";
+ $("dharmaTimingBadge").textContent=state.active.length?state.active.slice(0,2).join(" / "):"Natal";
+ $("dharmaTimingBadge").className="badge "+(state.active.length?"good":"warn");
+
+ let receivedIshta=applies?(receivedDharma.establishedIshta||"").trim():"",
+     jIndicators=[...(jr7?.indicators||[]),...(jr8?.indicators||[])].filter((x,i,a)=>a.indexOf(x)===i);
+ let topNatal=assessment.channels.filter(x=>x.natalRaw>0).slice(0,4);
+ $("dharmaNotice").innerHTML=receivedIshta
+   ?`<b>Established Iṣṭa recorded:</b> ${receivedIshta}. The chart-derived channels below remain corroborative only.`
+   :`<b>No established Iṣṭa is recorded.</b> Independent chart reconstruction gives Karakāṃśa indicator planet(s) <b>${jIndicators.join(" + ")||"—"}</b>. The strongest natal channels are currently <b>${topNatal.map(x=>x.name).join(" → ")}</b>. Multiple Karakāṃśa occupants are preserved as multiple signals; the engine does not manufacture one Iṣṭa. Dakṣiṇāmūrti, if shown, appears only as a secondary Śiva/Guru contemplative form.`;
+
+ $("dharmaPathBars").innerHTML=paths.map(x=>`<div class="pathRow">
+   <div class="pathName">${x.name}</div>
+   <div class="pathTrack" title="Natal ${x.natal.toFixed(1)} · current ${x.current.toFixed(1)}">
+    <div class="pathNatal" style="width:${x.natal.toFixed(1)}%"></div>
+    <div class="pathCurrent" style="width:${x.current.toFixed(1)}%"></div>
+   </div><div class="pathVal">${Math.round(x.current)}</div></div>`).join("");
+
+ $("dharmaTiming").innerHTML=`<div class="timingPath">${timing.map(x=>`<span class="timingPill">${x.level} · <b>${x.lord}</b></span>`).join("")||'<span class="timingPill">Natal foundation</span>'}</div>`+
+   timing.slice(0,3).map(x=>`<div class="timingTheme"><b>${x.lord}</b> — ${x.theme}. <span class="muted">${x.practice}; focus day ${x.weekday}.</span></div>`).join("");
+
+ let box=(title,body,cls="")=>`<div class="reconcileBox ${cls}"><h4>${title}</h4><div class="small">${body}</div></div>`;
+ $("ishtaIndicator").innerHTML=`<div class="reconcileGrid">
+  ${box("Received / established",applies?`Kuladevata <b>${receivedDharma.kuladevata||"—"}</b><br>Kula Devi <b>${receivedDharma.kulaDevi||"—"}</b><br>Established Iṣṭa <b>${receivedDharma.establishedIshta||"none recorded"}</b>`:"Stored anchors are not assigned to this birth profile.","okFlag")}
+  ${box("Jaimini · 7-kāraka",jr7?`AK <b>${jr7.ak}</b> · D9 Karakāṃśa <b>${SIGNS[jr7.karakamsha]}</b><br>12th = <b>${SIGNS[jr7.twelfth]}</b><br>${jr7.resolution}: <b>${jr7.indicators.join(" + ")}</b><br><b>No unique deity forced.</b> Candidate associations: ${jr7.modernCandidates.join(" / ")}.<br>${jr7.conclusion}`:"Unavailable","")}
+  ${box("Jaimini · 8-kāraka",jr8?`AK <b>${jr8.ak}</b>${jr8.ak==="Rahu"?" (reverse degree)":""} · D9 Karakāṃśa <b>${SIGNS[jr8.karakamsha]}</b><br>12th = <b>${SIGNS[jr8.twelfth]}</b><br>${jr8.resolution}: <b>${jr8.indicators.join(" + ")}</b><br><b>No unique deity forced.</b> Candidate associations: ${jr8.modernCandidates.join(" / ")}.<br>${jr8.conclusion}`:"Unavailable","")}
+ </div>
+ ${jreg?`<div class="small" style="margin-top:7px"><b>Prashanth regression:</b> ${jreg.ok?"PASS":"FAIL"} · expected Sun AK → Gemini Karakāṃśa → Taurus 12th with Venus + Rahu occupants. This is a calculation regression, not a deity override.</div>`:""}`;
+
+ $("deityGrid").innerHTML=assessment.channels.filter(d=>d.natalRaw>0).slice(0,6).map((d,i)=>`<div class="deityCard">
+   <div class="rank">natal channel ${i+1}</div>
+   <div class="name">${d.name}</div>
+   <div class="score">${Math.round(d.natalScore)}<span class="small"> relative evidence</span></div>
+   <div class="devataBand">${d.tier}</div>
+   <div class="devataMeter"><div style="width:${d.natalScore.toFixed(1)}%"></div></div>
+   <div class="why">${d.band}</div>
+   <div class="devataEvidence">${d.reasons.filter(r=>!r.timing).sort((a,b)=>b.points-a.points).slice(0,4).map(r=>`<span class="ev">${r.reason}</span>`).join("")}</div>
+  </div>`).join("");
+
+ $("devataTimingOverlay").innerHTML=assessment.overlay.length
+  ?assessment.overlay.map(o=>`<div class="routineBlock"><h4>${o.level} · ${o.lord} → ${o.name}</h4><ul><li>${o.why}</li><li>This modifies current practice emphasis only; it does not establish or replace an Iṣṭa.</li></ul></div>`).join("")
+  :`<div class="routineBlock"><h4>Natal only</h4><ul><li>No active Vimshottari overlay available for this date.</li></ul></div>`;
+
+ let specialized=specializedDevataAssessment(ms,assessment);
+ $("specializedDevataGrid").innerHTML=specialized.length
+  ?specialized.map(x=>`<div class="routineBlock"><h4>${x.name} · ${x.status}</h4><ul><li>${x.why}</li></ul></div>`).join("")
+  :`<div class="routineBlock"><h4>No specialized form elevated</h4><ul><li>No secondary form met the engine's disclosed threshold.</li></ul></div>`;
+
+ // Daily anchors below are prior Sādhana suggestions; study curriculum is kept separate from daily recitation and is not treated as received lineage instruction.
+ $("dailyTextAnchors").innerHTML=(applies?PRIOR_SUGGESTED_DAILY_TEXT_ANCHORS:[
+   {title:"Bhagavad Gītā",meta:"Broad foundation: karma, bhakti, jñāna and equanimity"},
+   {title:"Pātañjala Yoga Sūtras",meta:"Mind stabilization and disciplined practice"}
+ ]).map((t,i)=>`<div class="textCard"><div class="n">A${i+1}</div><div><div class="title">${t.title}</div><div class="meta">${t.meta}</div></div><div class="tscore">anchor</div></div>`).join("");
+
+ if(applies){
+  let phaseItems=curr.items.length?curr.items:[{title:"Bhagavad Gītā / Yoga Sūtras",meta:"No explicit received curriculum stage for this age."}];
+  $("textGrid").innerHTML=`<div class="small" style="margin-bottom:6px">Age ${curr.age} · prior suggested curriculum overlay · not a received lineage prescription</div>`+
+   phaseItems.map((t,i)=>`<div class="textCard"><div class="n">${i+1}</div><div><div class="title">${t.title}</div><div class="meta">${t.meta}</div></div><div class="tscore">now</div></div>`).join("");
+ }else{
+  $("textGrid").innerHTML=`<div class="small">No received curriculum is assigned to this profile. The list below remains chart-derived rather than pretending a universal age sequence.</div>`;
+ }
+ $("textAffinityGrid").innerHTML=texts.slice(0,7).map((t,i)=>`<div class="textCard">
+   <div class="n">${i+1}</div><div><div class="title">${t.title}</div><div class="meta">${t.kind} · model affinity only</div></div>
+   <div class="tscore">${Math.round(t.score)}</div></div>`).join("");
+
+ $("routineDuration").textContent=`${intensity} min core · received overlay ${applies?"on":"off"}`;
+ let routine=routinePlan(intensity,topDeity,topPath,timing);
+ $("routineGrid").innerHTML=routine.map(r=>`<div class="routineBlock"><h4>${r.title}</h4><ul>${r.items.filter(Boolean).map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+
+ let mind=mindCalmingPlan(timing);
+ $("mindCalmingGrid").innerHTML=mind.map((r,i)=>`<div class="routineBlock"><h4><span class="microTag">${i<5?"micro":"timing"}</span>${r.title}</h4><ul>${r.items.filter(Boolean).map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+
+ let d20=buildVargaChart("D20"),d9=buildVargaChart("D9"),
+     spiritualPlanets=[...CLASSICAL,"Rahu","Ketu"].map(n=>({n,m:planetDimensionMetrics(n,DOMAINS.indexOf("Spiritual"))})).sort((a,b)=>b.m.influence-a.m.influence).slice(0,4),
+     spiritualHouses=[5,9,12,8].map(h=>({h,m:houseDimensionMetrics(h,DOMAINS.indexOf("Spiritual"))})).sort((a,b)=>b.m.influence-a.m.influence);
+ $("dharmaEvidenceGrid").innerHTML=[
+  `<div class="evidenceCard"><b>Spiritual vargas</b><div class="small">D9 Asc ${d9?signName(d9.ascLon):"—"} · D20 Asc ${d20?signName(d20.ascLon):"—"} · model weights ${Object.entries(evidence).map(([k,w])=>`${k} ${Math.round(w*100)}%`).join(" / ")}</div></div>`,
+  `<div class="evidenceCard"><b>Leading planets</b><div class="small">${spiritualPlanets.map(x=>`${x.n} I${Math.round(x.m.influence)} S${signed(x.m.support)}`).join(" · ")}</div></div>`,
+  `<div class="evidenceCard"><b>Moksha / dharma houses</b><div class="small">${spiritualHouses.map(x=>`H${x.h} I${Math.round(x.m.influence)} S${signed(x.m.support)}`).join(" · ")}</div></div>`,
+  `<div class="evidenceCard"><b>Timing</b><div class="small">${state.active.map((x,i)=>`${LEVELS[i]} ${x}`).join(" → ")||"Natal only"} · ${fmt(ms)}</div></div>`
+ ].join("");
+}
+
+
 function natalMapCell(entity,dom,m,type){
  let support=m.support,b=bucket(support),rel=Math.round(m.relevance*100);
  return`<div class="natalCell" style="background:${heatColor(support)};color:${heatTextColor(support)}"
@@ -2296,7 +3599,7 @@ function showRanking(type,id,mode,el){
  }
 }
 
-function render(){if(!chart)return;renderSystemPicker();renderEvidencePicker();renderCyclePickers();let groups=visibleGroups();updateColorRange(groups);renderYearPicker();renderTimeZoomTree();renderDimensionPicker();renderCrumbs();renderSelected();renderHierarchy();renderTimeline(groups);renderHeat(groups);renderPlaybook();renderWeights();renderRankings();$("zoomOutBtn").disabled=cycleFamilyKey==="vimshottari"?!prefix.length:!cycleSelection}
+function render(){if(!chart)return;renderSystemPicker();renderSystemAwarePracticeTabs();renderEvidencePicker();renderCyclePickers();let groups=visibleGroups();updateColorRange(groups);renderYearPicker();renderTimeZoomTree();renderDimensionPicker();renderCrumbs();renderSelected();renderHierarchy();renderTimeline(groups);renderHeat(groups);renderPlaybook();renderWeights();renderRankings();renderDharmaTab();renderWesternInnerPathTab();renderSajuCultivationTab();$("zoomOutBtn").disabled=cycleFamilyKey==="vimshottari"?!prefix.length:!cycleSelection}
 async function calculateProfile(tryProviders=true){
  $("profileStatus").textContent="Profile: calculating…";$("profileStatus").className="badge warn";
  if($("pLocationMode").value==="auto")await resolveBirthPlace(true);
@@ -2309,6 +3612,9 @@ async function calculateProfile(tryProviders=true){
  let by=new Date(chart.birthMs).getUTCFullYear(),today=new Date(),todayY=today.getUTCFullYear(),todayISO=today.toISOString().slice(0,10);
  $("inspectDate").min=profile.date;$("inspectDate").max=`${by+profile.horizon}-12-31`;
  $("inspectDate").value=(todayY>=by&&todayY<=by+profile.horizon)?todayISO:profile.date;
+ for(const id of["dharmaDate","westernPathDate","sajuCultivationDate"]){
+  if($(id)){$(id).min=profile.date;$(id).max=$("inspectDate").max;$(id).value=$("inspectDate").value;}
+ }
  let ephem=swissReady?"Swiss Ephemeris":(chart.natalSource==="validated Prashanth natal reference"?"validated Prashanth natal reference + runtime fallback":"internal fallback");
  $("ephemStatus").textContent=`Ephemeris: ${ephem}`;$("ephemStatus").className="badge "+(swissReady||isGoldenPrashanth()?"good":"warn");
  $("baziStatus").textContent=`Saju: ${libBirth?baziProvider:"internal + Jie approximation"}`;$("baziStatus").className="badge "+(libBirth?"good":"warn");
@@ -2359,6 +3665,7 @@ function addStaticSystem(opts={}){
    existing.name=opts.name||existing.name;
    existing.missingPolicy=opts.missingPolicy||existing.missingPolicy||"renormalize";
    if(opts.structuralFamilies||opts.structuralFamily)existing.structuralFamilies=[...new Set([...(opts.structuralFamilies||[]),...(opts.structuralFamily?[opts.structuralFamily]:[])].filter(Boolean))];
+   if(opts.practiceFamily)existing.practiceFamily=opts.practiceFamily;
    if(opts.intervals)existing.staticIntervals=normalizeStaticIntervals(opts.intervals);
    selectedSystemIds.add(desiredId);
    scoreCache.clear();render();
@@ -2374,6 +3681,7 @@ function addStaticSystem(opts={}){
    cycleFamily:opts.cycleFamily,
    structuralFamily:opts.structuralFamily,
    structuralFamilies:opts.structuralFamilies,
+   practiceFamily:opts.practiceFamily||null,
    calculator:()=>Array(12).fill(null)
  });
  let sys=SYSTEMS[id];
@@ -2426,6 +3734,7 @@ function addSystem(opts={}){
  let cycleKeys=[...(opts.cycleKeys||[]),...(opts.cycleKey?[opts.cycleKey]:[])].filter(Boolean);
  SYSTEMS[id]={id,name:opts.name||id,active:opts.active!==false,targetShare:opts.targetShare??.10,
    cycleKeys:[...new Set(cycleKeys)],structuralFamilies:[...new Set([...(opts.structuralFamilies||[]),...(opts.structuralFamily?[opts.structuralFamily]:[])].filter(Boolean))],
+   practiceFamily:opts.practiceFamily||null,
    calculator:opts.calculator};
  for(const d of DOMAINS){let old=Object.keys(WEIGHTS[d]).reduce((a,k)=>a+WEIGHTS[d][k],0),share=clamp(opts.targetShare??.10,0,.95);for(const k of Object.keys(WEIGHTS[d]))WEIGHTS[d][k]=old?WEIGHTS[d][k]/old*(1-share):(1-share)/Object.keys(WEIGHTS[d]).length;WEIGHTS[d][id]=share}
  selectedSystemIds.add(id);ensureCycleFamily();render();return id;
@@ -2440,7 +3749,7 @@ window.AstroHeatmap={
  getProfile:()=>structuredClone(profile),
  getChart:()=>structuredClone(chart),
  getSystems:()=>Object.values(SYSTEMS).map(x=>({id:x.id,name:x.name,active:x.active,targetShare:x.targetShare,
-   cycleKeys:[...(x.cycleKeys||[])],structuralFamilies:[...(x.structuralFamilies||[])],static:!!x.static,
+   cycleKeys:[...(x.cycleKeys||[])],structuralFamilies:[...(x.structuralFamilies||[])],practiceFamily:x.practiceFamily||null,static:!!x.static,
    missingPolicy:x.missingPolicy||null,intervalCount:x.staticIntervals?.length||0})),
  getStaticIntervals:id=>structuredClone(SYSTEMS[id]?.staticIntervals||[]),
  setSelectedSystems:ids=>{selectedSystemIds=new Set(ids.filter(x=>SYSTEMS[x]));render()},
@@ -2459,14 +3768,35 @@ window.AstroHeatmap={
  setStructuralEvidenceMode:mode=>{if(!["integrated","d1","primary","custom"].includes(mode))throw new Error("Unknown evidence mode");structuralEvidenceMode=mode;scoreCache.clear();render()},
  setStructuralLayers:ids=>{enabledStructuralLayerIds=new Set(ids.filter(id=>STRUCTURAL_LAYERS[id]));enabledStructuralLayerIds.add("D1");structuralCache.clear();scoreCache.clear();render()},
  getVargaChart:id=>structuredClone(buildVargaChart(id)),
- getStructuralLayerBreakdown:(type,entity,domain,family="Vedic")=>structuralLayerBreakdown(type,entity,DOMAINS.indexOf(domain),family)
+ getStructuralLayerBreakdown:(type,entity,domain,family="Vedic")=>structuralLayerBreakdown(type,entity,DOMAINS.indexOf(domain),family),
+ getDharmaProfile:(ms=dharmaDateMs())=>{let state=currentDharmaPathScores(ms),deities=deityScores(ms,state);return structuredClone({ms,state,deities,texts:textScores(state,deities),jaimini7:jaiminiIshtaResolution("7"),jaimini8:jaiminiIshtaResolution("8"),receivedDharma})},
+ getReceivedDharma:()=>structuredClone(receivedDharma),
+ setReceivedDharma:x=>{receivedDharma={...receivedDharma,...x};renderDharmaTab()},
+ getJaiminiIshta:(scheme="7")=>structuredClone(jaiminiIshtaResolution(scheme)),
+ getIshtaStatus:()=>({established:(receivedDharma.establishedIshta||"").trim()||null,source:receivedDharma.source,autoInferenceDisabled:true}),
+ getClassicalDevataAssessment:(ms=dharmaDateMs())=>structuredClone(classicalDevataAssessment(ms)),
+ getSpecializedDevataAssessment:(ms=dharmaDateMs())=>{let a=classicalDevataAssessment(ms);return structuredClone(specializedDevataAssessment(ms,a))},
+ getWesternInnerPathAssessment:(ms=practiceDateMs("westernPathDate"))=>structuredClone(westernInnerPathAssessment(ms)),
+ getSajuCultivationAssessment:(ms=practiceDateMs("sajuCultivationDate"))=>structuredClone(sajuCultivationAssessment(ms)),
+ getSelectedPracticeFamilies:()=>selectedPracticeFamilies()
 };
 
 function exportCSV(){let groups=visibleGroups(),rows=[["Level","Path","Start","End",...selectedDimensions()]];for(const g of groups)rows.push([LEVELS[g.depth-1]||"Phase",g.path.join(" > "),fmt(g.a),fmt(g.b),...selectedDimensions().map(d=>scorePeriod(g,DOMAINS.indexOf(d)).toFixed(3))]);let csv=rows.map(r=>r.map(x=>`"${String(x).replaceAll('"','""')}"`).join(",")).join("\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="dynamic_astrology_heatmap_visible.csv";a.click()}
-function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.values(SYSTEMS).map(s=>[s.id,{id:s.id,name:s.name,active:s.active,targetShare:s.targetShare,cycleKeys:[...(s.cycleKeys||[])],structuralFamilies:[...(s.structuralFamilies||[])],static:!!s.static,missingPolicy:s.missingPolicy||null,intervals:s.static?(s.staticIntervals||[]).map(r=>({start:new Date(r.a).toISOString(),end:new Date(r.b).toISOString(),scores:Object.fromEntries(DOMAINS.map((d,i)=>[d,r.scores[i]]))})):undefined}])),weights:WEIGHTS,selectedSystems:[...selectedSystemIds],selectedDimensions:[...selectedDimensionsSet],calculation:{swissReady,baziProvider,dashaDepth:"Prana",sampling:$("sampleMode").value,
- structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
+function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.values(SYSTEMS).map(s=>[s.id,{id:s.id,name:s.name,active:s.active,targetShare:s.targetShare,cycleKeys:[...(s.cycleKeys||[])],structuralFamilies:[...(s.structuralFamilies||[])],practiceFamily:s.practiceFamily||null,static:!!s.static,missingPolicy:s.missingPolicy||null,intervals:s.static?(s.staticIntervals||[]).map(r=>({start:new Date(r.a).toISOString(),end:new Date(r.b).toISOString(),scores:Object.fromEntries(DOMAINS.map((d,i)=>[d,r.scores[i]]))})):undefined}])),weights:WEIGHTS,selectedSystems:[...selectedSystemIds],selectedDimensions:[...selectedDimensionsSet],calculation:{swissReady,baziProvider,dashaDepth:"Prana",sampling:$("sampleMode").value,
+ structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
 
-function switchTab(which){for(const id of["heatmap","rankings","validation","guide"]){$(id+"Tab").classList.toggle("active",id===which);$(id+"TabBtn").classList.toggle("active",id===which)}if(which==="validation")renderValidationSources()}
+function switchTab(which){
+  for(const id of["heatmap","rankings","dharma","westernPath","sajuCultivation","validation","guide"]){
+    $(id+"Tab").classList.toggle("active",id===which);
+    $(id+"TabBtn").classList.toggle("active",id===which);
+    const mbn=document.getElementById("mbn-"+id);
+    if(mbn)mbn.classList.toggle("active",id===which);
+  }
+  if(which==="validation")renderValidationSources();
+  if(which==="dharma")renderDharmaTab();
+  if(which==="westernPath")renderWesternInnerPathTab();
+  if(which==="sajuCultivation")renderSajuCultivationTab();
+}
 
 function closeCustomDropdowns(except=null){
  document.querySelectorAll("details.multiDrop[open]").forEach(d=>{if(d!==except)d.open=false});
@@ -2478,7 +3808,7 @@ document.addEventListener("pointerdown",e=>{
 },true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCustomDropdowns()});
 
-$("heatmapTabBtn").onclick=()=>switchTab("heatmap");$("rankingsTabBtn").onclick=()=>switchTab("rankings");$("validationTabBtn").onclick=()=>switchTab("validation");$("guideTabBtn").onclick=()=>switchTab("guide");$("runValidationBtn").onclick=runValidationSuite;$("validationMode").onchange=runValidationSuite;
+$("heatmapTabBtn").onclick=()=>switchTab("heatmap");$("rankingsTabBtn").onclick=()=>switchTab("rankings");$("dharmaTabBtn").onclick=()=>switchTab("dharma");$("westernPathTabBtn").onclick=()=>switchTab("westernPath");$("sajuCultivationTabBtn").onclick=()=>switchTab("sajuCultivation");$("validationTabBtn").onclick=()=>switchTab("validation");$("guideTabBtn").onclick=()=>switchTab("guide");$("runValidationBtn").onclick=runValidationSuite;$("validationMode").onchange=runValidationSuite;
 $("calculateBtn").onclick=()=>calculateProfile(true);
 $("resolveLocationBtn").onclick=()=>resolveBirthPlace(false).then(()=>calculateProfile(false));
 $("pLocationMode").onchange=()=>{setLocationMode();if($("pLocationMode").value==="auto")resolveBirthPlace(true).then(()=>calculateProfile(false))};
@@ -2494,9 +3824,35 @@ $("evidenceRecommendedBtn").onclick=()=>{enabledStructuralLayerIds=recommendedSt
 $("evidenceD1Btn").onclick=()=>{enabledStructuralLayerIds=new Set(["D1"]);structuralEvidenceMode="d1";structuralCache.clear();scoreCache.clear();render()};
 $("d60Convention").onchange=e=>{d60Convention=e.target.value;structuralCache.clear();scoreCache.clear();render()};
 $("pBirthConfidence").onchange=()=>{profile=readProfile();structuralCache.clear();scoreCache.clear();render()};
+$("dharmaDate").onchange=()=>{if($("inspectDate"))$("inspectDate").value=$("dharmaDate").value;renderDharmaTab()};
+$("dharmaIntensity").onchange=renderDharmaTab;
+$("westernPathDate").onchange=renderWesternInnerPathTab;
+$("sajuCultivationDate").onchange=renderSajuCultivationTab;
+["dharmaKuladevata","dharmaKulaDevi","dharmaEstablishedIshta","dharmaGuruLineage"].forEach(id=>$(id).onchange=()=>{
+ receivedDharma.kuladevata=$("dharmaKuladevata").value.trim();
+ receivedDharma.kulaDevi=$("dharmaKulaDevi").value.trim();
+ receivedDharma.establishedIshta=$("dharmaEstablishedIshta").value.trim();
+ receivedDharma.guruLineage=$("dharmaGuruLineage").value.trim();
+ receivedDharma.source="User-edited received dharma profile";
+ renderDharmaTab();
+});
+$("assignDharmaProfileBtn").onclick=()=>{
+ receivedDharma.ownerKey=dharmaProfileKey(profile);
+ receivedDharma.kuladevata=$("dharmaKuladevata").value.trim();
+ receivedDharma.kulaDevi=$("dharmaKulaDevi").value.trim();
+ receivedDharma.establishedIshta=$("dharmaEstablishedIshta").value.trim();
+ receivedDharma.guruLineage=$("dharmaGuruLineage").value.trim();
+ receivedDharma.source="User-assigned received dharma profile";
+ renderDharmaTab();
+};
+$("clearDharmaProfileBtn").onclick=()=>{
+ receivedDharma={ownerKey:dharmaProfileKey(profile),kuladevata:"",kulaDevi:"",establishedIshta:"",guruLineage:"",source:"Cleared · no Iṣṭa inferred"};
+ renderDharmaTab();
+};
+
 
 $("systemsAllBtn").onclick=()=>{selectedSystemIds=new Set(activeSystems().map(x=>x.id));render()};$("systemsCoreBtn").onclick=()=>{selectedSystemIds=new Set(["Vedic","Western","Saju"]);render()};$("dimsAllBtn").onclick=()=>{selectedDimensionsSet=new Set(DOMAINS);render()};$("dimsCareerBtn").onclick=()=>{selectedDimensionsSet=new Set(["Career"]);render()};
-$("zoomOutBtn").onclick=()=>{if(cycleFamilyKey==="vimshottari"){if(prefix.length)prefix=prefix.slice(0,-1)}else cycleSelection=null;render()};$("resetDashaBtn").onclick=()=>{prefix=[];cycleSelection=null;render()};$("inspectBtn").onclick=renderActivePath;$("inspectDate").onchange=renderActivePath;$("exportBtn").onclick=exportCSV;$("exportProfileBtn").onclick=exportProfile;
+$("zoomOutBtn").onclick=()=>{if(cycleFamilyKey==="vimshottari"){if(prefix.length)prefix=prefix.slice(0,-1)}else cycleSelection=null;render()};$("resetDashaBtn").onclick=()=>{prefix=[];cycleSelection=null;render()};$("inspectBtn").onclick=()=>{renderActivePath();if($("dharmaDate")){$("dharmaDate").value=$("inspectDate").value;renderDharmaTab()}};$("inspectDate").onchange=()=>{renderActivePath();if($("dharmaDate")){$("dharmaDate").value=$("inspectDate").value;renderDharmaTab()}};$("exportBtn").onclick=exportCSV;$("exportProfileBtn").onclick=exportProfile;
 
 $("importStaticBtn").onclick=()=>{
  try{
@@ -2529,6 +3885,31 @@ $("clearStaticBtn").onclick=()=>{
 setLocationMode();
 calculateProfile(false);
 setTimeout(()=>{loadSwiss().then(ok=>{if(ok)calculateProfile(false)});loadBazi().then(ok=>{if(ok)calculateProfile(false)})},150);
+
+// ── Mobile profile panel toggle ────────────────────────────
+let _profileOpen=false;
+function toggleProfilePanel(){
+  _profileOpen=!_profileOpen;
+  const pp=$("profilePanel"),tp=$("toolbarPanel"),strip=$("profileSummaryStrip");
+  if(pp){pp.style.display=_profileOpen?"block":"none"}
+  if(tp){tp.style.display=_profileOpen?"flex":"none"}
+  if(strip){strip.style.display=_profileOpen?"none":"flex"}
+  if($("profileToggleBtn"))$("profileToggleBtn").textContent=_profileOpen?"✕ Close":"⚙ Profile";
+}
+// sync summary strip with profile on calculate
+const _origCalcProfile=typeof calculateProfile==="function"?calculateProfile:null;
+function _syncStrip(){
+  const n=$("pName"),d=$("pDate"),t=$("pTime"),c=$("pCity"),co=$("pCountry");
+  if(n&&$("stripName"))$("stripName").textContent=n.value||"—";
+  if(d&&t&&$("stripDate")){
+    const dt=new Date(d.value);
+    const ds=isNaN(dt.getTime())?d.value:dt.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+    $("stripDate").textContent=ds+" · "+(t.value||"");
+  }
+  if(c&&co&&$("stripLoc"))$("stripLoc").textContent=[c.value,co.value].filter(Boolean).join(", ");
+}
+$("calculateBtn").addEventListener("click",()=>setTimeout(_syncStrip,200));
+_syncStrip();
 </script>
 </body>
 </html>
