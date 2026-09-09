@@ -263,6 +263,23 @@ header{position:relative!important;top:auto!important;flex-shrink:0}
   .phase,.cell,.headcell,.laneSeg,.rankCard{touch-action:manipulation}
   /* disable hover tooltip on touch devices */
   .tip{display:none!important}
+  /* ── heatmap tab mobile layout: reorder sections ─────────── */
+  /* viewport (timeline+heatmap) first, cycle zoom second, rest below */
+  #heatmapTab{display:flex;flex-direction:column}
+  #heatmapTab .gridtop{order:3}
+  #heatmapTab .hierarchyCard{order:2;margin-top:10px}
+  #heatmapTab .viewport{order:1}
+  #heatmapTab .playbookCard{order:4}
+  #heatmapTab .info{order:5;display:none}  /* hide weights on mobile */
+  /* compact cycle zoom on mobile */
+  .laneTrack{height:44px!important}
+  .laneSeg{height:34px!important;top:5px!important}
+  .lane{grid-template-columns:80px minmax(900px,1fr)!important}
+  .laneLabel{padding:6px 8px!important}
+  .hierarchyHead{flex-direction:column;align-items:flex-start!important;gap:6px!important}
+  .dateInspect{flex-wrap:wrap!important;gap:4px!important}
+  .dateInspect button,.dateInspect input{font-size:10px!important;padding:5px 8px!important}
+  .dashaValidation{display:none}  /* hide validation strip on mobile */
   /* collapsible heavy sections */
   .mobile-collapsible-head{
     display:flex;align-items:center;justify-content:space-between;
@@ -2264,6 +2281,11 @@ function activateCycleGroup(g){
  if(cycleFamilyKey==="vimshottari"){prefix=[...g.path];cycleSelection=null}
  else{cycleSelection={...g};prefix=[]}
  render();
+ // on mobile, scroll the cycle zoom (which sits below the timeline after reorder) into view
+ if(window.matchMedia("(max-width:768px)").matches){
+  const hc=document.querySelector(".hierarchyCard");
+  if(hc)setTimeout(()=>hc.scrollIntoView({behavior:"smooth",block:"nearest"}),80);
+ }
 }
 function cycleFamilyLabel(){return cycleFamilyKey&&CYCLE_FAMILIES[cycleFamilyKey]?CYCLE_FAMILIES[cycleFamilyKey].label:"No cycle"}
 function cycleContextLabel(){let f=CYCLE_FAMILIES[cycleFamilyKey];return f?.contexts?.find(x=>x.id===cycleContextKey)?.label||""}
