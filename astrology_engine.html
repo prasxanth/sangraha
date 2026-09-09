@@ -257,7 +257,10 @@ header{position:relative!important;top:auto!important;flex-shrink:0}
   .card,.hierarchyCard,.playbookCard,.dharmaCard,.natalMapCard,.guideCard,.rankPanel{padding:9px}
   /* viewport limits */
   .laneWrap{-webkit-overflow-scrolling:touch}
-  .heatwrap{max-height:45vh}
+  /* heatmap: only horizontal scroll — outer #content scrolls vertically.
+     This eliminates the nested 2D scroll container that breaks on iOS. */
+  .heatwrap{overflow-x:auto!important;overflow-y:visible!important;max-height:none!important}
+  .tlwrap{-webkit-overflow-scrolling:touch}
   .playbookWrap{max-height:280px}
   /* reliable tap targets in timeline/heatmap */
   .phase,.cell,.headcell,.laneSeg,.rankCard{touch-action:manipulation}
@@ -2430,7 +2433,7 @@ function renderVimshottariHierarchy(){
    d.className="laneSeg"+(g.a<=inspect&&g.b>inspect?" current":"")+(prefix.length>=depth&&prefix.slice(0,depth).join(">")===g.path.join(">")?" selected":"");
    d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
    d.innerHTML=`<div class="laneLord">${g.lord}</div><div class="laneDate">${zoomRangeLabel(g)}</div><div class="laneContinue">${bk[0]} ${sc.toFixed(2)}</div>`;
-   d.onclick=()=>{prefix=[...g.path];render()};track.appendChild(d);
+   d.onclick=()=>{prefix=[...g.path];render()};_tap(d,()=>{prefix=[...g.path];render()});track.appendChild(d);
   }
   lane.append(lab,track);root.appendChild(lane);
  }
@@ -2468,7 +2471,7 @@ function renderGenericCycleHierarchy(){
   d.className="laneSeg"+(g.a<=inspect&&g.b>inspect?" current":"")+(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b?" selected":"");
   d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
   d.innerHTML=`<div class="laneLord">${g.label||g.lord}</div><div class="laneDate">${fmt(g.a)} → ${fmt(g.b)}</div><div class="laneContinue">${bk[0]} ${sc.toFixed(2)}</div>`;
-  d.onclick=()=>activateCycleGroup(g);track.appendChild(d);
+  d.onclick=()=>activateCycleGroup(g);_tap(d,()=>activateCycleGroup(g));track.appendChild(d);
  }
  lane.append(lab,track);root.appendChild(lane);
  let axisLane=document.createElement("div");axisLane.className="lane";let yl=document.createElement("div");yl.className="laneLabel";yl.textContent=String(year),axis=document.createElement("div");axis.className="yearAxis";
@@ -2496,8 +2499,8 @@ function renderHierarchy(){
 function renderActivePath(){if(cycleFamilyKey==="vimshottari")renderVimshottariActivePath();else renderGenericCycleActivePath()}
 function periodTitle(g){return cycleFamilyKey==="vimshottari"?(g.path?.join(" → ")||g.lord):(g.label||g.lord||"Cycle period")}
 
-function renderTimeline(groups){let e=$("timeline");e.innerHTML="";for(const g of groups){let sc=scoreSelected(g),b=bucket(sc),d=document.createElement("div");d.className="phase";d.style.width=width(g,groups)+"px";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);d.innerHTML=`<div class="lord">${g.lord}</div><div class="date">${fmt(g.a)} → ${fmt(g.b)}</div><div class="grade">${b[0]} ${sc.toFixed(3)}</div>`;d.onclick=()=>activateCycleGroup(g);d.onmousemove=ev=>tipPeriod(ev,g);d.onmouseleave=hideTip;e.appendChild(d)}}
-function renderHeat(groups){let e=$("heat");e.innerHTML="";e.style.gridTemplateColumns=`var(--label) ${groups.map(g=>width(g,groups)+"px").join(" ")}`;let c=document.createElement("div");c.className="corner";c.innerHTML=`${dimensionLabel()}<br><span style="opacity:.7">${selectedSystemLabel()}</span><br><span style="opacity:.6">${$("sampleMode").value}-point sampling</span>`;e.appendChild(c);for(const g of groups){let h=document.createElement("div");h.className="headcell";h.innerHTML=`<b>${g.label||g.lord}</b><div class="headRange">${zoomRangeLabel(g)}</div>`;h.onclick=()=>activateCycleGroup(g);e.appendChild(h)}for(const dom of selectedDimensions()){let di=DOMAINS.indexOf(dom),lab=document.createElement("div");lab.className="rowlabel";lab.textContent=dom;e.appendChild(lab);for(const g of groups){let sc=scorePeriod(g,di),b=bucket(sc),ag=agreement(g,di),cell=document.createElement("div");cell.className="cell";cell.style.background=heatColor(sc);cell.style.color=heatTextColor(sc);cell.innerHTML=`<span class="agree">${ag.n}/${ag.totalSystems}</span><div class="grade">${b[0]}</div><div class="score">${sc.toFixed(3)}</div>`;cell.onclick=()=>activateCycleGroup(g);cell.onmousemove=ev=>tipDomain(ev,g,dom);cell.onmouseleave=hideTip;e.appendChild(cell)}}}
+function renderTimeline(groups){let e=$("timeline");e.innerHTML="";for(const g of groups){let sc=scoreSelected(g),b=bucket(sc),d=document.createElement("div");d.className="phase";d.style.width=width(g,groups)+"px";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);d.innerHTML=`<div class="lord">${g.lord}</div><div class="date">${fmt(g.a)} → ${fmt(g.b)}</div><div class="grade">${b[0]} ${sc.toFixed(3)}</div>`;d.onclick=()=>activateCycleGroup(g);_tap(d,()=>activateCycleGroup(g));d.onmousemove=ev=>tipPeriod(ev,g);d.onmouseleave=hideTip;e.appendChild(d)}}
+function renderHeat(groups){let e=$("heat");e.innerHTML="";e.style.gridTemplateColumns=`var(--label) ${groups.map(g=>width(g,groups)+"px").join(" ")}`;let c=document.createElement("div");c.className="corner";c.innerHTML=`${dimensionLabel()}<br><span style="opacity:.7">${selectedSystemLabel()}</span><br><span style="opacity:.6">${$("sampleMode").value}-point sampling</span>`;e.appendChild(c);for(const g of groups){let h=document.createElement("div");h.className="headcell";h.innerHTML=`<b>${g.label||g.lord}</b><div class="headRange">${zoomRangeLabel(g)}</div>`;h.onclick=()=>activateCycleGroup(g);_tap(h,()=>activateCycleGroup(g));e.appendChild(h)}for(const dom of selectedDimensions()){let di=DOMAINS.indexOf(dom),lab=document.createElement("div");lab.className="rowlabel";lab.textContent=dom;e.appendChild(lab);for(const g of groups){let sc=scorePeriod(g,di),b=bucket(sc),ag=agreement(g,di),cell=document.createElement("div");cell.className="cell";cell.style.background=heatColor(sc);cell.style.color=heatTextColor(sc);cell.innerHTML=`<span class="agree">${ag.n}/${ag.totalSystems}</span><div class="grade">${b[0]}</div><div class="score">${sc.toFixed(3)}</div>`;cell.onclick=()=>activateCycleGroup(g);_tap(cell,()=>activateCycleGroup(g));cell.onmousemove=ev=>tipDomain(ev,g,dom);cell.onmouseleave=hideTip;e.appendChild(cell)}}}
 function tipPeriod(ev,g){let rows=selectedDimensions().map(d=>{let s=scorePeriod(g,DOMAINS.indexOf(d));return`<tr><td>${d}</td><td>${bucket(s)[0]} ${s.toFixed(2)}</td></tr>`}).join("");showTip(ev,`<b>${periodTitle(g)}</b><div class="muted">${fmt(g.a)} → ${fmt(g.b)}</div><table>${rows}</table>`)}
 function tipDomain(ev,g,dom){
  let di=DOMAINS.indexOf(dom),mid=midpoint(g.a,g.b),
@@ -4019,19 +4022,15 @@ document.addEventListener("pointerdown",function(e){
   });
 },{passive:true,capture:true});
 
-// ── Fix touch-tap on phase/cell elements in scroll containers ──
-// Distinguish tap from scroll: track touch start position
-(function(){
-  let _startX=0,_startY=0;
-  document.addEventListener("touchstart",e=>{_startX=e.touches[0].clientX;_startY=e.touches[0].clientY},{passive:true});
-  document.addEventListener("touchend",e=>{
-    const dx=Math.abs(e.changedTouches[0].clientX-_startX);
-    const dy=Math.abs(e.changedTouches[0].clientY-_startY);
-    if(dx>8||dy>8)return; // was a scroll/swipe, not a tap
-    const el=e.target.closest(".phase,.cell,.headcell,.laneSeg,.rankCard,.crumb,.appTabBtn");
-    if(el)el.click();
-  },{passive:true});
-})();
+// ── Per-element reliable tap for touch devices ────────────────
+// Non-passive touchend lets us call preventDefault(), stopping
+// the browser's ghost-click that would otherwise double-fire.
+function _tap(el,fn){
+  let sx,sy,mv;
+  el.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;mv=false},{passive:true});
+  el.addEventListener("touchmove",e=>{if(Math.abs(e.touches[0].clientX-sx)>10||Math.abs(e.touches[0].clientY-sy)>10)mv=true},{passive:true});
+  el.addEventListener("touchend",e=>{if(!mv){e.preventDefault();fn()}},{passive:false});
+}
 </script>
 </body>
 </html>
