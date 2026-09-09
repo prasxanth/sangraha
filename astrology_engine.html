@@ -163,20 +163,19 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 .layerOff{opacity:.55}
 .evidenceTrace{font-size:8px;color:var(--muted);margin-top:3px;line-height:1.35}
 
-/* ── PWA SHELL (follows sangraha agni.html pattern) ─────── */
+/* ── PWA SHELL (sangraha agni.html pattern) ──────────────── */
 :root{
   --safe-t: env(safe-area-inset-top, 0px);
   --safe-b: env(safe-area-inset-bottom, 0px);
 }
-/* Shell always present */
 #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
 .status-bar{height:var(--safe-t);background:var(--bg);flex-shrink:0}
 #content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
+header{position:relative!important;top:auto!important;flex-shrink:0}
 
-/* Mobile bottom nav */
+/* ── MOBILE BOTTOM NAV ───────────────────────────────────── */
 .mobile-bottom-nav{
-  flex-shrink:0;
-  display:flex;overflow-x:auto;
+  flex-shrink:0;display:flex;overflow-x:auto;
   background:var(--panel2);border-top:1px solid var(--line);
   padding-bottom:var(--safe-b);
   -webkit-overflow-scrolling:touch;scrollbar-width:none;
@@ -185,38 +184,57 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 .mbn-btn{
   flex:0 0 auto;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:2px;padding:8px 10px;
+  gap:3px;padding:9px 8px;
   border:none;background:transparent;cursor:pointer;
-  color:var(--muted);font-size:8px;letter-spacing:.04em;text-transform:uppercase;
-  min-width:50px;-webkit-tap-highlight-color:transparent;
+  color:var(--muted);font-size:8px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  min-width:48px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
-.mbn-btn .icon{font-size:17px;line-height:1}
+.mbn-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .mbn-btn.active{color:var(--accent)}
 .mbn-btn:active{opacity:.5}
 
-/* Override sticky header — fixed via flex shell */
-header{position:relative!important;top:auto!important;flex-shrink:0}
+/* ── PROFILE OVERLAY (mobile full-screen) ────────────────── */
+#profileOverlay{
+  display:none;
+  position:fixed;inset:0;z-index:200;
+  background:var(--bg);
+  flex-direction:column;
+}
+#profileOverlay.open{display:flex}
+.prof-overlay-hdr{
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:calc(var(--safe-t) + 12px) 16px 12px;
+  border-bottom:1px solid var(--line);
+  background:var(--bg);
+}
+.prof-overlay-hdr h3{margin:0;font-size:15px;color:var(--text)}
+.prof-overlay-close{
+  background:var(--panel2);border:1px solid var(--line);border-radius:8px;
+  color:var(--muted);font-size:13px;padding:6px 12px;cursor:pointer;touch-action:manipulation;
+}
+.prof-overlay-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 16px calc(var(--safe-b) + 12px)}
 
-/* Desktop: top tabs visible, bottom nav hidden */
+/* ── DESKTOP: show profile in header, hide mobile UI ─────── */
 @media(min-width:769px){
   .mobile-bottom-nav{display:none}
   #profilePanel{display:block!important}
   #toolbarPanel{display:flex!important}
   #profileSummaryStrip{display:none!important}
   #profileToggleBtn{display:none}
+  #profileOverlay{display:none!important}
 }
 
-/* Mobile overrides */
+/* ── MOBILE OVERRIDES ────────────────────────────────────── */
 @media(max-width:768px){
-  html,body{overflow:hidden;height:100%;height:100dvh}
-  body{overscroll-behavior:none}
-  header .wrap{padding:10px 12px 8px}
-  h1{font-size:15px!important}
+  html,body{overflow:hidden;height:100%;height:100dvh;overscroll-behavior:none}
+  header .wrap{padding:10px 14px 10px}
+  h1{font-size:14px!important}
   header .sub{font-size:10px}
   .appTabs{display:none!important}
-  main{padding-bottom:4px}
+  main{padding-bottom:6px}
   .wrap,main{padding-left:10px!important;padding-right:10px!important}
-  /* grid collapses */
+  /* grids collapse to 1 col (dense) or 2 col (card lists) */
   .profileGrid{grid-template-columns:1fr 1fr!important}
   .gridtop,.dharmaGridTop,.dharmaGrid2{grid-template-columns:1fr!important}
   .rankGrid2{grid-template-columns:1fr!important}
@@ -227,20 +245,33 @@ header{position:relative!important;top:auto!important;flex-shrink:0}
   .validationSummary{grid-template-columns:1fr 1fr!important}
   .components{grid-template-columns:repeat(2,1fr)!important}
   .decision{grid-template-columns:1fr!important}
-  /* toolbar: horizontal scroll */
-  .toolbar{overflow-x:auto;flex-wrap:nowrap!important;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none}
+  /* toolbar: horizontal scroll strip */
+  .toolbar{overflow-x:auto;flex-wrap:nowrap!important;-webkit-overflow-scrolling:touch;
+    padding:6px 0 4px;scrollbar-width:none}
   .toolbar::-webkit-scrollbar{display:none}
-  .toolbar button,.toolbar select,.toolbar details{white-space:nowrap;flex-shrink:0}
+  .toolbar>*{white-space:nowrap;flex-shrink:0}
   .multiDrop{min-width:auto!important}
-  .multiDrop summary{min-width:120px}
-  .multiDrop .multiDropMenu{max-width:min(96vw,420px);left:0}
-  /* compact padding */
+  .multiDrop summary{min-width:110px}
+  .multiDrop .multiDropMenu{max-width:min(96vw,400px);left:0;right:auto}
+  /* compact cards */
   .card,.hierarchyCard,.playbookCard,.dharmaCard,.natalMapCard,.guideCard,.rankPanel{padding:9px}
-  .tip{max-width:min(320px,90vw)}
-  /* lane tracks still scroll horizontally inside their container */
+  /* viewport limits */
   .laneWrap{-webkit-overflow-scrolling:touch}
-  .heatwrap{max-height:55vh}
-  .playbookWrap{max-height:320px}
+  .heatwrap{max-height:45vh}
+  .playbookWrap{max-height:280px}
+  /* reliable tap targets in timeline/heatmap */
+  .phase,.cell,.headcell,.laneSeg,.rankCard{touch-action:manipulation}
+  /* disable hover tooltip on touch devices */
+  .tip{display:none!important}
+  /* collapsible heavy sections */
+  .mobile-collapsible-head{
+    display:flex;align-items:center;justify-content:space-between;
+    cursor:pointer;padding:4px 0;touch-action:manipulation;
+  }
+  .mobile-collapsible-head .mc-arrow{font-size:12px;color:var(--muted);transition:transform .2s;display:inline-block}
+  .mobile-collapsible-body{overflow:hidden;max-height:0;transition:max-height .3s ease}
+  .mobile-collapsible-body.open{max-height:9999px}
+  .mobile-collapsible-head.open .mc-arrow{transform:rotate(180deg)}
 }
 
 .dharmaHero{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
@@ -328,6 +359,18 @@ header{position:relative!important;top:auto!important;flex-shrink:0}
 <body>
 <div id="app">
 <div class="status-bar"></div>
+
+<!-- Mobile profile overlay (full-screen scrollable sheet) -->
+<div id="profileOverlay">
+ <div class="prof-overlay-hdr">
+  <h3>⚙ Profile &amp; Settings</h3>
+  <button class="prof-overlay-close" onclick="toggleProfilePanel()">✕ Close</button>
+ </div>
+ <div class="prof-overlay-body" id="profileOverlayBody">
+  <!-- profile form injected by JS on open -->
+ </div>
+</div>
+
 <header>
  <div class="wrap">
   <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
@@ -1039,13 +1082,27 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
 
 <!-- Mobile bottom nav (hidden on desktop via CSS) -->
 <nav class="mobile-bottom-nav" id="mobileBottomNav">
- <button class="mbn-btn active" id="mbn-heatmap" onclick="switchTab('heatmap')"><span class="icon">📊</span>Heat</button>
- <button class="mbn-btn" id="mbn-rankings" onclick="switchTab('rankings')"><span class="icon">⭐</span>Natal</button>
- <button class="mbn-btn" id="mbn-dharma" onclick="switchTab('dharma')"><span class="icon">🕉</span>Dharma</button>
- <button class="mbn-btn" id="mbn-westernPath" onclick="switchTab('westernPath')"><span class="icon">🌙</span>Western</button>
- <button class="mbn-btn" id="mbn-sajuCultivation" onclick="switchTab('sajuCultivation')"><span class="icon">☯</span>Saju</button>
- <button class="mbn-btn" id="mbn-validation" onclick="switchTab('validation')"><span class="icon">✓</span>Validate</button>
- <button class="mbn-btn" id="mbn-guide" onclick="switchTab('guide')"><span class="icon">📖</span>Guide</button>
+ <button class="mbn-btn active" id="mbn-heatmap" onclick="switchTab('heatmap')">
+  <svg viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="11" y="2" width="7" height="7" rx="1"/><rect x="2" y="11" width="7" height="7" rx="1"/><rect x="11" y="11" width="7" height="7" rx="1"/></svg>Heat
+ </button>
+ <button class="mbn-btn" id="mbn-rankings" onclick="switchTab('rankings')">
+  <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="2.2" fill="currentColor" stroke="none"/><line x1="10" y1="1" x2="10" y2="5"/><line x1="10" y1="15" x2="10" y2="19"/><line x1="1" y1="10" x2="5" y2="10"/><line x1="15" y1="10" x2="19" y2="10"/></svg>Natal
+ </button>
+ <button class="mbn-btn" id="mbn-dharma" onclick="switchTab('dharma')">
+  <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/><circle cx="10" cy="10" r="2" fill="currentColor" stroke="none"/><line x1="10" y1="2.5" x2="10" y2="8"/><line x1="10" y1="12" x2="10" y2="17.5"/><line x1="2.5" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="17.5" y2="10"/><line x1="5.2" y1="5.2" x2="8.6" y2="8.6"/><line x1="11.4" y1="11.4" x2="14.8" y2="14.8"/><line x1="14.8" y1="5.2" x2="11.4" y2="8.6"/><line x1="8.6" y1="11.4" x2="5.2" y2="14.8"/></svg>Dharma
+ </button>
+ <button class="mbn-btn" id="mbn-westernPath" onclick="switchTab('westernPath')">
+  <svg viewBox="0 0 20 20"><path d="M12.5 3.5A6.5 6.5 0 1 0 12.5 16.5A4.5 4.5 0 0 1 12.5 3.5Z"/><circle cx="15" cy="5" r="1.2" fill="currentColor" stroke="none"/></svg>Western
+ </button>
+ <button class="mbn-btn" id="mbn-sajuCultivation" onclick="switchTab('sajuCultivation')">
+  <svg viewBox="0 0 20 20"><rect x="2" y="9" width="3" height="9" rx=".5"/><rect x="6.5" y="6" width="3" height="12" rx=".5"/><rect x="11" y="3" width="3" height="15" rx=".5"/><rect x="15.5" y="7" width="3" height="11" rx=".5"/><line x1="1" y1="18.5" x2="19" y2="18.5"/></svg>Saju
+ </button>
+ <button class="mbn-btn" id="mbn-validation" onclick="switchTab('validation')">
+  <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><polyline points="6.5,10 9,12.5 13.5,7.5"/></svg>Check
+ </button>
+ <button class="mbn-btn" id="mbn-guide" onclick="switchTab('guide')">
+  <svg viewBox="0 0 20 20"><path d="M4 3h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><line x1="7" y1="8" x2="13" y2="8"/><line x1="7" y1="11" x2="13" y2="11"/><line x1="7" y1="14" x2="10" y2="14"/><line x1="10" y1="3" x2="10" y2="17"/></svg>Guide
+ </button>
 </nav>
 
 </div><!-- #app -->
@@ -3886,18 +3943,40 @@ setLocationMode();
 calculateProfile(false);
 setTimeout(()=>{loadSwiss().then(ok=>{if(ok)calculateProfile(false)});loadBazi().then(ok=>{if(ok)calculateProfile(false)})},150);
 
-// ── Mobile profile panel toggle ────────────────────────────
-let _profileOpen=false;
+// ── Mobile profile overlay ─────────────────────────────────
+const _isMobile=()=>window.matchMedia("(max-width:768px)").matches;
+
 function toggleProfilePanel(){
-  _profileOpen=!_profileOpen;
-  const pp=$("profilePanel"),tp=$("toolbarPanel"),strip=$("profileSummaryStrip");
-  if(pp){pp.style.display=_profileOpen?"block":"none"}
-  if(tp){tp.style.display=_profileOpen?"flex":"none"}
-  if(strip){strip.style.display=_profileOpen?"none":"flex"}
-  if($("profileToggleBtn"))$("profileToggleBtn").textContent=_profileOpen?"✕ Close":"⚙ Profile";
+  if(!_isMobile()){
+    // desktop: toggle inline visibility
+    const pp=$("profilePanel"),tp=$("toolbarPanel"),strip=$("profileSummaryStrip");
+    const open=pp.style.display!=="none"&&pp.style.display!=="";
+    if(pp)pp.style.display=open?"none":"block";
+    if(tp)tp.style.display=open?"none":"flex";
+    if(strip)strip.style.display=open?"flex":"none";
+    if($("profileToggleBtn"))$("profileToggleBtn").textContent=open?"⚙ Profile":"✕ Close";
+    return;
+  }
+  // mobile: toggle full-screen overlay
+  const overlay=document.getElementById("profileOverlay");
+  if(!overlay)return;
+  const opening=!overlay.classList.contains("open");
+  overlay.classList.toggle("open",opening);
+  document.body.style.overflow=opening?"hidden":"";
+  // move form into overlay body on first open
+  if(opening){
+    const body=document.getElementById("profileOverlayBody");
+    const pp=$("profilePanel"),tp=$("toolbarPanel");
+    if(body&&pp&&!body.contains(pp)){
+      body.appendChild(pp);
+      if(tp)body.appendChild(tp);
+    }
+    if(pp)pp.style.display="block";
+    if(tp)tp.style.display="flex";
+  }
 }
-// sync summary strip with profile on calculate
-const _origCalcProfile=typeof calculateProfile==="function"?calculateProfile:null;
+
+// Strip sync — compact summary shown in header when profile closed
 function _syncStrip(){
   const n=$("pName"),d=$("pDate"),t=$("pTime"),c=$("pCity"),co=$("pCountry");
   if(n&&$("stripName"))$("stripName").textContent=n.value||"—";
@@ -3910,6 +3989,27 @@ function _syncStrip(){
 }
 $("calculateBtn").addEventListener("click",()=>setTimeout(_syncStrip,200));
 _syncStrip();
+
+// ── Close dropdowns when tapping outside ──────────────────
+document.addEventListener("pointerdown",function(e){
+  document.querySelectorAll("details[open]").forEach(det=>{
+    if(!det.contains(e.target))det.removeAttribute("open");
+  });
+},{passive:true,capture:true});
+
+// ── Fix touch-tap on phase/cell elements in scroll containers ──
+// Distinguish tap from scroll: track touch start position
+(function(){
+  let _startX=0,_startY=0;
+  document.addEventListener("touchstart",e=>{_startX=e.touches[0].clientX;_startY=e.touches[0].clientY},{passive:true});
+  document.addEventListener("touchend",e=>{
+    const dx=Math.abs(e.changedTouches[0].clientX-_startX);
+    const dy=Math.abs(e.changedTouches[0].clientY-_startY);
+    if(dx>8||dy>8)return; // was a scroll/swipe, not a tap
+    const el=e.target.closest(".phase,.cell,.headcell,.laneSeg,.rankCard,.crumb,.appTabBtn");
+    if(el)el.click();
+  },{passive:true});
+})();
 </script>
 </body>
 </html>
