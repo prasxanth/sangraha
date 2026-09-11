@@ -307,6 +307,54 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
  .playbookWrap{max-height:none}
 }
 
+/* ── Font size bump ──────────────────────────────────────────── */
+.small{font-size:12px!important}
+.mbn-btn{font-size:10px}
+.mbn-btn svg{width:22px;height:22px}
+.pchip-lord{font-size:13px}
+.pchip-grade{font-size:16px}
+.pchip-score{font-size:9px}
+.hdr-title{font-size:20px}
+.lens-label{font-size:10px}
+.kala-lens ul{font-size:12px}
+.cell{font-size:11px}
+.cell .grade{font-size:14px}
+.headcell{font-size:11px}
+.rowlabel{font-size:12px}
+.phase .lord{font-size:13px}
+.phase .date{font-size:10px}
+.card h3{font-size:13px}
+.hierarchyHead h3{font-size:14px}
+.laneLord{font-size:11px}
+.pranaCard .pl{font-size:13px}
+
+/* ── Kāla navigation row ────────────────────────────────────── */
+.kala-nav-row{display:flex;align-items:center;gap:10px;padding:6px 0 4px;flex-wrap:wrap}
+.kala-back-btn{font-size:12px;padding:5px 12px;border-radius:20px;border-color:var(--accent);color:var(--accent)}
+.kala-period-label{font-size:13px;font-weight:800;color:#dce5ef;line-height:1.3}
+.kala-date-range{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ── Domain bar chart (heatmap alternative) ─────────────────── */
+.dbar-wrap{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:8px 0}
+.dbar-hdr-row{display:flex;min-height:22px;background:var(--panel3);border-bottom:1px solid var(--line)}
+.dbar-hdr-label{width:82px;min-width:82px;border-right:1px solid var(--line);font-size:9px;display:flex;align-items:center;padding:0 6px;color:var(--muted);flex-shrink:0}
+.dbar-hdr-track{flex:1;display:flex;overflow:hidden}
+.dbar-hdr-seg{flex:0 0 auto;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(255,255,255,.06);padding:2px 3px;overflow:hidden;white-space:nowrap;cursor:pointer;color:rgba(255,255,255,.6);touch-action:manipulation}
+.dbar-hdr-seg.sel{background:rgba(143,176,255,.2);color:#edf3fa}
+.dbar-row{display:flex;align-items:stretch;min-height:28px;border-bottom:1px solid rgba(255,255,255,.04)}
+.dbar-row:last-child{border-bottom:none}
+.dbar-label{width:82px;min-width:82px;padding:0 6px;font-size:11px;font-weight:700;display:flex;align-items:center;background:var(--panel2);border-right:1px solid var(--line);color:#b8c8d9;flex-shrink:0}
+.dbar-track{flex:1;display:flex;overflow:hidden}
+.dbar-seg{flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;cursor:pointer;border-right:1px solid rgba(0,0,0,.18);touch-action:manipulation;transition:filter .1s}
+.dbar-seg:hover{filter:brightness(1.18)}
+.dbar-seg.sel{box-shadow:inset 0 0 0 2px rgba(255,255,255,.9)}
+
+/* ── Subtabs ───────────────────────────────────────────────── */
+.subtab-row{display:flex;gap:5px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch;border-bottom:1px solid var(--line);margin-bottom:12px;flex-shrink:0}
+.subtab-row::-webkit-scrollbar{display:none}
+.subtab-btn{flex:0 0 auto;font-size:12px;font-weight:700;padding:7px 14px;border-radius:20px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);cursor:pointer;touch-action:manipulation}
+.subtab-btn.active{background:#1a2634;color:#f2f6fb;border-color:#40536b}
+
 /* ── Desktop: restore classic layout above 769px ──────────────── */
 @media(min-width:769px){
  #app{height:auto;overflow:visible;display:block}
@@ -466,6 +514,13 @@ header.deskHeader{display:none}
 
    <!-- Tab 1: Kāla Overview -->
    <div class="tabPanel active" id="heatmapTab">
+    <div class="kala-nav-row" id="kalaNavRow" style="display:none">
+     <button class="kala-back-btn" id="kalaBackBtn">← Back</button>
+     <div style="flex:1">
+      <div class="kala-period-label" id="kalaPeriodLabel"></div>
+      <div class="kala-date-range" id="kalaDateRange"></div>
+     </div>
+    </div>
     <div class="kala-period-row" id="periodChips"></div>
     <div class="radar-card">
      <div id="radarSvg"></div>
@@ -500,7 +555,8 @@ header.deskHeader{display:none}
     </div>
     <div class="viewport" style="margin-top:10px">
      <div class="tlwrap"><div class="timeline" id="timeline"></div></div>
-     <div class="heatwrap"><div class="heat" id="heat"></div></div>
+     <div id="domainBarsContainer" style="padding:4px 8px 8px"></div>
+     <div class="heatwrap" hidden><div class="heat" id="heat"></div></div>
     </div>
    </div>
 
@@ -519,7 +575,13 @@ header.deskHeader{display:none}
 
    <!-- Tab 4: Natal rankings -->
    <div class="tabPanel" id="rankingsTab">
+  <div class="subtab-row" id="rankingsSubtabRow">
+   <button class="subtab-btn active" data-stab="rank-mahadasha">Mahādaśā</button>
+   <button class="subtab-btn" data-stab="rank-natal">Natal Maps</button>
+   <button class="subtab-btn" data-stab="rank-rankings">Rankings</button>
+  </div>
   <div class="rankingsWrap">
+   <div id="rank-mahadasha">
    <div class="card" style="margin-bottom:12px">
     <h3>Dynamic natal rankings · Influence and Benefit</h3>
     <div class="small">These are <b>two separate calculations from the current birth chart</b>. <b>Influence/Salience</b> asks “how strongly does this planet/house shape the chart?” <b>Benefit/Support</b> asks “how constructively does it tend to operate in this chart?” A planet can therefore be highly influential but poorly supportive.</div>
@@ -550,7 +612,9 @@ header.deskHeader{display:none}
     </div>
     <div class="rankDetail" id="mahadashaEvidence"><div class="small">Mahādaśā evidence will be generated from the current chart.</div></div>
    </div>
+   </div><!-- /rank-mahadasha -->
 
+   <div id="rank-natal" style="display:none">
    <div class="natalMapCard">
     <div class="natalMapHeader">
      <div><h3>Planet × life-dimension natal map</h3><div class="small">Every cell is calculated from the current birth profile and selected structural evidence. In Integrated mode, D1 is combined with the relevant vargas for each life dimension; the same integrated metrics feed Vedic timing.</div></div>
@@ -567,8 +631,9 @@ header.deskHeader{display:none}
     </div>
     <div class="natalMapWrap"><div class="natalMap" id="houseDimensionMap"></div></div>
    </div>
+   </div><!-- /rank-natal -->
 
-
+   <div id="rank-rankings" style="display:none">
    <details class="rankSummaryDetails" open><summary>Ranked summaries · influence and benefit</summary>
    <div class="rankSectionTitle">Planets</div>
    <div class="rankSectionSub">The same planets can appear in very different order across the two lists.</div>
@@ -586,11 +651,19 @@ header.deskHeader{display:none}
 
    <div class="rankDetail" id="rankingDetail"><div class="small">Select any influence or benefit ranking item for details.</div></div>
    </details>
+   </div><!-- /rank-rankings -->
   </div>
  </div>
 
    <!-- Tab 5: Vedic Dharma -->
    <div class="tabPanel" id="dharmaTab">
+  <div class="subtab-row" id="dharmaSubtabRow">
+   <button class="subtab-btn active" data-stab="dharma-path">Path</button>
+   <button class="subtab-btn" data-stab="dharma-devata">Devata</button>
+   <button class="subtab-btn" data-stab="dharma-practice">Practice</button>
+   <button class="subtab-btn" data-stab="dharma-mind">Mind</button>
+  </div>
+  <div id="dharma-path">
   <div class="dharmaHero">
    <div>
     <h2>Spiritual path · Dharma · Practice</h2>
@@ -631,7 +704,9 @@ header.deskHeader{display:none}
     <div id="dharmaTiming"></div>
    </div>
   </div>
+  </div><!-- /dharma-path -->
 
+  <div id="dharma-devata" style="display:none">
   <div class="dharmaCard">
    <div class="dharmaCardHead"><h3>Devata assessment · classical-first</h3><span class="small">Kula → Karakāṃśa → dharma/Guru → D20 → timing</span></div>
    <div id="ishtaIndicator" class="ishtaIndicator"></div>
@@ -646,7 +721,9 @@ header.deskHeader{display:none}
    <div class="subsectionTitle">Specialized forms · secondary, not core rank</div>
    <div id="specializedDevataGrid" class="routineGrid"></div>
   </div>
+  </div><!-- /dharma-devata -->
 
+  <div id="dharma-practice" style="display:none">
   <div class="dharmaGrid2">
    <div class="dharmaCard">
     <div class="dharmaCardHead"><h3>Knowledge registry · daily anchors + study curriculum</h3><span class="small">recitation ≠ curriculum</span></div>
@@ -663,7 +740,9 @@ header.deskHeader{display:none}
     <div id="routineGrid" class="routineGrid"></div>
    </div>
   </div>
+  </div><!-- /dharma-practice -->
 
+  <div id="dharma-mind" style="display:none">
   <div class="dharmaGrid2">
    <div class="dharmaCard">
     <div class="dharmaCardHead"><h3>Mind-calming & witnessing micro-practices</h3><span class="small">short enough to use during the day</span></div>
@@ -675,13 +754,19 @@ header.deskHeader{display:none}
    </div>
   </div>
 
-  <div class="dharmaBoundary">
+  </div><!-- /dharma-mind -->
+  <div class="dharmaBoundary" style="display:none" id="dharma-boundary">
    <b>Interpretive boundary.</b> D20 is classically a worship/upāsanā varga; the exact D1/D9/D20 weights and the path scores here are engine modeling choices rather than scriptural percentages. Family Kuladevata, received Guru/Sampradaya instructions and an established Iṣṭa take precedence. Jaimini-style Iṣṭa indications are shown separately and may differ by chara-kāraka/aspect/tie-break convention. Public devotional/study practices only; no bija, tantric, nyāsa or initiation-dependent practice is auto-prescribed. Relative model scores are not efficacy claims.
   </div>
  </div>
 
    <!-- Tab 6: Western Path -->
    <div class="tabPanel" id="westernPathTab">
+  <div class="subtab-row" id="westernSubtabRow">
+   <button class="subtab-btn active" data-stab="west-orientation">Orientation</button>
+   <button class="subtab-btn" data-stab="west-practice">Practice</button>
+  </div>
+  <div id="west-orientation">
   <div class="dharmaHero">
    <div>
     <h2>Western · Inner Path</h2>
@@ -705,7 +790,9 @@ header.deskHeader{display:none}
     <div id="westernTimingGrid" class="routineGrid"></div>
    </div>
   </div>
+  </div><!-- /west-orientation -->
 
+  <div id="west-practice" style="display:none">
   <div class="dharmaGrid2">
    <div class="dharmaCard">
     <div class="dharmaCardHead"><h3>Practice / development fit · registry-driven</h3><span class="small">natal orientation + current activation + provenance</span></div>
@@ -716,14 +803,17 @@ header.deskHeader{display:none}
     <div id="westernEvidenceGrid" class="dharmaEvidenceGrid"></div>
    </div>
   </div>
-
-  <div class="dharmaBoundary">
-   <b>Interpretive boundary.</b> This is a Western-astrology psychological/meaning framework, not a religious identity engine. Neptune is treated as imagination/transcendence plus a need for reality-testing; Saturn as discipline/structure; Jupiter as meaning/philosophy; the 9th/12th axes as worldview/contemplation. Profections and transits change emphasis, not natal identity.
-  </div>
+  </div><!-- /west-practice -->
  </div>
 
    <!-- Tab 7: Saju -->
    <div class="tabPanel" id="sajuCultivationTab">
+  <div class="subtab-row" id="sajuSubtabRow">
+   <button class="subtab-btn active" data-stab="saju-elements">Elements</button>
+   <button class="subtab-btn" data-stab="saju-structure">Structure</button>
+   <button class="subtab-btn" data-stab="saju-timing">Timing</button>
+  </div>
+  <div id="saju-elements">
   <div class="dharmaHero">
    <div>
     <h2>BaZi / Saju · Cultivation & Regulation</h2>
@@ -741,37 +831,42 @@ header.deskHeader{display:none}
     <div class="dharmaCardHead"><h3>Natal elemental regulation</h3><span class="badge" id="sajuNatalBadge">—</span></div>
     <div id="sajuElementGrid" class="deityGrid"></div>
     <div class="subsectionTitle">Useful / favorable elements</div>
-    <div id="sajuUsefulGrid" class="routineGrid"></div>
+    <div id=”sajuUsefulGrid” class=”routineGrid”></div>
    </div>
-   <div class="dharmaCard">
-    <div class="dharmaCardHead"><h3>Ten-God structure</h3><span class="small">visible + all hidden stems · relative to Day Master</span></div>
-    <div id="sajuTenGodGrid" class="routineGrid"></div>
-   </div>
-  </div>
-
-  <div class="dharmaGrid2">
-   <div class="dharmaCard">
-    <div class="dharmaCardHead"><h3>Hidden stems · roots · Month Command</h3><span class="small">all four natal branches expanded</span></div>
-    <div id="sajuHiddenStemGrid" class="routineGrid"></div>
-   </div>
-   <div class="dharmaCard">
-    <div class="dharmaCardHead"><h3>Structural relations & climate</h3><span class="small">combination ≠ automatic transformation</span></div>
-    <div id="sajuInteractionGrid" class="routineGrid"></div>
+   <div class=”dharmaCard”>
+    <div class=”dharmaCardHead”><h3>Ten-God structure</h3><span class=”small”>visible + all hidden stems · relative to Day Master</span></div>
+    <div id=”sajuTenGodGrid” class=”routineGrid”></div>
    </div>
   </div>
+  </div><!-- /saju-elements -->
 
-  <div class="dharmaGrid2">
-   <div class="dharmaCard">
-    <div class="dharmaCardHead"><h3>Daeun · year · month overlay</h3><span class="badge" id="sajuTimingBadge">—</span></div>
-    <div id="sajuTimingGrid" class="routineGrid"></div>
+  <div id=”saju-structure” style=”display:none”>
+  <div class=”dharmaGrid2”>
+   <div class=”dharmaCard”>
+    <div class=”dharmaCardHead”><h3>Hidden stems · roots · Month Command</h3><span class=”small”>all four natal branches expanded</span></div>
+    <div id=”sajuHiddenStemGrid” class=”routineGrid”></div>
    </div>
-   <div class="dharmaCard">
-    <div class="dharmaCardHead"><h3>Current cultivation focus · registry-driven</h3><span class="small">elemental regulation + Ten Gods + timing + provenance</span></div>
-    <div id="sajuPracticeGrid" class="routineGrid"></div>
+   <div class=”dharmaCard”>
+    <div class=”dharmaCardHead”><h3>Structural relations & climate</h3><span class=”small”>combination ≠ automatic transformation</span></div>
+    <div id=”sajuInteractionGrid” class=”routineGrid”></div>
    </div>
   </div>
+  </div><!-- /saju-structure -->
 
-  <div class="dharmaBoundary">
+  <div id=”saju-timing” style=”display:none”>
+  <div class=”dharmaGrid2”>
+   <div class=”dharmaCard”>
+    <div class=”dharmaCardHead”><h3>Daeun · year · month overlay</h3><span class=”badge” id=”sajuTimingBadge”>—</span></div>
+    <div id=”sajuTimingGrid” class=”routineGrid”></div>
+   </div>
+   <div class=”dharmaCard”>
+    <div class=”dharmaCardHead”><h3>Current cultivation focus · registry-driven</h3><span class=”small”>elemental regulation + Ten Gods + timing + provenance</span></div>
+    <div id=”sajuPracticeGrid” class=”routineGrid”></div>
+   </div>
+  </div>
+  </div><!-- /saju-timing -->
+
+  <div class=”dharmaBoundary”>
    <b>Interpretive boundary.</b> “Useful/Favorable Element” is a BaZi modeling term here, not a deity. This engine now uses the complete standard hidden-stem table, explicit primary/middle/residual engine weights, Month Command, root strength, Ten Gods from visible + hidden stems, stem combinations, Six Harmonies, Three Harmonies, directional meetings, clashes, harms, punishments, breaks, conditional transformation tests and an element-level climate-regulation layer. Hidden-stem percentages and transformation thresholds are disclosed <b>engine choices</b>, because schools differ; detection of a relation never by itself proves transformation or favorability. A manually supplied Yongsin still takes precedence.
   </div>
  </div>
@@ -4642,7 +4737,7 @@ function showRanking(type,id,mode,el){
  }
 }
 
-function render(){if(!chart)return;renderSystemPicker();renderSystemAwarePracticeTabs();renderEvidencePicker();renderCyclePickers();let groups=visibleGroups();updateColorRange(groups);renderYearPicker();renderTimeZoomTree();renderDimensionPicker();renderCrumbs();renderSelected();renderHierarchy();renderTimeline(groups);renderHeat(groups);renderPlaybook();renderWeights();renderRankings();renderDharmaTab();renderWesternInnerPathTab();renderSajuCultivationTab();renderPeriodChips(groups);renderRadarChart();_syncStrip();$("zoomOutBtn").disabled=cycleFamilyKey==="vimshottari"?!prefix.length:!cycleSelection}
+function render(){if(!chart)return;renderSystemPicker();renderSystemAwarePracticeTabs();renderEvidencePicker();renderCyclePickers();let groups=visibleGroups();updateColorRange(groups);renderYearPicker();renderTimeZoomTree();renderDimensionPicker();renderCrumbs();renderSelected();renderHierarchy();renderTimeline(groups);renderHeat(groups);renderDomainBars(groups);renderPlaybook();renderWeights();renderRankings();renderDharmaTab();renderWesternInnerPathTab();renderSajuCultivationTab();renderPeriodChips(groups);renderRadarChart();updateKalaNav();_syncStrip();$("zoomOutBtn").disabled=cycleFamilyKey==="vimshottari"?!prefix.length:!cycleSelection}
 async function calculateProfile(tryProviders=true){
  $("profileStatus").textContent="Profile: calculating…";$("profileStatus").className="badge warn";
  if($("pLocationMode").value==="auto")await resolveBirthPlace(true);
@@ -5040,6 +5135,76 @@ $("clearStaticBtn").onclick=()=>{
 
 
 
+// ── Domain bar chart (heatmap alternative) ────────────────────────
+function renderDomainBars(groups){
+ const el=$("domainBarsContainer");if(!el||!groups.length)return;
+ const dims=selectedDimensions();
+ const allA=Math.min(...groups.map(g=>g.a)),allB=Math.max(...groups.map(g=>g.b)),span=Math.max(1,allB-allA);
+ const widths=groups.map(g=>Math.max(0.4,(g.b-g.a)/span*100));
+ // Header row (period labels)
+ let hdrHTML=`<div class="dbar-hdr-row"><div class="dbar-hdr-label">Domain</div><div class="dbar-hdr-track">`;
+ groups.forEach((g,i)=>{
+  const isActive=cycleFamilyKey==="vimshottari"?(prefix.length&&g.path.join(">")==prefix.join(">")):(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
+  const lbl=(g.lord||g.label||"").substring(0,6);
+  hdrHTML+=`<div class="dbar-hdr-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%" data-gi="${i}">${lbl}</div>`;
+ });
+ hdrHTML+=`</div></div>`;
+ // Domain rows
+ let rowsHTML="";
+ for(const dom of dims){
+  const di=DOMAINS.indexOf(dom);
+  rowsHTML+=`<div class="dbar-row"><div class="dbar-label">${dom}</div><div class="dbar-track">`;
+  groups.forEach((g,i)=>{
+   const sc=scorePeriod(g,di),bk=bucket(sc);
+   const bg=heatColor(sc),tc=heatTextColor(sc);
+   const isActive=cycleFamilyKey==="vimshottari"?(prefix.length&&g.path.join(">")==prefix.join(">")):(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
+   rowsHTML+=`<div class="dbar-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%;background:${bg};color:${tc}" data-gi="${i}" title="${dom}: ${bk[0]} ${sc.toFixed(2)}">${bk[0]}</div>`;
+  });
+  rowsHTML+=`</div></div>`;
+ }
+ el.innerHTML=`<div class="dbar-wrap">${hdrHTML}${rowsHTML}</div>`;
+ // Wire taps
+ el.querySelectorAll("[data-gi]").forEach(seg=>{
+  const g=groups[+seg.dataset.gi];
+  if(!g)return;
+  seg.onclick=()=>activateCycleGroup(g);
+  _tap(seg,()=>activateCycleGroup(g));
+ });
+}
+
+// ── Kāla nav: back button + date range ────────────────────────────
+function updateKalaNav(){
+ const hasSelection=(cycleFamilyKey==="vimshottari"&&prefix.length>0)||(cycleFamilyKey!=="vimshottari"&&cycleSelection);
+ const navRow=$("kalaNavRow");if(!navRow)return;
+ navRow.style.display=hasSelection?"flex":"none";
+ if(!hasSelection)return;
+ const p=currentDisplayPeriod();
+ const lb=chart?{a:chart.birthMs,b:chart.birthMs+profile.horizon*YEAR_MS}:{a:0,b:0};
+ const da=Math.max(p.a,lb.a),db=Math.min(p.b,lb.b);
+ const lbl=$("kalaPeriodLabel"),dr=$("kalaDateRange");
+ if(lbl)lbl.textContent=(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.lord||cycleSelection.label):"");
+ if(dr)dr.textContent=`${fmt(da)} → ${fmt(db)}`;
+}
+
+// ── Generic subtab setup ───────────────────────────────────────────
+function setupSubtabs(rowId,sectionMap){
+ // sectionMap: { 'btn-data-stab': ['sectionId', ...], ... }
+ const row=$(rowId);if(!row)return;
+ const btns=[...row.querySelectorAll("[data-stab]")];
+ btns.forEach(btn=>{
+  const activate=()=>{
+   btns.forEach(b=>b.classList.remove("active"));
+   btn.classList.add("active");
+   const stab=btn.dataset.stab;
+   Object.entries(sectionMap).forEach(([key,ids])=>{
+    ids.forEach(id=>{const el=$(id);if(el)el.style.display=key===stab?"":"none"});
+   });
+  };
+  btn.onclick=activate;
+  _tap(btn,activate);
+ });
+}
+
 // Mobile bottom nav bindings
 for(const id of["heatmap","cycles","playbook","rankings","dharma","westernPath","sajuCultivation","guide"]){
  const btn=$("mbn-"+id);
@@ -5049,6 +5214,40 @@ const profBtn=$("profileToggleBtn");
 if(profBtn){profBtn.onclick=toggleProfilePanel;_tap(profBtn,toggleProfilePanel);}
 const profClose=$("profileCloseBtn");
 if(profClose){profClose.onclick=toggleProfilePanel;_tap(profClose,toggleProfilePanel);}
+
+// Back button on Kāla tab
+const kalaBack=$("kalaBackBtn");
+if(kalaBack){
+ const doBack=()=>{
+  if(cycleFamilyKey==="vimshottari"){if(prefix.length>0)prefix=prefix.slice(0,-1)}
+  else cycleSelection=null;
+  render();
+ };
+ kalaBack.onclick=doBack;_tap(kalaBack,doBack);
+}
+
+// Set up subtab navigation for system tabs
+// (called after DOM ready — IDs must exist)
+setupSubtabs("rankingsSubtabRow",{
+ "rank-mahadasha":["rank-mahadasha"],
+ "rank-natal":["rank-natal"],
+ "rank-rankings":["rank-rankings"]
+});
+setupSubtabs("dharmaSubtabRow",{
+ "dharma-path":["dharma-path"],
+ "dharma-devata":["dharma-devata"],
+ "dharma-practice":["dharma-practice"],
+ "dharma-mind":["dharma-mind"]
+});
+setupSubtabs("westernSubtabRow",{
+ "west-orientation":["west-orientation"],
+ "west-practice":["west-practice"]
+});
+setupSubtabs("sajuSubtabRow",{
+ "saju-elements":["saju-elements"],
+ "saju-structure":["saju-structure"],
+ "saju-timing":["saju-timing"]
+});
 
 // Sync strip on load
 document.querySelectorAll("#profilePanel input,#profilePanel select").forEach(el=>el.addEventListener("change",_syncStrip));
