@@ -308,46 +308,63 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 }
 
 /* ── Font size bump ──────────────────────────────────────────── */
-.small{font-size:12px!important}
-.mbn-btn{font-size:10px}
-.mbn-btn svg{width:22px;height:22px}
-.pchip-lord{font-size:13px}
-.pchip-grade{font-size:16px}
-.pchip-score{font-size:9px}
-.hdr-title{font-size:20px}
-.lens-label{font-size:10px}
-.kala-lens ul{font-size:12px}
-.cell{font-size:11px}
-.cell .grade{font-size:14px}
-.headcell{font-size:11px}
-.rowlabel{font-size:12px}
-.phase .lord{font-size:13px}
-.phase .date{font-size:10px}
-.card h3{font-size:13px}
-.hierarchyHead h3{font-size:14px}
-.laneLord{font-size:11px}
-.pranaCard .pl{font-size:13px}
+body{font-size:14px}
+.small{font-size:13px!important}
+button,select,input{font-size:13px}
+.mbn-btn{font-size:11px}
+.mbn-btn svg{width:23px;height:23px}
+.pchip-lord{font-size:14px}
+.pchip-grade{font-size:18px}
+.pchip-score{font-size:10px}
+.hdr-title{font-size:22px}
+.lens-label{font-size:11px}
+.kala-lens ul{font-size:13px}
+.cell{font-size:12px}
+.cell .grade{font-size:15px}
+.headcell{font-size:12px}
+.rowlabel{font-size:13px}
+.phase .lord{font-size:14px}
+.phase .date{font-size:11px}
+.phase .grade{font-size:12px}
+.card h3{font-size:14px}
+.hierarchyHead h3{font-size:15px}
+.laneLord{font-size:12px}
+.laneDate{font-size:9px}
+.pranaCard .pl{font-size:14px}
+.pranaCard .pd{font-size:10px}
+.subtab-btn{font-size:13px}
+.appTabBtn{font-size:13px}
+h1{font-size:22px}
+h2{font-size:18px}
 
 /* ── Kāla navigation row ────────────────────────────────────── */
-.kala-nav-row{display:flex;align-items:center;gap:10px;padding:6px 0 4px;flex-wrap:wrap}
-.kala-back-btn{font-size:12px;padding:5px 12px;border-radius:20px;border-color:var(--accent);color:var(--accent)}
-.kala-period-label{font-size:13px;font-weight:800;color:#dce5ef;line-height:1.3}
-.kala-date-range{font-size:11px;color:var(--muted);margin-top:2px}
+.kala-nav-row{display:flex;align-items:center;gap:10px;padding:8px 0 6px;flex-wrap:nowrap;border-bottom:1px solid var(--line);margin-bottom:6px}
+.kala-back-btn{font-size:13px;padding:7px 14px;border-radius:20px;border-color:var(--accent);color:var(--accent);flex-shrink:0}
+.kala-crumbs{display:flex;flex-wrap:wrap;gap:4px;align-items:center;flex:1;min-width:0}
+.kala-crumb{font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.kala-crumb.active{color:#edf3fa;font-weight:800}
+.kala-crumb-sep{color:var(--line);font-size:10px}
+.kala-date-range{font-size:12px;color:var(--muted);white-space:nowrap;flex-shrink:0}
 
 /* ── Domain bar chart (heatmap alternative) ─────────────────── */
 .dbar-wrap{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:8px 0}
-.dbar-hdr-row{display:flex;min-height:22px;background:var(--panel3);border-bottom:1px solid var(--line)}
-.dbar-hdr-label{width:82px;min-width:82px;border-right:1px solid var(--line);font-size:9px;display:flex;align-items:center;padding:0 6px;color:var(--muted);flex-shrink:0}
+.dbar-hdr-row{display:flex;min-height:40px;background:var(--panel3);border-bottom:1px solid var(--line)}
+.dbar-hdr-label{width:88px;min-width:88px;border-right:1px solid var(--line);font-size:10px;display:flex;align-items:center;padding:0 7px;color:var(--muted);flex-shrink:0;font-weight:700}
 .dbar-hdr-track{flex:1;display:flex;overflow:hidden}
-.dbar-hdr-seg{flex:0 0 auto;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(255,255,255,.06);padding:2px 3px;overflow:hidden;white-space:nowrap;cursor:pointer;color:rgba(255,255,255,.6);touch-action:manipulation}
-.dbar-hdr-seg.sel{background:rgba(143,176,255,.2);color:#edf3fa}
-.dbar-row{display:flex;align-items:stretch;min-height:28px;border-bottom:1px solid rgba(255,255,255,.04)}
+.dbar-hdr-seg{flex:0 0 auto;font-size:9px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-right:1px solid rgba(255,255,255,.07);padding:3px 2px;overflow:hidden;cursor:pointer;color:rgba(255,255,255,.65);touch-action:manipulation;text-align:center;line-height:1.2}
+.dbar-hdr-seg .dbar-hdr-years{font-size:8px;opacity:.7;font-weight:600}
+.dbar-hdr-seg.sel{background:rgba(143,176,255,.18);color:#edf3fa;border-bottom:2px solid var(--accent)}
+.dbar-row{display:flex;align-items:stretch;min-height:34px;border-bottom:1px solid rgba(255,255,255,.04)}
 .dbar-row:last-child{border-bottom:none}
-.dbar-label{width:82px;min-width:82px;padding:0 6px;font-size:11px;font-weight:700;display:flex;align-items:center;background:var(--panel2);border-right:1px solid var(--line);color:#b8c8d9;flex-shrink:0}
+.dbar-label{width:88px;min-width:88px;padding:0 7px;font-size:12px;font-weight:800;display:flex;align-items:center;background:var(--panel2);border-right:1px solid var(--line);color:#c8d6e6;flex-shrink:0}
 .dbar-track{flex:1;display:flex;overflow:hidden}
-.dbar-seg{flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;cursor:pointer;border-right:1px solid rgba(0,0,0,.18);touch-action:manipulation;transition:filter .1s}
-.dbar-seg:hover{filter:brightness(1.18)}
-.dbar-seg.sel{box-shadow:inset 0 0 0 2px rgba(255,255,255,.9)}
+.dbar-seg{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;border-right:1px solid rgba(0,0,0,.18);touch-action:manipulation;transition:filter .12s;position:relative}
+.dbar-seg:hover{filter:brightness(1.2)}
+.dbar-seg.sel{box-shadow:inset 0 0 0 2px rgba(255,255,255,.9);z-index:1}
+.dbar-score{font-size:10px;font-weight:900;line-height:1}
+.dbar-grade{font-size:8px;opacity:.8;line-height:1}
+.dbar-bar-wrap{width:70%;height:4px;background:rgba(0,0,0,.25);border-radius:2px;overflow:hidden;margin-top:1px}
+.dbar-bar-fill{height:100%;border-radius:2px;background:rgba(255,255,255,.6)}
 
 /* ── Subtabs ───────────────────────────────────────────────── */
 .subtab-row{display:flex;gap:5px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch;border-bottom:1px solid var(--line);margin-bottom:12px;flex-shrink:0}
@@ -514,12 +531,10 @@ header.deskHeader{display:none}
 
    <!-- Tab 1: Kāla Overview -->
    <div class="tabPanel active" id="heatmapTab">
-    <div class="kala-nav-row" id="kalaNavRow" style="display:none">
-     <button class="kala-back-btn" id="kalaBackBtn">← Back</button>
-     <div style="flex:1">
-      <div class="kala-period-label" id="kalaPeriodLabel"></div>
-      <div class="kala-date-range" id="kalaDateRange"></div>
-     </div>
+    <div class="kala-nav-row" id="kalaNavRow">
+     <button class="kala-back-btn" id="kalaBackBtn" style="display:none">← Back</button>
+     <div class="kala-crumbs" id="kalaCrumbs"></div>
+     <div class="kala-date-range" id="kalaDateRange"></div>
     </div>
     <div class="kala-period-row" id="periodChips"></div>
     <div class="radar-card">
@@ -2904,10 +2919,12 @@ function activateCycleGroup(g){
  if(window.matchMedia("(max-width:768px)").matches){
   const active=document.querySelector(".tabPanel.active");
   if(active?.id==="heatmapTab"){
+   // scroll to radar to show updated chart
    const r=$("radarSvg");if(r)setTimeout(()=>r.closest(".radar-card")?.scrollIntoView({behavior:"smooth",block:"start"}),80);
   }else if(active?.id==="cyclesTab"){
+   // scroll hierarchy card into view so user sees the updated Vimshottari lanes
    const h=document.querySelector("#cyclesTab .hierarchyCard");
-   if(h)setTimeout(()=>h.scrollIntoView({behavior:"smooth",block:"nearest"}),80);
+   if(h)setTimeout(()=>h.scrollIntoView({behavior:"smooth",block:"start"}),80);
   }
  }
 }
@@ -4737,7 +4754,7 @@ function showRanking(type,id,mode,el){
  }
 }
 
-function render(){if(!chart)return;renderSystemPicker();renderSystemAwarePracticeTabs();renderEvidencePicker();renderCyclePickers();let groups=visibleGroups();updateColorRange(groups);renderYearPicker();renderTimeZoomTree();renderDimensionPicker();renderCrumbs();renderSelected();renderHierarchy();renderTimeline(groups);renderHeat(groups);renderDomainBars(groups);renderPlaybook();renderWeights();renderRankings();renderDharmaTab();renderWesternInnerPathTab();renderSajuCultivationTab();renderPeriodChips(groups);renderRadarChart();updateKalaNav();_syncStrip();$("zoomOutBtn").disabled=cycleFamilyKey==="vimshottari"?!prefix.length:!cycleSelection}
+function render(){if(!chart)return;renderSystemPicker();renderSystemAwarePracticeTabs();renderEvidencePicker();renderCyclePickers();let groups=visibleGroups();updateColorRange(groups);renderYearPicker();renderTimeZoomTree();renderDimensionPicker();renderCrumbs();renderSelected();renderHierarchy();renderTimeline(groups);renderHeat(groups);renderDomainBars();renderPlaybook();renderWeights();renderRankings();renderDharmaTab();renderWesternInnerPathTab();renderSajuCultivationTab();renderPeriodChips(groups);renderRadarChart();updateKalaNav();_syncStrip();$("zoomOutBtn").disabled=cycleFamilyKey==="vimshottari"?!prefix.length:!cycleSelection}
 async function calculateProfile(tryProviders=true){
  $("profileStatus").textContent="Profile: calculating…";$("profileStatus").className="badge warn";
  if($("pLocationMode").value==="auto")await resolveBirthPlace(true);
@@ -5135,55 +5152,103 @@ $("clearStaticBtn").onclick=()=>{
 
 
 
-// ── Domain bar chart (heatmap alternative) ────────────────────────
-function renderDomainBars(groups){
- const el=$("domainBarsContainer");if(!el||!groups.length)return;
+// ── Domain bar chart — always shows TOP-LEVEL overview ─────────────
+function renderDomainBars(){
+ const el=$("domainBarsContainer");if(!el)return;
+ // Use top-level groups so the chart is a stable navigation map, not zoom-dependent
+ let topGroups;
+ if(cycleFamilyKey==="vimshottari"&&dashaRoot.length){
+  topGroups=filterLifeAndYear(dashaRoot);
+ } else {
+  topGroups=cycleGroups(); // falls back for saju/western
+ }
+ if(!topGroups.length){el.innerHTML="";return}
  const dims=selectedDimensions();
- const allA=Math.min(...groups.map(g=>g.a)),allB=Math.max(...groups.map(g=>g.b)),span=Math.max(1,allB-allA);
- const widths=groups.map(g=>Math.max(0.4,(g.b-g.a)/span*100));
- // Header row (period labels)
- let hdrHTML=`<div class="dbar-hdr-row"><div class="dbar-hdr-label">Domain</div><div class="dbar-hdr-track">`;
- groups.forEach((g,i)=>{
-  const isActive=cycleFamilyKey==="vimshottari"?(prefix.length&&g.path.join(">")==prefix.join(">")):(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
-  const lbl=(g.lord||g.label||"").substring(0,6);
-  hdrHTML+=`<div class="dbar-hdr-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%" data-gi="${i}">${lbl}</div>`;
+ const allA=Math.min(...topGroups.map(g=>g.a)),allB=Math.max(...topGroups.map(g=>g.b)),span=Math.max(1,allB-allA);
+ const widths=topGroups.map(g=>Math.max(0.5,(g.b-g.a)/span*100));
+
+ // Active check: for vimshottari, check if the lord matches the first element of prefix
+ const isActiveGroup=g=>cycleFamilyKey==="vimshottari"
+  ?(prefix.length>0&&prefix[0]===(g.lord||g.path?.[0]))
+  :(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
+
+ // Build header row with period name + year range
+ let html=`<div class="dbar-wrap"><div class="dbar-hdr-row"><div class="dbar-hdr-label">Domain</div><div class="dbar-hdr-track">`;
+ topGroups.forEach((g,i)=>{
+  const isActive=isActiveGroup(g);
+  const name=(g.lord||g.label||"—");
+  const y0=new Date(g.a).getUTCFullYear(),y1=new Date(g.b-1).getUTCFullYear();
+  html+=`<div class="dbar-hdr-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%" data-gi="${i}">
+   <span>${name}</span><span class="dbar-hdr-years">${y0}–${y1}</span>
+  </div>`;
  });
- hdrHTML+=`</div></div>`;
- // Domain rows
- let rowsHTML="";
+ html+=`</div></div>`;
+
+ // Domain rows — score + mini bar fill
  for(const dom of dims){
   const di=DOMAINS.indexOf(dom);
-  rowsHTML+=`<div class="dbar-row"><div class="dbar-label">${dom}</div><div class="dbar-track">`;
-  groups.forEach((g,i)=>{
+  html+=`<div class="dbar-row"><div class="dbar-label">${dom}</div><div class="dbar-track">`;
+  topGroups.forEach((g,i)=>{
    const sc=scorePeriod(g,di),bk=bucket(sc);
    const bg=heatColor(sc),tc=heatTextColor(sc);
-   const isActive=cycleFamilyKey==="vimshottari"?(prefix.length&&g.path.join(">")==prefix.join(">")):(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
-   rowsHTML+=`<div class="dbar-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%;background:${bg};color:${tc}" data-gi="${i}" title="${dom}: ${bk[0]} ${sc.toFixed(2)}">${bk[0]}</div>`;
+   const isActive=isActiveGroup(g);
+   const barPct=Math.round(((sc+2)/4)*100); // 0-100%
+   html+=`<div class="dbar-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%;background:${bg};color:${tc}" data-gi="${i}" title="${dom} · ${name}: ${bk[0]} ${sc.toFixed(2)}">
+    <div class="dbar-score">${sc.toFixed(1)}</div>
+    <div class="dbar-grade">${bk[0]}</div>
+    <div class="dbar-bar-wrap"><div class="dbar-bar-fill" style="width:${barPct}%"></div></div>
+   </div>`;
   });
-  rowsHTML+=`</div></div>`;
+  html+=`</div></div>`;
  }
- el.innerHTML=`<div class="dbar-wrap">${hdrHTML}${rowsHTML}</div>`;
- // Wire taps
- el.querySelectorAll("[data-gi]").forEach(seg=>{
-  const g=groups[+seg.dataset.gi];
-  if(!g)return;
-  seg.onclick=()=>activateCycleGroup(g);
-  _tap(seg,()=>activateCycleGroup(g));
+ html+=`</div>`;
+ el.innerHTML=html;
+
+ // Wire taps — clicking a segment highlights it and zooms the hierarchy card to its sub-periods
+ topGroups.forEach((g,i)=>{
+  el.querySelectorAll(`[data-gi="${i}"]`).forEach(seg=>{
+   seg.onclick=()=>activateCycleGroup(g);
+   _tap(seg,()=>activateCycleGroup(g));
+  });
  });
 }
 
-// ── Kāla nav: back button + date range ────────────────────────────
+// ── Kāla nav: breadcrumb + date range, always visible ────────────
 function updateKalaNav(){
- const hasSelection=(cycleFamilyKey==="vimshottari"&&prefix.length>0)||(cycleFamilyKey!=="vimshottari"&&cycleSelection);
- const navRow=$("kalaNavRow");if(!navRow)return;
- navRow.style.display=hasSelection?"flex":"none";
- if(!hasSelection)return;
+ if(!chart)return;
+ const lb={a:chart.birthMs,b:chart.birthMs+profile.horizon*YEAR_MS};
  const p=currentDisplayPeriod();
- const lb=chart?{a:chart.birthMs,b:chart.birthMs+profile.horizon*YEAR_MS}:{a:0,b:0};
  const da=Math.max(p.a,lb.a),db=Math.min(p.b,lb.b);
- const lbl=$("kalaPeriodLabel"),dr=$("kalaDateRange");
- if(lbl)lbl.textContent=(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.lord||cycleSelection.label):"");
- if(dr)dr.textContent=`${fmt(da)} → ${fmt(db)}`;
+ const dr=$("kalaDateRange");
+ if(dr)dr.textContent=`${fmt(da)} — ${fmt(db)}`;
+
+ // Back button visibility
+ const hasSelection=(cycleFamilyKey==="vimshottari"&&prefix.length>0)||(cycleFamilyKey!=="vimshottari"&&cycleSelection);
+ const btn=$("kalaBackBtn");if(btn)btn.style.display=hasSelection?"":"none";
+
+ // Build clickable breadcrumbs: All life → Mahadasha lord → ...
+ const crumbs=$("kalaCrumbs");if(!crumbs)return;
+ let html=`<span class="kala-crumb${!hasSelection?" active":""}" id="kalaHome">All life</span>`;
+ if(cycleFamilyKey==="vimshottari"&&prefix.length){
+  prefix.forEach((lord,i)=>{
+   const path=prefix.slice(0,i+1);
+   const g=findPeriodByPath(path);
+   const isLast=i===prefix.length-1;
+   const levelNames=["Mahādaśā","Antardaśā","Pratyantardaśā","Sookṣma","Prāṇa"];
+   html+=`<span class="kala-crumb-sep">›</span><span class="kala-crumb${isLast?" active":""}" data-path='${JSON.stringify(path)}'>${lord}</span>`;
+  });
+ } else if(cycleSelection){
+  html+=`<span class="kala-crumb-sep">›</span><span class="kala-crumb active">${cycleSelection.lord||cycleSelection.label}</span>`;
+ }
+ crumbs.innerHTML=html;
+
+ // Wire crumb taps
+ crumbs.querySelector("#kalaHome")?.addEventListener("click",()=>{prefix=[];cycleSelection=null;render()});
+ crumbs.querySelectorAll("[data-path]").forEach(el=>{
+  const path=JSON.parse(el.dataset.path);
+  const activator=()=>{prefix=path;cycleSelection=null;render()};
+  el.onclick=activator;_tap(el,activator);
+ });
 }
 
 // ── Generic subtab setup ───────────────────────────────────────────
