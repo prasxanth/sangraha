@@ -552,6 +552,19 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 #cyclesTab .dbar-hdr-seg{cursor:pointer}.dbar-hdr-seg:hover{border-color:var(--accent)}
 @media(max-width:768px){.natalMapWrap{max-height:none}.natalmap-scroll-hint{display:none}.heat-explorer .explorer-controls{display:block}}
 
+
+/* Compact mobile navigation; comparison chips remain available on demand. */
+.mobile-period-selectors,.period-compare-toggle{display:none}
+@media(max-width:768px){
+ .mobile-period-selectors{display:grid;gap:6px;margin:8px 0}
+ .period-select-row{display:grid;grid-template-columns:100px minmax(0,1fr);gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+ .period-select-row select{width:100%;min-width:0;text-overflow:ellipsis;font-size:16px}
+ .period-compare-toggle{display:block;width:100%;min-height:44px;text-align:left;color:var(--accent);background:var(--panel);margin:6px 0}
+ .period-comparison:not(.expanded)>.kala-period-row,.period-comparison:not(.expanded)>.mobile-cycle-grid{display:none}
+ #cycleSelectionControls{display:none}
+ .laneWrap:has(.mobile-period-selectors){border:0}
+}
+
 </style>
 </head>
 <body>
@@ -701,7 +714,11 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
      <div class="kala-date-range" id="kalaDateRange"></div>
     </div>
     <div class="kala-chips-level" id="kalaChipsLevel">Mahādaśā</div>
-    <div class="kala-period-row" id="periodChips"></div>
+    <div class="mobile-period-selectors" id="kalaPeriodSelectors"></div>
+    <div class="period-comparison" id="kalaComparison">
+     <button type="button" class="period-compare-toggle" aria-expanded="false" aria-controls="periodChips">Compare periods</button>
+     <div class="kala-period-row" id="periodChips"></div>
+    </div>
     <div class="radar-card">
      <div id="radarSvg"></div>
     </div>
@@ -3245,11 +3262,50 @@ function renderPranaNavigator(){
  $("nextPranaBtn").onclick=()=>{if(selectedIdx>=0&&selectedIdx<kids.length-1){prefix=[...kids[selectedIdx+1].path];render()}};
 }
 
+// Native mobile selectors share the same path as chips, breadcrumbs and charts.
+const periodComparisonOpen={kala:false,cycles:false};
+function setupPeriodComparison(root,key){
+ const button=root.querySelector(".period-compare-toggle");
+ const sync=()=>{root.classList.toggle("expanded",periodComparisonOpen[key]);button.setAttribute("aria-expanded",String(periodComparisonOpen[key]));button.textContent=periodComparisonOpen[key]?"Hide period comparison":"Compare periods"};
+ button.onclick=()=>{periodComparisonOpen[key]=!periodComparisonOpen[key];sync()};sync();
+}
+function renderPeriodSelectors(root){
+ root.innerHTML="";
+ if(!_isMobile())return;
+ const addSelect=(name,groups,selected,choose,placeholder)=>{
+  const label=document.createElement("label");label.className="period-select-row";
+  const title=document.createElement("span");title.textContent=name;
+  const select=document.createElement("select");select.setAttribute("aria-label",name);
+  select.add(new Option(placeholder,""));
+  groups.forEach((g,i)=>select.add(new Option(`${g.lord||g.label} · ${zoomRangeLabel(g)}`,String(i))));
+  select.value=selected<0?"":String(selected);
+  select.onchange=()=>choose(select.value===""?null:groups[+select.value]);
+  label.append(title,select);root.appendChild(label);
+ };
+ if(cycleFamilyKey==="vimshottari"){
+  for(let depth=0;depth<Math.min(prefix.length+1,LEVELS.length);depth++){
+   const parent=depth?findPeriodByPath(prefix.slice(0,depth)):null;
+   const groups=(parent?childPeriods(parent):dashaRoot).filter(g=>g.b>chart.birthMs&&g.a<chart.birthMs+profile.horizon*YEAR_MS);
+   addSelect(LEVELS[depth],groups,groups.findIndex(g=>g.path[depth]===prefix[depth]),g=>{
+    prefix=g?[...g.path]:prefix.slice(0,depth);cycleSelection=null;calendarYear=null;render();
+   },depth?`Choose ${LEVELS[depth]}`:"All Mahādaśās");
+  }
+ }else{
+  const groups=cycleGroups();
+  addSelect(cycleContextLabel()||"Period",groups,groups.findIndex(g=>cycleSelection?.a===g.a&&cycleSelection?.b===g.b),g=>{cycleSelection=g?{...g}:null;prefix=[];render()},"All periods");
+ }
+ if(calendarYear!==null){
+  const clear=document.createElement("button");clear.textContent=`Clear ${calendarYear} year filter`;
+  clear.onclick=()=>{calendarYear=null;render()};root.appendChild(clear);
+ }
+}
 function renderMobileCycleZoom(){
  hidePranaNavigator();
  const root=$("hierarchyLanes"),groups=cycleVisualGroups();
- root.innerHTML='<div class="mobile-cycle-grid"></div>';
- const grid=root.firstElementChild;
+ root.innerHTML='<div class="mobile-period-selectors"></div><div class="period-comparison"><button type="button" class="period-compare-toggle" aria-expanded="false" aria-controls="cycleComparisonCards">Compare periods</button><div class="mobile-cycle-grid" id="cycleComparisonCards"></div></div>';
+ renderPeriodSelectors(root.querySelector(".mobile-period-selectors"));
+ setupPeriodComparison(root.querySelector(".period-comparison"),"cycles");
+ const grid=root.querySelector(".mobile-cycle-grid");
  for(const g of groups){
   const btn=document.createElement("button"),score=scoreSelected(g);
   btn.className="mobile-cycle-card";
@@ -5304,6 +5360,8 @@ function kalaChipGroups(groups=[]){
  return groups;
 }
 function renderPeriodChips(groups){
+ renderPeriodSelectors($("kalaPeriodSelectors"));
+ setupPeriodComparison($("kalaComparison"),"kala");
  const el=$("periodChips");if(!el)return;
  groups=kalaChipGroups(groups);
  el.innerHTML="";
