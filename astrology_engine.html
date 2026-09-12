@@ -565,6 +565,30 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
  .laneWrap:has(.mobile-period-selectors){border:0}
 }
 
+
+/* Compact overview and a preview that stays clear of the exploring finger. */
+.heat-view-switch{display:flex;gap:6px;margin-bottom:8px}
+.heat-view-switch button{flex:1}.heat-view-switch [aria-pressed="true"]{color:var(--gold2);border-color:var(--accent);background:var(--panel3)}
+.touch-heat-grid{border:1px solid var(--line);border-radius:9px;overflow:hidden;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:pan-y pinch-zoom}
+.touch-heat-grid-row{display:grid;grid-template-columns:78px repeat(var(--heat-cols),minmax(0,1fr));min-height:28px}
+.touch-heat-label,.touch-heat-corner{font-size:11px;padding:6px 3px;background:var(--panel2);overflow-wrap:anywhere}
+.touch-heat-column{font-size:10px;writing-mode:vertical-rl;max-height:75px;padding:5px 0;color:var(--muted);overflow:hidden;white-space:nowrap}
+.touch-heat-cell{min-width:0;min-height:28px;padding:0;border:1px solid rgba(0,0,0,.15);border-radius:0;position:relative}
+.touch-heat-cell.selected{outline:2px solid var(--gold2);outline-offset:-2px;z-index:1}
+.touch-heat-label.selected,.touch-heat-column.selected{color:var(--gold2);background:var(--panel3);font-weight:800}
+.heat-magnifier{position:fixed;z-index:400;background:var(--panel);border:2px solid var(--accent);border-radius:14px;padding:12px;box-shadow:0 12px 40px #0009;overflow:auto;pointer-events:none;overscroll-behavior:contain}
+.heat-magnifier.pinned{pointer-events:auto}
+.heat-preview-close{float:right;min-height:32px;font-size:13px;padding:3px 8px}
+.heat-preview-title{font-size:15px;font-weight:800;padding-right:58px}
+.heat-preview-score{font-size:20px;font-weight:800;color:var(--gold2)}
+.heat-neighborhood{display:grid;gap:3px;margin:8px 0;clear:both}
+.heat-neighbor{padding:5px;min-height:42px;font-size:11px;line-height:1.3;border-radius:4px;overflow-wrap:anywhere}
+.heat-neighbor.selected{outline:2px solid var(--gold2);outline-offset:-2px;font-weight:900}
+.heat-preview-evidence{font-size:13px;line-height:1.5}.heat-preview-evidence summary{min-height:36px;padding:6px 0;cursor:pointer}
+.touch-heat-cell.heat-crosshair{box-shadow:inset 0 0 0 1px rgba(232,201,144,.8)}
+.heat-magnifier button,.heat-magnifier summary,.touch-heat-cell{-webkit-tap-highlight-color:transparent}
+.heat-preview-explore{width:100%;margin-top:6px;border-color:var(--accent);font-size:14px}
+
 </style>
 </head>
 <body>
@@ -5448,6 +5472,7 @@ function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.valu
  structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
 
 function switchTab(which){
+ closeHeatPreview();
  const ALL_TABS=["heatmap","cycles","playbook","rankings","dharma","westernPath","sajuCultivation","guide","validation"];
  if(!ALL_TABS.includes(which))return;
  const previous=document.querySelector(".tabPanel.active");
@@ -5569,7 +5594,136 @@ function cycleVisualGroups(){
 }
 
 const heatExplorerDomains={};
-function renderHeatExplorer(root,{key,rows,metrics,title,onSelect}){
+// One shared preview avoids stacked popups when moving between maps or tabs.
+let heatPreview=null,heatPreviewOwner=null;
+function closeHeatPreview(){
+ if(heatPreview)heatPreview.remove();heatPreview=null;heatPreviewOwner=null;
+ document.querySelectorAll('.touch-heat-grid .selected,.touch-heat-grid .heat-crosshair').forEach(el=>{el.classList.remove('selected','heat-crosshair');if(el.matches('.touch-heat-cell'))el.setAttribute('aria-selected','false')});
+}
+document.addEventListener('pointerdown',e=>{if(heatPreview&&!heatPreview.contains(e.target)&&!heatPreviewOwner?.contains(e.target))closeHeatPreview()},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeHeatPreview()});
+window.addEventListener('resize',closeHeatPreview);
+$('content').addEventListener('scroll',closeHeatPreview,{passive:true});
+function renderHeatExplorer(root,config){
+ root._heatCleanup?.();closeHeatPreview();
+ root.innerHTML='';root.classList.add('heat-explorer');
+ let view='map';try{view=localStorage.getItem('kala-heat-view-'+config.key)==='details'?'details':'map'}catch(e){}
+ const controls=document.createElement('div');controls.className='heat-view-switch';controls.setAttribute('role','group');controls.setAttribute('aria-label','Heatmap view');
+ const body=document.createElement('div');body.className='heat-view-body';
+ const buttons=['map','details'].map(mode=>{
+  const button=document.createElement('button');button.type='button';button.textContent=mode==='map'?'Map':'Details';button.dataset.view=mode;
+  button.onclick=()=>{view=mode;try{localStorage.setItem('kala-heat-view-'+config.key,view)}catch(e){}paint()};controls.appendChild(button);return button;
+ });
+ root.append(controls,body);
+ function paint(){
+  root._heatCleanup?.();root._heatCleanup=null;closeHeatPreview();
+  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));
+  if(view==='details')renderHeatDetails(body,config);else root._heatCleanup=renderTouchHeatMap(body,config);
+ }
+ paint();
+}
+function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect}){
+ root.innerHTML='';const dims=selectedDimensions();
+ const caption=document.createElement('p');caption.className='small';caption.textContent='Tap a cell for details. Hold briefly, then slide to explore. Lift to pin; swipe normally to scroll.';
+ const grid=document.createElement('div');grid.className='touch-heat-grid';grid.setAttribute('role','grid');grid.setAttribute('aria-label',title);grid.style.setProperty('--heat-cols',Math.max(1,rows.length));
+ root.append(caption,grid);
+ if(!rows.length||!dims.length){grid.textContent='No periods or dimensions in this selection.';return()=>{}}
+ const data=dims.map(d=>rows.map(row=>metrics(row,DOMAINS.indexOf(d))));
+ const head=document.createElement('div');head.className='touch-heat-grid-row';head.setAttribute('role','row');
+ const corner=document.createElement('div');corner.className='touch-heat-corner';corner.textContent='Domain';corner.setAttribute('role','columnheader');head.appendChild(corner);
+ rows.forEach((row,c)=>{const h=document.createElement('div');h.className='touch-heat-column';h.dataset.col=c;h.setAttribute('role','columnheader');h.textContent=row.label;head.appendChild(h)});grid.appendChild(head);
+ const cells=[];
+ dims.forEach((domain,r)=>{
+  const line=document.createElement('div');line.className='touch-heat-grid-row';line.setAttribute('role','row');
+  const label=document.createElement('div');label.className='touch-heat-label';label.dataset.row=r;label.textContent=domain;label.setAttribute('role','rowheader');line.appendChild(label);
+  rows.forEach((row,c)=>{
+   const cell=document.createElement('button');cell.type='button';cell.className='touch-heat-cell';cell.dataset.row=r;cell.dataset.col=c;cell.tabIndex=r===0&&c===0?0:-1;
+   cell.setAttribute('role','gridcell');cell.setAttribute('aria-selected','false');cell.setAttribute('aria-label',`${row.label}, ${domain}, support ${signed(data[r][c].support)}${row.range?', '+row.range:''}`);
+   cell.style.background=heatColor(data[r][c].support);cell.style.color=heatTextColor(data[r][c].support);
+   line.appendChild(cell);cells.push(cell);
+  });grid.appendChild(line);
+ });
+ const legend=document.createElement('div');legend.className='small';legend.textContent='Color shows support. Map columns use equal width for comparison; exact dates are in the preview.';root.appendChild(legend);
+ let timer=null,start=null,holding=false,moved=false,current=null,mouseDragging=false;
+ const clearTimer=()=>{clearTimeout(timer);timer=null};
+ function pick(x,y){
+  const bounds=grid.getBoundingClientRect(),first=cells[0].getBoundingClientRect(),last=cells.at(-1).getBoundingClientRect();
+  if(x<first.left||x>last.right||y<first.top||y>last.bottom)return null;
+  const c=Math.min(rows.length-1,Math.floor((x-first.left)/(last.right-first.left)*rows.length));
+  const r=Math.min(dims.length-1,Math.floor((y-first.top)/(last.bottom-first.top)*dims.length));
+  return {r,c};
+ }
+ function show(r,c,x,y,pinned=false){
+  if(!grid.isConnected||!grid.getClientRects().length)return;
+  if(!heatPreview||heatPreviewOwner!==grid){
+   closeHeatPreview();heatPreview=document.createElement('section');heatPreview.className='heat-magnifier';heatPreview.setAttribute('aria-label','Heatmap selection');heatPreview.setAttribute('role','region');document.body.appendChild(heatPreview);heatPreviewOwner=grid;current=null;
+  }
+  heatPreview.classList.toggle('pinned',pinned);
+  if(!current||current.r!==r||current.c!==c){
+   current={r,c};grid.querySelectorAll('.selected,.heat-crosshair').forEach(el=>el.classList.remove('selected','heat-crosshair'));
+   cells.forEach(el=>{el.setAttribute('aria-selected',String(+el.dataset.row===r&&+el.dataset.col===c));el.classList.toggle('heat-crosshair',+el.dataset.row===r||+el.dataset.col===c)});
+   const cell=cells[r*rows.length+c];cell.classList.add('selected');
+   grid.querySelector(`.touch-heat-label[data-row="${r}"]`).classList.add('selected');grid.querySelector(`.touch-heat-column[data-col="${c}"]`).classList.add('selected');
+   heatPreview.innerHTML='';
+   const close=document.createElement('button');close.type='button';close.className='heat-preview-close';close.textContent='Close';close.onclick=()=>{closeHeatPreview();cell.focus({preventScroll:true})};
+   const name=document.createElement('div');name.className='heat-preview-title';name.textContent=`${rows[c].label} · ${dims[r]}`;
+   const score=document.createElement('div');score.className='heat-preview-score';score.setAttribute('aria-live','polite');score.textContent=`Support ${signed(data[r][c].support)}`;
+   const range=document.createElement('div');range.className='small';range.textContent=rows[c].range||'';
+   const neighborhood=document.createElement('div');neighborhood.className='heat-neighborhood';neighborhood.setAttribute('aria-hidden','true');
+   const c0=Math.max(0,Math.min(c-1,rows.length-3)),c1=Math.min(rows.length,c0+3),r0=Math.max(0,Math.min(r-1,dims.length-3)),r1=Math.min(dims.length,r0+3);
+   neighborhood.style.gridTemplateColumns=`repeat(${c1-c0},minmax(0,1fr))`;
+   for(let rr=r0;rr<r1;rr++)for(let cc=c0;cc<c1;cc++){
+    const tile=document.createElement('div');tile.className='heat-neighbor'+(rr===r&&cc===c?' selected':'');tile.style.background=heatColor(data[rr][cc].support);tile.style.color=heatTextColor(data[rr][cc].support);
+    tile.textContent=`${rows[cc].label} · ${dims[rr]} ${signed(data[rr][cc].support)}`;neighborhood.appendChild(tile);
+   }
+   heatPreview.append(close,name,score,range,neighborhood);
+   const detail=document.createElement('details');detail.className='heat-preview-evidence';const summary=document.createElement('summary');summary.textContent='More details';const content=document.createElement('div');content.innerHTML=data[r][c].detail||'';detail.append(summary,content);heatPreview.appendChild(detail);
+   detail.addEventListener('toggle',()=>{if(heatPreviewOwner===grid&&current?.r===r&&current?.c===c)show(r,c,x,y,true)});
+   if(onSelect){const explore=document.createElement('button');explore.type='button';explore.className='heat-preview-explore';explore.textContent='Explore this period';explore.onclick=()=>{closeHeatPreview();onSelect(rows[c])};heatPreview.appendChild(explore)}
+  }
+  const width=Math.min(340,innerWidth-16);heatPreview.style.width=width+'px';
+  const viewportTop=window.visualViewport?.offsetTop||0,viewportHeight=window.visualViewport?.height||innerHeight;
+  const aboveSpace=Math.max(0,y-viewportTop-36),belowSpace=Math.max(0,viewportTop+viewportHeight-y-40);
+  const useAbove=aboveSpace>=220||aboveSpace>=belowSpace;
+  heatPreview.style.maxHeight=Math.max(80,Math.min(430,useAbove?aboveSpace:belowSpace))+'px';
+  const h=heatPreview.offsetHeight;
+  heatPreview.style.left=Math.max(8,Math.min(innerWidth-width-8,x-width/2))+'px';
+  heatPreview.style.top=Math.max(viewportTop+8,Math.min(viewportTop+viewportHeight-h-8,useAbove?y-h-28:y+32))+'px';
+ }
+ function move(x,y,pinned=false){const hit=pick(x,y);if(hit)show(hit.r,hit.c,x,y,pinned)}
+ const abort=new AbortController(),options={signal:abort.signal};
+ grid.addEventListener('touchstart',e=>{
+  clearTimer();holding=false;moved=false;if(e.touches.length!==1){start=null;return}
+  const t=e.touches[0];start={x:t.clientX,y:t.clientY};
+  if(!pick(start.x,start.y)){start=null;return}
+  timer=setTimeout(()=>{holding=true;move(start.x,start.y)},320);
+ },{...options,passive:true});
+ grid.addEventListener('touchmove',e=>{
+  if(!start)return;if(e.touches.length!==1){clearTimer();start=null;holding=false;closeHeatPreview();return}
+  const t=e.touches[0];
+  if(holding){if(e.cancelable)e.preventDefault();move(t.clientX,t.clientY)}
+  else if(Math.hypot(t.clientX-start.x,t.clientY-start.y)>8){moved=true;clearTimer()}
+ },{...options,passive:false});
+ grid.addEventListener('touchend',e=>{
+  clearTimer();if(start&&(holding||!moved)){if(e.cancelable)e.preventDefault();const t=e.changedTouches[0];const hit=pick(t.clientX,t.clientY)||current;if(hit)show(hit.r,hit.c,t.clientX,t.clientY,true)}
+  start=null;holding=false;
+ },{...options,passive:false});
+ grid.addEventListener('touchcancel',()=>{clearTimer();start=null;holding=false;closeHeatPreview()},options);
+ grid.addEventListener('contextmenu',e=>e.preventDefault(),options);
+ grid.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button===0){mouseDragging=true;grid.setPointerCapture(e.pointerId);move(e.clientX,e.clientY)}},options);
+ grid.addEventListener('pointermove',e=>{if(mouseDragging)move(e.clientX,e.clientY)},options);
+ grid.addEventListener('pointerup',e=>{if(mouseDragging){mouseDragging=false;move(e.clientX,e.clientY,true)}},options);
+ grid.addEventListener('click',e=>{const cell=e.target.closest('.touch-heat-cell');if(cell){const b=cell.getBoundingClientRect();show(+cell.dataset.row,+cell.dataset.col,b.x+b.width/2,b.y+b.height/2,true)}},options);
+ grid.addEventListener('keydown',e=>{
+  const cell=e.target.closest('.touch-heat-cell');if(!cell)return;
+  const delta={ArrowLeft:[0,-1],ArrowRight:[0,1],ArrowUp:[-1,0],ArrowDown:[1,0]}[e.key];if(!delta)return;e.preventDefault();
+  const r=Math.max(0,Math.min(dims.length-1,+cell.dataset.row+delta[0])),c=Math.max(0,Math.min(rows.length-1,+cell.dataset.col+delta[1]));
+  cells.forEach(el=>el.tabIndex=-1);const next=cells[r*rows.length+c];next.tabIndex=0;next.focus({preventScroll:true});const b=next.getBoundingClientRect();show(r,c,b.x+b.width/2,b.y+b.height/2,true);
+ },options);
+ return()=>{clearTimer();abort.abort();if(heatPreviewOwner===grid)closeHeatPreview()};
+}
+
+function renderHeatDetails(root,{key,rows,metrics,title,onSelect}){
  const dims=selectedDimensions();
  const domain=dims.includes(heatExplorerDomains[key])?heatExplorerDomains[key]:dims[0];
  heatExplorerDomains[key]=domain;
@@ -5577,7 +5731,7 @@ function renderHeatExplorer(root,{key,rows,metrics,title,onSelect}){
  const label=document.createElement("label");label.className="explorer-controls";label.textContent=title;
  const select=document.createElement("select");select.setAttribute("aria-label",`${title}: life dimension`);
  dims.forEach(d=>select.add(new Option(d,d)));select.value=domain;
- select.onchange=()=>{heatExplorerDomains[key]=select.value;renderHeatExplorer(root,{key,rows,metrics,title,onSelect})};
+ select.onchange=()=>{heatExplorerDomains[key]=select.value;renderHeatDetails(root,{key,rows,metrics,title,onSelect})};
  label.appendChild(select);root.appendChild(label);
  const legend=document.createElement("p");legend.className="small";legend.textContent="Support −2 to +2 · center = neutral. Expand a row for details.";root.appendChild(legend);
  for(const row of rows){
@@ -5705,6 +5859,7 @@ function setupSubtabs(rowId,sectionMap){
  btns.forEach(btn=>{btn.setAttribute("aria-controls",sectionMap[btn.dataset.stab].join(" "));btn.setAttribute("aria-pressed",String(btn.classList.contains("active")))});
  btns.forEach(btn=>{
   const activate=()=>{
+   closeHeatPreview();
    btns.forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
    btn.setAttribute("aria-pressed","true");
    btn.classList.add("active");
