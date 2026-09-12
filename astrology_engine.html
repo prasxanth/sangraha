@@ -534,6 +534,24 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 .period-level-tag{min-width:110px}.period-level-name,.period-level-hint{white-space:normal}
 #radarSvg text{fill:var(--muted);font-family:var(--sans)}
 #radarSvg text[font-size="28"]{fill:var(--text)}
+
+/* Domain-focused explorers keep phone comparisons readable without two-axis panning. */
+.explorer-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:end;margin:10px 0}
+.explorer-controls label{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.explorer-controls select{width:100%;min-width:0}
+.heat-explorer{padding:10px;min-width:0!important}
+.explorer-item{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--panel2);overflow:hidden}
+.explorer-item summary{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;list-style:none;padding:12px;cursor:pointer;min-height:48px}
+.explorer-item summary::-webkit-details-marker{display:none}
+.explorer-name{font-size:16px;font-weight:800}.explorer-range,.explorer-hint{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.explorer-bar{grid-column:1/-1;position:relative;height:14px;background:var(--panel3);border-radius:4px;margin-top:5px}
+.explorer-bar:after{content:"";position:absolute;left:50%;height:100%;width:1px;background:var(--muted)}
+.explorer-bar i{position:absolute;top:2px;height:10px;border-radius:2px}
+.explorer-detail{padding:12px;border-top:1px solid var(--line);font-size:14px}
+.explorer-detail p{font-size:14px}.explorer-detail button{width:100%;border-color:var(--accent)}
+#cyclesTab .dbar-hdr-seg{cursor:pointer}.dbar-hdr-seg:hover{border-color:var(--accent)}
+@media(max-width:768px){.natalMapWrap{max-height:none}.natalmap-scroll-hint{display:none}.heat-explorer .explorer-controls{display:block}}
+
 </style>
 </head>
 <body>
@@ -713,6 +731,8 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
      <div class="hierarchyHead">
       <div><h3 id="cycleZoomTitle">Cycle zoom</h3><div class="small" id="cycleZoomDescription">Choose a cycle family in Settings. Duplicate providers using the same cycle key share one timeline.</div></div>
      </div>
+     <div id="cycleSelectionControls" class="explorer-controls"></div>
+     <div class="small" id="cycleSelectionTitle"></div>
      <div class="activePath" id="activePath"></div>
      <div class="dashaValidation" id="dashaValidation">Dasha validation: —</div>
      <div class="laneWrap"><div id="hierarchyLanes"></div></div>
@@ -3185,7 +3205,7 @@ function renderCrumbs(){
  crumbs.innerHTML=html;
 
  const home=crumbs.querySelector("#cycleHome");
- if(home)home.onclick=()=>{prefix=[];cycleSelection=null;render()};
+ if(home)home.onclick=()=>{prefix=[];cycleSelection=null;calendarYear=null;render()};
  crumbs.querySelectorAll("[data-cycle-path]").forEach(el=>el.onclick=()=>{
   prefix=JSON.parse(el.dataset.cyclePath);cycleSelection=null;render();
  });
@@ -3247,8 +3267,9 @@ function renderMobileCycleZoom(){
 
 function renderVimshottariHierarchy(){
  if(_isMobile()){renderMobileCycleZoom();return}
- let root=$("hierarchyLanes"),year=calendarYear??new Date(chart.birthMs).getUTCFullYear(),
-     w={a:Date.UTC(year,0,1),b:Date.UTC(year+1,0,1)},span=w.b-w.a,
+ let root=$("hierarchyLanes"),year=calendarYear,
+     selected=currentDisplayPeriod(),
+     w=year===null?{a:Math.max(chart.birthMs,selected.a),b:Math.min(chart.birthMs+profile.horizon*YEAR_MS,selected.b)}:{a:Date.UTC(year,0,1),b:Date.UTC(year+1,0,1)},span=Math.max(1,w.b-w.a),
      inspect=new Date($("inspectDate").value+"T00:00:00Z").getTime();
  root.innerHTML="";
  // Keep horizontal lanes only through Sookshma. Prana gets a dedicated readable navigator.
@@ -3280,12 +3301,12 @@ function renderVimshottariHierarchy(){
   lane.innerHTML=`<div class="laneLabel">Prana<div class="levelHint">Terminal level</div></div><div class="lanePrompt">Select a Sookshma period above; Prana will open below as a readable 3×3 navigator instead of a compressed lane.</div>`;
   root.appendChild(lane);
  }
- let axisLane=document.createElement("div");axisLane.className="lane";let lab=document.createElement("div");lab.className="laneLabel";lab.textContent=String(year);let axis=document.createElement("div");axis.className="yearAxis";
- for(let m=0;m<12;m++){let t=document.createElement("div");t.className="monthTick";t.style.left=(Date.UTC(year,m,1)-w.a)/span*100+"%";t.textContent=new Date(Date.UTC(year,m,1)).toLocaleDateString("en-US",{timeZone:"UTC",month:"short"});axis.appendChild(t)}
+ let axisLane=document.createElement("div");axisLane.className="lane";let lab=document.createElement("div");lab.className="laneLabel";lab.textContent=year===null?"Selected range":String(year);let axis=document.createElement("div");axis.className="yearAxis";
+ for(let m=0;m<6;m++){let t=document.createElement("div");t.className="monthTick";t.style.left=(m/6*100)+"%";t.textContent=fmt(w.a+span*m/6);axis.appendChild(t)}
  axisLane.append(lab,axis);root.appendChild(axisLane);
  renderVimshottariActivePath();renderPranaNavigator();
 }
-function renderVimshottariActivePath(){let ms=new Date($("inspectDate").value+"T12:00:00Z").getTime(),p=activePathAt(ms,5);$("activePath").innerHTML=p.length?p.map((x,i)=>`<span>${["MD","AD","PD","Sookshma","Prana"][i]}: ${x}</span>`).join('<span class="arrow">→</span>'):'<span class="small">Outside selected life horizon.</span>'}
+function renderVimshottariActivePath(){let ms=new Date($("inspectDate").value+"T12:00:00Z").getTime(),p=activePathAt(ms,5);$("activePath").innerHTML=p.length?`On ${$("inspectDate").value}: `+p.map((x,i)=>`<span>${["MD","AD","PD","Sookshma","Prana"][i]}: ${x}</span>`).join('<span class="arrow">→</span>'):'<span class="small">Outside selected life horizon.</span>'}
 
 
 function hidePranaNavigator(){let n=$("pranaNavigator");if(n){n.hidden=true;n.innerHTML=""}}
@@ -3323,7 +3344,25 @@ function renderGenericCycleActivePath(){
  if(cycleFamilyKey==="western_profection"&&g.meta)meta=` · House ${g.meta.house} · ${g.meta.lord}`;
  $("activePath").innerHTML=`<span>${cycleFamilyLabel()}</span><span class="arrow">→</span><span>${g.label||g.lord}${meta}</span><span class="badge">${fmt(g.a)} → ${fmt(g.b)}</span>`;
 }
+function renderCycleSelectionControls(){
+ const el=$("cycleSelectionControls");el.innerHTML="";
+ $("cycleSelectionTitle").textContent=`Viewing: ${periodTitle(currentDisplayPeriod())} · ${zoomRangeLabel(currentDisplayPeriod())}`;
+ if(cycleFamilyKey!=="vimshottari")return;
+ const label=document.createElement("label");label.textContent="Mahādaśā";
+ const select=document.createElement("select");select.id="cycleMahadashaSelect";
+ select.add(new Option("All Mahādaśās", ""));
+ const roots=dashaRoot.filter(g=>g.b>chart.birthMs&&g.a<chart.birthMs+profile.horizon*YEAR_MS);
+ roots.forEach(g=>select.add(new Option(`${g.lord} · ${zoomRangeLabel(g)}`,g.path[0])));
+ select.value=prefix[0]||"";
+ select.onchange=()=>{calendarYear=null;cycleSelection=null;prefix=select.value?[select.value]:[];render()};
+ label.appendChild(select);el.appendChild(label);
+ if(calendarYear!==null){
+  const clear=document.createElement("button");clear.textContent=`Clear ${calendarYear} year filter`;
+  clear.onclick=()=>{calendarYear=null;render()};el.appendChild(clear);
+ }
+}
 function renderHierarchy(){
+ renderCycleSelectionControls();
  let fam=ensureCycleFamily();$("cycleZoomTitle").textContent=fam?`Cycle zoom · ${fam.label}`:"Cycle zoom";
  $("cycleZoomDescription").textContent=fam?`${cycleContextLabel()}. Cycle families are deduplicated by cycle key, so multiple selected providers that use the same cycle share one timeline.`:"No selected system exposes a cycle family.";
  $("dashaValidation").style.display=cycleFamilyKey==="vimshottari"?"block":"none";
@@ -4662,6 +4701,19 @@ function renderNatalDimensionMaps(){
  }
  $("planetDimensionMap").style.display="grid";$("houseDimensionMap").style.display="grid";
  let renderMap=(root,type,rows)=>{
+  root.classList.toggle("heat-explorer",_isMobile());
+  if(_isMobile()){
+   root.style.display="block";root.style.gridTemplateColumns="";
+   renderHeatExplorer(root,{
+    key:type,title:`Compare ${type==="planet"?"planets":"houses"} by life dimension`,
+    rows:rows.map(entity=>({entity,label:type==="planet"?entity:`House ${entity}`})),
+    metrics:(row,di)=>{
+     const m=type==="planet"?planetDimensionMetrics(row.entity,di):houseDimensionMetrics(row.entity,di);
+     const context=type==="planet"?`${m.placement} · rules ${(m.ruled||[]).join(" / ")||"none"}`:`Lord ${m.lord} · occupants ${(m.occupants||[]).join(", ")||"none"}`;
+     return {support:m.support,detail:`${context}<br>Influence ${m.influence.toFixed(1)}/100 · relevance ${Math.round(m.relevance*100)}%<br>Overall influence ${Number(m.overallInfluence).toFixed(1)}/100 · overall benefit ${Number(m.overallBenefit).toFixed(1)}/100${m.layers?`<br>Evidence: ${m.layers.map(x=>`${x.id}: support ${signed(x.support)}, influence ${Math.round(x.influence)}, weight ${Math.round(x.weight*100)}%`).join("; ")}`:""}`};
+    }
+   });return;
+  }
   root.style.gridTemplateColumns=`138px repeat(${dims.length},86px)`;
   let html=`<div class="natalCorner">${type==="planet"?"Planet":"House"} ↓<br>Life dimension →</div>`+
     dims.map(d=>`<div class="natalCol">${d}</div>`).join("");
@@ -5448,7 +5500,7 @@ $("clearStaticBtn").onclick=()=>{
 
 
 
-// ── Cycle visualization: mobile minimap / desktop read-only comparison ──
+// ── Cycle visualization: domain explorer / desktop period comparison ──
 function cycleVisualGroups(){
  let groups=visibleGroups();
  if(cycleFamilyKey==="vimshottari"&&!groups.length&&prefix.length>=LEVELS.length){
@@ -5458,50 +5510,39 @@ function cycleVisualGroups(){
  return groups;
 }
 
-function renderCycleMobileMiniMap(el,groups){
- if(!groups.length){el.innerHTML="";return}
- const focus=currentDisplayPeriod();
- const focusName=periodTitle(focus);
- const focusRange=zoomRangeLabel(focus);
+const heatExplorerDomains={};
+function renderHeatExplorer(root,{key,rows,metrics,title,onSelect}){
  const dims=selectedDimensions();
- const levelName=cycleFamilyKey==="vimshottari"?(LEVELS[(groups[0]?.depth||1)-1]||"Dasha"):(cycleContextLabel()||cycleFamilyLabel());
-
- let html=`<div class="cycle-mobile-summary">
-  <div class="cycle-focus-head">${focusName}</div>
-  <div class="cycle-focus-range">${focusRange}</div>
-  <div class="cycle-mini-title">${levelName} · period ranges</div>
-  <div class="cycle-range-scroll">`;
-
- for(const g of groups){
-  html+=`<div class="cycle-range-card">
-   <div class="cr-name">${g.lord||g.label||"—"}</div>
-   <div class="cr-date">${zoomRangeLabel(g)}</div>
-  </div>`;
+ const domain=dims.includes(heatExplorerDomains[key])?heatExplorerDomains[key]:dims[0];
+ heatExplorerDomains[key]=domain;
+ root.innerHTML="";root.classList.add("heat-explorer");
+ const label=document.createElement("label");label.className="explorer-controls";label.textContent=title;
+ const select=document.createElement("select");select.setAttribute("aria-label",`${title}: life dimension`);
+ dims.forEach(d=>select.add(new Option(d,d)));select.value=domain;
+ select.onchange=()=>{heatExplorerDomains[key]=select.value;renderHeatExplorer(root,{key,rows,metrics,title,onSelect})};
+ label.appendChild(select);root.appendChild(label);
+ const legend=document.createElement("p");legend.className="small";legend.textContent="Support −2 to +2 · center = neutral. Expand a row for details.";root.appendChild(legend);
+ for(const row of rows){
+  const m=metrics(row,DOMAINS.indexOf(domain)),details=document.createElement("details");details.className="explorer-item";
+  const score=m.support,position=Math.max(0,Math.min(100,(score+2)/4*100));
+  details.innerHTML=`<summary><span class="explorer-name">${row.label}</span><b>${signed(score)}</b><span class="explorer-range">${row.range||""}</span><span class="explorer-bar" aria-hidden="true"><i style="left:${Math.min(50,position)}%;width:${Math.abs(position-50)}%;background:${heatColor(score)}"></i></span><span class="explorer-hint">Details ▾</span></summary><div class="explorer-detail"><b>${domain} · support ${signed(score)}</b><p>${m.detail||""}</p></div>`;
+  if(onSelect){const btn=document.createElement("button");btn.textContent="View this period in Cycle Zoom";btn.onclick=()=>onSelect(row);details.lastElementChild.appendChild(btn)}
+  root.appendChild(details);
  }
- html+=`</div><div class="cycle-mini-title">Domain minimap · read-only</div><div class="cycle-mini-map">`;
-
- const total=Math.max(1,Math.max(...groups.map(g=>g.b))-Math.min(...groups.map(g=>g.a)));
- for(const dom of dims){
-  const di=DOMAINS.indexOf(dom);
-  html+=`<div class="cycle-mini-row"><div class="cycle-mini-label">${dom}</div><div class="cycle-mini-track">`;
-  for(const g of groups){
-   const sc=scorePeriod(g,di),pct=Math.max(.35,(g.b-g.a)/total*100);
-   const short=(g.lord||g.label||"").slice(0,2);
-   html+=`<div class="cycle-mini-seg" style="flex:${Math.max(1,g.b-g.a)} 1 0%;background:${heatColor(sc)};color:${heatTextColor(sc)}" title="${dom} · ${g.lord||g.label||"—"} · ${zoomRangeLabel(g)} · ${sc.toFixed(2)}">${pct>=8?short:""}</div>`;
-  }
-  html+=`</div></div>`;
- }
- html+=`</div><div class="cycle-mini-title">Selected-period scores</div><div class="cycle-domain-snapshot">`;
-
- for(const dom of dims){
-  const sc=scorePeriod(focus,DOMAINS.indexOf(dom)),bk=bucket(sc);
-  html+=`<div class="cycle-domain-card" style="border-color:${heatColor(sc)}">
-   <div class="cd-name">${dom}</div>
-   <div class="cd-value">${sc.toFixed(2)} <span class="cd-grade">${bk[0]}</span></div>
-  </div>`;
- }
- html+=`</div></div>`;
- el.innerHTML=html;
+}
+function renderCycleMobileMiniMap(el,groups){
+ const focus=currentDisplayPeriod();
+ el.innerHTML=`<div class="cycle-mobile-summary"><div class="cycle-focus-head">${periodTitle(focus)}</div><div class="cycle-focus-range">${zoomRangeLabel(focus)}</div><div class="cycle-explorer"></div><div class="cycle-mini-title">Selected-period scores</div><div class="cycle-domain-snapshot"></div></div>`;
+ renderHeatExplorer(el.querySelector(".cycle-explorer"),{
+  key:"cycles",title:"Compare periods by life dimension",
+  rows:groups.map(g=>({label:g.lord||g.label,range:zoomRangeLabel(g),period:g})),
+  metrics:(row,di)=>({support:scorePeriod(row.period,di),detail:`${periodTitle(row.period)} · ${zoomRangeLabel(row.period)}`}),
+  onSelect:row=>activateCycleGroup(row.period)
+ });
+ el.querySelector(".cycle-domain-snapshot").innerHTML=selectedDimensions().map(dom=>{
+  const score=scorePeriod(focus,DOMAINS.indexOf(dom));
+  return `<div class="cycle-domain-card"><div class="cd-name">${dom}</div><div class="cd-value">${signed(score)}</div></div>`;
+ }).join("");
 }
 
 function renderDomainBars(){
@@ -5512,25 +5553,24 @@ function renderDomainBars(){
   return;
  }
 
- // Desktop keeps the broad comparison, but it is intentionally read-only.
+ // Desktop comparison follows the current zoom. Period headers share navigation state.
  let topGroups;
- if(cycleFamilyKey==="vimshottari"&&dashaRoot.length)topGroups=filterLifeAndYear(dashaRoot);
- else topGroups=cycleGroups();
+ topGroups=cycleVisualGroups();
  if(!topGroups.length){el.innerHTML="";return}
 
  const dims=selectedDimensions();
  const allA=Math.min(...topGroups.map(g=>g.a)),allB=Math.max(...topGroups.map(g=>g.b)),span=Math.max(1,allB-allA);
  const widths=topGroups.map(g=>Math.max(0.5,(g.b-g.a)/span*100));
  const isActiveGroup=g=>cycleFamilyKey==="vimshottari"
-  ?(prefix.length>0&&prefix[0]===(g.lord||g.path?.[0]))
+  ?(prefix.length===g.path?.length&&g.path.every((lord,i)=>prefix[i]===lord))
   :(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
 
  let html=`<div class="dbar-wrap"><div class="dbar-hdr-row"><div class="dbar-hdr-label">Domain</div><div class="dbar-hdr-track">`;
  topGroups.forEach((g,i)=>{
   const isActive=isActiveGroup(g),name=(g.lord||g.label||"—");
-  html+=`<div class="dbar-hdr-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%" data-gi="${i}">
+  html+=`<button type="button" class="dbar-hdr-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%" data-gi="${i}">
    <span>${name}</span><span class="dbar-hdr-years">${zoomRangeLabel(g)}</span>
-  </div>`;
+  </button>`;
  });
  html+=`</div></div>`;
 
@@ -5551,7 +5591,7 @@ function renderDomainBars(){
  }
  html+=`</div>`;
  el.innerHTML=html;
- // No click handlers here. Cycle Zoom is the single drill-in surface.
+ el.querySelectorAll(".dbar-hdr-seg").forEach(btn=>btn.onclick=()=>activateCycleGroup(topGroups[+btn.dataset.gi]));
 }
 
 // ── Kāla nav: breadcrumb + date range, always visible ────────────
@@ -5591,7 +5631,7 @@ function updateKalaNav(){
  crumbs.innerHTML=html;
 
  // Wire crumb taps
- crumbs.querySelector("#kalaHome")?.addEventListener("click",()=>{prefix=[];cycleSelection=null;render()});
+ crumbs.querySelector("#kalaHome")?.addEventListener("click",()=>{prefix=[];cycleSelection=null;calendarYear=null;render()});
  crumbs.querySelectorAll("[data-path]").forEach(el=>{
   const path=JSON.parse(el.dataset.path);
   const activator=()=>{prefix=path;cycleSelection=null;render()};
