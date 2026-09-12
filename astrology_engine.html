@@ -6,110 +6,112 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Kāla">
-<meta name="theme-color" content="#0a0d12">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0d12'/><text y='.9em' font-size='80' x='50%25' text-anchor='middle' fill='%238fb0ff'>☸</text></svg>">
+<meta name="theme-color" content="#0d0d0b">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230d0d0b'/><text y='.9em' font-size='80' x='50%25' text-anchor='middle' fill='%23c8a96e'>☸</text></svg>">
 <title>Kāla · Astrology Engine</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
- --bg:#0a0d12;--panel:#101720;--panel2:#151e29;--panel3:#1b2633;--line:#273647;
- --text:#edf3fa;--muted:#91a2b6;--accent:#8fb0ff;--label:182px;--cell:82px;
- --g2:#0d8c5a;--g1:#59b77f;--n:#c8ae57;--b1:#c47a49;--b2:#a93e4a;
+ --bg:#0d0d0b;--panel:#141412;--panel2:#1c1c19;--panel3:#232320;--line:#3b3932;
+ --text:#e8e4d8;--muted:#b8b2a5;--accent:#c8a96e;--gold2:#e8c990;
+ --sans:'Nunito',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'DM Mono',monospace;
+ --label:182px;--cell:82px;--g2:#0d8c5a;--g1:#59b77f;--n:#c8ae57;--b1:#c47a49;--b2:#a93e4a;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-header{position:sticky;top:0;z-index:30;background:rgba(10,13,18,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:30;background:rgba(13,13,11,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .wrap{max-width:1700px;margin:auto;padding:14px 16px}
-h1{margin:0;font-size:20px}.sub{color:var(--muted);font-size:12px;line-height:1.45;margin-top:4px}
+h1{margin:0;font-size:20px}.sub{color:var(--muted);font-size:13px;line-height:1.45;margin-top:4px}
 .toolbar{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;align-items:center}
-button,select,input{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 9px;font-size:12px}
-button{cursor:pointer}button:hover{border-color:#58708e}.primary{border-color:var(--accent)}
+button,select,input{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 9px;font-size:13px}
+button{cursor:pointer}button:hover{border-color:var(--muted)}.primary{border-color:var(--accent)}
 main{max-width:1700px;margin:auto;padding:14px 16px 28px}
-.small{font-size:11px;color:var(--muted);line-height:1.5}.big{font-size:21px;font-weight:750}
-.badge{display:inline-block;border:1px solid var(--line);padding:2px 6px;border-radius:999px;font-size:9px}
+.small{font-size:13px;color:var(--muted);line-height:1.5}.big{font-size:21px;font-weight:750}
+.badge{display:inline-block;border:1px solid var(--line);padding:2px 6px;border-radius:999px;font-size:13px}
 .good{border-color:#2f8f67;color:#8fe0b8}.warn{border-color:#a88540;color:#e2c27d}.bad{border-color:#984b54;color:#eda1aa}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}.card h3{font-size:12px;margin:0 0 8px;color:#d7e2ef}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}.card h3{font-size:13px;margin:0 0 8px;color:var(--text)}
 .profileCard{margin-top:11px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px}
 .profileGrid{display:grid;grid-template-columns:1.25fr .8fr .8fr 1.2fr .65fr .65fr .65fr .7fr .8fr;gap:7px;align-items:end}
-.field{display:flex;flex-direction:column;gap:4px}.field label{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:800}
-.field input,.field select{width:100%;background:#0d131b}
+.field{display:flex;flex-direction:column;gap:4px}.field label{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:800}
+.field input,.field select{width:100%;background:var(--panel)}
 .engineStatus{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 .appTabs{display:flex;gap:6px;max-width:1700px;margin:12px auto 0;padding:0 16px}
-.appTabBtn{background:#111923;color:var(--muted);border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:11px;font-weight:750}
-.appTabBtn.active{background:#1a2634;color:#f2f6fb;border-color:#40536b}.tabPanel{display:none}.tabPanel.active{display:block}
+.appTabBtn{background:var(--panel);color:var(--muted);border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:13px;font-weight:750}
+.appTabBtn.active{background:var(--panel);color:var(--text);border-color:var(--line)}.tabPanel{display:none}.tabPanel.active{display:block}
 .gridtop{display:grid;grid-template-columns:1.05fr .95fr;gap:10px;margin-bottom:10px}
-.components{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.component{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px}.component .name{font-size:10px;color:var(--muted)}.component .val{font-size:16px;font-weight:750;margin-top:3px}
-.decision{display:grid;grid-template-columns:1fr 1fr;gap:9px}.decisionbox{background:var(--panel2);border-radius:9px;padding:9px;border:1px solid var(--line)}.decisionbox b{font-size:11px}.decisionbox ul{margin:6px 0 0 17px;padding:0;font-size:11px;color:#dce5ef;line-height:1.45}
-.multiDrop{position:relative;display:inline-block;min-width:240px}.multiDrop summary{list-style:none;background:#111923;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px 28px 7px 9px;font-size:11px;cursor:pointer;position:relative;user-select:none}.multiDrop summary::-webkit-details-marker{display:none}.multiDrop summary:after{content:"▾";position:absolute;right:9px;top:7px;color:var(--muted)}.multiDrop[open] summary:after{content:"▴"}.multiDropMenu{position:absolute;z-index:70;top:calc(100% + 4px);left:0;min-width:330px;max-width:450px;max-height:430px;overflow:auto;background:#0d141d;border:1px solid #35465a;border-radius:9px;padding:7px;box-shadow:0 12px 28px rgba(0,0,0,.42)}.multiDropOption{display:flex;align-items:flex-start;gap:7px;padding:6px;border-radius:6px;font-size:10px;cursor:pointer}.multiDropOption:hover{background:#172231}.multiDropOption input{width:18px;height:18px;margin:1px 0 0 0;padding:0}.multiDropMeta{font-size:9px;color:var(--muted);margin-top:2px}.multiDropActions{display:flex;gap:5px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:7px;margin-top:5px}.multiDropActions button{font-size:9px;padding:4px 7px}
-.crumbs{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}.crumb{font-size:11px;padding:5px 8px;border:1px solid var(--line);border-radius:999px;background:var(--panel);cursor:pointer}.crumb.active{border-color:var(--accent)}
-.hierarchyCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}.hierarchyHead{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}.hierarchyHead h3{font-size:13px;margin:0;color:#d9e3f0}.dateInspect{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.activePath{font-size:12px;font-weight:700;margin:6px 0 10px;line-height:1.45}.activePath .arrow{color:var(--muted);padding:0 4px}.laneWrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px}.lane{display:grid;grid-template-columns:110px minmax(1050px,1fr);border-bottom:1px solid var(--line);min-width:1160px}.laneLabel{position:sticky;left:0;z-index:5;background:var(--panel2);padding:9px 10px;font-size:11px;font-weight:750;border-right:1px solid var(--line)}.levelHint{font-size:8px;color:var(--muted);margin-top:3px}.laneTrack{position:relative;height:58px;background:#0c1219}.laneSeg{position:absolute;top:5px;height:48px;border:1px solid rgba(255,255,255,.16);border-radius:6px;overflow:hidden;cursor:pointer;padding:5px 6px;min-width:2px}.laneSeg:hover{outline:2px solid rgba(255,255,255,.55);z-index:7}.laneSeg.current{outline:2px solid #fff;z-index:8}.laneSeg.selected{box-shadow:0 0 0 2px rgba(143,176,255,.7)}.laneLord{font-size:10px;font-weight:800;white-space:nowrap}.laneDate{font-size:8px;opacity:.84;white-space:nowrap;margin-top:3px}.laneContinue{font-size:8px;font-weight:700;opacity:.9;white-space:nowrap}.lanePrompt{height:58px;display:flex;align-items:center;padding:0 12px;color:var(--muted);font-size:10px;background:#0c1219}.yearAxis{position:relative;height:20px;min-width:1050px;background:#0c1219;border-top:1px solid var(--line)}.monthTick{position:absolute;top:0;height:100%;border-left:1px solid rgba(255,255,255,.12);font-size:8px;color:var(--muted);padding-left:3px;padding-top:4px}
-.viewport{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}.tlwrap{overflow-x:auto;border-bottom:1px solid var(--line);background:var(--panel2)}.timeline{display:flex;min-width:100%}.phase{flex:0 0 auto;min-width:var(--cell);padding:9px 7px;border-right:1px solid rgba(255,255,255,.10);cursor:pointer}.phase:hover{filter:brightness(1.1)}.phase .lord{font-weight:750;font-size:12px}.phase .date{font-size:9px;opacity:.80;margin-top:3px;white-space:nowrap}.phase .grade{font-size:11px;margin-top:5px}.heatwrap{overflow:auto;max-height:68vh}.heat{display:grid;min-width:100%}.corner,.rowlabel,.cell,.headcell{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.corner,.rowlabel{position:sticky;left:0;z-index:10;background:var(--panel);width:var(--label);min-width:var(--label)}.corner{top:0;padding:9px;font-size:10px;color:var(--muted);z-index:15}.rowlabel{padding:9px 10px;font-size:11px;font-weight:700}.headcell{background:var(--panel2);padding:7px;text-align:center;font-size:10px;cursor:pointer}.cell{min-width:var(--cell);padding:8px 5px;text-align:center;font-size:10px;cursor:pointer;position:relative}.cell:hover{filter:brightness(1.15)}.cell .grade{font-size:13px;font-weight:800}.cell .score{font-size:9px;opacity:.82}.agree{position:absolute;right:3px;top:3px;font-size:8px;background:rgba(0,0,0,.28);padding:1px 3px;border-radius:4px}
-.playbookCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;margin:14px 0}.priorityGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.priorityBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px}.priorityBox .kicker{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.priorityBox .title{font-size:12px;font-weight:800;margin:3px 0 5px}.priorityBox .body{font-size:10px;line-height:1.45;color:#c9d4e2}.playbookWrap{overflow:auto;margin-top:10px;border:1px solid var(--line);border-radius:9px;max-height:520px}.playbookTable{width:100%;border-collapse:collapse;font-size:10px;min-width:980px}.playbookTable th{position:sticky;top:0;z-index:4;background:var(--panel2);color:#cbd6e4;text-align:left;padding:7px;border-bottom:1px solid var(--line)}.playbookTable td{padding:7px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.4}.mode{display:inline-block;border-radius:999px;padding:2px 7px;font-size:9px;font-weight:800;border:1px solid rgba(255,255,255,.15)}
-.info{margin-top:10px}.weightsTable{width:100%;border-collapse:collapse;font-size:10px}.weightsTable th,.weightsTable td{padding:5px;border-bottom:1px solid var(--line);text-align:left}.weightsTable th{color:var(--muted);font-weight:600}
-.tip{position:fixed;display:none;z-index:1000;max-width:360px;background:#06090d;border:1px solid #465b75;border-radius:9px;padding:10px;box-shadow:0 16px 34px rgba(0,0,0,.5);font-size:11px;pointer-events:none}.tip table{width:100%;border-collapse:collapse;margin-top:5px}.tip td{padding:2px 4px;border-top:1px solid #1d2834}.tip .muted{color:var(--muted)}
-.rankingsWrap{max-width:1600px;margin:0 auto;padding:0 0 28px}.rankGrid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rankPanel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}.rankList{display:grid;gap:7px}.rankCard{width:100%;display:grid;grid-template-columns:36px minmax(120px,1fr) 64px;gap:8px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:9px;padding:8px 9px;background:#101822;color:var(--text);cursor:pointer}.rankCard.active{border-color:#88a9d8}.rankNum{font-size:15px;font-weight:900;text-align:center;opacity:.8}.rankName{font-size:12px;font-weight:800}.rankSub{font-size:9px;color:var(--muted);margin-top:2px}.rankScore{text-align:right}.rankScore .n{font-size:16px;font-weight:900}.rankDetail{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px;margin-top:12px;min-height:180px}.rankDetailGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:11px}.rankDetailBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px}.rankDetailBox h4{margin:0 0 5px;font-size:10px}.rankDetailBox p,.rankDetailBox li{font-size:10px;line-height:1.5;color:#c6d1df}
-.guideCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px}.guideGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.guideBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px}.guideBox h4{margin:0 0 6px;font-size:11px}.guideBox p,.guideBox li{font-size:10px;line-height:1.5;color:#c8d3e0}.code{white-space:pre-wrap;background:#0a0f15;border:1px solid var(--line);border-radius:8px;padding:9px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;line-height:1.5;color:#b9c8d9;overflow:auto}
+.components{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.component{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px}.component .name{font-size:13px;color:var(--muted)}.component .val{font-size:16px;font-weight:750;margin-top:3px}
+.decision{display:grid;grid-template-columns:1fr 1fr;gap:9px}.decisionbox{background:var(--panel2);border-radius:9px;padding:9px;border:1px solid var(--line)}.decisionbox b{font-size:13px}.decisionbox ul{margin:6px 0 0 17px;padding:0;font-size:13px;color:var(--text);line-height:1.45}
+.multiDrop{position:relative;display:inline-block;min-width:240px}.multiDrop summary{list-style:none;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px 28px 7px 9px;font-size:13px;cursor:pointer;position:relative;user-select:none}.multiDrop summary::-webkit-details-marker{display:none}.multiDrop summary:after{content:"▾";position:absolute;right:9px;top:7px;color:var(--muted)}.multiDrop[open] summary:after{content:"▴"}.multiDropMenu{position:absolute;z-index:70;top:calc(100% + 4px);left:0;min-width:330px;max-width:450px;max-height:430px;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:7px;box-shadow:0 12px 28px rgba(0,0,0,.42)}.multiDropOption{display:flex;align-items:flex-start;gap:7px;padding:6px;border-radius:6px;font-size:13px;cursor:pointer}.multiDropOption:hover{background:var(--panel)}.multiDropOption input{width:18px;height:18px;margin:1px 0 0 0;padding:0}.multiDropMeta{font-size:13px;color:var(--muted);margin-top:2px}.multiDropActions{display:flex;gap:5px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:7px;margin-top:5px}.multiDropActions button{font-size:13px;padding:4px 7px}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}.crumb{font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:999px;background:var(--panel);cursor:pointer}.crumb.active{border-color:var(--accent)}
+.hierarchyCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}.hierarchyHead{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}.hierarchyHead h3{font-size:13px;margin:0;color:var(--text)}.dateInspect{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.activePath{font-size:13px;font-weight:700;margin:6px 0 10px;line-height:1.45}.activePath .arrow{color:var(--muted);padding:0 4px}.laneWrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px}.lane{display:grid;grid-template-columns:110px minmax(1050px,1fr);border-bottom:1px solid var(--line);min-width:1160px}.laneLabel{position:sticky;left:0;z-index:5;background:var(--panel2);padding:9px 10px;font-size:13px;font-weight:750;border-right:1px solid var(--line)}.levelHint{font-size:13px;color:var(--muted);margin-top:3px}.laneTrack{position:relative;height:58px;background:var(--bg)}.laneSeg{position:absolute;top:5px;height:48px;border:1px solid rgba(255,255,255,.16);border-radius:6px;overflow:hidden;cursor:pointer;padding:5px 6px;min-width:2px}.laneSeg:hover{outline:2px solid rgba(255,255,255,.55);z-index:7}.laneSeg.current{outline:2px solid #fff;z-index:8}.laneSeg.selected{box-shadow:0 0 0 2px rgba(200,169,110,.7)}.laneLord{font-size:13px;font-weight:800;white-space:nowrap}.laneDate{font-size:13px;opacity:.84;white-space:nowrap;margin-top:3px}.laneContinue{font-size:13px;font-weight:700;opacity:.9;white-space:nowrap}.lanePrompt{height:58px;display:flex;align-items:center;padding:0 12px;color:var(--muted);font-size:13px;background:var(--bg)}.yearAxis{position:relative;height:20px;min-width:1050px;background:var(--bg);border-top:1px solid var(--line)}.monthTick{position:absolute;top:0;height:100%;border-left:1px solid rgba(255,255,255,.12);font-size:13px;color:var(--muted);padding-left:3px;padding-top:4px}
+.viewport{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}.tlwrap{overflow-x:auto;border-bottom:1px solid var(--line);background:var(--panel2)}.timeline{display:flex;min-width:100%}.phase{flex:0 0 auto;min-width:var(--cell);padding:9px 7px;border-right:1px solid rgba(255,255,255,.10);cursor:pointer}.phase:hover{filter:brightness(1.1)}.phase .lord{font-weight:750;font-size:13px}.phase .date{font-size:13px;opacity:.80;margin-top:3px;white-space:nowrap}.phase .grade{font-size:13px;margin-top:5px}.heatwrap{overflow:auto;max-height:68vh}.heat{display:grid;min-width:100%}.corner,.rowlabel,.cell,.headcell{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.corner,.rowlabel{position:sticky;left:0;z-index:10;background:var(--panel);width:var(--label);min-width:var(--label)}.corner{top:0;padding:9px;font-size:13px;color:var(--muted);z-index:15}.rowlabel{padding:9px 10px;font-size:13px;font-weight:700}.headcell{background:var(--panel2);padding:7px;text-align:center;font-size:13px;cursor:pointer}.cell{min-width:var(--cell);padding:8px 5px;text-align:center;font-size:13px;cursor:pointer;position:relative}.cell:hover{filter:brightness(1.15)}.cell .grade{font-size:13px;font-weight:800}.cell .score{font-size:13px;opacity:.82}.agree{position:absolute;right:3px;top:3px;font-size:13px;background:rgba(0,0,0,.28);padding:1px 3px;border-radius:4px}
+.playbookCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;margin:14px 0}.priorityGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.priorityBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px}.priorityBox .kicker{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.priorityBox .title{font-size:13px;font-weight:800;margin:3px 0 5px}.priorityBox .body{font-size:13px;line-height:1.45;color:var(--text)}.playbookWrap{overflow:auto;margin-top:10px;border:1px solid var(--line);border-radius:9px;max-height:520px}.playbookTable{width:100%;border-collapse:collapse;font-size:13px;min-width:980px}.playbookTable th{position:sticky;top:0;z-index:4;background:var(--panel2);color:var(--text);text-align:left;padding:7px;border-bottom:1px solid var(--line)}.playbookTable td{padding:7px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.4}.mode{display:inline-block;border-radius:999px;padding:2px 7px;font-size:13px;font-weight:800;border:1px solid rgba(255,255,255,.15)}
+.info{margin-top:10px}.weightsTable{width:100%;border-collapse:collapse;font-size:13px}.weightsTable th,.weightsTable td{padding:5px;border-bottom:1px solid var(--line);text-align:left}.weightsTable th{color:var(--muted);font-weight:600}
+.tip{position:fixed;display:none;z-index:1000;max-width:360px;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px;box-shadow:0 16px 34px rgba(0,0,0,.5);font-size:13px;pointer-events:none}.tip table{width:100%;border-collapse:collapse;margin-top:5px}.tip td{padding:2px 4px;border-top:1px solid var(--panel)}.tip .muted{color:var(--muted)}
+.rankingsWrap{max-width:1600px;margin:0 auto;padding:0 0 28px}.rankGrid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rankPanel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}.rankList{display:grid;gap:7px}.rankCard{width:100%;display:grid;grid-template-columns:36px minmax(120px,1fr) 64px;gap:8px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:9px;padding:8px 9px;background:var(--panel);color:var(--text);cursor:pointer}.rankCard.active{border-color:var(--muted)}.rankNum{font-size:15px;font-weight:900;text-align:center;opacity:.8}.rankName{font-size:13px;font-weight:800}.rankSub{font-size:13px;color:var(--muted);margin-top:2px}.rankScore{text-align:right}.rankScore .n{font-size:16px;font-weight:900}.rankDetail{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px;margin-top:12px;min-height:180px}.rankDetailGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:11px}.rankDetailBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px}.rankDetailBox h4{margin:0 0 5px;font-size:13px}.rankDetailBox p,.rankDetailBox li{font-size:13px;line-height:1.5;color:var(--text)}
+.guideCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px}.guideGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.guideBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px}.guideBox h4{margin:0 0 6px;font-size:13px}.guideBox p,.guideBox li{font-size:13px;line-height:1.5;color:var(--text)}.code{white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.5;color:var(--text);overflow:auto}
 @media(max-width:1000px){.profileGrid{grid-template-columns:1fr 1fr 1fr}.gridtop,.rankGrid2,.guideGrid{grid-template-columns:1fr}.rankDetailGrid{grid-template-columns:1fr}.priorityGrid{grid-template-columns:1fr}}
 @media(max-width:650px){:root{--label:126px;--cell:70px}.wrap,main{padding-left:9px;padding-right:9px}.profileGrid{grid-template-columns:1fr 1fr}.components{grid-template-columns:repeat(2,1fr)}.decision{grid-template-columns:1fr}.multiDrop{min-width:100%}.appTabs{padding:0 9px;overflow-x:auto}}
 
 .staticImportGrid{display:grid;grid-template-columns:1.2fr .55fr .8fr;gap:7px;margin-top:8px}
-.staticImportGrid input,.staticImportGrid select,.staticImportGrid textarea{width:100%;background:#0d131b;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:10px}
+.staticImportGrid input,.staticImportGrid select,.staticImportGrid textarea{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:13px}
 .staticImportGrid textarea{grid-column:1/-1;min-height:190px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.45}
 .staticImportActions{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
 @media(max-width:700px){.staticImportGrid{grid-template-columns:1fr}}
 
 
-.locationHint{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.35}
+.locationHint{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.35}
 .locationResolved{color:#88d8b0}
-.rankAreas{font-size:9px;color:#aebdce;line-height:1.4;margin-top:4px}
-.rankAreas b{color:#dbe6f2}
-.rankDesc{font-size:9px;color:#8fa1b5;line-height:1.4;margin-top:4px}
-.rankModeNote{margin-bottom:9px;padding:7px 9px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;font-size:10px;color:#b8c6d6}
-.dashaValidation{margin:6px 0 10px;padding:7px 9px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;font-size:10px;color:#c9d6e5}
-#pTzId[readonly],#pLat[readonly],#pLon[readonly]{opacity:.86;background:#0a1017}
+.rankAreas{font-size:13px;color:var(--muted);line-height:1.4;margin-top:4px}
+.rankAreas b{color:var(--text)}
+.rankDesc{font-size:13px;color:var(--muted);line-height:1.4;margin-top:4px}
+.rankModeNote{margin-bottom:9px;padding:7px 9px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;font-size:13px;color:var(--text)}
+.dashaValidation{margin:6px 0 10px;padding:7px 9px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;font-size:13px;color:var(--text)}
+#pTzId[readonly],#pLat[readonly],#pLon[readonly]{opacity:.86;background:var(--bg)}
 
 
 .validationSummary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
 .validationMetric{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px}
-.validationMetric .k{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.validationMetric .k{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
 .validationMetric .v{font-size:20px;font-weight:850;margin-top:3px}
 .validationTableWrap{overflow:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
-.validationTable{width:100%;border-collapse:collapse;min-width:1080px;font-size:10px}
-.validationTable th{position:sticky;top:0;background:var(--panel2);z-index:3;text-align:left;padding:7px;color:#cbd6e4;border-bottom:1px solid var(--line)}
+.validationTable{width:100%;border-collapse:collapse;min-width:1080px;font-size:13px}
+.validationTable th{position:sticky;top:0;background:var(--panel2);z-index:3;text-align:left;padding:7px;color:var(--text);border-bottom:1px solid var(--line)}
 .validationTable td{padding:7px;border-bottom:1px solid var(--line);vertical-align:top}
 .testPass{color:#8ee0b5;font-weight:850}.testFail{color:#f09aa5;font-weight:850}.testWarn{color:#e3c375;font-weight:850}
 .validationSources{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
-.validationSources a{color:#9ab7ff;word-break:break-all}
-.testDetail{font-size:9px;color:var(--muted);line-height:1.4;margin-top:2px}
+.validationSources a{color:var(--accent);word-break:break-all}
+.testDetail{font-size:13px;color:var(--muted);line-height:1.4;margin-top:2px}
 .validationControls{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
-.validationBanner{padding:9px 11px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);font-size:11px;line-height:1.5;margin-bottom:10px}
+.validationBanner{padding:9px 11px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);font-size:13px;line-height:1.5;margin-bottom:10px}
 @media(max-width:850px){.validationSummary{grid-template-columns:1fr 1fr}.validationSources{grid-template-columns:1fr}}
 
 
 .timeZoomDrop{min-width:310px}
 .timeZoomDrop .multiDropMenu{min-width:390px;max-width:520px;max-height:70vh}
 .timeTree{display:grid;gap:6px}
-.timeTreeFamily,.timeTreeGroup{border:1px solid var(--line);border-radius:8px;background:#101822;overflow:hidden}
-.timeTreeFamily>summary,.timeTreeGroup>summary{cursor:pointer;list-style:none;padding:7px 9px;font-size:10px;font-weight:800;color:#dce7f3}
+.timeTreeFamily,.timeTreeGroup{border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
+.timeTreeFamily>summary,.timeTreeGroup>summary{cursor:pointer;list-style:none;padding:7px 9px;font-size:13px;font-weight:800;color:var(--text)}
 .timeTreeFamily>summary::-webkit-details-marker,.timeTreeGroup>summary::-webkit-details-marker{display:none}
 .timeTreeFamily>summary:after,.timeTreeGroup>summary:after{content:"▾";float:right;color:var(--muted)}
 .timeTreeFamily[open]>summary:after,.timeTreeGroup[open]>summary:after{content:"▴"}
 .timeTreeContext{padding:6px;border-top:1px solid var(--line)}
-.timeTreeContextTitle{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:850;margin:1px 3px 5px}
-.timeTreeGroup{margin-top:5px;background:#0c131b}
-.timeTreeGroup>summary{font-size:9px;padding:6px 8px}
+.timeTreeContextTitle{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:850;margin:1px 3px 5px}
+.timeTreeGroup{margin-top:5px;background:var(--panel)}
+.timeTreeGroup>summary{font-size:13px;padding:6px 8px}
 .timeTreeYears{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:6px;border-top:1px solid var(--line)}
-.timeTreeBtn{width:100%;padding:5px 6px;font-size:9px;text-align:left;background:#111b26}
-.timeTreeBtn.active{border-color:var(--accent);background:#1b2b3d}
+.timeTreeBtn{width:100%;padding:5px 6px;font-size:13px;text-align:left;background:var(--panel)}
+.timeTreeBtn.active{border-color:var(--accent);background:var(--panel)}
 .timeTreeBtn.allYears{grid-column:1/-1;font-weight:800}
-.headRange{font-size:8px;line-height:1.25;color:inherit;opacity:.86;margin-top:3px;white-space:normal}
+.headRange{font-size:13px;line-height:1.25;color:inherit;opacity:.86;margin-top:3px;white-space:normal}
 .pranaNavigator{margin-top:10px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px}
 .pranaNavigator[hidden]{display:none}
 .pranaNavHead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap;margin-bottom:8px}
-.pranaNavHead h4{margin:0;font-size:11px;color:#e7eef7}
+.pranaNavHead h4{margin:0;font-size:13px;color:var(--text)}
 .pranaGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
-.pranaCard{display:block;width:100%;text-align:left;background:#0d151e;border:1px solid var(--line);border-radius:8px;padding:8px;color:var(--text);cursor:pointer}
-.pranaCard:hover{border-color:#617b9b}.pranaCard.active{border-color:#fff;box-shadow:0 0 0 2px rgba(143,176,255,.2)}
-.pranaCard .pn{font-size:9px;color:var(--muted)}.pranaCard .pl{font-size:12px;font-weight:850;margin:2px 0}.pranaCard .pd{font-size:9px;line-height:1.35}.pranaCard .ps{font-size:9px;margin-top:4px;font-weight:800}
+.pranaCard{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px;color:var(--text);cursor:pointer}
+.pranaCard:hover{border-color:var(--muted)}.pranaCard.active{border-color:#fff;box-shadow:0 0 0 2px rgba(200,169,110,.2)}
+.pranaCard .pn{font-size:13px;color:var(--muted)}.pranaCard .pl{font-size:13px;font-weight:850;margin:2px 0}.pranaCard .pd{font-size:13px;line-height:1.35}.pranaCard .ps{font-size:13px;margin-top:4px;font-weight:800}
 .pranaStep{display:flex;gap:5px;flex-wrap:wrap}
 @media(max-width:760px){
  .timeZoomDrop{min-width:100%}.timeZoomDrop .multiDropMenu{min-width:min(94vw,430px)}
@@ -118,37 +120,40 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 }
 
 
-.rankSectionTitle{font-size:12px;font-weight:850;color:#dce7f3;margin:14px 0 7px}
-.rankSectionSub{font-size:9px;color:var(--muted);margin:-3px 0 8px;line-height:1.45}
+.rankSectionTitle{font-size:13px;font-weight:850;color:var(--text);margin:14px 0 7px}
+.rankSectionSub{font-size:13px;color:var(--muted);margin:-3px 0 8px;line-height:1.45}
 .rankPanel.benefitPanel{border-color:#355447}
 .rankCard.benefitCard{grid-template-columns:36px minmax(120px,1fr) 78px}
-.rankCross{font-size:9px;color:#9fb0c3;margin-top:4px;line-height:1.35}
+.rankCross{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.35}
 .supportLegend{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
-.supportLegend>div{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:9px;line-height:1.4}
+.supportLegend>div{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:13px;line-height:1.4}
 @media(max-width:720px){.supportLegend{grid-template-columns:1fr}}
 
 
 .natalMapCard{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:11px;margin-bottom:12px}
 .natalMapHeader{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:8px}
 .natalMapHeader h3{margin:0;font-size:13px}
-.natalMapLegend{font-size:9px;color:var(--muted);line-height:1.45}
-.natalMapWrap{overflow:auto;border:1px solid var(--line);border-radius:9px;background:#0b1118}
+.natalMapLegend{font-size:13px;color:var(--muted);line-height:1.45}
+.natalMapWrap{overflow:auto;border:1px solid var(--line);border-radius:9px;background:var(--bg)}
+@media(max-width:768px){.natalMapWrap{max-height:260px}}
+.natalmap-scroll-hint{display:none;font-size:13px;color:var(--muted);text-align:center;padding:4px 0 6px}
+@media(max-width:768px){.natalmap-scroll-hint{display:block}}
 .natalMap{display:grid;min-width:max-content}
 .natalCorner,.natalCol,.natalRow{position:sticky;background:var(--panel2);z-index:2;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.natalCorner{left:0;top:0;z-index:5;width:138px;min-width:138px;padding:8px;font-size:9px;font-weight:850;color:#d7e2ef}
-.natalCol{top:0;z-index:4;width:86px;min-width:86px;padding:7px 5px;font-size:8px;font-weight:800;text-align:center;color:#cbd7e5;white-space:normal;line-height:1.2}
-.natalRow{left:0;z-index:3;width:138px;min-width:138px;padding:7px 8px;font-size:9px;line-height:1.25}
-.natalRow b{font-size:10px}
+.natalCorner{left:0;top:0;z-index:5;width:138px;min-width:138px;padding:8px;font-size:13px;font-weight:850;color:var(--text)}
+.natalCol{top:0;z-index:4;width:86px;min-width:86px;padding:7px 5px;font-size:13px;font-weight:800;text-align:center;color:var(--text);white-space:normal;line-height:1.2}
+.natalRow{left:0;z-index:3;width:138px;min-width:138px;padding:7px 8px;font-size:13px;line-height:1.25}
+.natalRow b{font-size:13px}
 .natalCell{position:relative;width:86px;min-width:86px;height:58px;border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:6px;cursor:pointer;text-align:center}
 .natalCell:hover{outline:2px solid rgba(255,255,255,.72);outline-offset:-2px}
 .natalSupport{font-size:13px;font-weight:900;line-height:1.1;margin-top:10px}
-.natalInfluence{position:absolute;top:4px;right:5px;font-size:7px;font-weight:850;opacity:.86}
-.natalRel{position:absolute;bottom:3px;left:5px;font-size:7px;opacity:.72}
-.natalMapTooltipTitle{font-size:11px;font-weight:850}
+.natalInfluence{position:absolute;top:4px;right:5px;font-size:13px;font-weight:850;opacity:.86}
+.natalRel{position:absolute;bottom:3px;left:5px;font-size:13px;opacity:.72}
+.natalMapTooltipTitle{font-size:13px;font-weight:850}
 .natalMapKey{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.natalMapKey span{font-size:8px;padding:3px 5px;border:1px solid var(--line);border-radius:5px;background:var(--panel2)}
+.natalMapKey span{font-size:13px;padding:3px 5px;border:1px solid var(--line);border-radius:5px;background:var(--panel2)}
 .rankSummaryDetails{margin-top:12px}
-.rankSummaryDetails>summary{cursor:pointer;font-size:11px;font-weight:850;color:#dce7f3;padding:8px 2px}
+.rankSummaryDetails>summary{cursor:pointer;font-size:13px;font-weight:850;color:var(--text);padding:8px 2px}
 @media(max-width:720px){
  .natalCorner,.natalRow{width:116px;min-width:116px}
  .natalCol,.natalCell{width:78px;min-width:78px}
@@ -158,18 +163,18 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 .evidenceDrop{min-width:285px}
 .evidenceDrop .multiDropMenu{min-width:400px;max-width:520px}
 .evidenceModes{border-bottom:1px solid var(--line);padding-bottom:5px;margin-bottom:5px}
-.layerTag{display:inline-block;font-size:7px;border:1px solid var(--line);padding:1px 4px;border-radius:999px;margin-left:4px;color:var(--muted)}
+.layerTag{display:inline-block;font-size:13px;border:1px solid var(--line);padding:1px 4px;border-radius:999px;margin-left:4px;color:var(--muted)}
 .layerWarn{color:#e2c27d}
 .layerOff{opacity:.55}
-.evidenceTrace{font-size:8px;color:var(--muted);margin-top:3px;line-height:1.35}
+.evidenceTrace{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.35}
 
 
 .dharmaHero{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
 .dharmaHero h2{font-size:17px;margin:0 0 5px}
 .dharmaControls{display:flex;gap:8px;flex-wrap:wrap;min-width:315px;justify-content:flex-end}
-.dharmaControls label{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;display:flex;flex-direction:column;gap:4px}
+.dharmaControls label{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;display:flex;flex-direction:column;gap:4px}
 .dharmaControls input,.dharmaControls select{min-width:140px}
-.dharmaNotice{font-size:10px;line-height:1.5;margin:0 0 10px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:#dce7f3}
+.dharmaNotice{font-size:13px;line-height:1.5;margin:0 0 10px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:var(--text)}
 .dharmaGridTop{display:grid;grid-template-columns:1.08fr .92fr;gap:10px;margin-bottom:10px}
 .dharmaGrid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
 .dharmaCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
@@ -177,72 +182,72 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 .dharmaCardHead h3{font-size:13px;margin:0}
 .pathBars{display:grid;gap:7px;margin-top:10px}
 .pathRow{display:grid;grid-template-columns:126px 1fr 48px;gap:8px;align-items:center}
-.pathName{font-size:10px;font-weight:800}
-.pathTrack{height:18px;background:#0b1118;border:1px solid var(--line);border-radius:999px;overflow:hidden;position:relative}
+.pathName{font-size:13px;font-weight:800}
+.pathTrack{height:18px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden;position:relative}
 .pathNatal,.pathCurrent{position:absolute;left:0;top:0;height:100%;border-radius:999px}
-.pathNatal{background:rgba(143,176,255,.36)}
+.pathNatal{background:rgba(200,169,110,.36)}
 .pathCurrent{height:7px;top:5px;background:rgba(237,243,250,.88)}
-.pathVal{text-align:right;font-size:9px;color:var(--muted)}
+.pathVal{text-align:right;font-size:13px;color:var(--muted)}
 .deityGrid{display:grid;grid-template-columns:repeat(4,minmax(170px,1fr));gap:8px}
 .deityCard{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px}
-.deityCard .rank{font-size:8px;color:var(--muted)}
+.deityCard .rank{font-size:13px;color:var(--muted)}
 .deityCard .name{font-size:13px;font-weight:850;margin:3px 0}
 .deityCard .score{font-size:18px;font-weight:900}
-.deityCard .why{font-size:9px;color:var(--muted);line-height:1.45;margin-top:5px}
-.ishtaIndicator{margin-top:9px;padding:9px;background:#0d141d;border:1px solid var(--line);border-radius:9px;font-size:10px;line-height:1.5}
+.deityCard .why{font-size:13px;color:var(--muted);line-height:1.45;margin-top:5px}
+.ishtaIndicator{margin-top:9px;padding:9px;background:var(--panel);border:1px solid var(--line);border-radius:9px;font-size:13px;line-height:1.5}
 .textGrid{display:grid;gap:7px}
 .textCard{display:grid;grid-template-columns:32px 1fr 42px;gap:8px;align-items:start;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:8px}
-.textCard .n{font-size:9px;color:var(--muted);font-weight:800}
-.textCard .title{font-size:10px;font-weight:850}
-.textCard .meta{font-size:8px;color:var(--muted);line-height:1.4;margin-top:3px}
-.textCard .tscore{text-align:right;font-size:10px;font-weight:850}
+.textCard .n{font-size:13px;color:var(--muted);font-weight:800}
+.textCard .title{font-size:13px;font-weight:850}
+.textCard .meta{font-size:13px;color:var(--muted);line-height:1.4;margin-top:3px}
+.textCard .tscore{text-align:right;font-size:13px;font-weight:850}
 .routineGrid{display:grid;gap:8px}
 .routineBlock{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px}
-.routineBlock h4{font-size:10px;margin:0 0 5px}
-.routineBlock ul{font-size:9px;line-height:1.5;margin:0 0 0 16px;padding:0;color:#dce7f3}
+.routineBlock h4{font-size:13px;margin:0 0 6px}
+.routineBlock ul{font-size:13px;line-height:1.55;margin:0 0 0 16px;padding:0;color:var(--text)}
 .timingPath{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0}
-.timingPill{font-size:9px;border:1px solid var(--line);border-radius:999px;padding:4px 7px;background:var(--panel2)}
-.timingTheme{font-size:10px;line-height:1.5;margin-top:7px}
+.timingPill{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:4px 7px;background:var(--panel2)}
+.timingTheme{font-size:13px;line-height:1.5;margin-top:7px}
 .dharmaEvidenceGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .evidenceCard{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:8px}
-.evidenceCard b{font-size:10px}.evidenceCard .small{font-size:8px}
-.dharmaBoundary{margin-top:10px;background:#111923;border:1px dashed #53657a;border-radius:10px;padding:10px;font-size:9px;line-height:1.5;color:#b9c6d5}
+.evidenceCard b{font-size:13px}.evidenceCard .small{font-size:13px}
+.dharmaBoundary{margin-top:10px;background:var(--panel);border:1px dashed var(--line);border-radius:10px;padding:10px;font-size:13px;line-height:1.5;color:var(--text)}
 @media(max-width:1000px){.dharmaGridTop,.dharmaGrid2{grid-template-columns:1fr}.deityGrid{grid-template-columns:repeat(2,1fr)}.dharmaEvidenceGrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.dharmaHero{display:block}.dharmaControls{justify-content:flex-start;margin-top:10px}.deityGrid,.dharmaEvidenceGrid{grid-template-columns:1fr}.pathRow{grid-template-columns:110px 1fr 40px}}
 
 
-.receivedCard{border-color:#3c5269}
+.receivedCard{border-color:var(--line)}
 .receivedGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-.receivedGrid label{font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;display:flex;flex-direction:column;gap:4px}
-.receivedGrid input{width:100%;background:#0d131b}
+.receivedGrid label{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;display:flex;flex-direction:column;gap:4px}
+.receivedGrid input{width:100%;background:var(--panel)}
 .receivedActions{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:9px;padding-top:8px;border-top:1px solid var(--line)}
-.subsectionTitle{font-size:9px;text-transform:uppercase;letter-spacing:.09em;font-weight:850;color:#c6d4e3;margin:12px 0 7px}
+.subsectionTitle{font-size:13px;text-transform:uppercase;letter-spacing:.09em;font-weight:850;color:var(--text);margin:12px 0 7px}
 .reconcileGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
 .reconcileBox{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px}
-.reconcileBox h4{font-size:10px;margin:0 0 5px}.reconcileBox .small{font-size:8px}
+.reconcileBox h4{font-size:13px;margin:0 0 5px}.reconcileBox .small{font-size:13px}
 .conflictFlag{border-color:#a88540;background:rgba(168,133,64,.08)}
 .okFlag{border-color:#2f8f67;background:rgba(47,143,103,.06)}
-.microTag{display:inline-block;font-size:8px;padding:2px 5px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-right:4px}
+.microTag{display:inline-block;font-size:13px;padding:2px 5px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-right:4px}
 @media(max-width:1000px){.receivedGrid,.reconcileGrid{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.receivedGrid,.reconcileGrid{grid-template-columns:1fr}}
 
 
 .devataEvidence{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
-.devataEvidence .ev{font-size:7px;border:1px solid var(--line);border-radius:999px;padding:2px 5px;color:var(--muted)}
-.devataBand{font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:#c8d5e4;font-weight:850;margin-top:5px}
-.devataMeter{height:5px;background:#0b1118;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:6px}
-.devataMeter>div{height:100%;background:#dce7f3}
+.devataEvidence .ev{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:2px 5px;color:var(--muted)}
+.devataBand{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--text);font-weight:850;margin-top:5px}
+.devataMeter{height:5px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:6px}
+.devataMeter>div{height:100%;background:var(--text)}
 
 
 .orientationCard{border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:9px}
-.orientationCard .name{font-weight:850;font-size:11px}
+.orientationCard .name{font-weight:850;font-size:13px}
 .orientationCard .score{font-family:var(--mono);font-size:16px;margin-top:2px}
-.orientationCard .why{font-size:8px;color:var(--muted);margin-top:4px;line-height:1.45}
+.orientationCard .why{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.45}
 .evidencePills{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.evidencePills span{font-size:7px;border:1px solid var(--line);border-radius:999px;padding:2px 5px;color:var(--muted)}
-.elementBar{height:6px;background:#0b1118;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:5px 0}
-.elementBar>div{height:100%;background:#dce7f3}
-.systemCalcNote{font-size:8px;color:var(--muted);line-height:1.5}
+.evidencePills span{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:2px 5px;color:var(--muted)}
+.elementBar{height:6px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:5px 0}
+.elementBar>div{height:100%;background:var(--text)}
+.systemCalcNote{font-size:13px;color:var(--muted);line-height:1.5}
 
 /* ── Mobile PWA shell ─────────────────────────────────────────── */
 :root{
@@ -252,16 +257,16 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 }
 #app{display:flex;flex-direction:column;height:100dvh;overflow:hidden}
 .status-bar{height:var(--safe-t);background:var(--bg);flex-shrink:0}
-#appHeader{flex-shrink:0;background:rgba(10,13,18,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 14px 6px}
+#appHeader{flex-shrink:0;background:rgba(13,13,11,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 14px 6px}
 .hdr-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.hdr-title{font-size:18px;font-weight:800;letter-spacing:-.01em;color:#edf3fa}
-#profileToggleBtn{font-size:12px;padding:6px 10px;border-radius:8px}
-#profileSummaryStrip{font-size:10px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.hdr-title{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--accent)}
+#profileToggleBtn{font-size:13px;padding:6px 10px;border-radius:8px}
+#profileSummaryStrip{font-size:13px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
 .crumbs-hdr{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
 #content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
-.mobile-bottom-nav{flex-shrink:0;display:flex;background:rgba(10,13,18,.97);border-top:1px solid var(--line);padding-bottom:var(--safe-b);overflow-x:auto;scrollbar-width:none}
+.mobile-bottom-nav{flex-shrink:0;display:flex;background:rgba(13,13,11,.97);border-top:1px solid var(--line);padding-bottom:var(--safe-b);overflow-x:auto;scrollbar-width:none}
 .mobile-bottom-nav::-webkit-scrollbar{display:none}
-.mbn-btn{flex:0 0 auto;min-width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;background:none;border:none;color:var(--muted);font-size:9px;cursor:pointer;touch-action:manipulation}
+.mbn-btn{flex:0 0 auto;min-width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;touch-action:manipulation}
 .mbn-btn.active{color:var(--accent)}
 .mbn-btn svg{width:20px;height:20px}
 .tabPanel{display:none;padding:12px 14px 80px}
@@ -275,13 +280,48 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 #profileOverlayBody{flex:1;overflow-y:auto;padding:12px 14px}
 
 /* ── Period chips ──────────────────────────────────────────────── */
-.kala-period-row{display:flex;gap:6px;overflow-x:auto;padding:10px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.kala-chips-level{font-size:13px;font-weight:800;color:var(--text);letter-spacing:.04em;padding:8px 2px 2px}
+.kala-period-row{display:flex;gap:6px;overflow-x:auto;padding:10px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;align-items:stretch}
 .kala-period-row::-webkit-scrollbar{display:none}
-.pchip{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;padding:8px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;touch-action:manipulation;min-width:56px;background:none}
-.pchip.active{border-color:rgba(255,255,255,.7);box-shadow:0 0 0 2px rgba(143,176,255,.5)}
-.pchip-lord{font-weight:800;font-size:11px}
+.period-level-tag{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;min-width:78px;padding:7px 9px;border:1px solid var(--line);border-radius:10px;background:var(--panel2)}
+.period-level-name{font-size:13px;font-weight:900;color:var(--accent);white-space:nowrap}
+.period-level-hint{font-size:13px;color:var(--muted);margin-top:2px;white-space:nowrap}
+.pchip{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 10px;border-radius:10px;border:2px solid transparent;cursor:pointer;touch-action:manipulation;min-width:86px;background:none;scroll-snap-align:start}
+.pchip.active{border-color:rgba(255,255,255,.7);box-shadow:0 0 0 2px rgba(200,169,110,.5)}
+.pchip-lord{font-weight:800;font-size:13px}
 .pchip-grade{font-size:14px;font-weight:900;margin-top:2px}
-.pchip-score{font-size:8px;opacity:.8}
+.pchip-score{font-size:13px;opacity:.8}
+.pchip-range{font-size:13px;opacity:.72;margin-top:3px;white-space:nowrap}
+.pchip-years{font-size:13px;opacity:.65;margin-top:1px}
+.dbar-context-hdr{font-size:13px;font-weight:800;color:var(--text);padding:6px 2px 4px}
+.dbar-back-link{font-size:13px;color:var(--accent);cursor:pointer;margin-left:6px;font-weight:600}
+@media(max-width:768px){.tlwrap{display:none}}
+
+
+/* ── Selected plot range / mobile cycle minimap ───────────────── */
+.kala-plot-range{display:flex;justify-content:center;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 auto 8px;padding:6px 10px;width:min(100%,420px);border:1px solid var(--line);border-radius:9px;background:var(--panel2);font-size:13px;color:var(--muted)}
+.kala-plot-range b{color:var(--text);font-size:13px}
+.cycle-mobile-summary{padding:8px 4px 10px}
+.cycle-focus-head{font-size:13px;font-weight:850;color:var(--text)}
+.cycle-focus-range{font-size:13px;color:var(--accent);margin-top:3px;line-height:1.35}
+.cycle-mini-title{margin-top:12px;font-size:13px;font-weight:850;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.cycle-range-scroll{display:flex;gap:6px;overflow-x:auto;padding:7px 0 9px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cycle-range-scroll::-webkit-scrollbar{display:none}
+.cycle-range-card{flex:0 0 142px;border:1px solid var(--line);background:var(--panel2);border-radius:8px;padding:7px 8px}
+.cycle-range-card .cr-name{font-size:13px;font-weight:850}
+.cycle-range-card .cr-date{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.35}
+.cycle-mini-map{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--bg)}
+.cycle-mini-row{display:grid;grid-template-columns:76px 1fr;min-height:25px;border-bottom:1px solid rgba(255,255,255,.05)}
+.cycle-mini-row:last-child{border-bottom:none}
+.cycle-mini-label{display:flex;align-items:center;padding:0 7px;background:var(--panel2);border-right:1px solid var(--line);font-size:13px;font-weight:800;color:var(--text)}
+.cycle-mini-track{display:flex;min-width:0}
+.cycle-mini-seg{min-width:2px;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(0,0,0,.22);font-size:13px;font-weight:850;overflow:hidden}
+.cycle-domain-snapshot{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.cycle-domain-card{border:1px solid var(--line);border-radius:9px;padding:8px;background:var(--panel2)}
+.cycle-domain-card .cd-name{font-size:13px;color:var(--muted);font-weight:800}
+.cycle-domain-card .cd-value{font-size:16px;font-weight:900;margin-top:2px}
+.cycle-domain-card .cd-grade{font-size:13px;margin-left:5px;opacity:.85}
+#cyclesTab .phase,#cyclesTab .dbar-hdr-seg,#cyclesTab .dbar-seg,#cyclesTab .headcell,#cyclesTab .cell{cursor:default}
 
 /* ── Radar ─────────────────────────────────────────────────────── */
 .radar-card{display:flex;justify-content:center;padding:4px 0}
@@ -292,8 +332,8 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 .kala-systems .component{flex:1 0 auto;min-width:80px}
 .kala-lens{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
 .lens-col{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:9px}
-.lens-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px}
-.kala-lens ul{margin:0;padding:0 0 0 14px;font-size:11px;line-height:1.6;color:#dce5ef}
+.lens-label{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px}
+.kala-lens ul{margin:0;padding:0 0 0 14px;font-size:13px;line-height:1.6;color:var(--text)}
 
 /* ── Heatmap: only horizontal scroll ─────────────────────────── */
 .heatwrap{overflow-x:auto;overflow-y:visible;max-height:none}
@@ -305,33 +345,35 @@ main{max-width:1700px;margin:auto;padding:14px 16px 28px}
 @media(max-width:768px){
  .priorityGrid{grid-template-columns:1fr !important}
  .playbookWrap{max-height:none}
+ .period-level-tag{min-width:72px;padding:6px 8px}
+ .pchip{min-width:88px;padding:8px 9px}
 }
 
 /* ── Font size bump ──────────────────────────────────────────── */
 body{font-size:14px}
 .small{font-size:13px!important}
 button,select,input{font-size:13px}
-.mbn-btn{font-size:11px}
+.mbn-btn{font-size:13px}
 .mbn-btn svg{width:23px;height:23px}
 .pchip-lord{font-size:14px}
 .pchip-grade{font-size:18px}
-.pchip-score{font-size:10px}
+.pchip-score{font-size:13px}
 .hdr-title{font-size:22px}
-.lens-label{font-size:11px}
+.lens-label{font-size:13px}
 .kala-lens ul{font-size:13px}
-.cell{font-size:12px}
+.cell{font-size:13px}
 .cell .grade{font-size:15px}
-.headcell{font-size:12px}
+.headcell{font-size:13px}
 .rowlabel{font-size:13px}
 .phase .lord{font-size:14px}
-.phase .date{font-size:11px}
-.phase .grade{font-size:12px}
+.phase .date{font-size:13px}
+.phase .grade{font-size:13px}
 .card h3{font-size:14px}
 .hierarchyHead h3{font-size:15px}
-.laneLord{font-size:12px}
-.laneDate{font-size:9px}
+.laneLord{font-size:13px}
+.laneDate{font-size:13px}
 .pranaCard .pl{font-size:14px}
-.pranaCard .pd{font-size:10px}
+.pranaCard .pd{font-size:13px}
 .subtab-btn{font-size:13px}
 .appTabBtn{font-size:13px}
 h1{font-size:22px}
@@ -341,36 +383,46 @@ h2{font-size:18px}
 .kala-nav-row{display:flex;align-items:center;gap:10px;padding:8px 0 6px;flex-wrap:nowrap;border-bottom:1px solid var(--line);margin-bottom:6px}
 .kala-back-btn{font-size:13px;padding:7px 14px;border-radius:20px;border-color:var(--accent);color:var(--accent);flex-shrink:0}
 .kala-crumbs{display:flex;flex-wrap:wrap;gap:4px;align-items:center;flex:1;min-width:0}
-.kala-crumb{font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap}
-.kala-crumb.active{color:#edf3fa;font-weight:800}
-.kala-crumb-sep{color:var(--line);font-size:10px}
-.kala-date-range{font-size:12px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+.kala-crumb{font-size:13px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.kala-crumb.active{color:var(--accent);font-weight:800}
+.kala-crumb-sep{color:var(--line);font-size:13px}
+.kala-date-range{font-size:13px;color:var(--muted);white-space:nowrap;flex-shrink:0}
 
 /* ── Domain bar chart (heatmap alternative) ─────────────────── */
 .dbar-wrap{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:8px 0}
 .dbar-hdr-row{display:flex;min-height:40px;background:var(--panel3);border-bottom:1px solid var(--line)}
-.dbar-hdr-label{width:88px;min-width:88px;border-right:1px solid var(--line);font-size:10px;display:flex;align-items:center;padding:0 7px;color:var(--muted);flex-shrink:0;font-weight:700}
+.dbar-hdr-label{width:88px;min-width:88px;border-right:1px solid var(--line);font-size:13px;display:flex;align-items:center;padding:0 7px;color:var(--muted);flex-shrink:0;font-weight:700}
 .dbar-hdr-track{flex:1;display:flex;overflow:hidden}
-.dbar-hdr-seg{flex:0 0 auto;font-size:9px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-right:1px solid rgba(255,255,255,.07);padding:3px 2px;overflow:hidden;cursor:pointer;color:rgba(255,255,255,.65);touch-action:manipulation;text-align:center;line-height:1.2}
-.dbar-hdr-seg .dbar-hdr-years{font-size:8px;opacity:.7;font-weight:600}
-.dbar-hdr-seg.sel{background:rgba(143,176,255,.18);color:#edf3fa;border-bottom:2px solid var(--accent)}
+.dbar-hdr-seg{flex:0 0 auto;font-size:13px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-right:1px solid rgba(255,255,255,.07);padding:3px 2px;overflow:hidden;cursor:pointer;color:rgba(255,255,255,.65);touch-action:manipulation;text-align:center;line-height:1.2}
+.dbar-hdr-seg .dbar-hdr-years{font-size:13px;opacity:.7;font-weight:600}
+.dbar-hdr-seg.sel{background:rgba(200,169,110,.18);color:var(--accent);border-bottom:2px solid var(--accent)}
 .dbar-row{display:flex;align-items:stretch;min-height:34px;border-bottom:1px solid rgba(255,255,255,.04)}
 .dbar-row:last-child{border-bottom:none}
-.dbar-label{width:88px;min-width:88px;padding:0 7px;font-size:12px;font-weight:800;display:flex;align-items:center;background:var(--panel2);border-right:1px solid var(--line);color:#c8d6e6;flex-shrink:0}
+.dbar-label{width:88px;min-width:88px;padding:0 7px;font-size:13px;font-weight:800;display:flex;align-items:center;background:var(--panel2);border-right:1px solid var(--line);color:var(--text);flex-shrink:0}
 .dbar-track{flex:1;display:flex;overflow:hidden}
 .dbar-seg{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;border-right:1px solid rgba(0,0,0,.18);touch-action:manipulation;transition:filter .12s;position:relative}
 .dbar-seg:hover{filter:brightness(1.2)}
 .dbar-seg.sel{box-shadow:inset 0 0 0 2px rgba(255,255,255,.9);z-index:1}
-.dbar-score{font-size:10px;font-weight:900;line-height:1}
-.dbar-grade{font-size:8px;opacity:.8;line-height:1}
+.dbar-score{font-size:13px;font-weight:900;line-height:1}
+.dbar-grade{font-size:13px;opacity:.8;line-height:1}
 .dbar-bar-wrap{width:70%;height:4px;background:rgba(0,0,0,.25);border-radius:2px;overflow:hidden;margin-top:1px}
 .dbar-bar-fill{height:100%;border-radius:2px;background:rgba(255,255,255,.6)}
+
+
+@media(max-width:768px){
+ #cyclesTab .tlwrap{display:none}
+ #cyclesTab .viewport{overflow:visible}
+ #cyclesTab #domainBarsContainer{padding:0}
+ .cycle-domain-snapshot{grid-template-columns:1fr 1fr}
+ .cycle-mini-row{grid-template-columns:70px 1fr}
+ .kala-date-range{font-size:13px}
+}
 
 /* ── Subtabs ───────────────────────────────────────────────── */
 .subtab-row{display:flex;gap:5px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch;border-bottom:1px solid var(--line);margin-bottom:12px;flex-shrink:0}
 .subtab-row::-webkit-scrollbar{display:none}
-.subtab-btn{flex:0 0 auto;font-size:12px;font-weight:700;padding:7px 14px;border-radius:20px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);cursor:pointer;touch-action:manipulation}
-.subtab-btn.active{background:#1a2634;color:#f2f6fb;border-color:#40536b}
+.subtab-btn{flex:0 0 auto;font-size:13px;font-weight:700;padding:7px 14px;border-radius:20px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);cursor:pointer;touch-action:manipulation}
+.subtab-btn.active{background:var(--panel);color:var(--text);border-color:var(--line)}
 
 /* ── Desktop: restore classic layout above 769px ──────────────── */
 @media(min-width:769px){
@@ -388,6 +440,100 @@ h2{font-size:18px}
 }
 header.deskHeader{display:none}
 .appTabs{display:none}
+
+/* Shared Sādhana theme and readable, touch-friendly layout. */
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-size:16px;line-height:1.6}
+button,input,select,textarea{font-family:inherit;font-size:16px;min-height:44px;max-width:100%}
+button,summary{touch-action:manipulation}
+button:hover{border-color:var(--accent)}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+h1,h2,.hdr-title{font-family:var(--serif);font-weight:500;color:var(--gold2)}
+h1,.hdr-title{font-size:26px}h2{font-size:23px}
+h3,.card h3,.dharmaCardHead h3{font-size:17px;color:var(--text)}
+h4,.routineBlock h4{font-size:16px}
+p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox li{font-size:15px;line-height:1.65}
+.small{font-size:14px!important;line-height:1.65}
+.appTabBtn.active,.subtab-btn.active,.mbn-btn.active{background:var(--panel3);color:var(--gold2);border-color:var(--accent)}
+.appTabs{flex-wrap:wrap}.appTabBtn{min-height:44px}
+.tabPanel,.field,.dharmaCard,.rankPanel,.routineBlock,#content{min-width:0}
+.tabPanel{overflow-wrap:anywhere}
+.supportLegend>div,.rankDetailBox,.priorityBox,.evidenceCard{min-width:0}
+.kala-nav-row{flex-wrap:wrap;gap:6px 10px}
+.kala-crumbs{gap:4px;overflow-wrap:anywhere}
+.kala-crumb{display:inline-flex;align-items:center;min-height:44px;padding:4px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font:inherit;font-size:14px;white-space:normal;text-align:left}
+.kala-crumb.active{color:var(--gold2);border-color:var(--accent)}
+.kala-date-range{flex-basis:100%;white-space:normal;font-size:14px;padding-bottom:5px}
+.kala-plot-range{font-size:14px}.kala-plot-range b{font-size:14px;color:var(--gold2)}
+.kala-chips-level{display:none}
+.pchip{min-width:160px;gap:3px}.pchip-range{white-space:normal;font-size:13px;opacity:1}
+.pchip-lord{font-size:16px}.pchip-score{font-size:14px;opacity:1}
+#radarSvg{width:100%;max-width:460px;text-align:center}
+#radarSvg svg{display:block;margin:auto;max-width:400px!important}
+.cycle-range-card{flex-basis:190px}.cycle-range-card .cr-date{font-size:13px}
+.cycle-focus-head{font-size:18px}.cycle-focus-range{font-size:14px}
+.cycle-mini-row{grid-template-columns:100px minmax(0,1fr);min-height:36px}
+.cycle-mini-label{font-size:13px;overflow-wrap:anywhere}
+.cycle-mini-seg{min-width:0;font-size:12px}
+.cycle-domain-card .cd-name{font-size:14px}.cycle-domain-card .cd-value{font-size:22px}
+.cycle-domain-card .cd-grade{font-size:13px}.cycle-domain-card{padding:12px}
+#domainBarsContainer{overflow-x:auto}.dbar-wrap{min-width:1100px}
+.dbar-hdr-track,.dbar-track{overflow:visible;min-width:0}
+.dbar-hdr-seg,.dbar-seg{flex:1 0 110px!important;min-width:110px!important}
+.dbar-hdr-seg{padding:9px 5px;overflow-wrap:anywhere;color:var(--text)}
+.dbar-label,.dbar-hdr-label{width:110px;min-width:110px}
+.phase{min-width:180px}.phase .date{white-space:normal}
+.laneTrack{height:104px}.laneSeg{height:92px}.laneDate{white-space:normal}
+.dbar-seg{min-height:60px}.dbar-hdr-years{opacity:1!important}
+.mobile-cycle-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px}
+.mobile-cycle-card{display:flex;flex-direction:column;gap:4px;padding:12px;text-align:left;border-radius:10px}
+.mobile-cycle-card strong{font-size:16px}.mobile-cycle-card span{font-size:13px}
+.mobile-cycle-card.active{outline:2px solid var(--accent);outline-offset:1px}
+#profileOverlay:not(.open){visibility:hidden;pointer-events:none}
+#profileOverlay.open{visibility:visible;pointer-events:auto}
+@media(min-width:769px){#profileOverlay:not(.open){visibility:visible;pointer-events:auto}}
+@media(max-width:768px){
+ html,body{height:100%;overflow:hidden}
+ #app{height:100vh;height:100dvh}
+ #content{min-height:0;scroll-padding-top:12px}
+ main{padding:0!important;width:100%}
+ .tabPanel{padding:12px 12px 24px}
+ .mobile-bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible;padding:4px max(4px,env(safe-area-inset-right)) calc(4px + var(--safe-b)) max(4px,env(safe-area-inset-left));gap:2px}
+ .mbn-btn{min-width:0;min-height:48px;padding:4px 1px;font-size:12px;line-height:1.3;border-radius:8px}
+ .mbn-btn svg{width:20px;height:20px}
+ .subtab-row{position:sticky;top:-12px;z-index:20;background:var(--bg);padding:8px 0;scroll-snap-type:x proximity}
+ .subtab-btn{min-height:44px;font-size:14px;scroll-snap-align:start}
+ .kala-lens,.dharmaGridTop,.dharmaGrid2,.routineGrid,.guideGrid,.rankGrid2,.decision{grid-template-columns:minmax(0,1fr)}
+ .dharmaHero{flex-direction:column}.dharmaControls{min-width:0;width:100%;justify-content:flex-start}
+ .dharmaControls label{flex:1 1 140px;min-width:0}
+ .profileGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .profileGrid .field input,.profileGrid .field select{min-width:0;font-size:16px}
+ .prof-overlay-hdr{padding-top:calc(12px + var(--safe-t))}
+ #profileOverlayBody{padding-bottom:calc(24px + var(--safe-b))}
+ .multiDrop,.timeZoomDrop,.evidenceDrop{min-width:0;width:100%}
+ .multiDrop summary{font-size:15px;min-height:44px}
+ .multiDrop .multiDropMenu{position:static;min-width:0;width:100%;max-width:none;max-height:55dvh;margin-top:5px}
+ .multiDropOption{min-height:44px;font-size:14px}.multiDropOption input{flex:0 0 22px;min-height:22px}
+ .multiDropActions button{font-size:14px}
+ .cycles-controls input,.cycles-controls button{flex:1 1 140px;min-width:0}
+ .cycle-mini-row{grid-template-columns:96px minmax(0,1fr)}
+ .cycle-mini-map{width:100%}.cycle-mobile-summary{padding:10px}
+ .laneWrap{overflow:visible}.hierarchyCard{scroll-margin-top:12px}
+ .weightsTable{min-width:650px}.info>.card{overflow-x:auto}
+ .deityGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .rankCard,.rankCard.benefitCard{grid-template-columns:28px minmax(0,1fr) 60px}
+ .rankName,.rankSub,.badge,.evidencePills span{overflow-wrap:anywhere}
+}
+@media(max-width:360px){.profileGrid,.mobile-cycle-grid,.deityGrid{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+
+.guideBox,.guideCard,.code{min-width:0;overflow-wrap:anywhere}
+.guideGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:768px){.guideGrid{grid-template-columns:minmax(0,1fr)}}
+.period-level-tag{min-width:110px}.period-level-name,.period-level-hint{white-space:normal}
+#radarSvg text{fill:var(--muted);font-family:var(--sans)}
+#radarSvg text[font-size="28"]{fill:var(--text)}
 </style>
 </head>
 <body>
@@ -536,6 +682,7 @@ header.deskHeader{display:none}
      <div class="kala-crumbs" id="kalaCrumbs"></div>
      <div class="kala-date-range" id="kalaDateRange"></div>
     </div>
+    <div class="kala-chips-level" id="kalaChipsLevel">Mahādaśā</div>
     <div class="kala-period-row" id="periodChips"></div>
     <div class="radar-card">
      <div id="radarSvg"></div>
@@ -552,13 +699,16 @@ header.deskHeader{display:none}
 
    <!-- Tab 2: Cycles -->
    <div class="tabPanel" id="cyclesTab">
+    <div class="kala-nav-row cycle-nav-row" id="cycleNavRow">
+     <button class="kala-back-btn" id="zoomOutBtn" style="display:none">← Back</button>
+     <div class="kala-crumbs" id="crumbs"></div>
+     <div class="kala-date-range" id="cycleDateRange"></div>
+    </div>
     <div class="cycles-controls">
-     <button id="zoomOutBtn">Zoom out one level</button>
-     <button id="resetDashaBtn">Reset cycle zoom</button>
+     <button id="resetDashaBtn" hidden>Reset cycle zoom</button>
      <input type="date" id="inspectDate">
      <button id="inspectBtn">Show active path</button>
     </div>
-    <div class="crumbs" id="crumbs"></div>
     <div class="hierarchyCard">
      <div class="hierarchyHead">
       <div><h3 id="cycleZoomTitle">Cycle zoom</h3><div class="small" id="cycleZoomDescription">Choose a cycle family in Settings. Duplicate providers using the same cycle key share one timeline.</div></div>
@@ -569,8 +719,8 @@ header.deskHeader{display:none}
      <div class="pranaNavigator" id="pranaNavigator" hidden></div>
     </div>
     <div class="viewport" style="margin-top:10px">
-     <div class="tlwrap"><div class="timeline" id="timeline"></div></div>
      <div id="domainBarsContainer" style="padding:4px 8px 8px"></div>
+     <div class="tlwrap"><div class="timeline" id="timeline"></div></div>
      <div class="heatwrap" hidden><div class="heat" id="heat"></div></div>
     </div>
    </div>
@@ -636,6 +786,7 @@ header.deskHeader{display:none}
      <div class="natalMapLegend"><b>Cell color / S</b> = dimension-specific natal support (−2…+2)<br><b>I</b> = dimension-specific structural influence (0…100)</div>
     </div>
     <div class="natalMapKey"><span>Green = supportive</span><span>Gold = mixed</span><span>Red = challenging</span><span>I = influence, not goodness</span></div>
+    <div class="natalmap-scroll-hint">↔ Swipe to explore · ↕ Scroll rows</div>
     <div class="natalMapWrap"><div class="natalMap" id="planetDimensionMap"></div></div>
    </div>
 
@@ -644,6 +795,7 @@ header.deskHeader{display:none}
      <div><h3>House × life-dimension natal map</h3><div class="small">House salience and support are recalculated from D1 plus the currently routed structural layers; each varga uses its own derived ascendant, lord and occupants.</div></div>
      <div class="natalMapLegend"><b>Cell color / S</b> = dimension-specific house support (−2…+2)<br><b>I</b> = dimension-specific house salience (0…100)</div>
     </div>
+    <div class="natalmap-scroll-hint">↔ Swipe to explore · ↕ Scroll rows</div>
     <div class="natalMapWrap"><div class="natalMap" id="houseDimensionMap"></div></div>
    </div>
    </div><!-- /rank-natal -->
@@ -678,7 +830,6 @@ header.deskHeader{display:none}
    <button class="subtab-btn" data-stab="dharma-practice">Practice</button>
    <button class="subtab-btn" data-stab="dharma-mind">Mind</button>
   </div>
-  <div id="dharma-path">
   <div class="dharmaHero">
    <div>
     <h2>Spiritual path · Dharma · Practice</h2>
@@ -692,6 +843,7 @@ header.deskHeader{display:none}
 
   <div class="dharmaNotice" id="dharmaNotice"></div>
 
+  <div id="dharma-path">
   <div class="dharmaCard receivedCard">
    <div class="dharmaCardHead"><h3>1 · Received / established dharma anchors</h3><span class="badge good">precedence layer</span></div>
    <div class="small">These are <b>not calculated from the horoscope</b>. Family/Kula anchors come from family tradition. An Iṣṭa belongs here only when you personally establish/receive one; a prior algorithmic suggestion must never be promoted into this field. The chart may corroborate or suggest, but it must not silently create religious identity.</div>
@@ -781,7 +933,6 @@ header.deskHeader{display:none}
    <button class="subtab-btn active" data-stab="west-orientation">Orientation</button>
    <button class="subtab-btn" data-stab="west-practice">Practice</button>
   </div>
-  <div id="west-orientation">
   <div class="dharmaHero">
    <div>
     <h2>Western · Inner Path</h2>
@@ -794,6 +945,7 @@ header.deskHeader{display:none}
 
   <div class="dharmaNotice" id="westernPathNotice"></div>
 
+  <div id="west-orientation">
   <div class="dharmaGridTop">
    <div class="dharmaCard">
     <div class="dharmaCardHead"><h3>Natal orientation</h3><span class="badge" id="westernNatalBadge">—</span></div>
@@ -828,7 +980,6 @@ header.deskHeader{display:none}
    <button class="subtab-btn" data-stab="saju-structure">Structure</button>
    <button class="subtab-btn" data-stab="saju-timing">Timing</button>
   </div>
-  <div id="saju-elements">
   <div class="dharmaHero">
    <div>
     <h2>BaZi / Saju · Cultivation & Regulation</h2>
@@ -841,52 +992,53 @@ header.deskHeader{display:none}
 
   <div class="dharmaNotice" id="sajuCultivationNotice"></div>
 
+  <div id="saju-elements">
   <div class="dharmaGridTop">
    <div class="dharmaCard">
     <div class="dharmaCardHead"><h3>Natal elemental regulation</h3><span class="badge" id="sajuNatalBadge">—</span></div>
     <div id="sajuElementGrid" class="deityGrid"></div>
     <div class="subsectionTitle">Useful / favorable elements</div>
-    <div id=”sajuUsefulGrid” class=”routineGrid”></div>
+    <div id="sajuUsefulGrid" class="routineGrid"></div>
    </div>
-   <div class=”dharmaCard”>
-    <div class=”dharmaCardHead”><h3>Ten-God structure</h3><span class=”small”>visible + all hidden stems · relative to Day Master</span></div>
-    <div id=”sajuTenGodGrid” class=”routineGrid”></div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Ten-God structure</h3><span class="small">visible + all hidden stems · relative to Day Master</span></div>
+    <div id="sajuTenGodGrid" class="routineGrid"></div>
    </div>
   </div>
   </div><!-- /saju-elements -->
 
-  <div id=”saju-structure” style=”display:none”>
-  <div class=”dharmaGrid2”>
-   <div class=”dharmaCard”>
-    <div class=”dharmaCardHead”><h3>Hidden stems · roots · Month Command</h3><span class=”small”>all four natal branches expanded</span></div>
-    <div id=”sajuHiddenStemGrid” class=”routineGrid”></div>
+  <div id="saju-structure" style="display:none">
+  <div class="dharmaGrid2">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Hidden stems · roots · Month Command</h3><span class="small">all four natal branches expanded</span></div>
+    <div id="sajuHiddenStemGrid" class="routineGrid"></div>
    </div>
-   <div class=”dharmaCard”>
-    <div class=”dharmaCardHead”><h3>Structural relations & climate</h3><span class=”small”>combination ≠ automatic transformation</span></div>
-    <div id=”sajuInteractionGrid” class=”routineGrid”></div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Structural relations & climate</h3><span class="small">combination ≠ automatic transformation</span></div>
+    <div id="sajuInteractionGrid" class="routineGrid"></div>
    </div>
   </div>
   </div><!-- /saju-structure -->
 
-  <div id=”saju-timing” style=”display:none”>
-  <div class=”dharmaGrid2”>
-   <div class=”dharmaCard”>
-    <div class=”dharmaCardHead”><h3>Daeun · year · month overlay</h3><span class=”badge” id=”sajuTimingBadge”>—</span></div>
-    <div id=”sajuTimingGrid” class=”routineGrid”></div>
+  <div id="saju-timing" style="display:none">
+  <div class="dharmaGrid2">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Daeun · year · month overlay</h3><span class="badge" id="sajuTimingBadge">—</span></div>
+    <div id="sajuTimingGrid" class="routineGrid"></div>
    </div>
-   <div class=”dharmaCard”>
-    <div class=”dharmaCardHead”><h3>Current cultivation focus · registry-driven</h3><span class=”small”>elemental regulation + Ten Gods + timing + provenance</span></div>
-    <div id=”sajuPracticeGrid” class=”routineGrid”></div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Current cultivation focus · registry-driven</h3><span class="small">elemental regulation + Ten Gods + timing + provenance</span></div>
+    <div id="sajuPracticeGrid" class="routineGrid"></div>
    </div>
   </div>
   </div><!-- /saju-timing -->
 
-  <div class=”dharmaBoundary”>
+  <div class="dharmaBoundary">
    <b>Interpretive boundary.</b> “Useful/Favorable Element” is a BaZi modeling term here, not a deity. This engine now uses the complete standard hidden-stem table, explicit primary/middle/residual engine weights, Month Command, root strength, Ten Gods from visible + hidden stems, stem combinations, Six Harmonies, Three Harmonies, directional meetings, clashes, harms, punishments, breaks, conditional transformation tests and an element-level climate-regulation layer. Hidden-stem percentages and transformation thresholds are disclosed <b>engine choices</b>, because schools differ; detection of a relation never by itself proves transformation or favorability. A manually supplied Yongsin still takes precedence.
   </div>
  </div>
 
-   <!-- Validation tab (desktop only) -->
+   <!-- Validation tab -->
    <div class="tabPanel" id="validationTab">
   <div class="card" style="margin-bottom:12px">
    <h3 style="font-size:14px">Cross-profile golden validation suite</h3>
@@ -1243,7 +1395,7 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
  </div>
 
  <!-- Mobile bottom nav -->
- <nav class="mobile-bottom-nav" id="mobileBottomNav">
+ <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Main navigation">
   <button class="mbn-btn active" id="mbn-heatmap">
    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
     <circle cx="10" cy="10" r="7"/>
@@ -1317,6 +1469,7 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
    </svg>
    Guide
   </button>
+ <button class="mbn-btn" id="mbn-validation"><span aria-hidden="true">✓</span>Validation</button>
  </nav>
 </div>
 
@@ -1512,7 +1665,12 @@ function bucket(x){if(x>=1.2)return["++","strong"];if(x>=.45)return["+","support
 function mix(a,b,t){return Math.round(a+(b-a)*t)}
 function gradientRGB(t){const S=[{p:0,c:[150,45,55]},{p:.25,c:[202,112,69]},{p:.5,c:[211,190,91]},{p:.75,c:[104,183,126]},{p:1,c:[15,133,82]}];t=clamp(t,0,1);for(let i=0;i<S.length-1;i++){let a=S[i],b=S[i+1];if(t>=a.p&&t<=b.p){let u=(t-a.p)/(b.p-a.p);return[mix(a.c[0],b.c[0],u),mix(a.c[1],b.c[1],u),mix(a.c[2],b.c[2],u)]}}return S.at(-1).c}
 function heatColor(x){let t=(x-COLOR_RANGE.min)/Math.max(.001,COLOR_RANGE.max-COLOR_RANGE.min),c=gradientRGB(t);return`rgb(${c[0]},${c[1]},${c[2]})`}
-function heatTextColor(x){let t=clamp((x-COLOR_RANGE.min)/Math.max(.001,COLOR_RANGE.max-COLOR_RANGE.min),0,1);return(t>.37&&t<.64)?"#10151b":"#fff"}
+function heatTextColor(x){
+ const rgb=gradientRGB((x-COLOR_RANGE.min)/Math.max(.001,COLOR_RANGE.max-COLOR_RANGE.min));
+ const linear=rgb.map(v=>{v=v/255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)});
+ const luminance=.2126*linear[0]+.7152*linear[1]+.0722*linear[2];
+ return luminance>.179?"#000":"#fff";
+}
 function fmt(ms){return new Date(ms).toLocaleDateString("en-US",{timeZone:"UTC",day:"2-digit",month:"short",year:"numeric"})}
 function fmtShort(ms){return new Date(ms).toLocaleDateString("en-US",{timeZone:"UTC",month:"short",year:"2-digit"})}
 function midpoint(a,b){return a+(b-a)/2}
@@ -1528,10 +1686,8 @@ function zoomRangeLabel(g){
   let depth=g.path?.length||g.depth||1;
   if(depth>=5||dur<=3*86400000)return`${fmtDateTime(g.a)} → ${fmtDateTime(g.b)}`;
   if(depth>=3||dur<180*86400000)return`${fmt(g.a)} → ${fmt(g.b)}`;
-  if(dur>3*YEAR_MS)return`${new Date(g.a).getUTCFullYear()} → ${new Date(g.b-1).getUTCFullYear()}`;
   return`${fmt(g.a)} → ${fmt(g.b)}`;
  }
- if(cycleFamilyKey==="saju"&&cycleContextKey==="daeun")return`${new Date(g.a).getUTCFullYear()} → ${new Date(g.b-1).getUTCFullYear()}`;
  if(cycleFamilyKey==="saju"&&cycleContextKey==="month")return`${fmt(g.a)} → ${fmt(g.b)}`;
  if(cycleFamilyKey==="western_profection")return`${fmt(g.a)} → ${fmt(g.b)}`;
  return`${fmt(g.a)} → ${fmt(g.b)}`;
@@ -2918,14 +3074,11 @@ function activateCycleGroup(g){
  render();
  if(window.matchMedia("(max-width:768px)").matches){
   const active=document.querySelector(".tabPanel.active");
-  if(active?.id==="heatmapTab"){
-   // scroll to radar to show updated chart
-   const r=$("radarSvg");if(r)setTimeout(()=>r.closest(".radar-card")?.scrollIntoView({behavior:"smooth",block:"start"}),80);
-  }else if(active?.id==="cyclesTab"){
-   // scroll hierarchy card into view so user sees the updated Vimshottari lanes
+  if(active?.id==="cyclesTab"){
    const h=document.querySelector("#cyclesTab .hierarchyCard");
    if(h)setTimeout(()=>h.scrollIntoView({behavior:"smooth",block:"start"}),80);
   }
+  // Kāla stays at the chip rail; the next dasha level replaces it in place.
  }
 }
 function cycleFamilyLabel(){return cycleFamilyKey&&CYCLE_FAMILIES[cycleFamilyKey]?CYCLE_FAMILIES[cycleFamilyKey].label:"No cycle"}
@@ -3014,15 +3167,35 @@ function renderYearPicker(){
 function renderSystemPicker(){let box=$("systemOptions");box.innerHTML=Object.values(SYSTEMS).map(s=>`<label class="multiDropOption"><input type="checkbox" data-sys="${s.id}" ${selectedSystemIds.has(s.id)&&s.active?"checked":""} ${s.active?"":"disabled"}><span><b>${s.name}</b><div class="multiDropMeta">${s.active?"Enabled":"Disabled"} · ${s.static?"static intervals":"dynamic calculator"} · avg target ${(averageSystemWeight(s.id)*100).toFixed(1)}%</div></span></label>`).join("");box.querySelectorAll("input[data-sys]").forEach(i=>i.onchange=()=>{if(i.checked)selectedSystemIds.add(i.dataset.sys);else selectedSystemIds.delete(i.dataset.sys);selectedSystems();render()});$("systemSummary").textContent=selectedSystemLabel()}
 function renderDimensionPicker(){let box=$("dimensionOptions");box.innerHTML=DOMAINS.map(d=>`<label class="multiDropOption"><input type="checkbox" data-dim="${d}" ${selectedDimensionsSet.has(d)?"checked":""}><span><b>${d}</b></span></label>`).join("");box.querySelectorAll("input[data-dim]").forEach(i=>i.onchange=()=>{if(i.checked)selectedDimensionsSet.add(i.dataset.dim);else selectedDimensionsSet.delete(i.dataset.dim);selectedDimensions();render()});$("dimensionSummary").textContent=dimensionLabel()}
 function renderCrumbs(){
- if(cycleFamilyKey==="vimshottari"){
-  $("crumbs").innerHTML=`<span class="crumb ${prefix.length?"":"active"}" onclick="prefix=[];cycleSelection=null;render()">Vimshottari root</span>`+
-   prefix.map((p,i)=>`<span class="crumb ${i===prefix.length-1?"active":""}" onclick="prefix=prefix.slice(0,${i+1});cycleSelection=null;render()">${LEVELS[i]} · ${p}</span>`).join("");
- }else{
-  $("crumbs").innerHTML=`<span class="crumb ${cycleSelection?"":"active"}" onclick="cycleSelection=null;render()">${cycleFamilyLabel()} · ${cycleContextLabel()}</span>`+
-   (cycleSelection?`<span class="crumb active" onclick="cycleSelection=null;render()">${cycleSelection.label||cycleSelection.lord}</span>`:"");
+ const crumbs=$("crumbs");if(!crumbs)return;
+ const hasSelection=(cycleFamilyKey==="vimshottari"&&prefix.length>0)||(cycleFamilyKey!=="vimshottari"&&cycleSelection);
+ const back=$("zoomOutBtn");if(back){back.style.display=hasSelection?"":"none";back.textContent="← Back"}
+
+ let html=`<button type="button" class="kala-crumb${!hasSelection?" active":""}" id="cycleHome">All life</button>`;
+ if(cycleFamilyKey==="vimshottari"&&prefix.length){
+  const levelShort=["MD","AD","PD","Sūkṣma","Prāṇa"];
+  const levelNames=["Mahādaśā","Antardaśā","Pratyantardaśā","Sookṣma","Prāṇa"];
+  prefix.forEach((lord,i)=>{
+   const path=prefix.slice(0,i+1),isLast=i===prefix.length-1;
+   html+=`<span class="kala-crumb-sep">›</span><button type="button" class="kala-crumb${isLast?" active":""}" title="${levelNames[i]} · ${lord}" data-cycle-path='${JSON.stringify(path)}'>${levelShort[i]} · ${lord}</button>`;
+  });
+ }else if(cycleSelection){
+  html+=`<span class="kala-crumb-sep">›</span><button type="button" class="kala-crumb active">${cycleSelection.label||cycleSelection.lord||cycleContextLabel()}</button>`;
+ }
+ crumbs.innerHTML=html;
+
+ const home=crumbs.querySelector("#cycleHome");
+ if(home)home.onclick=()=>{prefix=[];cycleSelection=null;render()};
+ crumbs.querySelectorAll("[data-cycle-path]").forEach(el=>el.onclick=()=>{
+  prefix=JSON.parse(el.dataset.cyclePath);cycleSelection=null;render();
+ });
+
+ const range=$("cycleDateRange");
+ if(range){
+  const p=currentDisplayPeriod();
+  range.textContent=zoomRangeLabel(p);
  }
 }
-
 function renderPranaNavigator(){
  let nav=$("pranaNavigator");
  if(cycleFamilyKey!=="vimshottari"||prefix.length<4){nav.hidden=true;nav.innerHTML="";return}
@@ -3051,7 +3224,29 @@ function renderPranaNavigator(){
  $("prevPranaBtn").onclick=()=>{if(selectedIdx>0){prefix=[...kids[selectedIdx-1].path];render()}};
  $("nextPranaBtn").onclick=()=>{if(selectedIdx>=0&&selectedIdx<kids.length-1){prefix=[...kids[selectedIdx+1].path];render()}};
 }
+
+function renderMobileCycleZoom(){
+ hidePranaNavigator();
+ const root=$("hierarchyLanes"),groups=cycleVisualGroups();
+ root.innerHTML='<div class="mobile-cycle-grid"></div>';
+ const grid=root.firstElementChild;
+ for(const g of groups){
+  const btn=document.createElement("button"),score=scoreSelected(g);
+  btn.className="mobile-cycle-card";
+  const selected=cycleFamilyKey==="vimshottari"?g.path?.join(">")===prefix.join(">"):
+   cycleSelection?.a===g.a&&cycleSelection?.b===g.b;
+  btn.classList.toggle("active",!!selected);
+  btn.style.background=heatColor(score);btn.style.color=heatTextColor(score);
+  btn.innerHTML=`<strong>${g.lord||g.label}</strong><span>${zoomRangeLabel(g)}</span><span>${bucket(score)[0]} · ${score.toFixed(2)}</span>`;
+  btn.onclick=()=>activateCycleGroup(g);
+  grid.appendChild(btn);
+ }
+ if(!groups.length)grid.textContent="No periods in this date range. Use All life to return.";
+ if(cycleFamilyKey==="vimshottari")renderVimshottariActivePath();else renderGenericCycleActivePath();
+}
+
 function renderVimshottariHierarchy(){
+ if(_isMobile()){renderMobileCycleZoom();return}
  let root=$("hierarchyLanes"),year=calendarYear??new Date(chart.birthMs).getUTCFullYear(),
      w={a:Date.UTC(year,0,1),b:Date.UTC(year+1,0,1)},span=w.b-w.a,
      inspect=new Date($("inspectDate").value+"T00:00:00Z").getTime();
@@ -3085,7 +3280,7 @@ function renderVimshottariHierarchy(){
   lane.innerHTML=`<div class="laneLabel">Prana<div class="levelHint">Terminal level</div></div><div class="lanePrompt">Select a Sookshma period above; Prana will open below as a readable 3×3 navigator instead of a compressed lane.</div>`;
   root.appendChild(lane);
  }
- let axisLane=document.createElement("div");axisLane.className="lane",lab=document.createElement("div");lab.className="laneLabel";lab.textContent=String(year),axis=document.createElement("div");axis.className="yearAxis";
+ let axisLane=document.createElement("div");axisLane.className="lane";let lab=document.createElement("div");lab.className="laneLabel";lab.textContent=String(year);let axis=document.createElement("div");axis.className="yearAxis";
  for(let m=0;m<12;m++){let t=document.createElement("div");t.className="monthTick";t.style.left=(Date.UTC(year,m,1)-w.a)/span*100+"%";t.textContent=new Date(Date.UTC(year,m,1)).toLocaleDateString("en-US",{timeZone:"UTC",month:"short"});axis.appendChild(t)}
  axisLane.append(lab,axis);root.appendChild(axisLane);
  renderVimshottariActivePath();renderPranaNavigator();
@@ -3095,6 +3290,7 @@ function renderVimshottariActivePath(){let ms=new Date($("inspectDate").value+"T
 
 function hidePranaNavigator(){let n=$("pranaNavigator");if(n){n.hidden=true;n.innerHTML=""}}
 function renderGenericCycleHierarchy(){
+ if(_isMobile()){renderMobileCycleZoom();return}
  hidePranaNavigator();
  let root=$("hierarchyLanes"),year=calendarYear??new Date($("inspectDate").value+"T12:00:00Z").getUTCFullYear(),
      w={a:Date.UTC(year,0,1),b:Date.UTC(year+1,0,1)},span=w.b-w.a,inspect=new Date($("inspectDate").value+"T12:00:00Z").getTime(),
@@ -3112,7 +3308,7 @@ function renderGenericCycleHierarchy(){
   d.onclick=()=>activateCycleGroup(g);_tap(d,()=>activateCycleGroup(g));track.appendChild(d);
  }
  lane.append(lab,track);root.appendChild(lane);
- let axisLane=document.createElement("div");axisLane.className="lane";let yl=document.createElement("div");yl.className="laneLabel";yl.textContent=String(year),axis=document.createElement("div");axis.className="yearAxis";
+ let axisLane=document.createElement("div");axisLane.className="lane";let yl=document.createElement("div");yl.className="laneLabel";yl.textContent=String(year);let axis=document.createElement("div");axis.className="yearAxis";
  for(let m=0;m<12;m++){let t=document.createElement("div");t.className="monthTick";t.style.left=(Date.UTC(year,m,1)-w.a)/span*100+"%";t.textContent=new Date(Date.UTC(year,m,1)).toLocaleDateString("en-US",{timeZone:"UTC",month:"short"});axis.appendChild(t)}
  axisLane.append(yl,axis);root.appendChild(axisLane);renderGenericCycleActivePath();
 }
@@ -3131,14 +3327,49 @@ function renderHierarchy(){
  let fam=ensureCycleFamily();$("cycleZoomTitle").textContent=fam?`Cycle zoom · ${fam.label}`:"Cycle zoom";
  $("cycleZoomDescription").textContent=fam?`${cycleContextLabel()}. Cycle families are deduplicated by cycle key, so multiple selected providers that use the same cycle share one timeline.`:"No selected system exposes a cycle family.";
  $("dashaValidation").style.display=cycleFamilyKey==="vimshottari"?"block":"none";
- $("zoomOutBtn").textContent=cycleFamilyKey==="vimshottari"?"Zoom out one level":"Clear cycle selection";
+ $("zoomOutBtn").textContent="← Back";
  if(cycleFamilyKey==="vimshottari")renderVimshottariHierarchy();else renderGenericCycleHierarchy();
 }
 function renderActivePath(){if(cycleFamilyKey==="vimshottari")renderVimshottariActivePath();else renderGenericCycleActivePath()}
 function periodTitle(g){return cycleFamilyKey==="vimshottari"?(g.path?.join(" → ")||g.lord):(g.label||g.lord||"Cycle period")}
 
-function renderTimeline(groups){let e=$("timeline");e.innerHTML="";for(const g of groups){let sc=scoreSelected(g),b=bucket(sc),d=document.createElement("div");d.className="phase";d.style.width=width(g,groups)+"px";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);d.innerHTML=`<div class="lord">${g.lord}</div><div class="date">${fmt(g.a)} → ${fmt(g.b)}</div><div class="grade">${b[0]} ${sc.toFixed(3)}</div>`;d.onclick=()=>activateCycleGroup(g);_tap(d,()=>activateCycleGroup(g));d.onmousemove=ev=>tipPeriod(ev,g);d.onmouseleave=hideTip;e.appendChild(d)}}
-function renderHeat(groups){let e=$("heat");e.innerHTML="";e.style.gridTemplateColumns=`var(--label) ${groups.map(g=>width(g,groups)+"px").join(" ")}`;let c=document.createElement("div");c.className="corner";c.innerHTML=`${dimensionLabel()}<br><span style="opacity:.7">${selectedSystemLabel()}</span><br><span style="opacity:.6">${$("sampleMode").value}-point sampling</span>`;e.appendChild(c);for(const g of groups){let h=document.createElement("div");h.className="headcell";h.innerHTML=`<b>${g.label||g.lord}</b><div class="headRange">${zoomRangeLabel(g)}</div>`;h.onclick=()=>activateCycleGroup(g);_tap(h,()=>activateCycleGroup(g));e.appendChild(h)}for(const dom of selectedDimensions()){let di=DOMAINS.indexOf(dom),lab=document.createElement("div");lab.className="rowlabel";lab.textContent=dom;e.appendChild(lab);for(const g of groups){let sc=scorePeriod(g,di),b=bucket(sc),ag=agreement(g,di),cell=document.createElement("div");cell.className="cell";cell.style.background=heatColor(sc);cell.style.color=heatTextColor(sc);cell.innerHTML=`<span class="agree">${ag.n}/${ag.totalSystems}</span><div class="grade">${b[0]}</div><div class="score">${sc.toFixed(3)}</div>`;cell.onclick=()=>activateCycleGroup(g);_tap(cell,()=>activateCycleGroup(g));cell.onmousemove=ev=>tipDomain(ev,g,dom);cell.onmouseleave=hideTip;e.appendChild(cell)}}}
+function renderTimeline(groups){
+ let e=$("timeline");e.innerHTML="";
+ for(const g of groups){
+  let sc=scoreSelected(g),b=bucket(sc),d=document.createElement("div");
+  d.className="phase";
+  d.style.width=width(g,groups)+"px";
+  d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
+  d.innerHTML=`<div class="lord">${g.lord||g.label||"—"}</div><div class="date">${zoomRangeLabel(g)}</div><div class="grade">${b[0]} ${sc.toFixed(3)}</div>`;
+  // Read-only context. Cycle Zoom is the single drill-in surface.
+  d.onmousemove=ev=>tipPeriod(ev,g);d.onmouseleave=hideTip;
+  e.appendChild(d);
+ }
+}
+function renderHeat(groups){
+ let e=$("heat");e.innerHTML="";
+ e.style.gridTemplateColumns=`var(--label) ${groups.map(g=>width(g,groups)+"px").join(" ")}`;
+ let c=document.createElement("div");c.className="corner";
+ c.innerHTML=`${dimensionLabel()}<br><span style="opacity:.7">${selectedSystemLabel()}</span><br><span style="opacity:.6">${$("sampleMode").value}-point sampling</span>`;
+ e.appendChild(c);
+
+ for(const g of groups){
+  let h=document.createElement("div");h.className="headcell";
+  h.innerHTML=`<b>${g.label||g.lord}</b><div class="headRange">${zoomRangeLabel(g)}</div>`;
+  // Read-only: drilling happens only in Cycle Zoom.
+  e.appendChild(h);
+ }
+ for(const dom of selectedDimensions()){
+  let di=DOMAINS.indexOf(dom),lab=document.createElement("div");lab.className="rowlabel";lab.textContent=dom;e.appendChild(lab);
+  for(const g of groups){
+   let sc=scorePeriod(g,di),b=bucket(sc),ag=agreement(g,di),cell=document.createElement("div");
+   cell.className="cell";cell.style.background=heatColor(sc);cell.style.color=heatTextColor(sc);
+   cell.innerHTML=`<span class="agree">${ag.n}/${ag.totalSystems}</span><div class="grade">${b[0]}</div><div class="score">${sc.toFixed(3)}</div>`;
+   cell.onmousemove=ev=>tipDomain(ev,g,dom);cell.onmouseleave=hideTip;
+   e.appendChild(cell);
+  }
+ }
+}
 function tipPeriod(ev,g){let rows=selectedDimensions().map(d=>{let s=scorePeriod(g,DOMAINS.indexOf(d));return`<tr><td>${d}</td><td>${bucket(s)[0]} ${s.toFixed(2)}</td></tr>`}).join("");showTip(ev,`<b>${periodTitle(g)}</b><div class="muted">${fmt(g.a)} → ${fmt(g.b)}</div><table>${rows}</table>`)}
 function tipDomain(ev,g,dom){
  let di=DOMAINS.indexOf(dom),mid=midpoint(g.a,g.b),
@@ -4424,7 +4655,7 @@ function bindNatalMapTooltips(root){
 function renderNatalDimensionMaps(){
  let dims=selectedDimensions();
  if(!hasSelectedStructuralFamily("Vedic")){
-  let msg=`<div style="padding:14px;color:var(--muted);font-size:10px">Select a Vedic / Jyotish system in <b>Systems</b> to enable the built-in D1/divisional structural evidence maps. Future structural families can expose their own layers through the same registry.</div>`;
+  let msg=`<div style="padding:14px;color:var(--muted);font-size:13px">Select a Vedic / Jyotish system in <b>Systems</b> to enable the built-in D1/divisional structural evidence maps. Future structural families can expose their own layers through the same registry.</div>`;
   $("planetDimensionMap").style.display="block";$("houseDimensionMap").style.display="block";
   $("planetDimensionMap").innerHTML=msg;$("houseDimensionMap").innerHTML=msg;
   return;
@@ -4734,7 +4965,7 @@ function showRanking(type,id,mode,el){
  if(mode==="benefit"){
   $("rankingDetail").innerHTML=`<h3 style="margin:0;font-size:15px">#${benefit.rank} · ${title} · ${benefit.score}/100 support</h3>
    <div class="rankAreas" style="margin-top:5px"><b>${band.label}</b> · Influence rank #${influence?.rank||"—"} (${influence?.score||"—"}/100)</div>
-   <div class="rankDesc" style="font-size:10px">${benefit.description||""}</div>
+   <div class="rankDesc" style="font-size:13px">${benefit.description||""}</div>
    <div class="rankDetailGrid">
     <div class="rankDetailBox"><h4>Why it is supportive / challenging</h4><ul>${(benefit.reasons||[]).map(r=>`<li>${r}</li>`).join("")}</ul></div>
     <div class="rankDetailBox"><h4>How to interpret it</h4><p>${benefit.manifests||band.label}</p></div>
@@ -4744,7 +4975,7 @@ function showRanking(type,id,mode,el){
  }else{
   $("rankingDetail").innerHTML=`<h3 style="margin:0;font-size:15px">#${influence.rank} · ${title} · ${influence.score}/100 influence</h3>
    <div class="rankAreas" style="margin-top:5px"><b>Benefit:</b> #${benefit?.rank||"—"} · ${benefit?.score||"—"}/100 · ${band.label}</div>
-   <div class="rankDesc" style="font-size:10px">${influence.description||""}</div>
+   <div class="rankDesc" style="font-size:13px">${influence.description||""}</div>
    <div class="rankDetailGrid">
     <div class="rankDetailBox"><h4>Why it is influential</h4><ul>${(influence.reasons||[]).map(r=>`<li>${r}</li>`).join("")}</ul></div>
     <div class="rankDetailBox"><h4>How it tends to manifest</h4><p>${influence.manifests||placement}</p></div>
@@ -4754,7 +4985,33 @@ function showRanking(type,id,mode,el){
  }
 }
 
-function render(){if(!chart)return;renderSystemPicker();renderSystemAwarePracticeTabs();renderEvidencePicker();renderCyclePickers();let groups=visibleGroups();updateColorRange(groups);renderYearPicker();renderTimeZoomTree();renderDimensionPicker();renderCrumbs();renderSelected();renderHierarchy();renderTimeline(groups);renderHeat(groups);renderDomainBars();renderPlaybook();renderWeights();renderRankings();renderDharmaTab();renderWesternInnerPathTab();renderSajuCultivationTab();renderPeriodChips(groups);renderRadarChart();updateKalaNav();_syncStrip();$("zoomOutBtn").disabled=cycleFamilyKey==="vimshottari"?!prefix.length:!cycleSelection}
+// Render costly charts and evidence only for the visible tab. Shared cycle state
+// stays current; switching tabs always refreshes that tab from the same scores.
+function renderTabContent(which){
+ if(!chart)return;
+ if(which==="heatmap"){
+  renderSelected();renderPeriodChips(visibleGroups());renderRadarChart();updateKalaNav();
+ }else if(which==="cycles"){
+  renderCrumbs();renderHierarchy();
+  if(!_isMobile())renderTimeline(visibleGroups());
+  renderDomainBars();
+ }else if(which==="playbook"){renderPlaybook();renderWeights()}
+ else if(which==="rankings")renderRankings();
+ else if(which==="dharma")renderDharmaTab();
+ else if(which==="westernPath")renderWesternInnerPathTab();
+ else if(which==="sajuCultivation")renderSajuCultivationTab();
+ else if(which==="validation")renderValidationSources();
+}
+function render(){
+ if(!chart)return;
+ renderSystemPicker();renderSystemAwarePracticeTabs();renderEvidencePicker();renderCyclePickers();
+ updateColorRange(visibleGroups());renderYearPicker();renderTimeZoomTree();renderDimensionPicker();
+ const active=document.querySelector(".tabPanel.active");
+ renderTabContent(active?.id.replace(/Tab$/,"")||"heatmap");
+ _syncStrip();
+ $("zoomOutBtn").disabled=cycleFamilyKey==="vimshottari"?!prefix.length:!cycleSelection;
+}
+
 async function calculateProfile(tryProviders=true){
  $("profileStatus").textContent="Profile: calculating…";$("profileStatus").className="badge warn";
  if($("pLocationMode").value==="auto")await resolveBirthPlace(true);
@@ -4968,6 +5225,13 @@ function toggleProfilePanel(){
  const opening=!overlay.classList.contains("open");
  overlay.classList.toggle("open",opening);
  document.body.style.overflow=opening?"hidden":"";
+ if(_isMobile()){
+  overlay.setAttribute("role","dialog");overlay.setAttribute("aria-modal","true");
+  overlay.setAttribute("aria-label","Profile and settings");
+  $("content").inert=opening;$("mobileBottomNav").inert=opening;
+  $("profileToggleBtn").setAttribute("aria-expanded",String(opening));
+  if(opening)$("profileCloseBtn").focus();else $("profileToggleBtn").focus();
+ }
  if(opening){
   const body=$("profileOverlayBody");
   const pp=$("profilePanel"),tp=$("toolbarPanel");
@@ -4979,18 +5243,36 @@ function toggleProfilePanel(){
  if(btn)btn.textContent=opening?"✕ Close":"⚙ Profile";
 }
 const DOMAIN_SHORT=["Career","Wealth","Marr.","Family","Child.","Vital.","Mind","Spirit.","Reinv.","Learn.","Auto.","Mentor."];
+function kalaChipGroups(groups=[]){
+ if(cycleFamilyKey!=="vimshottari")return groups;
+ if(prefix.length>=LEVELS.length){
+  const parent=findPeriodByPath(prefix.slice(0,-1));
+  return parent?filterLifeAndYear(childPeriods(parent)):[];
+ }
+ return groups;
+}
 function renderPeriodChips(groups){
  const el=$("periodChips");if(!el)return;
+ groups=kalaChipGroups(groups);
  el.innerHTML="";
+ if(!groups.length)return;
+ const depth=groups[0]?.depth||1;
+ const depthKey=cycleFamilyKey==="vimshottari"?`v:${depth}`:`${cycleFamilyKey}:${cycleContextKey}`;
+ if(el.dataset.depthKey!==depthKey){el.scrollLeft=0;el.dataset.depthKey=depthKey}
+ const levelName=cycleFamilyKey==="vimshottari"?(LEVELS[depth-1]||`Level ${depth}`):(cycleContextLabel()||cycleFamilyLabel());
+ const tag=document.createElement("div");
+ tag.className="period-level-tag";
+ tag.innerHTML=`<span class="period-level-name">${levelName}</span><span class="period-level-hint">${cycleFamilyKey==="vimshottari"?(depth<LEVELS.length?"Tap to drill":"Prāṇa peers"):"Tap to select"}</span>`;
+ el.appendChild(tag);
  for(const g of groups){
   const sc=scoreSelected(g),b=bucket(sc),d=document.createElement("button");
   d.className="pchip";
   const isActive=cycleFamilyKey==="vimshottari"
-   ?(prefix.length&&g.path.join(">")==prefix.join(">"))
+   ?(prefix.length===g.path?.length&&g.path.join(">")===prefix.join(">"))
    :(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
   if(isActive)d.classList.add("active");
   d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
-  d.innerHTML=`<span class="pchip-lord">${g.lord||g.label||"—"}</span><span class="pchip-grade">${b[0]}</span><span class="pchip-score">${sc.toFixed(1)}</span>`;
+  d.innerHTML=`<span class="pchip-lord">${g.lord||g.label||"—"}</span><span class="pchip-grade">${b[0]}</span><span class="pchip-score">${sc.toFixed(1)}</span><span class="pchip-range">${zoomRangeLabel(g)}</span>`;
   d.onclick=()=>activateCycleGroup(g);
   _tap(d,()=>activateCycleGroup(g));
   el.appendChild(d);
@@ -5000,12 +5282,12 @@ function renderRadarChart(){
  const el=$("radarSvg");if(!el)return;
  const p=currentDisplayPeriod();
  const vals=DOMAINS.map((d,di)=>({d,s:scorePeriod(p,di)}));
- const cx=150,cy=155,maxR=100;
- let svg=`<svg viewBox="0 0 300 310" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px">`;
+ const cx=150,cy=155,maxR=85;
+ let svg=`<svg viewBox="-15 15 330 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px">`;
  for(let s=-2;s<=2;s++){
   const r=(s+2)/4*maxR;
   svg+=`<circle cx="${cx}" cy="${cy}" r="${r.toFixed(1)}" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="${s===0?1.5:1}"/>`;
-  if(r>5)svg+=`<text x="${(cx+r+2).toFixed(1)}" y="${(cy+3).toFixed(1)}" font-size="7" fill="rgba(145,162,182,.5)" font-family="sans-serif">${s>0?'+':''}${s}</text>`;
+  if(r>5)svg+=`<text x="${(cx+r+2).toFixed(1)}" y="${(cy+3).toFixed(1)}" font-size="10" fill="rgba(145,162,182,.5)" font-family="sans-serif">${s>0?'+':''}${s}</text>`;
  }
  const N=12;
  for(let i=0;i<N;i++){
@@ -5014,7 +5296,7 @@ function renderRadarChart(){
   svg+=`<line x1="${cx}" y1="${cy}" x2="${ax.toFixed(1)}" y2="${ay.toFixed(1)}" stroke="rgba(255,255,255,.09)" stroke-width="1"/>`;
   const lx=cx+(maxR+20)*Math.cos(angle),ly=cy+(maxR+20)*Math.sin(angle);
   const ta=Math.abs(Math.cos(angle))<.1?"middle":Math.cos(angle)<0?"end":"start";
-  svg+=`<text x="${lx.toFixed(1)}" y="${(ly+4).toFixed(1)}" font-size="9" fill="#91a2b6" text-anchor="${ta}" font-family="sans-serif">${DOMAIN_SHORT[i]}</text>`;
+  svg+=`<text x="${lx.toFixed(1)}" y="${(ly+4).toFixed(1)}" font-size="13" fill="#91a2b6" text-anchor="${ta}" font-family="sans-serif">${DOMAIN_SHORT[i]}</text>`;
  }
  const pts=vals.map((v,i)=>{
   const angle=(i*30-90)*Math.PI/180;
@@ -5035,17 +5317,19 @@ function renderRadarChart(){
  const grade=bucket(avg)[0];
  svg+=`<text x="${cx}" y="${cy-12}" text-anchor="middle" font-size="28" font-weight="800" fill="#edf3fa" font-family="sans-serif">${grade}</text>`;
  svg+=`<text x="${cx}" y="${cy+10}" text-anchor="middle" font-size="13" fill="#91a2b6" font-family="sans-serif">${avg.toFixed(2)}</text>`;
- const selLabel=(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join("→"):(cycleSelection?(cycleSelection.lord||cycleSelection.label):"All life");
+ const selLabel="";
  svg+=`<text x="${cx}" y="${cy+26}" text-anchor="middle" font-size="10" fill="#5c7a9a" font-family="sans-serif">${selLabel}</text>`;
  svg+=`</svg>`;
- el.innerHTML=svg;
+ const plotLabel=periodTitle(p);
+ const plotRange=zoomRangeLabel(p);
+ el.innerHTML=svg+`<div class="kala-plot-range"><span>${plotLabel}</span><b>${plotRange}</b></div>`;
 }
 function _syncStrip(){
  const n=$("pName"),d=$("pDate"),t=$("pTime"),c=$("pCity"),co=$("pCountry");
  const strip=$("profileSummaryStrip");
  if(!strip)return;
  const dt=new Date(d?.value);
- const ds=d?.value?(isNaN(dt)?d.value:dt.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"})):"—";
+ const ds=d?.value?(isNaN(dt)?d.value:dt.toLocaleDateString("en-GB",{timeZone:"UTC",day:"2-digit",month:"short",year:"numeric"})):"—";
  strip.textContent=[n?.value,ds+(t?.value?" · "+t.value:""),[c?.value,co?.value].filter(Boolean).join(", ")].filter(Boolean).join(" · ");
 }
 
@@ -5054,17 +5338,18 @@ function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.valu
  structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
 
 function switchTab(which){
- const ALL_TABS=["heatmap","cycles","playbook","rankings","dharma","westernPath","sajuCultivation","guide"];
+ const ALL_TABS=["heatmap","cycles","playbook","rankings","dharma","westernPath","sajuCultivation","guide","validation"];
+ if(!ALL_TABS.includes(which))return;
+ const previous=document.querySelector(".tabPanel.active");
+ if(previous)previous.dataset.scrollTop=$("content").scrollTop;
  for(const id of ALL_TABS){
   let panel=$(id+"Tab"),btn=$("mbn-"+id);
   if(panel)panel.classList.toggle("active",id===which);
-  if(btn)btn.classList.toggle("active",id===which);
+  if(btn){btn.classList.toggle("active",id===which);btn.setAttribute("aria-current",id===which?"page":"false")}
   let dbt=$(id+"TabBtn");if(dbt)dbt.classList.toggle("active",id===which);
  }
- if(which==="dharma")renderDharmaTab();
- if(which==="westernPath")renderWesternInnerPathTab();
- if(which==="sajuCultivation")renderSajuCultivationTab();
- if(which==="validation")renderValidationSources();
+ renderTabContent(which);
+ $("content").scrollTop=Number($(which+"Tab")?.dataset.scrollTop||0);
 }
 
 function closeCustomDropdowns(except=null){
@@ -5075,7 +5360,18 @@ document.addEventListener("pointerdown",e=>{
  if(!inside)closeCustomDropdowns();
  else closeCustomDropdowns(inside);
 },true);
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCustomDropdowns()});
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){
+  closeCustomDropdowns();
+  if(_isMobile()&&$("profileOverlay").classList.contains("open"))toggleProfilePanel();
+ }
+ if(e.key==="Tab"&&_isMobile()&&$("profileOverlay").classList.contains("open")){
+  const items=[...$("profileOverlay").querySelectorAll('button,input,select,textarea,summary,[tabindex="0"]')].filter(el=>!el.disabled&&el.getClientRects().length);
+  const first=items[0],last=items.at(-1);
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+ }
+});
 
 $("heatmapTabBtn").onclick=()=>switchTab("heatmap");$("rankingsTabBtn").onclick=()=>switchTab("rankings");$("dharmaTabBtn").onclick=()=>switchTab("dharma");$("westernPathTabBtn").onclick=()=>switchTab("westernPath");$("sajuCultivationTabBtn").onclick=()=>switchTab("sajuCultivation");$("validationTabBtn").onclick=()=>switchTab("validation");$("guideTabBtn").onclick=()=>switchTab("guide");$("runValidationBtn").onclick=runValidationSuite;$("validationMode").onchange=runValidationSuite;
 $("calculateBtn").onclick=()=>calculateProfile(true);
@@ -5152,48 +5448,100 @@ $("clearStaticBtn").onclick=()=>{
 
 
 
-// ── Domain bar chart — always shows TOP-LEVEL overview ─────────────
+// ── Cycle visualization: mobile minimap / desktop read-only comparison ──
+function cycleVisualGroups(){
+ let groups=visibleGroups();
+ if(cycleFamilyKey==="vimshottari"&&!groups.length&&prefix.length>=LEVELS.length){
+  const parent=findPeriodByPath(prefix.slice(0,-1));
+  groups=parent?filterLifeAndYear(childPeriods(parent)):[];
+ }
+ return groups;
+}
+
+function renderCycleMobileMiniMap(el,groups){
+ if(!groups.length){el.innerHTML="";return}
+ const focus=currentDisplayPeriod();
+ const focusName=periodTitle(focus);
+ const focusRange=zoomRangeLabel(focus);
+ const dims=selectedDimensions();
+ const levelName=cycleFamilyKey==="vimshottari"?(LEVELS[(groups[0]?.depth||1)-1]||"Dasha"):(cycleContextLabel()||cycleFamilyLabel());
+
+ let html=`<div class="cycle-mobile-summary">
+  <div class="cycle-focus-head">${focusName}</div>
+  <div class="cycle-focus-range">${focusRange}</div>
+  <div class="cycle-mini-title">${levelName} · period ranges</div>
+  <div class="cycle-range-scroll">`;
+
+ for(const g of groups){
+  html+=`<div class="cycle-range-card">
+   <div class="cr-name">${g.lord||g.label||"—"}</div>
+   <div class="cr-date">${zoomRangeLabel(g)}</div>
+  </div>`;
+ }
+ html+=`</div><div class="cycle-mini-title">Domain minimap · read-only</div><div class="cycle-mini-map">`;
+
+ const total=Math.max(1,Math.max(...groups.map(g=>g.b))-Math.min(...groups.map(g=>g.a)));
+ for(const dom of dims){
+  const di=DOMAINS.indexOf(dom);
+  html+=`<div class="cycle-mini-row"><div class="cycle-mini-label">${dom}</div><div class="cycle-mini-track">`;
+  for(const g of groups){
+   const sc=scorePeriod(g,di),pct=Math.max(.35,(g.b-g.a)/total*100);
+   const short=(g.lord||g.label||"").slice(0,2);
+   html+=`<div class="cycle-mini-seg" style="flex:${Math.max(1,g.b-g.a)} 1 0%;background:${heatColor(sc)};color:${heatTextColor(sc)}" title="${dom} · ${g.lord||g.label||"—"} · ${zoomRangeLabel(g)} · ${sc.toFixed(2)}">${pct>=8?short:""}</div>`;
+  }
+  html+=`</div></div>`;
+ }
+ html+=`</div><div class="cycle-mini-title">Selected-period scores</div><div class="cycle-domain-snapshot">`;
+
+ for(const dom of dims){
+  const sc=scorePeriod(focus,DOMAINS.indexOf(dom)),bk=bucket(sc);
+  html+=`<div class="cycle-domain-card" style="border-color:${heatColor(sc)}">
+   <div class="cd-name">${dom}</div>
+   <div class="cd-value">${sc.toFixed(2)} <span class="cd-grade">${bk[0]}</span></div>
+  </div>`;
+ }
+ html+=`</div></div>`;
+ el.innerHTML=html;
+}
+
 function renderDomainBars(){
  const el=$("domainBarsContainer");if(!el)return;
- // Use top-level groups so the chart is a stable navigation map, not zoom-dependent
- let topGroups;
- if(cycleFamilyKey==="vimshottari"&&dashaRoot.length){
-  topGroups=filterLifeAndYear(dashaRoot);
- } else {
-  topGroups=cycleGroups(); // falls back for saju/western
+
+ if(window.matchMedia("(max-width:768px)").matches){
+  renderCycleMobileMiniMap(el,cycleVisualGroups());
+  return;
  }
+
+ // Desktop keeps the broad comparison, but it is intentionally read-only.
+ let topGroups;
+ if(cycleFamilyKey==="vimshottari"&&dashaRoot.length)topGroups=filterLifeAndYear(dashaRoot);
+ else topGroups=cycleGroups();
  if(!topGroups.length){el.innerHTML="";return}
+
  const dims=selectedDimensions();
  const allA=Math.min(...topGroups.map(g=>g.a)),allB=Math.max(...topGroups.map(g=>g.b)),span=Math.max(1,allB-allA);
  const widths=topGroups.map(g=>Math.max(0.5,(g.b-g.a)/span*100));
-
- // Active check: for vimshottari, check if the lord matches the first element of prefix
  const isActiveGroup=g=>cycleFamilyKey==="vimshottari"
   ?(prefix.length>0&&prefix[0]===(g.lord||g.path?.[0]))
   :(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
 
- // Build header row with period name + year range
  let html=`<div class="dbar-wrap"><div class="dbar-hdr-row"><div class="dbar-hdr-label">Domain</div><div class="dbar-hdr-track">`;
  topGroups.forEach((g,i)=>{
-  const isActive=isActiveGroup(g);
-  const name=(g.lord||g.label||"—");
-  const y0=new Date(g.a).getUTCFullYear(),y1=new Date(g.b-1).getUTCFullYear();
+  const isActive=isActiveGroup(g),name=(g.lord||g.label||"—");
   html+=`<div class="dbar-hdr-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%" data-gi="${i}">
-   <span>${name}</span><span class="dbar-hdr-years">${y0}–${y1}</span>
+   <span>${name}</span><span class="dbar-hdr-years">${zoomRangeLabel(g)}</span>
   </div>`;
  });
  html+=`</div></div>`;
 
- // Domain rows — score + mini bar fill
  for(const dom of dims){
   const di=DOMAINS.indexOf(dom);
   html+=`<div class="dbar-row"><div class="dbar-label">${dom}</div><div class="dbar-track">`;
   topGroups.forEach((g,i)=>{
-   const sc=scorePeriod(g,di),bk=bucket(sc);
-   const bg=heatColor(sc),tc=heatTextColor(sc);
-   const isActive=isActiveGroup(g);
-   const barPct=Math.round(((sc+2)/4)*100); // 0-100%
-   html+=`<div class="dbar-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%;background:${bg};color:${tc}" data-gi="${i}" title="${dom} · ${name}: ${bk[0]} ${sc.toFixed(2)}">
+   const name=(g.lord||g.label||"—"),sc=scorePeriod(g,di),bk=bucket(sc);
+   const bg=heatColor(sc),tc=heatTextColor(sc),isActive=isActiveGroup(g);
+   const barPct=Math.round(((sc+2)/4)*100);
+   html+=`<div class="dbar-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%;background:${bg};color:${tc}" data-gi="${i}" title="${dom} · ${name}: ${bk[0]} ${sc.toFixed(2)} · ${zoomRangeLabel(g)}">
     <div class="dbar-score">${sc.toFixed(1)}</div>
     <div class="dbar-grade">${bk[0]}</div>
     <div class="dbar-bar-wrap"><div class="dbar-bar-fill" style="width:${barPct}%"></div></div>
@@ -5203,14 +5551,7 @@ function renderDomainBars(){
  }
  html+=`</div>`;
  el.innerHTML=html;
-
- // Wire taps — clicking a segment highlights it and zooms the hierarchy card to its sub-periods
- topGroups.forEach((g,i)=>{
-  el.querySelectorAll(`[data-gi="${i}"]`).forEach(seg=>{
-   seg.onclick=()=>activateCycleGroup(g);
-   _tap(seg,()=>activateCycleGroup(g));
-  });
- });
+ // No click handlers here. Cycle Zoom is the single drill-in surface.
 }
 
 // ── Kāla nav: breadcrumb + date range, always visible ────────────
@@ -5226,19 +5567,26 @@ function updateKalaNav(){
  const hasSelection=(cycleFamilyKey==="vimshottari"&&prefix.length>0)||(cycleFamilyKey!=="vimshottari"&&cycleSelection);
  const btn=$("kalaBackBtn");if(btn)btn.style.display=hasSelection?"":"none";
 
+ // Update chips level label — include date range so it's always prominent
+ const VIMSH_LEVELS=["Mahādaśā","Antardaśā","Pratyantardaśā","Sūkṣmadaśā","Prāṇadaśā"];
+ const lbl=$("kalaChipsLevel");
+ if(lbl){
+  const lvName=cycleFamilyKey==="vimshottari"?(VIMSH_LEVELS[Math.min(prefix.length,4)]||"Vimshottari"):cycleFamilyLabel();
+  lbl.textContent=`${lvName}  ·  ${fmt(da)} – ${fmt(db)}`;
+ }
+
  // Build clickable breadcrumbs: All life → Mahadasha lord → ...
  const crumbs=$("kalaCrumbs");if(!crumbs)return;
- let html=`<span class="kala-crumb${!hasSelection?" active":""}" id="kalaHome">All life</span>`;
+ let html=`<button type="button" class="kala-crumb${!hasSelection?" active":""}" id="kalaHome">All life</button>`;
  if(cycleFamilyKey==="vimshottari"&&prefix.length){
+  const levelShort=["MD","AD","PD","Sūkṣma","Prāṇa"];
+  const levelNames=["Mahādaśā","Antardaśā","Pratyantardaśā","Sookṣma","Prāṇa"];
   prefix.forEach((lord,i)=>{
-   const path=prefix.slice(0,i+1);
-   const g=findPeriodByPath(path);
-   const isLast=i===prefix.length-1;
-   const levelNames=["Mahādaśā","Antardaśā","Pratyantardaśā","Sookṣma","Prāṇa"];
-   html+=`<span class="kala-crumb-sep">›</span><span class="kala-crumb${isLast?" active":""}" data-path='${JSON.stringify(path)}'>${lord}</span>`;
+   const path=prefix.slice(0,i+1),isLast=i===prefix.length-1;
+   html+=`<span class="kala-crumb-sep">›</span><button type="button" class="kala-crumb${isLast?" active":""}" title="${levelNames[i]} · ${lord}" data-path='${JSON.stringify(path)}'>${levelShort[i]} · ${lord}</button>`;
   });
  } else if(cycleSelection){
-  html+=`<span class="kala-crumb-sep">›</span><span class="kala-crumb active">${cycleSelection.lord||cycleSelection.label}</span>`;
+  html+=`<span class="kala-crumb-sep">›</span><button type="button" class="kala-crumb active">${cycleSelection.lord||cycleSelection.label}</button>`;
  }
  crumbs.innerHTML=html;
 
@@ -5256,9 +5604,11 @@ function setupSubtabs(rowId,sectionMap){
  // sectionMap: { 'btn-data-stab': ['sectionId', ...], ... }
  const row=$(rowId);if(!row)return;
  const btns=[...row.querySelectorAll("[data-stab]")];
+ btns.forEach(btn=>{btn.setAttribute("aria-controls",sectionMap[btn.dataset.stab].join(" "));btn.setAttribute("aria-pressed",String(btn.classList.contains("active")))});
  btns.forEach(btn=>{
   const activate=()=>{
-   btns.forEach(b=>b.classList.remove("active"));
+   btns.forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
+   btn.setAttribute("aria-pressed","true");
    btn.classList.add("active");
    const stab=btn.dataset.stab;
    Object.entries(sectionMap).forEach(([key,ids])=>{
@@ -5271,7 +5621,7 @@ function setupSubtabs(rowId,sectionMap){
 }
 
 // Mobile bottom nav bindings
-for(const id of["heatmap","cycles","playbook","rankings","dharma","westernPath","sajuCultivation","guide"]){
+for(const id of["heatmap","cycles","playbook","rankings","dharma","westernPath","sajuCultivation","guide","validation"]){
  const btn=$("mbn-"+id);
  if(btn){btn.onclick=()=>switchTab(id);_tap(btn,()=>switchTab(id));}
 }
@@ -5317,6 +5667,15 @@ setupSubtabs("sajuSubtabRow",{
 // Sync strip on load
 document.querySelectorAll("#profilePanel input,#profilePanel select").forEach(el=>el.addEventListener("change",_syncStrip));
 
+document.querySelectorAll(".field").forEach(field=>{const label=field.querySelector("label"),input=field.querySelector("input,select");if(label&&input)label.htmlFor=input.id});
+$("inspectDate").setAttribute("aria-label","Inspect cycle date");
+window.matchMedia("(max-width:768px)").addEventListener("change",()=>{
+ const overlay=$("profileOverlay");overlay.classList.remove("open");
+ overlay.removeAttribute("role");overlay.removeAttribute("aria-modal");
+ $("content").inert=false;$("mobileBottomNav").inert=false;document.body.style.overflow="";
+ $("profileToggleBtn").textContent="⚙ Profile";$("profileToggleBtn").setAttribute("aria-expanded","false");
+ if(chart)render();
+});
 setLocationMode();
 calculateProfile(false);
 setTimeout(()=>{loadSwiss().then(ok=>{if(ok)calculateProfile(false)});loadBazi().then(ok=>{if(ok)calculateProfile(false)})},150);
