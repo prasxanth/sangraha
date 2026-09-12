@@ -589,6 +589,29 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 .heat-magnifier button,.heat-magnifier summary,.touch-heat-cell{-webkit-tap-highlight-color:transparent}
 .heat-preview-explore{width:100%;margin-top:6px;border-color:var(--accent);font-size:14px}
 
+
+/* Compact cards and single-row grouped mobile navigation. */
+.saved-profile-controls{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;margin-bottom:8px}
+.saved-profile-controls select{min-width:0;width:100%}
+.badge,.mode,.timingPill,.evidencePills span,.microTag,.layerTag,.devataEvidence .ev{border-radius:6px;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.35;font-size:12px}
+.mode{padding:4px 6px;min-width:0;box-sizing:border-box}
+.playbookTable th:nth-child(3),.playbookTable td:nth-child(3){min-width:86px;width:100px}
+.cycle-domain-snapshot{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.cycle-domain-card{padding:7px 8px;border-radius:8px}.cycle-domain-card .cd-name{font-size:12px;line-height:1.3}.cycle-domain-card .cd-value{font-size:17px;margin-top:3px}
+.component{padding:7px}.kala-systems .component{min-width:0;flex:1 1 100px}.component .name{font-size:12px;line-height:1.35}.component .val{font-size:17px}
+.pchip{min-width:128px;padding:7px 9px}.pchip-lord{font-size:14px}.pchip-grade{font-size:16px}.pchip-score,.pchip-range{font-size:12px}.mobile-cycle-card{padding:8px}.mobile-cycle-card strong{font-size:14px}.mobile-cycle-card span{font-size:12px}
+.nav-group{min-width:0}.nav-group>.mbn-btn{width:100%;height:100%}.nav-group-icon{font-size:22px;line-height:22px}
+.nav-group-menu{position:fixed;left:8px;right:8px;bottom:calc(65px + env(safe-area-inset-bottom,0px));z-index:100;display:flex;gap:6px;padding:10px;background:var(--panel2);border:1px solid var(--accent);border-radius:12px;box-shadow:0 -8px 24px #0008}
+.nav-group-menu[hidden]{display:none}.nav-group-menu .mbn-btn{flex:1;min-height:54px;font-size:14px}
+@media(max-width:768px){
+ .mobile-bottom-nav{grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:1fr}
+ .mobile-bottom-nav>.mbn-btn,.nav-group>.mbn-btn{font-size:11px;min-height:50px;gap:3px}
+ .hdr-title{font-size:clamp(20px,5.5vw,26px);line-height:1.2;min-width:0}.hdr-row #profileToggleBtn{flex-shrink:0}
+ .saved-profile-controls{grid-template-columns:minmax(0,1fr) auto}.saved-profile-controls label{grid-column:1/-1;font-size:14px}
+ .cycle-domain-snapshot{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .kala-systems{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+}
+
 </style>
 </head>
 <body>
@@ -596,7 +619,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 <!-- ─── Desktop header (hidden on mobile) ─────────────────── -->
 <header class="deskHeader">
  <div class="wrap">
-  <h1>Kāla · Astrology Engine</h1>
+  <h1 id="desktopPageTitle">Kāla</h1>
   <div class="sub">Birth-driven calculation for arbitrary profiles. Natal structural evidence and timing are separate layers: Vedic timing is generated recursively to <b>Prana dasha</b>, Western uses natal + transits/profections, and Saju uses Four Pillars + Daeun/year/season.</div>
  </div>
 </header>
@@ -614,21 +637,23 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
   <div id="profileOverlayBody">
    <!-- Profile form (moved here on mobile) -->
    <div id="profilePanel" class="profileCard">
+    <div class="saved-profile-controls"><label for="savedProfilePicker">Saved profile</label><select id="savedProfilePicker"></select><button type="button" id="saveProfileBtn">Save profile</button></div>
+    <div class="small" id="savedProfileStatus" role="status">Birth times are hospital/family recorded, with high confidence. Profiles and edits are saved in this browser.</div>
     <div class="profileGrid">
      <div class="field"><label>Name</label><input id="pName" value="Prashanth Kumar"></div>
-     <div class="field"><label>Birth date</label><input id="pDate" type="date" value="1982-03-13"></div>
-     <div class="field"><label>Birth time</label><input id="pTime" type="time" step="1" value="22:55:00"></div>
+     <div class="field"><label>Birth date</label><input id="pDate" required type="date" value="1982-03-13"></div>
+     <div class="field"><label>Birth time</label><input id="pTime" required type="time" step="1" value="22:55:00"></div>
      <div class="field"><label>City</label><input id="pCity" value="Khartoum"></div>
      <div class="field"><label>Country</label><input id="pCountry" value="Sudan"></div>
      <div class="field"><label>Coordinates</label><select id="pLocationMode"><option value="auto" selected>Auto from city/country</option><option value="manual">Manual</option></select></div>
-     <div class="field"><label>Latitude</label><input id="pLat" type="number" step=".0001" value="15.5007" readonly></div>
-     <div class="field"><label>Longitude</label><input id="pLon" type="number" step=".0001" value="32.5599" readonly></div>
-     <div class="field"><label>UTC offset</label><input id="pTz" type="number" step=".25" value="2"></div>
+     <div class="field"><label>Latitude</label><input id="pLat" required min="-90" max="90" type="number" step=".0001" value="15.5007" readonly></div>
+     <div class="field"><label>Longitude</label><input id="pLon" required min="-180" max="180" type="number" step=".0001" value="32.5599" readonly></div>
+     <div class="field"><label>UTC offset</label><input id="pTz" required min="-12" max="14" type="number" step=".25" value="2"></div>
      <div class="field"><label>Timezone ID</label><input id="pTzId" value="Africa/Khartoum" readonly></div>
      <div class="field"><label>Sex</label><select id="pSex"><option value="male" selected>Male</option><option value="female">Female</option></select></div>
      <div class="field"><label>Ayanamsa</label><select id="pAyan"><option value="lahiri" selected>Lahiri</option><option value="krishnamurti">Krishnamurti</option><option value="raman">Raman</option><option value="fagan">Fagan-Bradley</option></select></div>
      <div class="field"><label>House system</label><select id="pHouse"><option value="W" selected>Whole Sign</option><option value="P">Placidus</option></select></div>
-     <div class="field"><label>Birth-time confidence</label><select id="pBirthConfidence"><option value="exact">Exact / rectified</option><option value="recorded" selected>Recorded to minute</option><option value="approximate">Approximate</option></select></div>
+     <div class="field"><label>Birth-time confidence</label><select id="pBirthConfidence"><option value="exact">Exact / rectified</option><option value="recorded" selected>Recorded · high confidence</option><option value="approximate">Approximate</option></select></div>
      <div class="field"><label>Life horizon</label><select id="pHorizon"><option value="80">80 years</option><option value="100" selected>100 years</option><option value="120">120 years</option></select></div>
      <div class="field"><label>Saju Yongsin</label><select id="pYongsin"><option value="auto" selected>Auto</option><option>Wood</option><option>Fire</option><option>Earth</option><option>Metal</option><option>Water</option></select></div>
      <div class="field"><label>Daeun start age</label><input id="pDaeunAge" type="number" step=".01" placeholder="Auto"></div>
@@ -701,7 +726,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
  <!-- App header (mobile only) -->
  <header id="appHeader">
   <div class="hdr-row">
-   <span class="hdr-title">Kāla</span>
+   <span class="hdr-title" id="activePageTitle">Kāla</span>
    <button id="profileToggleBtn">⚙ Profile</button>
   </div>
   <div id="profileSummaryStrip"></div>
@@ -1010,7 +1035,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
   <div class="dharmaGridTop">
    <div class="dharmaCard">
     <div class="dharmaCardHead"><h3>Natal orientation</h3><span class="badge" id="westernNatalBadge">—</span></div>
-    <div class="small">Relative evidence scores describe <b>salience</b>, not goodness or certainty. They are calculated from the current birth profile; no Prashanth-specific ranking table is used.</div>
+    <div class="small">Relative evidence scores describe <b>salience</b>, not goodness or certainty. They are calculated from the current birth profile; no preset-specific ranking table is used.</div>
     <div id="westernOrientationGrid" class="deityGrid"></div>
    </div>
    <div class="dharmaCard">
@@ -1216,12 +1241,10 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
       </ul>
     </div>
 
-    <div class="guideBox"><h4>Regression invariants for future patches</h4>
+    <div class="guideBox"><h4>Regression invariants for future patches</h4><p>Reference-chart fixtures validate the engine; the current birth profile drives the displayed results.</p>
       <ul>
-        <li>For the Prashanth preset, Mercury/Venus Antardasha must validate to <b>05 Jul 2024 → 06 May 2027</b> (±1 day).</li>
         <li>The year selector must remain grouped by Mahadasha; transition years may show both lords in the option label.</li>
-        <li>The dynamic ranking engine must reproduce the Prashanth regression target Mercury 87, Mars 82, Rahu 81, Saturn 79 without a profile-specific runtime override.</li>
-        <li>The dynamic ranking engine must reproduce the Prashanth regression target 11th 88, 8th 84, 12th 83 without a profile-specific runtime override.</li>
+
         <li>Every ranking card must show both <b>Areas</b> and a short <b>Description</b> before the click-through detail.</li>
         <li>City + country must auto-resolve latitude/longitude by default; manual coordinates remain an explicit override.</li>
         <li>Dynamic calculator plug-ins and static interval plug-ins must both remain supported.</li>
@@ -1263,7 +1286,6 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
     <div class="guideBox"><h4>Natal-derived output invariant</h4>
       <ul>
         <li>Planet influence rankings, house rankings, natal placements, dashas, profections, Saju pillars and every other birth-chart-derived value must recalculate when the birth profile changes.</li>
-        <li>Prashanth's old ranking is a <b>regression target only</b>. It must never be injected as a special runtime ranking.</li>
         <li>Provider-specific evidence may differ; shared astronomical/timing cycles should be identified by a provider-neutral cycle key.</li>
       </ul>
     </div>
@@ -1301,7 +1323,6 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
     <div class="guideBox"><h4>Natal dimension-map invariant</h4>
       <ul>
         <li>Rankings alone are not sufficient. The Rankings tab must also render <b>Planet × life dimension</b> and <b>House × life dimension</b> heatmaps.</li>
-        <li>Every cell must be dynamically derived from the current birth chart; never store a Prashanth-specific dimension matrix.</li>
         <li>Cell color / S-score represents dimension-specific natal support (−2…+2). The I-score represents dimension-specific structural influence (0…100).</li>
         <li>Planet domain influence combines overall natal influence with planet-domain semantics, occupied-house relevance and ruled-house relevance.</li>
         <li>Planet domain support combines the independently calculated natal benefit score with the same chart-specific relevance paths.</li>
@@ -1316,7 +1337,6 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
         <li>For quadrant houses such as Placidus, use provider cusps when available; if unavailable, label the equal-house fallback explicitly.</li>
         <li>Vedic dasha scoring must not use a generic planet-domain lookup alone. Each active MD/AD/PD/Sookshma/Prana lord must consume the current chart's <b>dimension-specific support + influence</b> metrics.</li>
         <li>Domain productivity and overall beneficence are separate. A mixed functional planet may still be highly productive in a domain it strongly carries.</li>
-        <li>For the Prashanth Whole-Sign regression: Sun/Mercury = H4, Venus = H3, Mars/Saturn = H11, Moon/Jupiter = H12, Rahu = H8, Ketu = H2.</li>
       </ul>
     </div>
 
@@ -1391,20 +1411,19 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
         <li>Never promote a chart-derived deity suggestion into an established personal Iṣṭa. Never rank an inherited Kuladevata, Guru/Sampradaya instruction or genuinely established personal Iṣṭa against chart-derived devotional affinities.</li>
         <li>Keep three layers explicit: <b>received practice</b>, <b>natal/classical indicator</b>, and <b>dasha-sensitive supporting emphasis</b>.</li>
         <li>The Jaimini check must disclose the chara-kāraka scheme. The built-in comparison shows both 7-kāraka and 8-kāraka (Rahu reverse-degree) schemes.</li>
-        <li>For the Prashanth regression, both schemes resolve Sun as Atmakaraka; Sun is in Gemini D9, so the 12th from Karakāṃśa is Taurus, occupied by Venus and Rahu. Show both indicator planets. Do not manufacture Dakṣiṇāmūrti — or any single Iṣṭa — from that geometry.</li>
         <li>Daily recitation anchors and long-form study curriculum are separate. A text may be recited daily while its full study is scheduled later.</li>
         <li>Do not display arbitrary “efficacy %” for mantra, witnessing, deity practice or mind-calming routines.</li>
       </ul>
     </div>
 
-    
+
             <div class="guideBox"><h4>Mahādaśā ranker · reconciled model</h4>
       <ul>
        <li>Calculates <b>two rankings</b>: overall support/continuity and productive leverage/activation. High leverage is not automatically beneficence.</li>
        <li>Uses purpose-routed vargas rather than flat averaging: D2 wealth, D7 children, D10 career, D20 spiritual practice, D24 learning, D27 resilience and D30 adversity; D1/D9 remain broad.</li>
        <li>D60 is <b>confidence-gated</b> using declared birth-time confidence plus nearest subdivision-boundary sensitivity. It is corroborative only and cannot dominate a close ranking when sensitivity is poor.</li>
        <li>Same-sign D1 planets are not automatically called a close conjunction: the evidence panel reports the actual angular separation and marks ≤8° separately.</li>
-       <li>The ranker is <b>cold chart-only</b>. Historical promotions, outcomes and hindsight are excluded from scoring and may be used only as external validation.</li><li>For the registered Prashanth regression profile, the reconciled order <b>Venus → Jupiter → Mercury → Sun → Saturn → Moon → Mars → Rahu → Ketu</b> is stored only as a <b>validation benchmark</b>. The engine shows differences instead of forcing the dynamic result to match it.</li>
+       <li>The ranker is <b>cold chart-only</b>. Historical promotions, outcomes and hindsight are excluded from scoring and may be used only as external validation.</li>
       </ul>
     </div>
 <div class="guideBox"><h4>Three independent knowledge registries</h4>
@@ -1429,7 +1448,6 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
         <div class="guideBox"><h4>Vedic Dharma render safety</h4><ul><li>Vimshottari timing themes now use the generic <code>VEDIC_TIMING_PRACTICE</code> registry for all nine lords.</li><li>The Dharma renderer surfaces any future runtime exception in the tab instead of failing blank.</li><li>Timing-practice wording does not establish a new Iṣṭa or override Kula/Guru/received practice.</li></ul></div>
 <div class="guideBox"><h4>Generic Vedic knowledge registry</h4>
       <ul>
-        <li>Runtime recommendations do <b>not</b> search the web and do not reuse Prashanth’s prior Sādhana ranking. The same resolver consumes whatever birth chart is currently loaded.</li>
         <li>The registry is split into <b>calculation correlations</b> (Dharma paths), <b>devatā families/association rules</b>, <b>public daily practices</b>, <b>texts/study metadata</b>, and <b>provenance records</b>.</li>
         <li>Received family/Guru/Iṣṭa information remains a separate precedence layer and is never inferred from the registry.</li>
         <li>Daily routines are assembled only from public/non-initiatory practices. Bīja, nyāsa, forced breath-retention and initiation-dependent procedures are excluded from automatic selection.</li>
@@ -1445,7 +1463,6 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
         <li>Mahādaśā/AD/PD/Sookshma/Prana are a <b>practice overlay</b>, not natal deity identity.</li>
         <li>Dakṣiṇāmūrti is not a core-ranking ID. It can appear only as a specialized refinement of a sufficiently strong Śiva/Guru contemplative channel.</li>
         <li>Bhairava is specialized/secondary when 8th-house/Rahu transformation is strong; it is not automatically promoted into the core daily list.</li>
-        <li>For Prashanth, a regression checks D9 Sun Gemini; D9 Venus + Rahu Taurus; D20 Asc Gemini; D20 Jupiter + Saturn Aquarius; D20 Venus + Rahu + Ketu Capricorn; and the qualitative order Devī/Durgā → Śrī/Lakṣmī → Guru–Śiva → Viṣṇu.</li>
       </ul>
     </div>
    </div>
@@ -1549,13 +1566,13 @@ const CITY_DB={
  "new york|united states":{lat:40.7128,lon:-74.0060,tz:-5,tzid:"America/New_York",label:"New York, NY, United States"},
  "singapore|singapore":{lat:1.3521,lon:103.8198,tz:8,tzid:"Asia/Singapore",label:"Singapore"}
 };
-const GOLDEN_PRASHANTH={
+const REFERENCE_CHART={
  date:"1982-03-13",timePrefix:"22:55",city:"khartoum",country:"sudan",lat:15.5007,lon:32.5599,tzid:"Africa/Khartoum",
  tropical:{Sun:352.95005182698725,Moon:220.70528009503172,Mercury:330.10591288479554,Venus:308.141330128685,Mars:196.3584288390542,Jupiter:219.8454460955067,Saturn:200.81980343628774,Uranus:244.6183027185267,Neptune:266.97386223038706,Pluto:206.4120867851956,"Mean Node":109.3787970128885},
  lahiriSiderealMoon:197.10132946903852,tropAsc:243.4314584484282,tropMC:155.6679679283401,
  expected:{mercuryMdStart:"2021-02-09",mercuryVenusStart:"2024-07-05",mercuryVenusEnd:"2027-05-06"}
 };
-const PRASHANTH_RANKING_REGRESSION={
+const REFERENCE_RANKING_REGRESSION={
  planets:[["Mercury",87],["Mars",82],["Rahu",81],["Saturn",79]],
  houses:[["11",88],["8",84],["12",83]]
 };
@@ -1946,7 +1963,7 @@ function tzOffsetFor(tzid,date,time){
 }
 function setLocationMode(){
  let auto=$("pLocationMode").value==="auto";
- $("pLat").readOnly=auto;$("pLon").readOnly=auto;
+ $("pLat").readOnly=auto;$("pLon").readOnly=auto;$("pTzId").readOnly=auto;
  $("locationHint").textContent=auto?"Automatic location uses the city/country centroid by default. Switch to Manual only when you have more precise birth coordinates.":"Manual coordinates enabled; city/country are retained as labels only.";
 }
 async function resolveTimezone(lat,lon){
@@ -1979,6 +1996,8 @@ async function resolveBirthPlace(silent=false){
  let city=$("pCity").value.trim(),country=$("pCountry").value.trim();
  if(!city||!country){if(!silent)$("locationHint").textContent="Enter both city and country.";return null}
  let key=cityKey(city,country),rec=CITY_DB[key];
+ const requestKey=JSON.stringify([city,country,$("pDate").value,$("pTime").value,activeProfileId]);
+ const stillCurrent=()=>requestKey===JSON.stringify([$("pCity").value.trim(),$("pCountry").value.trim(),$("pDate").value,$("pTime").value,activeProfileId]);
  if(rec){applyResolvedLocation(rec,"built-in geocoder");return rec}
  try{
   $("locationStatus").textContent="Location: resolving…";$("locationStatus").className="badge warn";
@@ -1988,9 +2007,10 @@ async function resolveBirthPlace(silent=false){
   if(data?.[0]){
    let lat=+data[0].lat,lon=+data[0].lon,tzid=await resolveTimezone(lat,lon);
    rec={lat,lon,tzid,tz:estimateTz(lon),label:data[0].display_name||`${city}, ${country}`};
-   applyResolvedLocation(rec,"online geocoder");return rec;
+   if(!stillCurrent())return null;applyResolvedLocation(rec,"online geocoder");return rec;
   }
  }catch(e){}
+ if(!stillCurrent())return null;
  $("locationStatus").textContent="Location: unresolved · manual coordinates retained";$("locationStatus").className="badge warn";
  if(!silent)$("locationHint").textContent="Automatic geocoding could not resolve this city/country. Switch Coordinates to Manual and enter precise latitude/longitude.";
  return null;
@@ -2002,10 +2022,11 @@ function readProfile(){let city=$("pCity").value.trim(),country=$("pCountry").va
  horizon:+$("pHorizon").value,yongsin:$("pYongsin").value,
  daeunAge:$("pDaeunAge").value===""?null:+$("pDaeunAge").value
 }}
-function isGoldenPrashanth(p=profile){
+function isReferenceProfile(p=profile){
  if(!p)return false;
- return p.date===GOLDEN_PRASHANTH.date&&String(p.time).startsWith(GOLDEN_PRASHANTH.timePrefix)&&
-   String(p.city||"").trim().toLowerCase()===GOLDEN_PRASHANTH.city&&String(p.country||"").trim().toLowerCase()===GOLDEN_PRASHANTH.country;
+ if(Math.abs(p.lat-REFERENCE_CHART.lat)>.0001||Math.abs(p.lon-REFERENCE_CHART.lon)>.0001||+p.tz!==2||!["22:55","22:55:00"].includes(p.time))return false;
+ return p.date===REFERENCE_CHART.date&&String(p.time).startsWith(REFERENCE_CHART.timePrefix)&&
+   String(p.city||"").trim().toLowerCase()===REFERENCE_CHART.city&&String(p.country||"").trim().toLowerCase()===REFERENCE_CHART.country;
 }
 function buildNatal(p){
  let bms=birthMsFromProfile(p),jd=jdFromMs(bms),ayan=ayanamsa(jd,p.ayanamsa),asc=calcAsc(bms,p),trop={},sid={};
@@ -2013,21 +2034,21 @@ function buildNatal(p){
  let node=calcPlanet("Mean Node","SE_MEAN_NODE",10,jd);
  trop.Rahu={...node};trop.Ketu={...node,lon:norm(node.lon+180)};
  sid.Rahu={...node,lon:norm(node.lon-ayan)};sid.Ketu={...node,lon:norm(node.lon+180-ayan)};
- let goldenFallback=isGoldenPrashanth(p)&&trop.Moon.src!=="Swiss Ephemeris";
+ let goldenFallback=isReferenceProfile(p)&&trop.Moon.src!=="Swiss Ephemeris";
  if(goldenFallback){
-  for(const[n,lon]of Object.entries(GOLDEN_PRASHANTH.tropical)){
+  for(const[n,lon]of Object.entries(REFERENCE_CHART.tropical)){
    if(n==="Mean Node")continue;
    let base=trop[n]||{speed:0,ret:false};
-   trop[n]={...base,lon,src:"validated Prashanth natal reference"};
-   sid[n]={...base,lon:norm(lon-ayan),src:"validated Prashanth natal reference"};
+   trop[n]={...base,lon,src:"validated reference ephemeris"};
+   sid[n]={...base,lon:norm(lon-ayan),src:"validated reference ephemeris"};
   }
-  let rahuLon=GOLDEN_PRASHANTH.tropical["Mean Node"];
-  trop.Rahu={...trop.Rahu,lon:rahuLon,src:"validated Prashanth natal reference"};
-  trop.Ketu={...trop.Ketu,lon:norm(rahuLon+180),src:"validated Prashanth natal reference"};
-  sid.Rahu={...sid.Rahu,lon:norm(rahuLon-ayan),src:"validated Prashanth natal reference"};
-  sid.Ketu={...sid.Ketu,lon:norm(rahuLon+180-ayan),src:"validated Prashanth natal reference"};
-  asc={...asc,asc:GOLDEN_PRASHANTH.tropAsc,mc:GOLDEN_PRASHANTH.tropMC,src:"validated Prashanth natal reference"};
-  if(p.ayanamsa==="lahiri")sid.Moon.lon=GOLDEN_PRASHANTH.lahiriSiderealMoon;
+  let rahuLon=REFERENCE_CHART.tropical["Mean Node"];
+  trop.Rahu={...trop.Rahu,lon:rahuLon,src:"validated reference ephemeris"};
+  trop.Ketu={...trop.Ketu,lon:norm(rahuLon+180),src:"validated reference ephemeris"};
+  sid.Rahu={...sid.Rahu,lon:norm(rahuLon-ayan),src:"validated reference ephemeris"};
+  sid.Ketu={...sid.Ketu,lon:norm(rahuLon+180-ayan),src:"validated reference ephemeris"};
+  asc={...asc,asc:REFERENCE_CHART.tropAsc,mc:REFERENCE_CHART.tropMC,src:"validated reference ephemeris"};
+  if(p.ayanamsa==="lahiri")sid.Moon.lon=REFERENCE_CHART.lahiriSiderealMoon;
  }
  let sidAsc=norm(asc.asc-ayan),
      tropCusps=asc.cusps,
@@ -2038,7 +2059,7 @@ function buildNatal(p){
  }
  return{birthMs:bms,jd,ayan,tropical:trop,sidereal:sid,tropAsc:asc.asc,tropMC:asc.mc,sidAsc,
    tropCusps,sidCusps,houseSystem:p.house,ascSource:asc.src,
-   natalSource:goldenFallback?"validated Prashanth natal reference":(trop.Moon.src||asc.src)};
+   natalSource:goldenFallback?"validated reference ephemeris":(trop.Moon.src||asc.src)};
 }
 
 function validateHouseSystem(){
@@ -2048,7 +2069,7 @@ function validateHouseSystem(){
    let expected=((signIndex(chart.sidereal[n].lon)-signIndex(chart.sidAsc)+12)%12)+1;
    if(chart.sidereal[n].house!==expected)ok=false;
   }
-  if(isGoldenPrashanth()){
+  if(isReferenceProfile()){
    let expected={Sun:4,Mercury:4,Venus:3,Mars:11,Saturn:11,Moon:12,Jupiter:12,Rahu:8,Ketu:2},
        mismatches=Object.entries(expected).filter(([n,h])=>chart.sidereal[n]?.house!==h);
    ok=ok&&!mismatches.length;
@@ -2093,15 +2114,15 @@ function dateYMD(ms){return new Date(ms).toISOString().slice(0,10)}
 function dayDelta(a,b){return Math.abs(Date.parse(a+"T00:00:00Z")-Date.parse(b+"T00:00:00Z"))/86400000}
 function validateDashaRegression(){
  let box=$("dashaValidation");
- if(!isGoldenPrashanth()){
+ if(!isReferenceProfile()){
   if(box)box.innerHTML=`Dasha source: ${chart.natalSource}. Birth Moon ${signDegree(chart.sidereal.Moon.lon)} · generated dynamically through Prana.`;
   return;
  }
  let md=dashaRoot.find(x=>x.lord==="Mercury"&&x.a<Date.UTC(2030,0,1)),ve=md?childPeriods(md).find(x=>x.lord==="Venus"):null;
  let mdStart=md?dateYMD(md.a):"—",veStart=ve?dateYMD(ve.a):"—",veEnd=ve?dateYMD(ve.b):"—";
- let pass=md&&ve&&dayDelta(mdStart,GOLDEN_PRASHANTH.expected.mercuryMdStart)<=1&&dayDelta(veStart,GOLDEN_PRASHANTH.expected.mercuryVenusStart)<=1&&dayDelta(veEnd,GOLDEN_PRASHANTH.expected.mercuryVenusEnd)<=1;
+ let pass=md&&ve&&dayDelta(mdStart,REFERENCE_CHART.expected.mercuryMdStart)<=1&&dayDelta(veStart,REFERENCE_CHART.expected.mercuryVenusStart)<=1&&dayDelta(veEnd,REFERENCE_CHART.expected.mercuryVenusEnd)<=1;
  if(box)box.innerHTML=pass
-   ?`<b>Validated Prashanth regression:</b> Mercury MD begins ${fmt(md.a)} · <b>Mercury/Venus AD ${fmt(ve.a)} → ${fmt(ve.b)}</b>. This matches the established 05 Jul 2024 → 06 May 2027 boundary.`
+   ?`<b>Reference-chart validation:</b> Mercury MD begins ${fmt(md.a)} · <b>Mercury/Venus AD ${fmt(ve.a)} → ${fmt(ve.b)}</b>. This matches the established 05 Jul 2024 → 06 May 2027 boundary.`
    :`<b style="color:#eda1aa">Dasha regression failed.</b> Calculated Mercury MD ${mdStart}; Mercury/Venus ${veStart} → ${veEnd}. Do not use this timing until the natal Moon provider is corrected.`;
  $("dashaStatus").className="badge "+(pass?"good":"bad");
  if(pass)$("dashaStatus").textContent=`Dasha validated · Me/Ve → 06 May 2027`;
@@ -3608,8 +3629,8 @@ function runValidationSuite(){
  }
  let ws=wholeSignSyntheticInvariant();if(ws.ok)syntheticPass++;else syntheticFail++;
  let vg=vargaSyntheticInvariant();if(vg.ok)syntheticPass++;else syntheticFail++;
- let jx=prashanthJaiminiRegression();if(!jx||(jx.ok&&jx.noAutoIshta))syntheticPass++;else syntheticFail++;
- let dx=prashanthDevataRegression();if(!dx||dx.ok)syntheticPass++;else syntheticFail++;
+ let jx=referenceJaiminiRegression();if(!jx||(jx.ok&&jx.noAutoIshta))syntheticPass++;else syntheticFail++;
+ let dx=referenceDevataRegression();if(!dx||dx.ok)syntheticPass++;else syntheticFail++;
  let wx=westernInnerPathSyntheticInvariant();if(wx.ok)syntheticPass++;else syntheticFail++;
  let sx=sajuCultivationSyntheticInvariant();if(sx.ok)syntheticPass++;else syntheticFail++;
  let hx=hiddenStemEngineInvariant();if(hx.ok)syntheticPass++;else syntheticFail++;
@@ -3644,7 +3665,7 @@ function runValidationSuite(){
  <div class="testDetail">Full hidden-stem engine invariant: <b class="${hx.ok?"testPass":"testFail"}">${hx.ok?"PASS":"FAIL"}</b> · ${hx.detail}</div>
  <div class="testDetail">Mahādaśā support/leverage invariant: <b class="${mx.ok?"testPass":"testFail"}">${mx.ok?"PASS":"FAIL"}</b> · ${mx.detail}</div>
  <div class="testDetail">Vedic Dharma timing-practice invariant: <b class="${tx.ok?"testPass":"testFail"}">${tx.ok?"PASS":"FAIL"}</b> · ${tx.detail}</div>
- ${isGoldenPrashanth()?(()=>{let b=prashanthMahadashaReconciliationBenchmark();return`<div class="testDetail">Prashanth Mahādaśā reconciliation benchmark: <b class="${b.placementsPass?"testPass":"testFail"}">PLACEMENTS ${b.placementsPass?"PASS":"FAIL"}</b> · dynamic order is compared to ${b.expected.join(" → ")} but does not affect pass/fail because it is an interpretive calibration target, not an oracle.</div>`})():""}
+ ${isReferenceProfile()?(()=>{let b=referenceMahadashaReconciliationBenchmark();return`<div class="testDetail">Reference chart Mahādaśā reconciliation benchmark: <b class="${b.placementsPass?"testPass":"testFail"}">PLACEMENTS ${b.placementsPass?"PASS":"FAIL"}</b> · dynamic order is compared to ${b.expected.join(" → ")} but does not affect pass/fail because it is an interpretive calibration target, not an oracle.</div>`})():""}
  <div class="testDetail">Generic Vedic knowledge-registry invariant: <b class="${kx.ok?"testPass":"testFail"}">${kx.ok?"PASS":"FAIL"}</b> · ${kx.detail}</div>
  <div class="testDetail">Generic Western knowledge-registry invariant: <b class="${wk.ok?"testPass":"testFail"}">${wk.ok?"PASS":"FAIL"}</b> · ${wk.detail}</div>
  <div class="testDetail">Generic Saju knowledge-registry invariant: <b class="${sk.ok?"testPass":"testFail"}">${sk.ok?"PASS":"FAIL"}</b> · ${sk.detail}</div>`;
@@ -3813,7 +3834,7 @@ function calcRankings(){
  rankings.houses.forEach(x=>{x.benefitScore=houseBenefitScoreMap[x.id];x.benefitRank=houseBenefitRankMap[x.id]});
 
  rankings.mode="dynamic-dual";
- rankings.regression=isGoldenPrashanth()?{
+ rankings.regression=isReferenceProfile()?{
    planets:rankings.planets.slice(0,4).map(x=>[x.id,x.score]),
    houses:rankings.houses.slice(0,3).map(x=>[x.id,x.score])
  }:null;
@@ -4163,8 +4184,8 @@ function jaiminiIshtaResolution(scheme="7"){
        :`No occupant: lord/aspect fallback is lower-confidence and school-dependent.`
  };
 }
-function prashanthJaiminiRegression(){
- if(!isGoldenPrashanth())return null;
+function referenceJaiminiRegression(){
+ if(!isReferenceProfile())return null;
  let r7=jaiminiIshtaResolution("7"),r8=jaiminiIshtaResolution("8"),
      wantOcc=["Rahu","Venus"].sort().join("|"),
      ok=r7?.ak==="Sun"&&r8?.ak==="Sun"&&SIGNS[r7.karakamsha]==="Gemini"&&SIGNS[r7.twelfth]==="Taurus"&&
@@ -4172,8 +4193,8 @@ function prashanthJaiminiRegression(){
  return{ok,r7,r8,noAutoIshta:receivedDharma.establishedIshta==="",note:"Geometry regression only · does not establish an Iṣṭa."};
 }
 
-function prashanthDevataRegression(ms=Date.UTC(2026,8,8,12)){
- if(!isGoldenPrashanth())return null;
+function referenceDevataRegression(ms=Date.UTC(2026,8,8,12)){
+ if(!isReferenceProfile())return null;
  let a=classicalDevataAssessment(ms),d20=a.d20,d9=a.d9,
      byId=Object.fromEntries(a.channels.map(x=>[x.id,x])),
      expectedD20={
@@ -4636,7 +4657,7 @@ function renderDharmaTab(){
      timing=timingPracticeText(state.active),topPath=paths[0]?.name||"balanced dharma",
      topDeity=deities[0],evidence=evidenceWeightsForDomain("Spiritual","Vedic"),
      applies=receivedDharmaApplies(),jr7=assessment.j7,jr8=assessment.j8,
-     jreg=prashanthJaiminiRegression();
+     jreg=referenceJaiminiRegression();
 
  // Keep editable UI synchronized with explicit received state without changing ownership silently.
  if(document.activeElement!==$("dharmaKuladevata"))$("dharmaKuladevata").value=receivedDharma.kuladevata||"";
@@ -4657,7 +4678,7 @@ function renderDharmaTab(){
  let topNatal=assessment.channels.filter(x=>x.natalRaw>0).slice(0,4);
  $("dharmaNotice").innerHTML=receivedIshta
    ?`<b>Established Iṣṭa recorded:</b> ${receivedIshta}. The chart-derived channels below remain corroborative only.`
-   :`<b>No established Iṣṭa is recorded.</b> Independent chart reconstruction gives Karakāṃśa indicator planet(s) <b>${jIndicators.join(" + ")||"—"}</b>. The strongest natal channels are currently <b>${topNatal.map(x=>x.name).join(" → ")}</b>. Multiple Karakāṃśa occupants are preserved as multiple signals; the engine does not manufacture one Iṣṭa. Dakṣiṇāmūrti, if shown, appears only as a secondary Śiva/Guru contemplative form. Recommendations below are resolved from <b>${resolved.registryVersion}</b>, not from the earlier Prashanth Sādhana file.`;
+   :`<b>No established Iṣṭa is recorded.</b> Independent chart reconstruction gives Karakāṃśa indicator planet(s) <b>${jIndicators.join(" + ")||"—"}</b>. The strongest natal channels are currently <b>${topNatal.map(x=>x.name).join(" → ")}</b>. Multiple Karakāṃśa occupants are preserved as multiple signals; the engine does not manufacture one Iṣṭa. Dakṣiṇāmūrti, if shown, appears only as a secondary Śiva/Guru contemplative form. Recommendations below use <b>${resolved.registryVersion}</b> with the current birth chart and recorded practice preferences.`;
 
  $("dharmaPathBars").innerHTML=paths.map(x=>`<div class="pathRow">
    <div class="pathName">${x.name}</div>
@@ -4675,7 +4696,7 @@ function renderDharmaTab(){
   ${box("Jaimini · 7-kāraka",jr7?`AK <b>${jr7.ak}</b> · D9 Karakāṃśa <b>${SIGNS[jr7.karakamsha]}</b><br>12th = <b>${SIGNS[jr7.twelfth]}</b><br>${jr7.resolution}: <b>${jr7.indicators.join(" + ")}</b><br><b>No unique deity forced.</b> Candidate associations: ${jr7.modernCandidates.join(" / ")}.<br>${jr7.conclusion}`:"Unavailable","")}
   ${box("Jaimini · 8-kāraka",jr8?`AK <b>${jr8.ak}</b>${jr8.ak==="Rahu"?" (reverse degree)":""} · D9 Karakāṃśa <b>${SIGNS[jr8.karakamsha]}</b><br>12th = <b>${SIGNS[jr8.twelfth]}</b><br>${jr8.resolution}: <b>${jr8.indicators.join(" + ")}</b><br><b>No unique deity forced.</b> Candidate associations: ${jr8.modernCandidates.join(" / ")}.<br>${jr8.conclusion}`:"Unavailable","")}
  </div>
- ${jreg?`<div class="small" style="margin-top:7px"><b>Prashanth regression:</b> ${jreg.ok?"PASS":"FAIL"} · expected Sun AK → Gemini Karakāṃśa → Taurus 12th with Venus + Rahu occupants. This is a calculation regression, not a deity override.</div>`:""}`;
+ ${jreg?`<div class="small" style="margin-top:7px"><b>Reference chart regression:</b> ${jreg.ok?"PASS":"FAIL"} · expected Sun AK → Gemini Karakāṃśa → Taurus 12th with Venus + Rahu occupants. This is a calculation regression, not a deity override.</div>`:""}`;
 
  $("deityGrid").innerHTML=assessment.channels.filter(d=>d.natalRaw>0).slice(0,6).map((d,i)=>`<div class="deityCard">
    <div class="rank">natal channel ${i+1}</div>
@@ -4836,7 +4857,7 @@ const MAHADASHA_VARGA_ROUTING={
  Autonomy:{D1:.60,D10:.20,D27:.10,D9:.10},
  Mentorship:{D1:.55,D9:.20,D20:.15,D24:.10}
 };
-const PRASHANTH_MAHADASHA_RECONCILIATION_BENCHMARK={
+const REFERENCE_MAHADASHA_RECONCILIATION_BENCHMARK={
  metric:"overall life support / worldly continuity · interpretive benchmark only",
  order:["Venus","Jupiter","Mercury","Sun","Saturn","Moon","Mars","Rahu","Ketu"],
  principles:[
@@ -4852,10 +4873,10 @@ const PRASHANTH_MAHADASHA_RECONCILIATION_BENCHMARK={
  ],
  scoringInput:false
 };
-function prashanthMahadashaReconciliationBenchmark(){
- if(!isGoldenPrashanth())return null;
+function referenceMahadashaReconciliationBenchmark(){
+ if(!isReferenceProfile())return null;
  let dynamic=calculateMahadashaRankings().support.map(x=>x.lord),
-     expected=PRASHANTH_MAHADASHA_RECONCILIATION_BENCHMARK.order,
+     expected=REFERENCE_MAHADASHA_RECONCILIATION_BENCHMARK.order,
      exactPositions=expected.filter((x,i)=>dynamic[i]===x).length,
      top3Set=expected.slice(0,3).every(x=>dynamic.slice(0,5).includes(x)),
      vc=id=>buildVargaChart(id),
@@ -5014,8 +5035,8 @@ function renderMahadashaRankings(){
  let near=d.nearest;
  $("d60GateStatus").innerHTML=`<b>D60 ${d.gateLabel}</b><br>base ${Math.round(d.baseConfidence*100)}% · boundary gate ${Math.round(d.boundaryFactor*100)}% · effective ${Math.round(d.effectiveConfidence*100)}%${near?`<br>nearest: ${near.entity} · ${Number.isFinite(near.minutes)?near.minutes.toFixed(2)+" min":"—"} to boundary`:""}`;
  let sTop=r.support.slice(0,3).map(x=>x.lord).join(" → "),lTop=r.leverage.slice(0,3).map(x=>x.lord).join(" → "),
-     bench=prashanthMahadashaReconciliationBenchmark(),
-     benchHtml=bench?`<div class="rankDetailBox"><h4>Prashanth reconciliation benchmark · validation only</h4><p><b>Benchmark:</b> ${bench.expected.join(" → ")}</p><p><b>Current dynamic model:</b> ${bench.dynamic.join(" → ")}</p><p>Exact positions ${bench.exactPositions}/9 · cited divisional-placement audit ${bench.placementsPass?"PASS":"FAIL"}. This benchmark is <b>not</b> a scoring input; differences expose model calibration rather than being silently overridden.</p></div>`:"";
+     bench=referenceMahadashaReconciliationBenchmark(),
+     benchHtml=bench?`<div class="rankDetailBox"><h4>Reference chart reconciliation benchmark · validation only</h4><p><b>Benchmark:</b> ${bench.expected.join(" → ")}</p><p><b>Current dynamic model:</b> ${bench.dynamic.join(" → ")}</p><p>Exact positions ${bench.exactPositions}/9 · cited divisional-placement audit ${bench.placementsPass?"PASS":"FAIL"}. This benchmark is <b>not</b> a scoring input; differences expose model calibration rather than being silently overridden.</p></div>`:"";
  $("mahadashaEvidence").innerHTML=`<h3 style="margin:0;font-size:14px">Interpretation split</h3>
   <div class="rankDetailGrid">
    <div class="rankDetailBox"><h4>Overall support</h4><p>${sTop}</p><p>Support deliberately weights functional/natural benefit and domain-routed varga condition more than sheer activation.</p></div>
@@ -5047,10 +5068,10 @@ function mahadashaRankingInvariant(){
 }
 
 function renderRankings(){
- let regression=rankings.regression,pass=regression&&JSON.stringify(regression.planets)===JSON.stringify(PRASHANTH_RANKING_REGRESSION.planets)&&
-   JSON.stringify(regression.houses)===JSON.stringify(PRASHANTH_RANKING_REGRESSION.houses);
+ let regression=rankings.regression,pass=regression&&JSON.stringify(regression.planets)===JSON.stringify(REFERENCE_RANKING_REGRESSION.planets)&&
+   JSON.stringify(regression.houses)===JSON.stringify(REFERENCE_RANKING_REGRESSION.houses);
  $("rankingsModeNote").innerHTML=regression
-  ?`<b>Both rankings are dynamic · influence regression ${pass?"PASS":"FAIL"}.</b> Prashanth's historical influence values are used only as a regression target. Benefit/support is calculated independently from the natal chart and is not hard-coded.`
+  ?`<b>Both rankings are dynamic · influence regression ${pass?"PASS":"FAIL"}.</b> Reference chart's historical influence values are used only as a regression target. Benefit/support is calculated independently from the natal chart and is not hard-coded.`
   :`<b>Both rankings are dynamic.</b> Changing birth date, time or place recalculates influence/salience and benefit/support independently.`;
 
  let influenceCard=(x,type)=>{
@@ -5145,10 +5166,15 @@ function render(){
 }
 
 async function calculateProfile(tryProviders=true){
+ if(!validateProfileInputs())return;
+ const request=++profileCalculationVersion;
  $("profileStatus").textContent="Profile: calculating…";$("profileStatus").className="badge warn";
  if($("pLocationMode").value==="auto")await resolveBirthPlace(true);
- profile=readProfile();
+ if(request!==profileCalculationVersion)return;
  if(tryProviders)await Promise.allSettled([loadSwiss(),loadBazi()]);
+ if(request!==profileCalculationVersion)return;
+ profile=readProfile();
+ captureActiveProfile();persistProfiles();renderSavedProfilePicker();
  scoreCache.clear();periodCache.clear();structuralCache.clear();
  chart=buildNatal(profile);
  let libBirth=tryBaziBirth();chart.sajuBirth=libBirth||sajuFallbackAt(chart.birthMs);chart.daeunStartAge=jieStartAge();chart.yongsin=inferYongsin();
@@ -5159,8 +5185,8 @@ async function calculateProfile(tryProviders=true){
  for(const id of["dharmaDate","westernPathDate","sajuCultivationDate"]){
   if($(id)){$(id).min=profile.date;$(id).max=$("inspectDate").max;$(id).value=$("inspectDate").value;}
  }
- let ephem=swissReady?"Swiss Ephemeris":(chart.natalSource==="validated Prashanth natal reference"?"validated Prashanth natal reference + runtime fallback":"internal fallback");
- $("ephemStatus").textContent=`Ephemeris: ${ephem}`;$("ephemStatus").className="badge "+(swissReady||isGoldenPrashanth()?"good":"warn");
+ let ephem=swissReady?"Swiss Ephemeris":(chart.natalSource==="validated reference ephemeris"?"validated reference ephemeris + runtime fallback":"internal fallback");
+ $("ephemStatus").textContent=`Ephemeris: ${ephem}`;$("ephemStatus").className="badge "+(swissReady||isReferenceProfile()?"good":"warn");
  $("baziStatus").textContent=`Saju: ${libBirth?baziProvider:"internal + Jie approximation"} · full hidden-stem structural engine`;$("baziStatus").className="badge "+(libBirth?"good":"warn");
  $("profileStatus").textContent=`Profile: ${profile.name} · ${profile.city}, ${profile.country} · Evidence ${structuralEvidenceLabel()} · Yongsin ${chart.yongsin} · Daeun ${chart.daeunStartAge.toFixed(2)}y`;
  $("profileStatus").className="badge good";
@@ -5304,7 +5330,7 @@ window.AstroHeatmap={
  getCycleFamilies:()=>selectedCycleKeys().map(k=>structuredClone(CYCLE_FAMILIES[k])),
  getNatalRankings:()=>structuredClone(rankings),
  getMahadashaRankings:()=>structuredClone(calculateMahadashaRankings()),
- getMahadashaReconciliationBenchmark:()=>structuredClone(prashanthMahadashaReconciliationBenchmark()),
+ getMahadashaReconciliationBenchmark:()=>structuredClone(referenceMahadashaReconciliationBenchmark()),
  getD60SensitivityAssessment:()=>structuredClone(d60SensitivityAssessment()),
  getNatalDimensionMetrics:(type,entity,domain)=>{let di=DOMAINS.indexOf(domain);return type==="planet"?planetDimensionMetrics(entity,di):houseDimensionMetrics(+entity,di)},
  getVedicTimingBreakdown:(ms,domain)=>vedicTimingBreakdown(ms,DOMAINS.indexOf(domain)),
@@ -5352,6 +5378,7 @@ function _tap(el,fn){
 }
 const _isMobile=()=>window.matchMedia("(max-width:768px)").matches;
 function toggleProfilePanel(){
+ closeNavGroups();
  const overlay=$("profileOverlay");
  if(!overlay)return;
  const opening=!overlay.classList.contains("open");
@@ -5473,8 +5500,12 @@ function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.valu
 
 function switchTab(which){
  closeHeatPreview();
+ const openGroup=document.querySelector(".nav-group-menu:not([hidden])");
+ const groupTrigger=openGroup?.dataset.trigger;closeNavGroups();
+ if(groupTrigger)$(groupTrigger).focus({preventScroll:true});
  const ALL_TABS=["heatmap","cycles","playbook","rankings","dharma","westernPath","sajuCultivation","guide","validation"];
  if(!ALL_TABS.includes(which))return;
+ updatePageTitle(which);
  const previous=document.querySelector(".tabPanel.active");
  if(previous)previous.dataset.scrollTop=$("content").scrollTop;
  for(const id of ALL_TABS){
@@ -5917,12 +5948,99 @@ setupSubtabs("sajuSubtabRow",{
  "saju-timing":["saju-timing"]
 });
 
+const PROFILE_FIELDS=['pName','pDate','pTime','pCity','pCountry','pLocationMode','pLat','pLon','pTz','pTzId','pSex','pAyan','pHouse','pBirthConfidence','pHorizon','pYongsin','pDaeunAge','sampleMode'];
+const FAMILY_PRESETS=[
+ {id:'father',name:'Prashanth Kumar',date:'1982-03-13',time:'22:55:00',city:'Khartoum',country:'Sudan',sex:'male'},
+ {id:'mother',name:'Shyamala Gurumurthy',date:'1987-05-09',time:'21:10:00',city:'Chennai',country:'India',sex:'female'},
+ {id:'son1',name:'Vrushank Prashanth',date:'2020-03-27',time:'08:37:07',city:'Fremont',country:'United States',sex:'male'},
+ {id:'son2',name:'Shreyan Prashanth',date:'2023-05-15',time:'10:42:00',city:'Fremont',country:'United States',sex:'male'}
+];
+let savedProfiles={},activeProfileId='father',profileCalculationVersion=0;
+function profileDefaults(p){
+ const loc=CITY_DB[cityKey(p.city,p.country)];
+ return {pName:p.name,pDate:p.date,pTime:p.time,pCity:p.city,pCountry:p.country,pLocationMode:'auto',pLat:String(loc.lat),pLon:String(loc.lon),pTz:String(tzOffsetFor(loc.tzid,p.date,p.time)),pTzId:loc.tzid,pSex:p.sex,pAyan:'lahiri',pHouse:'W',pBirthConfidence:'recorded',pHorizon:'100',pYongsin:'auto',pDaeunAge:'',sampleMode:'3'};
+}
+function persistProfiles(){
+ try{localStorage.setItem('kala-family-profiles-v1',JSON.stringify({active:activeProfileId,profiles:savedProfiles}));return true}catch(e){$('savedProfileStatus').textContent='Changes are available for this session; browser storage is unavailable.';return false}
+}
+function captureActiveProfile(){
+ if(!savedProfiles[activeProfileId])return;
+ savedProfiles[activeProfileId].fields=Object.fromEntries(PROFILE_FIELDS.map(id=>[id,$(id).value]));
+ savedProfiles[activeProfileId].dharma=structuredClone(receivedDharma);
+}
+function renderSavedProfilePicker(){
+ const select=$('savedProfilePicker');select.innerHTML='';
+ FAMILY_PRESETS.forEach(p=>select.add(new Option(savedProfiles[p.id].fields.pName||p.name,p.id)));select.value=activeProfileId;
+}
+function loadSavedProfile(id){
+ const entry=savedProfiles[id];if(!entry)return;
+ activeProfileId=id;
+ PROFILE_FIELDS.forEach(key=>{if(entry.fields[key]!=null)$(key).value=entry.fields[key]});
+ receivedDharma=entry.dharma?structuredClone(entry.dharma):{ownerKey:dharmaProfileKey(readProfile()),kuladevata:'',kulaDevi:'',establishedIshta:'',guruLineage:'',source:'No received practice recorded'};
+ renderSavedProfilePicker();setLocationMode();_syncStrip();
+ document.querySelectorAll('.tabPanel').forEach(el=>delete el.dataset.scrollTop);
+ $('validationTable').dataset.autorun='';
+}
+function setupSavedProfiles(){
+ let stored=null;try{stored=JSON.parse(localStorage.getItem('kala-family-profiles-v1')||'null')}catch(e){}
+ FAMILY_PRESETS.forEach(p=>{
+  const fields=profileDefaults(p),old=stored?.profiles?.[p.id];
+  // Only known form values are restored; no arbitrary storage keys become fields.
+  if(old?.fields)PROFILE_FIELDS.forEach(k=>{if(typeof old.fields[k]==='string')fields[k]=old.fields[k]});
+  savedProfiles[p.id]={fields,dharma:old?.dharma||(p.id==='father'?structuredClone(receivedDharma):null)};
+ });
+ loadSavedProfile(FAMILY_PRESETS.some(p=>p.id===stored?.active)?stored.active:'father');
+ $('savedProfilePicker').onchange=async e=>{
+  captureActiveProfile();loadSavedProfile(e.target.value);persistProfiles();
+  $('savedProfileStatus').textContent='Profile switched. Edits to the previous profile were saved.';
+  await calculateProfile(false);
+ };
+ $('saveProfileBtn').onclick=async()=>{
+  if(!validateProfileInputs())return;
+  captureActiveProfile();if(persistProfiles())$('savedProfileStatus').textContent='Profile saved in this browser.';
+  renderSavedProfilePicker();await calculateProfile(false);
+ };
+ window.addEventListener('pagehide',()=>{captureActiveProfile();persistProfiles()});
+}
+function validateProfileInputs(){
+ for(const id of ['pDate','pTime','pLat','pLon','pTz']){const input=$(id);if(!input.value||!input.checkValidity()){input.reportValidity();$('savedProfileStatus').textContent='Enter a valid birth date, time and location before calculating.';return false}}
+ return true;
+}
+const PAGE_TITLES={heatmap:'Kāla',cycles:'Cycles',playbook:'Playbook',rankings:'Natal Maps',dharma:'Vedic · Dharma',westernPath:'Western · Inner Path',sajuCultivation:'Saju · Cultivation',guide:'Integration Guide',validation:'Validation'};
+function updatePageTitle(which){
+ const title=PAGE_TITLES[which]||'Kāla';$('activePageTitle').textContent=title;$('desktopPageTitle').textContent=title;document.title=title+' · Astrology Engine';
+ for(const [group,ids] of Object.entries({paths:['dharma','westernPath','sajuCultivation'],more:['guide','validation']})){
+  const btn=$('mbn-'+group);if(btn){btn.classList.toggle('active',ids.includes(which));btn.setAttribute('aria-current',ids.includes(which)?'page':'false')}
+ }
+}
+function closeNavGroups(){
+ document.querySelectorAll('.nav-group-menu').forEach(menu=>{menu.hidden=true;$(menu.dataset.trigger)?.setAttribute('aria-expanded','false')});
+}
+function setupGroupedNavigation(){
+ const nav=$('mobileBottomNav');
+ for(const [id,label,icon,items] of [['paths','Paths','☸',['dharma','westernPath','sajuCultivation']],['more','More','⋯',['guide','validation']]]){
+  const group=document.createElement('div');group.className='nav-group';
+  const button=document.createElement('button');button.className='mbn-btn';button.id='mbn-'+id;button.type='button';button.innerHTML=`<span class="nav-group-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;
+  const menu=document.createElement('div');menu.className='nav-group-menu';menu.id='nav-'+id;menu.hidden=true;menu.dataset.trigger=button.id;menu.setAttribute('role','group');menu.setAttribute('aria-label',label);
+  button.setAttribute('aria-controls',menu.id);button.setAttribute('aria-expanded','false');
+  items.forEach(tab=>{const item=$('mbn-'+tab);if(item)menu.appendChild(item)});
+  button.onclick=()=>{const opening=menu.hidden;closeNavGroups();closeHeatPreview();menu.hidden=!opening;button.setAttribute('aria-expanded',String(opening))};
+  group.append(button,menu);nav.appendChild(group);
+ }
+ document.addEventListener('pointerdown',e=>{if(!e.target.closest('.nav-group'))closeNavGroups()},true);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){const menu=document.querySelector('.nav-group-menu:not([hidden])');if(menu){closeNavGroups();$(menu.dataset.trigger).focus()}}});
+ updatePageTitle('heatmap');
+}
+
+setupSavedProfiles();
+setupGroupedNavigation();
 // Sync strip on load
 document.querySelectorAll("#profilePanel input,#profilePanel select").forEach(el=>el.addEventListener("change",_syncStrip));
 
 document.querySelectorAll(".field").forEach(field=>{const label=field.querySelector("label"),input=field.querySelector("input,select");if(label&&input)label.htmlFor=input.id});
 $("inspectDate").setAttribute("aria-label","Inspect cycle date");
 window.matchMedia("(max-width:768px)").addEventListener("change",()=>{
+ closeNavGroups();
  const overlay=$("profileOverlay");overlay.classList.remove("open");
  overlay.removeAttribute("role");overlay.removeAttribute("aria-modal");
  $("content").inert=false;$("mobileBottomNav").inert=false;document.body.style.overflow="";
