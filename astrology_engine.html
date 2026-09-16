@@ -612,7 +612,9 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
  .kala-systems{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
 }
 
-</style>
+
+.catalogControls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}.catalogControls label{display:grid;gap:5px;font-size:13px;min-width:0}.catalogControls input,.catalogControls select{width:100%;min-width:0;min-height:44px;font-size:16px}.catalogEntry{border-bottom:1px solid var(--line,#d8cdb9);padding:9px 0}.catalogEntry summary{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;min-height:44px}.catalogEntry summary>span:first-child{font-weight:600}.catalogTag{border:1px solid #b9ab91;border-radius:6px;padding:3px 6px;font-size:12px;flex-shrink:0;max-width:45%;overflow-wrap:anywhere}.catalogEntryBody{padding:8px 0;font-size:14px;line-height:1.6}.catalogMeter{display:grid;gap:5px;margin:8px 0;font-size:13px}.catalogMeter meter{width:100%;height:14px;accent-color:#917335}.catalogBrowser{min-width:0}.catalogResults{max-height:560px;overflow:auto;overscroll-behavior:contain}.shaniTimeline{border-left:2px solid #b4a17e;padding-left:15px;margin:12px 5px}.shaniWindow{position:relative;padding:10px 8px;margin:8px 0;border-radius:8px;background:rgba(164,138,84,.07)}.shaniWindow:before{content:'';position:absolute;left:-21px;top:20px;width:10px;height:10px;border-radius:50%;background:#a48a54}.shaniWindow.current{outline:2px solid #9b773c}.shaniWindow summary{cursor:pointer;display:grid;gap:6px;min-height:44px}.shaniWindow small{font-size:13px}.shaniWindow p{font-size:14px}.catalogEntryBody p{overflow-wrap:anywhere}@media(max-width:600px){.catalogControls{grid-template-columns:1fr 1fr}.catalogControls label:first-child{grid-column:1/-1}.catalogResults{max-height:65vh}.catalogTag{font-size:12px}.nav-group-menu{max-width:calc(100vw - 24px)}}
+.transitBar{height:8px;background:linear-gradient(90deg,#eee4d6 49.5%,#887b67 49.5%,#887b67 50.5%,#eee4d6 50.5%);position:relative;margin:5px 0 10px;border-radius:4px}.transitBar i{height:100%;position:absolute;border-radius:3px}</style>
 </head>
 <body>
 
@@ -744,7 +746,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
   <button class="appTabBtn" id="cyclesTabBtn">Cycles</button>
   <button class="appTabBtn" id="playbookTabBtn">Playbook</button>
   <button class="appTabBtn" id="rankingsTabBtn">Natal maps & rankings</button>
-  <button class="appTabBtn" id="dharmaTabBtn">Vedic · Dharma</button>
+  <button class="appTabBtn" id="vedicYogaTabBtn">Vedic · Yogas</button><button class="appTabBtn" id="dharmaTabBtn">Vedic · Dharma</button>
   <button class="appTabBtn" id="westernPathTabBtn">Western · Inner Path</button>
   <button class="appTabBtn" id="sajuCultivationTabBtn">Saju · Cultivation</button>
   <button class="appTabBtn" id="guideTabBtn">Integration guide</button>
@@ -782,7 +784,26 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
    </div>
 
    <!-- Tab 2: Cycles -->
-   <div class="tabPanel" id="cyclesTab">
+   <div class="tabPanel" id="cyclesTab"><details id="gocharaDetails" class="card"><summary>Transit delivery · Gochara evidence</summary>  <div class="card" id="vedicGocharaCard" style="margin-top:12px">
+   <div class="natalMapHeader">
+    <div>
+     <h3>Vedic Gochara overlay · projected sky × natal chart × active dasha</h3>
+     <div class="small">The Vedic score is no longer dasha-only. For the selected phase the engine projects sidereal transits using the selected ayanāṃśa, evaluates Gochara from natal Moon, whole-sign activation from Lagna, Parāśari graha dṛṣṭi, contacts to active dasha lords, Jupiter–Saturn double-transit activation, nodes, dignity, retrogression and combustion. Long periods are sampled across the period rather than using today's sky.</div>
+    </div>
+    <div class="natalMapLegend" id="vedicGocharaBadge">Gochara: —</div>
+   </div>
+   <div class="supportLegend">
+    <div><b>Dasha promise</b><br>Natal + routed divisional evidence determines the structural promise and direction.</div>
+    <div><b>Gochara delivery</b><br>Projected transits modify timing/intensity. Weight increases as the selected period becomes shorter.</div>
+    <div><b>Provider-aware</b><br>Swiss Ephemeris is preferred. If the runtime falls back to the analytical ephemeris, the panel says so explicitly.</div>
+   </div>
+   <div class="dharmaGrid2" style="margin-top:10px">
+    <div class="routineGrid" id="vedicGocharaTransitGrid"></div>
+    <div class="routineGrid" id="vedicGocharaTriggerGrid"></div>
+   </div>
+  </div>
+
+</details>
     <div class="kala-nav-row cycle-nav-row" id="cycleNavRow">
      <button class="kala-back-btn" id="zoomOutBtn" style="display:none">← Back</button>
      <div class="kala-crumbs" id="crumbs"></div>
@@ -984,7 +1005,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
     <div id="dailyTextAnchors" class="textGrid"></div>
     <div class="subsectionTitle">Study curriculum · foundation first</div>
     <div id="textGrid" class="textGrid"></div>
-    <details class="rankSummaryDetails"><summary>Additional registry affinities + provenance</summary><div id="textAffinityGrid" class="textGrid" style="margin-top:8px"></div></details>
+    <details class="rankSummaryDetails"><summary>Browse all texts · affinities + provenance</summary><div id="textAffinityGrid" class="textGrid" style="margin-top:8px"></div></details>
     <div class="subsectionTitle">Registry provenance</div><div id="knowledgeRegistryProvenance" class="routineGrid"></div>
    </div>
 
@@ -1014,7 +1035,44 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
  </div>
 
    <!-- Tab 6: Western Path -->
-   <div class="tabPanel" id="westernPathTab">
+   <div class="tabPanel" id="vedicYogaTab">
+  <div class="dharmaHero">
+   <div><div class="eyebrow">Vedic / Jyotish · configuration activation</div>
+    <h2>Major Vedic Yoga Registry & Śani Cycles</h2>
+    <div class="small">A major yoga/configuration is selected generically from the current chart against a versioned rule registry, then its <b>activation</b> is evaluated from participating dasha lords and projected Gochara. Śani cycles are computed directly from transiting sidereal Saturn relative to the natal Moon. These are timing/configuration layers, not deterministic promises of events.</div>
+   </div>
+   <div class="dharmaControls">
+    <label>Inspect date<input type="date" id="vedicYogaDate"></label>
+   </div>
+  </div>
+  <div class="dharmaNotice" id="vedicYogaNotice">—</div>
+  <div class="dharmaGrid2">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Natal yoga registry</h3><span class="small">detected dynamically from current D1</span></div>
+    <div id="vedicYogaList" class="routineGrid"></div>
+   </div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Activation at selected date</h3><span class="small">dasha × Gochara trigger layer</span></div>
+    <div id="vedicYogaActivation" class="routineGrid"></div>
+   </div>
+  </div>
+  <div class="dharmaGrid2">
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Śani cycle now</h3><span class="small">from natal Moon · selected sidereal ayanāṃśa</span></div>
+    <div id="shaniCurrentGrid" class="routineGrid"></div>
+   </div>
+   <div class="dharmaCard">
+    <div class="dharmaCardHead"><h3>Śani windows</h3><span class="small">Sāḍe Sātī + 4th/8th Moon transit windows</span></div>
+    <div id="shaniWindowGrid" class="routineGrid"></div>
+   </div>
+  </div>
+  <div class="dharmaCard">
+   <div class="dharmaCardHead"><h3>Method boundary</h3><span class="small">avoid double-counting</span></div>
+   <div class="small"><b>Important:</b> natal yoga strength is mostly already represented by the natal/varga planet and house metrics. Therefore yoga detection is used primarily as an <b>explanatory activation overlay</b>, not as a second independent benefic score. Sāḍe Sātī/Ashtama/Ardha-Ashtama are also not labeled simply “good” or “bad”; the engine reports the Saturn phase and lets the natal Saturn condition, dasha context and Gochara determine direction.</div>
+  </div>
+ </div>
+
+<div class="tabPanel" id="westernPathTab">
   <div class="subtab-row" id="westernSubtabRow">
    <button class="subtab-btn active" data-stab="west-orientation">Orientation</button>
    <button class="subtab-btn" data-stab="west-practice">Practice</button>
@@ -1452,7 +1510,7 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
         <li>Received family/Guru/Iṣṭa information remains a separate precedence layer and is never inferred from the registry.</li>
         <li>Daily routines are assembled only from public/non-initiatory practices. Bīja, nyāsa, forced breath-retention and initiation-dependent procedures are excluded from automatic selection.</li>
         <li>Study recommendations are <b>foundation first</b>; there is no universal age-based curriculum. Intermediate/advanced affinity is visible but does not claim readiness.</li>
-        <li>Extend at runtime with <code>AstroHeatmap.registerVedicKnowledge("path"|"devata"|"practice"|"text"|"planetDevataRule"|"karakamsha12Rule"|"specializedForm"|"source", item)</code>.</li>
+        <li>Extend at runtime with <code>AstroHeatmap.registerVedicKnowledge("path"|"devata"|"practice"|"text"|"planetDevataRule"|"karakamsha12Rule"|"specializedForm"|"devataForm"|"devataFamily"|"practiceFamily"|"source", item)</code>.</li>
       </ul>
     </div>
 <div class="guideBox"><h4>Classical-first devatā engine</h4>
@@ -1508,7 +1566,7 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
    </svg>
    Natal
   </button>
-  <button class="mbn-btn" id="mbn-dharma">
+  <button class="mbn-btn" id="mbn-vedicYoga"><span aria-hidden="true">☼</span><span>Yogas</span></button><button class="mbn-btn" id="mbn-dharma">
    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
     <circle cx="10" cy="10" r="7"/>
     <circle cx="10" cy="10" r="2"/>
@@ -2625,29 +2683,792 @@ function vedicConnectionScore(name,di){
  return den?clamp(num/den,-2,2):0;
 }
 function vedicLordDomainOutcome(lord,di){
- let m=planetDimensionMetrics(lord,di);
+ const key=`vlord:${lord}:${di}`,cached=scoreCache.get(key);if(cached?.chart===chart)return cached.value;
+ let m=cachedVedicMetric("planet",lord,di);
  if(!Number.isFinite(m.support))return 0;
  // Support determines direction; influence determines how much of that domain is mobilized.
  // The directional carrier captures domain-specific productivity even when overall beneficence is mixed.
  let supportedActivation=m.support*(.45+.55*m.influence/100),
      carrier=clamp(2*m.directional,-2,2)*(m.influence/100),
      connections=vedicConnectionScore(lord,di);
- return clamp(.55*supportedActivation+.30*carrier+.15*connections,-2,2);
+ const value=clamp(.55*supportedActivation+.30*carrier+.15*connections,-2,2);scoreCache.set(key,{chart,value});return value;
 }
+const VEDIC_GOCHARA_MOON_GOOD={
+ Sun:[3,6,10,11],Moon:[1,3,6,7,10,11],Mars:[3,6,11],Mercury:[2,4,6,8,10,11],
+ Jupiter:[2,5,7,9,11],Venus:[1,2,3,4,5,8,9,11,12],Saturn:[3,6,11],Rahu:[3,6,11],Ketu:[3,6,11]
+};
+
+const VEDIC_GOCHARA_BODY_WEIGHT={Sun:.62,Moon:.42,Mars:.82,Mercury:.68,Venus:.68,Jupiter:1.25,Saturn:1.25,Rahu:1.05,Ketu:1.05};
+
+const VEDIC_COMBUST_ORB={Mercury:14,Venus:10,Mars:17,Jupiter:11,Saturn:15};
+
+const VEDIC_GOCHARA_DEPTH_WEIGHT={0:.08,1:.10,2:.17,3:.27,4:.34,5:.38};
+
+function vedicStructuralDashaScore(ms,di){
+ let path=activePathAt(ms,5);if(!path.length)return 0;
+ let weights=VEDIC_LEVEL_WEIGHTS.slice(0,path.length),den=weights.reduce((a,b)=>a+b,0)||1,v=0;
+ for(let d=0;d<path.length;d++)v+=vedicLordDomainOutcome(path[d],di)*weights[d];
+ return clamp(v/den,-2,2);
+}
+
+function gocharaWeightForDepth(depth){return VEDIC_GOCHARA_DEPTH_WEIGHT[Math.max(0,Math.min(5,depth||0))]??.27}
+
+function vedicDrishtiOffsets(body){
+ if(body==="Mars")return[3,6,7];
+ if(body==="Jupiter")return[4,6,8];
+ if(body==="Saturn")return[2,6,9];
+ return[6];
+}
+
+function vedicSignTargets(body,fromSign){return[...new Set([fromSign,...vedicDrishtiOffsets(body).map(o=>(fromSign+o)%12)])]}
+
+function vedicGocharaMoonQuality(body,houseFromMoon){
+ let good=VEDIC_GOCHARA_MOON_GOOD[body]||[];
+ if(good.includes(houseFromMoon))return 1;
+ if(body==="Saturn"&&[12,1,2].includes(houseFromMoon))return-1;
+ if(["Mars","Rahu","Ketu"].includes(body)&&[1,4,7,8,12].includes(houseFromMoon))return-.72;
+ if(body==="Jupiter")return-.55;
+ return-.40;
+}
+
+function vedicTransitDignity(body,sign){
+ if(!CLASSICAL.includes(body))return 0;
+ if(EXALT_SIGN[body]===sign)return 1;
+ if(DEBIL_SIGN[body]===sign)return-1;
+ if((OWN_SIGNS[body]||[]).includes(sign))return .62;
+ return 0;
+}
+
+function vedicCombustState(body,lon,sunLon,ret=false){
+ let base=VEDIC_COMBUST_ORB[body];if(!base)return{combust:false,sep:angularSep(lon,sunLon),orb:null};
+ let orb=body==="Mercury"&&ret?12:body==="Venus"&&ret?8:base,sep=angularSep(lon,sunLon);
+ return{combust:sep<=orb,sep,orb};
+}
+
+function calcVedicTransitSet(ms){
+ let key=`vgo:${Math.round(ms/3600000)}`;if(scoreCache.has(key))return scoreCache.get(key);
+ let jd=jdFromMs(ms),ay=ayanamsa(jd,profile.ayanamsa),trop=calcTransitSet(ms),o={},
+     ascSign=signIndex(chart.sidAsc),moonSign=signIndex(chart.sidereal.Moon.lon);
+ for(const name of CLASSICAL){
+  let x=trop[name],lon=norm(x.lon-ay),sign=signIndex(lon);
+  o[name]={name,lon,sign,speed:x.speed,ret:!!x.ret,src:x.src,fromLagna:((sign-ascSign+12)%12)+1,fromMoon:((sign-moonSign+12)%12)+1};
+ }
+ let node=calcPlanet("Mean Node","SE_MEAN_NODE",10,jd),rahuLon=norm(node.lon-ay),ketuLon=norm(rahuLon+180);
+ for(const [name,lon] of [["Rahu",rahuLon],["Ketu",ketuLon]]){
+  let sign=signIndex(lon);o[name]={name,lon,sign,speed:node.speed,ret:true,src:node.src,fromLagna:((sign-ascSign+12)%12)+1,fromMoon:((sign-moonSign+12)%12)+1};
+ }
+ for(const name of CLASSICAL){
+  let c=vedicCombustState(name,o[name].lon,o.Sun.lon,o[name].ret);o[name].combust=c.combust;o[name].combustSep=c.sep;o[name].combustOrb=c.orb;
+ }
+ o._meta={jd,ayanamsa:ay,provider:Object.values(o).filter(x=>x?.name).every(x=>String(x.src).includes("Swiss"))?"Swiss Ephemeris":"analytical / mixed fallback"};
+ scoreCache.set(key,o);return o;
+}
+
+function vedicTransitContact(body,t,natalName){
+ let n=chart.sidereal[natalName];if(!n)return null;
+ let sep=angularSep(t.lon,n.lon),sameSign=t.sign===signIndex(n.lon),targets=vedicDrishtiOffsets(body).map(o=>(t.sign+o)%12),
+     drishti=targets.includes(signIndex(n.lon)),exactConj=sameSign&&sep<=5,exactOpp=Math.abs(sep-180)<=5;
+ if(!sameSign&&!drishti&&!exactOpp)return null;
+ let strength=exactConj?1:exactOpp?.90:drishti?.72:.52;
+ return{body,target:natalName,sep,sameSign,drishti,exactConj,exactOpp,strength,
+   label:exactConj?`conjunct natal ${natalName} ${sep.toFixed(1)}°`:exactOpp?`opposite natal ${natalName} ${Math.abs(sep-180).toFixed(1)}° orb`:drishti?`graha dṛṣṭi to natal ${natalName}`:`same-sign activation of natal ${natalName}`};
+}
+
+function cachedVedicMetric(type,entity,di){
+ const key=`vmetric:${type}:${entity}:${di}`,entry=scoreCache.get(key);if(entry?.chart===chart)return entry.value;
+ const value=aggregateStructuralMetrics(type,entity,di);scoreCache.set(key,{chart,value});return value;
+}
+function vedicBodyGocharaContribution(body,t,di,path){
+ let natal=cachedVedicMetric("planet",body,di),natalDir=clamp((natal?.support||0)/2,-1,1),moonQ=vedicGocharaMoonQuality(body,t.fromMoon),
+     dignity=vedicTransitDignity(body,t.sign),baseDir=clamp(.46*moonQ+.34*natalDir+.20*dignity,-1,1),
+     lagnaRel=clamp(Math.abs(HOUSE_PROFILE[t.fromLagna]?.[di]||0)/1.2,0,1),activation=.44+.56*lagnaRel,
+     idx=path.indexOf(body),dashaMult=idx>=0?1+.30*(VEDIC_LEVEL_WEIGHTS[idx]||.15)/.25:1,
+     stateMult=(t.ret?1.08:1)*(t.combust?.84:1),contacts=[];
+ let contactNum=0,contactDen=0;
+ for(let i=0;i<path.length;i++){
+  let target=path[i],c=vedicTransitContact(body,t,target);if(!c)continue;
+  let targetDir=clamp(vedicLordDomainOutcome(target,di)/2,-1,1),lw=VEDIC_LEVEL_WEIGHTS[i]||.15,dir=clamp(.55*baseDir+.45*targetDir,-1,1),w=c.strength*lw;
+  contactNum+=dir*w;contactDen+=w;contacts.push({...c,level:LEVELS[i],direction:dir});
+ }
+ if(["Rahu","Ketu"].includes(body)){
+  let ascSep=angularSep(t.lon,chart.sidAsc),moonSep=angularSep(t.lon,chart.sidereal.Moon.lon);
+  if(ascSep<=5){contactNum+=baseDir*.18;contactDen+=.18;contacts.push({label:`${body} within ${ascSep.toFixed(1)}° of natal Ascendant`,strength:.85,direction:baseDir})}
+  if(moonSep<=5){contactNum+=baseDir*.18;contactDen+=.18;contacts.push({label:`${body} within ${moonSep.toFixed(1)}° of natal Moon`,strength:.85,direction:baseDir})}
+ }
+ let contactDir=contactDen?contactNum/contactDen:0,direction=clamp(.76*baseDir+.24*contactDir,-1,1),
+     importance=(VEDIC_GOCHARA_BODY_WEIGHT[body]||.6)*activation*dashaMult*stateMult,contribution=direction*importance;
+ return{body,direction,importance,contribution,moonQ,natalDir,dignity,activation,dashaMult,stateMult,contacts,fromMoon:t.fromMoon,fromLagna:t.fromLagna,sign:t.sign,ret:t.ret,combust:t.combust};
+}
+
+function vedicDoubleTransitActivation(trans,di,path){
+ let j=trans.Jupiter,s=trans.Saturn;if(!j||!s)return{score:0,houses:[],activeLordHits:[]};
+ let jt=new Set(vedicSignTargets("Jupiter",j.sign)),st=new Set(vedicSignTargets("Saturn",s.sign)),ascSign=signIndex(chart.sidAsc),houses=[],num=0,den=0;
+ for(let h=1;h<=12;h++){
+  let sign=(ascSign+h-1)%12;if(!jt.has(sign)||!st.has(sign))continue;
+  let hm=cachedVedicMetric("house",h,di),rel=clamp(hm?.relevance??0,0,1),dir=clamp((hm?.support||0)/2,-1,1);
+  if(rel>.08){houses.push({house:h,sign,direction:dir,relevance:rel});num+=dir*rel;den+=rel}
+ }
+ let activeLordHits=[];
+ for(let i=0;i<path.length;i++){
+  let n=chart.sidereal[path[i]];if(n&&jt.has(signIndex(n.lon))&&st.has(signIndex(n.lon)))activeLordHits.push({lord:path[i],level:LEVELS[i]});
+ }
+ let score=den?clamp(num/den,-1,1):0;if(activeLordHits.length)score=clamp(score+.18*Math.sign(score||1),-1,1);
+ return{score,houses,activeLordHits};
+}
+
+function vedicGocharaScore(ms,di,path=activePathAt(ms,5)){
+ let trans=calcVedicTransitSet(ms),rows=[],num=0,den=0;
+ for(const body of [...CLASSICAL,"Rahu","Ketu"]){
+  let r=vedicBodyGocharaContribution(body,trans[body],di,path);rows.push(r);num+=r.contribution;den+=r.importance;
+ }
+ let base=den?num/den:0,doubleTransit=vedicDoubleTransitActivation(trans,di,path),normalized=clamp(.86*base+.14*doubleTransit.score,-1,1),score=clamp(2*normalized,-2,2);
+ rows.sort((a,b)=>Math.abs(b.contribution)-Math.abs(a.contribution));
+ return{score,normalized,rows,doubleTransit,trans,provider:trans._meta.provider,ayanamsa:trans._meta.ayanamsa};
+}
+
+function vedicPeriodSampleTimes(period){
+ let durDays=Math.max(.01,(period.b-period.a)/86400000),depth=period.depth||period.path?.length||0,
+     targetDays=depth<=1?240:depth===2?30:depth===3?5:depth===4?1:.25,
+     cap=depth<=1?32:depth===2?24:depth===3?20:depth===4?15:12,n=Math.max(3,Math.min(cap,Math.ceil(durDays/targetDays)+1)),out=[];
+ for(let i=0;i<n;i++)out.push(period.a+(period.b-period.a)*(i+.5)/n);
+ return out;
+}
+
+function scoreVedicPeriod(period,di){
+ let depth=period.depth||period.path?.length||0,key=`vp:${period.a}:${period.b}:${depth}:${di}`;
+ if(scoreCache.has(key))return scoreCache.get(key);
+ let ts=vedicPeriodSampleTimes(period),gw=gocharaWeightForDepth(depth),vals=ts.map(ms=>{
+  let path=activePathAt(ms,5),structural=vedicStructuralDashaScore(ms,di),g=vedicGocharaScore(ms,di,path).score;
+  return clamp((1-gw)*structural+gw*g,-2,2);
+ });
+ let v=vals.reduce((a,b)=>a+b,0)/Math.max(1,vals.length);scoreCache.set(key,v);return v;
+}
+
+function vedicGocharaInvariant(){
+ let favOk=JSON.stringify(VEDIC_GOCHARA_MOON_GOOD.Jupiter)===JSON.stringify([2,5,7,9,11])&&JSON.stringify(VEDIC_GOCHARA_MOON_GOOD.Saturn)===JSON.stringify([3,6,11])&&JSON.stringify(VEDIC_GOCHARA_MOON_GOOD.Mercury)===JSON.stringify([2,4,6,8,10,11]),
+     aspOk=JSON.stringify(vedicDrishtiOffsets("Mars"))===JSON.stringify([3,6,7])&&JSON.stringify(vedicDrishtiOffsets("Jupiter"))===JSON.stringify([4,6,8])&&JSON.stringify(vedicDrishtiOffsets("Saturn"))===JSON.stringify([2,6,9]),
+     node=chart?calcVedicTransitSet(chart.birthMs):null,nodeOk=!!node&&Math.abs(angularSep(node.Rahu.lon,node.Ketu.lon)-180)<1e-6,
+     scoreOk=chart?DOMAINS.every((d,i)=>Number.isFinite(vedicGocharaScore(chart.birthMs,i,activePathAt(chart.birthMs,5)).score)):true;
+ return{ok:favOk&&aspOk&&nodeOk&&scoreOk,detail:`Moon-house table ${favOk?"PASS":"FAIL"} · Parāśari aspects ${aspOk?"PASS":"FAIL"} · nodes opposite ${nodeOk?"PASS":"FAIL"} · finite domain scores ${scoreOk?"PASS":"FAIL"}`};
+}
+
+const VEDIC_YOGA_REGISTRY={
+ version:"2026.09-v2-major-classical",
+ runtimePolicy:"generic natal detection → structural salience → Vimshottari activation → projected Gochara with selected ayanāṃśa",
+ coverage:{
+  included:[
+   "Pancha Mahapurusha","Moon yogas","Sun yogas","Parivartana classifications",
+   "Kendra–Trikona / Dharma–Karma Raja Yoga","Dhana associations","Viparita Raja Yoga",
+   "Neecha-bhanga","Lakshmi / Saraswati / Amala / Vasumati","selected nodal afflictions"
+  ],
+  boundary:"Major practical/classical registry, not every named yoga in every Sanskrit text, regional school, Jaimini corpus, Tajika system or modern compilation. School-dependent variants are labeled instead of silently merged."
+ },
+ sources:{
+  "classical-major":{label:"Classical / widely transmitted Jyotish rule family",note:"Core geometry is widely used; exact cancellation, dignity and exception clauses can vary by text/commentary."},
+  "parashari-major":{label:"Parāśari-style house/lord framework",note:"Whole-sign D1 lordship, graha dṛṣṭi and dignity are used consistently with this engine."},
+  "engine-strict":{label:"Engine strictness convention",note:"Used where popular practice is broader than this engine; the stricter threshold is disclosed."},
+  "school-variable":{label:"School-variable rule",note:"The engine chooses one explicit conservative implementation and exposes the condition."}
+ },
+ definitions:[
+  {id:"gaja-kesari",name:"Gaja Kesari Yoga",category:"Moon yogas",kind:"gajaKesari",polarity:"constructive",provenance:["classical-major"],participants:["Moon","Jupiter"],
+   description:"Jupiter in a kendra (1/4/7/10) from the Moon."},
+  {id:"chandra-mangala",name:"Chandra–Maṅgala Yoga",category:"Moon yogas",kind:"moonMars",polarity:"mixed/constructive",provenance:["classical-major"],participants:["Moon","Mars"],
+   description:"Moon and Mars in conjunction or 7th relationship."},
+  {id:"sunapha",name:"Sunapha Yoga",category:"Moon yogas",kind:"moonFlank",side:"second",polarity:"constructive",provenance:["classical-major"],participants:["Moon"],
+   description:"A classical planet other than Sun/Moon occupies the 2nd sign from the Moon."},
+  {id:"anapha",name:"Anapha Yoga",category:"Moon yogas",kind:"moonFlank",side:"twelfth",polarity:"constructive",provenance:["classical-major"],participants:["Moon"],
+   description:"A classical planet other than Sun/Moon occupies the 12th sign from the Moon."},
+  {id:"durudhara",name:"Durudhara Yoga",category:"Moon yogas",kind:"moonFlank",side:"both",polarity:"constructive",provenance:["classical-major"],participants:["Moon"],
+   description:"Classical planets other than Sun/Moon occupy both the 2nd and 12th signs from the Moon."},
+  {id:"kemadruma",name:"Kemadruma Yoga · with cancellation audit",category:"Moon yogas",kind:"kemadruma",polarity:"challenging",provenance:["classical-major","school-variable"],participants:["Moon"],
+   description:"No classical planet other than Sun in 2nd/12th from Moon; common cancellation conditions are audited separately."},
+  {id:"adhi",name:"Adhi Yoga from Moon",category:"Moon yogas",kind:"adhi",polarity:"constructive",provenance:["classical-major"],participants:["Moon","Mercury","Jupiter","Venus"],
+   description:"Natural benefics occupy the 6th, 7th and/or 8th signs from the Moon; completeness is reported."},
+
+  {id:"budha-aditya-strict",name:"Budha–Āditya Yoga · strict",category:"Sun yogas",kind:"budhaAditya",polarity:"constructive",provenance:["classical-major","engine-strict"],participants:["Sun","Mercury"],
+   description:"Sun and Mercury in the same sign and within the engine's ≤8° close-conjunction threshold."},
+  {id:"vesi",name:"Vesi Yoga",category:"Sun yogas",kind:"sunFlank",side:"second",polarity:"mixed/constructive",provenance:["classical-major"],participants:["Sun"],
+   description:"A classical planet other than Sun/Moon occupies the 2nd sign from the Sun."},
+  {id:"vasi",name:"Vasi Yoga",category:"Sun yogas",kind:"sunFlank",side:"twelfth",polarity:"mixed/constructive",provenance:["classical-major"],participants:["Sun"],
+   description:"A classical planet other than Sun/Moon occupies the 12th sign from the Sun."},
+  {id:"ubhayachari",name:"Ubhayachari Yoga",category:"Sun yogas",kind:"sunFlank",side:"both",polarity:"constructive",provenance:["classical-major"],participants:["Sun"],
+   description:"Classical planets other than Sun/Moon occupy both the 2nd and 12th signs from the Sun."},
+
+  {id:"ruchaka",name:"Ruchaka Mahāpuruṣa Yoga",category:"Pancha Mahapurusha",kind:"mahapurusha",planet:"Mars",polarity:"constructive/powerful",provenance:["classical-major"],participants:["Mars"],
+   description:"Mars in a kendra from Lagna in own or exaltation sign."},
+  {id:"bhadra",name:"Bhadra Mahāpuruṣa Yoga",category:"Pancha Mahapurusha",kind:"mahapurusha",planet:"Mercury",polarity:"constructive/powerful",provenance:["classical-major"],participants:["Mercury"],
+   description:"Mercury in a kendra from Lagna in own or exaltation sign."},
+  {id:"hamsa",name:"Hamsa Mahāpuruṣa Yoga",category:"Pancha Mahapurusha",kind:"mahapurusha",planet:"Jupiter",polarity:"constructive/powerful",provenance:["classical-major"],participants:["Jupiter"],
+   description:"Jupiter in a kendra from Lagna in own or exaltation sign."},
+  {id:"malavya",name:"Mālavya Mahāpuruṣa Yoga",category:"Pancha Mahapurusha",kind:"mahapurusha",planet:"Venus",polarity:"constructive/powerful",provenance:["classical-major"],participants:["Venus"],
+   description:"Venus in a kendra from Lagna in own or exaltation sign."},
+  {id:"sasa",name:"Śaśa Mahāpuruṣa Yoga",category:"Pancha Mahapurusha",kind:"mahapurusha",planet:"Saturn",polarity:"constructive/powerful",provenance:["classical-major"],participants:["Saturn"],
+   description:"Saturn in a kendra from Lagna in own or exaltation sign."},
+
+  {id:"parivartana-maha",name:"Mahā Parivartana Yoga",category:"Parivartana",kind:"parivartanaClass",className:"Maha",polarity:"constructive/powerful",provenance:["classical-major"],participants:[],
+   description:"Sign exchange between houses not involving 3/6/8/12 under the engine's classification."},
+  {id:"parivartana-khala",name:"Khala Parivartana Yoga",category:"Parivartana",kind:"parivartanaClass",className:"Khala",polarity:"mixed",provenance:["classical-major","school-variable"],participants:[],
+   description:"Sign exchange involving the 3rd house but not 6/8/12."},
+  {id:"parivartana-dainya",name:"Dainya Parivartana Yoga",category:"Parivartana",kind:"parivartanaClass",className:"Dainya",polarity:"challenging/mixed",provenance:["classical-major","school-variable"],participants:[],
+   description:"Sign exchange involving a dusthāna (6/8/12)."},
+  {id:"dharma-karma",name:"Dharma–Karmādhipati Raja Yoga",category:"Raja yogas",kind:"dharmaKarma",polarity:"constructive/powerful",provenance:["parashari-major"],participants:[],
+   description:"9th- and 10th-house lords are associated by conjunction, mutual aspect or exchange."},
+  {id:"kendra-trikona-raja",name:"Kendra–Trikona Raja Yoga",category:"Raja yogas",kind:"kendraTrikona",polarity:"constructive/powerful",provenance:["parashari-major"],participants:[],
+   description:"A kendra lord and trikona lord form a conjunction, mutual aspect or exchange."},
+  {id:"yogakaraka",name:"Yoga-kāraka Lordship",category:"Raja yogas",kind:"yogakaraka",polarity:"constructive/powerful",provenance:["parashari-major"],participants:[],
+   description:"One planet simultaneously rules a kendra and a trikona (excluding Lagna-only triviality where appropriate)."},
+
+  {id:"dhana-association",name:"Dhana Yoga · wealth-lord association",category:"Dhana yogas",kind:"dhana",polarity:"constructive",provenance:["parashari-major"],participants:[],
+   description:"Lords of wealth/gain houses (2/5/9/11, with Lagna support) form qualifying associations."},
+  {id:"lakshmi",name:"Lakṣmī Yoga · strict",category:"Dhana yogas",kind:"lakshmi",polarity:"constructive",provenance:["classical-major","engine-strict"],participants:[],
+   description:"9th lord is strong by sign and Lagna lord is also materially strong under a conservative implementation."},
+  {id:"amala",name:"Amala Yoga",category:"Dhana yogas",kind:"amala",polarity:"constructive",provenance:["classical-major"],participants:[],
+   description:"A natural benefic occupies the 10th from Lagna or the Moon."},
+  {id:"vasumati",name:"Vasumati Yoga",category:"Dhana yogas",kind:"vasumati",polarity:"constructive",provenance:["classical-major","school-variable"],participants:["Mercury","Jupiter","Venus"],
+   description:"Natural benefics occupy upachaya houses 3/6/10/11 from Lagna or Moon; the engine reports which reference qualifies."},
+  {id:"saraswati",name:"Sarasvatī Yoga · conservative",category:"Learning yogas",kind:"saraswati",polarity:"constructive",provenance:["classical-major","engine-strict"],participants:["Mercury","Jupiter","Venus"],
+   description:"Mercury, Jupiter and Venus occupy 2/kendra/trikona-type supportive houses, with Jupiter materially dignified/strong."},
+
+  {id:"harsha",name:"Harṣa Viparīta Raja Yoga",category:"Viparita Raja",kind:"viparita",lordHouse:6,polarity:"constructive-through-adversity",provenance:["classical-major"],participants:[],
+   description:"6th lord occupies a dusthāna (6/8/12)."},
+  {id:"sarala",name:"Sarala Viparīta Raja Yoga",category:"Viparita Raja",kind:"viparita",lordHouse:8,polarity:"constructive-through-adversity",provenance:["classical-major"],participants:[],
+   description:"8th lord occupies a dusthāna (6/8/12)."},
+  {id:"vimala",name:"Vimala Viparīta Raja Yoga",category:"Viparita Raja",kind:"viparita",lordHouse:12,polarity:"constructive-through-adversity",provenance:["classical-major"],participants:[],
+   description:"12th lord occupies a dusthāna (6/8/12)."},
+  {id:"neecha-bhanga",name:"Nīcha-bhaṅga · cancellation audit",category:"Cancellation yogas",kind:"neechaBhanga",polarity:"restorative/mixed",provenance:["classical-major","school-variable"],participants:[],
+   description:"For any debilitated classical planet, the engine audits a conservative subset of common cancellation conditions."},
+
+  {id:"guru-chandala",name:"Guru–Chāṇḍāla configuration",category:"Nodal configurations",kind:"guruChandala",polarity:"challenging/mixed",provenance:["classical-major","school-variable"],participants:["Jupiter","Rahu"],
+   description:"Jupiter shares a sign with Rahu; Ketu contact is reported separately but not silently equated."},
+  {id:"surya-grahana",name:"Sūrya Grahaṇa configuration · strict",category:"Nodal configurations",kind:"grahana",luminary:"Sun",polarity:"challenging/mixed",provenance:["classical-major","engine-strict"],participants:["Sun","Rahu","Ketu"],
+   description:"Sun is within 8° of Rahu or Ketu in the sidereal zodiac."},
+  {id:"chandra-grahana",name:"Chandra Grahaṇa configuration · strict",category:"Nodal configurations",kind:"grahana",luminary:"Moon",polarity:"challenging/mixed",provenance:["classical-major","engine-strict"],participants:["Moon","Rahu","Ketu"],
+   description:"Moon is within 8° of Rahu or Ketu in the sidereal zodiac."}
+ ]
+};
+
+const YOGA_BENEFICS=["Mercury","Jupiter","Venus"];
+
+const YOGA_FLANK_PLANETS=["Mars","Mercury","Jupiter","Venus","Saturn"];
+
+const DUSTHANA_HOUSES=[6,8,12];
+
+const KENDRA_HOUSES=[1,4,7,10];
+
+const TRIKONA_HOUSES=[1,5,9];
+
+const UPACHAYA_HOUSES=[3,6,10,11];
+
+function d1LordOfHouse(h){
+ let asc=signIndex(chart.sidAsc),sign=(asc+h-1)%12;
+ return rulerOfSignIndex(sign);
+}
+
+function natalPlanetSign(name){return signIndex(chart.sidereal[name].lon)}
+
+function signDistance(a,b){return((a-b+12)%12)}
+
+function relativeHouseFrom(refName,targetName){
+ return signDistance(natalPlanetSign(targetName),natalPlanetSign(refName))+1;
+}
+
+function housesRuledByPlanet(name){
+ let asc=signIndex(chart.sidAsc),out=[];
+ for(let h=1;h<=12;h++)if(rulerOfSignIndex((asc+h-1)%12)===name)out.push(h);
+ return out;
+}
+
+function planetSimpleDignity(name){
+ let sign=natalPlanetSign(name);
+ if(EXALT_SIGN[name]===sign)return{band:"exalted",score:1};
+ if((OWN_SIGNS[name]||[]).includes(sign))return{band:"own sign",score:.72};
+ if(DEBIL_SIGN[name]===sign)return{band:"debilitated",score:-1};
+ return{band:"ordinary sign",score:0};
+}
+
+function planetSimpleStrength(name){
+ let d=planetSimpleDignity(name),p=chart.sidereal[name],m=planetDimensionMetrics(name,DOMAINS.indexOf("Career")),
+     houseBoost=KENDRA_HOUSES.includes(p.house)?.12:TRIKONA_HOUSES.includes(p.house)?.10:0;
+ return clamp(50+24*d.score+houseBoost+.18*((m?.influence||50)-50)+.12*((m?.overallBenefit||50)-50),5,95);
+}
+
+function classicalMutualAspect(a,b){
+ let sa=natalPlanetSign(a),sb=natalPlanetSign(b),
+     aHits=vedicDrishtiOffsets(a).some(o=>(sa+o)%12===sb),
+     bHits=vedicDrishtiOffsets(b).some(o=>(sb+o)%12===sa);
+ return aHits&&bHits;
+}
+
+function parivartanaPairs(){
+ let out=[],seen=new Set();
+ for(const a of CLASSICAL){
+  let signA=natalPlanetSign(a),lordA=rulerOfSignIndex(signA);
+  if(!CLASSICAL.includes(lordA)||lordA===a)continue;
+  let signB=natalPlanetSign(lordA),lordB=rulerOfSignIndex(signB);
+  if(lordB!==a)continue;
+  let key=[a,lordA].sort().join("|");if(seen.has(key))continue;seen.add(key);
+  let houses=[chart.sidereal[a].house,chart.sidereal[lordA].house],
+      cls=houses.some(h=>DUSTHANA_HOUSES.includes(h))?"Dainya":houses.includes(3)?"Khala":"Maha";
+  out.push({a,b:lordA,houses,signs:[signA,signB],className:cls});
+ }
+ return out;
+}
+
+function planetAssociation(a,b){
+ let same=natalPlanetSign(a)===natalPlanetSign(b),mutual=classicalMutualAspect(a,b),
+     exchange=parivartanaPairs().some(x=>new Set([x.a,x.b]).size===2&&[x.a,x.b].includes(a)&&[x.a,x.b].includes(b)),
+     sep=angularSep(chart.sidereal[a].lon,chart.sidereal[b].lon);
+ return{present:same||mutual||exchange,same,mutual,exchange,sep,
+   label:same?`same-sign association ${sep.toFixed(2)}°`:mutual?"mutual graha dṛṣṭi":exchange?"sign exchange":"no qualifying association"};
+}
+
+function planetsAtRelativeSign(referenceName,relHouse,planetPool=YOGA_FLANK_PLANETS){
+ return planetPool.filter(p=>relativeHouseFrom(referenceName,p)===relHouse);
+}
+
+function kendraFromMoon(name){
+ return[1,4,7,10].includes(relativeHouseFrom("Moon",name));
+}
+
+function kendraFromLagnaHouse(h){return KENDRA_HOUSES.includes(h)}
+
+function kendraFromMoonSign(sign){
+ let moon=natalPlanetSign("Moon"),h=((sign-moon+12)%12)+1;return KENDRA_HOUSES.includes(h);
+}
+
+function yogaResult(def,present,strength,participants,evidence,extra={}){
+ return{...def,present:!!present,strength:present?clamp(strength,0,100):0,participants:[...new Set(participants||def.participants||[])],evidence,...extra};
+}
+
+function detectVedicYoga(def){
+ let sid=chart.sidereal;
+ switch(def.kind){
+  case"gajaKesari":{
+   let rel=relativeHouseFrom("Moon","Jupiter"),present=KENDRA_HOUSES.includes(rel),sep=angularSep(sid.Jupiter.lon,sid.Moon.lon),
+       strength=52+.20*(planetSimpleStrength("Jupiter")-50)+.16*(planetSimpleStrength("Moon")-50);
+   return yogaResult(def,present,strength,["Moon","Jupiter"],
+     present?`Jupiter is H${rel} from Moon · separation ${sep.toFixed(2)}° · Moon H${sid.Moon.house}, Jupiter H${sid.Jupiter.house}.`:`Jupiter is H${rel} from Moon, not a kendra.`);
+  }
+  case"moonMars":{
+   let rel=relativeHouseFrom("Moon","Mars"),present=[1,7].includes(rel),sep=angularSep(sid.Moon.lon,sid.Mars.lon);
+   return yogaResult(def,present,rel===1?68:60,["Moon","Mars"],present?`Moon–Mars ${rel===1?"same-sign":"7th"} relationship · separation ${sep.toFixed(2)}°.`:`Mars is H${rel} from Moon.`);
+  }
+  case"moonFlank":{
+   let p2=planetsAtRelativeSign("Moon",2),p12=planetsAtRelativeSign("Moon",12),
+       present=def.side==="second"?p2.length>0:def.side==="twelfth"?p12.length>0:p2.length>0&&p12.length>0,
+       parts=def.side==="second"?p2:def.side==="twelfth"?p12:[...p2,...p12],strength=50+8*Math.min(4,parts.length);
+   return yogaResult(def,present,strength,["Moon",...parts],`2nd from Moon: ${p2.join(", ")||"none"} · 12th: ${p12.join(", ")||"none"}.`);
+  }
+  case"kemadruma":{
+   let p2=planetsAtRelativeSign("Moon",2),p12=planetsAtRelativeSign("Moon",12),raw=p2.length===0&&p12.length===0,
+       kendraPlanets=YOGA_FLANK_PLANETS.filter(kendraFromMoon),
+       moonKendraFromAsc=KENDRA_HOUSES.includes(sid.Moon.house),
+       cancellation=raw&&(kendraPlanets.length>0||moonKendraFromAsc),
+       present=raw&&!cancellation;
+   return yogaResult(def,present,present?72:0,["Moon",...kendraPlanets],
+     `2nd/12th from Moon empty: ${raw?"yes":"no"} · planets in kendra from Moon: ${kendraPlanets.join(", ")||"none"} · Moon in kendra from Lagna: ${moonKendraFromAsc?"yes":"no"} · ${raw&&cancellation?"common cancellation condition detected":raw?"no common cancellation in this subset":"raw condition absent"}.`,
+     {rawCondition:raw,cancelled:cancellation,cancellationPlanets:kendraPlanets});
+  }
+  case"adhi":{
+   let hits=YOGA_BENEFICS.filter(p=>[6,7,8].includes(relativeHouseFrom("Moon",p))),
+       houses=hits.map(p=>relativeHouseFrom("Moon",p)),present=hits.length>=2,strength=45+12*hits.length;
+   return yogaResult(def,present,strength,["Moon",...hits],`Benefics in H6/H7/H8 from Moon: ${hits.map((p,i)=>`${p} H${houses[i]}`).join(" · ")||"none"}. Engine requires at least two for material activation.`);
+  }
+  case"budhaAditya":{
+   let same=natalPlanetSign("Sun")===natalPlanetSign("Mercury"),sep=angularSep(sid.Sun.lon,sid.Mercury.lon),present=same&&sep<=8;
+   return yogaResult(def,present,80-3*sep,["Sun","Mercury"],same?`Same sign · separation ${sep.toFixed(2)}° · ${present?"meets":"fails"} ≤8° strict threshold.`:"Different signs.");
+  }
+  case"sunFlank":{
+   let p2=planetsAtRelativeSign("Sun",2),p12=planetsAtRelativeSign("Sun",12),
+       present=def.side==="second"?p2.length>0:def.side==="twelfth"?p12.length>0:p2.length>0&&p12.length>0,
+       parts=def.side==="second"?p2:def.side==="twelfth"?p12:[...p2,...p12];
+   return yogaResult(def,present,48+8*Math.min(parts.length,4),["Sun",...parts],`2nd from Sun: ${p2.join(", ")||"none"} · 12th: ${p12.join(", ")||"none"}.`);
+  }
+  case"mahapurusha":{
+   let p=sid[def.planet],dig=planetSimpleDignity(def.planet),present=KENDRA_HOUSES.includes(p.house)&&dig.score>0,
+       strength=present?65+18*dig.score+8*(p.house===1):0;
+   return yogaResult(def,present,strength,[def.planet],`${def.planet}: ${SIGNS[p.sign??natalPlanetSign(def.planet)]||signName(p.lon)} · H${p.house} · ${dig.band}. Requires kendra + own/exalted.`);
+  }
+  case"parivartanaClass":{
+   let pairs=parivartanaPairs().filter(x=>x.className===def.className),present=pairs.length>0;
+   return yogaResult(def,present,55+10*pairs.length,pairs.flatMap(x=>[x.a,x.b]),
+     present?pairs.map(x=>`${x.a} ↔ ${x.b} · H${x.houses[0]}/H${x.houses[1]} · ${x.className}`).join(" · "):`No ${def.className} exchange detected.`,{pairs});
+  }
+  case"dharmaKarma":{
+   let a=d1LordOfHouse(9),b=d1LordOfHouse(10),assoc=planetAssociation(a,b);
+   return yogaResult(def,assoc.present,72,[a,b],`9th lord ${a}; 10th lord ${b} · ${assoc.label}.`);
+  }
+  case"kendraTrikona":{
+   let pairs=[],seen=new Set();
+   for(const kh of KENDRA_HOUSES)for(const th of TRIKONA_HOUSES){
+    let a=d1LordOfHouse(kh),b=d1LordOfHouse(th);if(a===b)continue;
+    let key=[a,b].sort().join("|");if(seen.has(key))continue;seen.add(key);
+    let assoc=planetAssociation(a,b);if(assoc.present)pairs.push({a,b,kh,th,label:assoc.label});
+   }
+   return yogaResult(def,pairs.length>0,58+7*Math.min(4,pairs.length),pairs.flatMap(x=>[x.a,x.b]),
+     pairs.length?pairs.map(x=>`${x.a}(H${x.kh} lord) + ${x.b}(H${x.th} lord): ${x.label}`).join(" · "):"No qualifying kendra–trikona lord association.",{pairs});
+  }
+  case"yogakaraka":{
+   let hits=[];
+   for(const p of CLASSICAL){
+    let ruled=housesRuledByPlanet(p),k=ruled.filter(h=>[4,7,10].includes(h)),t=ruled.filter(h=>[5,9].includes(h));
+    if(k.length&&t.length)hits.push({planet:p,k,t});
+   }
+   return yogaResult(def,hits.length>0,65+8*hits.length,hits.map(x=>x.planet),hits.length?hits.map(x=>`${x.planet}: kendra ${x.k.join("/")} + trikona ${x.t.join("/")}`).join(" · "):"No non-Lagna kendra+trikona co-lord detected.",{hits});
+  }
+  case"dhana":{
+   let houses=[2,5,9,11],pairs=[],seen=new Set();
+   for(let i=0;i<houses.length;i++)for(let j=i+1;j<houses.length;j++){
+    let a=d1LordOfHouse(houses[i]),b=d1LordOfHouse(houses[j]);if(a===b){pairs.push({a,b,ha:houses[i],hb:houses[j],label:"same planet rules both"});continue}
+    let key=[a,b,houses[i],houses[j]].join("|");if(seen.has(key))continue;seen.add(key);
+    let assoc=planetAssociation(a,b);if(assoc.present)pairs.push({a,b,ha:houses[i],hb:houses[j],label:assoc.label});
+   }
+   return yogaResult(def,pairs.length>0,54+7*Math.min(5,pairs.length),pairs.flatMap(x=>[x.a,x.b]),
+     pairs.length?pairs.map(x=>`H${x.ha} ${x.a} + H${x.hb} ${x.b}: ${x.label}`).join(" · "):"No qualifying 2/5/9/11 lord association.",{pairs});
+  }
+  case"lakshmi":{
+   let l1=d1LordOfHouse(1),l9=d1LordOfHouse(9),d9=planetSimpleDignity(l9),s1=planetSimpleStrength(l1),
+       present=d9.score>0&&s1>=62;
+   return yogaResult(def,present,present?68+.18*(s1-50):0,[l1,l9],`Lagna lord ${l1} strength ${Math.round(s1)} · 9th lord ${l9} is ${d9.band}. Strict engine requires own/exalted 9th lord + materially strong Lagna lord.`);
+  }
+  case"amala":{
+   let hits=[];
+   for(const ref of["Lagna","Moon"]){
+    for(const p of YOGA_BENEFICS){
+     let h=ref==="Lagna"?sid[p].house:relativeHouseFrom("Moon",p);
+     if(h===10)hits.push({ref,p});
+    }
+   }
+   return yogaResult(def,hits.length>0,55+10*Math.min(3,hits.length),hits.map(x=>x.p),hits.length?hits.map(x=>`${x.p} 10th from ${x.ref}`).join(" · "):"No Mercury/Jupiter/Venus in 10th from Lagna or Moon.",{hits});
+  }
+  case"vasumati":{
+   let lagna=YOGA_BENEFICS.filter(p=>UPACHAYA_HOUSES.includes(sid[p].house)),
+       moon=YOGA_BENEFICS.filter(p=>UPACHAYA_HOUSES.includes(relativeHouseFrom("Moon",p))),
+       best=lagna.length>=moon.length?{ref:"Lagna",hits:lagna}:{ref:"Moon",hits:moon},
+       present=best.hits.length>=2;
+   return yogaResult(def,present,50+12*best.hits.length,best.hits,`Upachaya benefics from Lagna: ${lagna.join(", ")||"none"} · from Moon: ${moon.join(", ")||"none"} · engine requires at least two from one reference.`,{lagna,moon});
+  }
+  case"saraswati":{
+   let allowed=[2,1,4,5,7,9,10],placements=YOGA_BENEFICS.map(p=>({p,h:sid[p].house})),
+       placementOk=placements.every(x=>allowed.includes(x.h)),jStrong=planetSimpleStrength("Jupiter")>=62,present=placementOk&&jStrong;
+   return yogaResult(def,present,present?72:0,YOGA_BENEFICS,`Mercury/Jupiter/Venus houses: ${placements.map(x=>`${x.p} H${x.h}`).join(" · ")} · Jupiter strength ${Math.round(planetSimpleStrength("Jupiter"))}.`);
+  }
+  case"viparita":{
+   let lord=d1LordOfHouse(def.lordHouse),h=sid[lord].house,present=DUSTHANA_HOUSES.includes(h);
+   return yogaResult(def,present,present?62:0,[lord],`H${def.lordHouse} lord ${lord} occupies H${h} · ${present?"dusthāna condition met":"condition not met"}.`);
+  }
+  case"neechaBhanga":{
+   let cases=[];
+   for(const p of CLASSICAL){
+    if(DEBIL_SIGN[p]!==natalPlanetSign(p))continue;
+    let debilSign=natalPlanetSign(p),dispositor=rulerOfSignIndex(debilSign),
+        exaltPlanet=CLASSICAL.find(q=>EXALT_SIGN[q]===debilSign),
+        dispK=KENDRA_HOUSES.includes(sid[dispositor].house)||kendraFromMoonSign(natalPlanetSign(dispositor)),
+        exaltK=exaltPlanet&&(KENDRA_HOUSES.includes(sid[exaltPlanet].house)||kendraFromMoonSign(natalPlanetSign(exaltPlanet))),
+        selfMoonK=kendraFromMoon(p),
+        cancelled=dispK||!!exaltK||selfMoonK;
+    cases.push({planet:p,dispositor,exaltPlanet,dispK,exaltK:!!exaltK,selfMoonK,cancelled});
+   }
+   let cancelled=cases.filter(x=>x.cancelled),present=cancelled.length>0;
+   return yogaResult(def,present,55+10*cancelled.length,[...cancelled.flatMap(x=>[x.planet,x.dispositor,x.exaltPlanet]).filter(Boolean)],
+     cases.length?cases.map(x=>`${x.planet} debilitated · dispositor ${x.dispositor}${x.dispK?" kendra":""}${x.exaltPlanet?` · exaltation-sign planet ${x.exaltPlanet}${x.exaltK?" kendra":""}`:""}${x.selfMoonK?" · debilitated planet kendra from Moon":""} → ${x.cancelled?"cancellation condition":"no cancellation in engine subset"}`).join(" · "):"No classical planet is debilitated in D1.",{cases});
+  }
+  case"guruChandala":{
+   let same=natalPlanetSign("Jupiter")===natalPlanetSign("Rahu"),ketuSame=natalPlanetSign("Jupiter")===natalPlanetSign("Ketu");
+   return yogaResult(def,same,same?68:0,["Jupiter","Rahu"],`Jupiter–Rahu same sign: ${same?"yes":"no"} · Jupiter–Ketu same sign: ${ketuSame?"yes (reported separately)":"no"}.`);
+  }
+  case"grahana":{
+   let l=def.luminary,rSep=angularSep(sid[l].lon,sid.Rahu.lon),kSep=angularSep(sid[l].lon,sid.Ketu.lon),
+       node=rSep<=kSep?"Rahu":"Ketu",sep=Math.min(rSep,kSep),present=sep<=8;
+   return yogaResult(def,present,present?clamp(85-5*sep,40,85):0,[l,node],`${l} nearest node ${node} · separation ${sep.toFixed(2)}° · strict threshold ≤8°.`);
+  }
+ }
+ return yogaResult(def,false,0,def.participants||[],"No detector implemented.");
+}
+
+function detectedVedicYogas(){return VEDIC_YOGA_REGISTRY.definitions.map(detectVedicYoga)}
+
+function yogaDashaActivation(yoga,ms){
+ let path=activePathAt(ms,5),num=0,den=0,hits=[];
+ for(let i=0;i<path.length;i++){
+  let w=VEDIC_LEVEL_WEIGHTS[i]||.15;den+=w;
+  if(yoga.participants.includes(path[i])){num+=w;hits.push({level:LEVELS[i],lord:path[i],weight:w})}
+ }
+ return{score:den?num/den:0,hits,path};
+}
+
+function yogaTransitActivation(yoga,ms){
+ if(!yoga.participants?.length)return{score:0,hits:[]};
+ let trans=calcVedicTransitSet(ms),hits=[],num=0,den=0;
+ for(const body of [...new Set(["Jupiter","Saturn","Rahu","Ketu",...yoga.participants])]){
+  if(!trans[body])continue;
+  let bw=VEDIC_GOCHARA_BODY_WEIGHT[body]||.6;
+  for(const target of yoga.participants){
+   if(!chart.sidereal[target])continue;
+   let c=vedicTransitContact(body,trans[body],target);if(!c)continue;
+   num+=bw*c.strength;den+=bw;hits.push({...c,transit:body});
+  }
+ }
+ return{score:den?clamp(num/den,0,1):0,hits};
+}
+
+function yogaActivationAt(yoga,ms){
+ let d=yogaDashaActivation(yoga,ms),t=yogaTransitActivation(yoga,ms),structural=(yoga.strength||0)/100,
+     activation=clamp(100*structural*(.18+.52*d.score+.30*t.score),0,100),
+     band=activation>=70?"strongly activated":activation>=45?"activated":activation>=25?"lightly activated":"latent";
+ return{...yoga,dasha:d,transit:t,activation,band};
+}
+
+function allYogaActivationsAt(ms){
+ return detectedVedicYogas().filter(x=>x.present).map(x=>yogaActivationAt(x,ms)).sort((a,b)=>b.activation-a.activation);
+}
+
+function yogaCategorySummary(){
+ let ys=detectedVedicYogas(),m={};
+ for(const y of ys){m[y.category]??={total:0,present:0};m[y.category].total++;if(y.present)m[y.category].present++}
+ return m;
+}
+
+function vedicYogaInvariant(){
+ let ys=detectedVedicYogas(),ids=new Set(ys.map(x=>x.id)),unique=ids.size===VEDIC_YOGA_REGISTRY.definitions.length,
+     finite=ys.every(x=>Number.isFinite(x.strength)&&Array.isArray(x.participants)),
+     required=["gaja-kesari","ruchaka","bhadra","hamsa","malavya","sasa","sunapha","anapha","durudhara","kemadruma","vesi","vasi","ubhayachari","harsha","sarala","vimala","neecha-bhanga","kendra-trikona-raja","dhana-association"],
+     coverage=required.every(id=>ids.has(id)),mahapurusha=ys.filter(x=>x.category==="Pancha Mahapurusha").length===5,
+     activation=ys.filter(x=>x.present).every(y=>Number.isFinite(yogaActivationAt(y,chart.birthMs).activation));
+ return{ok:unique&&finite&&coverage&&mahapurusha&&activation,
+   detail:`${ys.length} rules · unique ${unique?"PASS":"FAIL"} · major-family coverage ${coverage?"PASS":"FAIL"} · 5 Mahāpuruṣa ${mahapurusha?"PASS":"FAIL"} · activation ${activation?"PASS":"FAIL"}`};
+}
+
+function calcSiderealSaturnAt(ms){
+ let jd=jdFromMs(ms),x=calcPlanet("Saturn","SE_SATURN",6,jd),ay=ayanamsa(jd,profile.ayanamsa),
+     lon=norm(x.lon-ay),sign=signIndex(lon),moonSign=signIndex(chart.sidereal.Moon.lon),
+     fromMoon=((sign-moonSign+12)%12)+1;
+ return{ms,lon,sign,fromMoon,ret:!!x.ret,src:x.src};
+}
+
+function shaniPhaseFromMoonHouse(h){
+ if(h===12)return{id:"sade-sati-rising",name:"Sāḍe Sātī · Rising",family:"Sade Sati",severity:"major",description:"Saturn is 12th from the natal Moon."};
+ if(h===1)return{id:"sade-sati-peak",name:"Sāḍe Sātī · Janma / Peak",family:"Sade Sati",severity:"major",description:"Saturn is transiting the natal Moon sign."};
+ if(h===2)return{id:"sade-sati-setting",name:"Sāḍe Sātī · Setting",family:"Sade Sati",severity:"major",description:"Saturn is 2nd from the natal Moon."};
+ if(h===4)return{id:"ardha-ashtama",name:"Ardha-Ashtama / Kantaka Śani",family:"Sensitive Saturn",severity:"moderate",description:"Saturn is 4th from the natal Moon."};
+ if(h===8)return{id:"ashtama",name:"Ashtama Śani",family:"Sensitive Saturn",severity:"moderate",description:"Saturn is 8th from the natal Moon."};
+ return{id:"ordinary",name:"Ordinary Saturn transit",family:"Other",severity:"normal",description:`Saturn is H${h} from the natal Moon.`};
+}
+
+function shaniStateAt(ms){
+ let sat=calcSiderealSaturnAt(ms),phase=shaniPhaseFromMoonHouse(sat.fromMoon);
+ return{...sat,...phase};
+}
+
+function refineSaturnSignBoundary(a,b,signA){
+ for(let i=0;i<24;i++){
+  let m=(a+b)/2,s=calcSiderealSaturnAt(m).sign;
+  if(s===signA)a=m;else b=m;
+ }
+ return(a+b)/2;
+}
+
+function scanShaniWindows(startMs,endMs){
+ if(!Number.isFinite(startMs)||!Number.isFinite(endMs)||endMs<=startMs)return[];
+ const key=`shani:${startMs}:${endMs}`;if(scoreCache.has(key))return scoreCache.get(key);
+ const step=10*86400000,segments=[];let last=shaniStateAt(startMs),segStart=startMs,previous=startMs;
+ for(let ms=startMs+step;previous<endMs;ms+=step){
+  const t=Math.min(ms,endMs),cur=shaniStateAt(t);
+  if(cur.sign!==last.sign){const boundary=refineSaturnSignBoundary(previous,t,last.sign);segments.push({...shaniPhaseFromMoonHouse(last.fromMoon),a:segStart,b:boundary,sign:last.sign,fromMoon:last.fromMoon});segStart=boundary;last=cur;}
+  previous=t;
+ }
+ if(segStart<endMs)segments.push({...shaniPhaseFromMoonHouse(last.fromMoon),a:segStart,b:endMs,sign:last.sign,fromMoon:last.fromMoon});
+ const out=segments.filter(x=>x.family!=='Other');scoreCache.set(key,out);return out;
+}
+
+function shaniCycleInvariant(){
+ let moonSign=signIndex(chart.sidereal.Moon.lon),
+     tests=[
+      {sat:(moonSign+11)%12,want:"sade-sati-rising"},
+      {sat:moonSign,want:"sade-sati-peak"},
+      {sat:(moonSign+1)%12,want:"sade-sati-setting"},
+      {sat:(moonSign+3)%12,want:"ardha-ashtama"},
+      {sat:(moonSign+7)%12,want:"ashtama"}
+     ],
+     ok=tests.every(x=>shaniPhaseFromMoonHouse(((x.sat-moonSign+12)%12)+1).id===x.want);
+ return{ok,detail:`12th/1st/2nd Sāḍe Sātī + 4th/8th sensitive Saturn mapping ${ok?"PASS":"FAIL"}`};
+}
+
+function renderVedicGocharaPanel(){
+ let card=$("vedicGocharaCard");if(!card)return;
+ let enabled=selectedSystems().some(x=>x.id==="Vedic");card.hidden=!enabled;if(!enabled)return;
+ let p=currentDisplayPeriod(),depth=p.depth||p.path?.length||0,mid=midpoint(p.a,p.b),dims=selectedDimensions(),path=activePathAt(mid,5),
+     gw=gocharaWeightForDepth(depth),byDim=dims.map(d=>{let di=DOMAINS.indexOf(d),g=vedicGocharaScore(mid,di,path);return{d,di,g}}),
+     mean=byDim.reduce((a,x)=>a+x.g.score,0)/Math.max(1,byDim.length),g0=byDim[0]?.g||vedicGocharaScore(mid,0,path),
+     trans=g0.trans,samples=vedicPeriodSampleTimes(p).length,showBodies=[...new Set(["Jupiter","Saturn","Rahu","Ketu",...path])].filter(x=>trans[x]);
+ $("vedicGocharaBadge").innerHTML=`<b>${bucket(mean)[0]} ${mean.toFixed(2)}</b><br>${Math.round(gw*100)}% Gochara weight · ${samples} projected samples<br>${g0.provider}`;
+ $("vedicGocharaTransitGrid").innerHTML=`<div class="routineBlock"><h4>Midpoint projected sky · ${fmt(mid)}</h4><ul>
+   <li><b>Active path:</b> ${path.map((x,i)=>`${LEVELS[i]} ${x}`).join(" → ")||"—"}.</li>
+   ${showBodies.map(body=>{let t=trans[body];return`<li><b>${body}</b> ${signDegree(t.lon)} · H${t.fromLagna} from Lagna · H${t.fromMoon} from Moon${t.ret?" · retrograde":""}${t.combust?" · combust":""}.</li>`}).join("")}
+   <li><b>Period integration:</b> ${samples} projected date samples across ${fmt(p.a)} → ${fmt(p.b)}; shorter dasha levels receive higher transit weight.</li>
+  </ul></div>
+  <div class="routineBlock"><h4>Selected-domain midpoint Gochara</h4><ul>${byDim.map(x=>`<li>${x.d}: <b>${bucket(x.g.score)[0]} ${x.g.score.toFixed(2)}</b><div class="transitBar"><i style="left:${x.g.score<0?50+x.g.score*25:50}%;width:${Math.abs(x.g.score)*25}%;background:${x.g.score<0?"#b47a63":"#758b64"}"></i></div></li>`).join("")}</ul></div>`;
+ let top=g0.rows.slice(0,5),dt=g0.doubleTransit;
+ $("vedicGocharaTriggerGrid").innerHTML=`<div class="routineBlock"><h4>Strongest midpoint contributors · ${dims[0]||"Career"}</h4><ul>
+   ${top.map(r=>`<li><b>${r.body}</b>: Moon H${r.fromMoon} · Lagna H${r.fromLagna} · contribution ${r.contribution>=0?"+":""}${r.contribution.toFixed(2)}${r.contacts.length?` · ${r.contacts.slice(0,2).map(c=>c.label).join("; ")}`:""}.</li>`).join("")}
+  </ul></div>
+  <div class="routineBlock"><h4>Jupiter–Saturn double-transit activation</h4><ul>
+   <li>${dt.houses.length?`Jointly activated natal houses: ${dt.houses.map(x=>`H${x.house}`).join(", ")}.`:"No material jointly activated routed house at the midpoint for this domain."}</li>
+   <li>${dt.activeLordHits.length?`Active dasha lords jointly contacted: ${dt.activeLordHits.map(x=>`${x.level} ${x.lord}`).join(", ")}.`:"No active dasha lord jointly contacted by Jupiter and Saturn at the midpoint."}</li>
+   <li>Rahu/Ketu special 5th/9th aspects are intentionally <b>not</b> assumed; the engine uses the conservative universal 7th aspect because node-aspect conventions vary.</li>
+  </ul></div>`;
+}
+
+function normalizedAnchorText(x){return String(x||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim()}
+
+function receivedAnchorStrings(){
+ if(!receivedDharmaApplies())return[];
+ return[receivedDharma.kuladevata,receivedDharma.kulaDevi,receivedDharma.establishedIshta,receivedDharma.guruLineage].filter(Boolean);
+}
+
+function formMatchesReceived(form){
+ let anchors=receivedAnchorStrings().map(normalizedAnchorText).filter(Boolean),names=[form.name,...(form.aliases||[])].map(normalizedAnchorText).filter(Boolean);
+ return anchors.some(a=>names.some(n=>a===n||a.includes(n)||n.includes(a)));
+}
+
+function devataFormPathScore(form,state){
+ let refs=form.paths||{},num=0,den=0;
+ for(const [path,w] of Object.entries(refs)){num+=(state.paths?.[path]?.current??50)*w;den+=w}
+ return den?num/den:50;
+}
+
+function devataFormTimingScore(form,active){
+ let ps=form.timingPlanets||[];if(!ps.length||!active?.length)return 50;
+ let weights=VEDIC_LEVEL_WEIGHTS.slice(0,active.length),den=weights.reduce((a,b)=>a+b,0)||1,v=0;
+ for(let i=0;i<active.length;i++)v+=(ps.includes(active[i])?100:35)*weights[i];
+ return v/den;
+}
+
+function devataFormAssessment(ms,assessment,state){
+ let active=state.active||[],anchorAvailable=receivedAnchorAvailable(),channels=Object.fromEntries(assessment.channels.map(x=>[x.id,x])),forms=[];
+ for(const form of VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog||[]){
+  let ch=channels[form.channelId],channelScore=ch?.natalScore||0,pathScore=devataFormPathScore(form,state),timingScore=devataFormTimingScore(form,active),receivedMatch=formMatchesReceived(form),
+      score=clamp(.65*channelScore+.25*pathScore+.10*timingScore+(receivedMatch?20:0),0,100),
+      minChannel=form.minChannel??30,
+      safetyOk=form.safePublic!==false&&form.requiresInitiation!==true&&form.requiresGuru!==true&&!form.lineageSensitive,
+      anchorOk=!form.requiresEstablishedAnchor||anchorAvailable,
+      receivedOk=!form.requiresReceivedAnchor||receivedMatch,
+      eligibleAuto=form.autoSuggest!==false&&safetyOk&&anchorOk&&receivedOk&&channelScore>=minChannel;
+  forms.push({...form,channelScore,pathScore,timingScore,score,receivedMatch,eligibleAuto,
+    eligibility:receivedMatch?"received / established catalog match":eligibleAuto?"eligible supporting form":form.requiresReceivedAnchor?"received-context only":form.requiresInitiation||form.requiresGuru||form.lineageSensitive?"tradition / lineage gated":form.autoSuggest===false?"contextual only":"below channel threshold"});
+ }
+ forms.sort((a,b)=>(b.receivedMatch-a.receivedMatch)||(b.eligibleAuto-a.eligibleAuto)||b.score-a.score);
+ return{forms,receivedMatches:forms.filter(x=>x.receivedMatch),eligible:forms.filter(x=>x.eligibleAuto),contextual:forms.filter(x=>!x.eligibleAuto&&!x.receivedMatch)};
+}
+
+function practiceCategory(item){
+ if(item.category)return item.category;
+ let id=item.id||"";
+ if(["breath-settling","silent-sitting","walking-contemplation"].includes(id))return"Meditation & Breath";
+ if(["devotional-reading","simple-prayer"].includes(id))return"Bhakti & Worship";
+ if(id==="svadhyaya")return"Study & Inquiry";
+ if(id==="nama-japa-established")return"Mantra & Recitation";
+ if(["seva","ethical-intention"].includes(id))return"Seva & Ethics";
+ if(["kula-remembrance","gratitude-offering"].includes(id))return"Grihastha & Family";
+ if(id==="teaching-sharing")return"Community & Teaching";
+ return"Other";
+}
+
+function practiceEligibility(item,anchorAvailable){
+ let reasons=[];
+ if(item.safePublic!==true)reasons.push("not public-auto");
+ if(item.requiresInitiation===true)reasons.push("initiation required");
+ if(item.requiresGuru===true)reasons.push("Guru/teacher required");
+ if(item.lineageSensitive===true)reasons.push("lineage-sensitive");
+ if(item.requiresReceivedAnchor&&!receivedAnchorStrings().some(x=>x.trim()))reasons.push("received tradition required");
+ if(item.requiresEstablishedAnchor&&!anchorAvailable)reasons.push("established anchor required");
+ if(item.autoAssemble===false)reasons.push("catalog-only / not daily-auto");
+ return{eligible:reasons.length===0,reasons};
+}
+
+function practiceCatalogSummary(){
+ let all=VEDIC_KNOWLEDGE_REGISTRY.practices,anchor=receivedAnchorAvailable(),byCategory={};
+ for(const p of all){let c=practiceCategory(p),e=practiceEligibility(p,anchor);byCategory[c]??={total:0,auto:0,gated:0};byCategory[c].total++;if(e.eligible)byCategory[c].auto++;else byCategory[c].gated++}
+ return{total:all.length,auto:all.filter(p=>practiceEligibility(p,anchor).eligible).length,gated:all.filter(p=>!practiceEligibility(p,anchor).eligible).length,byCategory};
+}
+
+function selectDiversePractices(list,max){
+ let out=[],used=new Set();
+ for(const p of list){let c=practiceCategory(p);if(!used.has(c)){out.push(p);used.add(c);if(out.length>=max)return out}}
+ for(const p of list){if(!out.includes(p)){out.push(p);if(out.length>=max)break}}
+ return out;
+}
+
+function renderVedicYogaTab(){
+ let btn=$("vedicYogaTabBtn"),panel=$("vedicYogaTab"),
+     enabled=hasSelectedPracticeFamily("Vedic")||hasSelectedStructuralFamily("Vedic");
+ if(!btn||!panel)return;btn.hidden=!enabled;if(!enabled)return;
+ initializePracticeDateInput("vedicYogaDate");
+ let ms=practiceDateMs("vedicYogaDate"),yogas=detectedVedicYogas(),present=yogas.filter(x=>x.present),
+     absent=yogas.filter(x=>!x.present),active=allYogaActivationsAt(ms),sh=shaniStateAt(ms),
+     scanStart=Math.max(chart.birthMs,ms-35*YEAR_MS),scanEnd=Math.min(chart.birthMs+profile.horizon*YEAR_MS,ms+45*YEAR_MS),
+     windows=scanShaniWindows(scanStart,scanEnd),
+     nearby=windows.filter(x=>x.b>=ms-15*YEAR_MS&&x.a<=ms+30*YEAR_MS).slice(0,16),
+     cats=yogaCategorySummary();
+
+ $("vedicYogaNotice").innerHTML=`Registry <b>${VEDIC_YOGA_REGISTRY.version}</b> · ${yogas.length} major rules across ${Object.keys(cats).length} families · <b>${present.length}</b> detected in this chart. On ${fmt(ms)}, strongest activation: <b>${active[0]?`${active[0].name} · ${Math.round(active[0].activation)}/100 ${active[0].band}`:"none detected"}</b>. Saturn: <b>H${sh.fromMoon} from natal Moon · ${sh.name}</b>.`;
+
+ let categoryStrip=`<div class="routineBlock"><h4>Coverage by family</h4><ul><li>${Object.entries(cats).map(([k,v])=>`${k}: <b>${v.present}/${v.total}</b>`).join(" · ")}</li><li>${VEDIC_YOGA_REGISTRY.coverage.boundary}</li></ul></div>`;
+ let detectedCards=present.length?present.map(y=>`<div class="routineBlock"><h4>✓ ${y.name} · ${y.category} · structural salience ${Math.round(y.strength)}/100</h4><ul>
+   <li>${y.description}</li><li><b>Chart evidence:</b> ${y.evidence}</li>
+   <li><b>Polarity:</b> ${y.polarity} · <b>participants:</b> ${y.participants.join(" + ")||"dynamic house-lord pair"}.</li>
+   <li><b>Rule provenance:</b> ${(y.provenance||[]).map(id=>VEDIC_YOGA_REGISTRY.sources[id]?.label||id).join(" + ")}.</li>
+  </ul></div>`).join(""):`<div class="small">No registered major yoga detected.</div>`;
+ let inactive=`<details class="rankSummaryDetails"><summary>Inactive / unmet registry rules · ${absent.length}</summary><div style="margin-top:8px">${absent.map(y=>`<div class="routineBlock"><h4>○ ${y.name} · ${y.category}</h4><ul><li>${y.description}</li><li>${y.evidence}</li></ul></div>`).join("")}</div></details>`;
+ $("vedicYogaList").innerHTML=categoryStrip+detectedCards+inactive;
+
+ $("vedicYogaActivation").innerHTML=(active.length?active:[{name:"No detected yoga",activation:0,band:"—",dasha:{hits:[]},transit:{hits:[]},category:"—",polarity:"—"}]).map(y=>`<div class="routineBlock"><h4>${y.name} · ${Math.round(y.activation)}/100 · ${y.band}</h4><ul>
+   <li><b>Family:</b> ${y.category} · <b>polarity:</b> ${y.polarity}.</li>
+   <li><b>Dasha activation:</b> ${y.dasha.hits.length?y.dasha.hits.map(x=>`${x.level} ${x.lord}`).join(" · "):"no participating dasha lord active"}.</li>
+   <li><b>Transit triggers:</b> ${y.transit.hits.length?y.transit.hits.slice(0,6).map(x=>`${x.transit}: ${x.label}`).join(" · "):"no major registered trigger at this date"}.</li>
+   <li>Activation measures how strongly the natal configuration is being called into expression; it is <b>not</b> a probability of a promised event.</li>
+  </ul></div>`).join("");
+
+ $("shaniCurrentGrid").innerHTML=`<div class="routineBlock"><h4>${sh.name}</h4><ul>
+   <li>${sh.description}</li><li>Saturn: <b>${signDegree(sh.lon)}</b> · H${sh.fromMoon} from natal Moon${sh.ret?" · retrograde":""}.</li>
+   <li>Natal Moon: <b>${signDegree(chart.sidereal.Moon.lon)}</b>. Sāḍe Sātī is defined here strictly by Saturn transiting the 12th, 1st and 2nd signs from the natal Moon.</li>
+   <li>This phase is <b>not automatically scored as uniformly bad</b>; natal Saturn, active dashas and the rest of Gochara still determine manifestation.</li>
+  </ul></div>`;
+
+ $("shaniWindowGrid").innerHTML=nearby.length?nearby.map(w=>`<div class="routineBlock"><h4>${w.name}</h4><ul>
+   <li>${fmt(w.a)} → ${fmt(w.b)} · Saturn in ${SIGNS[w.sign]} · H${w.fromMoon} from natal Moon.</li>
+   <li>${w.family==="Sade Sati"?"One segment of the 7½-year Saturn cycle; retrograde sign re-entry can create separate segments.":"A separate sensitive Saturn-from-Moon window, not part of Sāḍe Sātī."}</li>
+  </ul></div>`).join(""):`<div class="small">No sensitive Saturn window in the displayed scan range.</div>`;
+ renderYogaCatalog(yogas,active,windows,ms);
+}
+
+function projectedMahadashaGochara(period,domainWeights){
+ if(!period)return{mean:0,meanAbs:0,samples:0};
+ let sig=Object.entries(domainWeights).map(([d,w])=>`${d}:${w}`).join("|"),key=`mdg:${period.a}:${period.b}:${sig}`;
+ if(scoreCache.has(key))return scoreCache.get(key);
+ let ts=vedicPeriodSampleTimes({...period,depth:1}),signedVals=[],absVals=[];
+ for(const ms of ts){
+  let path=activePathAt(ms,5),v=0;
+  for(const [domain,w] of Object.entries(domainWeights))v+=w*vedicGocharaScore(ms,DOMAINS.indexOf(domain),path).score;
+  signedVals.push(v);absVals.push(Math.abs(v));
+ }
+ let out={mean:signedVals.reduce((a,b)=>a+b,0)/Math.max(1,signedVals.length),meanAbs:absVals.reduce((a,b)=>a+b,0)/Math.max(1,absVals.length),samples:ts.length};
+ scoreCache.set(key,out);return out;
+}
+
 function scoreVedicAt(ms){
  let path=activePathAt(ms,5),out=Array(12).fill(null);if(!path.length)return out;
- let weights=VEDIC_LEVEL_WEIGHTS.slice(0,path.length),den=weights.reduce((a,b)=>a+b,0);
+ let gw=gocharaWeightForDepth(path.length);
  for(let di=0;di<12;di++){
-  let v=0;
-  for(let d=0;d<path.length;d++)v+=vedicLordDomainOutcome(path[d],di)*weights[d];
-  out[di]=clamp(v/den,-2,2);
+  let structural=vedicStructuralDashaScore(ms,di),g=vedicGocharaScore(ms,di,path).score;
+  out[di]=clamp((1-gw)*structural+gw*g,-2,2);
  }
  return out;
 }
 function vedicTimingBreakdown(ms,di){
- let path=activePathAt(ms,5);
- return path.map((lord,i)=>({level:LEVELS[i],lord,weight:VEDIC_LEVEL_WEIGHTS[i],outcome:vedicLordDomainOutcome(lord,di),
-   layers:structuralLayerBreakdown("planet",lord,di)}));
+ let path=activePathAt(ms,5),g=vedicGocharaScore(ms,di,path),gw=gocharaWeightForDepth(path.length);
+ return{path:path.map((lord,i)=>({level:LEVELS[i],lord,weight:VEDIC_LEVEL_WEIGHTS[i],outcome:vedicLordDomainOutcome(lord,di),layers:structuralLayerBreakdown("planet",lord,di)})),
+   structural:vedicStructuralDashaScore(ms,di),gochara:g.score,gocharaWeight:gw,final:scoreVedicAt(ms)[di],provider:g.provider,transits:g.rows,doubleTransit:g.doubleTransit};
 }
 function angularSep(a,b){let d=Math.abs(norm(a-b));return Math.min(d,360-d)}
 function closestAspect(sep){let defs=[{a:0,v:1,orb:5},{a:60,v:.65,orb:4},{a:90,v:-.8,orb:4.5},{a:120,v:.8,orb:4.5},{a:180,v:-.9,orb:5}],best=null;for(const x of defs){let o=Math.abs(sep-x.a);if(o<=x.orb&&(!best||o<best.o))best={...x,o,strength:1-o/x.orb}}return best}
@@ -2921,8 +3742,21 @@ function effectiveNominalWeight(domain,id){return WEIGHTS[domain]?.[id]??0}
 function scoreSystemAt(id,ms){let sys=SYSTEMS[id];if(!sys)return Array(12).fill(null);try{return sys.calculator({ms,profile,chart,domainNames:DOMAINS})}catch(e){console.error("system calculator",id,e);return Array(12).fill(null)}}
 function combinedAt(ms){let per=Object.fromEntries(selectedSystems().map(s=>[s.id,scoreSystemAt(s.id,ms)])),out=[],weightsByDomain=[];for(let di=0;di<12;di++){let domain=DOMAINS[di],eligible=selectedSystems().filter(s=>Number.isFinite(per[s.id]?.[di])),den=eligible.reduce((a,s)=>a+effectiveNominalWeight(domain,s.id),0),w={};let v=0;if(den>0)for(const sys of eligible){w[sys.id]=effectiveNominalWeight(domain,sys.id)/den;v+=per[sys.id][di]*w[sys.id]}out[di]=den?clamp(v,-2,2):0;weightsByDomain[di]=w}return{combined:out,per,weightsByDomain}}
 function sampleTimes(period){let n=+$("sampleMode").value||3;if(n===1)return[midpoint(period.a,period.b)];return[period.a+(period.b-period.a)*.2,midpoint(period.a,period.b),period.a+(period.b-period.a)*.8]}
-function scorePeriod(period,di){let ts=sampleTimes(period),vals=ts.map(t=>combinedAt(t).combined[di]);return vals.reduce((a,b)=>a+b,0)/vals.length}
-function perSystemPeriod(period,id,di){let ts=sampleTimes(period),vals=ts.map(t=>scoreSystemAt(id,t)?.[di]).filter(Number.isFinite);return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null}
+function scorePeriod(period,di){
+ // Preserve per-date missing-coverage normalization for imported systems.
+ const systems=selectedSystems(),domain=DOMAINS[di],vedic=systems.some(s=>s.id==='Vedic')?scoreVedicPeriod(period,di):null;
+ const values=sampleTimes(period).map(ms=>{
+  const rows=systems.map(sys=>({id:sys.id,value:sys.id==='Vedic'?vedic:scoreSystemAt(sys.id,ms)?.[di]})).filter(x=>Number.isFinite(x.value));
+  const den=rows.reduce((sum,x)=>sum+effectiveNominalWeight(domain,x.id),0);
+  return den?rows.reduce((sum,x)=>sum+x.value*effectiveNominalWeight(domain,x.id)/den,0):0;
+ });return clamp(avg(values),-2,2);
+}
+
+function perSystemPeriod(period,id,di){
+ if(id==="Vedic")return scoreVedicPeriod(period,di);
+ let ts=sampleTimes(period),vals=ts.map(t=>scoreSystemAt(id,t)?.[di]).filter(Number.isFinite);
+ return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;
+}
 function selectedDimensions(){let a=DOMAINS.filter(d=>selectedDimensionsSet.has(d));if(!a.length){selectedDimensionsSet.add("Career");return["Career"]}return a}
 function scoreSelected(period){let ds=selectedDimensions();return ds.reduce((a,d)=>a+scorePeriod(period,DOMAINS.indexOf(d)),0)/ds.length}
 function agreement(period,di){let c=scorePeriod(period,di),cf=c>=.45?1:c<=-.45?-1:0,sys=selectedSystems(),mid=midpoint(period.a,period.b),combo=combinedAt(mid),w=combo.weightsByDomain[di],n=0,wt=0,total=0;for(const s of sys){let x=perSystemPeriod(period,s.id,di);if(!Number.isFinite(x)||!w[s.id])continue;let f=x>=.45?1:x<=-.45?-1:0;total+=w[s.id];if(f===cf){n++;wt+=w[s.id]}}return{n,totalSystems:Object.keys(w).length,weighted:total?wt/total:0}}
@@ -3514,7 +4348,7 @@ function tipPeriod(ev,g){let rows=selectedDimensions().map(d=>{let s=scorePeriod
 function tipDomain(ev,g,dom){
  let di=DOMAINS.indexOf(dom),mid=midpoint(g.a,g.b),
      rows=selectedSystems().map(s=>{let x=perSystemPeriod(g,s.id,di),cov=s.static?staticCoverageForPeriod(s.id,g,di):1;
-      let detail=s.id==="Vedic"?`<div class="muted">${vedicTimingBreakdown(mid,di).map(z=>{
+      let detail=s.id==="Vedic"?`<div class="muted">${vedicTimingBreakdown(mid,di).path.map(z=>{
        let top=z.layers.filter(x=>x.weight>.04).sort((a,b)=>b.weight-a.weight).slice(0,3)
          .map(x=>`${x.id} ${x.support>=0?"+":""}${x.support.toFixed(2)}×${Math.round(x.weight*100)}%`).join(", ");
        return`${z.lord} ${z.outcome>=0?"+":""}${z.outcome.toFixed(2)} [${top}]`;
@@ -3528,7 +4362,7 @@ function tipDomain(ev,g,dom){
 function showTip(ev,html){let t=$("tip");t.innerHTML=html;t.style.display="block";t.style.left=Math.min(innerWidth-375,ev.clientX+14)+"px";t.style.top=Math.min(innerHeight-240,ev.clientY+14)+"px"}function hideTip(){$("tip").style.display="none"}
 
 function phaseDomainValues(){let p=currentDisplayPeriod();return selectedDimensions().map(d=>{let i=DOMAINS.indexOf(d),s=scorePeriod(p,i);return{d,s,grade:bucket(s)[0]}}).sort((a,b)=>b.s-a.s)}
-function renderSelected(){let p=currentDisplayPeriod(),vals=phaseDomainValues();$("selTitle").textContent=(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life");$("selDates").textContent=`${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;let mid=midpoint(p.a,p.b),comb=combinedAt(mid);$("components").innerHTML=`<div class="component"><div class="name">${selectedSystemLabel()}</div><div class="val">${bucket(vals.reduce((a,x)=>a+x.s,0)/vals.length)[0]} ${(vals.reduce((a,x)=>a+x.s,0)/vals.length).toFixed(2)}</div></div>`+selectedSystems().map(s=>{let arr=scoreSystemAt(s.id,mid),ds=selectedDimensions(),v=ds.reduce((a,d)=>a+(arr[DOMAINS.indexOf(d)]??0),0)/ds.length;return`<div class="component"><div class="name">${s.name}</div><div class="val">${bucket(v)[0]} ${v.toFixed(2)}</div></div>`}).join("");$("leverage").innerHTML=vals.slice(0,3).map(x=>`<li><b>${x.d}</b> ${x.grade} ${x.s.toFixed(2)}</li>`).join("");$("protect").innerHTML=[...vals].reverse().slice(0,3).map(x=>`<li><b>${x.d}</b> ${x.grade} ${x.s.toFixed(2)}</li>`).join("");$("actionline").textContent=`Use ${vals[0]?.d||"the strongest selected domain"} as the primary lever; protect ${vals.at(-1)?.d||"the weakest selected domain"}.`;renderRadarChart();}
+function renderSelected(){let p=currentDisplayPeriod(),vals=phaseDomainValues();$("selTitle").textContent=(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life");$("selDates").textContent=`${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;let mid=midpoint(p.a,p.b),comb=combinedAt(mid);$("components").innerHTML=`<div class="component"><div class="name">${selectedSystemLabel()}</div><div class="val">${bucket(vals.reduce((a,x)=>a+x.s,0)/vals.length)[0]} ${(vals.reduce((a,x)=>a+x.s,0)/vals.length).toFixed(2)}</div></div>`+selectedSystems().map(s=>{let ds=selectedDimensions(),v=ds.reduce((a,d)=>a+(perSystemPeriod(p,s.id,DOMAINS.indexOf(d))??0),0)/ds.length;return`<div class="component"><div class="name">${s.name}</div><div class="val">${bucket(v)[0]} ${v.toFixed(2)}</div></div>`}).join("");$("leverage").innerHTML=vals.slice(0,3).map(x=>`<li><b>${x.d}</b> ${x.grade} ${x.s.toFixed(2)}</li>`).join("");$("protect").innerHTML=[...vals].reverse().slice(0,3).map(x=>`<li><b>${x.d}</b> ${x.grade} ${x.s.toFixed(2)}</li>`).join("");$("actionline").textContent=`Use ${vals[0]?.d||"the strongest selected domain"} as the primary lever; protect ${vals.at(-1)?.d||"the weakest selected domain"}.`}
 function bestCarrier(domain,vals){let choices=(CARRIERS[domain]||[]).map(d=>vals.find(x=>x.d===d)).filter(Boolean).sort((a,b)=>b.s-a.s);return choices[0]||vals[0]}
 function renderPlaybook(){let vals=phaseDomainValues(),p=currentDisplayPeriod();$("playbookPhase").textContent=`${(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life")} · ${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;let rank=vals.map((x,i)=>({...x,mode:x.s>=.7?"PUSH":x.s>=.3?"BUILD":x.s<=-.45?"PROTECT":i>=Math.ceil(vals.length*.65)?"TRANSFER":"BUILD"}));let pri=[rank[0],rank.find(x=>x.mode==="BUILD"),[...rank].reverse().find(x=>x.mode==="PROTECT"||x.s<.2)].filter(Boolean);$("priorityGrid").innerHTML=pri.slice(0,3).map((x,i)=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?`${carrier.d} (${carrier.grade} ${carrier.s.toFixed(2)})`:"a stronger domain");return`<div class="priorityBox"><div class="kicker">${["Exploit","Build next","Protect"][i]||x.mode}</div><div class="title">${x.d} · ${x.grade} ${x.s.toFixed(2)}</div><div class="body">${text}</div></div>`}).join("");$("playbookTable").innerHTML=`<tr><th>Domain</th><th>Score</th><th>Mode</th><th>Guidance</th><th>Carrier</th></tr>`+rank.map(x=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?carrier.d:"a stronger domain");return`<tr><td><b>${x.d}</b></td><td>${x.grade} ${x.s.toFixed(3)}</td><td><span class="mode">${x.mode}</span></td><td>${text}</td><td>${carrier&&carrier.d!==x.d?`${carrier.d} · ${carrier.grade} ${carrier.s.toFixed(2)}`:"—"}</td></tr>`}).join("")}
 
@@ -3636,6 +4470,9 @@ function runValidationSuite(){
  let hx=hiddenStemEngineInvariant();if(hx.ok)syntheticPass++;else syntheticFail++;
  let mx=mahadashaRankingInvariant();if(mx.ok)syntheticPass++;else syntheticFail++;
  let tx=vedicTimingPracticeInvariant();if(tx.ok)syntheticPass++;else syntheticFail++;
+ let gx=vedicGocharaInvariant();if(gx.ok)syntheticPass++;else syntheticFail++;
+ let yx=vedicYogaInvariant();if(yx.ok)syntheticPass++;else syntheticFail++;
+ let qx=shaniCycleInvariant();if(qx.ok)syntheticPass++;else syntheticFail++;
  let kx=vedicKnowledgeRegistryInvariant();if(kx.ok)syntheticPass++;else syntheticFail++;
  let wk=westernKnowledgeRegistryInvariant();if(wk.ok)syntheticPass++;else syntheticFail++;
  let sk=sajuKnowledgeRegistryInvariant();if(sk.ok)syntheticPass++;else syntheticFail++;
@@ -3665,6 +4502,9 @@ function runValidationSuite(){
  <div class="testDetail">Full hidden-stem engine invariant: <b class="${hx.ok?"testPass":"testFail"}">${hx.ok?"PASS":"FAIL"}</b> · ${hx.detail}</div>
  <div class="testDetail">Mahādaśā support/leverage invariant: <b class="${mx.ok?"testPass":"testFail"}">${mx.ok?"PASS":"FAIL"}</b> · ${mx.detail}</div>
  <div class="testDetail">Vedic Dharma timing-practice invariant: <b class="${tx.ok?"testPass":"testFail"}">${tx.ok?"PASS":"FAIL"}</b> · ${tx.detail}</div>
+ <div class="testDetail">Vedic projected Gochara invariant: <b class="${gx.ok?"testPass":"testFail"}">${gx.ok?"PASS":"FAIL"}</b> · ${gx.detail}</div>
+ <div class="testDetail">Vedic yoga activation invariant: <b class="${yx.ok?"testPass":"testFail"}">${yx.ok?"PASS":"FAIL"}</b> · ${yx.detail}</div>
+ <div class="testDetail">Śani cycle invariant: <b class="${qx.ok?"testPass":"testFail"}">${qx.ok?"PASS":"FAIL"}</b> · ${qx.detail}</div>
  ${isReferenceProfile()?(()=>{let b=referenceMahadashaReconciliationBenchmark();return`<div class="testDetail">Reference chart Mahādaśā reconciliation benchmark: <b class="${b.placementsPass?"testPass":"testFail"}">PLACEMENTS ${b.placementsPass?"PASS":"FAIL"}</b> · dynamic order is compared to ${b.expected.join(" → ")} but does not affect pass/fail because it is an interpretive calibration target, not an oracle.</div>`})():""}
  <div class="testDetail">Generic Vedic knowledge-registry invariant: <b class="${kx.ok?"testPass":"testFail"}">${kx.ok?"PASS":"FAIL"}</b> · ${kx.detail}</div>
  <div class="testDetail">Generic Western knowledge-registry invariant: <b class="${wk.ok?"testPass":"testFail"}">${wk.ok?"PASS":"FAIL"}</b> · ${wk.detail}</div>
@@ -3989,7 +4829,7 @@ function normalizedMetricSignal(m){
  return 100*clamp(.56*influence01+.29*support01+.15*rel,0,1);
 }
 const VEDIC_KNOWLEDGE_REGISTRY={
- version:"2026.09-v1",
+ version:"2026.09-v14",
  runtimePolicy:"deterministic embedded registry · no runtime web lookup",
  sources:{
   "engine-path-v1":{type:"engine-model",label:"Vedic path correlation model v1",note:"Planet/house/path weights are explicit engine modeling choices, not scriptural percentages."},
@@ -3997,7 +4837,11 @@ const VEDIC_KNOWLEDGE_REGISTRY={
   "traditional-devata":{type:"traditional-association",label:"Traditional / commonly used planet–devatā association layer",note:"Supporting association only; never establishes personal Iṣṭa, Kula or Sampradāya."},
   "public-practice":{type:"practice-library",label:"Public non-initiatory practice library",note:"Only simple, generally accessible practices are eligible for automatic assembly; no bīja, nyāsa, forced retention or initiation-dependent procedure."},
   "text-library":{type:"curated-text-library",label:"General Sanātana Dharma text taxonomy",note:"Texts are tagged by path, difficulty and devotional family. Ranking is an engine affinity, not a command or lineage prescription."},
-  "received-precedence":{type:"precedence-rule",label:"Received / family tradition precedence",note:"Kuladevata, Guru, Sampradāya and genuinely established Iṣṭa supersede algorithmic suggestions."}
+  "received-precedence":{type:"precedence-rule",label:"Received / family tradition precedence",note:"Kuladevata, Guru, Sampradāya and genuinely established Iṣṭa supersede algorithmic suggestions."},
+  "devata-form-v2":{type:"form-taxonomy",label:"Devatā family/form taxonomy v2",note:"Forms are subordinate to broad chart-derived channels. A form match is a supporting affinity, never an inferred Iṣṭa or lineage."},
+  "practice-taxonomy-v2":{type:"practice-taxonomy",label:"Daily practice taxonomy v2",note:"Practices carry safety, initiation, Guru, received-anchor, frequency and auto-assembly metadata."},
+  "tradition-gated":{type:"eligibility-rule",label:"Tradition / initiation gated",note:"Catalogued for completeness but excluded from automatic daily routines unless an appropriate received/Guru context exists."},
+  "regional-received":{type:"received-form-taxonomy",label:"Regional / family received form",note:"Regional and Kula forms are catalogued but never inferred from chart geometry alone."}
  },
  paths:{
   "Jnana / Vedanta":{id:"Jnana / Vedanta",planets:{Jupiter:1,Mercury:.82,Ketu:1,Sun:.45,Saturn:.28},houses:{9:1,12:.82,5:.42,8:.28},provenance:["engine-path-v1"]},
@@ -4020,6 +4864,82 @@ const VEDIC_KNOWLEDGE_REGISTRY={
   Narasimha:{id:"Narasimha",name:"Narasimha",family:"Vaiṣṇava",forms:["Narasimha"],band:"Protective Vaiṣṇava form · courage",provenance:["traditional-devata"]},
   Sarasvati:{id:"Sarasvati",name:"Sarasvatī",family:"Devī",forms:["Sarasvatī"],band:"Learning · speech · refined intelligence",provenance:["traditional-devata"]}
  },
+ devataFamilies:{
+  "Śaiva":{id:"Śaiva",label:"Śaiva",description:"Śiva/Guru, contemplative, renunciant and transformative forms."},
+  "Vaiṣṇava":{id:"Vaiṣṇava",label:"Vaiṣṇava",description:"Nārāyaṇa/Viṣṇu and avatāra forms oriented to sustaining dharma, devotion and protection."},
+  "Śākta":{id:"Śākta",label:"Śākta / Devī",description:"Devī forms spanning protection, mothering, wisdom, power and regional/Kula traditions."},
+  "Śrī":{id:"Śrī",label:"Śrī / Lakṣmī",description:"Auspiciousness, harmony, prosperity, household flourishing and generosity."},
+  "Sārasvata":{id:"Sārasvata",label:"Sarasvatī / learning",description:"Learning, speech, arts, refined intelligence and knowledge transmission."},
+  "Gaṇapatya":{id:"Gaṇapatya",label:"Gaṇapatya",description:"Gaṇeśa forms associated with beginnings, obstacles, mantra and integration."},
+  "Kaumāra":{id:"Kaumāra",label:"Kaumāra / Skanda",description:"Skanda/Subrahmaṇya/Murugan forms associated with courage, tapas and disciplined action."},
+  "Saura":{id:"Saura",label:"Saura",description:"Sūrya/Āditya forms associated with clarity, vitality, integrity and visible dharma."},
+  "Vaidika":{id:"Vaidika",label:"Vaidika / Gāyatrī",description:"Gāyatrī/Sāvitrī and Vedic illumination/buddhi-śuddhi symbolism."},
+  "Rāma-bhakti":{id:"Rāma-bhakti",label:"Rāma-bhakti / Hanumān",description:"Service, courage, loyalty, disciplined devotion and Rāma-centered bhakti."},
+  "Regional/Kula":{id:"Regional/Kula",label:"Regional / Kula",description:"Family, village, temple and regional forms that require received tradition rather than astrological inference."}
+ },
+ devataFormCatalog:[
+  {id:"shiva",name:"Śiva",channelId:"Shiva",family:"Śaiva",paths:{"Jnana / Vedanta":.8,"Raja / Dhyana":.75},timingPlanets:["Sun","Jupiter","Saturn","Ketu"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2","traditional-devata"],note:"Broad Śaiva form; chart affinity does not establish Iṣṭa."},
+  {id:"sadashiva",name:"Sadāśiva",channelId:"Shiva",family:"Śaiva",paths:{"Jnana / Vedanta":.9,"Raja / Dhyana":.72},timingPlanets:["Jupiter","Ketu"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2","traditional-devata"],note:"Guru/jñāna-oriented Śaiva expression."},
+  {id:"dakshinamurti",name:"Dakṣiṇāmūrti",channelId:"Shiva",family:"Śaiva",paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.62},timingPlanets:["Jupiter","Mercury","Ketu"],safePublic:true,autoSuggest:true,minChannel:45,provenance:["devata-form-v2","traditional-devata"],note:"Supporting contemplative Guru/Śiva form only; never auto-promoted to established Iṣṭa."},
+  {id:"nataraja",name:"Naṭarāja",channelId:"Shiva",family:"Śaiva",paths:{"Raja / Dhyana":.6,"Bhakti / Devotion":.48},timingPlanets:["Sun","Mars","Ketu"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Śiva as cosmic dance/change; supporting form."},
+  {id:"ardhanarishvara",name:"Ardhanārīśvara",channelId:"Shiva",family:"Śaiva",paths:{"Grihastha Dharma":.72,"Jnana / Vedanta":.55},timingPlanets:["Venus","Moon","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Integrative Śiva–Śakti form; not a binary gender prescription."},
+  {id:"mrityunjaya",name:"Tryambaka / Mṛtyuñjaya Śiva",channelId:"Shiva",family:"Śaiva",paths:{"Bhakti / Devotion":.55,"Mantra / Upasana":.55},timingPlanets:["Saturn","Ketu","Jupiter"],safePublic:true,autoSuggest:false,provenance:["devata-form-v2"],note:"Catalogued devotional form; the engine does not make medical claims or prescribe ritual counts."},
+  {id:"pashupati",name:"Paśupati",channelId:"Shiva",family:"Śaiva",paths:{"Raja / Dhyana":.6,"Karma / Seva":.35},timingPlanets:["Saturn","Ketu"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Śaiva form associated with lordship over beings and restraint."},
+  {id:"bhairava",name:"Bhairava",channelId:"Shiva",family:"Śaiva",paths:{"Mantra / Upasana":.8,"Raja / Dhyana":.55},timingPlanets:["Rahu","Ketu","Saturn"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Lineage-sensitive specialized form; never auto-assembled as core daily practice."},
+  {id:"mahakala",name:"Mahākāla",channelId:"Shiva",family:"Śaiva",paths:{"Raja / Dhyana":.62,"Mantra / Upasana":.78},timingPlanets:["Saturn","Ketu"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Specialized/time-transformative form; contextual only without lineage."},
+
+  {id:"narayana",name:"Nārāyaṇa",channelId:"Vishnu",family:"Vaiṣṇava",paths:{"Bhakti / Devotion":.82,"Grihastha Dharma":.62,"Jnana / Vedanta":.45},timingPlanets:["Jupiter","Mercury","Venus"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2","traditional-devata"],note:"Broad sustaining Vaiṣṇava form."},
+  {id:"vishnu",name:"Viṣṇu",channelId:"Vishnu",family:"Vaiṣṇava",paths:{"Bhakti / Devotion":.75,"Grihastha Dharma":.65},timingPlanets:["Jupiter","Mercury","Venus"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Broad Vaiṣṇava channel form."},
+  {id:"rama",name:"Rāma",channelId:"Vishnu",family:"Vaiṣṇava",paths:{"Karma / Seva":.82,"Grihastha Dharma":.86,"Bhakti / Devotion":.72},timingPlanets:["Sun","Jupiter","Mars"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Dharma, steadiness, service and household responsibility emphasis."},
+  {id:"krishna",name:"Kṛṣṇa",channelId:"Vishnu",family:"Vaiṣṇava",paths:{"Bhakti / Devotion":1,"Jnana / Vedanta":.65,"Grihastha Dharma":.42},timingPlanets:["Moon","Venus","Jupiter","Mercury"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Bhakti, wisdom and relational devotion emphasis."},
+  {id:"venkateswara",name:"Veṅkaṭeśvara / Śrīnivāsa",channelId:"Vishnu",family:"Vaiṣṇava",paths:{"Bhakti / Devotion":.88,"Grihastha Dharma":.72},timingPlanets:["Jupiter","Venus","Saturn"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Temple-centered Vaiṣṇava form; supporting affinity only."},
+  {id:"hayagriva",name:"Hayagrīva",channelId:"Vishnu",family:"Vaiṣṇava",paths:{"Jnana / Vedanta":.88,"Mantra / Upasana":.45},timingPlanets:["Mercury","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Knowledge/learning-oriented Vaiṣṇava form."},
+  {id:"dhanvantari",name:"Dhanvantari",channelId:"Vishnu",family:"Vaiṣṇava",paths:{"Bhakti / Devotion":.45,"Karma / Seva":.55},timingPlanets:["Jupiter","Sun"],safePublic:true,autoSuggest:false,provenance:["devata-form-v2"],note:"Healing/medicine symbolism only; not medical advice or treatment."},
+  {id:"varaha",name:"Varāha",channelId:"Vishnu",family:"Vaiṣṇava",paths:{"Karma / Seva":.55,"Bhakti / Devotion":.65},timingPlanets:["Mars","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Protective/restorative Vaiṣṇava form."},
+  {id:"trivikrama",name:"Trivikrama / Vāmana",channelId:"Vishnu",family:"Vaiṣṇava",paths:{"Karma / Seva":.48,"Jnana / Vedanta":.42},timingPlanets:["Jupiter","Mercury"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Order, proportion and dharma symbolism."},
+  {id:"narasimha",name:"Narasimha",channelId:"Narasimha",family:"Vaiṣṇava",paths:{"Bhakti / Devotion":.78,"Karma / Seva":.62},timingPlanets:["Mars","Jupiter","Sun"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2","traditional-devata"],note:"Protective Vaiṣṇava form; chart suggestion does not replace received family form."},
+  {id:"yoga-narasimha",name:"Yoga Narasimha",aliases:["Yoga Narasimhar"],channelId:"Narasimha",family:"Regional/Kula",paths:{"Bhakti / Devotion":.9,"Raja / Dhyana":.65},timingPlanets:["Jupiter","Mars","Ketu"],safePublic:true,autoSuggest:false,requiresReceivedAnchor:true,provenance:["devata-form-v2","regional-received","received-precedence"],note:"Catalogued as a received/Kula-capable form; never inferred from chart alone."},
+
+  {id:"durga",name:"Durgā",channelId:"Devi",family:"Śākta",paths:{"Bhakti / Devotion":.78,"Mantra / Upasana":.6},timingPlanets:["Rahu","Moon","Mars"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2","jaimini-karakamsha"],note:"Protective Śakti form; family/tradition takes precedence over chart affinity."},
+  {id:"parvati",name:"Pārvatī / Gaurī",channelId:"Devi",family:"Śākta",paths:{"Grihastha Dharma":.88,"Bhakti / Devotion":.68},timingPlanets:["Moon","Venus","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Household, relational and mothering Śakti expression."},
+  {id:"annapurna",name:"Annapūrṇā",channelId:"Devi",family:"Śākta",paths:{"Grihastha Dharma":1,"Karma / Seva":.7,"Bhakti / Devotion":.55},timingPlanets:["Moon","Venus","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Nourishment, generosity and household offering symbolism."},
+  {id:"kali",name:"Kālī",channelId:"Devi",family:"Śākta",paths:{"Raja / Dhyana":.55,"Mantra / Upasana":.8},timingPlanets:["Rahu","Ketu","Saturn"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Form may be publicly revered; specialized upāsanā is lineage-sensitive and not auto-prescribed."},
+  {id:"lalita",name:"Lalitā / Tripurasundarī",channelId:"Devi",family:"Śākta",paths:{"Bhakti / Devotion":.62,"Mantra / Upasana":.85,"Jnana / Vedanta":.42},timingPlanets:["Venus","Mercury","Moon"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Śrīvidyā-associated form; specialized practice requires tradition/Guru context."},
+  {id:"rajarajeshwari",name:"Rājarājeśvarī",channelId:"Devi",family:"Śākta",paths:{"Bhakti / Devotion":.72,"Mantra / Upasana":.72},timingPlanets:["Venus","Moon"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Contextual Śākta form; not auto-prescribed."},
+  {id:"bhuvaneshwari",name:"Bhuvaneśvarī",channelId:"Devi",family:"Śākta",paths:{"Raja / Dhyana":.52,"Mantra / Upasana":.8},timingPlanets:["Moon","Rahu","Venus"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Mahāvidyā context; specialized practice is lineage-sensitive."},
+  {id:"chamunda",name:"Cāmuṇḍā",channelId:"Devi",family:"Śākta",paths:{"Bhakti / Devotion":.45,"Mantra / Upasana":.8},timingPlanets:["Rahu","Mars","Ketu"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Fierce Śakti form; contextual only without lineage."},
+  {id:"meenakshi",name:"Mīnākṣī",channelId:"Devi",family:"Regional/Kula",paths:{"Bhakti / Devotion":.75,"Grihastha Dharma":.65},timingPlanets:["Moon","Venus"],safePublic:true,autoSuggest:false,requiresReceivedAnchor:true,provenance:["devata-form-v2","regional-received"],note:"Regional/temple form; astrology does not infer personal temple or family affiliation."},
+  {id:"kamakshi",name:"Kāmākṣī",channelId:"Devi",family:"Regional/Kula",paths:{"Bhakti / Devotion":.78,"Mantra / Upasana":.5},timingPlanets:["Venus","Moon"],safePublic:true,autoSuggest:false,requiresReceivedAnchor:true,provenance:["devata-form-v2","regional-received"],note:"Regional/temple form; requires received context for personal precedence."},
+  {id:"angala-parameswari",name:"Aṅgāla Parameśvarī / Aṅgāḷamman",aliases:["Angalaparameshwari","Angala Parameswari"],channelId:"Devi",family:"Regional/Kula",paths:{"Bhakti / Devotion":.9,"Grihastha Dharma":.8},timingPlanets:["Moon","Rahu","Mars"],safePublic:true,autoSuggest:false,requiresReceivedAnchor:true,provenance:["devata-form-v2","regional-received","received-precedence"],note:"Family/regional form is recognized only through received tradition, never inferred from astrology."},
+  {id:"grama-devata",name:"Grāma Devatā / Amman family form",channelId:"Devi",family:"Regional/Kula",paths:{"Bhakti / Devotion":.7,"Grihastha Dharma":.85},timingPlanets:["Moon","Mars"],safePublic:true,autoSuggest:false,requiresReceivedAnchor:true,provenance:["devata-form-v2","regional-received"],note:"Placeholder family for received village/temple forms; not a chart-generated identity."},
+
+  {id:"sri-lakshmi",name:"Śrī Lakṣmī",channelId:"Lakshmi",family:"Śrī",paths:{"Grihastha Dharma":.88,"Bhakti / Devotion":.72},timingPlanets:["Venus","Jupiter","Moon"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2","jaimini-karakamsha"],note:"Broad Śrī/Lakṣmī form."},
+  {id:"mahalakshmi",name:"Mahālakṣmī",channelId:"Lakshmi",family:"Śrī",paths:{"Bhakti / Devotion":.78,"Grihastha Dharma":.88},timingPlanets:["Venus","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Auspiciousness, stewardship and household flourishing emphasis."},
+  {id:"gaja-lakshmi",name:"Gaja Lakṣmī",channelId:"Lakshmi",family:"Śrī",paths:{"Grihastha Dharma":.8,"Karma / Seva":.4},timingPlanets:["Venus","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Prosperity/royal-auspiciousness symbolism; no financial guarantee."},
+
+  {id:"sarasvati",name:"Sarasvatī",channelId:"Sarasvati",family:"Sārasvata",paths:{"Jnana / Vedanta":.8,"Karma / Seva":.35},timingPlanets:["Mercury","Jupiter","Venus"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2","traditional-devata"],note:"Learning, speech, arts and refined intelligence."},
+  {id:"sharada",name:"Śāradā",channelId:"Sarasvati",family:"Sārasvata",paths:{"Jnana / Vedanta":.88,"Bhakti / Devotion":.35},timingPlanets:["Mercury","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Sarasvatī learning/wisdom form."},
+
+  {id:"ganesha",name:"Gaṇeśa / Gaṇapati",channelId:"Ganesha",family:"Gaṇapatya",paths:{"Mantra / Upasana":.65,"Karma / Seva":.42},timingPlanets:["Ketu","Mercury"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2","traditional-devata"],note:"Broad Gaṇapatya form."},
+  {id:"siddhivinayaka",name:"Siddhivināyaka",channelId:"Ganesha",family:"Gaṇapatya",paths:{"Bhakti / Devotion":.55,"Karma / Seva":.45},timingPlanets:["Ketu","Mercury"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Popular Gaṇeśa form; supporting affinity only."},
+  {id:"heramba",name:"Heramba Gaṇapati",channelId:"Ganesha",family:"Gaṇapatya",paths:{"Mantra / Upasana":.72},timingPlanets:["Ketu","Mars"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Specialized Gaṇeśa form; contextual only without tradition."},
+  {id:"ucchishta-ganapati",name:"Ucchiṣṭa Gaṇapati",channelId:"Ganesha",family:"Gaṇapatya",paths:{"Mantra / Upasana":.95},timingPlanets:["Ketu","Rahu","Mercury"],safePublic:false,autoSuggest:false,requiresInitiation:true,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Explicitly excluded from automatic recommendations."},
+
+  {id:"skanda",name:"Skanda / Kārttikeya",channelId:"Skanda",family:"Kaumāra",paths:{"Karma / Seva":.72,"Bhakti / Devotion":.42},timingPlanets:["Mars","Ketu"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Broad Kaumāra form."},
+  {id:"subrahmanya",name:"Subrahmaṇya",channelId:"Skanda",family:"Kaumāra",paths:{"Karma / Seva":.75,"Mantra / Upasana":.45},timingPlanets:["Mars","Ketu"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Disciplined-action and jñāna symbolism in Kaumāra traditions."},
+  {id:"murugan",name:"Murugan / Śaṇmukha",channelId:"Skanda",family:"Kaumāra",paths:{"Bhakti / Devotion":.72,"Karma / Seva":.72},timingPlanets:["Mars","Ketu"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2","regional-received"],note:"Tamil Kaumāra form; chart affinity does not create regional identity."},
+
+  {id:"surya",name:"Sūrya",channelId:"Surya",family:"Saura",paths:{"Karma / Seva":.65,"Grihastha Dharma":.42},timingPlanets:["Sun"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Clarity, vitality and visible dharma symbolism."},
+  {id:"aditya",name:"Āditya / Sūrya Nārāyaṇa",channelId:"Surya",family:"Saura",paths:{"Bhakti / Devotion":.45,"Karma / Seva":.62},timingPlanets:["Sun","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Saura/Vaiṣṇava bridge form; supporting affinity only."},
+
+  {id:"gayatri",name:"Gāyatrī",channelId:"Gayatri",family:"Vaidika",paths:{"Mantra / Upasana":.72,"Jnana / Vedanta":.65},timingPlanets:["Mercury","Sun","Jupiter"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Vedic illumination/buddhi-śuddhi affinity. Recitation details can be tradition-specific."},
+  {id:"savitri",name:"Sāvitrī",channelId:"Gayatri",family:"Vaidika",paths:{"Jnana / Vedanta":.62,"Mantra / Upasana":.62},timingPlanets:["Sun","Mercury"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Solar/Vedic illumination form."},
+
+  {id:"hanuman",name:"Hanumān / Añjaneya",channelId:"Hanuman",family:"Rāma-bhakti",paths:{"Karma / Seva":.9,"Bhakti / Devotion":.72},timingPlanets:["Mars","Saturn","Sun"],safePublic:true,autoSuggest:true,provenance:["devata-form-v2"],note:"Service, courage and disciplined devotion."},
+  {id:"panchamukha-hanuman",name:"Pañcamukha Hanumān",channelId:"Hanuman",family:"Rāma-bhakti",paths:{"Bhakti / Devotion":.62,"Mantra / Upasana":.55},timingPlanets:["Mars","Saturn"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Specific protective form; contextual rather than automatically prescribed."},
+
+  {id:"dattatreya",name:"Dattātreya",channelId:"Shiva",family:"Śaiva",paths:{"Jnana / Vedanta":.82,"Raja / Dhyana":.62},timingPlanets:["Jupiter","Ketu"],safePublic:true,autoSuggest:false,lineageSensitive:true,provenance:["devata-form-v2","tradition-gated"],note:"Guru/Avadhūta form spanning sectarian boundaries; best treated with tradition context."}
+ ],
  planetDevataRules:{
   Rahu:[{id:"Devi",w:1}],
   Venus:[{id:"Lakshmi",w:1},{id:"Devi",w:.22}],
@@ -4042,31 +4962,79 @@ const VEDIC_KNOWLEDGE_REGISTRY={
    condition:{minChannel:{id:"Shiva",score:45},avgPlanetSignals:["Mercury","Jupiter","Ketu"],minAverage:50},
    why:"A sufficiently strong Śiva/Guru channel plus cognition, jñāna and inwardness can make Dakṣiṇāmūrti a fitting contemplative form. This refines the Śiva/Guru channel; it never establishes an Iṣṭa.",provenance:["traditional-devata"]}
  ],
+ practiceFamilies:{
+  "Meditation & Breath":{description:"Simple attention, breath and contemplative settling; no forced retention."},
+  "Bhakti & Worship":{description:"Accessible devotion, prayer, remembrance, darśana and simple household worship."},
+  "Study & Inquiry":{description:"Svādhyāya, reflection, manana, journaling and contemplative assimilation."},
+  "Mantra & Recitation":{description:"Public recitation and already-established nāma/mantra practice; initiation-gated material stays excluded."},
+  "Seva & Ethics":{description:"Concrete service, charity, ethical action and disciplined responsibility."},
+  "Grihastha & Family":{description:"Household dharma, family remembrance, shared reading, gratitude and hospitality."},
+  "Community & Teaching":{description:"Satsaṅga, mentoring, learning groups and responsible transmission."},
+  "Pilgrimage & Sacred Space":{description:"Temple visits, sacred walks, festival observance and place-based devotion."},
+  "Body & Discipline":{description:"Gentle embodied discipline that supports attention and steadiness."},
+  "Tradition-Gated Advanced":{description:"Catalogued for completeness but never automatically assembled without appropriate initiation/Guru/tradition."}
+ },
  practices:[
-  {id:"breath-settling",title:"Comfortable breath settling",paths:{"Raja / Dhyana":1,"Mantra / Upasana":.28},timingPlanets:["Moon","Saturn","Ketu"],minutes:3,slot:"Morning / transition",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
+  {id:"breath-settling",category:"Meditation & Breath",title:"Comfortable breath settling",paths:{"Raja / Dhyana":1,"Mantra / Upasana":.28},timingPlanets:["Moon","Saturn","Ketu"],minutes:3,slot:"Morning / transition",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
    instructions:["Use comfortable diaphragmatic breathing or a few unforced alternate-nostril breaths.","No breath retention or strain is prescribed."]},
-  {id:"silent-sitting",title:"Silent sitting / witnessing",paths:{"Raja / Dhyana":1,"Jnana / Vedanta":.72},timingPlanets:["Ketu","Saturn","Jupiter","Moon"],minutes:6,slot:"Morning / evening",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
+  {id:"silent-sitting",category:"Meditation & Breath",title:"Silent sitting / witnessing",paths:{"Raja / Dhyana":1,"Jnana / Vedanta":.72},timingPlanets:["Ketu","Saturn","Jupiter","Moon"],minutes:6,slot:"Morning / evening",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
    instructions:["Sit quietly and notice body, breath and thoughts without recursively analyzing the observer.","Finish by returning to one concrete action or ordinary activity."]},
-  {id:"svadhyaya",title:"Svādhyāya · scripture study",paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.38,"Bhakti / Devotion":.26},timingPlanets:["Mercury","Jupiter","Ketu"],minutes:8,slot:"Morning / evening",safePublic:true,requiresInitiation:false,provenance:["public-practice","text-library"],
+  {id:"svadhyaya",category:"Study & Inquiry",title:"Svādhyāya · scripture study",paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.38,"Bhakti / Devotion":.26},timingPlanets:["Mercury","Jupiter","Ketu"],minutes:8,slot:"Morning / evening",safePublic:true,requiresInitiation:false,provenance:["public-practice","text-library"],
    instructions:["Read a short passage slowly and summarize its meaning in your own words.","Prefer comprehension and application over accumulating texts."]},
-  {id:"devotional-reading",title:"Devotional reading / remembrance",paths:{"Bhakti / Devotion":1,"Grihastha Dharma":.42},timingPlanets:["Moon","Venus","Jupiter"],minutes:6,slot:"Morning / evening",safePublic:true,requiresInitiation:false,provenance:["public-practice","text-library"],
+  {id:"devotional-reading",category:"Bhakti & Worship",title:"Devotional reading / remembrance",paths:{"Bhakti / Devotion":1,"Grihastha Dharma":.42},timingPlanets:["Moon","Venus","Jupiter"],minutes:6,slot:"Morning / evening",safePublic:true,requiresInitiation:false,provenance:["public-practice","text-library"],
    instructions:["Read or remember a devotional passage that already fits your tradition.","Do not treat a chart-ranked devatā as a command to change religious identity."]},
-  {id:"nama-japa-established",title:"Simple nāma-japa of an established / chosen divine name",paths:{"Bhakti / Devotion":.92,"Mantra / Upasana":1},timingPlanets:["Mercury","Moon","Venus","Jupiter","Ketu"],minutes:5,slot:"Morning / evening",safePublic:true,requiresInitiation:false,requiresEstablishedAnchor:true,provenance:["public-practice","received-precedence"],
+  {id:"nama-japa-established",category:"Mantra & Recitation",title:"Simple nāma-japa of an established / chosen divine name",paths:{"Bhakti / Devotion":.92,"Mantra / Upasana":1},timingPlanets:["Mercury","Moon","Venus","Jupiter","Ketu"],minutes:5,slot:"Morning / evening",safePublic:true,requiresInitiation:false,requiresEstablishedAnchor:true,provenance:["public-practice","received-precedence"],
    instructions:["Use only a divine name or simple mantra you already follow or have consciously adopted.","The engine does not generate bīja, nyāsa, initiation-dependent counts or a new Iṣṭa."]},
-  {id:"simple-prayer",title:"Simple prayer / offering",paths:{"Bhakti / Devotion":.82,"Grihastha Dharma":.72},timingPlanets:["Moon","Venus","Jupiter"],minutes:3,slot:"Morning / evening",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
+  {id:"simple-prayer",category:"Bhakti & Worship",title:"Simple prayer / offering",paths:{"Bhakti / Devotion":.82,"Grihastha Dharma":.72},timingPlanets:["Moon","Venus","Jupiter"],minutes:3,slot:"Morning / evening",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
    instructions:["Offer gratitude, concern or intention in ordinary language or your existing family form.","Keep it simple enough to remain sustainable."]},
-  {id:"kula-remembrance",title:"Family / Kula remembrance",paths:{"Bhakti / Devotion":.86,"Grihastha Dharma":1},timingPlanets:["Moon","Venus","Jupiter"],minutes:3,slot:"Optional",safePublic:true,requiresInitiation:false,requiresReceivedAnchor:true,provenance:["public-practice","received-precedence"],
+  {id:"kula-remembrance",category:"Grihastha & Family",title:"Family / Kula remembrance",paths:{"Bhakti / Devotion":.86,"Grihastha Dharma":1},timingPlanets:["Moon","Venus","Jupiter"],minutes:3,slot:"Optional",safePublic:true,requiresInitiation:false,requiresReceivedAnchor:true,provenance:["public-practice","received-precedence"],
    instructions:["Remember the family/Kula anchors exactly as your family practice understands them.","Chart-derived rankings do not replace this layer."]},
-  {id:"seva",title:"Sevā · concrete service",paths:{"Karma / Seva":1,"Bhakti / Devotion":.32,"Grihastha Dharma":.38},timingPlanets:["Sun","Mars","Saturn","Jupiter"],minutes:10,slot:"Daytime",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
+  {id:"seva",category:"Seva & Ethics",title:"Sevā · concrete service",paths:{"Karma / Seva":1,"Bhakti / Devotion":.32,"Grihastha Dharma":.38},timingPlanets:["Sun","Mars","Saturn","Jupiter"],minutes:10,slot:"Daytime",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
    instructions:["Choose one useful act that materially helps another person, family or community.","Prefer concrete service over symbolic intensity."]},
-  {id:"ethical-intention",title:"Ethical intention / yama-niyama reflection",paths:{"Raja / Dhyana":.72,"Karma / Seva":.76,"Grihastha Dharma":.42},timingPlanets:["Saturn","Sun","Jupiter"],minutes:3,slot:"Before consequential action",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
+  {id:"ethical-intention",category:"Seva & Ethics",title:"Ethical intention / yama-niyama reflection",paths:{"Raja / Dhyana":.72,"Karma / Seva":.76,"Grihastha Dharma":.42},timingPlanets:["Saturn","Sun","Jupiter"],minutes:3,slot:"Before consequential action",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
    instructions:["Name one quality for the next action: truthful, useful, proportionate, patient or non-harming.","Review behavior rather than judging identity."]},
-  {id:"gratitude-offering",title:"Gratitude / household offering",paths:{"Grihastha Dharma":1,"Bhakti / Devotion":.62},timingPlanets:["Venus","Moon","Jupiter"],minutes:3,slot:"Evening",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
+  {id:"gratitude-offering",category:"Grihastha & Family",title:"Gratitude / household offering",paths:{"Grihastha Dharma":1,"Bhakti / Devotion":.62},timingPlanets:["Venus","Moon","Jupiter"],minutes:3,slot:"Evening",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
    instructions:["Name one gift received and one responsibility to carry well.","Let gratitude reinforce household dharma rather than become a performance."]},
-  {id:"walking-contemplation",title:"Walking contemplation",paths:{"Raja / Dhyana":.62,"Karma / Seva":.42,"Jnana / Vedanta":.32},timingPlanets:["Mars","Saturn","Moon"],minutes:10,slot:"Daytime",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
+  {id:"walking-contemplation",category:"Meditation & Breath",title:"Walking contemplation",paths:{"Raja / Dhyana":.62,"Karma / Seva":.42,"Jnana / Vedanta":.32},timingPlanets:["Mars","Saturn","Moon"],minutes:10,slot:"Daytime",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
    instructions:["Walk without audio for several minutes and let one question settle without forcing an answer.","Return with one concrete next step."]},
-  {id:"teaching-sharing",title:"Teaching / mentoring as integration",paths:{"Jnana / Vedanta":.72,"Karma / Seva":.82},timingPlanets:["Jupiter","Mercury","Sun"],minutes:10,slot:"Weekly / daytime",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
-   instructions:["Explain one useful principle clearly to someone who can benefit.","Teaching is used as an integration test, not as a claim of spiritual authority."]}
+  {id:"teaching-sharing",category:"Community & Teaching",title:"Teaching / mentoring as integration",paths:{"Jnana / Vedanta":.72,"Karma / Seva":.82},timingPlanets:["Jupiter","Mercury","Sun"],minutes:10,slot:"Weekly / daytime",safePublic:true,requiresInitiation:false,provenance:["public-practice"],
+   instructions:["Explain one useful principle clearly to someone who can benefit.","Teaching is used as an integration test, not as a claim of spiritual authority."]},
+  {id:"morning-sankalpa",category:"Seva & Ethics",title:"Morning saṅkalpa · one clear intention",paths:{"Karma / Seva":.78,"Grihastha Dharma":.42,"Raja / Dhyana":.35},timingPlanets:["Sun","Mercury","Saturn"],minutes:2,slot:"Morning",frequency:"daily",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Choose one concrete quality for the day: truthful, patient, useful, courageous or non-harming.","Keep the intention behavioral rather than predictive or magical."]},
+  {id:"evening-review",category:"Study & Inquiry",title:"Evening dharma review",paths:{"Jnana / Vedanta":.52,"Karma / Seva":.62,"Grihastha Dharma":.45},timingPlanets:["Saturn","Mercury","Jupiter"],minutes:5,slot:"Evening",frequency:"daily",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Review one action that was aligned, one that was not, and one repair for tomorrow.","Avoid obsessive scorekeeping; finish the review and release it."]},
+  {id:"pranam",category:"Bhakti & Worship",title:"Praṇāma / simple bow",paths:{"Bhakti / Devotion":.72,"Grihastha Dharma":.42},timingPlanets:["Sun","Moon","Jupiter"],minutes:1,slot:"Morning / evening",frequency:"daily",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Offer a simple bow to the divine, Guru principle, elders or family altar according to your actual tradition.","No new ritual identity is inferred by the chart."]},
+  {id:"lamp-offering",category:"Bhakti & Worship",title:"Simple lamp / light offering",paths:{"Bhakti / Devotion":.8,"Grihastha Dharma":.72},timingPlanets:["Sun","Venus","Moon"],minutes:3,slot:"Morning / evening",frequency:"daily or occasional",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["If already normal in your household, light a safe lamp/candle and offer gratitude or prayer.","Skip fire if unsafe or unsuitable; the practice is optional, not astrologically mandatory."]},
+  {id:"simple-home-puja",category:"Bhakti & Worship",title:"Simple home pūjā to an established form",paths:{"Bhakti / Devotion":1,"Grihastha Dharma":.75},timingPlanets:["Moon","Venus","Jupiter"],minutes:10,slot:"Morning / evening",frequency:"daily or weekly",safePublic:true,requiresInitiation:false,requiresEstablishedAnchor:true,provenance:["public-practice","received-precedence","practice-taxonomy-v2"],instructions:["Use only the simple pūjā form already normal to your household/tradition.","The engine does not invent mudrā, nyāsa, mantra sequences or ritual counts."]},
+  {id:"public-stotra",category:"Mantra & Recitation",title:"Public stotra / hymn recitation",paths:{"Bhakti / Devotion":.78,"Mantra / Upasana":.78},timingPlanets:["Mercury","Moon","Jupiter"],minutes:7,slot:"Morning / evening",frequency:"daily or weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","text-library","practice-taxonomy-v2"],instructions:["Choose a widely public hymn that already fits your tradition and understanding.","Prefer meaning and steady recitation over escalating counts."]},
+  {id:"sahasranama-reading",category:"Mantra & Recitation",title:"Sahasranāma reading / recitation",paths:{"Bhakti / Devotion":.82,"Mantra / Upasana":.72},timingPlanets:["Mercury","Jupiter","Venus"],minutes:15,slot:"Weekly / optional",frequency:"weekly",safePublic:true,requiresInitiation:false,autoAssemble:false,provenance:["public-practice","text-library","practice-taxonomy-v2"],instructions:["Use a public sahasranāma associated with an already meaningful devotional family.","Do not treat chart affinity as an instruction to switch deity or lineage."]},
+  {id:"bhajan-kirtana",category:"Bhakti & Worship",title:"Bhajan / kīrtana / devotional singing",paths:{"Bhakti / Devotion":1,"Grihastha Dharma":.35},timingPlanets:["Moon","Venus","Jupiter"],minutes:10,slot:"Flexible",frequency:"daily or weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Sing or listen attentively to devotional music from a tradition you actually value.","Use it as devotion and emotional settling, not as a quantified remedy."]},
+  {id:"temple-darshan",category:"Pilgrimage & Sacred Space",title:"Temple darśana",paths:{"Bhakti / Devotion":.9,"Grihastha Dharma":.58},timingPlanets:["Moon","Jupiter","Venus"],minutes:20,slot:"Weekly / occasional",frequency:"weekly or occasional",safePublic:true,requiresInitiation:false,autoAssemble:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Visit a temple meaningful to you when practical.","Existing family/lineage connections take precedence over chart-ranked forms."]},
+  {id:"satsanga",category:"Community & Teaching",title:"Satsaṅga / learning community",paths:{"Jnana / Vedanta":.62,"Bhakti / Devotion":.62,"Karma / Seva":.38},timingPlanets:["Jupiter","Mercury","Moon"],minutes:30,slot:"Weekly",frequency:"weekly",safePublic:true,requiresInitiation:false,autoAssemble:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Join a trustworthy learning/devotional community where questions and conduct are grounded.","Community affiliation should be chosen by judgment, not astrology alone."]},
+  {id:"manana-journal",category:"Study & Inquiry",title:"Manana journal · reasoned reflection",paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.42},timingPlanets:["Mercury","Jupiter","Ketu"],minutes:8,slot:"After study",frequency:"several times weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Write the teaching in your own words, one objection, and one practical implication.","Use reasoning to clarify rather than to spiral indefinitely."]},
+  {id:"self-inquiry-journal",category:"Study & Inquiry",title:"Structured self-inquiry journal",paths:{"Jnana / Vedanta":.92,"Raja / Dhyana":.62},timingPlanets:["Ketu","Mercury","Jupiter"],minutes:8,slot:"Quiet period",frequency:"several times weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Investigate one concrete assumption about self, action or attachment.","Stop after one written conclusion or unresolved question; do not turn inquiry into compulsive recursion."]},
+  {id:"nididhyasana-short",category:"Meditation & Breath",title:"Short nididhyāsana · contemplative assimilation",paths:{"Jnana / Vedanta":.9,"Raja / Dhyana":.78},timingPlanets:["Ketu","Jupiter","Saturn"],minutes:8,slot:"After study / evening",frequency:"several times weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Rest with one already-understood teaching rather than introducing a new concept.","If the mind becomes agitated or recursive, return to ordinary breath and end the session."]},
+  {id:"short-mauna",category:"Meditation & Breath",title:"Short mauna · deliberate quiet",paths:{"Raja / Dhyana":.78,"Jnana / Vedanta":.42},timingPlanets:["Saturn","Ketu","Moon"],minutes:10,slot:"Flexible",frequency:"several times weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Keep a brief period free from talking, audio and messaging.","Use silence to reduce stimulation, not to withdraw from necessary responsibilities."]},
+  {id:"dana",category:"Seva & Ethics",title:"Dāna · proportionate giving",paths:{"Karma / Seva":1,"Grihastha Dharma":.62,"Bhakti / Devotion":.35},timingPlanets:["Jupiter","Venus","Sun"],minutes:5,slot:"Weekly / monthly",frequency:"weekly or monthly",safePublic:true,requiresInitiation:false,autoAssemble:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Give money, goods, time or expertise within your actual means and judgment.","Astrology does not determine the recipient or financial amount."]},
+  {id:"food-sharing",category:"Seva & Ethics",title:"Food sharing / annadāna spirit",paths:{"Karma / Seva":.9,"Grihastha Dharma":.8,"Bhakti / Devotion":.4},timingPlanets:["Moon","Jupiter","Venus"],minutes:15,slot:"Weekly / occasional",frequency:"weekly or occasional",safePublic:true,requiresInitiation:false,autoAssemble:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Share food or support food access in a practical, hygienic and appropriate way.","Keep the action concrete and proportionate."]},
+  {id:"family-scripture",category:"Grihastha & Family",title:"Family scripture / story reading",paths:{"Grihastha Dharma":1,"Bhakti / Devotion":.62,"Jnana / Vedanta":.35},timingPlanets:["Moon","Jupiter","Mercury"],minutes:10,slot:"Evening / weekly",frequency:"weekly",safePublic:true,requiresInitiation:false,autoAssemble:false,provenance:["public-practice","text-library","practice-taxonomy-v2"],instructions:["Read an age-appropriate dharma story or passage together and discuss one value.","Keep the goal understanding and family connection rather than performance."]},
+  {id:"ancestor-gratitude",category:"Grihastha & Family",title:"Ancestor / family gratitude remembrance",paths:{"Grihastha Dharma":.9,"Bhakti / Devotion":.45},timingPlanets:["Moon","Sun","Saturn"],minutes:3,slot:"Occasional",frequency:"occasional",safePublic:true,requiresInitiation:false,requiresReceivedAnchor:true,autoAssemble:false,traditionGuided:true,provenance:["received-precedence","practice-taxonomy-v2"],instructions:["Use only the remembrance form appropriate to your actual family tradition.","The engine does not prescribe śrāddha procedure, dates or ritual obligations."]},
+  {id:"festival-observance",category:"Grihastha & Family",title:"Festival observance in existing tradition",paths:{"Grihastha Dharma":.92,"Bhakti / Devotion":.82},timingPlanets:["Moon","Venus","Jupiter","Sun"],minutes:20,slot:"Festival / occasional",frequency:"seasonal",safePublic:true,requiresInitiation:false,requiresReceivedAnchor:true,autoAssemble:false,traditionGuided:true,provenance:["received-precedence","practice-taxonomy-v2"],instructions:["Observe festivals according to family/community practice where meaningful.","Do not create new ritual obligations solely from chart rankings."]},
+  {id:"nature-contemplation",category:"Meditation & Breath",title:"Nature contemplation",paths:{"Raja / Dhyana":.62,"Jnana / Vedanta":.35,"Bhakti / Devotion":.28},timingPlanets:["Moon","Jupiter","Saturn"],minutes:12,slot:"Daytime",frequency:"several times weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Spend a short period outdoors observing without audio or multitasking.","Use direct perception rather than trying to force symbolic messages."]},
+  {id:"gentle-asana",category:"Body & Discipline",title:"Gentle āsana / mobility",paths:{"Raja / Dhyana":.55,"Karma / Seva":.28},timingPlanets:["Mars","Saturn","Sun"],minutes:10,slot:"Morning / daytime",frequency:"daily or several times weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Use comfortable mobility or familiar yoga postures within your physical limits.","This is not medical or injury-rehabilitation guidance."]},
+  {id:"nadi-shodhana-unforced",category:"Meditation & Breath",title:"Unforced alternate-nostril breathing",paths:{"Raja / Dhyana":.82,"Mantra / Upasana":.28},timingPlanets:["Moon","Mercury","Saturn"],minutes:4,slot:"Morning / transition",frequency:"daily or occasional",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Use a few gentle rounds without breath retention or strain.","Stop if uncomfortable; no ratios, bandhas or forced kumbhaka are prescribed."]},
+  {id:"maitri-goodwill",category:"Seva & Ethics",title:"Maitrī / goodwill reflection",paths:{"Karma / Seva":.62,"Raja / Dhyana":.48,"Bhakti / Devotion":.35},timingPlanets:["Moon","Venus","Jupiter"],minutes:4,slot:"Flexible",frequency:"daily or several times weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Bring to mind one person and wish them clarity, safety or well-being in ordinary language.","Do not use the practice to bypass necessary boundaries or action."]},
+  {id:"mindful-meal",category:"Grihastha & Family",title:"Mindful meal gratitude",paths:{"Grihastha Dharma":.88,"Bhakti / Devotion":.42},timingPlanets:["Moon","Venus","Jupiter"],minutes:1,slot:"Before meal",frequency:"daily",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Pause briefly before eating and acknowledge the people, resources and living systems that made the meal possible.","No ritual formula is required."]},
+  {id:"pilgrimage-walk",category:"Pilgrimage & Sacred Space",title:"Pilgrimage / sacred-place walk",paths:{"Bhakti / Devotion":.72,"Raja / Dhyana":.45},timingPlanets:["Jupiter","Moon","Saturn"],minutes:30,slot:"Occasional",frequency:"occasional",safePublic:true,requiresInitiation:false,autoAssemble:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Visit a meaningful sacred place or walk a familiar sacred route when practical.","Travel decisions should be made on ordinary safety/logistical grounds, not astrological compulsion."]},
+  {id:"guru-remembrance",category:"Bhakti & Worship",title:"Guru remembrance · established lineage only",paths:{"Jnana / Vedanta":.72,"Bhakti / Devotion":.72},timingPlanets:["Jupiter","Ketu"],minutes:3,slot:"Morning / study",frequency:"daily or weekly",safePublic:true,requiresInitiation:false,requiresReceivedAnchor:true,autoAssemble:false,provenance:["received-precedence","practice-taxonomy-v2"],instructions:["Use only a Guru/teacher/lineage relationship you actually have.","The horoscope does not create a Guru relationship."]},
+  {id:"japa-mala-established",category:"Mantra & Recitation",title:"Mālā japa of an established name/mantra",paths:{"Mantra / Upasana":1,"Bhakti / Devotion":.72},timingPlanets:["Mercury","Ketu","Moon","Jupiter"],minutes:10,slot:"Morning / evening",frequency:"daily or several times weekly",safePublic:true,requiresInitiation:false,requiresEstablishedAnchor:true,provenance:["public-practice","received-precedence","practice-taxonomy-v2"],instructions:["Use only a name/mantra already consciously adopted or received.","The engine does not prescribe seed syllables, counts, nyāsa or initiation-dependent procedure."]},
+  {id:"attention-sabbath",category:"Body & Discipline",title:"Short digital / attention fast",paths:{"Raja / Dhyana":.62,"Grihastha Dharma":.35},timingPlanets:["Saturn","Ketu","Mercury"],minutes:15,slot:"Evening / weekly",frequency:"daily or weekly",safePublic:true,requiresInitiation:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Set aside a bounded period without feeds, alerts or unnecessary screens.","Use the recovered attention for rest, family, study or ordinary presence."]},
+  {id:"hospitality",category:"Grihastha & Family",title:"Atithi / hospitality practice",paths:{"Grihastha Dharma":.9,"Karma / Seva":.62},timingPlanets:["Venus","Jupiter","Moon"],minutes:15,slot:"Weekly / occasional",frequency:"weekly or occasional",safePublic:true,requiresInitiation:false,autoAssemble:false,provenance:["public-practice","practice-taxonomy-v2"],instructions:["Offer practical hospitality within your means and boundaries.","The practice can be as simple as attention, food, help or welcome."]},
+
+  {id:"bija-mantra-initiated",category:"Tradition-Gated Advanced",title:"Bīja-mantra sādhana",paths:{"Mantra / Upasana":1},timingPlanets:["Ketu","Rahu","Mercury"],minutes:0,slot:"Tradition-guided",frequency:"as received",safePublic:false,requiresInitiation:true,requiresGuru:true,autoAssemble:false,provenance:["tradition-gated"],instructions:["Catalogued only; never auto-prescribed."]},
+  {id:"nyasa-initiated",category:"Tradition-Gated Advanced",title:"Nyāsa sequence",paths:{"Mantra / Upasana":1},timingPlanets:["Ketu","Mercury"],minutes:0,slot:"Tradition-guided",frequency:"as received",safePublic:false,requiresInitiation:true,requiresGuru:true,autoAssemble:false,provenance:["tradition-gated"],instructions:["Catalogued only; never auto-prescribed."]},
+  {id:"advanced-kumbhaka",category:"Tradition-Gated Advanced",title:"Advanced kumbhaka / bandha practice",paths:{"Raja / Dhyana":1},timingPlanets:["Saturn","Ketu","Mars"],minutes:0,slot:"Teacher-guided",frequency:"as taught",safePublic:false,requiresInitiation:false,requiresGuru:true,autoAssemble:false,provenance:["tradition-gated"],instructions:["Catalogued only; the engine never prescribes forced breath retention or bandha progression."]},
+  {id:"tantric-upasana",category:"Tradition-Gated Advanced",title:"Tantric deity upāsanā",paths:{"Mantra / Upasana":1},timingPlanets:["Rahu","Ketu","Venus"],minutes:0,slot:"Lineage-guided",frequency:"as received",safePublic:false,requiresInitiation:true,requiresGuru:true,autoAssemble:false,provenance:["tradition-gated"],instructions:["Catalogued only; requires appropriate lineage/Guru context."]},
+  {id:"complex-homa",category:"Tradition-Gated Advanced",title:"Complex homa / fire ritual",paths:{"Mantra / Upasana":.72,"Bhakti / Devotion":.45},timingPlanets:["Sun","Mars","Jupiter"],minutes:0,slot:"Tradition-guided",frequency:"as appropriate",safePublic:false,requiresInitiation:false,requiresGuru:true,autoAssemble:false,provenance:["tradition-gated"],instructions:["Catalogued only; not automatically assembled by the engine."]},
+  {id:"yantra-mandala-initiated",category:"Tradition-Gated Advanced",title:"Initiated yantra / maṇḍala procedure",paths:{"Mantra / Upasana":1},timingPlanets:["Mercury","Venus","Rahu"],minutes:0,slot:"Lineage-guided",frequency:"as received",safePublic:false,requiresInitiation:true,requiresGuru:true,autoAssemble:false,provenance:["tradition-gated"],instructions:["Catalogued only; never auto-prescribed."]}
  ],
  texts:[
   {id:"bhagavad-gita",title:"Bhagavad Gītā",kind:"Itihāsa · broad foundation",difficulty:"foundation",dailyAnchor:true,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":.85,"Bhakti / Devotion":.72,"Karma / Seva":1,"Grihastha Dharma":.55},devatas:["Vishnu"],timingPlanets:["Jupiter","Mercury","Sun","Venus"],provenance:["text-library"]},
@@ -4088,7 +5056,20 @@ const VEDIC_KNOWLEDGE_REGISTRY={
   {id:"dakshinamurti-stotra",title:"Dakṣiṇāmūrti Stotra",kind:"Stotra · Advaita contemplation",difficulty:"intermediate",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":.94,"Bhakti / Devotion":.38},devatas:["Shiva"],timingPlanets:["Jupiter","Mercury","Ketu"],provenance:["text-library"]},
   {id:"mandukya-karika",title:"Māṇḍūkya Upaniṣad + Kārikā",kind:"Śruti / Vedānta · advanced",difficulty:"advanced",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.94},devatas:["Shiva"],timingPlanets:["Ketu","Jupiter","Mercury"],provenance:["text-library"]},
   {id:"upadesa-sahasri",title:"Upadeśa Sāhasrī",kind:"Advaita · advanced study",difficulty:"advanced",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.38},devatas:["Shiva"],timingPlanets:["Jupiter","Mercury"],provenance:["text-library"]},
-  {id:"yoga-vasistha",title:"Yoga Vāsiṣṭha · selected teachings",kind:"Advaita / contemplative literature",difficulty:"advanced",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":.92,"Raja / Dhyana":.82},devatas:[],timingPlanets:["Jupiter","Ketu","Mercury"],provenance:["text-library"]}
+  {id:"yoga-vasistha",title:"Yoga Vāsiṣṭha · selected teachings",kind:"Advaita / contemplative literature",difficulty:"advanced",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":.92,"Raja / Dhyana":.82},devatas:[],timingPlanets:["Jupiter","Ketu","Mercury"],provenance:["text-library"]},
+  {id:"taittiriya",title:"Taittirīya Upaniṣad · selected sections",kind:"Śruti · Vedānta",difficulty:"intermediate",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":.9,"Grihastha Dharma":.32},devatas:[],timingPlanets:["Jupiter","Mercury"],provenance:["text-library"]},
+  {id:"chandogya-selected",title:"Chāndogya Upaniṣad · selected teachings",kind:"Śruti · Vedānta",difficulty:"advanced",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.45},devatas:[],timingPlanets:["Jupiter","Mercury","Ketu"],provenance:["text-library"]},
+  {id:"brihadaranyaka-selected",title:"Bṛhadāraṇyaka Upaniṣad · selected teachings",kind:"Śruti · Vedānta",difficulty:"advanced",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.48},devatas:[],timingPlanets:["Jupiter","Ketu","Mercury"],provenance:["text-library"]},
+  {id:"drg-drsya-viveka",title:"Dṛg-Dṛśya-Viveka",kind:"Advaita prakaraṇa",difficulty:"intermediate",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.55},devatas:[],timingPlanets:["Mercury","Ketu","Jupiter"],provenance:["text-library"]},
+  {id:"aparokshanubhuti",title:"Aparokṣānubhūti",kind:"Advaita prakaraṇa",difficulty:"advanced",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.58},devatas:["Shiva"],timingPlanets:["Jupiter","Ketu"],provenance:["text-library"]},
+  {id:"ashtavakra",title:"Aṣṭāvakra Gītā",kind:"Advaita dialogue",difficulty:"advanced",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Jnana / Vedanta":1,"Raja / Dhyana":.62},devatas:[],timingPlanets:["Ketu","Jupiter"],provenance:["text-library"]},
+  {id:"uddhava-gita",title:"Uddhava Gītā · selected teachings",kind:"Bhāgavata · jñāna/bhakti",difficulty:"intermediate",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Bhakti / Devotion":.78,"Jnana / Vedanta":.72},devatas:["Vishnu"],timingPlanets:["Jupiter","Mercury","Moon"],provenance:["text-library"]},
+  {id:"hanuman-chalisa",title:"Hanumān Cālīsā",kind:"Devotional hymn",difficulty:"foundation",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Bhakti / Devotion":.85,"Karma / Seva":.45},devatas:["Hanuman"],timingPlanets:["Mars","Saturn","Sun"],provenance:["text-library"]},
+  {id:"shiva-mahimna",title:"Śiva Mahimna Stotra",kind:"Śaiva stotra",difficulty:"foundation",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Bhakti / Devotion":.82,"Jnana / Vedanta":.32},devatas:["Shiva"],timingPlanets:["Jupiter","Saturn","Ketu"],provenance:["text-library"]},
+  {id:"kanakadhara",title:"Kanakadhārā Stotra",kind:"Śrī / Lakṣmī stotra",difficulty:"foundation",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Bhakti / Devotion":.8,"Grihastha Dharma":.48},devatas:["Lakshmi"],timingPlanets:["Venus","Jupiter"],provenance:["text-library"]},
+  {id:"subrahmanya-bhujangam",title:"Subrahmaṇya Bhujangam",kind:"Kaumāra stotra",difficulty:"foundation",dailyAnchor:false,safePublic:true,traditionGuided:false,paths:{"Bhakti / Devotion":.72,"Karma / Seva":.35},devatas:["Skanda"],timingPlanets:["Mars","Ketu"],provenance:["text-library"]},
+  {id:"sri-sukta",title:"Śrī Sūkta",kind:"Vedic hymn",difficulty:"intermediate",dailyAnchor:false,safePublic:true,traditionGuided:true,paths:{"Bhakti / Devotion":.72,"Mantra / Upasana":.62,"Grihastha Dharma":.45},devatas:["Lakshmi"],timingPlanets:["Venus","Jupiter"],provenance:["text-library","tradition-gated"]},
+  {id:"purusha-sukta",title:"Puruṣa Sūkta",kind:"Vedic hymn",difficulty:"intermediate",dailyAnchor:false,safePublic:true,traditionGuided:true,paths:{"Jnana / Vedanta":.62,"Bhakti / Devotion":.55,"Mantra / Upasana":.42},devatas:["Vishnu"],timingPlanets:["Sun","Jupiter"],provenance:["text-library","tradition-gated"]}
  ]
 };
 const DHARMA_PATHS=VEDIC_KNOWLEDGE_REGISTRY.paths;
@@ -4373,26 +5354,27 @@ function receivedAnchorAvailable(){
 function resolveVedicKnowledge(ms,intensity=20){
  let state=currentDharmaPathScores(ms),assessment=classicalDevataAssessment(ms),
      active=state.active||[],anchorAvailable=receivedAnchorAvailable(),
-     practices=VEDIC_KNOWLEDGE_REGISTRY.practices
-       .filter(x=>x.safePublic&&x.requiresInitiation!==true)
-       .filter(x=>!x.requiresReceivedAnchor||receivedDharmaApplies())
-       .filter(x=>!x.requiresEstablishedAnchor||anchorAvailable)
-       .map(x=>({...x,score:scoreKnowledgeItem(x,state,assessment.channels,active)}))
+     formAssessment=devataFormAssessment(ms,assessment,state),
+     allPractices=VEDIC_KNOWLEDGE_REGISTRY.practices
+       .map(x=>{let eligibility=practiceEligibility(x,anchorAvailable);return{...x,category:practiceCategory(x),eligibility,score:scoreKnowledgeItem(x,state,assessment.channels,active)}})
        .sort((a,b)=>b.score-a.score),
+     practices=allPractices.filter(x=>x.eligibility.eligible),
+     gatedPractices=allPractices.filter(x=>!x.eligibility.eligible),
      texts=VEDIC_KNOWLEDGE_REGISTRY.texts
        .filter(x=>x.safePublic!==false)
        .map(x=>({...x,score:scoreKnowledgeItem(x,state,assessment.channels,active)}))
        .sort((a,b)=>b.score-a.score),
      dailyTexts=texts.filter(x=>x.dailyAnchor&&!x.traditionGuided).slice(0,3),
-     foundation=texts.filter(x=>x.difficulty==="foundation").slice(0,4),
-     intermediate=texts.filter(x=>x.difficulty==="intermediate").slice(0,3),
-     advanced=texts.filter(x=>x.difficulty==="advanced").slice(0,3),
+     foundation=texts.filter(x=>x.difficulty==="foundation").slice(0,5),
+     intermediate=texts.filter(x=>x.difficulty==="intermediate").slice(0,4),
+     advanced=texts.filter(x=>x.difficulty==="advanced").slice(0,4),
      studyCurriculum=[...foundation.slice(0,3),...intermediate.slice(0,2)],
-     provenanceIds=new Set(["engine-path-v1","public-practice","text-library","received-precedence"]);
+     provenanceIds=new Set(["engine-path-v1","public-practice","practice-taxonomy-v2","devata-form-v2","text-library","received-precedence"]);
  for(const ch of assessment.channels.slice(0,5))for(const id of(ch.provenance||[]))provenanceIds.add(id);
+ for(const f of formAssessment.forms.slice(0,8))for(const id of(f.provenance||[]))provenanceIds.add(id);
  return{
-  ms,intensity,state,assessment,active,
-  dailyPractices:practices,
+  ms,intensity,state,assessment,active,formAssessment,
+  dailyPractices:practices,allPractices,gatedPractices,practiceSummary:practiceCatalogSummary(),
   dailyTexts,studyCurriculum,foundation,intermediate,advanced,allTexts:texts,
   provenance:knowledgeSourceRows([...provenanceIds]),
   registryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,
@@ -4422,6 +5404,15 @@ function registerVedicKnowledge(kind,item){
  }else if(kind==="specializedForm"){
   if(!item.id)throw new Error("Specialized form requires id.");
   VEDIC_KNOWLEDGE_REGISTRY.specializedForms.push({...item});
+ }else if(kind==="devataForm"){
+  if(!item.id||!item.channelId)throw new Error("Devatā form requires id + channelId.");
+  VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.push({...item});
+ }else if(kind==="devataFamily"){
+  if(!item.id)throw new Error("Devatā family requires id.");
+  VEDIC_KNOWLEDGE_REGISTRY.devataFamilies[item.id]={...item};
+ }else if(kind==="practiceFamily"){
+  if(!item.id)throw new Error("Practice family requires id.");
+  VEDIC_KNOWLEDGE_REGISTRY.practiceFamilies[item.id]={...item};
  }else if(kind==="source"){
   if(!item.id)throw new Error("Source requires id.");
   VEDIC_KNOWLEDGE_REGISTRY.sources[item.id]={...item};delete VEDIC_KNOWLEDGE_REGISTRY.sources[item.id].id;
@@ -4432,19 +5423,21 @@ function registerVedicKnowledge(kind,item){
 function vedicKnowledgeRegistryInvariant(){
  let practiceIds=VEDIC_KNOWLEDGE_REGISTRY.practices.map(x=>x.id),
      textIds=VEDIC_KNOWLEDGE_REGISTRY.texts.map(x=>x.id),
-     unique=new Set(practiceIds).size===practiceIds.length&&new Set(textIds).size===textIds.length,
-     provenanceOk=[...VEDIC_KNOWLEDGE_REGISTRY.practices,...VEDIC_KNOWLEDGE_REGISTRY.texts]
+     formIds=(VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog||[]).map(x=>x.id),
+     unique=new Set(practiceIds).size===practiceIds.length&&new Set(textIds).size===textIds.length&&new Set(formIds).size===formIds.length,
+     provenanceOk=[...VEDIC_KNOWLEDGE_REGISTRY.practices,...VEDIC_KNOWLEDGE_REGISTRY.texts,...VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog]
        .every(x=>(x.provenance||[]).every(id=>!!VEDIC_KNOWLEDGE_REGISTRY.sources[id])),
+     channelsOk=VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.every(x=>!!VEDIC_KNOWLEDGE_REGISTRY.devatas[x.channelId]),
+     gatingOk=VEDIC_KNOWLEDGE_REGISTRY.practices.filter(x=>x.requiresInitiation||x.requiresGuru||x.safePublic===false).every(x=>practiceEligibility(x,receivedAnchorAvailable()).eligible===false),
+     formGatingOk=VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.filter(x=>x.requiresInitiation||x.requiresGuru||x.lineageSensitive).every(x=>x.autoSuggest===false||x.safePublic===false),
+     broad=VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length>=40&&VEDIC_KNOWLEDGE_REGISTRY.practices.length>=40&&VEDIC_KNOWLEDGE_REGISTRY.texts.length>=30,
      jnanaState={active:["Mercury"],paths:Object.fromEntries(Object.keys(DHARMA_PATHS).map(k=>[k,{current:k==="Jnana / Vedanta"?92:38}]))},
      bhaktiState={active:["Moon"],paths:Object.fromEntries(Object.keys(DHARMA_PATHS).map(k=>[k,{current:k==="Bhakti / Devotion"?92:38}]))},
-     sv=VEDIC_KNOWLEDGE_REGISTRY.practices.find(x=>x.id==="svadhyaya"),
-     dr=VEDIC_KNOWLEDGE_REGISTRY.practices.find(x=>x.id==="devotional-reading"),
+     sv=VEDIC_KNOWLEDGE_REGISTRY.practices.find(x=>x.id==="svadhyaya"),dr=VEDIC_KNOWLEDGE_REGISTRY.practices.find(x=>x.id==="devotional-reading"),
      jSv=scoreKnowledgeItem(sv,jnanaState,[],jnanaState.active),jDr=scoreKnowledgeItem(dr,jnanaState,[],jnanaState.active),
-     bSv=scoreKnowledgeItem(sv,bhaktiState,[],bhaktiState.active),bDr=scoreKnowledgeItem(dr,bhaktiState,[],bhaktiState.active),
-     switches=jSv>jDr&&bDr>bSv,
-     noPriorConstants=true;
- return{ok:unique&&provenanceOk&&switches&&noPriorConstants,unique,provenanceOk,switches,noPriorConstants,
-   detail:`registry ${VEDIC_KNOWLEDGE_REGISTRY.version} · unique IDs ${unique?"PASS":"FAIL"} · provenance ${provenanceOk?"PASS":"FAIL"} · synthetic path switch ${switches?"PASS":"FAIL"} · prior-profile constants ${noPriorConstants?"removed":"present"}`};
+     bSv=scoreKnowledgeItem(sv,bhaktiState,[],bhaktiState.active),bDr=scoreKnowledgeItem(dr,bhaktiState,[],bhaktiState.active),switches=jSv>jDr&&bDr>bSv;
+ return{ok:unique&&provenanceOk&&channelsOk&&gatingOk&&formGatingOk&&broad&&switches,
+   detail:`registry ${VEDIC_KNOWLEDGE_REGISTRY.version} · forms ${formIds.length} · practices ${practiceIds.length} · texts ${textIds.length} · unique ${unique?"PASS":"FAIL"} · provenance ${provenanceOk?"PASS":"FAIL"} · channel refs ${channelsOk?"PASS":"FAIL"} · practice gating ${gatingOk?"PASS":"FAIL"} · form gating ${formGatingOk?"PASS":"FAIL"} · broad coverage ${broad?"PASS":"FAIL"} · path switch ${switches?"PASS":"FAIL"}`};
 }
 function mindCalmingPlan(timing){
  let lead=timing[0],secondary=timing[1];
@@ -4491,7 +5484,7 @@ function routinePlan(intensity,resolved,timing){
   if((receivedDharma.guruLineage||"").trim())received.push(`Guru / Sampradāya: ${receivedDharma.guruLineage}`);
  }
  let maxPractice=intensity<=10?3:intensity>=40?6:4,
-     candidates=resolved.dailyPractices.slice(0,maxPractice),
+     candidates=selectDiversePractices(resolved.dailyPractices,maxPractice),
      weights=intensity<=10?[.38,.34,.28]:intensity>=40?[.24,.20,.18,.15,.13,.10]:[.30,.26,.24,.20],
      blocks=[];
  if(received.length)blocks.push({title:"Received / family precedence layer",items:[
@@ -4534,12 +5527,14 @@ function initializePracticeDateInput(id){
 function renderSystemAwarePracticeTabs(){
  let defs=[
   {family:"Vedic",btn:"dharmaTabBtn",panel:"dharmaTab"},
+  {family:"Vedic",btn:"vedicYogaTabBtn",panel:"vedicYogaTab"},
   {family:"Western",btn:"westernPathTabBtn",panel:"westernPathTab"},
   {family:"Saju",btn:"sajuCultivationTabBtn",panel:"sajuCultivationTab"}
  ];
  for(const x of defs){
   let show=hasSelectedPracticeFamily(x.family)||(x.family==="Vedic"&&hasSelectedStructuralFamily("Vedic"));
   if($(x.btn))$(x.btn).hidden=!show;
+  const mobile=$("mbn-"+x.panel.replace(/Tab$/, ""));if(mobile)mobile.hidden=!show;
   if(!show&&$(x.panel)?.classList.contains("active"))switchTab("heatmap");
  }
 }
@@ -4678,7 +5673,7 @@ function renderDharmaTab(){
  let topNatal=assessment.channels.filter(x=>x.natalRaw>0).slice(0,4);
  $("dharmaNotice").innerHTML=receivedIshta
    ?`<b>Established Iṣṭa recorded:</b> ${receivedIshta}. The chart-derived channels below remain corroborative only.`
-   :`<b>No established Iṣṭa is recorded.</b> Independent chart reconstruction gives Karakāṃśa indicator planet(s) <b>${jIndicators.join(" + ")||"—"}</b>. The strongest natal channels are currently <b>${topNatal.map(x=>x.name).join(" → ")}</b>. Multiple Karakāṃśa occupants are preserved as multiple signals; the engine does not manufacture one Iṣṭa. Dakṣiṇāmūrti, if shown, appears only as a secondary Śiva/Guru contemplative form. Recommendations below use <b>${resolved.registryVersion}</b> with the current birth chart and recorded practice preferences.`;
+   :`<b>No established Iṣṭa is recorded.</b> Independent chart reconstruction gives Karakāṃśa indicator planet(s) <b>${jIndicators.join(" + ")||"—"}</b>. The strongest natal channels are currently <b>${topNatal.map(x=>x.name).join(" → ")}</b>. Multiple Karakāṃśa occupants are preserved as multiple signals; the engine does not manufacture one Iṣṭa. Dakṣiṇāmūrti, if shown, appears only as a secondary Śiva/Guru contemplative form. Recommendations below are resolved from <b>${resolved.registryVersion}</b>, independently of saved profile notes.`;
 
  $("dharmaPathBars").innerHTML=paths.map(x=>`<div class="pathRow">
    <div class="pathName">${x.name}</div>
@@ -4687,8 +5682,10 @@ function renderDharmaTab(){
     <div class="pathCurrent" style="width:${x.current.toFixed(1)}%"></div>
    </div><div class="pathVal">${Math.round(x.current)}</div></div>`).join("");
 
+ let dharmaGochara=vedicGocharaScore(ms,DOMAINS.indexOf("Spiritual"),state.active);
  $("dharmaTiming").innerHTML=`<div class="timingPath">${timing.map(x=>`<span class="timingPill">${x.level} · <b>${x.lord}</b></span>`).join("")||'<span class="timingPill">Natal foundation</span>'}</div>`+
-   timing.slice(0,3).map(x=>`<div class="timingTheme"><b>${x.lord}</b> — ${x.theme}. <span class="muted">${x.practice}; focus day ${x.weekday}.</span></div>`).join("");
+   timing.slice(0,3).map(x=>`<div class="timingTheme"><b>${x.lord}</b> — ${x.theme}. <span class="muted">${x.practice}; focus day ${x.weekday}.</span></div>`).join("")+
+   `<div class="timingTheme"><b>Gochara overlay</b> — ${bucket(dharmaGochara.score)[0]} ${dharmaGochara.score.toFixed(2)} for Spiritual on ${fmt(ms)}. <span class="muted">${dharmaGochara.provider}; Jupiter/Saturn double-transit and active-lord contacts included.</span></div>`;
 
  let box=(title,body,cls="")=>`<div class="reconcileBox ${cls}"><h4>${title}</h4><div class="small">${body}</div></div>`;
  $("ishtaIndicator").innerHTML=`<div class="reconcileGrid">
@@ -4712,10 +5709,15 @@ function renderDharmaTab(){
   ?assessment.overlay.map(o=>`<div class="routineBlock"><h4>${o.level} · ${o.lord} → ${o.name}</h4><ul><li>${o.why}</li><li>This modifies current practice emphasis only; it does not establish or replace an Iṣṭa.</li></ul></div>`).join("")
   :`<div class="routineBlock"><h4>Natal only</h4><ul><li>No active Vimshottari overlay available for this date.</li></ul></div>`;
 
- let specialized=specializedDevataAssessment(ms,assessment);
- $("specializedDevataGrid").innerHTML=specialized.length
-  ?specialized.map(x=>`<div class="routineBlock"><h4>${x.name} · ${x.status}</h4><ul><li>${x.why}</li></ul></div>`).join("")
-  :`<div class="routineBlock"><h4>No specialized form elevated</h4><ul><li>No secondary form met the engine's disclosed threshold.</li></ul></div>`;
+ let specialized=specializedDevataAssessment(ms,assessment),forms=resolved.formAssessment,
+     receivedForms=forms.receivedMatches,
+     eligibleForms=forms.eligible.filter(x=>!receivedForms.includes(x)).slice(0,10),
+     gatedForms=forms.forms.filter(x=>!x.eligibleAuto&&!x.receivedMatch);
+ $("specializedDevataGrid").innerHTML=
+  (receivedForms.length?receivedForms.map(x=>`<div class="routineBlock"><h4>Received catalog match · ${x.name}</h4><ul><li>${x.note}</li><li><b>Precedence:</b> this match comes from the received/family layer, not from astrology.</li></ul></div>`).join(""):"")+
+  (eligibleForms.length?eligibleForms.map(x=>`<div class="routineBlock"><h4>${x.name} · supporting form ${Math.round(x.score)}/100</h4><ul><li>${x.note}</li><li>Family ${x.family} · parent channel ${x.channelId} ${Math.round(x.channelScore)}/100 · path fit ${Math.round(x.pathScore)} · timing ${Math.round(x.timingScore)}.</li><li>This is a <b>supporting form affinity</b>, never an inferred Iṣṭa.</li></ul></div>`).join(""):`<div class="routineBlock"><h4>No additional public form elevated</h4><ul><li>No non-received form met the auto-suggestion rules.</li></ul></div>`)+
+  (specialized.length?specialized.filter(x=>!forms.forms.some(f=>f.name===x.name)).map(x=>`<div class="routineBlock"><h4>${x.name} · ${x.status}</h4><ul><li>${x.why}</li></ul></div>`).join(""):"")+
+  `<details class="rankSummaryDetails"><summary>Full devatā form catalog · ${forms.forms.length} forms · ${gatedForms.length} contextual/gated</summary><div style="margin-top:8px">${forms.forms.map(x=>`<div class="routineBlock"><h4>${x.receivedMatch?"★":x.eligibleAuto?"✓":"○"} ${x.name} · ${x.family}</h4><ul><li>${x.eligibility} · channel ${x.channelId} ${Math.round(x.channelScore)}/100 · score ${Math.round(x.score)}/100.</li><li>${x.note}</li><li>${(x.provenance||[]).map(id=>VEDIC_KNOWLEDGE_REGISTRY.sources[id]?.label||id).join(" + ")}</li></ul></div>`).join("")}</div></details>`;
 
  // Registry-driven daily anchors and curriculum. No prior-profile Sādhana list is used as an input.
  $("dailyTextAnchors").innerHTML=resolved.dailyTexts.map((t,i)=>`<div class="textCard">
@@ -4735,12 +5737,20 @@ function renderDharmaTab(){
 
  $("knowledgeRegistryProvenance").innerHTML=`<div class="routineBlock"><h4>${resolved.registryVersion} · ${resolved.runtimePolicy}</h4><ul>
    ${resolved.provenance.map(x=>`<li><b>${x.label}</b> · ${x.type} — ${x.note}</li>`).join("")}
-   <li><b>Extensibility:</b> new paths, devatā families, practices, texts, source records and association rules can be registered through <code>AstroHeatmap.registerVedicKnowledge(kind,item)</code> without rewriting the resolver.</li>
+   <li><b>Catalog coverage:</b> ${VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length} devatā forms · ${resolved.practiceSummary.total} practices (${resolved.practiceSummary.auto} auto-eligible / ${resolved.practiceSummary.gated} gated) · ${resolved.allTexts.length} ranked public texts.</li>
+   <li><b>Safety boundary:</b> received/Kula/Guru/Iṣṭa always outrank chart suggestions; bīja, nyāsa, advanced kumbhaka, tantric upāsanā and other gated procedures are catalogued but excluded from automatic routine assembly.</li>
+   <li><b>Extensibility:</b> new paths, devatā channels/forms, practice families, practices, texts, source records and association rules can be registered through <code>AstroHeatmap.registerVedicKnowledge(kind,item)</code> without rewriting the resolver.</li>
   </ul></div>`;
  $("routineDuration").textContent=`${intensity} min core · registry ${resolved.registryVersion} · received overlay ${applies?"on":"off"}`;
  let routine=routinePlan(intensity,resolved,timing);
- $("routineGrid").innerHTML=routine.map(r=>`<div class="routineBlock"><h4>${r.title}</h4><ul>${r.items.filter(Boolean).map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+ let ps=resolved.practiceSummary;
+ $("routineGrid").innerHTML=routine.map(r=>`<div class="routineBlock"><h4>${r.title}</h4><ul>${r.items.filter(Boolean).map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")+
+  `<details class="rankSummaryDetails"><summary>Daily-practice catalog · ${ps.total} practices · ${ps.auto} auto-eligible · ${ps.gated} gated/contextual</summary><div style="margin-top:8px">
+    <div class="routineBlock"><h4>Coverage by practice family</h4><ul><li>${Object.entries(ps.byCategory).map(([k,v])=>`${k}: <b>${v.total}</b> (${v.auto} auto / ${v.gated} gated)`).join(" · ")}</li></ul></div>
+    ${resolved.allPractices.map(p=>`<div class="routineBlock"><h4>${p.eligibility.eligible?"✓":"○"} ${p.title} · ${p.category}</h4><ul><li>Affinity ${Math.round(p.score)}/100 · ${p.frequency||p.slot||"flexible"}.</li><li>${p.eligibility.eligible?"Eligible for automatic routine assembly.":`Not auto-assembled: ${p.eligibility.reasons.join("; ")}.`}</li><li>${p.instructions?.[0]||""}</li></ul></div>`).join("")}
+   </div></details>`;
 
+ renderExpandedDharmaCatalogs(resolved);
  let mind=mindCalmingPlan(timing);
  $("mindCalmingGrid").innerHTML=mind.map((r,i)=>`<div class="routineBlock"><h4><span class="microTag">${i<5?"micro":"timing"}</span>${r.title}</h4><ul>${r.items.filter(Boolean).map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
 
@@ -4752,7 +5762,7 @@ function renderDharmaTab(){
   `<div class="evidenceCard"><b>Leading planets</b><div class="small">${spiritualPlanets.map(x=>`${x.n} I${Math.round(x.m.influence)} S${signed(x.m.support)}`).join(" · ")}</div></div>`,
   `<div class="evidenceCard"><b>Moksha / dharma houses</b><div class="small">${spiritualHouses.map(x=>`H${x.h} I${Math.round(x.m.influence)} S${signed(x.m.support)}`).join(" · ")}</div></div>`,
   `<div class="evidenceCard"><b>Timing</b><div class="small">${state.active.map((x,i)=>`${LEVELS[i]} ${x}`).join(" → ")||"Natal only"} · ${fmt(ms)}</div></div>`,
-  `<div class="evidenceCard"><b>Knowledge resolver</b><div class="small">${resolved.registryVersion} · ${resolved.runtimePolicy} · ${resolved.dailyPractices.length} eligible practices · ${resolved.allTexts.length} ranked texts</div></div>`
+  `<div class="evidenceCard"><b>Knowledge resolver</b><div class="small">${resolved.registryVersion} · ${resolved.runtimePolicy} · ${resolved.formAssessment.forms.length} devatā forms · ${resolved.practiceSummary.total} practices / ${resolved.practiceSummary.auto} auto-eligible · ${resolved.allTexts.length} ranked texts</div></div>`
  ].join("");
  }catch(e){
   console.error("Vedic Dharma render failed",e);
@@ -4999,17 +6009,23 @@ function calculateMahadashaRankings(){
   }
   let routedS=sDomains.reduce((a,x)=>a+x.score*x.weight,0),
       routedL=lDomains.reduce((a,x)=>a+x.score*x.weight,0),
-      sScore=clamp(.80*routedS+.20*(benefitMap[lord]??50),0,100),
-      lScore=clamp(.78*routedL+.22*(influenceMap[lord]??50),0,100),
+      structuralSupport=clamp(.80*routedS+.20*(benefitMap[lord]??50),0,100),
+      structuralLeverage=clamp(.78*routedL+.22*(influenceMap[lord]??50),0,100),
       period=mahadashaPeriodForLord(lord),
+      projectedSupport=projectedMahadashaGochara(period,MAHADASHA_SUPPORT_DOMAIN_WEIGHTS),
+      projectedLeverage=projectedMahadashaGochara(period,MAHADASHA_LEVERAGE_DOMAIN_WEIGHTS),
+      transitSupport=clamp(50+25*projectedSupport.mean,0,100),
+      transitActivation=clamp(50+25*projectedLeverage.meanAbs,0,100),
+      sScore=clamp(.90*structuralSupport+.10*transitSupport,0,100),
+      lScore=clamp(.90*structuralLeverage+.10*transitActivation,0,100),
       placements=mahadashaPlacementEvidence(lord);
-  support.push({lord,score:sScore,domains:sDomains,period,placements});
-  leverage.push({lord,score:lScore,domains:lDomains,period,placements});
+  support.push({lord,score:sScore,structuralScore:structuralSupport,projectedGochara:projectedSupport,domains:sDomains,period,placements});
+  leverage.push({lord,score:lScore,structuralScore:structuralLeverage,projectedGochara:projectedLeverage,domains:lDomains,period,placements});
  }
  support.sort((a,b)=>b.score-a.score);leverage.sort((a,b)=>b.score-a.score);
  support.forEach((x,i)=>x.rank=i+1);leverage.forEach((x,i)=>x.rank=i+1);
  return{support,leverage,d60:d60SensitivityAssessment(),
-   methodology:"Domain-routed vargas · chart-only · no historical calibration · D60 confidence-gated"};
+   methodology:"Domain-routed vargas · no historical calibration · D60 confidence-gated · 10% whole-Mahadasha projected Gochara overlay"};
 }
 function mahadashaTopEvidence(row,mode){
  let domains=[...row.domains].sort((a,b)=>Math.abs(b.score-50)*b.weight-Math.abs(a.score-50)*a.weight).slice(0,4),
@@ -5026,7 +6042,7 @@ function renderMahadashaRankings(){
         <div class="rankName">${x.lord}</div>
         <div class="rankSub">${period}</div>
         <div class="rankAreas"><b>Leading domains:</b> ${ev.domains.slice(0,3).map(q=>`${q.domain} ${Math.round(q.score)}`).join(" · ")}</div>
-        <div class="rankDesc">${mode==="support"?"Constructive support / continuity":"Activation / productive leverage"} · routed across purpose-specific vargas.</div>
+        <div class="rankDesc">${mode==="support"?"Constructive support / continuity":"Activation / productive leverage"} · structural ${Math.round(x.structuralScore??x.score)} · projected Gochara ${x.projectedGochara?`${x.projectedGochara.mean>=0?"+":""}${x.projectedGochara.mean.toFixed(2)} / ${x.projectedGochara.samples} samples`:"—"}.</div>
        </div><div class="rankScore"><div class="n">${Math.round(x.score)}</div><div class="small">/100 ${mode}</div></div>
       </button>`;
      };
@@ -5056,6 +6072,7 @@ function showMahadashaEvidence(lord,mode,el){
    <div class="rankDetailBox"><h4>Leading life-domain scores</h4><ul>${ev.domains.map(x=>`<li>${x.domain}: ${Math.round(x.score)}/100 · domain weight ${(100*x.weight).toFixed(0)}%</li>`).join("")}</ul></div>
    <div class="rankDetailBox"><h4>Divisional evidence</h4><ul>${ev.placements.map(x=>`<li><b>${x.id}</b> ${x.placement}${x.dignity?` · ${x.dignity}`:""}${x.assoc} · ${x.role}</li>`).join("")}</ul></div>
    <div class="rankDetailBox"><h4>D60 gate</h4><p>Effective D60 confidence ${Math.round(d60.effectiveConfidence*100)}%. ${d60.effectiveConfidence<.20?"D60 is effectively prevented from deciding this ranking.":"D60 remains only corroborative, never dominant."}</p></div>
+   <div class="rankDetailBox"><h4>Projected Gochara overlay</h4><p>Structural ${Math.round(row.structuralScore??row.score)}/100 → final ${Math.round(row.score)}/100. ${row.projectedGochara?`Whole-period projected mean ${row.projectedGochara.mean>=0?"+":""}${row.projectedGochara.mean.toFixed(2)} across ${row.projectedGochara.samples} sampled skies.`:"No chronological Mahādaśā occurrence is inside the configured horizon."} Mahādaśā Gochara weight is capped at 10%.</p></div>
   </div>`;
 }
 function mahadashaRankingInvariant(){
@@ -5147,9 +6164,10 @@ function renderTabContent(which){
  }else if(which==="cycles"){
   renderCrumbs();renderHierarchy();
   if(!_isMobile())renderTimeline(visibleGroups());
-  renderDomainBars();
+  renderDomainBars();if($("gocharaDetails").open)renderVedicGocharaPanel();
  }else if(which==="playbook"){renderPlaybook();renderWeights()}
  else if(which==="rankings")renderRankings();
+ else if(which==="vedicYoga")renderVedicYogaTab();
  else if(which==="dharma")renderDharmaTab();
  else if(which==="westernPath")renderWesternInnerPathTab();
  else if(which==="sajuCultivation")renderSajuCultivationTab();
@@ -5182,7 +6200,7 @@ async function calculateProfile(tryProviders=true){
  let by=new Date(chart.birthMs).getUTCFullYear(),today=new Date(),todayY=today.getUTCFullYear(),todayISO=today.toISOString().slice(0,10);
  $("inspectDate").min=profile.date;$("inspectDate").max=`${by+profile.horizon}-12-31`;
  $("inspectDate").value=(todayY>=by&&todayY<=by+profile.horizon)?todayISO:profile.date;
- for(const id of["dharmaDate","westernPathDate","sajuCultivationDate"]){
+ for(const id of["dharmaDate","vedicYogaDate","westernPathDate","sajuCultivationDate"]){
   if($(id)){$(id).min=profile.date;$(id).max=$("inspectDate").max;$(id).value=$("inspectDate").value;}
  }
  let ephem=swissReady?"Swiss Ephemeris":(chart.natalSource==="validated reference ephemeris"?"validated reference ephemeris + runtime fallback":"internal fallback");
@@ -5309,7 +6327,44 @@ function addSystem(opts={}){
  for(const d of DOMAINS){let old=Object.keys(WEIGHTS[d]).reduce((a,k)=>a+WEIGHTS[d][k],0),share=clamp(opts.targetShare??.10,0,.95);for(const k of Object.keys(WEIGHTS[d]))WEIGHTS[d][k]=old?WEIGHTS[d][k]/old*(1-share):(1-share)/Object.keys(WEIGHTS[d]).length;WEIGHTS[d][id]=share}
  selectedSystemIds.add(id);ensureCycleFamily();render();return id;
 }
+function catalogEscape(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function catalogFold(value){return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
+const catalogViewState={};
+function catalogMeter(label,value){return `<div class="catalogMeter"><span>${catalogEscape(label)} <b>${Math.round(value)}/100</b></span><meter min="0" max="100" value="${Math.max(0,Math.min(100,value))}">${Math.round(value)}</meter></div>`}
+function catalogSources(ids,registry=VEDIC_KNOWLEDGE_REGISTRY){return (ids||[]).map(id=>catalogEscape(registry.sources[id]?.label||id)).join(' · ')}
+function renderCatalogBrowser(id,title,rows){
+ const el=$(id);if(!el)return;
+ const state=catalogViewState[id]||(catalogViewState[id]={q:'',group:'',status:''});
+ const options=key=>[...new Set(rows.map(r=>r[key]))].sort().map(v=>`<option value="${catalogEscape(v)}">${catalogEscape(v)}</option>`).join('');
+ el.innerHTML=`<div class="catalogBrowser"><h4>${catalogEscape(title)}</h4><div class="catalogControls"><label>Search<input type="search" data-filter="q" placeholder="Name or evidence" aria-label="Search ${catalogEscape(title)}"></label><label>Family / level<select data-filter="group"><option value="">All families / levels</option>${options('group')}</select></label><label>Status<select data-filter="status"><option value="">All statuses</option>${options('status')}</select></label></div><p class="small catalogCount" aria-live="polite"></p><div class="catalogResults"></div></div>`;
+ const draw=()=>{const found=rows.filter(r=>(!state.group||r.group===state.group)&&(!state.status||r.status===state.status)&&catalogFold(r.name+' '+r.group+' '+r.search).includes(catalogFold(state.q)));el.querySelector('.catalogCount').textContent=`${found.length} of ${rows.length} entries · open an entry for evidence and provenance`;
+ el.querySelector('.catalogResults').innerHTML=found.map(r=>`<details class="catalogEntry"><summary><span>${catalogEscape(r.name)}</span><span class="catalogTag">${catalogEscape(r.status)}</span></summary><div class="catalogEntryBody"><p class="small">${catalogEscape(r.group)}</p>${r.body}</div></details>`).join('')||'<p>No matching entries. Clear a filter to see more.</p>'};
+ el.querySelectorAll('[data-filter]').forEach(input=>{input.value=state[input.dataset.filter];input.addEventListener('input',()=>{state[input.dataset.filter]=input.value;draw()})});draw();
+}
+function renderExpandedDharmaCatalogs(resolved){
+ renderCatalogBrowser('specializedDevataGrid','All devatā forms',resolved.formAssessment.forms.map(x=>({name:x.name,group:x.family,status:x.receivedMatch?'Received':x.eligibleAuto?'Supporting':'Contextual',search:x.note,body:`<p>${catalogEscape(x.note)}</p><p>${catalogEscape(x.eligibility)}</p>${catalogMeter('Supporting affinity',x.score)}<p class="small">Channel ${Math.round(x.channelScore)} · path fit ${Math.round(x.pathScore)} · timing ${Math.round(x.timingScore)}. Affinity never establishes an Iṣṭa.</p><p class="small">${catalogSources(x.provenance)}</p>`})));
+ renderCatalogBrowser('textAffinityGrid','Complete text library',resolved.allTexts.map(x=>({name:x.title,group:x.difficulty,status:x.traditionGuided?'Teacher / tradition context':x.dailyAnchor?'Daily anchor':'Study',search:x.kind+' '+Object.keys(x.paths||{}).join(' '),body:`<p>${catalogEscape(x.kind)} · ${catalogEscape(Object.keys(x.paths||{}).join(' · '))}</p>${catalogMeter('Study affinity',x.score)}<p>Start with foundations; prior study and teacher guidance take precedence over affinity.</p><p class="small">${catalogSources(x.provenance)}</p>`})));
+ const old=$('routineGrid').querySelector('details');if(old)old.remove();const holder=document.createElement('div');holder.id='practiceCatalogBrowser';$('routineGrid').appendChild(holder);
+ renderCatalogBrowser(holder.id,'Complete practice catalog',resolved.allPractices.map(x=>({name:x.title,group:x.category,status:x.eligibility.eligible?'Routine eligible':'Contextual / gated',search:(x.instructions||[]).join(' '),body:`<p>${x.eligibility.eligible?'Eligible for automatic routine assembly.':catalogEscape(x.eligibility.reasons.join('; '))}</p>${catalogMeter('Practice affinity',x.score)}<p class="small">${catalogEscape(x.frequency||x.slot||'Flexible')} · ${catalogEscape(x.minutes||'Flexible')} minutes</p><ul>${(x.instructions||[]).map(t=>`<li>${catalogEscape(t)}</li>`).join('')}</ul><p class="small">${catalogSources(x.provenance)}</p>`})));
+}
+function renderYogaCatalog(yogas,active,windows,ms){
+ renderCatalogBrowser('vedicYogaList','All yoga rules',yogas.map(x=>({name:x.name,group:x.category,status:x.present?'Detected':'Unmet',search:x.description+' '+x.evidence,body:`<p>${catalogEscape(x.description)}</p><p><b>Chart evidence:</b> ${catalogEscape(x.evidence)}</p>${catalogMeter('Natal salience',x.strength)}<p>${catalogEscape(x.polarity)} · ${catalogEscape(x.participants.join(' + '))}</p><p class="small">${catalogSources(x.provenance,VEDIC_YOGA_REGISTRY)}</p>`})));
+ $('vedicYogaActivation').querySelectorAll('.routineBlock').forEach((el,i)=>{if(active[i])el.insertAdjacentHTML('afterbegin',catalogMeter('Activation',active[i].activation))});
+ $('shaniWindowGrid').innerHTML=`<p class="small">${fmt(ms)} · selected date. Window endpoints are computed sign crossings; first and last windows may be clipped to the scan range. Provider: ${catalogEscape(calcVedicTransitSet(ms)._meta.provider)}.</p><div class="shaniTimeline">${windows.map(w=>`<details class="shaniWindow ${w.a<=ms&&ms<w.b?'current':''}"><summary><span>${catalogEscape(w.name)}</span><small>${fmt(w.a)} → ${fmt(w.b)}${w.a<=ms&&ms<w.b?' · Current':''}</small></summary><p>Saturn in ${SIGNS[w.sign]} · H${w.fromMoon} from natal Moon. ${catalogEscape(w.description||'Retrograde re-entry can split this phase into separate windows.')}</p></details>`).join('')||'<p>No sensitive windows in this scan range.</p>'}</div>`;
+}
+
 window.AstroHeatmap={
+ getVedicGochara:(ms=Date.now(),domain="Career")=>structuredClone(vedicGocharaScore(ms,DOMAINS.indexOf(domain),activePathAt(ms,5))),
+ getVedicTransitSet:(ms=Date.now())=>structuredClone(calcVedicTransitSet(ms)),
+ getVedicYogaRegistry:()=>structuredClone(VEDIC_YOGA_REGISTRY),
+ getVedicYogas:()=>structuredClone(detectedVedicYogas()),
+ getVedicYogaActivations:(ms=Date.now())=>structuredClone(allYogaActivationsAt(ms)),
+ getShaniState:(ms=Date.now())=>structuredClone(shaniStateAt(ms)),
+ getShaniWindows:(startMs,endMs)=>structuredClone(scanShaniWindows(startMs,endMs)),
+ scoreVedicPeriod:(period,domain)=>scoreVedicPeriod(period,DOMAINS.indexOf(domain)),
+ getVedicDevataForms:(ms=dharmaDateMs())=>structuredClone(devataFormAssessment(ms,classicalDevataAssessment(ms),currentDharmaPathScores(ms))),
+ getVedicPracticeCatalog:(ms=dharmaDateMs())=>{let r=resolveVedicKnowledge(ms,20);return structuredClone({summary:r.practiceSummary,all:r.allPractices,eligible:r.dailyPractices,gated:r.gatedPractices})},
+
  addSystem,
  addStaticSystem,
  registerCycleFamily,
@@ -5496,14 +6551,14 @@ function _syncStrip(){
 
 function exportCSV(){let groups=visibleGroups(),rows=[["Level","Path","Start","End",...selectedDimensions()]];for(const g of groups)rows.push([LEVELS[g.depth-1]||"Phase",g.path.join(" > "),fmt(g.a),fmt(g.b),...selectedDimensions().map(d=>scorePeriod(g,DOMAINS.indexOf(d)).toFixed(3))]);let csv=rows.map(r=>r.map(x=>`"${String(x).replaceAll('"','""')}"`).join(",")).join("\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="dynamic_astrology_heatmap_visible.csv";a.click()}
 function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.values(SYSTEMS).map(s=>[s.id,{id:s.id,name:s.name,active:s.active,targetShare:s.targetShare,cycleKeys:[...(s.cycleKeys||[])],structuralFamilies:[...(s.structuralFamilies||[])],practiceFamily:s.practiceFamily||null,static:!!s.static,missingPolicy:s.missingPolicy||null,intervals:s.static?(s.staticIntervals||[]).map(r=>({start:new Date(r.a).toISOString(),end:new Date(r.b).toISOString(),scores:Object.fromEntries(DOMAINS.map((d,i)=>[d,r.scores[i]]))})):undefined}])),weights:WEIGHTS,selectedSystems:[...selectedSystemIds],selectedDimensions:[...selectedDimensionsSet],calculation:{swissReady,baziProvider,dashaDepth:"Prana",sampling:$("sampleMode").value,
- structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
+ structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,vedicDevataFormCount:VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length,vedicPracticeCount:VEDIC_KNOWLEDGE_REGISTRY.practices.length,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1-gochara",vedicGocharaModel:"lahiri-moon-lagna-drishti-active-lords-double-transit-v1",vedicYogaActivationModel:"major-yoga-registry-v2-natal-dasha-gochara",shaniCycleModel:"moon-sign-sade-sati-4th-8th-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
 
 function switchTab(which){
  closeHeatPreview();
  const openGroup=document.querySelector(".nav-group-menu:not([hidden])");
  const groupTrigger=openGroup?.dataset.trigger;closeNavGroups();
  if(groupTrigger)$(groupTrigger).focus({preventScroll:true});
- const ALL_TABS=["heatmap","cycles","playbook","rankings","dharma","westernPath","sajuCultivation","guide","validation"];
+ const ALL_TABS=["heatmap","cycles","playbook","rankings","dharma","vedicYoga","westernPath","sajuCultivation","guide","validation"];
  if(!ALL_TABS.includes(which))return;
  updatePageTitle(which);
  const previous=document.querySelector(".tabPanel.active");
@@ -5555,6 +6610,10 @@ $("evidenceRecommendedBtn").onclick=()=>{enabledStructuralLayerIds=recommendedSt
 $("evidenceD1Btn").onclick=()=>{enabledStructuralLayerIds=new Set(["D1"]);structuralEvidenceMode="d1";structuralCache.clear();scoreCache.clear();render()};
 $("d60Convention").onchange=e=>{d60Convention=e.target.value;structuralCache.clear();scoreCache.clear();render()};
 $("pBirthConfidence").onchange=()=>{profile=readProfile();structuralCache.clear();scoreCache.clear();render()};
+$("vedicYogaDate").onchange=renderVedicYogaTab;
+$("vedicYogaTabBtn").onclick=()=>switchTab("vedicYoga");
+$("mbn-vedicYoga").onclick=()=>switchTab("vedicYoga");
+$("gocharaDetails").ontoggle=()=>{if($("gocharaDetails").open&&chart)renderVedicGocharaPanel()};
 $("dharmaDate").onchange=()=>{if($("inspectDate"))$("inspectDate").value=$("dharmaDate").value;renderDharmaTab()};
 $("dharmaIntensity").onchange=renderDharmaTab;
 $("westernPathDate").onchange=renderWesternInnerPathTab;
@@ -5905,7 +6964,7 @@ function setupSubtabs(rowId,sectionMap){
 }
 
 // Mobile bottom nav bindings
-for(const id of["heatmap","cycles","playbook","rankings","dharma","westernPath","sajuCultivation","guide","validation"]){
+for(const id of["heatmap","cycles","playbook","rankings","dharma","vedicYoga","westernPath","sajuCultivation","guide","validation"]){
  const btn=$("mbn-"+id);
  if(btn){btn.onclick=()=>switchTab(id);_tap(btn,()=>switchTab(id));}
 }
@@ -6006,10 +7065,10 @@ function validateProfileInputs(){
  for(const id of ['pDate','pTime','pLat','pLon','pTz']){const input=$(id);if(!input.value||!input.checkValidity()){input.reportValidity();$('savedProfileStatus').textContent='Enter a valid birth date, time and location before calculating.';return false}}
  return true;
 }
-const PAGE_TITLES={heatmap:'Kāla',cycles:'Cycles',playbook:'Playbook',rankings:'Natal Maps',dharma:'Vedic · Dharma',westernPath:'Western · Inner Path',sajuCultivation:'Saju · Cultivation',guide:'Integration Guide',validation:'Validation'};
+const PAGE_TITLES={heatmap:'Kāla',cycles:'Cycles',playbook:'Playbook',rankings:'Natal Maps',dharma:'Vedic · Dharma',vedicYoga:'Vedic · Yogas',westernPath:'Western · Inner Path',sajuCultivation:'Saju · Cultivation',guide:'Integration Guide',validation:'Validation'};
 function updatePageTitle(which){
  const title=PAGE_TITLES[which]||'Kāla';$('activePageTitle').textContent=title;$('desktopPageTitle').textContent=title;document.title=title+' · Astrology Engine';
- for(const [group,ids] of Object.entries({paths:['dharma','westernPath','sajuCultivation'],more:['guide','validation']})){
+ for(const [group,ids] of Object.entries({paths:['dharma','vedicYoga','westernPath','sajuCultivation'],more:['guide','validation']})){
   const btn=$('mbn-'+group);if(btn){btn.classList.toggle('active',ids.includes(which));btn.setAttribute('aria-current',ids.includes(which)?'page':'false')}
  }
 }
@@ -6018,7 +7077,7 @@ function closeNavGroups(){
 }
 function setupGroupedNavigation(){
  const nav=$('mobileBottomNav');
- for(const [id,label,icon,items] of [['paths','Paths','☸',['dharma','westernPath','sajuCultivation']],['more','More','⋯',['guide','validation']]]){
+ for(const [id,label,icon,items] of [['paths','Paths','☸',['dharma','vedicYoga','westernPath','sajuCultivation']],['more','More','⋯',['guide','validation']]]){
   const group=document.createElement('div');group.className='nav-group';
   const button=document.createElement('button');button.className='mbn-btn';button.id='mbn-'+id;button.type='button';button.innerHTML=`<span class="nav-group-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;
   const menu=document.createElement('div');menu.className='nav-group-menu';menu.id='nav-'+id;menu.hidden=true;menu.dataset.trigger=button.id;menu.setAttribute('role','group');menu.setAttribute('aria-label',label);
