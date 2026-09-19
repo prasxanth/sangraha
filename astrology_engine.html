@@ -1669,21 +1669,22 @@ const LEVELS=['Mahadasha','Antardasha','Pratyantardasha','Sookshma','Prana'];
 const VEDIC_LEVEL_WEIGHTS=[.15,.25,.25,.20,.15];
 const DOMAINS=["Career","Wealth","Marriage","Family","Children","Vitality","Mind","Spiritual","Reinvention","Learning","Autonomy","Mentorship"];
 const ASTROLOGY_METHOD_REGISTRY={
- version:"2026.09-v16",
+ version:"2026.09-v17-audit",
  primaryVedic:"BPHS",
  methods:{
   BPHS:{
-   id:"BPHS",name:"Bṛhat Parāśara Horā Śāstra · Classical Core",status:"PRIMARY",
+   id:"BPHS",name:"BPHS-derived conditional rule model",status:"PRIMARY",
    lineage:"Parāśari",
    sourceLock:true,
    sources:[
-    {id:"BPHS-47",label:"BPHS Ch.47 · Effects of Daśās",use:"general vs distinctive daśā effects; strength and placement govern delivery"},
-    {id:"BPHS-48",label:"BPHS Ch.48 · Distinctive effects of Nakṣatra Daśās / bhāva lords",use:"house lordship, placement and dignity in period interpretation"},
+    {id:"BPHS-3",label:"BPHS Ch.3 · Planetary characters",use:"natural/temporary friendship and degree-sensitive dignity"},
+    {id:"BPHS-34",label:"BPHS Ch.34 · Yoga karakas",use:"ascendant-specific lordship qualifications"},
+    {id:"BPHS-58",label:"BPHS Ch.58 · Mercury antardashas (accessible transcription)",use:"conditional relative placement; chapter number differs by edition"},
     {id:"BPHS-VARGA",label:"BPHS · divisional consideration / Śoḍaśavarga",use:"domain vargas corroborate D1 promise; they do not replace D1"},
     {id:"BPHS-GOCHARA",label:"Parāśari Gochara layer",use:"delivery overlay after natal + daśā promise"}
    ],
-   normalization:"Numerical values are fixed engine normalization for visualization, not scriptural percentages.",
-   boundary:"Core v1 implements D1 lordship/placement/dignity, domain relevance, relevant-varga corroboration, Vimśottari hierarchy and projected Gochara. Full Śaḍbala/Aṣṭakavarga is NOT silently approximated; add only after separately verified implementation."
+   normalization:"Numerical weights are explicit v17 application policy for visualization, not scriptural percentages.",
+   boundary:"Audited subset: contextual lordship, dignity/friendship, independent varga corroboration and MD–AD relationships. Not exhaustive BPHS; see the rule-coverage panel."
   },
   BNN:{
    id:"BNN",name:"Bhrigu Nandi Nadi · R.G. Rao-style conservative core",status:"SECOND OPINION · OFF BY DEFAULT",
@@ -1696,7 +1697,7 @@ const ASTROLOGY_METHOD_REGISTRY={
     {id:"BNN-TRANSIT",label:"BNN · slow-transit activation",use:"Jupiter, Saturn and nodes activate documented natal circuits"}
    ],
    normalization:"Conservative engine subset. No Vimśottari daśā is imported into BNN.",
-   boundary:"BNN is kept independent from BPHS. It uses natural significators + conjunction/trine circuits + slow-transit activation. It is not allowed to rewrite BPHS results and is unchecked in the combined-system selector by default."
+   boundary:"Independent BNN relationship model: significators, adjacent/opposite/trinal links, dispositors, exchanges and slow transits. Retrograde projection is evidence only. The full case corpus is not encoded."
   }
  }
 };
@@ -1750,80 +1751,43 @@ function bphsRulerships(name){
  return out;
 }
 
-function bphsDignitySignal(name,sign=natalPlanetSign(name)){
- if(!CLASSICAL.includes(name))return 0;
- if(EXALT_SIGN[name]===sign)return 1;
- if((OWN_SIGNS[name]||[]).includes(sign))return .72;
- if(DEBIL_SIGN[name]===sign)return-1;
- return 0;
-}
+function bphsDignitySignal(name,sign=natalPlanetSign(name)){return ruleDignity(name,sign===natalPlanetSign(name)?chart.sidereal[name].lon:sign*30+10).score}
 
 function bphsNaturalSignal(name){
- if(name==="Moon"){
-  let phase=norm(chart.sidereal.Moon.lon-chart.sidereal.Sun.lon);
-  return phase>0&&phase<=180?.55:.10;
- }
- return BPHS_NATURAL_QUALITY[name]??0;
+ const n=basicNatural(name);if(name!=='Mercury')return n;
+ const contacts=CLASSICAL.filter(x=>x!==name&&natalPlanetSign(x)===natalPlanetSign(name));
+ if(contacts.some(x=>basicNatural(x)<0))return-.25;
+ return contacts.some(x=>basicNatural(x)>0)?.35:.2;
 }
 
 function bphsDomainRelevance(name,di){
- let rule=BPHS_DOMAIN_RULES[DOMAINS[di]],p=chart.sidereal[name];if(!rule||!p)return 0;
- let rel=0,ruled=bphsRulerships(name);
- if(ruled.some(h=>rule.houses.includes(h)))rel+=.46;
- if(rule.houses.includes(p.house))rel+=.34;
- if(rule.karakas.includes(name))rel+=.38;
- let from=natalPlanetSign(name),targets=vedicSignTargets(name,from),
-     asc=signIndex(chart.sidAsc),
-     targetSigns=rule.houses.map(h=>(asc+h-1)%12);
- if(targetSigns.some(x=>targets.includes(x)))rel+=.18;
- if(["Rahu","Ketu"].includes(name)){
-  let disp=rulerOfSignIndex(natalPlanetSign(name));
-  if(rule.karakas.includes(disp)||bphsRulerships(disp).some(h=>rule.houses.includes(h)))rel+=.20;
- }
- return clamp(rel,0,1);
+ return ruleMemo('relevance:'+name+':'+di,()=>{
+  const rule=BPHS_DOMAIN_RULES[DOMAINS[di]],ruled=bphsRulerships(name),h=bphsWholeHouse(name),lords=[...new Set(rule.houses.map(x=>rulerOfSignIndex(signIndex(chart.sidAsc)+x-1)))];
+  let rel=(ruled.some(x=>rule.houses.includes(x))?.4:0)+(rule.houses.includes(h)?.25:0)+(rule.karakas.includes(name)?.3:0);
+  if(rule.houses.some(x=>vedicSignTargets(name,natalPlanetSign(name)).includes((signIndex(chart.sidAsc)+x-1)%12)))rel+=.15;
+  const linked=lords.filter(n=>n!==name&&planetAssociation(name,n).present);if(linked.length)rel+=Math.min(.3,linked.length*.15);
+  return clamp(rel,0,1);
+ });
 }
 
-function bphsFunctionalSignal(name){
- if(!CLASSICAL.includes(name)){
-  let disp=rulerOfSignIndex(natalPlanetSign(name));
-  return .70*bphsFunctionalSignal(disp);
- }
- let ruled=bphsRulerships(name);
- if(!ruled.length)return 0;
- return clamp(ruled.reduce((a,h)=>a+(BPHS_HOUSE_QUALITY[h]||0),0)/ruled.length,-1,1);
-}
+function bphsFunctionalSignal(name){return functionalAssessment(name).score}
 
-function bphsPlacementSignal(name){
- let h=chart.sidereal[name]?.house;
- return BPHS_HOUSE_QUALITY[h]??0;
-}
+function bphsPlacementSignal(name){return BPHS_HOUSE_QUALITY[bphsWholeHouse(name)]??0}
 
 function bphsVargaCorroboration(name,di){
- let rule=BPHS_DOMAIN_RULES[DOMAINS[di]],id=rule?.varga;
- if(!id||id==="D1"||!STRUCTURAL_LAYERS[id])return{signal:0,id:null,evidence:"D1 only"};
- let vc=buildVargaChart(id),p=vc?.planets?.[name];if(!p)return{signal:0,id,evidence:`${id} unavailable`};
- let dig=CLASSICAL.includes(name)?bphsDignitySignal(name,p.sign):0,
-     hq=KENDRA_HOUSES.includes(p.house)?.55:TRIKONA_HOUSES.includes(p.house)?.65:DUSTHANA_HOUSES.includes(p.house)?-.50:0,
-     confidence=structuralLayerConfidence(id),
-     signal=clamp((.62*dig+.38*hq)*confidence,-1,1);
- return{signal,id,evidence:`${id} ${SIGNS[p.sign]} H${p.house} · confidence ${Math.round(confidence*100)}%`};
+ const id=BPHS_DOMAIN_RULES[DOMAINS[di]]?.varga,vc=id?buildVargaChart(id):null,p=vc?.planets?.[name];if(!p)return{signal:0,id,evidence:'No routed varga available'};
+ const positions=Object.fromEntries(Object.entries(vc.planets).map(([n,v])=>[n,{...v,lon:v.lon??v.sign*30+10}])),dignity=ruleDignity(name,p.lon??p.sign*30+10,positions),houseSignal=[1,4,7,10].includes(p.house)?.55:[5,9].includes(p.house)?.65:[6,8,12].includes(p.house)?-.45:0,confidence=structuralLayerConfidence(id);
+ return{signal:clamp((.6*dignity.score+.4*houseSignal)*confidence,-1,1),id,dignity,confidence,evidence:`${id} ${SIGNS[p.sign]} H${p.house} · ${dignity.band} · ${Math.round(confidence*100)}% confidence · independent corroboration`};
 }
 
 function bphsLordDomainAssessment(name,di){const key='bphs-lord:'+JSON.stringify([name,di]),entry=scoreCache.get(key);if(entry?.chart===chart)return entry.value;const value=bphsLordDomainAssessmentUncached(name,di);scoreCache.set(key,{chart,value});return value}
 function bphsLordDomainAssessmentUncached(name,di){
- let rel=bphsDomainRelevance(name,di),functional=bphsFunctionalSignal(name),
-     placement=bphsPlacementSignal(name),dignity=bphsDignitySignal(name),
-     natural=bphsNaturalSignal(name),varga=bphsVargaCorroboration(name,di),
-     condition=clamp(.36*functional+.24*placement+.25*dignity+.15*natural,-1,1),
-     support=clamp(2*condition*(.35+.65*rel)+.32*varga.signal*rel,-2,2),
-     prominence=clamp((KENDRA_HOUSES.includes(chart.sidereal[name]?.house)?.78:
-                      TRIKONA_HOUSES.includes(chart.sidereal[name]?.house)?.72:
-                      UPACHAYA_HOUSES.includes(chart.sidereal[name]?.house)?.62:.42),0,1),
-     dignityPower=clamp(.52+.35*Math.abs(dignity)+(["Rahu","Ketu"].includes(name)?.18:0),0,1),
-     activation=clamp(2*(.48*rel+.30*prominence+.22*dignityPower),0,2);
- return{name,domain:DOMAINS[di],support,activation,relevance:rel,functional,placement,dignity,natural,varga,
-   provenance:["BPHS-47","BPHS-48","BPHS-VARGA"],
-   normalization:"fixed v16 engine normalization; not a BPHS percentage"};
+ const relevance=bphsDomainRelevance(name,di),functionalDetail=functionalAssessment(name),functional=functionalDetail.score,placement=bphsPlacementSignal(name),dignityDetail=ruleDignity(name),strength=strengthComponents(name),dignity=strength.cancellation.present?Math.max(-.35,dignityDetail.score):dignityDetail.score,natural=bphsNaturalSignal(name),varga=bphsVargaCorroboration(name,di),host=dignityDetail.host,chain=dispositorChain(name),contacts=planetRuleContacts(name);
+ const hostCondition=host===name?dignity:clamp(.55*ruleDignity(host).score+.25*bphsPlacementSignal(host)+.20*functionalAssessment(host).score,-1,1);
+ const association=contacts.length?avg(contacts.map(c=>{const val=.55*functionalAssessment(c.name).score+.45*basicNatural(c.name);return val*(c.exchange?1:c.same?.8:.55)})):0;
+ const general=2*(.20*functional+.20*dignity+.16*placement+.14*natural+.14*hostCondition+.16*association),domainFactor=.65+.35*relevance,vargaContribution=.35*varga.signal;
+ const support=clamp(general*domainFactor*(.75+.25*strength.value)+vargaContribution,-2,2),activation=clamp(2*(.48*relevance+.27*strength.value+.15*([1,4,7,10].includes(bphsWholeHouse(name))?1:.5)+.10*Math.min(1,contacts.length/3)),0,2);
+ return{name,domain:DOMAINS[di],support,activation,relevance,functional,placement,dignity,natural,varga,functionalDetail,dignityDetail,strength,dispositor:{host,condition:hostCondition,...chain},contacts,association,contributions:{general,domainFactor,strengthFactor:.75+.25*strength.value,varga:vargaContribution},provenance:['bphs'],normalization:'v17 explicit heuristic normalization; not scriptural percentages; partial rule coverage'};
 }
 
 function bphsPathAssociationFactor(path,di){const key='bphs-assoc:'+JSON.stringify([path,di]),entry=scoreCache.get(key);if(entry?.chart===chart)return entry.value;const value=bphsPathAssociationFactorUncached(path,di);scoreCache.set(key,{chart,value});return value}
@@ -1843,19 +1807,14 @@ function bphsPathAssociationFactorUncached(path,di){
 }
 
 function bphsPathSupport(path,di){
- if(!path?.length)return 0;
- let w=normalizedDashaWeights(path.length),v=0;
- path.forEach((lord,i)=>v+=bphsLordDomainAssessment(lord,di).support*w[i]);
- let f=bphsPathAssociationFactor(path,di);
- return clamp(v*f.supportFactor,-2,2);
+ if(!path?.length)return 0;const w=normalizedDashaWeights(path.length),baseline=path.reduce((sum,lord,i)=>sum+w[i]*bphsLordDomainAssessment(lord,di).support,0);
+ const pairs=path.slice(1).map((ad,i)=>({w:w[i+1],assessment:bphsPairAssessment(path[0],ad,di)})),context=pairs.reduce((sum,p)=>sum+p.w*p.assessment.pairSignal,0);
+ return clamp(baseline+.35*context,-2,2);
 }
 
 function bphsPathActivation(path,di){
- if(!path?.length)return 0;
- let w=normalizedDashaWeights(path.length),v=0;
- path.forEach((lord,i)=>v+=bphsLordDomainAssessment(lord,di).activation*w[i]);
- let f=bphsPathAssociationFactor(path,di);
- return clamp(v*f.activationFactor,0,2);
+ if(!path?.length)return 0;const w=normalizedDashaWeights(path.length),baseline=path.reduce((sum,lord,i)=>sum+w[i]*bphsLordDomainAssessment(lord,di).activation,0),unique=[...new Set(path)],links=unique.flatMap((a,i)=>unique.slice(i+1).map(b=>planetAssociation(a,b))).filter(x=>x.present).length;
+ return clamp(baseline*(1+Math.min(.12,.04*links)),0,2);
 }
 
 function bphsSupportTransitWeight(depth){return BPHS_SUPPORT_TRANSIT_WEIGHT[Math.max(1,Math.min(5,depth||1))]??.08}
@@ -1875,12 +1834,7 @@ function methodSelectionInvariant(){
   detail:`BPHS primary ${primary?"PASS":"FAIL"} · BNN installed ${bnnExists?"PASS":"FAIL"} · BNN off by default ${bnnOffDefault?"PASS":"FAIL"} · comparator weights ${weights?"PASS":"FAIL"} · no Vimśottari leakage into BNN ${independent?"PASS":"FAIL"}`};
 }
 
-function bnnRelationWeight(a,b){
- let sa=natalPlanetSign(a),sb=natalPlanetSign(b),d=signDistance(sb,sa);
- if(d===0)return{kind:"conjunction",weight:1};
- if(d===4||d===8)return{kind:"trine",weight:.78};
- return null;
-}
+function bnnRelationWeight(a,b){const rel=bnnRelations(a,b);return rel.length?[...rel].sort((x,y)=>y.weight-x.weight)[0]:null}
 
 function bnnActorValence(name,rule){
  if(rule.heroes.includes(name))return 1;
@@ -1891,27 +1845,25 @@ function bnnActorValence(name,rule){
  return 0;
 }
 
+// BNN uses sign condition; BPHS temporary/compound friendships are not imported.
+function bnnSignCondition(name){
+ const sign=natalPlanetSign(name),host=rulerOfSignIndex(sign);
+ const score=!CLASSICAL.includes(name)?0:EXALT_SIGN[name]===sign?1:DEBIL_SIGN[name]===sign?-1:host===name?.65:.45*naturalRelationship(name,host);
+ return{score,host};
+}
+
 function bnnNatalDomainAssessment(di){const key='bnn-natal:'+JSON.stringify([di]),entry=scoreCache.get(key);if(entry?.chart===chart)return entry.value;const value=bnnNatalDomainAssessmentUncached(di);scoreCache.set(key,{chart,value});return value}
 function bnnNatalDomainAssessmentUncached(di){
- let domain=DOMAINS[di],rule=BNN_DOMAIN_RULES[domain],actors=[...CLASSICAL,"Rahu","Ketu"],
-     heroRows=[],num=0,den=0,connections=[];
+ const domain=DOMAINS[di],rule=BNN_DOMAIN_RULES[domain],actors=[...CLASSICAL,'Rahu','Ketu'],connections=[],heroRows=[],nuances=[];
  for(const hero of rule.heroes){
-  let hnum=.55,hden=.55; // hero planet owns the enquiry.
-  for(const actor of actors){
-   if(actor===hero)continue;
-   let rel=bnnRelationWeight(hero,actor);if(!rel)continue;
-   let val=bnnActorValence(actor,rule);
-   hnum+=rel.weight*val;hden+=rel.weight;
-   connections.push({hero,actor,kind:rel.kind,weight:rel.weight,valence:val});
-  }
-  let heroScore=clamp(hnum/Math.max(.55,hden),-1,1);
-  heroRows.push({hero,score:heroScore});num+=heroScore;den++;
+  const dignity=bnnSignCondition(hero),host=dignity.host,base=.6*dignity.score+.4*bnnSignCondition(host).score;let num=base,den=1;
+  for(const actor of actors){if(actor===hero)continue;const relations=bnnRelations(hero,actor);if(!relations.length)continue;const relation=[...relations].sort((a,b)=>b.weight-a.weight)[0],condition=bnnSignCondition(actor).score,valence=clamp(.6*bnnActorValence(actor,rule)+.4*condition,-1,1);num+=relation.weight*valence;den+=relation.weight;connections.push({hero,actor,kind:relation.kind,weight:relation.weight,valence,relations});}
+  heroRows.push({hero,score:clamp(num/den,-1,1),dispositor:host,chain:dispositorChain(hero)});
  }
- let support=clamp(2*(den?num/den:0),-2,2),
-     density=clamp(connections.reduce((a,x)=>a+x.weight,0)/Math.max(1,rule.heroes.length*3),0,1),
-     activationBase=clamp(2*(.48+.52*density),0,2);
- return{domain,support,activationBase,heroes:[...rule.heroes],connections,heroRows,
-   provenance:["BNN-KARAKA","BNN-CONJ","BNN-TRINE"]};
+ for(const actor of actors){const p=chart.sidereal[actor];if(p.ret&&CLASSICAL.includes(actor))nuances.push({planet:actor,kind:'retrograde previous-sign influence',actualSign:natalPlanetSign(actor),projectedSign:(natalPlanetSign(actor)+11)%12,status:'evidence only; no physical longitude shifted'});}
+ const degreeOrder=actors.map(name=>({name,sign:natalPlanetSign(name),degree:chart.sidereal[name].lon%30})).sort((a,b)=>a.degree-b.degree);
+ const density=clamp(connections.reduce((sum,x)=>sum+x.weight,0)/Math.max(1,rule.heroes.length*4),0,1);
+ return{domain,support:2*avg(heroRows.map(x=>x.score)),activationBase:2*(.25+.65*density),heroes:[...rule.heroes],connections,heroRows,nuances,degreeOrder,provenance:['bnn'],coverage:'audited relationship subset; not all case judgments'};
 }
 
 function bnnTransitRelationToNatalSign(transitSign,natalSign){
@@ -1923,24 +1875,12 @@ function bnnTransitRelationToNatalSign(transitSign,natalSign){
 
 function bnnTransitDomainAssessment(ms,di){const key='bnn-transit:'+JSON.stringify([ms,di]),entry=scoreCache.get(key);if(entry?.chart===chart)return entry.value;const value=bnnTransitDomainAssessmentUncached(ms,di);scoreCache.set(key,{chart,value});return value}
 function bnnTransitDomainAssessmentUncached(ms,di){
- let natal=bnnNatalDomainAssessment(di),trans=calcVedicTransitSet(ms),rule=BNN_DOMAIN_RULES[DOMAINS[di]],
-     targets=[...new Set([...rule.heroes,...natal.connections.map(x=>x.actor)])],
-     hits=[],actNum=0,actDen=0,supportAdj=0;
- for(const body of Object.keys(BNN_TRANSIT_ACTIVATORS)){
-  let t=trans[body];if(!t)continue;let bw=BNN_TRANSIT_ACTIVATORS[body];
-  for(const target of targets){
-   let n=chart.sidereal[target];if(!n)continue;
-   let rw=bnnTransitRelationToNatalSign(t.sign,signIndex(n.lon));if(!rw)continue;
-   let intensity=bw*rw,val=bnnActorValence(body,rule);
-   actNum+=intensity;actDen+=bw;
-   supportAdj+=.16*intensity*val;
-   hits.push({transit:body,target,relation:rw===1?"same sign":"trine",intensity,valence:val});
-  }
+ const natal=bnnNatalDomainAssessment(di),trans=calcVedicTransitSet(ms),rule=BNN_DOMAIN_RULES[DOMAINS[di]],targets=[...new Set([...rule.heroes,...natal.connections.map(x=>x.actor)])],hits=[];let numerator=0,denominator=0,adjustment=0;
+ for(const [body,bw]of Object.entries(BNN_TRANSIT_ACTIVATORS)){
+  for(const target of targets){const rw=bnnTransitRelationToNatalSign(trans[body].sign,natalPlanetSign(target));denominator+=bw;if(!rw)continue;const intensity=bw*rw,valence=bnnActorValence(body,rule);numerator+=intensity;adjustment+=intensity*valence;hits.push({transit:body,target,relation:rw===1?'same sign':'trine',intensity,valence});}
  }
- let activation=clamp(.58*natal.activationBase+.42*(actDen?2*clamp(actNum/Math.max(1,actDen),0,1):0),0,2),
-     support=clamp(natal.support+supportAdj,-2,2);
- return{...natal,ms,support,activation,hits,provider:trans._meta?.provider||"sidereal transit provider",
-   provenance:[...natal.provenance,"BNN-TRANSIT"]};
+ const delivery=denominator?numerator/denominator:0,support=clamp(natal.support+.35*(denominator?adjustment/denominator:0),-2,2),activation=clamp(.65*natal.activationBase+.35*2*delivery,0,2);
+ return{...natal,ms,support,activation,hits,provider:trans._meta.provider,provenance:['bnn'],normalization:'bounded average of distinct contacts; non-hits remain in denominator'};
 }
 
 function scoreBNNAt(ms){
@@ -1957,6 +1897,161 @@ function activationBNNAt(ms){
 
 function bnnTimingBreakdown(ms,di){return bnnTransitDomainAssessment(ms,di)}
 
+const CLASSICAL_RULE_AUDIT={
+ version:'2026.09-v17-audit',exhaustive:false,
+ sources:{
+  bphs:{title:'BPHS, accessible English transcription',url:'https://vedic-astro.s3.amazonaws.com/books/bhrihat_parasara_hora_shastra.pdf',locator:'Ch. 3, 6–7, 34, 47–48, 51–60; Mercury AD chapter is 58 in this transcription (60 in Sharma edition)'},
+  bnn:{title:'R. G. Rao, Bhrigu Nandi Nadi',url:'https://astrofoxx.wordpress.com/wp-content/uploads/2018/11/bhrigu-nandi-nadi.pdf',locator:'Introduction pp. iii–iv; worked-chart retrograde and exchange examples'},
+  pyjhora:{title:'PyJHora library evaluated',url:'https://github.com/naturalstupid/PyJHora',locator:'Python/Swiss calculation toolkit; not an exhaustive BPHS + BNN interpretive engine; not bundled'}
+ },
+ families:[
+  ['BPHS','Lordship precedence','scored','All 12 ascendants; chapter-34 classifications plus explicit general hierarchy; no arithmetic average of owned houses.'],
+  ['BPHS','Dignity and friendship','scored','Own/exaltation/debilitation, degree-sensitive moolatrikona; directional natural and temporary friendship; compound relationship.'],
+  ['BPHS','Dispositor and associations','scored','Nonrecursive dispositor condition; same sign, aspects and exchanges; distinct planet pairs only.'],
+  ['BPHS','Natural condition','scored','Waxing/waning Moon and Mercury association; natural condition remains separate from functional lordship.'],
+  ['BPHS','Domain and varga','scored','All 12 life domains; direct and indirect connections; independent varga corroboration; relevance never zeros general results.'],
+  ['BPHS','MD–AD context','scored','All 81 ordered pairs use the general relationship framework. Mercury-specific conditional audits cover all 9 AD lords. Other MD chapters are not fully encoded.'],
+  ['BPHS','Strength components','partial','Dignity, angularity, directional geometry, combustion and motion; these components are not full Shadbala.'],
+  ['BPHS','Debility cancellation','partial','Dispositor/exaltation-lord kendra conditions audited; partial relief, no automatic Raja Yoga claim.'],
+  ['BPHS','Planetary war','evidence only','Close classical-planet encounters are flagged; no winner is invented from longitude alone.'],
+  ['BPHS','Maraka and remedial passages','evidence only','Lordships may be labeled; no death, illness or mandatory remedy prediction is generated.'],
+  ['BPHS','Other full corpora','not implemented','Full Shadbala, Ashtakavarga/vedha, all avasthas, argala, 144 lord-in-house interpretations, every yoga, alternative dashas and every chapter-specific exception.'],
+  ['BNN','Karaka circuits','scored','All 12 domains: conjunction, trine, seventh, second/twelfth, sign host and sign exchange; multiple links retained, strongest counted once per actor.'],
+  ['BNN','Sign condition and dispositors','scored','Dignity, natural friendship, dispositors and closed chains without infinite recursion; the significator does not receive an automatic positive score.'],
+  ['BNN','Slow-transit delivery','scored','Jupiter, Saturn and nodes activate natal circuits; no Vimshottari import. Transit evidence retains actual sign positions.'],
+  ['BNN','Retrograde projection and degree order','evidence only','Previous-sign influence and ordering are shown as conventions; actual natal longitudes are not moved.'],
+  ['BNN','Case corpus and progressions','not implemented','The book’s 500-plus case judgments and all progression variants are not converted into universal rules. No exhaustive BNN coverage is claimed.']
+ ]
+};
+
+const NATURAL_RELATIONSHIPS={
+ Sun:{friends:['Moon','Mars','Jupiter'],enemies:['Venus','Saturn']},Moon:{friends:['Sun','Mercury'],enemies:[]},
+ Mars:{friends:['Sun','Moon','Jupiter'],enemies:['Mercury']},Mercury:{friends:['Sun','Venus'],enemies:['Moon']},
+ Jupiter:{friends:['Sun','Moon','Mars'],enemies:['Mercury','Venus']},Venus:{friends:['Mercury','Saturn'],enemies:['Sun','Moon']},
+ Saturn:{friends:['Mercury','Venus'],enemies:['Sun','Moon','Mars']}
+};
+
+const MOOLATRIKONA_RANGES={Sun:[4,0,20],Moon:[1,3,30],Mars:[0,0,12],Mercury:[5,15,20],Jupiter:[8,0,10],Venus:[6,0,15],Saturn:[10,0,20]};
+
+const ASCENDANT_FUNCTIONAL_RULES=[
+ {good:['Sun','Jupiter'],bad:['Saturn','Mercury','Venus'],qualified:['Mars'],yoga:[],v:'19–22'},
+ {good:['Sun','Saturn'],bad:['Jupiter','Venus','Moon'],qualified:['Mercury'],yoga:['Saturn'],v:'23–24'},
+ {good:['Venus'],bad:['Mars','Jupiter','Sun'],qualified:[],yoga:[],v:'25–26'},
+ {good:['Mars','Jupiter','Moon'],bad:['Venus','Mercury'],qualified:[],yoga:['Mars'],v:'27–28'},
+ {good:['Mars','Jupiter','Sun'],bad:['Mercury','Venus','Saturn'],qualified:[],yoga:['Mars'],v:'29–30'},
+ {good:['Mercury','Venus'],bad:['Mars','Jupiter','Moon'],qualified:['Sun'],yoga:[],v:'31–32'},
+ {good:['Saturn','Mercury'],bad:['Jupiter','Sun','Mars'],qualified:['Venus'],yoga:['Saturn'],v:'33–34'},
+ {good:['Jupiter','Moon','Sun'],bad:['Venus','Mercury','Saturn'],qualified:['Mars'],yoga:['Sun','Moon'],v:'35–36'},
+ {good:['Mars','Sun'],bad:['Venus'],qualified:['Jupiter'],yoga:[],v:'37–38'},
+ {good:['Venus','Mercury'],bad:['Mars','Jupiter','Moon'],qualified:['Sun'],yoga:['Venus'],v:'39–40'},
+ {good:['Venus','Saturn'],bad:['Jupiter','Moon','Mars'],qualified:['Mercury'],yoga:['Venus'],v:'41–42'},
+ {good:['Mars','Moon'],bad:['Saturn','Venus','Sun','Mercury'],qualified:[],yoga:[],v:'43–44'}
+];
+
+function ruleMemo(key,compute){const hit=scoreCache.get('audit:'+key);if(hit?.chart===chart)return hit.value;const value=compute();scoreCache.set('audit:'+key,{chart,value});return value}
+
+function ruleHouseBetween(referenceSign,targetSign){return((targetSign-referenceSign+12)%12)+1}
+
+function bphsWholeHouse(name){return ruleHouseBetween(signIndex(chart.sidAsc),natalPlanetSign(name))}
+
+function naturalRelationship(from,to){if(from===to)return 1;const row=NATURAL_RELATIONSHIPS[from];return row?.friends.includes(to)?1:row?.enemies.includes(to)?-1:0}
+
+function compoundRelationship(from,to,positions=chart.sidereal){
+ if(from===to)return{natural:1,temporary:1,score:1,label:'same planet / own sign'};
+ const natural=naturalRelationship(from,to),h=ruleHouseBetween(signIndex(positions[from].lon),signIndex(positions[to].lon)),temporary=[2,3,4,10,11,12].includes(h)?1:-1,total=natural+temporary;
+ return{natural,temporary,relativeHouse:h,score:total/2,label:['great enemy','enemy','neutral','friend','great friend'][total+2]};
+}
+
+function ruleDignity(name,lon=chart.sidereal[name]?.lon,positions=chart.sidereal){
+ if(!CLASSICAL.includes(name))return{score:0,band:'node dignity convention not assumed',host:rulerOfSignIndex(signIndex(lon))};
+ const sign=signIndex(lon),degree=norm(lon)%30,host=rulerOfSignIndex(sign),m=MOOLATRIKONA_RANGES[name];
+ if(m&&sign===m[0]&&degree>=m[1]&&degree<m[2])return{score:.8,band:'moolatrikona',host};
+ if(EXALT_SIGN[name]===sign&&!(name==='Mercury'&&degree>=20))return{score:1,band:'exalted',host};
+ if((OWN_SIGNS[name]||[]).includes(sign))return{score:.65,band:'own sign',host};
+ if(DEBIL_SIGN[name]===sign)return{score:-1,band:'debilitated',host};
+ const r=compoundRelationship(name,host,positions);
+ return{score:r.score*.45,band:r.label+' sign',host,relationship:r};
+}
+
+function basicNatural(name){if(name==='Moon'){const phase=norm(chart.sidereal.Moon.lon-chart.sidereal.Sun.lon);return phase<=180?.55:-.35}return{Sun:-.1,Mars:-.35,Mercury:.2,Jupiter:.65,Venus:.6,Saturn:-.4,Rahu:-.35,Ketu:-.3}[name]??0}
+
+function functionalAssessment(name,allowNode=true){
+ if(!CLASSICAL.includes(name)){
+  const host=rulerOfSignIndex(natalPlanetSign(name)),conj=CLASSICAL.filter(x=>natalPlanetSign(x)===natalPlanetSign(name)),hostSignal=functionalAssessment(host,false).score;
+  return{score:clamp(.45*hostSignal+.35*(conj.length?avg(conj.map(x=>functionalAssessment(x,false).score)):0)+.20*(BPHS_HOUSE_QUALITY[bphsWholeHouse(name)]||0),-1,1),houses:[],status:'conditional node agency',evidence:['Host '+host+' is only one input; occupied house and associated lords retained.'],host,conjunct:conj,source:'BPHS 34.16–17'};
+ }
+ const houses=bphsRulerships(name),row=ASCENDANT_FUNCTIONAL_RULES[signIndex(chart.sidAsc)],evidence=[],trine=houses.some(h=>[5,9].includes(h)),angular=houses.some(h=>[4,7,10].includes(h));let score=0,status='mixed / association-dependent';
+ if(houses.includes(1)){score=.45;status='ascendant lord';evidence.push('Ascendant lord has protective precedence.')}
+ else if(trine&&angular){score=.7;status='kendra–trikona lord';evidence.push('A single planet owns a kendra and a trine.')}
+ else if(trine){score=.45;status='trinal lord'}
+ else if(houses.some(h=>[3,6,11].includes(h))){score=-.45;status='trishadaya lord'}
+ else if(houses.includes(8)&&!['Sun','Moon'].includes(name)){score=-.4;status='eighth-lord qualification'}
+ else if(angular){score=basicNatural(name)>0?-.15:0;status='kendra lord; natural status qualified'}
+ if(row.yoga.includes(name)){score=.7;status='ascendant-specific yoga indicator'}
+ else if(row.good.includes(name)){score=.45;status='ascendant-specific supportive'}
+ else if(row.bad.includes(name)){score=-.45;status='ascendant-specific challenging'}
+ else if(row.qualified.includes(name)){score=name==='Mercury'&&signIndex(chart.sidAsc)===1?-.15:0;status='ascendant-specific qualified / neutral'}
+ evidence.push(`${SIGNS[signIndex(chart.sidAsc)]} ascendant · H${houses.join('/H')} · ${status}`);
+ if(houses.some(h=>[2,7].includes(h)))evidence.push('2nd/7th lordship recorded as contextual maraka terminology; no mortality prediction or universal domain penalty.');
+ return{score,houses,status,evidence,source:'BPHS 34.'+row.v};
+}
+
+function dispositorChain(name){const path=[],seen=new Set();let current=name;while(!seen.has(current)&&path.length<10){seen.add(current);path.push(current);const host=rulerOfSignIndex(natalPlanetSign(current));if(host===current)return{path,termination:'own-sign endpoint'};current=host}return{path,termination:'closed cycle',cycleAt:current}}
+
+function cancellationAssessment(name){
+ if(!CLASSICAL.includes(name)||DEBIL_SIGN[name]!==natalPlanetSign(name))return{present:false,evidence:[]};
+ const sign=natalPlanetSign(name),host=rulerOfSignIndex(sign),exaltLord=rulerOfSignIndex(EXALT_SIGN[name]),moon=natalPlanetSign('Moon');
+ const candidates=[...new Set([host,exaltLord])],evidence=candidates.filter(n=>[1,4,7,10].includes(bphsWholeHouse(n))||[1,4,7,10].includes(ruleHouseBetween(moon,natalPlanetSign(n)))).map(n=>n+' in a kendra from Lagna or Moon');
+ return{present:evidence.length>0,evidence};
+}
+
+function strengthComponents(name){
+ return ruleMemo('strength:'+name,()=>{
+  const p=chart.sidereal[name],dignity=ruleDignity(name),h=bphsWholeHouse(name),combust=vedicCombustState(name,p.lon,chart.sidereal.Sun.lon,p.ret),cancel=cancellationAssessment(name);
+  const preferred={Sun:10,Mars:10,Moon:4,Venus:4,Jupiter:1,Mercury:1,Saturn:7}[name],distance=preferred?Math.min((h-preferred+12)%12,(preferred-h+12)%12):3,directional=1-distance/6;
+  const base=.45+.22*dignity.score+.12*directional+([1,4,7,10].includes(h)?.10:0)+(p.ret&&CLASSICAL.includes(name)?.06:0)-(combust.combust?.18:0)+(cancel.present?.10:0);
+  const war=CLASSICAL.filter(n=>!['Sun','Moon',name].includes(n)&&!['Sun','Moon'].includes(name)&&angularSep(p.lon,chart.sidereal[n].lon)<1);
+  return{value:clamp(base,.1,1),weak:base<.36,combust,retrograde:!!p.ret,directional,war,cancellation:cancel,label:'partial strength components; not full Shadbala'};
+ });
+}
+
+function planetRuleContacts(name){return CLASSICAL.filter(n=>n!==name).map(n=>({name:n,...planetAssociation(name,n),incoming:vedicSignTargets(n,natalPlanetSign(n)).includes(natalPlanetSign(name))})).filter(x=>x.present||x.incoming)}
+
+const MERCURY_AD_CLAUSES={
+ Mercury:{verses:'1–5',goodLagna:[1,4,5,7,9,10,11],badLagna:[6,8,12],badRelative:[],weakRequired:false},
+ Ketu:{verses:'6–12',goodRelative:[1,4,7,10,11],badRelative:[8,12],afflictionRequired:true},
+ Venus:{verses:'13–19',goodLagna:[1,4,5,7,9,10,11],goodRelative:[1,4,5,7,9,10,11],badRelative:[6,8,12],weakRequired:true},
+ Sun:{verses:'20–25',goodLagna:[1,2,4,5,7,9,10,11],badLagna:[6,8,12],badRelative:[6,8,12],weakRequired:true,afflictionRequired:true},
+ Moon:{verses:'26–35',goodLagna:[1,4,5,7,9,10],goodRelative:[1,3,4,5,7,9,10,11],badRelative:[6,8,12],weakRequired:true},
+ Mars:{verses:'36–46',goodLagna:[1,4,5,7,9,10],goodRelative:[1,4,5,7,9,10,11],badLagna:[8,12],badRelative:[8,12],afflictionRequired:true},
+ Rahu:{verses:'47–55',goodLagna:[1,4,5,7,9,10],goodSigns:[0,1,5,10],badRelative:[8,12],afflictionRequired:true},
+ Jupiter:{verses:'56–66',goodLagna:[1,4,5,7,9,10,11],goodRelative:[1,4,5,7,9,10,11],badLagna:[6,8,12],badRelative:[6,8,12],weakRequired:true},
+ Saturn:{verses:'67–72',goodLagna:[1,4,5,7,9,10,11],badRelative:[8,12],weakRequired:false}
+};
+
+function bphsPairAssessment(md,ad,di){
+ return ruleMemo('pair:'+md+':'+ad+':'+di,()=>{
+  const relativeHouse=ruleHouseBetween(natalPlanetSign(md),natalPlanetSign(ad)),lagnaHouse=bphsWholeHouse(ad),relation=compoundRelationship(ad,md),reverse=compoundRelationship(md,ad),association=md===ad?{present:false,label:'same lord; no self-association boost'}:planetAssociation(md,ad),strength=strengthComponents(ad),clauses=md==='Mercury'?MERCURY_AD_CLAUSES[ad]:null,contacts=planetRuleContacts(ad),afflicted=contacts.some(x=>basicNatural(x.name)<0),beneficContact=contacts.some(x=>basicNatural(x.name)>0);
+  let positive=(clauses?.goodRelative||[1,4,5,7,9,10,11]).includes(relativeHouse),negative=(clauses?.badRelative||[6,8,12]).includes(relativeHouse),qualifiedNegative=negative&&(!clauses?.weakRequired||strength.weak)&&(!clauses?.afflictionRequired||afflicted);
+  const favorableLagna=(clauses?.goodLagna||[]).includes(lagnaHouse),challengingLagna=(clauses?.badLagna||[]).includes(lagnaHouse),dignity=ruleDignity(ad),relativeSignal=md===ad?0:positive?.45:qualifiedNegative?-.55:negative?-.12:0;
+  const sharedHost=rulerOfSignIndex(natalPlanetSign(md))===rulerOfSignIndex(natalPlanetSign(ad)),friendship=CLASSICAL.includes(md)&&CLASSICAL.includes(ad)?(relation.score+reverse.score)/2:0;
+  const pairSignal=md===ad?0:clamp(.45*relativeSignal+.25*friendship+.20*(association.present?.6:0)+.10*(sharedHost?.4:0),-1,1);
+  const evidence=[`AD H${relativeHouse} from MD; MD H${ruleHouseBetween(natalPlanetSign(ad),natalPlanetSign(md))} from AD; AD H${lagnaHouse} from Lagna.`,`${ad} → ${md}: natural ${relation.natural}, temporary ${relation.temporary}, ${relation.label}; reverse: ${reverse.label}.`,association.label];
+  if(negative)evidence.push(`Relative-house caution ${qualifiedNegative?'qualifies':'is conditional; required weakness/affliction is not fully present'}.`);
+  if(clauses)evidence.push(`Mercury chapter ${clauses.verses}: Lagna favorable ${favorableLagna?'yes':'no'} / challenging ${challengingLagna?'yes':'no'}; weak ${strength.weak?'yes':'no'}; affliction ${afflicted?'yes':'no'}; benefic contact ${beneficContact?'yes':'no'}. Conditional audit, not a guaranteed outcome.`);
+  return{md,ad,domain:DOMAINS[di],relativeHouse,lagnaHouse,relation,reverse,association,sharedHost,strength,positive,negative,qualifiedNegative,pairSignal,evidence,clauses:clauses?{...clauses,favorableLagna,challengingLagna,beneficContact,afflicted,dignity:dignity.band}:null,coverage:clauses?'Mercury conditional subset + general framework':'general framework; chapter-specific exceptions not fully encoded'};
+ });
+}
+
+function bnnRelations(a,b){
+ if(a===b)return[];const sa=natalPlanetSign(a),sb=natalPlanetSign(b),h=ruleHouseBetween(sa,sb),out=[];
+ if(h===1)out.push({kind:'conjunction',weight:1});if([5,9].includes(h))out.push({kind:'trine',weight:.65});
+ if(h===7&&!['Rahu','Ketu'].includes(a)&&!['Rahu','Ketu'].includes(b))out.push({kind:'seventh',weight:.65});
+ if(h===2)out.push({kind:'second / following',weight:.4});if(h===12)out.push({kind:'twelfth / preceding',weight:.4});
+ if(rulerOfSignIndex(sa)===b)out.push({kind:'dispositor',weight:.7});
+ if(rulerOfSignIndex(sa)===b&&rulerOfSignIndex(sb)===a)out.push({kind:'exchange',weight:.9});
+ return out;
+}
 const CANONICAL_WEIGHTS={
  Career:{Vedic:.45,Western:.35,Saju:.20,BNN:.15}, Wealth:{Vedic:.40,Western:.25,Saju:.35,BNN:.15},
  Marriage:{Vedic:.40,Western:.40,Saju:.20,BNN:.15}, Family:{Vedic:.40,Western:.35,Saju:.25,BNN:.15},
@@ -2039,7 +2134,7 @@ const CYCLE_FAMILIES={
  western_profection:{key:"western_profection",label:"Western · Annual profections",contexts:[{id:"annual",label:"Annual profection · house & lord"}]}
 };
 let SYSTEMS={
- Vedic:{id:"Vedic",methodKey:"BPHS",name:"Vedic · BPHS Classical Core · PRIMARY",active:true,primary:true,defaultSelected:true,sourceLocked:true,targetShare:null,cycleKeys:["vimshottari"],structuralFamilies:["Vedic"],practiceFamily:"Vedic",calculator:ctx=>scoreVedicAt(ctx.ms),activationCalculator:ctx=>activationVedicAt(ctx.ms)},
+ Vedic:{id:"Vedic",methodKey:"BPHS",name:"Vedic · Parashari rule model · PRIMARY",active:true,primary:true,defaultSelected:true,sourceLocked:true,targetShare:null,cycleKeys:["vimshottari"],structuralFamilies:["Vedic"],practiceFamily:"Vedic",calculator:ctx=>scoreVedicAt(ctx.ms),activationCalculator:ctx=>activationVedicAt(ctx.ms)},
  BNN:{id:"BNN",methodKey:"BNN",name:"Vedic · Bhrigu Nandi Nadi · second opinion",active:true,primary:false,defaultSelected:false,sourceLocked:true,targetShare:.15,cycleKeys:[],structuralFamilies:[],practiceFamily:null,calculator:ctx=>scoreBNNAt(ctx.ms),activationCalculator:ctx=>activationBNNAt(ctx.ms)},
  Western:{id:"Western",name:"Built-in: Western",active:true,defaultSelected:true,targetShare:null,cycleKeys:["western_profection"],structuralFamilies:[],practiceFamily:"Western",calculator:ctx=>scoreWesternAt(ctx.ms),activationCalculator:ctx=>activationWesternAt(ctx.ms)},
  Saju:{id:"Saju",name:"Built-in: Saju",active:true,defaultSelected:true,targetShare:null,cycleKeys:["saju"],structuralFamilies:[],practiceFamily:"Saju",calculator:ctx=>scoreSajuAt(ctx.ms),activationCalculator:ctx=>activationSajuAt(ctx.ms)}
@@ -2989,7 +3084,7 @@ function vedicConnectionScore(name,di){
  return den?clamp(num/den,-2,2):0;
 }
 function vedicLordDomainOutcome(lord,di){
- // v16: source-locked BPHS classical core. Legacy heuristic planetDimensionMetrics()
+ // v16: BPHS-derived conditional subset. Legacy heuristic planetDimensionMetrics()
  // remains available for natal exploration but no longer defines BPHS daśā phala.
  return bphsLordDomainAssessment(lord,di).support;
 }
@@ -3819,7 +3914,7 @@ function vedicPeriodBreakdown(period,di){
   path:path.map((lord,i)=>({level:LEVELS[i],lord,weight:weights[i],
     support:vedicLordDomainOutcome(lord,di),activation:vedicStructuralPathActivation([lord],di),
     assessment:bphsLordDomainAssessment(lord,di),layers:structuralLayerBreakdown("planet",lord,di)})),
-  method:"BPHS",association:bphsPathAssociationFactor(path,di),supportTransitWeight:gocharaWeightForDepth(path.length),activationTransitWeight:activationGocharaWeightForDepth(path.length),
+  method:"BPHS-derived v17",pairAssessments:path.slice(1).map(ad=>bphsPairAssessment(path[0],ad,di)),association:bphsPathAssociationFactor(path,di),supportTransitWeight:gocharaWeightForDepth(path.length),activationTransitWeight:activationGocharaWeightForDepth(path.length),
   support,activation,
   supportRange:hasVedicPeriodPath(period)?vedicDescendantRange(period,di,"support"):null,
   activationRange:hasVedicPeriodPath(period)?vedicDescendantRange(period,di,"activation"):null,
@@ -6888,6 +6983,8 @@ window.AstroHeatmap={
  getSystems:()=>Object.values(SYSTEMS).map(x=>({id:x.id,name:x.name,methodKey:x.methodKey||null,primary:!!x.primary,defaultSelected:x.defaultSelected!==false,sourceLocked:!!x.sourceLocked,active:x.active,targetShare:x.targetShare,
    cycleKeys:[...(x.cycleKeys||[])],structuralFamilies:[...(x.structuralFamilies||[])],practiceFamily:x.practiceFamily||null,static:!!x.static,
    hasActivation:typeof x.activationCalculator==="function",missingPolicy:x.missingPolicy||null,intervalCount:x.staticIntervals?.length||0})),
+ getRuleCoverage:()=>structuredClone(CLASSICAL_RULE_AUDIT),
+ getMDADAssessment:(md,ad,domain)=>structuredClone(bphsPairAssessment(md,ad,DOMAINS.indexOf(domain))),
  getMethodRegistry:()=>structuredClone(ASTROLOGY_METHOD_REGISTRY),
  getBPHSAssessment:(lord,domain)=>structuredClone(bphsLordDomainAssessment(lord,DOMAINS.indexOf(domain))),
  getBNNAssessment:(ms=Date.now(),domain="Career")=>structuredClone(bnnTimingBreakdown(ms,DOMAINS.indexOf(domain))),
@@ -7066,7 +7163,7 @@ function _syncStrip(){
 
 function exportCSV(){let groups=visibleGroups(),rows=[["Level","Path","Start","End",...selectedDimensions()]];for(const g of groups)rows.push([LEVELS[g.depth-1]||"Phase",g.path.join(" > "),fmt(g.a),fmt(g.b),...selectedDimensions().map(d=>scorePeriod(g,DOMAINS.indexOf(d)).toFixed(3))]);let csv=rows.map(r=>r.map(x=>`"${String(x).replaceAll('"','""')}"`).join(",")).join("\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="dynamic_astrology_heatmap_visible.csv";a.click()}
 function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.values(SYSTEMS).map(s=>[s.id,{id:s.id,name:s.name,active:s.active,targetShare:s.targetShare,cycleKeys:[...(s.cycleKeys||[])],structuralFamilies:[...(s.structuralFamilies||[])],practiceFamily:s.practiceFamily||null,static:!!s.static,missingPolicy:s.missingPolicy||null,intervals:s.static?(s.staticIntervals||[]).map(r=>({start:new Date(r.a).toISOString(),end:new Date(r.b).toISOString(),scores:Object.fromEntries(DOMAINS.map((d,i)=>[d,r.scores[i]]))})):undefined}])),weights:WEIGHTS,selectedSystems:[...selectedSystemIds],selectedDimensions:[...selectedDimensionsSet],calculation:{swissReady,baziProvider,dashaDepth:"Prana",sampling:$("sampleMode").value,
- structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,vedicDevataFormCount:VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length,vedicPracticeCount:VEDIC_KNOWLEDGE_REGISTRY.practices.length,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,methodRegistryVersion:ASTROLOGY_METHOD_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1-gochara",periodScoringModel:"bphs-source-locked-fixed-path-v16",activationModel:"bala-plus-delivery-v16",vedicPrimaryMethod:"BPHS",bnnPolicy:"installed-off-by-default-independent",interpretiveBenchmarkPolicy:"none",vedicGocharaModel:"lahiri-moon-lagna-drishti-active-lords-double-transit-v1",vedicYogaActivationModel:"major-yoga-registry-v2-natal-dasha-gochara",shaniCycleModel:"moon-sign-sade-sati-4th-8th-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
+ structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,vedicDevataFormCount:VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length,vedicPracticeCount:VEDIC_KNOWLEDGE_REGISTRY.practices.length,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,methodRegistryVersion:ASTROLOGY_METHOD_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1-gochara",periodScoringModel:"parashari-conditional-audit-v17",ruleCoverage:CLASSICAL_RULE_AUDIT,activationModel:"partial-strength-and-delivery-v17",vedicPrimaryMethod:"BPHS",bnnPolicy:"installed-off-by-default-independent",interpretiveBenchmarkPolicy:"none",vedicGocharaModel:"lahiri-moon-lagna-drishti-active-lords-double-transit-v1",vedicYogaActivationModel:"major-yoga-registry-v2-natal-dasha-gochara",shaniCycleModel:"moon-sign-sade-sati-4th-8th-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
 
 function switchTab(which){
  closeHeatPreview();
@@ -7588,14 +7685,19 @@ function methodBar(value,activation=false){
  const position=activation?value*50:(value+2)*25,origin=activation?0:50;
  return `<div class="methodScale ${activation?'':'signed'}" aria-hidden="true"><i style="left:${Math.min(origin,position)}%;width:${Math.abs(position-origin)}%;background:${activation?activationColor(value):heatColor(value)}"></i></div>`;
 }
+function renderRuleCoverage(){
+ const counts=CLASSICAL_RULE_AUDIT.families.reduce((out,r)=>(out[r[2]]=(out[r[2]]||0)+1,out),{});
+ return `<details id="ruleCoverage"><summary>Rule coverage · ${CLASSICAL_RULE_AUDIT.families.length} audited families · partial implementation</summary><p class="small">${Object.entries(counts).map(([status,count])=>`<b>${count}</b> ${status}`).join(' · ')}</p><p class="small">All 12 domains share the audited framework. Numerical weights and domain mappings are app policy. Neither tradition is exhaustively encoded. Mercury chapter Lagna conditions and special signs are evidence annotations; qualified relative-house conditions contribute to the score.</p>${CLASSICAL_RULE_AUDIT.families.map(([method,name,status,detail])=>`<details class="methodSource"><summary>${method} · ${name} · ${status}</summary><p>${catalogEscape(detail)}</p></details>`).join('')}<h4>Reviewed sources</h4>${Object.values(CLASSICAL_RULE_AUDIT.sources).map(source=>`<p class="small"><a href="${source.url}" target="_blank" rel="noopener">${catalogEscape(source.title)}</a> · ${catalogEscape(source.locator)}</p>`).join('')}</details>`;
+}
 function renderMethodComparison(){
  const period=currentDisplayPeriod(),ms=midpoint(period.a,period.b),di=DOMAINS.indexOf(methodComparisonDomain),path=fixedVedicPeriodPath(period),bnn=bnnTimingBreakdown(ms,di),bnSelected=selectedSystemIds.has('BNN'),root=$('methodComparisonBody');
  const scores=[{id:'Vedic',name:'BPHS · primary',support:scoreVedicPeriod(period,di),activation:activationVedicPeriod(period,di)},{id:'BNN',name:'BNN · independent comparator',support:perSystemPeriod(period,'BNN',di),activation:perSystemActivationPeriod(period,'BNN',di)}];
  const nominal=effectiveNominalWeight(methodComparisonDomain,'BNN'),den=selectedSystems().reduce((sum,s)=>sum+effectiveNominalWeight(methodComparisonDomain,s.id),0);
- root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · nominal ${Math.round(nominal*100)}% before renormalization${bnSelected?` · effective ${(100*nominal/den).toFixed(1)}% for ${methodComparisonDomain}`:''}. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support <b>${signed(x.support)}</b></div>${methodBar(x.support)}<div>Period activation <b>${activationDisplay(x.activation)}</b></div>${methodBar(x.activation,true)}<p class="small">${x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length} projected samples · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Numerical values are the attachment's fixed engine normalization, not scriptural percentages. Full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · lord evidence</h3><p class="small">${hasVedicPeriodPath(period)?'Fixed selected path':'Midpoint path illustration; the path changes across this date range'}. Transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
- const a=bphsLordDomainAssessment(lord,di),factors=[['Lordship',a.functional],['D1 placement',a.placement],['Dignity',a.dignity],['Natural nature',a.natural],['Varga',a.varga.signal]];
- return `<details><summary>${LEVELS[i]} ${lord} · ${Math.round(normalizedDashaWeights(path.length)[i]*100)}% · support ${signed(a.support)}</summary><p>Activation ${activationDisplay(a.activation)} · domain relevance ${Math.round(a.relevance*100)}%</p><div class="methodFactors">${factors.map(([label,value])=>`<span>${label}</span>${methodBar(value*2)}<span>${signed(value)}</span>`).join('')}</div><p class="small">Factors −1 to +1. ${catalogEscape(a.varga.evidence)}. Rules: ${BPHS_DOMAIN_RULES[methodComparisonDomain].houses.map(h=>'H'+h).join(', ')} · karakas ${BPHS_DOMAIN_RULES[methodComparisonDomain].karakas.join(', ')}.</p></details>`;
- }).join('')}<p class="small">${bphsPathAssociationFactor(path,di).evidence.map(catalogEscape).join(' · ')||'No additional qualifying lord association.'}</p></section><section class="methodCard"><h3>BNN · natal circuits</h3><p class="small">Same-sign and trinal links from each domain significator. Hero → actor; same-sign links do not imply an exact conjunction.</p>${bnn.heroRows.map(row=>`<div class="bnnCircuit"><h4>${row.hero} · circuit signal ${signed(row.score)}</h4>${bnn.connections.filter(c=>c.hero===row.hero).map(c=>`<div class="bnnLink"><span>${c.hero}</span>→<span>${c.actor}</span><small>${c.kind} · relation ${c.weight.toFixed(2)} · valence ${signed(c.valence)}</small></div>`).join('')||'<p class="small">No registered natal links.</p>'}</div>`).join('')}<details><summary>Slow-transit triggers · ${bnn.hits.length}</summary><p class="small">Midpoint ${fmt(ms)} · ${catalogEscape(bnn.provider)}. These illustrate the midpoint, not the period average.</p>${bnn.hits.map(x=>`<p class="small">${x.transit} → ${x.target} · ${x.relation} · intensity ${x.intensity.toFixed(2)} · valence ${signed(x.valence)}</p>`).join('')||'<p>No registered triggers.</p>'}</details></section></div><details><summary>Method provenance and boundaries</summary>${Object.values(ASTROLOGY_METHOD_REGISTRY.methods).map(m=>`<div class="methodSource"><h4>${catalogEscape(m.name)}</h4><p>${catalogEscape(m.boundary)}</p><ul>${m.sources.map(s=>`<li>${catalogEscape(s.label)} — ${catalogEscape(s.use)}</li>`).join('')}</ul></div>`).join('')}<p class="small">These are provenance labels supplied with v16, not independently verified quotations or edition-specific citations.</p></details>`;
+ root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><p class="small">Natal: ${catalogEscape(chart.natalSource)} · transits: ${catalogEscape(bnn.provider)} · ${catalogEscape(profile.ayanamsa)}. ${chart.natalSource!=='Swiss Ephemeris'?'Offline ayanāṃśa and transit positions are approximations; dates and scores can differ from Swiss Ephemeris.':''}</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · nominal ${Math.round(nominal*100)}% before renormalization${bnSelected?` · effective ${(100*nominal/den).toFixed(1)}% for ${methodComparisonDomain}`:''}. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support <b>${signed(x.support)}</b></div>${methodBar(x.support)}<div>Period activation <b>${activationDisplay(x.activation)}</b></div>${methodBar(x.activation,true)}<p class="small">${x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length} projected samples · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Numerical weights are this app’s explicit v17 modeling choices, not scriptural percentages or probabilities. Coverage is partial; full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · lord evidence</h3><p class="small">${hasVedicPeriodPath(period)?'Fixed selected path':'Midpoint path illustration; the path changes across this date range'}. Transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
+ const a=bphsLordDomainAssessment(lord,di),factors=[['Lordship',a.functional],['D1 placement',a.placement],['Dignity',a.dignity],['Natural nature',a.natural],['Dispositor',a.dispositor.condition],['Associations',a.association],['Varga',a.varga.signal]];
+ return `<details><summary>${LEVELS[i]} ${lord} · ${Math.round(normalizedDashaWeights(path.length)[i]*100)}% · support ${signed(a.support)}</summary><p>Activation ${activationDisplay(a.activation)} · domain relevance ${Math.round(a.relevance*100)}%</p><div class="methodFactors">${factors.map(([label,value])=>`<span>${label}</span>${methodBar(value*2)}<span>${signed(value)}</span>`).join('')}</div><p class="small">Factors −1 to +1. ${catalogEscape(a.varga.evidence)}. General contribution ${signed(a.contributions.general)} × relevance floor ${a.contributions.domainFactor.toFixed(2)} × strength ${a.contributions.strengthFactor.toFixed(2)}; independent varga ${signed(a.contributions.varga)}. Dispositor: ${catalogEscape(a.dispositor.host)}. ${catalogEscape(a.functionalDetail.status)}. Rules: ${BPHS_DOMAIN_RULES[methodComparisonDomain].houses.map(h=>'H'+h).join(', ')} · karakas ${BPHS_DOMAIN_RULES[methodComparisonDomain].karakas.join(', ')}.</p></details>`;
+ }).join('')}${path.slice(1).map(ad=>{const pair=bphsPairAssessment(path[0],ad,di);return `<details class="pairEvidence"><summary>${path[0]} → ${ad} · context ${signed(pair.pairSignal)}</summary>${pair.evidence.map(e=>`<p class="small">${catalogEscape(e)}</p>`).join('')}<p class="small">${catalogEscape(pair.coverage)}</p></details>`}).join('')}<p class="small">${bphsPathAssociationFactor(path,di).evidence.map(catalogEscape).join(' · ')||'No additional qualifying lord association.'}</p></section><section class="methodCard"><h3>BNN · natal circuits</h3><p class="small">Same-sign, trine, seventh, adjacent-sign, dispositor and exchange links from each domain significator; strongest relationship counted once per actor. Hero → actor; same-sign links do not imply an exact conjunction.</p>${bnn.heroRows.map(row=>`<div class="bnnCircuit"><h4>${row.hero} · circuit signal ${signed(row.score)}</h4>${bnn.connections.filter(c=>c.hero===row.hero).map(c=>`<div class="bnnLink"><span>${c.hero}</span>→<span>${c.actor}</span><small>${c.relations.map(r=>r.kind).join(" / ")} · relation ${c.weight.toFixed(2)} · valence ${signed(c.valence)}</small></div>`).join('')||'<p class="small">No registered natal links.</p>'}</div>`).join('')}<details><summary>Retrograde and degree-order evidence</summary>${bnn.nuances.map(n=>`<p class="small">${n.planet}: ${SIGNS[n.actualSign]} → ${SIGNS[n.projectedSign]} · ${n.status}.</p>`).join('')}<p class="small">${bnn.degreeOrder.map(n=>`${n.name} ${n.degree.toFixed(1)}° ${SIGNS[n.sign]}`).join(' · ')}. Ordering shown as evidence; no automatic event sequence.</p></details><details><summary>Slow-transit triggers · ${bnn.hits.length}</summary><p class="small">Midpoint ${fmt(ms)} · ${catalogEscape(bnn.provider)}. These illustrate the midpoint, not the period average.</p>${bnn.hits.map(x=>`<p class="small">${x.transit} → ${x.target} · ${x.relation} · intensity ${x.intensity.toFixed(2)} · valence ${signed(x.valence)}</p>`).join('')||'<p>No registered triggers.</p>'}</details></section></div><details><summary>Method provenance and boundaries</summary>${Object.values(ASTROLOGY_METHOD_REGISTRY.methods).map(m=>`<div class="methodSource"><h4>${catalogEscape(m.name)}</h4><p>${catalogEscape(m.boundary)}</p><ul>${m.sources.map(s=>`<li>${catalogEscape(s.label)} — ${catalogEscape(s.use)}</li>`).join('')}</ul></div>`).join('')}<p class="small">The rule audit below links the reviewed sources and separates scored rules, partial implementations and evidence-only conventions.</p></details>`;
+ root.insertAdjacentHTML('beforeend',renderRuleCoverage());
  $('methodDomain').value=methodComparisonDomain;$('methodDomain').onchange=e=>{methodComparisonDomain=e.target.value;renderMethodComparison()};
  $('toggleBNN').onclick=()=>{if(selectedSystemIds.has('BNN'))selectedSystemIds.delete('BNN');else selectedSystemIds.add('BNN');render()};
 }

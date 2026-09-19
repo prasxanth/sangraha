@@ -1,0 +1,22 @@
+const fs=require('fs'),cp=require('child_process'),os=require('os'),path=require('path'),assert=require('node:assert/strict'),{chromium}=require('playwright');
+const work=fs.mkdtempSync(path.join(os.tmpdir(),'kala-rule-audit-'));
+const python=process.env.ORACLE_PYTHON||'python3';
+const fixtures=()=>cp.execFileSync(python,[path.join(__dirname,'astrology_v17_oracle.py'),work]);
+(async()=>{const b=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});try{const p=await b.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('console',m=>{if(m.type()==='error'&&m.text().includes('calculator'))errors.push(m.text())});await p.route('https://**',r=>r.abort());await p.addInitScript(()=>{const t=setTimeout;window.setTimeout=(f,d,...a)=>String(f).includes('loadSwiss().then')?0:t(f,d,...a)});await p.goto('file://'+process.cwd()+'/astrology_engine.html');await p.waitForFunction(()=>document.querySelector('#validationTable').dataset.autorun==='done');
+const offline=await p.evaluate(()=>{const md=dashaRoot.find(x=>x.lord==='Mercury'&&x.a>chart.birthMs);return{profile,chart,rows:[md,...childPeriods(md)].map(p=>({path:p.path,a:p.a,b:p.b,support:scoreVedicPeriod(p,0),activation:activationVedicPeriod(p,0),combined:scorePeriod(p,0),bnn:perSystemPeriod(p,'BNN',0)})),assessments:DSEQ.map(n=>bphsLordDomainAssessment(n,0))}});
+fs.writeFileSync(path.join(work,'offline.json'),JSON.stringify(offline,null,2));fixtures();
+const inject=async()=>p.evaluate(fixtures=>{
+ window.auditFixtures=fixtures;
+ if(!window.auditOriginal){window.auditOriginal={calcPlanet,ayanamsa};
+ calcPlanet=(n,c,i,jd)=>{const v=window.auditFixtures[jd.toFixed(8)]?.planets[n];if(window.auditStrict&&!v)throw new Error('Missing Swiss sample '+n+' '+jd);return v?{lon:norm(v[0]),speed:v[3],ret:v[3]<0,src:'Swiss Ephemeris'}:window.auditOriginal.calcPlanet(n,c,i,jd)};
+ ayanamsa=(jd,mode)=>window.auditFixtures[jd.toFixed(8)]?.ayan??window.auditOriginal.ayanamsa(jd,mode);}
+ scoreCache.clear();structuralCache.clear();periodCache.clear();chart=buildNatal(profile);chart.sajuBirth=sajuFallbackAt(chart.birthMs);chart.daeunStartAge=jieStartAge();chart.yongsin=inferYongsin();buildDashaRoot();
+},JSON.parse(fs.readFileSync(path.join(work,'fixtures.json'))));
+await inject();
+const dates=await p.evaluate(()=>{const md=dashaRoot.find(x=>x.lord==='Mercury'&&x.a>chart.birthMs);return [md,...childPeriods(md)].flatMap(p=>[...vedicPeriodSampleTimes(p),...sampleTimes(p),...Array.from({length:192},(_,i)=>p.a+(p.b-p.a)*(i+.5)/192)])});fs.writeFileSync(path.join(work,'dates.json'),JSON.stringify(dates));fixtures();await inject();
+const result=await p.evaluate(()=>{window.auditStrict=true;const md=dashaRoot.find(x=>x.lord==='Mercury'&&x.a>chart.birthMs),ps=[md,...childPeriods(md)];return {provider:'Swiss Ephemeris 2.10.03, Moshier, mean node, Lahiri; exact samples replayed, no approximate dates in reported scoring',chart,profile,rows:ps.map(p=>{const support=scoreVedicPeriod(p,0),activation=activationVedicPeriod(p,0),combined=scorePeriod(p,0),bnn=perSystemPeriod(p,'BNN',0);const original=vedicPeriodSampleTimes;let dense;try{vedicPeriodSampleTimes=p=>Array.from({length:192},(_,i)=>p.a+(p.b-p.a)*(i+.5)/192);scoreCache.clear();dense=scoreVedicPeriod(p,0)}finally{vedicPeriodSampleTimes=original;scoreCache.clear()}return{path:p.path,a:p.a,b:p.b,support,activation,combined,bnn,dense192:dense}})}});const independent=JSON.parse(fs.readFileSync(path.join(work,'independent-dasha.json')));
+assert(Math.abs(independent.a-result.rows[0].a)<1,'Independent lunar-balance MD start differs');
+assert(Math.abs(independent.b-result.rows[0].b)<1,'Independent MD duration differs');
+assert.deepEqual(errors,[],'No scoring errors may be silently dropped');
+const report={model:'v17 partial rule model',offline,swiss:result,independentDasha:independent};
+fs.writeFileSync(path.join(work,'report.json'),JSON.stringify(report,null,2));console.log('PASS: independent dasha dates; Swiss/Moshier natal and transit replay. Report: '+path.join(work,'report.json'));}finally{await b.close()}})().catch(e=>{console.error(e);process.exit(1)});
