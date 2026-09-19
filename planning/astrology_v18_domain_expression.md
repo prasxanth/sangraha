@@ -4,7 +4,7 @@
 
 The desktop grid shown in the user's screenshot contained a support number and a second `0`/`+` category symbol. Cells now show one signed support score, to two decimals. The category is named in the tooltip. The older grid also displays only the support score. Small values rounded to zero no longer display a misleading negative zero in these cells.
 
-The default color scale is now fixed at −2…+2. Relative contrast remains available explicitly; its stretched colors should not be read as the magnitude of an absolute difference.
+Display follow-up: relative contrast is again the default, with a visible legend giving its endpoints and explaining the comparison. The fixed −2…+2 option remains available. The earlier fixed default compressed these near-neutral scores into similar colors. Relative colors do not change any scores or weights. The follow-up also removes duplicate category symbols from all navigation levels, Prana, timeline, chips, playbook, radar center and transit summaries; each support display uses one signed number.
 
 The previous three-date average was particularly sensitive to which Western transits it happened to sample. Default non-Vedic period averages now use uniform mid-bin samples targeting daily spacing, with a minimum of 12 and maximum of 192 points. Long intervals are evenly covered subject to that cap. Coarse three-date and midpoint modes remain labeled previews. Old saved profiles using the former three-date default migrate once to dense sampling; versioned storage preserves subsequent explicit choices. Existing BPHS fixed-path and depth-specific sampling remains intact.
 
@@ -68,3 +68,5 @@ ORACLE_PYTHON=/path/to/python node tests/astrology_v18_audit.cjs
 ```
 
 The resulting temporary report includes full input/provider context. Live CDN/WASM loading is not validated by replay tests. Numerical convergence is checked for the listed reference periods across all domains, not every possible chart.
+
+The follow-up regression `tests/astrology_score_display.cjs` checks all navigation depths, desktop/mobile score displays, single-score formatting and color-mode invariance.

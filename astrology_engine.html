@@ -483,7 +483,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 .dbar-hdr-seg{padding:9px 5px;overflow-wrap:anywhere;color:var(--text)}
 .dbar-label,.dbar-hdr-label{width:110px;min-width:110px}
 .phase{min-width:180px}.phase .date{white-space:normal}
-.laneTrack{height:104px}.laneSeg{height:92px}.laneDate{white-space:normal}
+.laneTrack{height:104px}.laneSeg{height:92px}.laneDate{white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.3}
 .dbar-seg{min-height:60px}.dbar-hdr-years{opacity:1!important}
 .mobile-cycle-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px}
 .mobile-cycle-card{display:flex;flex-direction:column;gap:4px;padding:12px;text-align:left;border-radius:10px}
@@ -719,7 +719,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
       <div class="multiDropActions"><button type="button" id="evidenceRecommendedBtn">Recommended layers</button><button type="button" id="evidenceD1Btn">D1 only</button></div>
      </div>
     </details>
-    <select id="contrastMode"><option value="relative">Relative contrast</option><option value="absolute" selected>Absolute −2…+2</option><option value="percentile">Percentile contrast</option></select>
+    <select id="contrastMode"><option value="relative" selected>Relative contrast</option><option value="absolute">Absolute −2…+2</option><option value="percentile">Percentile contrast</option></select>
     <button id="exportBtn">Export visible CSV</button>
     <button id="exportProfileBtn">Export profile/config</button>
    </div>
@@ -827,7 +827,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
      <div class="pranaNavigator" id="pranaNavigator" hidden></div>
     </div>
     <div class="viewport" style="margin-top:10px">
-     <div class="small" style="padding:8px">Support −2 to +2 · selected dasha path + projected timing</div><div id="domainBarsContainer" style="padding:4px 8px 8px"></div>
+     <div id="supportMapLegend" class="small" style="padding:8px"></div><div id="domainBarsContainer" style="padding:4px 8px 8px"></div>
      <div class="tlwrap"><div class="timeline" id="timeline"></div></div>
      <div class="heatwrap" hidden><div class="heat" id="heat"></div></div>
     </div>
@@ -3698,13 +3698,13 @@ function renderVedicGocharaPanel(){
      gw=gocharaWeightForDepth(path.length),byDim=dims.map(d=>{let di=DOMAINS.indexOf(d),g=vedicGocharaScore(mid,di,path);return{d,di,g}}),
      mean=byDim.reduce((a,x)=>a+x.g.score,0)/Math.max(1,byDim.length),g0=byDim[0]?.g||vedicGocharaScore(mid,0,path),
      trans=g0.trans,samples=vedicPeriodSampleTimes(p).length,showBodies=[...new Set(["Jupiter","Saturn","Rahu","Ketu",...path])].filter(x=>trans[x]);
- $("vedicGocharaBadge").innerHTML=`<b>${bucket(mean)[0]} ${mean.toFixed(2)}</b><br>${Math.round(gw*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation Gochara weight · ${samples} projected samples<br>${g0.provider}`;
+ $("vedicGocharaBadge").innerHTML=`<b>${signed(mean)}</b><br>${Math.round(gw*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation Gochara weight · ${samples} projected samples<br>${g0.provider}`;
  $("vedicGocharaTransitGrid").innerHTML=`<div class="routineBlock"><h4>Midpoint projected sky · ${fmt(mid)}</h4><ul>
    <li><b>${hasVedicPeriodPath(p)?"Fixed selected path":"Midpoint path (changes across this range)"}:</b> ${path.map((x,i)=>`${LEVELS[i]} ${x}`).join(" → ")||"—"}.</li>
    ${showBodies.map(body=>{let t=trans[body];return`<li><b>${body}</b> ${signDegree(t.lon)} · H${t.fromLagna} from Lagna · H${t.fromMoon} from Moon${t.ret?" · retrograde":""}${t.combust?" · combust":""}.</li>`}).join("")}
    <li><b>Period integration:</b> ${samples} projected date samples across ${fmt(p.a)} → ${fmt(p.b)}; shorter dasha levels receive higher transit weight.</li>
   </ul></div>
-  <div class="routineBlock"><h4>Selected-domain midpoint Gochara</h4><ul>${byDim.map(x=>`<li>${x.d}: <b>${bucket(x.g.score)[0]} ${x.g.score.toFixed(2)}</b><div class="transitBar"><i style="left:${x.g.score<0?50+x.g.score*25:50}%;width:${Math.abs(x.g.score)*25}%;background:${x.g.score<0?"#b47a63":"#758b64"}"></i></div></li>`).join("")}</ul></div>`;
+  <div class="routineBlock"><h4>Selected-domain midpoint Gochara</h4><ul>${byDim.map(x=>`<li>${x.d}: <b>${signed(x.g.score)}</b><div class="transitBar"><i style="left:${x.g.score<0?50+x.g.score*25:50}%;width:${Math.abs(x.g.score)*25}%;background:${x.g.score<0?"#b47a63":"#758b64"}"></i></div></li>`).join("")}</ul></div>`;
  let top=g0.rows.slice(0,5),dt=g0.doubleTransit;
  $("vedicGocharaTriggerGrid").innerHTML=`<div class="routineBlock"><h4>Strongest midpoint contributors · ${dims[0]||"Career"}</h4><ul>
    ${top.map(r=>`<li><b>${r.body}</b>: Moon H${r.fromMoon} · Lagna H${r.fromLagna} · contribution ${r.contribution>=0?"+":""}${r.contribution.toFixed(2)}${r.contacts.length?` · ${r.contacts.slice(0,2).map(c=>c.label).join("; ")}`:""}.</li>`).join("")}
@@ -4628,6 +4628,10 @@ function cycleFamilyLabel(){return cycleFamilyKey&&CYCLE_FAMILIES[cycleFamilyKey
 function cycleContextLabel(){let f=CYCLE_FAMILIES[cycleFamilyKey];return f?.contexts?.find(x=>x.id===cycleContextKey)?.label||""}
 
 function visibleGroups(){return cycleGroups()}
+function supportColorLegend(){
+ const mode=$("contrastMode").value;
+ return mode==='absolute'?'Support −2 to +2 · fixed color scale':`${mode==='percentile'?'Percentile':'Relative'} colors · lower ${signed(COLOR_RANGE.min)} → higher ${signed(COLOR_RANGE.max)} in the visible comparison · support scale −2 to +2`;
+}
 function updateColorRange(groups){if($("contrastMode").value==="absolute"){COLOR_RANGE={min:-2,max:2};return}let vals=[];for(const g of groups)for(const d of selectedDimensions())vals.push(scorePeriod(g,DOMAINS.indexOf(d)));vals=vals.filter(Number.isFinite).sort((a,b)=>a-b);if(!vals.length){COLOR_RANGE={min:-2,max:2};return}let lo,hi;if($("contrastMode").value==="percentile"&&vals.length>4){lo=vals[Math.floor(vals.length*.05)];hi=vals[Math.floor(vals.length*.95)]}else{lo=vals[0];hi=vals.at(-1)}if(Math.abs(hi-lo)<.1){let m=(lo+hi)/2;lo=m-.05;hi=m+.05}let pad=(hi-lo)*.05;COLOR_RANGE={min:lo-pad,max:hi+pad}}
 function width(g,groups){let a=Math.min(...groups.map(x=>x.a)),b=Math.max(...groups.map(x=>x.b)),span=Math.max(1,b-a);return Math.max(82,Math.round((g.b-g.a)/span*1450))}
 
@@ -4769,7 +4773,7 @@ function renderPranaNavigator(){
     return`<button type="button" class="pranaCard ${active?"active":""}" data-prana-index="${i}">
       <div class="pn">Prana ${i+1} of 9</div><div class="pl">${g.lord}</div>
       <div class="pd">${fmtDateTime(g.a)}<br>→ ${fmtDateTime(g.b)}</div>
-      <div class="ps">${bk[0]} ${sc.toFixed(3)}</div>
+      <div class="ps">${signed(sc)}</div>
     </button>`;
   }).join("")}</div>`;
  nav.querySelectorAll("[data-prana-index]").forEach(btn=>btn.onclick=()=>{prefix=[...kids[+btn.dataset.pranaIndex].path];render()});
@@ -4829,7 +4833,7 @@ function renderMobileCycleZoom(){
    cycleSelection?.a===g.a&&cycleSelection?.b===g.b;
   btn.classList.toggle("active",!!selected);
   btn.style.background=heatColor(score);btn.style.color=heatTextColor(score);
-  btn.innerHTML=`<strong>${g.lord||g.label}</strong><span>${zoomRangeLabel(g)}</span><span>${bucket(score)[0]} · ${score.toFixed(2)}</span>`;
+  btn.innerHTML=`<strong>${g.lord||g.label}</strong><span>${zoomRangeLabel(g)}</span><span>${signed(score)}</span>`;
   btn.onclick=()=>activateCycleGroup(g);
   grid.appendChild(btn);
  }
@@ -4858,7 +4862,7 @@ function renderVimshottariHierarchy(){
    let va=Math.max(g.a,w.a),vb=Math.min(g.b,w.b),left=(va-w.a)/span*100,wid=(vb-va)/span*100,sc=scoreSelected(g),bk=bucket(sc),d=document.createElement("div");
    d.className="laneSeg"+(g.a<=inspect&&g.b>inspect?" current":"")+(prefix.length>=depth&&prefix.slice(0,depth).join(">")===g.path.join(">")?" selected":"");
    d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
-   d.innerHTML=`<div class="laneLord">${g.lord}</div><div class="laneDate">${zoomRangeLabel(g)}</div><div class="laneContinue">${bk[0]} ${sc.toFixed(2)}</div>`;
+   d.innerHTML=`<div class="laneLord">${g.lord}</div><div class="laneDate">${zoomRangeLabel(g)}</div><div class="laneContinue">${signed(sc)}</div>`;
    d.onclick=()=>{prefix=[...g.path];render()};_tap(d,()=>{prefix=[...g.path];render()});track.appendChild(d);
   }
   lane.append(lab,track);root.appendChild(lane);
@@ -4897,7 +4901,7 @@ function renderGenericCycleHierarchy(){
   let va=Math.max(g.a,w.a),vb=Math.min(g.b,w.b),left=(va-w.a)/span*100,wid=(vb-va)/span*100,sc=scoreSelected(g),bk=bucket(sc),d=document.createElement("div");
   d.className="laneSeg"+(g.a<=inspect&&g.b>inspect?" current":"")+(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b?" selected":"");
   d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
-  d.innerHTML=`<div class="laneLord">${g.label||g.lord}</div><div class="laneDate">${fmt(g.a)} → ${fmt(g.b)}</div><div class="laneContinue">${bk[0]} ${sc.toFixed(2)}</div>`;
+  d.innerHTML=`<div class="laneLord">${g.label||g.lord}</div><div class="laneDate">${fmt(g.a)} → ${fmt(g.b)}</div><div class="laneContinue">${signed(sc)}</div>`;
   d.onclick=()=>activateCycleGroup(g);_tap(d,()=>activateCycleGroup(g));track.appendChild(d);
  }
  lane.append(lab,track);root.appendChild(lane);
@@ -4951,7 +4955,7 @@ function renderTimeline(groups){
   d.className="phase";
   d.style.width=width(g,groups)+"px";
   d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
-  d.innerHTML=`<div class="lord">${g.lord||g.label||"—"}</div><div class="date">${zoomRangeLabel(g)}</div><div class="grade">${b[0]} ${sc.toFixed(3)}</div>`;
+  d.innerHTML=`<div class="lord">${g.lord||g.label||"—"}</div><div class="date">${zoomRangeLabel(g)}</div><div class="grade">${signed(sc)}</div>`;
   // Read-only context. Cycle Zoom is the single drill-in surface.
   d.onmousemove=ev=>tipPeriod(ev,g);d.onmouseleave=hideTip;
   e.appendChild(d);
@@ -4981,7 +4985,7 @@ function renderHeat(groups){
   }
  }
 }
-function tipPeriod(ev,g){let rows=selectedDimensions().map(d=>{let s=scorePeriod(g,DOMAINS.indexOf(d));return`<tr><td>${d}</td><td>${bucket(s)[0]} ${s.toFixed(2)}</td></tr>`}).join("");showTip(ev,`<b>${periodTitle(g)}</b><div class="muted">${fmt(g.a)} → ${fmt(g.b)}</div><table>${rows}</table>`)}
+function tipPeriod(ev,g){let rows=selectedDimensions().map(d=>{let s=scorePeriod(g,DOMAINS.indexOf(d));return`<tr><td>${d}</td><td>${signed(s)}</td></tr>`}).join("");showTip(ev,`<b>${periodTitle(g)}</b><div class="muted">${fmt(g.a)} → ${fmt(g.b)}</div><table>${rows}</table>`)}
 function tipDomain(ev,g,dom){
  let di=DOMAINS.indexOf(dom),
      rows=selectedSystems().map(sys=>{
@@ -5012,19 +5016,19 @@ function renderSelected(){
  $("selTitle").textContent=(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life");
  $("selDates").textContent=`${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;
  $("components").innerHTML=
-   `<div class="component"><div class="name">Combined · Support</div><div class="val">${bucket(meanSupport)[0]} ${meanSupport.toFixed(2)}</div></div>`+
+   `<div class="component"><div class="name">Combined · Support</div><div class="val">${signed(meanSupport)}</div></div>`+
    `<div class="component"><div class="name">Combined · Activation</div><div class="val">${activationBucket(meanActivation)[0]} ${activationDisplay(meanActivation)}</div></div>`+
    selectedSystems().map(sys=>{let ds=selectedDimensions(),
       sup=ds.reduce((a,d)=>a+(perSystemPeriod(p,sys.id,DOMAINS.indexOf(d))??0),0)/ds.length,
       acts=ds.map(d=>perSystemActivationPeriod(p,sys.id,DOMAINS.indexOf(d))).filter(Number.isFinite),
       act=acts.length?acts.reduce((a,b)=>a+b,0)/acts.length:null;
-      return`<div class="component"><div class="name">${sys.name}</div><div class="val">S ${bucket(sup)[0]} ${sup.toFixed(2)}${act==null?"":` · A ${activationBucket(act)[0]} ${activationDisplay(act)}`}</div></div>`}).join("");
+      return`<div class="component"><div class="name">${sys.name}</div><div class="val">S ${signed(sup)}${act==null?"":` · A ${activationBucket(act)[0]} ${activationDisplay(act)}`}</div></div>`}).join("");
  $("leverage").innerHTML=activationRank.filter(x=>Number.isFinite(x.activation)).slice(0,3).map(x=>`<li><b>${x.d}</b> ${x.activationGrade} activation ${activationDisplay(x.activation)} · support ${x.support>=0?"+":""}${x.support.toFixed(2)}</li>`).join("");
- $("protect").innerHTML=[...supportRank].reverse().slice(0,3).map(x=>`<li><b>${x.d}</b> ${x.grade} support ${x.support.toFixed(2)} · activation ${activationDisplay(x.activation)}</li>`).join("");
+ $("protect").innerHTML=[...supportRank].reverse().slice(0,3).map(x=>`<li><b>${x.d}</b> support ${signed(x.support)} · activation ${activationDisplay(x.activation)}</li>`).join("");
  $("actionline").textContent=`Highest leverage: ${activationRank[0]?.d||"—"}. Cleanest support: ${supportRank[0]?.d||"—"}. Protect the lowest-support domain: ${supportRank.at(-1)?.d||"—"}.`;
 }
 function bestCarrier(domain,vals){let choices=(CARRIERS[domain]||[]).map(d=>vals.find(x=>x.d===d)).filter(Boolean).sort((a,b)=>b.s-a.s);return choices[0]||vals[0]}
-function renderPlaybook(){let vals=phaseDomainValues(),p=currentDisplayPeriod();$("playbookPhase").textContent=`${(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life")} · ${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;let rank=vals.map((x,i)=>({...x,mode:x.s>=.7?"PUSH":x.s>=.3?"BUILD":x.s<=-.45?"PROTECT":i>=Math.ceil(vals.length*.65)?"TRANSFER":"BUILD"}));let pri=[rank[0],rank.find(x=>x.mode==="BUILD"),[...rank].reverse().find(x=>x.mode==="PROTECT"||x.s<.2)].filter(Boolean);$("priorityGrid").innerHTML=pri.slice(0,3).map((x,i)=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?`${carrier.d} (${carrier.grade} ${carrier.s.toFixed(2)})`:"a stronger domain");return`<div class="priorityBox"><div class="kicker">${["Exploit","Build next","Protect"][i]||x.mode}</div><div class="title">${x.d} · ${x.grade} ${x.s.toFixed(2)}</div><div class="body">${text}</div></div>`}).join("");$("playbookTable").innerHTML=`<tr><th>Domain</th><th>Score</th><th>Mode</th><th>Guidance</th><th>Carrier</th></tr>`+rank.map(x=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?carrier.d:"a stronger domain");return`<tr><td><b>${x.d}</b></td><td>${x.grade} ${x.s.toFixed(3)}</td><td><span class="mode">${x.mode}</span></td><td>${text}</td><td>${carrier&&carrier.d!==x.d?`${carrier.d} · ${carrier.grade} ${carrier.s.toFixed(2)}`:"—"}</td></tr>`}).join("")}
+function renderPlaybook(){let vals=phaseDomainValues(),p=currentDisplayPeriod();$("playbookPhase").textContent=`${(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life")} · ${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;let rank=vals.map((x,i)=>({...x,mode:x.s>=.7?"PUSH":x.s>=.3?"BUILD":x.s<=-.45?"PROTECT":i>=Math.ceil(vals.length*.65)?"TRANSFER":"BUILD"}));let pri=[rank[0],rank.find(x=>x.mode==="BUILD"),[...rank].reverse().find(x=>x.mode==="PROTECT"||x.s<.2)].filter(Boolean);$("priorityGrid").innerHTML=pri.slice(0,3).map((x,i)=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?`${carrier.d} (${signed(carrier.s)})`:"a stronger domain");return`<div class="priorityBox"><div class="kicker">${["Exploit","Build next","Protect"][i]||x.mode}</div><div class="title">${x.d} · ${signed(x.s)}</div><div class="body">${text}</div></div>`}).join("");$("playbookTable").innerHTML=`<tr><th>Domain</th><th>Score</th><th>Mode</th><th>Guidance</th><th>Carrier</th></tr>`+rank.map(x=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?carrier.d:"a stronger domain");return`<tr><td><b>${x.d}</b></td><td>${signed(x.s)}</td><td><span class="mode">${x.mode}</span></td><td>${text}</td><td>${carrier&&carrier.d!==x.d?`${carrier.d} · ${signed(carrier.s)}`:"—"}</td></tr>`}).join("")}
 
 function averageSystemWeight(id){return DOMAINS.reduce((a,d)=>a+(WEIGHTS[d]?.[id]||0),0)/DOMAINS.length}
 function renderWeights(){let ss=selectedSystems(),t=$("weightsTable");t.innerHTML="<tr><th>Domain</th>"+ss.map(s=>`<th>${s.name}</th>`).join("")+"</tr>"+DOMAINS.map(d=>{let den=ss.reduce((a,s)=>a+effectiveNominalWeight(d,s.id),0);return`<tr><td>${d}</td>${ss.map(s=>`<td>${den?((effectiveNominalWeight(d,s.id)/den)*100).toFixed(1):"0"}%</td>`).join("")}</tr>`}).join("")}
@@ -5344,7 +5348,7 @@ function calcRankings(){
 }
 
 function avg(arr){let a=arr.filter(Number.isFinite);return a.length?a.reduce((x,y)=>x+y,0)/a.length:0}
-function signed(v){return`${v>=0?"+":""}${v.toFixed(2)}`}
+function signed(v){const value=Math.abs(v)<.005?0:v;return`${value>=0?"+":""}${value.toFixed(2)}`}
 function d1PlanetDimensionMetrics(name,di){
  let inf=rankings.planets.find(x=>x.id===name),ben=rankings.planetBenefit.find(x=>x.id===name),p=chart.sidereal[name];
  if(!inf||!ben||!p)return{influence:0,support:0,relevance:0};
@@ -6348,7 +6352,7 @@ function renderDharmaTab(){
  let dharmaGochara=vedicGocharaScore(ms,DOMAINS.indexOf("Spiritual"),state.active);
  $("dharmaTiming").innerHTML=`<div class="timingPath">${timing.map(x=>`<span class="timingPill">${x.level} · <b>${x.lord}</b></span>`).join("")||'<span class="timingPill">Natal foundation</span>'}</div>`+
    timing.slice(0,3).map(x=>`<div class="timingTheme"><b>${x.lord}</b> — ${x.theme}. <span class="muted">${x.practice}; focus day ${x.weekday}.</span></div>`).join("")+
-   `<div class="timingTheme"><b>Gochara overlay</b> — ${bucket(dharmaGochara.score)[0]} ${dharmaGochara.score.toFixed(2)} for Spiritual on ${fmt(ms)}. <span class="muted">${dharmaGochara.provider}; Jupiter/Saturn double-transit and active-lord contacts included.</span></div>`;
+   `<div class="timingTheme"><b>Gochara overlay</b> — ${signed(dharmaGochara.score)} for Spiritual on ${fmt(ms)}. <span class="muted">${dharmaGochara.provider}; Jupiter/Saturn double-transit and active-lord contacts included.</span></div>`;
 
  let box=(title,body,cls="")=>`<div class="reconcileBox ${cls}"><h4>${title}</h4><div class="small">${body}</div></div>`;
  $("ishtaIndicator").innerHTML=`<div class="reconcileGrid">
@@ -7109,7 +7113,7 @@ function renderPeriodChips(groups){
    :(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
   if(isActive)d.classList.add("active");
   d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
-  d.innerHTML=`<span class="pchip-lord">${g.lord||g.label||"—"}</span><span class="pchip-grade">${b[0]}</span><span class="pchip-score">${sc.toFixed(1)}</span><span class="pchip-range">${zoomRangeLabel(g)}</span>`;
+  d.innerHTML=`<span class="pchip-lord">${g.lord||g.label||"—"}</span><span class="pchip-score">${signed(sc)}</span><span class="pchip-range">${zoomRangeLabel(g)}</span>`;
   d.onclick=()=>activateCycleGroup(g);
   _tap(d,()=>activateCycleGroup(g));
   el.appendChild(d);
@@ -7151,9 +7155,9 @@ function renderRadarChart(){
   const c=v.s>0.7?'#0d8c5a':v.s>0.3?'#59b77f':v.s>-0.3?'#c8ae57':v.s>-0.7?'#c47a49':'#a93e4a';
   svg+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.5" fill="${c}" stroke="#0a0d12" stroke-width="1.5"/>`;
  });
- const grade=bucket(avg)[0];
+ const grade=signed(avg);
  svg+=`<text x="${cx}" y="${cy-12}" text-anchor="middle" font-size="28" font-weight="800" fill="#edf3fa" font-family="sans-serif">${grade}</text>`;
- svg+=`<text x="${cx}" y="${cy+10}" text-anchor="middle" font-size="13" fill="#91a2b6" font-family="sans-serif">${avg.toFixed(2)}</text>`;
+ svg+=`<text x="${cx}" y="${cy+10}" text-anchor="middle" font-size="13" fill="#91a2b6" font-family="sans-serif">Support</text>`;
  const selLabel="";
  svg+=`<text x="${cx}" y="${cy+26}" text-anchor="middle" font-size="10" fill="#5c7a9a" font-family="sans-serif">${selLabel}</text>`;
  svg+=`</svg>`;
@@ -7356,7 +7360,7 @@ function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect,metric='suppor
    line.appendChild(cell);cells.push(cell);
   });grid.appendChild(line);
  });
- const legend=document.createElement('div');legend.className='small';legend.textContent=(isActivation?'Activation 0–2: intensity, not favorability. ':'Support −2 to +2: friction to constructive support. ')+'Equal-width columns; exact dates are in the preview.';root.appendChild(legend);
+ const legend=document.createElement('div');legend.className='small';legend.textContent=(isActivation?'Activation 0–2: intensity, not favorability. ':supportColorLegend()+'. ')+'Equal-width columns; exact dates are in the preview.';root.appendChild(legend);
  let timer=null,start=null,holding=false,moved=false,current=null,mouseDragging=false;
  const clearTimer=()=>{clearTimeout(timer);timer=null};
  function pick(x,y){
@@ -7447,7 +7451,7 @@ function renderHeatDetails(root,{key,rows,metrics,title,onSelect,metric='support
  dims.forEach(d=>select.add(new Option(d,d)));select.value=domain;
  select.onchange=()=>{heatExplorerDomains[key]=select.value;renderHeatDetails(root,{key,rows,metrics,title,onSelect,metric})};
  label.appendChild(select);root.appendChild(label);
- const legend=document.createElement("p");legend.className="small";legend.textContent=isActivation?"Activation 0–2 · intensity, not favorability. Expand a row for details.":"Support −2 to +2 · center = neutral. Expand a row for details.";root.appendChild(legend);
+ const legend=document.createElement("p");legend.className="small";legend.textContent=isActivation?"Activation 0–2 · intensity, not favorability. Expand a row for details.":supportColorLegend()+". Expand a row for details.";root.appendChild(legend);
  for(const row of rows){
   const m=metrics(row,DOMAINS.indexOf(domain)),details=document.createElement("details");details.className="explorer-item";
   const score=m.support,center=isActivation?0:50,position=Number.isFinite(score)?Math.max(0,Math.min(100,isActivation?score*50:(score+2)/4*100)):center;
@@ -7473,6 +7477,7 @@ function renderCycleMobileMiniMap(el,groups){
 
 function renderDomainBars(){
  const el=$("domainBarsContainer");if(!el)return;
+ $("supportMapLegend").textContent=supportColorLegend();
 
  if(window.matchMedia("(max-width:768px)").matches){
   renderCycleMobileMiniMap(el,cycleVisualGroups());
