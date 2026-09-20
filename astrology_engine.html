@@ -615,6 +615,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 
 .catalogControls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}.catalogControls label{display:grid;gap:5px;font-size:13px;min-width:0}.catalogControls input,.catalogControls select{width:100%;min-width:0;min-height:44px;font-size:16px}.catalogEntry{border-bottom:1px solid var(--line,#d8cdb9);padding:9px 0}.catalogEntry summary{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;min-height:44px}.catalogEntry summary>span:first-child{font-weight:600}.catalogTag{border:1px solid #b9ab91;border-radius:6px;padding:3px 6px;font-size:12px;flex-shrink:0;max-width:45%;overflow-wrap:anywhere}.catalogEntryBody{padding:8px 0;font-size:14px;line-height:1.6}.catalogMeter{display:grid;gap:5px;margin:8px 0;font-size:13px}.catalogMeter meter{width:100%;height:14px;accent-color:#917335}.catalogBrowser{min-width:0}.catalogResults{max-height:560px;overflow:auto;overscroll-behavior:contain}.shaniTimeline{border-left:2px solid #b4a17e;padding-left:15px;margin:12px 5px}.shaniWindow{position:relative;padding:10px 8px;margin:8px 0;border-radius:8px;background:rgba(164,138,84,.07)}.shaniWindow:before{content:'';position:absolute;left:-21px;top:20px;width:10px;height:10px;border-radius:50%;background:#a48a54}.shaniWindow.current{outline:2px solid #9b773c}.shaniWindow summary{cursor:pointer;display:grid;gap:6px;min-height:44px}.shaniWindow small{font-size:13px}.shaniWindow p{font-size:14px}.catalogEntryBody p{overflow-wrap:anywhere}@media(max-width:600px){.catalogControls{grid-template-columns:1fr 1fr}.catalogControls label:first-child{grid-column:1/-1}.catalogResults{max-height:65vh}.catalogTag{font-size:12px}.nav-group-menu{max-width:calc(100vw - 24px)}}
 .transitBar{height:8px;background:linear-gradient(90deg,#eee4d6 49.5%,#887b67 49.5%,#887b67 50.5%,#eee4d6 50.5%);position:relative;margin:5px 0 10px;border-radius:4px}.transitBar i{height:100%;position:absolute;border-radius:3px}.methodControls{display:flex;flex-wrap:wrap;align-items:end;gap:10px;margin:14px 0}.methodControls label{display:grid;gap:5px;flex:1;min-width:140px}.methodControls select,.methodControls button{min-height:44px;font-size:16px}.methodCompareGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.methodCard{border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0;overflow-wrap:anywhere}.methodScale{height:12px;border-radius:4px;background:var(--panel2);position:relative;margin:7px 0 14px}.methodScale.signed:after{content:'';position:absolute;left:50%;height:100%;border-left:1px solid var(--muted)}.methodScale i{position:absolute;height:100%;border-radius:4px}.methodFactors{display:grid;grid-template-columns:minmax(100px,1fr) 2fr 45px;gap:8px;align-items:center;font-size:13px}.methodFactors .methodScale{margin:5px 0}.bnnCircuit{margin:12px 0;padding-left:12px;border-left:2px solid var(--accent)}.bnnCircuit h4{margin:8px 0}.bnnLink{display:flex;flex-wrap:wrap;gap:6px;padding:7px 0;font-size:14px}.bnnLink span{border:1px solid var(--line);padding:4px 7px;border-radius:6px}.methodSource{font-size:13px;line-height:1.6}.methodCard summary{min-height:44px;cursor:pointer;padding:8px 0}@media(max-width:700px){.methodCompareGrid{grid-template-columns:1fr}}
+.hierarchy-pending .tabPanel{display:none!important}.hierarchyProgress{padding:20px;border:1px solid var(--line);border-radius:12px;margin:12px 0}
 </style>
 </head>
 <body>
@@ -755,7 +756,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
  </div>
 
  <!-- Main content area -->
- <div id="content">
+ <div id="content"><div id="hierarchyProgress" class="hierarchyProgress" role="status" aria-live="polite" hidden></div>
   <main style="max-width:1700px;margin:auto">
 
    <!-- Tab 1: Kāla Overview -->
@@ -1286,7 +1287,7 @@ Depth 1: MD
 Depth 2: AD
 Depth 3: PD
 Depth 4: Sookshma
-Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year life horizon does not require hundreds of thousands of precomputed leaves.</p></div>
+Depth 5: Prana</div><p>The visible branch controls navigation. Scoring evaluates underlying Prana intervals in responsive batches, then reuses their duration-weighted totals.</p></div>
     <div class="guideBox"><h4>Saju conventions</h4><p>Daeun direction follows year-stem polarity + sex. Start age uses the traditional days-to-nearest-Jie ÷ 3 approximation unless you provide an explicit start age. The UI exposes Saju Yongsin and start-age overrides because schools differ.</p></div>
 
     <div class="guideBox"><h4>Handoff rule for future chats</h4>
@@ -1488,9 +1489,9 @@ Depth 5: Prana</div><p>Only the visible branch is generated, so a 100–120 year
 <div class="guideBox"><h4>Support vs Activation · corrected period hierarchy</h4>
       <ul>
        <li><b>Support</b> is signed: constructive/easy ↔ friction. <b>Activation</b> is unsigned: quiet ↔ strongly engaged. A demanding promotion/restructuring window can therefore be high activation but only mixed support.</li>
-       <li>For a selected Vimshottari period, only the <b>selected fixed path</b> defines the baseline. Existing level weights are truncated at that depth and renormalized: MD is 100% its lord; AD uses MD+AD only; PD uses MD+AD+PD only, and so on.</li>
-       <li>Lower descendants no longer silently dominate a parent summary. They are reported separately as a <b>within-period range</b> so the engine can say “strong AD, but with mixed child periods” without averaging the AD away.</li>
-       <li>Projected Gochara still varies across the selected period and is sampled across its actual dates. This preserves real timing while keeping the selected dasha identity stable.</li>
+       <li><b>Prana is the scoring base.</b> Each parent is the duration-weighted mean of its nine children: MD → AD → PD → Sookshma → Prana. Each full MD therefore summarizes 6,561 Prana intervals. Duration weights use the actual interval length and therefore the Vimshottari years/120 proportions once.</li>
+       <li>Planetary influence weights are inputs to each Prana calculation, not additional duration weights. The old selected-path context remains available as diagnostic evidence, distinct from the period average.</li>
+       <li>Each Prana is evaluated at its midpoint; averaging the resulting short intervals produces the parent summary. This is a numerical approximation to time-varying transits, not an exact continuous integral. Parent support and activation use the same duration aggregation. Partial date ranges use actual overlapping durations; foreign cycle views retain their own date-range calculations.</li>
        <li>Activation has native calculators for Vedic, Western and Saju. External systems may provide <code>activationCalculator(ctx)</code>; if they do not, activation coverage is omitted rather than inferred from absolute support.</li>
       </ul>
     </div>
@@ -1669,7 +1670,7 @@ const LEVELS=['Mahadasha','Antardasha','Pratyantardasha','Sookshma','Prana'];
 const VEDIC_LEVEL_WEIGHTS=[.15,.25,.25,.20,.15];
 const DOMAINS=["Career","Wealth","Marriage","Family","Children","Vitality","Mind","Spiritual","Reinvention","Learning","Autonomy","Mentorship"];
 const ASTROLOGY_METHOD_REGISTRY={
- version:"2026.09-v18-expression",
+ version:"2026.09-v19-duration",
  primaryVedic:"BPHS",
  methods:{
   BPHS:{
@@ -2112,7 +2113,17 @@ const CARRIERS={Career:["Learning","Reinvention","Autonomy","Mentorship"],Wealth
 let swe=null,swissReady=false,baziLib=null,baziProvider="Internal fallback";
 let profile=null,chart=null,dashaRoot=[],prefix=[],calendarYear=null;
 let cycleFamilyKey="vimshottari",cycleContextKey="hierarchy",cycleSelection=null;
-let scoreCache=new Map(),periodCache=new Map(),cycleCache=new Map(),structuralCache=new Map(),rankings={planets:[],houses:[],planetBenefit:[],houseBenefit:[]};
+class CalculationCache extends Map{
+ constructor(){super();this.instantKeys=[]}
+ set(key,value){
+  if(/^(vgo:|tr:|w:|s:|wa:|sa:|wx:|st:)/.test(key)&&!this.has(key)){
+   this.instantKeys.push(key);if(this.instantKeys.length>2048)super.delete(this.instantKeys.shift());
+  }
+  return super.set(key,value);
+ }
+ clear(){super.clear();this.instantKeys=[]}
+}
+let scoreCache=new CalculationCache(),periodCache=new Map(),cycleCache=new Map(),structuralCache=new Map(),rankings={planets:[],houses:[],planetBenefit:[],houseBenefit:[]};
 let selectedSystemIds=new Set(DEFAULT_SELECTED_SYSTEM_IDS),selectedDimensionsSet=new Set(DOMAINS);
 let structuralEvidenceMode="integrated",enabledStructuralLayerIds=new Set(["D1","D9","D10","D2","D4","D7","D12","D20","D24","D27","D30"]),d60Convention="absolute";
 let receivedDharma={
@@ -2917,8 +2928,9 @@ function timingBranchContacts(natalPillars,timingLayer){
      all=branchRelationAnalysis(natalPillars,extra);
  return all.filter(r=>(r.pillars||[]).includes(timingLayer.level));
 }
-function sajuTimingAssessment(ms){
- let useful=estimateUsefulElements(chart.sajuBirth),tg=baziTenGodAssessment(chart.sajuBirth),
+function sajuTimingAssessment(ms){const key='st:'+ms;if(scoreCache.has(key))return scoreCache.get(key);const value=sajuTimingAssessmentUncached(ms);scoreCache.set(key,value);return value}
+function sajuTimingAssessmentUncached(ms){
+ let useful=ruleMemo('saju-useful',()=>estimateUsefulElements(chart.sajuBirth)),tg=ruleMemo('saju-tengod',()=>baziTenGodAssessment(chart.sajuBirth)),
      dy=daeunAt(ms),cur=sajuFallbackAt(ms),layers=[];
  if(dy)layers.push({level:"Daeun",pillar:dy,weight:.50});
  layers.push({level:"Year",pillar:cur.year,weight:.30});
@@ -3139,7 +3151,7 @@ function vedicCombustState(body,lon,sunLon,ret=false){
 }
 
 function calcVedicTransitSet(ms){
- let key=`vgo:${Math.round(ms/3600000)}`;if(scoreCache.has(key))return scoreCache.get(key);
+ let key=`vgo:${ms}`;if(scoreCache.has(key))return scoreCache.get(key);
  let jd=jdFromMs(ms),ay=ayanamsa(jd,profile.ayanamsa),trop=calcTransitSet(ms),o={},
      ascSign=signIndex(chart.sidAsc),moonSign=signIndex(chart.sidereal.Moon.lon);
  for(const name of CLASSICAL){
@@ -3220,6 +3232,7 @@ function vedicGocharaScore(ms,di,path=activePathAt(ms,5)){
 }
 
 function vedicPeriodSampleTimes(period){
+ if(hasVedicPeriodPath(period)&&period.path.length===5)return[pranaMidpoint(period)];
  let durDays=Math.max(.01,(period.b-period.a)/86400000),depth=period.depth||period.path?.length||0,
      targetDays=depth<=1?240:depth===2?30:depth===3?5:depth===4?1:.25,
      cap=depth<=1?32:depth===2?24:depth===3?20:depth===4?15:12,n=Math.max(3,Math.min(cap,Math.ceil(durDays/targetDays)+1)),out=[];
@@ -3227,7 +3240,110 @@ function vedicPeriodSampleTimes(period){
  return out;
 }
 
+// Prana is the integration base. Every coarser Vimshottari level is a duration rollup.
+const PERIOD_AGGREGATION_DEPTH=5;
+function durationSummaryChildren(period){
+ if(hasVedicPeriodPath(period)&&period.path.length>=PERIOD_AGGREGATION_DEPTH)return[];
+ const key='duration-children:'+JSON.stringify([period.a,period.b,period.path,period.cycleFamily]);
+ if(periodCache.has(key))return periodCache.get(key);const value=durationSummaryChildrenUncached(period);periodCache.set(key,value);return value;
+}
+function durationSummaryChildrenUncached(period){
+ if(hasVedicPeriodPath(period)&&period.path.length<PERIOD_AGGREGATION_DEPTH){
+  const canonical=findPeriodByPath(period.path),source=canonical&&canonical.a<=period.a&&canonical.b>=period.b?canonical:Number.isFinite(period._fullA)?{...period,a:period._fullA,b:period._fullB}:period;
+  return childPeriods(source).filter(p=>p.b>period.a&&p.a<period.b).map(p=>({...p,_fullA:p._fullA??p.a,_fullB:p._fullB??p.b,a:Math.max(p.a,period.a),b:Math.min(p.b,period.b)}));
+ }
+ if(!period.cycleFamily&&!period.path?.length)return dashaRoot.filter(p=>p.b>period.a&&p.a<period.b).map(p=>({...p,_fullA:p._fullA??p.a,_fullB:p._fullB??p.b,a:Math.max(p.a,period.a),b:Math.min(p.b,period.b)}));
+ return[];
+}
+function isDurationSummaryPeriod(period){return hasVedicPeriodPath(period)||(!period.cycleFamily&&!period.path?.length)}
+function weightedMetricArrays(period,children,rows){
+ const out={support:[],activation:[],coverage:{support:[],activation:[]},leafCount:rows.reduce((n,r)=>n+(r.leafCount||1),0)};
+ for(const metric of ['support','activation'])for(let di=0;di<DOMAINS.length;di++){
+  let sum=0,covered=0;
+  children.forEach((child,i)=>{const value=rows[i][metric][di],duration=rows[i].coverage?.[metric]?.[di]??(child.b-child.a);if(Number.isFinite(value)){sum+=duration*value;covered+=duration}});
+  out[metric][di]=covered?sum/covered:null;out.coverage[metric][di]=covered;
+ }
+ return out;
+}
+function durationSystemMetrics(period,id){
+ const key='duration-system:'+JSON.stringify([id,period.a,period.b,period.path]);
+ if(scoreCache.has(key))return scoreCache.get(key);
+ const children=durationSummaryChildren(period);let value;
+ if(children.length)value=weightedMetricArrays(period,children,children.map(p=>durationSystemMetrics(p,id)));
+ else{
+  value=id==='Vedic'?{...pranaVedicMetrics(period)}:{support:pranaSystemValues(period,id,'support'),activation:pranaSystemValues(period,id,'activation'),leafCount:1};
+  value.coverage=Object.fromEntries(['support','activation'].map(metric=>[metric,value[metric].map(v=>Number.isFinite(v)?period.b-period.a:0)]));
+ }
+ scoreCache.set(key,value);return value;
+}
+let durationBlendSignature='',durationBlendVersion=0;
+function durationCombinedMetrics(period){
+ const signature=JSON.stringify([[...selectedSystemIds],WEIGHTS]);
+ if(signature!==durationBlendSignature){durationBlendSignature=signature;durationBlendVersion++}
+ const key='duration-combined:'+JSON.stringify([period.a,period.b,period.path,durationBlendVersion]);
+ if(scoreCache.has(key))return scoreCache.get(key);
+ const children=durationSummaryChildren(period);let value;
+ if(children.length)value=weightedMetricArrays(period,children,children.map(durationCombinedMetrics));
+ else{
+  const systems=selectedSystems().map(s=>({id:s.id,metrics:durationSystemMetrics(period,s.id)}));value={support:[],activation:[],coverage:{support:[],activation:[]},leafCount:1};
+  for(const metric of ['support','activation'])for(let di=0;di<DOMAINS.length;di++){
+   let num=0,den=0;for(const s of systems){const x=s.metrics[metric]?.[di],w=effectiveNominalWeight(DOMAINS[di],s.id);if(Number.isFinite(x)){num+=w*x;den+=w}}
+   value[metric][di]=den?num/den:metric==='support'?0:null;value.coverage[metric][di]=Number.isFinite(value[metric][di])?period.b-period.a:0;
+  }
+ }
+ scoreCache.set(key,value);return value;
+}
+function durationWeightedScore(period,di,key){
+ if(!isDurationSummaryPeriod(period)||(!hasVedicPeriodPath(period)&&!durationSummaryChildren(period).length))return undefined;
+ if(key==='combined-support')return durationCombinedMetrics(period).support[di];
+ if(key==='combined-activation')return durationCombinedMetrics(period).activation[di];
+ if(key==='Vedic-support')return durationSystemMetrics(period,'Vedic').support[di];
+ if(key==='Vedic-activation')return durationSystemMetrics(period,'Vedic').activation[di];
+ if(key.startsWith('system-support-'))return durationSystemMetrics(period,key.slice('system-support-'.length)).support?.[di]??null;
+ if(key.startsWith('system-activation-'))return durationSystemMetrics(period,key.slice('system-activation-'.length)).activation?.[di]??null;
+ return undefined;
+}
+
 function scoreVedicPeriod(period,di){
+ const average=durationWeightedScore(period,di,'Vedic-support');
+ return average!==undefined?average:scoreVedicContextPeriod(period,di);
+}
+function activationVedicPeriod(period,di){
+ const average=durationWeightedScore(period,di,'Vedic-activation');
+ return average!==undefined?average:activationVedicContextPeriod(period,di);
+}
+function periodAveragingLabel(period){
+ return durationSummaryChildren(period).length?'Duration-weighted Prana average':hasVedicPeriodPath(period)?'Prana midpoint score':'Date-range score';
+}
+
+function pranaMidpoint(period){
+ const original=findPeriodByPath(period.path),full=Number.isFinite(period._fullA)?{a:period._fullA,b:period._fullB}:original&&original.a<=period.a&&original.b>=period.b?original:period;
+ return midpoint(full.a,full.b);
+}
+function pranaVedicMetrics(period){
+ const ms=pranaMidpoint(period),key='prana-vedic:'+JSON.stringify([ms,period.path]);
+ if(scoreCache.has(key))return scoreCache.get(key);
+ const path=period.path,gw=gocharaWeightForDepth(5),aw=activationGocharaWeightForDepth(5),support=[],activation=[],transitActivation=[];
+ for(let di=0;di<DOMAINS.length;di++){
+  const g=vedicGocharaScore(ms,di,path);let num=0,den=0;
+  for(const r of g.rows||[]){num+=Math.abs(r.contribution||0);den+=Math.max(.001,r.importance||0)}
+  const base=den?clamp(num/den,0,1):0,boost=(g.doubleTransit?.houses?.length||g.doubleTransit?.activeLordHits?.length)?.12:0;
+  support[di]=clamp((1-gw)*vedicStructuralPathSupport(path,di)+gw*g.score,-2,2);
+  transitActivation[di]=clamp(2*(.90*base+boost),0,2);
+  activation[di]=clamp((1-aw)*vedicStructuralPathActivation(path,di)+aw*transitActivation[di],0,2);
+ }
+ const out={support,activation,transitActivation,leafCount:1};scoreCache.set(key,out);return out;
+}
+function pranaSystemValues(period,id,metric){
+ if(id==='Vedic')return pranaVedicMetrics(period)[metric];
+ const ms=pranaMidpoint(period),key='prana-system:'+JSON.stringify([id,metric,ms]);
+ if(scoreCache.has(key))return scoreCache.get(key);
+ const raw=metric==='activation'?activationSystemAt(id,ms):scoreSystemAt(id,ms),value=DOMAINS.map((_,di)=>Number.isFinite(raw?.[di])?raw[di]:null);
+ scoreCache.set(key,value);return value;
+}
+
+function scoreVedicContextPeriod(period,di){
+ if(hasVedicPeriodPath(period)&&period.path.length===5)return pranaVedicMetrics(period).support[di];
  let depth=period.depth||period.path?.length||0,key=`vps:${period.a}:${period.b}:${(period.path||[]).join(">")}:${di}`;
  if(scoreCache.has(key))return scoreCache.get(key);
  let ts=vedicPeriodSampleTimes(period);
@@ -3411,7 +3527,8 @@ function parivartanaPairs(){
  return out;
 }
 
-function planetAssociation(a,b){
+function planetAssociation(a,b){return ruleMemo('association:'+a+':'+b,()=>planetAssociationUncached(a,b))}
+function planetAssociationUncached(a,b){
  let same=natalPlanetSign(a)===natalPlanetSign(b),mutual=classicalMutualAspect(a,b),
      exchange=parivartanaPairs().some(x=>new Set([x.a,x.b]).size===2&&[x.a,x.b].includes(a)&&[x.a,x.b].includes(b)),
      sep=angularSep(chart.sidereal[a].lon,chart.sidereal[b].lon);
@@ -3698,7 +3815,7 @@ function renderVedicGocharaPanel(){
      gw=gocharaWeightForDepth(path.length),byDim=dims.map(d=>{let di=DOMAINS.indexOf(d),g=vedicGocharaScore(mid,di,path);return{d,di,g}}),
      mean=byDim.reduce((a,x)=>a+x.g.score,0)/Math.max(1,byDim.length),g0=byDim[0]?.g||vedicGocharaScore(mid,0,path),
      trans=g0.trans,samples=vedicPeriodSampleTimes(p).length,showBodies=[...new Set(["Jupiter","Saturn","Rahu","Ketu",...path])].filter(x=>trans[x]);
- $("vedicGocharaBadge").innerHTML=`<b>${signed(mean)}</b><br>${Math.round(gw*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation Gochara weight · ${samples} projected samples<br>${g0.provider}`;
+ $("vedicGocharaBadge").innerHTML=`<b>${signed(mean)}</b><br>Midpoint transit context (illustration)<br>Period rollups use Prana leaves: 24% support / 55% activation transit weight<br>${g0.provider}`;
  $("vedicGocharaTransitGrid").innerHTML=`<div class="routineBlock"><h4>Midpoint projected sky · ${fmt(mid)}</h4><ul>
    <li><b>${hasVedicPeriodPath(p)?"Fixed selected path":"Midpoint path (changes across this range)"}:</b> ${path.map((x,i)=>`${LEVELS[i]} ${x}`).join(" → ")||"—"}.</li>
    ${showBodies.map(body=>{let t=trans[body];return`<li><b>${body}</b> ${signDegree(t.lon)} · H${t.fromLagna} from Lagna · H${t.fromMoon} from Moon${t.ret?" · retrograde":""}${t.combust?" · combust":""}.</li>`}).join("")}
@@ -3886,7 +4003,8 @@ function fixedVedicPeriodPath(period,ms=null){
  return activePathAt(ms??midpoint(period.a,period.b),5);
 }
 
-function activationVedicPeriod(period,di){
+function activationVedicContextPeriod(period,di){
+ if(hasVedicPeriodPath(period)&&period.path.length===5)return pranaVedicMetrics(period).activation[di];
  let key=`vpa:${period.a}:${period.b}:${(period.path||[]).join(">")}:${di}`;
  if(scoreCache.has(key))return scoreCache.get(key);
  let ts=vedicPeriodSampleTimes(period),fixed=hasVedicPeriodPath(period)?[...period.path]:null,vals=ts.map(ms=>{
@@ -3912,14 +4030,15 @@ function vedicPeriodBreakdown(period,di){
      support=scoreVedicPeriod(period,di),activation=activationVedicPeriod(period,di);
  return{
   pathMode:hasVedicPeriodPath(period)?"fixed":"changing; path shown is midpoint illustration",
+  aggregation:periodAveragingLabel(period),contextSupport:scoreVedicContextPeriod(period,di),contextActivation:activationVedicContextPeriod(period,di),
   path:path.map((lord,i)=>({level:LEVELS[i],lord,weight:weights[i],
     support:vedicLordDomainOutcome(lord,di),activation:vedicStructuralPathActivation([lord],di),
     assessment:bphsLordDomainAssessment(lord,di),layers:structuralLayerBreakdown("planet",lord,di)})),
-  method:"BPHS-derived v17",pairAssessments:path.slice(1).map(ad=>bphsPairAssessment(path[0],ad,di)),association:bphsPathAssociationFactor(path,di),supportTransitWeight:gocharaWeightForDepth(path.length),activationTransitWeight:activationGocharaWeightForDepth(path.length),
+  method:"BPHS-derived v17",pairAssessments:path.slice(1).map(ad=>bphsPairAssessment(path[0],ad,di)),association:bphsPathAssociationFactor(path,di),supportTransitWeight:gocharaWeightForDepth(durationSummaryChildren(period).length?5:path.length),activationTransitWeight:activationGocharaWeightForDepth(durationSummaryChildren(period).length?5:path.length),
   support,activation,
   supportRange:hasVedicPeriodPath(period)?vedicDescendantRange(period,di,"support"):null,
   activationRange:hasVedicPeriodPath(period)?vedicDescendantRange(period,di,"activation"):null,
-  samples:vedicPeriodSampleTimes(period).length
+  samples:isDurationSummaryPeriod(period)?durationSystemMetrics(period,"Vedic").leafCount:vedicPeriodSampleTimes(period).length
  };
 }
 
@@ -3937,42 +4056,28 @@ function coldModelIntegrityInvariant(){
 }
 
 function selectedPeriodHierarchyInvariant(){
- if(!chart||!dashaRoot?.length)return{ok:true,detail:"chart not initialized"};
- let md=dashaRoot.find(x=>x.lord==="Mercury"&&x.b>chart.birthMs)||dashaRoot.find(x=>x.b>chart.birthMs),
-     ad=md?childPeriods(md)[0]:null;
- if(!md||!ad)return{ok:false,detail:"could not construct MD/AD fixture"};
- let w1=normalizedDashaWeights(1),w2=normalizedDashaWeights(2),
-     weightsOk=w1.length===1&&Math.abs(w1[0]-1)<1e-9&&w2.length===2&&Math.abs(w2.reduce((a,b)=>a+b,0)-1)<1e-9,
-     fixed= fixedVedicPeriodPath(ad).join(">")===ad.path.join(">"),
-     noDesc=fixedVedicPeriodPath(ad).length===2;
- return{ok:weightsOk&&fixed&&noDesc,
-   detail:`MD renormalizes to 100% parent ${weightsOk?"PASS":"FAIL"} · AD fixed path depth ${fixed&&noDesc?"PASS":"FAIL"} · descendants excluded from parent baseline`};
+ if(!chart||!dashaRoot?.length)return{ok:true,detail:'chart not initialized'};
+ let md=dashaRoot.find(p=>p.b>chart.birthMs),maxError=0,levels=0;
+ for(let p=md;p&&p.path.length<5;p=childPeriods(p)[0]){
+  const kids=childPeriods(p),duration=p.b-p.a;
+  maxError=Math.max(maxError,Math.abs(kids.reduce((sum,k)=>sum+(k.b-k.a)/duration,0)-1),...kids.map(k=>Math.abs((k.b-k.a)/duration-DASHA[k.lord]/120)));levels++;
+ }
+ return{ok:levels===4&&maxError<1e-10,detail:`MD → AD → PD → Sookshma → Prana: all four duration partitions sum to one; maximum error ${maxError.toExponential(1)}. Parent scores are duration-weighted child averages.`};
 }
 
 function activationWesternAt(ms){
- let key="wa:"+Math.round(ms/86400000);if(scoreCache.has(key))return scoreCache.get(key);
- let trans=calcTransitSet(ms),
-     points={Sun:chart.tropical.Sun.lon,Moon:chart.tropical.Moon.lon,Mercury:chart.tropical.Mercury.lon,Venus:chart.tropical.Venus.lon,Mars:chart.tropical.Mars.lon,Jupiter:chart.tropical.Jupiter.lon,Saturn:chart.tropical.Saturn.lon,Asc:chart.tropAsc,MC:chart.tropMC},
-     age=Math.max(0,Math.floor((ms-chart.birthMs)/YEAR_MS)),ph=(age%12)+1,ascSign=signIndex(chart.tropAsc),lord=rulerOfSignIndex(ascSign+ph-1),out=[];
+ const key='wa:'+ms;if(scoreCache.has(key))return scoreCache.get(key);
+ const contacts=westernAspectSignals(ms),age=Math.max(0,Math.floor((ms-chart.birthMs)/YEAR_MS)),ph=(age%12)+1,lord=rulerOfSignIndex(signIndex(chart.tropAsc)+ph-1),out=[];
  for(let di=0;di<12;di++){
-  let num=0,den=0;
-  for(const body of Object.keys(trans)){
-   let prof=WESTERN_TRANSIT_PROFILE[body]||Array(12).fill(0),bestAbs=0;
-   for(const lon of Object.values(points)){
-    let asp=closestAspect(angularSep(trans[body].lon,lon));
-    if(asp)bestAbs=Math.max(bestAbs,asp.strength);
-   }
-   if(bestAbs){num+=Math.abs(prof[di]||0)*bestAbs;den+=bestAbs}
-  }
-  let transit=den?clamp((num/den)/.75,0,2):0,
-      profection=clamp((Math.abs(HOUSE_PROFILE[ph]?.[di]||0)+Math.abs(WESTERN_TRANSIT_PROFILE[lord]?.[di]||0))/.9,0,2);
+  let num=0,den=0;for(const [body,c] of Object.entries(contacts))if(c.activationAbs){num+=Math.abs(WESTERN_TRANSIT_PROFILE[body]?.[di]||0)*c.activationAbs;den+=c.activationAbs}
+  const transit=den?clamp((num/den)/.75,0,2):0,profection=clamp((Math.abs(HOUSE_PROFILE[ph]?.[di]||0)+Math.abs(WESTERN_TRANSIT_PROFILE[lord]?.[di]||0))/.9,0,2);
   out[di]=clamp(.70*transit+.30*profection,0,2);
  }
  scoreCache.set(key,out);return out;
 }
 
 function activationSajuAt(ms){
- let key="sa:"+Math.round(ms/86400000);if(scoreCache.has(key))return scoreCache.get(key);
+ let key="sa:"+ms;if(scoreCache.has(key))return scoreCache.get(key);
  let t=sajuTimingAssessment(ms),target=profile.yongsin!=="auto"?profile.yongsin:t.useful.primary,out=[];
  for(let di=0;di<12;di++){
   let v=0;
@@ -4000,16 +4105,19 @@ function activationSystemAt(id,ms){
 }
 
 function perSystemActivationPeriod(period,id,di){
+ const average=durationWeightedScore(period,di,'system-activation-'+id);if(average!==undefined)return average;
  if(id==="Vedic")return activationVedicPeriod(period,di);
+ if(hasVedicPeriodPath(period)&&period.path.length===5)return pranaSystemValues(period,id,"activation")?.[di]??null;
  let sys=SYSTEMS[id];if(!sys||typeof sys.activationCalculator!=="function")return null;
  let ts=sampleTimes(period),vals=ts.map(t=>activationSystemAt(id,t)?.[di]).filter(Number.isFinite);
  return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;
 }
 
 function activationPeriod(period,di){
+ const average=durationWeightedScore(period,di,'combined-activation');if(average!==undefined)return average;
  const domain=DOMAINS[di],systems=selectedSystems(),vedic=systems.some(s=>s.id==='Vedic')?activationVedicPeriod(period,di):null;
  const vals=sampleTimes(period).map(ms=>{
-  const rows=systems.map(sys=>({id:sys.id,value:sys.id==='Vedic'?vedic:activationSystemAt(sys.id,ms)?.[di]})).filter(x=>Number.isFinite(x.value));
+  const rows=systems.map(sys=>({id:sys.id,value:sys.id==='Vedic'?vedic:hasVedicPeriodPath(period)&&period.path.length===5?pranaSystemValues(period,sys.id,'activation')?.[di]:activationSystemAt(sys.id,ms)?.[di]})).filter(x=>Number.isFinite(x.value));
   const den=rows.reduce((sum,x)=>sum+effectiveNominalWeight(domain,x.id),0);
   return den?rows.reduce((sum,x)=>sum+x.value*effectiveNominalWeight(domain,x.id)/den,0):null;
  }).filter(Number.isFinite);
@@ -4092,8 +4200,27 @@ function vedicTimingBreakdown(ms,di){
 }
 function angularSep(a,b){let d=Math.abs(norm(a-b));return Math.min(d,360-d)}
 function closestAspect(sep){let defs=[{a:0,v:1,orb:5},{a:60,v:.65,orb:4},{a:90,v:-.8,orb:4.5},{a:120,v:.8,orb:4.5},{a:180,v:-.9,orb:5}],best=null;for(const x of defs){let o=Math.abs(sep-x.a);if(o<=x.orb&&(!best||o<best.o))best={...x,o,strength:1-o/x.orb}}return best}
-function calcTransitSet(ms){let key="tr:"+Math.round(ms/3600000);if(scoreCache.has(key))return scoreCache.get(key);let jd=jdFromMs(ms),o={};for(const[n,c,id]of TRANSIT_BODIES)o[n]=calcPlanet(n,c,id,jd);scoreCache.set(key,o);return o}
-function scoreWesternAt(ms){let key="w:"+Math.round(ms/86400000);if(scoreCache.has(key))return scoreCache.get(key);let trans=calcTransitSet(ms),points={Sun:chart.tropical.Sun.lon,Moon:chart.tropical.Moon.lon,Mercury:chart.tropical.Mercury.lon,Venus:chart.tropical.Venus.lon,Mars:chart.tropical.Mars.lon,Jupiter:chart.tropical.Jupiter.lon,Saturn:chart.tropical.Saturn.lon,Asc:chart.tropAsc,MC:chart.tropMC},out=[];let age=Math.max(0,Math.floor((ms-chart.birthMs)/YEAR_MS)),ph=(age%12)+1,ascSign=signIndex(chart.tropAsc),lord=rulerOfSignIndex(ascSign+ph-1);for(let di=0;di<12;di++){let num=0,den=0;for(const body of Object.keys(trans)){let prof=WESTERN_TRANSIT_PROFILE[body]||Array(12).fill(0),best=0,bestAbs=0;for(const lon of Object.values(points)){let asp=closestAspect(angularSep(trans[body].lon,lon));if(asp){let val=asp.v*asp.strength;if(Math.abs(val)>bestAbs){bestAbs=Math.abs(val);best=val}}}if(bestAbs){num+=prof[di]*best;den+=bestAbs}}let transit=den?clamp(num/Math.max(1,den)*1.6,-2,2):0,houseBase=HOUSE_PROFILE[ph]?.[di]||0,lordBase=WESTERN_TRANSIT_PROFILE[lord]?.[di]||0,profection=clamp((houseBase+lordBase)/2,-2,2);out[di]=clamp(.7*transit+.3*profection,-2,2)}scoreCache.set(key,out);return out}
+function calcTransitSet(ms){let key="tr:"+ms;if(scoreCache.has(key))return scoreCache.get(key);let jd=jdFromMs(ms),o={};for(const[n,c,id]of TRANSIT_BODIES)o[n]=calcPlanet(n,c,id,jd);scoreCache.set(key,o);return o}
+function westernAspectSignals(ms){
+ const key='wx:'+ms;if(scoreCache.has(key))return scoreCache.get(key);
+ const trans=calcTransitSet(ms),points=[...CLASSICAL.map(n=>chart.tropical[n].lon),chart.tropAsc,chart.tropMC],out={};
+ for(const [body,p] of Object.entries(trans)){
+  let best=0,bestAbs=0,activationAbs=0;
+  for(const lon of points){const asp=closestAspect(angularSep(p.lon,lon));if(!asp)continue;const val=asp.v*asp.strength;if(Math.abs(val)>bestAbs){bestAbs=Math.abs(val);best=val}activationAbs=Math.max(activationAbs,asp.strength)}
+  out[body]={best,bestAbs,activationAbs};
+ }
+ scoreCache.set(key,out);return out;
+}
+function scoreWesternAt(ms){
+ const key='w:'+ms;if(scoreCache.has(key))return scoreCache.get(key);
+ const contacts=westernAspectSignals(ms),age=Math.max(0,Math.floor((ms-chart.birthMs)/YEAR_MS)),ph=(age%12)+1,lord=rulerOfSignIndex(signIndex(chart.tropAsc)+ph-1),out=[];
+ for(let di=0;di<12;di++){
+  let num=0,den=0;for(const [body,c] of Object.entries(contacts))if(c.bestAbs){num+=(WESTERN_TRANSIT_PROFILE[body]?.[di]||0)*c.best;den+=c.bestAbs}
+  const transit=den?clamp(num/Math.max(1,den)*1.6,-2,2):0,profection=clamp(((HOUSE_PROFILE[ph]?.[di]||0)+(WESTERN_TRANSIT_PROFILE[lord]?.[di]||0))/2,-2,2);
+  out[di]=clamp(.7*transit+.3*profection,-2,2);
+ }
+ scoreCache.set(key,out);return out;
+}
 
 const WESTERN_KNOWLEDGE_REGISTRY={
  version:"2026.09-v1",
@@ -4310,7 +4437,7 @@ function westernInnerPathSyntheticInvariant(){
 }
 
 function scoreSajuAt(ms){
- let key="s:"+Math.round(ms/86400000);if(scoreCache.has(key))return scoreCache.get(key);
+ let key="s:"+ms;if(scoreCache.has(key))return scoreCache.get(key);
  let t=sajuTimingAssessment(ms),target=profile.yongsin!=="auto"?profile.yongsin:t.useful.primary,
      secondary=t.useful.secondary,out=[];
  for(let di=0;di<12;di++){
@@ -4362,6 +4489,7 @@ function effectiveNominalWeight(domain,id){return WEIGHTS[domain]?.[id]??0}
 function scoreSystemAt(id,ms){let sys=SYSTEMS[id];if(!sys)return Array(12).fill(null);try{return sys.calculator({ms,profile,chart,domainNames:DOMAINS})}catch(e){console.error("system calculator",id,e);return Array(12).fill(null)}}
 function combinedAt(ms){let per=Object.fromEntries(selectedSystems().map(s=>[s.id,scoreSystemAt(s.id,ms)])),out=[],weightsByDomain=[];for(let di=0;di<12;di++){let domain=DOMAINS[di],eligible=selectedSystems().filter(s=>Number.isFinite(per[s.id]?.[di])),den=eligible.reduce((a,s)=>a+effectiveNominalWeight(domain,s.id),0),w={};let v=0;if(den>0)for(const sys of eligible){w[sys.id]=effectiveNominalWeight(domain,sys.id)/den;v+=per[sys.id][di]*w[sys.id]}out[di]=den?clamp(v,-2,2):0;weightsByDomain[di]=w}return{combined:out,per,weightsByDomain}}
 function sampleTimes(period){
+ if(hasVedicPeriodPath(period)&&period.path.length===5)return[pranaMidpoint(period)];
  const mode=$("sampleMode").value;
  if(mode==='1')return[midpoint(period.a,period.b)];
  if(mode==='3')return[period.a+(period.b-period.a)*.2,midpoint(period.a,period.b),period.a+(period.b-period.a)*.8];
@@ -4370,17 +4498,20 @@ function sampleTimes(period){
  return Array.from({length:n},(_,i)=>period.a+(period.b-period.a)*(i+.5)/n);
 }
 function scorePeriod(period,di){
+ const average=durationWeightedScore(period,di,'combined-support');if(average!==undefined)return average;
  // Preserve per-date missing-coverage normalization for imported systems.
  const systems=selectedSystems(),domain=DOMAINS[di],vedic=systems.some(s=>s.id==='Vedic')?scoreVedicPeriod(period,di):null;
  const values=sampleTimes(period).map(ms=>{
-  const rows=systems.map(sys=>({id:sys.id,value:sys.id==='Vedic'?vedic:scoreSystemAt(sys.id,ms)?.[di]})).filter(x=>Number.isFinite(x.value));
+  const rows=systems.map(sys=>({id:sys.id,value:sys.id==='Vedic'?vedic:hasVedicPeriodPath(period)&&period.path.length===5?pranaSystemValues(period,sys.id,'support')?.[di]:scoreSystemAt(sys.id,ms)?.[di]})).filter(x=>Number.isFinite(x.value));
   const den=rows.reduce((sum,x)=>sum+effectiveNominalWeight(domain,x.id),0);
   return den?rows.reduce((sum,x)=>sum+x.value*effectiveNominalWeight(domain,x.id)/den,0):0;
  });return clamp(avg(values),-2,2);
 }
 
 function perSystemPeriod(period,id,di){
+ const average=durationWeightedScore(period,di,'system-support-'+id);if(average!==undefined)return average;
  if(id==="Vedic")return scoreVedicPeriod(period,di);
+ if(hasVedicPeriodPath(period)&&period.path.length===5)return pranaSystemValues(period,id,"support")?.[di]??null;
  let ts=sampleTimes(period),vals=ts.map(t=>scoreSystemAt(id,t)?.[di]).filter(Number.isFinite);
  return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;
 }
@@ -4992,7 +5123,7 @@ function tipDomain(ev,g,dom){
       let x=perSystemPeriod(g,sys.id,di),cov=sys.static?staticCoverageForPeriod(sys.id,g,di):1,detail="";
       if(sys.id==="Vedic"){
        let bd=vedicPeriodBreakdown(g,di);
-       detail=`<div class="muted">${bd.pathMode}<br>${bd.path.map(z=>`${z.level} ${z.lord} ${z.support>=0?"+":""}${z.support.toFixed(2)} × ${Math.round(z.weight*100)}%`).join("<br>")}${bd.supportRange?`<br>Next-level range ${bd.supportRange.min>=0?"+":""}${bd.supportRange.min.toFixed(2)} → ${bd.supportRange.max>=0?"+":""}${bd.supportRange.max.toFixed(2)} (${bd.supportRange.minLord}…${bd.supportRange.maxLord})`:""}</div>`;
+       detail=`<div class="muted">${bd.aggregation}<br>Selected-path context: ${bd.pathMode}<br>${bd.path.map(z=>`${z.level} ${z.lord} ${z.support>=0?"+":""}${z.support.toFixed(2)} × ${Math.round(z.weight*100)}%`).join("<br>")}${bd.supportRange?`<br>Next-level range ${bd.supportRange.min>=0?"+":""}${bd.supportRange.min.toFixed(2)} → ${bd.supportRange.max>=0?"+":""}${bd.supportRange.max.toFixed(2)} (${bd.supportRange.minLord}…${bd.supportRange.maxLord})`:""}</div>`;
       }
       return`<tr><td>${sys.name}${sys.static?` <span class="muted">(${Math.round(cov*100)}% cov)</span>`:""}${detail}</td><td>${Number.isFinite(x)?x.toFixed(2):"no coverage"}</td></tr>`
      }).join(""),
@@ -6789,7 +6920,7 @@ function renderTabContent(which){
  else if(which==="validation")renderValidationSources();
 }
 function render(){
- if(!chart)return;
+ if(!chart||hierarchyPending)return;
  renderSystemPicker();renderSystemAwarePracticeTabs();renderEvidencePicker();renderCyclePickers();
  updateColorRange(visibleGroups());renderYearPicker();renderTimeZoomTree();renderDimensionPicker();
  const active=document.querySelector(".tabPanel.active");
@@ -6798,6 +6929,19 @@ function render(){
  $("zoomOutBtn").disabled=cycleFamilyKey==="vimshottari"?!prefix.length:!cycleSelection;
 }
 
+let hierarchyPending=false;
+async function prepareDurationHierarchy(request){
+ const lb=lifeBounds(),roots=dashaRoot.filter(p=>p.b>lb.a&&p.a<lb.b),stack=[...roots].reverse(),total=roots.length*6561;let done=0;
+ hierarchyPending=true;$('content').classList.add('hierarchy-pending');$('hierarchyProgress').hidden=false;$('hierarchyProgress').textContent='Calculating duration-weighted periods… 0%';
+ while(stack.length){
+  if(request!==profileCalculationVersion)return false;
+  const p=stack.pop();if(p.path.length<5){stack.push(...childPeriods(p).slice().reverse());continue}
+  durationCombinedMetrics(p);done++;
+  if(done%64===0){$('hierarchyProgress').textContent=`Calculating duration-weighted periods… ${Math.round(100*done/total)}%`;await new Promise(resolve=>setTimeout(resolve,0));}
+ }
+ if(request!==profileCalculationVersion)return false;
+ hierarchyPending=false;$('content').classList.remove('hierarchy-pending');$('hierarchyProgress').hidden=true;return true;
+}
 async function calculateProfile(tryProviders=true){
  if(!validateProfileInputs())return;
  const request=++profileCalculationVersion;
@@ -6818,6 +6962,7 @@ async function calculateProfile(tryProviders=true){
  for(const id of["dharmaDate","vedicYogaDate","westernPathDate","sajuCultivationDate"]){
   if($(id)){$(id).min=profile.date;$(id).max=$("inspectDate").max;$(id).value=$("inspectDate").value;}
  }
+ if(!await prepareDurationHierarchy(request))return;
  let ephem=swissReady?"Swiss Ephemeris":(chart.natalSource==="validated reference ephemeris"?"validated reference ephemeris + runtime fallback":"internal fallback");
  $("ephemStatus").textContent=`Ephemeris: ${ephem}`;$("ephemStatus").className="badge "+(swissReady||isReferenceProfile()?"good":"warn");
  $("baziStatus").textContent=`Saju: ${libBirth?baziProvider:"internal + Jie approximation"} · full hidden-stem structural engine`;$("baziStatus").className="badge "+(libBirth?"good":"warn");
@@ -6996,6 +7141,7 @@ window.AstroHeatmap={
    cycleKeys:[...(x.cycleKeys||[])],structuralFamilies:[...(x.structuralFamilies||[])],practiceFamily:x.practiceFamily||null,static:!!x.static,
    hasActivation:typeof x.activationCalculator==="function",missingPolicy:x.missingPolicy||null,intervalCount:x.staticIntervals?.length||0})),
  getDomainExpression:(period,domain)=>{if(!DOMAINS.includes(domain)||!Number.isFinite(period?.a)||!Number.isFinite(period?.b)||period.b<=period.a)throw new Error("Valid period and domain required");return structuredClone(domainExpressionAssessment(period,DOMAINS.indexOf(domain)))},
+ getPeriodAveraging:period=>({label:periodAveragingLabel(period),base:"Prana",children:durationSummaryChildren(period).map(p=>({path:p.path,a:p.a,b:p.b,weight:(p.b-p.a)/(period.b-period.a)}))}),
  getRuleCoverage:()=>structuredClone(CLASSICAL_RULE_AUDIT),
  getMDADAssessment:(md,ad,domain)=>structuredClone(bphsPairAssessment(md,ad,DOMAINS.indexOf(domain))),
  getMethodRegistry:()=>structuredClone(ASTROLOGY_METHOD_REGISTRY),
@@ -7175,8 +7321,8 @@ function _syncStrip(){
 }
 
 function exportCSV(){let groups=visibleGroups(),rows=[["Level","Path","Start","End",...selectedDimensions()]];for(const g of groups)rows.push([LEVELS[g.depth-1]||"Phase",g.path.join(" > "),fmt(g.a),fmt(g.b),...selectedDimensions().map(d=>scorePeriod(g,DOMAINS.indexOf(d)).toFixed(3))]);let csv=rows.map(r=>r.map(x=>`"${String(x).replaceAll('"','""')}"`).join(",")).join("\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="dynamic_astrology_heatmap_visible.csv";a.click()}
-function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.values(SYSTEMS).map(s=>[s.id,{id:s.id,name:s.name,active:s.active,targetShare:s.targetShare,cycleKeys:[...(s.cycleKeys||[])],structuralFamilies:[...(s.structuralFamilies||[])],practiceFamily:s.practiceFamily||null,static:!!s.static,missingPolicy:s.missingPolicy||null,intervals:s.static?(s.staticIntervals||[]).map(r=>({start:new Date(r.a).toISOString(),end:new Date(r.b).toISOString(),scores:Object.fromEntries(DOMAINS.map((d,i)=>[d,r.scores[i]]))})):undefined}])),weights:WEIGHTS,selectedSystems:[...selectedSystemIds],selectedDimensions:[...selectedDimensionsSet],calculation:{swissReady,baziProvider,dashaDepth:"Prana",sampling:$("sampleMode").value,samplingModel:"uniform-midbin-daily-cap192-v2",expressionModel:"domain-evidence-v1-experimental",
- structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,vedicDevataFormCount:VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length,vedicPracticeCount:VEDIC_KNOWLEDGE_REGISTRY.practices.length,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,methodRegistryVersion:ASTROLOGY_METHOD_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1-gochara",periodScoringModel:"parashari-conditional-audit-v17",ruleCoverage:CLASSICAL_RULE_AUDIT,activationModel:"partial-strength-and-delivery-v17",vedicPrimaryMethod:"BPHS",bnnPolicy:"installed-off-by-default-independent",interpretiveBenchmarkPolicy:"none",vedicGocharaModel:"lahiri-moon-lagna-drishti-active-lords-double-transit-v1",vedicYogaActivationModel:"major-yoga-registry-v2-natal-dasha-gochara",shaniCycleModel:"moon-sign-sade-sati-4th-8th-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
+function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.values(SYSTEMS).map(s=>[s.id,{id:s.id,name:s.name,active:s.active,targetShare:s.targetShare,cycleKeys:[...(s.cycleKeys||[])],structuralFamilies:[...(s.structuralFamilies||[])],practiceFamily:s.practiceFamily||null,static:!!s.static,missingPolicy:s.missingPolicy||null,intervals:s.static?(s.staticIntervals||[]).map(r=>({start:new Date(r.a).toISOString(),end:new Date(r.b).toISOString(),scores:Object.fromEntries(DOMAINS.map((d,i)=>[d,r.scores[i]]))})):undefined}])),weights:WEIGHTS,selectedSystems:[...selectedSystemIds],selectedDimensions:[...selectedDimensionsSet],calculation:{swissReady,baziProvider,dashaDepth:"Prana",sampling:$("sampleMode").value,samplingModel:"uniform-midbin-daily-cap192-v2",expressionModel:"domain-evidence-duration-v2-experimental",
+ structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,vedicDevataFormCount:VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length,vedicPracticeCount:VEDIC_KNOWLEDGE_REGISTRY.practices.length,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,methodRegistryVersion:ASTROLOGY_METHOD_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1-gochara",periodScoringModel:"duration-weighted-prana-v19",periodAggregationBase:"Prana",contextScoringModel:"parashari-conditional-audit-v17",ruleCoverage:CLASSICAL_RULE_AUDIT,activationModel:"partial-strength-and-delivery-v17",vedicPrimaryMethod:"BPHS",bnnPolicy:"installed-off-by-default-independent",interpretiveBenchmarkPolicy:"none",vedicGocharaModel:"lahiri-moon-lagna-drishti-active-lords-double-transit-v1",vedicYogaActivationModel:"major-yoga-registry-v2-natal-dasha-gochara",shaniCycleModel:"moon-sign-sade-sati-4th-8th-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
 
 function switchTab(which){
  closeHeatPreview();
@@ -7726,6 +7872,14 @@ function expressionNatalEvidence(di,index){
 function domainExpressionAssessment(period,di){
  const key='expression-period:'+JSON.stringify([period.a,period.b,period.path,di]);
  return ruleMemo(key,()=>{
+  const children=durationSummaryChildren(period);
+  if(children.length){
+   const rows=children.map(p=>domainExpressionAssessment(p,di)),duration=period.b-period.a;
+   return rows[0].map((first,index)=>{
+    const mean=fn=>rows.reduce((sum,row,i)=>sum+(children[i].b-children[i].a)*fn(row[index]),0)/duration;
+    return{...first,score:mean(r=>r.score),delivery:mean(r=>r.delivery),contributions:Object.fromEntries(['structural','yoga','transit'].map(k=>[k,mean(r=>r.contributions[k])])),samples:rows.reduce((sum,row)=>sum+row[index].samples,0),pathMode:'duration-weighted Prana children'};
+   });
+  }
   const fixed=hasVedicPeriodPath(period)?period.path:null,times=vedicPeriodSampleTimes(period);
   return DOMAIN_EXPRESSION_RULES[DOMAINS[di]].map((_,index)=>{
    const natal=expressionNatalEvidence(di,index),samples=times.map(ms=>{
@@ -7735,13 +7889,17 @@ function domainExpressionAssessment(period,di){
     // A detected combination contributes only through participating selected lords.
     const yogaRows=natal.yogas.map(y=>({id:y.id,name:y.name,evidence:y.evidence,participants:y.participants,signal:(y.strength/100)*path.reduce((s,n,i)=>s+(y.participants.includes(n)?weights[i]:0),0)}));
     const yoga=yogaRows.length?Math.max(...yogaRows.map(y=>y.signal)):0;
-    const transit=vedicGocharaActivation(ms,di,path)/2;
+    const transit=hasVedicPeriodPath(period)&&period.path.length===5?pranaVedicMetrics(period).transitActivation[di]/2:vedicGocharaActivation(ms,di,path)/2;
     const structural=.60*natal.structure*(.4+.6*delivery),combination=.25*yoga,timing=.15*transit;
     return{score:2*(structural+combination+timing),structural,combination,timing,delivery};
    });
    return{...natal,score:avg(samples.map(s=>s.score)),delivery:avg(samples.map(s=>s.delivery)),contributions:{structural:2*avg(samples.map(s=>s.structural)),yoga:2*avg(samples.map(s=>s.combination)),transit:2*avg(samples.map(s=>s.timing))},samples:times.length,pathMode:fixed?'fixed selected path':'sampled changing paths',metric:'exploratory expression strength, 0–2; not support or predicted achievement'};
   });
  });
+}
+function renderDurationExplanation(period,di){
+ const children=durationSummaryChildren(period);if(!children.length)return `<p class="small">${periodAveragingLabel(period)}. Prana midpoint values define a piecewise-constant time model; coarser periods integrate it by duration.</p>`;
+ return `<details class="durationLedger"><summary>How this period is averaged · ${children.length} children</summary><p class="small">Σ(child support × included duration) ÷ total duration. Vimshottari years/120 set the durations once; planetary influence weights are separate. All levels recurse to Prana midpoint evaluations. Partial intervals retain the original Prana value and use only their overlapping time.</p>${children.map(child=>{const weight=(child.b-child.a)/(period.b-period.a),support=scorePeriod(child,di);return `<p class="small"><b>${catalogEscape(periodTitle(child))}</b> · ${((child.b-child.a)/86400000).toFixed(2)} days · ${(100*weight).toFixed(2)}% time weight<br>Combined support ${signed(support)} · weighted contribution ${signed(support*weight)}</p>`}).join('')}</details>`;
 }
 function renderDomainExpression(period,di){
  const rows=domainExpressionAssessment(period,di);
@@ -7756,11 +7914,11 @@ function renderMethodComparison(){
  const period=currentDisplayPeriod(),ms=midpoint(period.a,period.b),di=DOMAINS.indexOf(methodComparisonDomain),path=fixedVedicPeriodPath(period),bnn=bnnTimingBreakdown(ms,di),bnSelected=selectedSystemIds.has('BNN'),root=$('methodComparisonBody');
  const scores=[{id:'Vedic',name:'BPHS · primary',support:scoreVedicPeriod(period,di),activation:activationVedicPeriod(period,di)},{id:'BNN',name:'BNN · independent comparator',support:perSystemPeriod(period,'BNN',di),activation:perSystemActivationPeriod(period,'BNN',di)}];
  const nominal=effectiveNominalWeight(methodComparisonDomain,'BNN'),den=selectedSystems().reduce((sum,s)=>sum+effectiveNominalWeight(methodComparisonDomain,s.id),0);
- root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><p class="small">Natal: ${catalogEscape(chart.natalSource)} · transits: ${catalogEscape(bnn.provider)} · ${catalogEscape(profile.ayanamsa)}. ${chart.natalSource!=='Swiss Ephemeris'?'Offline ayanāṃśa and transit positions are approximations; dates and scores can differ from Swiss Ephemeris.':''}</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · nominal ${Math.round(nominal*100)}% before renormalization${bnSelected?` · effective ${(100*nominal/den).toFixed(1)}% for ${methodComparisonDomain}`:''}. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support <b>${signed(x.support)}</b></div>${methodBar(x.support)}<div>Period activation <b>${activationDisplay(x.activation)}</b></div>${methodBar(x.activation,true)}<p class="small">${x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length} projected samples · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Numerical weights are this app’s explicit v17 modeling choices, not scriptural percentages or probabilities. Coverage is partial; full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · lord evidence</h3><p class="small">${hasVedicPeriodPath(period)?'Fixed selected path':'Midpoint path illustration; the path changes across this date range'}. Transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
+ root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><p class="small">Natal: ${catalogEscape(chart.natalSource)} · transits: ${catalogEscape(bnn.provider)} · ${catalogEscape(profile.ayanamsa)}. ${chart.natalSource!=='Swiss Ephemeris'?'Offline ayanāṃśa and transit positions are approximations; dates and scores can differ from Swiss Ephemeris.':''}</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · nominal ${Math.round(nominal*100)}% before renormalization${bnSelected?` · effective ${(100*nominal/den).toFixed(1)}% for ${methodComparisonDomain}`:''}. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support <b>${signed(x.support)}</b></div>${methodBar(x.support)}<div>Period activation <b>${activationDisplay(x.activation)}</b></div>${methodBar(x.activation,true)}<p class="small">${isDurationSummaryPeriod(period)?durationSystemMetrics(period,x.id).leafCount:(x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length)} ${isDurationSummaryPeriod(period)?'Prana midpoint samples · duration weighted':'projected samples'} · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Numerical weights are this app’s explicit v17 modeling choices, not scriptural percentages or probabilities. Coverage is partial; full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · selected-path context</h3><p class="small">Diagnostic context, separate from the duration-weighted total above. ${hasVedicPeriodPath(period)?'Selected path':'Midpoint path illustration'}. Context transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
  const a=bphsLordDomainAssessment(lord,di),factors=[['Lordship',a.functional],['D1 placement',a.placement],['Dignity',a.dignity],['Natural nature',a.natural],['Dispositor',a.dispositor.condition],['Associations',a.association],['Varga',a.varga.signal]];
  return `<details><summary>${LEVELS[i]} ${lord} · ${Math.round(normalizedDashaWeights(path.length)[i]*100)}% · support ${signed(a.support)}</summary><p>Activation ${activationDisplay(a.activation)} · domain relevance ${Math.round(a.relevance*100)}%</p><div class="methodFactors">${factors.map(([label,value])=>`<span>${label}</span>${methodBar(value*2)}<span>${signed(value)}</span>`).join('')}</div><p class="small">Factors −1 to +1. ${catalogEscape(a.varga.evidence)}. General contribution ${signed(a.contributions.general)} × relevance floor ${a.contributions.domainFactor.toFixed(2)} × strength ${a.contributions.strengthFactor.toFixed(2)}; independent varga ${signed(a.contributions.varga)}. Dispositor: ${catalogEscape(a.dispositor.host)}. ${catalogEscape(a.functionalDetail.status)}. Rules: ${BPHS_DOMAIN_RULES[methodComparisonDomain].houses.map(h=>'H'+h).join(', ')} · karakas ${BPHS_DOMAIN_RULES[methodComparisonDomain].karakas.join(', ')}.</p></details>`;
  }).join('')}${path.slice(1).map(ad=>{const pair=bphsPairAssessment(path[0],ad,di);return `<details class="pairEvidence"><summary>${path[0]} → ${ad} · context ${signed(pair.pairSignal)}</summary>${pair.evidence.map(e=>`<p class="small">${catalogEscape(e)}</p>`).join('')}<p class="small">${catalogEscape(pair.coverage)}</p></details>`}).join('')}<p class="small">${bphsPathAssociationFactor(path,di).evidence.map(catalogEscape).join(' · ')||'No additional qualifying lord association.'}</p></section><section class="methodCard"><h3>BNN · natal circuits</h3><p class="small">Same-sign, trine, seventh, adjacent-sign, dispositor and exchange links from each domain significator; strongest relationship counted once per actor. Hero → actor; same-sign links do not imply an exact conjunction.</p>${bnn.heroRows.map(row=>`<div class="bnnCircuit"><h4>${row.hero} · circuit signal ${signed(row.score)}</h4>${bnn.connections.filter(c=>c.hero===row.hero).map(c=>`<div class="bnnLink"><span>${c.hero}</span>→<span>${c.actor}</span><small>${c.relations.map(r=>r.kind).join(" / ")} · relation ${c.weight.toFixed(2)} · valence ${signed(c.valence)}</small></div>`).join('')||'<p class="small">No registered natal links.</p>'}</div>`).join('')}<details><summary>Retrograde and degree-order evidence</summary>${bnn.nuances.map(n=>`<p class="small">${n.planet}: ${SIGNS[n.actualSign]} → ${SIGNS[n.projectedSign]} · ${n.status}.</p>`).join('')}<p class="small">${bnn.degreeOrder.map(n=>`${n.name} ${n.degree.toFixed(1)}° ${SIGNS[n.sign]}`).join(' · ')}. Ordering shown as evidence; no automatic event sequence.</p></details><details><summary>Slow-transit triggers · ${bnn.hits.length}</summary><p class="small">Midpoint ${fmt(ms)} · ${catalogEscape(bnn.provider)}. These illustrate the midpoint, not the period average.</p>${bnn.hits.map(x=>`<p class="small">${x.transit} → ${x.target} · ${x.relation} · intensity ${x.intensity.toFixed(2)} · valence ${signed(x.valence)}</p>`).join('')||'<p>No registered triggers.</p>'}</details></section></div><details><summary>Method provenance and boundaries</summary>${Object.values(ASTROLOGY_METHOD_REGISTRY.methods).map(m=>`<div class="methodSource"><h4>${catalogEscape(m.name)}</h4><p>${catalogEscape(m.boundary)}</p><ul>${m.sources.map(s=>`<li>${catalogEscape(s.label)} — ${catalogEscape(s.use)}</li>`).join('')}</ul></div>`).join('')}<p class="small">The rule audit below links the reviewed sources and separates scored rules, partial implementations and evidence-only conventions.</p></details>`;
- root.insertAdjacentHTML('beforeend',renderDomainExpression(period,di)+renderRuleCoverage());
+ root.insertAdjacentHTML('beforeend',renderDurationExplanation(period,di)+renderDomainExpression(period,di)+renderRuleCoverage());
  $('expressionPeriods').ontoggle=e=>{
   if(!e.target.open)return;
   const children=hasVedicPeriodPath(period)?childPeriods(period):[];
@@ -7831,8 +7989,8 @@ function periodMetricEvidence(period,di){
  let detail='<p>Support '+signed(sup)+' · activation '+activationDisplay(act)+'</p><ul>'+systems+'</ul><p>For separate domain expression (for example recognition versus scale), open the Vedic methods comparison.</p>';
  if(selectedSystems().some(s=>s.id==='Vedic')&&hasVedicPeriodPath(period)){
   const bd=vedicPeriodBreakdown(period,di);
-  detail+='<p>Fixed baseline: '+bd.path.map(x=>x.level+' '+x.lord+' × '+Math.round(x.weight*100)+'%').join(' → ')+'</p>';
-  if(bd.supportRange)detail+='<p>Next-level support '+signed(bd.supportRange.min)+' to '+signed(bd.supportRange.max)+'; activation '+activationDisplay(bd.activationRange.min)+' to '+activationDisplay(bd.activationRange.max)+'. Child variation does not redefine the parent.</p>';
+  detail+='<p>Unaggregated selected-path context (diagnostic): '+bd.path.map(x=>x.level+' '+x.lord+' × '+Math.round(x.weight*100)+'%').join(' → ')+'</p>';
+  if(bd.supportRange)detail+='<p>Next-level support '+signed(bd.supportRange.min)+' to '+signed(bd.supportRange.max)+'; activation '+activationDisplay(bd.activationRange.min)+' to '+activationDisplay(bd.activationRange.max)+'. Each parent averages its children by actual duration, down to Prana.</p>';
  }else detail+='<p>Vedic timing changes across this date range; no fixed Vimshottari path is selected.</p>';
  return detail;
 }

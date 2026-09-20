@@ -4,6 +4,7 @@ const { chromium } = require('playwright');
   const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true });
   try {
     const page = await browser.newPage({ viewport: { width: 360, height: 800 } });
+    page.setDefaultTimeout(120000);
     const errors = [];
     page.on('pageerror', e => errors.push(e.message));
     await page.route('https://**', r => r.abort());
@@ -27,7 +28,7 @@ const { chromium } = require('playwright');
           const baseline = w[0]*bphsLordDomainAssessment('Mercury',0).support + w[1]*bphsLordDomainAssessment(p.lord,0).support;
           const context = .35*w[1]*bphsPairAssessment('Mercury',p.lord,0).pairSignal;
           const transit = avg(vedicPeriodSampleTimes(p).map(ms => vedicGocharaScore(ms,0,p.path).score));
-          return Math.abs(w[0]-.375)<1e-12 && w[1]===.625 && gw===.08 && Math.abs((1-gw)*(baseline+context)+gw*transit-scoreVedicPeriod(p,0))<1e-12;
+          return Math.abs(w[0]-.375)<1e-12 && w[1]===.625 && gw===.08 && Math.abs((1-gw)*(baseline+context)+gw*transit-scoreVedicContextPeriod(p,0))<1e-12;
         }),
         partition: children.every((p, i) => (i === 0 ? p.a === md.a : p.a === children[i-1].b) && Math.abs((p.b-p.a)/(md.b-md.a) - DASHA[p.lord]/120) < 1e-12) && children.at(-1).b === md.b,
         noSelf: DSEQ.every(n => bphsPairAssessment(n, n, 0).pairSignal === 0),

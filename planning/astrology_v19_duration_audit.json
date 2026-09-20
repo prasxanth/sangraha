@@ -1,0 +1,116 @@
+{
+  "readySeconds": 29.93,
+  "checks": 87285,
+  "maxError": 3.120600999828582e-12,
+  "leafCount": 6561,
+  "clippedLeaves": 4520,
+  "domains": [
+    {
+      "domain": "Career",
+      "support": 0.2747501437659854,
+      "vedic": 0.04976399228875326
+    },
+    {
+      "domain": "Wealth",
+      "support": 0.33104242350616325,
+      "vedic": 0.06851490013269168
+    },
+    {
+      "domain": "Marriage",
+      "support": 0.1905506833933008,
+      "vedic": 0.006248600078463536
+    },
+    {
+      "domain": "Family",
+      "support": 0.24293825498809446,
+      "vedic": 0.020956491974387516
+    },
+    {
+      "domain": "Children",
+      "support": 0.1793617177148452,
+      "vedic": -0.01195616801395454
+    },
+    {
+      "domain": "Vitality",
+      "support": 0.22111305457604893,
+      "vedic": -0.04516565128407424
+    },
+    {
+      "domain": "Mind",
+      "support": 0.23960320086494113,
+      "vedic": 0.009235013996904757
+    },
+    {
+      "domain": "Spiritual",
+      "support": 0.20394413059330563,
+      "vedic": 0.025758044134265693
+    },
+    {
+      "domain": "Reinvention",
+      "support": 0.31948856063748005,
+      "vedic": 0.034917384569827264
+    },
+    {
+      "domain": "Learning",
+      "support": 0.294858770542504,
+      "vedic": 0.01281282753537739
+    },
+    {
+      "domain": "Autonomy",
+      "support": 0.33335811717649005,
+      "vedic": 0.055887016448102296
+    },
+    {
+      "domain": "Mentorship",
+      "support": 0.2203927814934799,
+      "vedic": 0.0027070597645010336
+    }
+  ],
+  "careerADs": [
+    {
+      "lord": "Mercury",
+      "weight": 0.14166666666666666,
+      "support": 0.2767860514208298
+    },
+    {
+      "lord": "Ketu",
+      "weight": 0.058333333333333334,
+      "support": 0.3265391524852125
+    },
+    {
+      "lord": "Venus",
+      "weight": 0.16666666666666666,
+      "support": 0.3490664298411992
+    },
+    {
+      "lord": "Sun",
+      "weight": 0.05,
+      "support": 0.43578591446658016
+    },
+    {
+      "lord": "Moon",
+      "weight": 0.08333333333333333,
+      "support": 0.30519726019873245
+    },
+    {
+      "lord": "Mars",
+      "weight": 0.058333333333333334,
+      "support": 0.1921824336913574
+    },
+    {
+      "lord": "Rahu",
+      "weight": 0.15,
+      "support": 0.19289385134913167
+    },
+    {
+      "lord": "Jupiter",
+      "weight": 0.13333333333333333,
+      "support": 0.2569833912833984
+    },
+    {
+      "lord": "Saturn",
+      "weight": 0.15833333333333333,
+      "support": 0.231671737057822
+    }
+  ]
+}

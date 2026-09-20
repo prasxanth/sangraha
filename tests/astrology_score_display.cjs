@@ -4,6 +4,7 @@ const {chromium}=require('playwright');
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  try{
   const page=await browser.newPage({viewport:{width:1500,height:1000}}),errors=[];
+  page.setDefaultTimeout(120000);
   page.on('pageerror',e=>errors.push(e.message));
   await page.route('https://**',r=>r.abort());
   await page.addInitScript(()=>{const timeout=setTimeout;window.setTimeout=(f,d,...a)=>String(f).includes('loadSwiss().then')?0:timeout(f,d,...a)});
