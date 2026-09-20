@@ -617,6 +617,13 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 .transitBar{height:8px;background:linear-gradient(90deg,#eee4d6 49.5%,#887b67 49.5%,#887b67 50.5%,#eee4d6 50.5%);position:relative;margin:5px 0 10px;border-radius:4px}.transitBar i{height:100%;position:absolute;border-radius:3px}.methodControls{display:flex;flex-wrap:wrap;align-items:end;gap:10px;margin:14px 0}.methodControls label{display:grid;gap:5px;flex:1;min-width:140px}.methodControls select,.methodControls button{min-height:44px;font-size:16px}.methodCompareGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.methodCard{border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0;overflow-wrap:anywhere}.methodScale{height:12px;border-radius:4px;background:var(--panel2);position:relative;margin:7px 0 14px}.methodScale.signed:after{content:'';position:absolute;left:50%;height:100%;border-left:1px solid var(--muted)}.methodScale i{position:absolute;height:100%;border-radius:4px}.methodFactors{display:grid;grid-template-columns:minmax(100px,1fr) 2fr 45px;gap:8px;align-items:center;font-size:13px}.methodFactors .methodScale{margin:5px 0}.bnnCircuit{margin:12px 0;padding-left:12px;border-left:2px solid var(--accent)}.bnnCircuit h4{margin:8px 0}.bnnLink{display:flex;flex-wrap:wrap;gap:6px;padding:7px 0;font-size:14px}.bnnLink span{border:1px solid var(--line);padding:4px 7px;border-radius:6px}.methodSource{font-size:13px;line-height:1.6}.methodCard summary{min-height:44px;cursor:pointer;padding:8px 0}@media(max-width:700px){.methodCompareGrid{grid-template-columns:1fr}}
 .hierarchy-pending .tabPanel{display:none!important}.hierarchyProgress{padding:20px;border:1px solid var(--line);border-radius:12px;margin:12px 0}
 .metric-bucket{display:block;font-size:13px;line-height:1.2;white-space:normal;overflow-wrap:anywhere}.metric-number{display:block;font-size:12px;font-weight:400;line-height:1.3;margin-top:3px}.laneContinue{white-space:normal}.laneTrack{height:86px}.laneSeg{height:76px}.dbar-seg{min-height:64px}.touch-heat-cell.direction-cell{font-size:11px;font-weight:700;line-height:1.1;overflow-wrap:anywhere;padding:3px;min-height:44px}
+/* Keep the complete bucket/value pair inside its painted container. */
+.metric-bucket{line-height:1.3}.metric-number{font-size:13px;font-weight:600;line-height:1.35;opacity:1;margin-top:4px;white-space:nowrap}
+.laneTrack{height:144px;min-height:144px}.laneSeg{height:auto;min-height:132px;padding:8px 6px;display:flex;flex-direction:column;gap:3px}.laneContinue{opacity:1;margin-top:auto;flex-shrink:0}.laneDate{margin-top:0;flex-shrink:0}.laneLord{flex-shrink:0;overflow:hidden;text-overflow:ellipsis}
+.dbar-seg{min-height:82px;padding:8px 4px;gap:5px}.dbar-score{line-height:1.3;max-width:100%;flex-shrink:0}.dbar-bar-wrap{flex-shrink:0}
+.cell .score,.pchip-score,.phase .grade{opacity:1}.pchip,.phase,.pranaCard,.mobile-cycle-card,.cycle-domain-card,.component{height:auto;min-height:min-content}
+.explorer-item summary>span{min-width:0}.explorer-item summary>span:nth-child(2){max-width:155px}.heat-preview-score .metric-number{font-size:14px}
+.laneTrack{display:flex;align-items:stretch;height:auto!important;min-height:144px;gap:1px}.laneSeg{position:static;left:auto!important;width:auto!important;flex:1 0 124px;height:auto!important;min-height:132px;min-width:124px}.laneContinue{margin-top:4px}.lane-readability-note{margin:6px 0 10px}
 </style>
 </head>
 <body>
@@ -5143,7 +5150,21 @@ function renderCycleSelectionControls(){
   clear.onclick=()=>{calendarYear=null;render()};el.appendChild(clear);
  }
 }
+
+function fitHierarchyScoreCards(){
+ const root=$('hierarchyLanes');if(!root||!root.getClientRects().length)return;
+ for(const track of root.querySelectorAll('.laneTrack')){
+  const cards=[...track.querySelectorAll('.laneSeg')];
+  track.style.minWidth=Math.max(1050,cards.length*124)+'px';
+  cards.forEach(card=>card.style.flexGrow=String(parseFloat(card.style.width)||1));
+ }
+ if(root.querySelector('.laneSeg')&&!root.querySelector('.lane-readability-note')){
+  const note=document.createElement('p');note.className='small lane-readability-note';note.textContent='Period cards use readable minimum widths. Dates show the exact duration.';root.prepend(note);
+ }
+}
+
 function renderHierarchy(){
+ requestAnimationFrame(fitHierarchyScoreCards);
  renderCycleSelectionControls();
  let fam=ensureCycleFamily();$("cycleZoomTitle").textContent=fam?`Cycle zoom · ${fam.label}`:"Cycle zoom";
  $("cycleZoomDescription").textContent=fam?`${cycleContextLabel()}. Cycle families are deduplicated by cycle key, so multiple selected providers that use the same cycle share one timeline.`:"No selected system exposes a cycle family.";
@@ -7540,6 +7561,7 @@ function closeHeatPreview(){
 document.addEventListener('pointerdown',e=>{if(heatPreview&&!heatPreview.contains(e.target)&&!heatPreviewOwner?.contains(e.target))closeHeatPreview()},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeHeatPreview()});
 window.addEventListener('resize',closeHeatPreview);
+window.addEventListener('resize',()=>requestAnimationFrame(fitHierarchyScoreCards));
 $('content').addEventListener('scroll',closeHeatPreview,{passive:true});
 function renderHeatExplorer(root,config){
  root._heatCleanup?.();closeHeatPreview();
