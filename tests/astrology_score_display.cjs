@@ -14,6 +14,8 @@ const {chromium}=require('playwright');
    const single=t=>/^[+-]?\d+\.\d{2}$/.test(t.trim());
    const check=selector=>{const nodes=[...document.querySelectorAll(selector)];if(!nodes.length)throw Error('Missing score nodes '+selector);return nodes.every(n=>single(n.textContent))};
    const results=[];
+   if($('contrastMode').value!=='absolute')throw Error('Support colors must default to the absolute semantic scale');
+   $('contrastMode').value='relative';
    switchTab('cycles');
    const path=['Mercury','Venus','Mars','Jupiter'];
    for(let depth=0;depth<=4;depth++){prefix=path.slice(0,depth);render();results.push(check('.laneContinue'));if(depth===4)results.push(check('#pranaNavigator .ps'))}
