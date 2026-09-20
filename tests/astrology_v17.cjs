@@ -84,7 +84,7 @@ const { chromium } = require('playwright');
     await page.evaluate(() => renderDomainBars());
     assert(await page.locator('.dbar-seg').count() > 0);
     assert.equal(await page.locator('.dbar-grade').count(),0,'Only support scores belong in cells');
-    assert(await page.locator('.dbar-score').evaluateAll(cells => cells.every(c => /^[+−-]?\d+\.\d{2}$/.test(c.textContent))));
+    assert(await page.locator('.dbar-score').evaluateAll(cells => cells.every(c => /^[+−-]?\d+\.\d{2}$/.test(c.querySelector(".metric-number")?.textContent||""))));
     const migration = await page.evaluate(()=>{
       const old=JSON.parse(localStorage.getItem('kala-family-profiles-v1'));delete old.samplingVersion;
       for(const p of Object.values(old.profiles))p.fields.sampleMode='3';

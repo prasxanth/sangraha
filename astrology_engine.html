@@ -616,6 +616,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 .catalogControls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}.catalogControls label{display:grid;gap:5px;font-size:13px;min-width:0}.catalogControls input,.catalogControls select{width:100%;min-width:0;min-height:44px;font-size:16px}.catalogEntry{border-bottom:1px solid var(--line,#d8cdb9);padding:9px 0}.catalogEntry summary{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;min-height:44px}.catalogEntry summary>span:first-child{font-weight:600}.catalogTag{border:1px solid #b9ab91;border-radius:6px;padding:3px 6px;font-size:12px;flex-shrink:0;max-width:45%;overflow-wrap:anywhere}.catalogEntryBody{padding:8px 0;font-size:14px;line-height:1.6}.catalogMeter{display:grid;gap:5px;margin:8px 0;font-size:13px}.catalogMeter meter{width:100%;height:14px;accent-color:#917335}.catalogBrowser{min-width:0}.catalogResults{max-height:560px;overflow:auto;overscroll-behavior:contain}.shaniTimeline{border-left:2px solid #b4a17e;padding-left:15px;margin:12px 5px}.shaniWindow{position:relative;padding:10px 8px;margin:8px 0;border-radius:8px;background:rgba(164,138,84,.07)}.shaniWindow:before{content:'';position:absolute;left:-21px;top:20px;width:10px;height:10px;border-radius:50%;background:#a48a54}.shaniWindow.current{outline:2px solid #9b773c}.shaniWindow summary{cursor:pointer;display:grid;gap:6px;min-height:44px}.shaniWindow small{font-size:13px}.shaniWindow p{font-size:14px}.catalogEntryBody p{overflow-wrap:anywhere}@media(max-width:600px){.catalogControls{grid-template-columns:1fr 1fr}.catalogControls label:first-child{grid-column:1/-1}.catalogResults{max-height:65vh}.catalogTag{font-size:12px}.nav-group-menu{max-width:calc(100vw - 24px)}}
 .transitBar{height:8px;background:linear-gradient(90deg,#eee4d6 49.5%,#887b67 49.5%,#887b67 50.5%,#eee4d6 50.5%);position:relative;margin:5px 0 10px;border-radius:4px}.transitBar i{height:100%;position:absolute;border-radius:3px}.methodControls{display:flex;flex-wrap:wrap;align-items:end;gap:10px;margin:14px 0}.methodControls label{display:grid;gap:5px;flex:1;min-width:140px}.methodControls select,.methodControls button{min-height:44px;font-size:16px}.methodCompareGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.methodCard{border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0;overflow-wrap:anywhere}.methodScale{height:12px;border-radius:4px;background:var(--panel2);position:relative;margin:7px 0 14px}.methodScale.signed:after{content:'';position:absolute;left:50%;height:100%;border-left:1px solid var(--muted)}.methodScale i{position:absolute;height:100%;border-radius:4px}.methodFactors{display:grid;grid-template-columns:minmax(100px,1fr) 2fr 45px;gap:8px;align-items:center;font-size:13px}.methodFactors .methodScale{margin:5px 0}.bnnCircuit{margin:12px 0;padding-left:12px;border-left:2px solid var(--accent)}.bnnCircuit h4{margin:8px 0}.bnnLink{display:flex;flex-wrap:wrap;gap:6px;padding:7px 0;font-size:14px}.bnnLink span{border:1px solid var(--line);padding:4px 7px;border-radius:6px}.methodSource{font-size:13px;line-height:1.6}.methodCard summary{min-height:44px;cursor:pointer;padding:8px 0}@media(max-width:700px){.methodCompareGrid{grid-template-columns:1fr}}
 .hierarchy-pending .tabPanel{display:none!important}.hierarchyProgress{padding:20px;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+.metric-bucket{display:block;font-size:13px;line-height:1.2;white-space:normal;overflow-wrap:anywhere}.metric-number{display:block;font-size:12px;font-weight:400;line-height:1.3;margin-top:3px}.laneContinue{white-space:normal}.laneTrack{height:86px}.laneSeg{height:76px}.dbar-seg{min-height:64px}.touch-heat-cell.direction-cell{font-size:11px;font-weight:700;line-height:1.1;overflow-wrap:anywhere;padding:3px;min-height:44px}
 </style>
 </head>
 <body>
@@ -2211,11 +2212,85 @@ const signName=x=>SIGNS[signIndex(x)];
 const YEAR_MS=365.2425*86400000;
 
 function bucket(x){if(x>=1.2)return["++","strong"];if(x>=.45)return["+","supportive"];if(x<=-1.2)return["−−","strong friction"];if(x<=-.45)return["−","friction"];return["0","mixed"]}
+function directionSupportBand(x){
+ if(!Number.isFinite(x))return{key:"unavailable",label:"Not supplied",rank:null};
+ if(x>=1.20)return{key:"exceptional",label:"Exceptional",rank:3};
+ if(x>=.75)return{key:"great",label:"Great",rank:2};
+ if(x>=.35)return{key:"good",label:"Good",rank:1};
+ if(x>-.35)return{key:"mixed",label:"Mixed / Neutral",rank:0};
+ if(x>-.75)return{key:"challenging",label:"Challenging",rank:-1};
+ if(x>-1.20)return{key:"difficult",label:"Difficult",rank:-2};
+ return{key:"very-difficult",label:"Very Difficult",rank:-3};
+}
+function directionActivationBand(x){
+ if(!Number.isFinite(x))return{key:"unavailable",label:"Not supplied",rank:null};
+ if(x>=1.50)return{key:"very-high",label:"Very High",rank:4};
+ if(x>=1.15)return{key:"high",label:"High",rank:3};
+ if(x>=.75)return{key:"moderate",label:"Moderate",rank:2};
+ if(x>=.35)return{key:"low",label:"Low",rank:1};
+ return{key:"quiet",label:"Quiet",rank:0};
+}
+function directionScaleBand(x){
+ if(!Number.isFinite(x))return{key:"unavailable",label:"Not supplied",rank:null};
+ if(x>=1.50)return{key:"exceptional",label:"Exceptional Scale",rank:4};
+ if(x>=1.15)return{key:"large",label:"Large Scale",rank:3};
+ if(x>=.75)return{key:"moderate",label:"Moderate Scale",rank:2};
+ if(x>=.35)return{key:"limited",label:"Limited Scale",rank:1};
+ return{key:"local",label:"Local / Narrow",rank:0};
+}
+function directionFromScores(support,activation,scale){
+ if(![support,activation,scale].every(Number.isFinite))return{action:"Not supplied",tone:"unavailable",why:"Support, activation and Vedic expression are all required."};
+ let
+     sb=directionSupportBand(support),ab=directionActivationBand(activation),xb=directionScaleBand(scale),
+     consequential=ab.rank>=3||xb.rank>=3,veryConsequential=ab.rank>=3&&xb.rank>=3,
+     action="HOLD",tone="neutral",why="";
+ if(sb.rank>=2&&veryConsequential){action="EXPAND";tone="strong-positive";why="strong support + high activation + large reach"}
+ else if(sb.rank>=1&&consequential){action="ADVANCE";tone="positive";why="supportive direction with meaningful activation/reach"}
+ else if(sb.rank>=1){action="BUILD";tone="positive-soft";why="supportive but steadier / less consequential"}
+ else if(sb.rank===0&&veryConsequential){action="PIVOT";tone="mixed-active";why="mixed support but high activation and reach"}
+ else if(sb.rank===0&&consequential){action="SELECTIVE";tone="mixed-active";why="mixed support; act selectively because the period is consequential"}
+ else if(sb.rank===0){action="HOLD";tone="neutral";why="mixed support and lower consequence"}
+ else if(sb.rank<=-1&&consequential){action="RESTRUCTURE";tone="negative-active";why="friction plus meaningful activation/reach; change structure rather than force ease"}
+ else {action="PROTECT";tone="negative";why="friction with limited upside from forcing the period"}
+ if(sb.rank<=-2&&veryConsequential){action="RESTRUCTURE";why="substantial friction in a highly consequential period"}
+ return{support,activation,scale,supportBand:sb,activationBand:ab,scaleBand:xb,action,tone,why};
+}
+function directionColor(d){
+ let map={
+  "strong-positive":"rgb(32,143,91)",
+  "positive":"rgb(74,164,105)",
+  "positive-soft":"rgb(139,177,100)",
+  "mixed-active":"rgb(205,172,82)",
+  "neutral":"rgb(190,177,101)",
+  "negative-active":"rgb(199,111,69)",
+  "negative":"rgb(174,71,63)"
+ };
+ return map[d.tone]||"rgb(190,177,101)";
+}
+function directionTextColor(d){
+ return["positive-soft","mixed-active","neutral"].includes(d.tone)?"#11140f":"#fff";
+}
+
+const DIRECTION_ACTIONS=['EXPAND','ADVANCE','BUILD','PIVOT','SELECTIVE','HOLD','RESTRUCTURE','PROTECT'];
+const DIRECTION_CODES=['EX','AD','BU','PV','SE','HO','RS','PR'];
+const DIRECTION_TONES=['strong-positive','positive','positive-soft','mixed-active','mixed-active','neutral','negative-active','negative'];
+function directionSynthesis(period,di){return directionFromScores(scorePeriod(period,di),activationPeriod(period,di),selectedSystemIds.has('Vedic')?scalePeriod(period,di):null)}
+function metricBand(value,metric='support'){return(metric==='scale'?directionScaleBand:metric==='activation'?directionActivationBand:directionSupportBand)(value).label}
+function metricValueHTML(value,metric='support'){
+ if(metric==='direction')return `<b class="metric-bucket">${DIRECTION_ACTIONS[value]||'Not supplied'}</b>`;
+ return `<b class="metric-bucket">${metricBand(value,metric)}</b><small class="metric-number">${Number.isFinite(value)?(metric==='support'?signed(value):value.toFixed(2)):'—'}</small>`;
+}
+
 function mix(a,b,t){return Math.round(a+(b-a)*t)}
 function gradientRGB(t){const S=[{p:0,c:[150,45,55]},{p:.25,c:[202,112,69]},{p:.5,c:[211,190,91]},{p:.75,c:[104,183,126]},{p:1,c:[15,133,82]}];t=clamp(t,0,1);for(let i=0;i<S.length-1;i++){let a=S[i],b=S[i+1];if(t>=a.p&&t<=b.p){let u=(t-a.p)/(b.p-a.p);return[mix(a.c[0],b.c[0],u),mix(a.c[1],b.c[1],u),mix(a.c[2],b.c[2],u)]}}return S.at(-1).c}
-function heatColor(x){let t=(x-COLOR_RANGE.min)/Math.max(.001,COLOR_RANGE.max-COLOR_RANGE.min),c=gradientRGB(t);return`rgb(${c[0]},${c[1]},${c[2]})`}
+function supportDisplayRGB(x){
+ if($('contrastMode')?.value==='absolute')return {'3':[44,137,89],'2':[90,166,112],'1':[156,191,139],'0':[193,187,164],'-1':[211,153,104],'-2':[190,104,79],'-3':[155,63,64]}[directionSupportBand(x).rank]||[120,120,120];
+ return gradientRGB((x-COLOR_RANGE.min)/Math.max(.001,COLOR_RANGE.max-COLOR_RANGE.min));
+}
+function heatColor(x){const rgb=supportDisplayRGB(x);return `rgb(${rgb.join(',')})`}
+
 function heatTextColor(x){
- const rgb=gradientRGB((x-COLOR_RANGE.min)/Math.max(.001,COLOR_RANGE.max-COLOR_RANGE.min));
+ const rgb=supportDisplayRGB(x);
  const linear=rgb.map(v=>{v=v/255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)});
  const luminance=.2126*linear[0]+.7152*linear[1]+.0722*linear[2];
  return luminance>.179?"#000":"#fff";
@@ -4142,7 +4217,7 @@ function tipActivationDomain(ev,g,dom){
  let di=DOMAINS.indexOf(dom),
      rows=selectedSystems().map(sys=>{
       let x=perSystemActivationPeriod(g,sys.id,di);
-      return`<tr><td>${sys.name}</td><td>${Number.isFinite(x)?`${activationBucket(x)[0]} ${x.toFixed(2)}`:"activation not supplied"}</td></tr>`
+      return`<tr><td>${sys.name}</td><td>${Number.isFinite(x)?`${metricValueHTML(x,"activation")}`:"activation not supplied"}</td></tr>`
      }).join(""),
      a=activationPeriod(g,di),sup=scorePeriod(g,di),
      vbd=selectedSystems().some(x=>x.id==="Vedic")&&g.path?.length?vedicPeriodBreakdown(g,di):null,
@@ -4904,7 +4979,7 @@ function renderPranaNavigator(){
     return`<button type="button" class="pranaCard ${active?"active":""}" data-prana-index="${i}">
       <div class="pn">Prana ${i+1} of 9</div><div class="pl">${g.lord}</div>
       <div class="pd">${fmtDateTime(g.a)}<br>→ ${fmtDateTime(g.b)}</div>
-      <div class="ps">${signed(sc)}</div>
+      <div class="ps">${metricValueHTML(sc)}</div>
     </button>`;
   }).join("")}</div>`;
  nav.querySelectorAll("[data-prana-index]").forEach(btn=>btn.onclick=()=>{prefix=[...kids[+btn.dataset.pranaIndex].path];render()});
@@ -4964,7 +5039,7 @@ function renderMobileCycleZoom(){
    cycleSelection?.a===g.a&&cycleSelection?.b===g.b;
   btn.classList.toggle("active",!!selected);
   btn.style.background=heatColor(score);btn.style.color=heatTextColor(score);
-  btn.innerHTML=`<strong>${g.lord||g.label}</strong><span>${zoomRangeLabel(g)}</span><span>${signed(score)}</span>`;
+  btn.innerHTML=`<strong>${g.lord||g.label}</strong><span>${zoomRangeLabel(g)}</span><span>${metricValueHTML(score)}</span>`;
   btn.onclick=()=>activateCycleGroup(g);
   grid.appendChild(btn);
  }
@@ -4993,7 +5068,7 @@ function renderVimshottariHierarchy(){
    let va=Math.max(g.a,w.a),vb=Math.min(g.b,w.b),left=(va-w.a)/span*100,wid=(vb-va)/span*100,sc=scoreSelected(g),bk=bucket(sc),d=document.createElement("div");
    d.className="laneSeg"+(g.a<=inspect&&g.b>inspect?" current":"")+(prefix.length>=depth&&prefix.slice(0,depth).join(">")===g.path.join(">")?" selected":"");
    d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
-   d.innerHTML=`<div class="laneLord">${g.lord}</div><div class="laneDate">${zoomRangeLabel(g)}</div><div class="laneContinue">${signed(sc)}</div>`;
+   d.innerHTML=`<div class="laneLord">${g.lord}</div><div class="laneDate">${zoomRangeLabel(g)}</div><div class="laneContinue">${metricValueHTML(sc)}</div>`;
    d.onclick=()=>{prefix=[...g.path];render()};_tap(d,()=>{prefix=[...g.path];render()});track.appendChild(d);
   }
   lane.append(lab,track);root.appendChild(lane);
@@ -5032,7 +5107,7 @@ function renderGenericCycleHierarchy(){
   let va=Math.max(g.a,w.a),vb=Math.min(g.b,w.b),left=(va-w.a)/span*100,wid=(vb-va)/span*100,sc=scoreSelected(g),bk=bucket(sc),d=document.createElement("div");
   d.className="laneSeg"+(g.a<=inspect&&g.b>inspect?" current":"")+(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b?" selected":"");
   d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
-  d.innerHTML=`<div class="laneLord">${g.label||g.lord}</div><div class="laneDate">${fmt(g.a)} → ${fmt(g.b)}</div><div class="laneContinue">${signed(sc)}</div>`;
+  d.innerHTML=`<div class="laneLord">${g.label||g.lord}</div><div class="laneDate">${fmt(g.a)} → ${fmt(g.b)}</div><div class="laneContinue">${metricValueHTML(sc)}</div>`;
   d.onclick=()=>activateCycleGroup(g);_tap(d,()=>activateCycleGroup(g));track.appendChild(d);
  }
  lane.append(lab,track);root.appendChild(lane);
@@ -5086,7 +5161,7 @@ function renderTimeline(groups){
   d.className="phase";
   d.style.width=width(g,groups)+"px";
   d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
-  d.innerHTML=`<div class="lord">${g.lord||g.label||"—"}</div><div class="date">${zoomRangeLabel(g)}</div><div class="grade">${signed(sc)}</div>`;
+  d.innerHTML=`<div class="lord">${g.lord||g.label||"—"}</div><div class="date">${zoomRangeLabel(g)}</div><div class="grade">${metricValueHTML(sc)}</div>`;
   // Read-only context. Cycle Zoom is the single drill-in surface.
   d.onmousemove=ev=>tipPeriod(ev,g);d.onmouseleave=hideTip;
   e.appendChild(d);
@@ -5110,7 +5185,7 @@ function renderHeat(groups){
   for(const g of groups){
    let sc=scorePeriod(g,di),cell=document.createElement("div");
    cell.className="cell";cell.style.background=heatColor(sc);cell.style.color=heatTextColor(sc);
-   cell.innerHTML=`<div class="score">${signed(Math.abs(sc)<.005?0:sc)}</div>`;
+   cell.innerHTML=`<div class="score">${metricValueHTML(sc)}</div>`;
    cell.onmousemove=ev=>tipDomain(ev,g,dom);cell.onmouseleave=hideTip;
    e.appendChild(cell);
   }
@@ -5147,19 +5222,19 @@ function renderSelected(){
  $("selTitle").textContent=(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life");
  $("selDates").textContent=`${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;
  $("components").innerHTML=
-   `<div class="component"><div class="name">Combined · Support</div><div class="val">${signed(meanSupport)}</div></div>`+
-   `<div class="component"><div class="name">Combined · Activation</div><div class="val">${activationBucket(meanActivation)[0]} ${activationDisplay(meanActivation)}</div></div>`+
+   `<div class="component"><div class="name">Combined · Support</div><div class="val">${metricValueHTML(meanSupport)}</div></div>`+
+   `<div class="component"><div class="name">Combined · Activation</div><div class="val">${metricValueHTML(meanActivation,"activation")}</div></div>`+
    selectedSystems().map(sys=>{let ds=selectedDimensions(),
       sup=ds.reduce((a,d)=>a+(perSystemPeriod(p,sys.id,DOMAINS.indexOf(d))??0),0)/ds.length,
       acts=ds.map(d=>perSystemActivationPeriod(p,sys.id,DOMAINS.indexOf(d))).filter(Number.isFinite),
       act=acts.length?acts.reduce((a,b)=>a+b,0)/acts.length:null;
-      return`<div class="component"><div class="name">${sys.name}</div><div class="val">S ${signed(sup)}${act==null?"":` · A ${activationBucket(act)[0]} ${activationDisplay(act)}`}</div></div>`}).join("");
- $("leverage").innerHTML=activationRank.filter(x=>Number.isFinite(x.activation)).slice(0,3).map(x=>`<li><b>${x.d}</b> ${x.activationGrade} activation ${activationDisplay(x.activation)} · support ${x.support>=0?"+":""}${x.support.toFixed(2)}</li>`).join("");
+      return`<div class="component"><div class="name">${sys.name}</div><div class="val">Support ${metricValueHTML(sup)}${act==null?"":` Activation ${metricValueHTML(act,"activation")}`}</div></div>`}).join("");
+ $("leverage").innerHTML=activationRank.filter(x=>Number.isFinite(x.activation)).slice(0,3).map(x=>`<li><b>${x.d}</b> ${metricBand(x.activation,"activation")} activation ${activationDisplay(x.activation)} · support ${x.support>=0?"+":""}${x.support.toFixed(2)}</li>`).join("");
  $("protect").innerHTML=[...supportRank].reverse().slice(0,3).map(x=>`<li><b>${x.d}</b> support ${signed(x.support)} · activation ${activationDisplay(x.activation)}</li>`).join("");
  $("actionline").textContent=`Highest leverage: ${activationRank[0]?.d||"—"}. Cleanest support: ${supportRank[0]?.d||"—"}. Protect the lowest-support domain: ${supportRank.at(-1)?.d||"—"}.`;
 }
 function bestCarrier(domain,vals){let choices=(CARRIERS[domain]||[]).map(d=>vals.find(x=>x.d===d)).filter(Boolean).sort((a,b)=>b.s-a.s);return choices[0]||vals[0]}
-function renderPlaybook(){let vals=phaseDomainValues(),p=currentDisplayPeriod();$("playbookPhase").textContent=`${(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life")} · ${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;let rank=vals.map((x,i)=>({...x,mode:x.s>=.7?"PUSH":x.s>=.3?"BUILD":x.s<=-.45?"PROTECT":i>=Math.ceil(vals.length*.65)?"TRANSFER":"BUILD"}));let pri=[rank[0],rank.find(x=>x.mode==="BUILD"),[...rank].reverse().find(x=>x.mode==="PROTECT"||x.s<.2)].filter(Boolean);$("priorityGrid").innerHTML=pri.slice(0,3).map((x,i)=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?`${carrier.d} (${signed(carrier.s)})`:"a stronger domain");return`<div class="priorityBox"><div class="kicker">${["Exploit","Build next","Protect"][i]||x.mode}</div><div class="title">${x.d} · ${signed(x.s)}</div><div class="body">${text}</div></div>`}).join("");$("playbookTable").innerHTML=`<tr><th>Domain</th><th>Score</th><th>Mode</th><th>Guidance</th><th>Carrier</th></tr>`+rank.map(x=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?carrier.d:"a stronger domain");return`<tr><td><b>${x.d}</b></td><td>${signed(x.s)}</td><td><span class="mode">${x.mode}</span></td><td>${text}</td><td>${carrier&&carrier.d!==x.d?`${carrier.d} · ${signed(carrier.s)}`:"—"}</td></tr>`}).join("")}
+function renderPlaybook(){let vals=phaseDomainValues(),p=currentDisplayPeriod();$("playbookPhase").textContent=`${(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life")} · ${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;let rank=vals.map((x,i)=>({...x,mode:x.s>=.7?"PUSH":x.s>=.3?"BUILD":x.s<=-.45?"PROTECT":i>=Math.ceil(vals.length*.65)?"TRANSFER":"BUILD"}));let pri=[rank[0],rank.find(x=>x.mode==="BUILD"),[...rank].reverse().find(x=>x.mode==="PROTECT"||x.s<.2)].filter(Boolean);$("priorityGrid").innerHTML=pri.slice(0,3).map((x,i)=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?`${carrier.d} (${signed(carrier.s)})`:"a stronger domain");return`<div class="priorityBox"><div class="kicker">${["Exploit","Build next","Protect"][i]||x.mode}</div><div class="title">${x.d} · ${signed(x.s)}</div><div class="body">${text}</div></div>`}).join("");$("playbookTable").innerHTML=`<tr><th>Domain</th><th>Score</th><th>Mode</th><th>Guidance</th><th>Carrier</th></tr>`+rank.map(x=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?carrier.d:"a stronger domain");return`<tr><td><b>${x.d}</b></td><td>${metricValueHTML(x.s)}</td><td><span class="mode">${x.mode}</span></td><td>${text}</td><td>${carrier&&carrier.d!==x.d?`${carrier.d} · ${signed(carrier.s)}`:"—"}</td></tr>`}).join("")}
 
 function averageSystemWeight(id){return DOMAINS.reduce((a,d)=>a+(WEIGHTS[d]?.[id]||0),0)/DOMAINS.length}
 function renderWeights(){let ss=selectedSystems(),t=$("weightsTable");t.innerHTML="<tr><th>Domain</th>"+ss.map(s=>`<th>${s.name}</th>`).join("")+"</tr>"+DOMAINS.map(d=>{let den=ss.reduce((a,s)=>a+effectiveNominalWeight(d,s.id),0);return`<tr><td>${d}</td>${ss.map(s=>`<td>${den?((effectiveNominalWeight(d,s.id)/den)*100).toFixed(1):"0"}%</td>`).join("")}</tr>`}).join("")}
@@ -6910,7 +6985,7 @@ function renderTabContent(which){
  }else if(which==="cycles"){
   renderCrumbs();renderHierarchy();
   if(!_isMobile())renderTimeline(visibleGroups());
-  renderDomainBars();renderActivationExplorer();renderScaleExplorer();if($("methodComparison").open)renderMethodComparison();if($("gocharaDetails").open)renderVedicGocharaPanel();
+  renderDomainBars();renderActivationExplorer();renderScaleExplorer();renderDirectionExplorer();if($("methodComparison").open)renderMethodComparison();if($("gocharaDetails").open)renderVedicGocharaPanel();
  }else if(which==="playbook"){renderPlaybook();renderWeights()}
  else if(which==="rankings")renderRankings();
  else if(which==="vedicYoga")renderVedicYogaTab();
@@ -7259,7 +7334,7 @@ function renderPeriodChips(groups){
    :(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
   if(isActive)d.classList.add("active");
   d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
-  d.innerHTML=`<span class="pchip-lord">${g.lord||g.label||"—"}</span><span class="pchip-score">${signed(sc)}</span><span class="pchip-range">${zoomRangeLabel(g)}</span>`;
+  d.innerHTML=`<span class="pchip-lord">${g.lord||g.label||"—"}</span><span class="pchip-score">${metricValueHTML(sc)}</span><span class="pchip-range">${zoomRangeLabel(g)}</span>`;
   d.onclick=()=>activateCycleGroup(g);
   _tap(d,()=>activateCycleGroup(g));
   el.appendChild(d);
@@ -7485,7 +7560,7 @@ function renderHeatExplorer(root,config){
  paint();
 }
 function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect,metric='support'}){
- const isActivation=metric==='activation'||metric==='scale',metricLabel=metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isActivation?activationColor:heatColor,textColor=isActivation?activationTextColor:heatTextColor,format=isActivation?activationDisplay:signed;
+ const isDirection=metric==='direction',isActivation=metric==='activation'||metric==='scale',metricLabel=isDirection?'Direction':metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isDirection?x=>directionColor({tone:DIRECTION_TONES[x]}):isActivation?activationColor:heatColor,textColor=isDirection?x=>directionTextColor({tone:DIRECTION_TONES[x]}):isActivation?activationTextColor:heatTextColor,format=isDirection?x=>DIRECTION_ACTIONS[x]||'Not supplied':x=>metricBand(x,metric)+' · '+(Number.isFinite(x)?(isActivation?activationDisplay(x):signed(x)):'—');
  root.innerHTML='';const dims=selectedDimensions();
  const caption=document.createElement('p');caption.className='small';caption.textContent='Tap a cell for details. Hold briefly, then slide to explore. Lift to pin; swipe normally to scroll.';
  const grid=document.createElement('div');grid.className='touch-heat-grid';grid.setAttribute('role','grid');grid.setAttribute('aria-label',title);grid.style.setProperty('--heat-cols',Math.max(1,rows.length));
@@ -7502,11 +7577,12 @@ function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect,metric='suppor
   rows.forEach((row,c)=>{
    const cell=document.createElement('button');cell.type='button';cell.className='touch-heat-cell';cell.dataset.row=r;cell.dataset.col=c;cell.tabIndex=r===0&&c===0?0:-1;
    cell.setAttribute('role','gridcell');cell.setAttribute('aria-selected','false');cell.setAttribute('aria-label',`${row.label}, ${domain}, ${metricLabel} ${format(data[r][c].support)}${row.range?', '+row.range:''}`);
+   if(isDirection){cell.classList.add('direction-cell');cell.textContent=innerWidth<=600?(DIRECTION_CODES[data[r][c].support]||'—'):format(data[r][c].support)}
    cell.style.background=color(data[r][c].support);cell.style.color=textColor(data[r][c].support);
    line.appendChild(cell);cells.push(cell);
   });grid.appendChild(line);
  });
- const legend=document.createElement('div');legend.className='small';legend.textContent=(metric==='scale'?'Expression 0–2: fixed magnitude scale, not favorability. ':isActivation?'Activation 0–2: intensity, not favorability. ':supportColorLegend()+'. ')+'Equal-width columns; exact dates are in the preview.';root.appendChild(legend);
+ const legend=document.createElement('div');legend.className='small';legend.textContent=(isDirection?'EX Expand · AD Advance · BU Build · PV Pivot · SE Selective · HO Hold · RS Restructure · PR Protect. Categorical direction; tap for full labels and inputs. ':metric==='scale'?'Expression 0–2: fixed magnitude scale, not favorability. ':isActivation?'Activation 0–2: intensity, not favorability. ':supportColorLegend()+'. ')+'Equal-width columns; exact dates are in the preview.';root.appendChild(legend);
  let timer=null,start=null,holding=false,moved=false,current=null,mouseDragging=false;
  const clearTimer=()=>{clearTimeout(timer);timer=null};
  function pick(x,y){
@@ -7530,7 +7606,7 @@ function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect,metric='suppor
    heatPreview.innerHTML='';
    const close=document.createElement('button');close.type='button';close.className='heat-preview-close';close.textContent='Close';close.onclick=()=>{closeHeatPreview();cell.focus({preventScroll:true})};
    const name=document.createElement('div');name.className='heat-preview-title';name.textContent=`${rows[c].label} · ${dims[r]}`;
-   const score=document.createElement('div');score.className='heat-preview-score';score.setAttribute('aria-live','polite');score.textContent=`${metricLabel} ${format(data[r][c].support)}`;
+   const score=document.createElement('div');score.className='heat-preview-score';score.setAttribute('aria-live','polite');score.innerHTML=`${metricLabel} ${metricValueHTML(data[r][c].support,metric)}`;
    const range=document.createElement('div');range.className='small';range.textContent=rows[c].range||'';
    const neighborhood=document.createElement('div');neighborhood.className='heat-neighborhood';neighborhood.setAttribute('aria-hidden','true');
    const c0=Math.max(0,Math.min(c-1,rows.length-3)),c1=Math.min(rows.length,c0+3),r0=Math.max(0,Math.min(r-1,dims.length-3)),r1=Math.min(dims.length,r0+3);
@@ -7590,18 +7666,18 @@ function renderHeatDetails(root,{key,rows,metrics,title,onSelect,metric='support
  const dims=selectedDimensions();
  const domain=dims.includes(heatExplorerDomains[key])?heatExplorerDomains[key]:dims[0];
  heatExplorerDomains[key]=domain;
- const isActivation=metric==='activation'||metric==='scale',metricLabel=metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isActivation?activationColor:heatColor,textColor=isActivation?activationTextColor:heatTextColor,format=isActivation?activationDisplay:signed;
+ const isDirection=metric==='direction',isActivation=metric==='activation'||metric==='scale',metricLabel=isDirection?'Direction':metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isDirection?x=>directionColor({tone:DIRECTION_TONES[x]}):isActivation?activationColor:heatColor,textColor=isDirection?x=>directionTextColor({tone:DIRECTION_TONES[x]}):isActivation?activationTextColor:heatTextColor,format=isDirection?x=>DIRECTION_ACTIONS[x]||'Not supplied':x=>metricBand(x,metric)+' · '+(Number.isFinite(x)?(isActivation?activationDisplay(x):signed(x)):'—');
  root.innerHTML="";root.classList.add("heat-explorer");
  const label=document.createElement("label");label.className="explorer-controls";label.textContent=title;
  const select=document.createElement("select");select.setAttribute("aria-label",`${title}: life dimension`);
  dims.forEach(d=>select.add(new Option(d,d)));select.value=domain;
  select.onchange=()=>{heatExplorerDomains[key]=select.value;renderHeatDetails(root,{key,rows,metrics,title,onSelect,metric})};
  label.appendChild(select);root.appendChild(label);
- const legend=document.createElement("p");legend.className="small";legend.textContent=metric==='scale'?"Expression 0–2 · fixed magnitude scale, not favorability. Expand a row for details.":isActivation?"Activation 0–2 · intensity, not favorability. Expand a row for details.":supportColorLegend()+". Expand a row for details.";root.appendChild(legend);
+ const legend=document.createElement("p");legend.className="small";legend.textContent=isDirection?'Categorical direction from support, activation and expression. Expand a row for the inputs.':metric==='scale'?"Expression 0–2 · fixed magnitude scale, not favorability. Expand a row for details.":isActivation?"Activation 0–2 · intensity, not favorability. Expand a row for details.":supportColorLegend()+". Expand a row for details.";root.appendChild(legend);
  for(const row of rows){
   const m=metrics(row,DOMAINS.indexOf(domain)),details=document.createElement("details");details.className="explorer-item";
   const score=m.support,center=isActivation?0:50,position=Number.isFinite(score)?Math.max(0,Math.min(100,isActivation?score*50:(score+2)/4*100)):center;
-  details.innerHTML=`<summary><span class="explorer-name">${row.label}</span><b>${format(score)}</b><span class="explorer-range">${row.range||""}</span><span class="explorer-bar" aria-hidden="true"><i style="left:${Math.min(center,position)}%;width:${Math.abs(position-center)}%;background:${color(score)}"></i></span><span class="explorer-hint">Details ▾</span></summary><div class="explorer-detail"><b>${domain} · ${metricLabel} ${format(score)}</b><div>${typeof m.detail==="function"?m.detail():m.detail||""}</div></div>`;
+  details.innerHTML=`<summary><span class="explorer-name">${row.label}</span><span>${metricValueHTML(score,metric)}</span><span class="explorer-range">${row.range||""}</span><span class="explorer-bar" ${isDirection?'hidden':''} aria-hidden="true"><i style="left:${Math.min(center,position)}%;width:${Math.abs(position-center)}%;background:${color(score)}"></i></span><span class="explorer-hint">Details ▾</span></summary><div class="explorer-detail"><b>${domain} · ${metricLabel} ${format(score)}</b><div>${typeof m.detail==="function"?m.detail():m.detail||""}</div></div>`;
   if(onSelect){const btn=document.createElement("button");btn.textContent="View this period in Cycle Zoom";btn.onclick=()=>onSelect(row);details.lastElementChild.appendChild(btn)}
   root.appendChild(details);
  }
@@ -7617,7 +7693,7 @@ function renderCycleMobileMiniMap(el,groups){
  });
  el.querySelector(".cycle-domain-snapshot").innerHTML=selectedDimensions().map(dom=>{
   const score=scorePeriod(focus,DOMAINS.indexOf(dom));
-  return `<div class="cycle-domain-card"><div class="cd-name">${dom}</div><div class="cd-value">${signed(score)}</div></div>`;
+  return `<div class="cycle-domain-card"><div class="cd-name">${dom}</div><div class="cd-value">${metricValueHTML(score)}</div></div>`;
  }).join("");
 }
 
@@ -7658,8 +7734,8 @@ function renderDomainBars(){
    const name=(g.lord||g.label||"—"),sc=scorePeriod(g,di),bk=bucket(sc);
    const bg=heatColor(sc),tc=heatTextColor(sc),isActive=isActiveGroup(g);
    const barPct=Math.round(((sc+2)/4)*100);
-   html+=`<div class="dbar-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%;background:${bg};color:${tc}" data-gi="${i}" title="${dom} · ${name}: support ${signed(sc)} (${bk[1]}) · ${zoomRangeLabel(g)}">
-    <div class="dbar-score">${signed(Math.abs(sc)<.005?0:sc)}</div>
+   html+=`<div class="dbar-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%;background:${bg};color:${tc}" data-gi="${i}" title="${dom} · ${name}: support ${signed(sc)} (${metricBand(sc)}) · ${zoomRangeLabel(g)}">
+    <div class="dbar-score">${metricValueHTML(sc)}</div>
     <div class="dbar-bar-wrap"><div class="dbar-bar-fill" style="width:${barPct}%"></div></div>
    </div>`;
   });
@@ -7914,7 +7990,7 @@ function renderMethodComparison(){
  const period=currentDisplayPeriod(),ms=midpoint(period.a,period.b),di=DOMAINS.indexOf(methodComparisonDomain),path=fixedVedicPeriodPath(period),bnn=bnnTimingBreakdown(ms,di),bnSelected=selectedSystemIds.has('BNN'),root=$('methodComparisonBody');
  const scores=[{id:'Vedic',name:'BPHS · primary',support:scoreVedicPeriod(period,di),activation:activationVedicPeriod(period,di)},{id:'BNN',name:'BNN · independent comparator',support:perSystemPeriod(period,'BNN',di),activation:perSystemActivationPeriod(period,'BNN',di)}];
  const nominal=effectiveNominalWeight(methodComparisonDomain,'BNN'),den=selectedSystems().reduce((sum,s)=>sum+effectiveNominalWeight(methodComparisonDomain,s.id),0);
- root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><p class="small">Natal: ${catalogEscape(chart.natalSource)} · transits: ${catalogEscape(bnn.provider)} · ${catalogEscape(profile.ayanamsa)}. ${chart.natalSource!=='Swiss Ephemeris'?'Offline ayanāṃśa and transit positions are approximations; dates and scores can differ from Swiss Ephemeris.':''}</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · nominal ${Math.round(nominal*100)}% before renormalization${bnSelected?` · effective ${(100*nominal/den).toFixed(1)}% for ${methodComparisonDomain}`:''}. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support <b>${signed(x.support)}</b></div>${methodBar(x.support)}<div>Period activation <b>${activationDisplay(x.activation)}</b></div>${methodBar(x.activation,true)}<p class="small">${isDurationSummaryPeriod(period)?durationSystemMetrics(period,x.id).leafCount:(x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length)} ${isDurationSummaryPeriod(period)?'Prana midpoint samples · duration weighted':'projected samples'} · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Numerical weights are this app’s explicit v17 modeling choices, not scriptural percentages or probabilities. Coverage is partial; full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · selected-path context</h3><p class="small">Diagnostic context, separate from the duration-weighted total above. ${hasVedicPeriodPath(period)?'Selected path':'Midpoint path illustration'}. Context transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
+ root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><p class="small">Natal: ${catalogEscape(chart.natalSource)} · transits: ${catalogEscape(bnn.provider)} · ${catalogEscape(profile.ayanamsa)}. ${chart.natalSource!=='Swiss Ephemeris'?'Offline ayanāṃśa and transit positions are approximations; dates and scores can differ from Swiss Ephemeris.':''}</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · nominal ${Math.round(nominal*100)}% before renormalization${bnSelected?` · effective ${(100*nominal/den).toFixed(1)}% for ${methodComparisonDomain}`:''}. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support ${metricValueHTML(x.support)}</div>${methodBar(x.support)}<div>Period activation ${metricValueHTML(x.activation,"activation")}</div>${methodBar(x.activation,true)}<p class="small">${isDurationSummaryPeriod(period)?durationSystemMetrics(period,x.id).leafCount:(x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length)} ${isDurationSummaryPeriod(period)?'Prana midpoint samples · duration weighted':'projected samples'} · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Numerical weights are this app’s explicit v17 modeling choices, not scriptural percentages or probabilities. Coverage is partial; full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · selected-path context</h3><p class="small">Diagnostic context, separate from the duration-weighted total above. ${hasVedicPeriodPath(period)?'Selected path':'Midpoint path illustration'}. Context transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
  const a=bphsLordDomainAssessment(lord,di),factors=[['Lordship',a.functional],['D1 placement',a.placement],['Dignity',a.dignity],['Natural nature',a.natural],['Dispositor',a.dispositor.condition],['Associations',a.association],['Varga',a.varga.signal]];
  return `<details><summary>${LEVELS[i]} ${lord} · ${Math.round(normalizedDashaWeights(path.length)[i]*100)}% · support ${signed(a.support)}</summary><p>Activation ${activationDisplay(a.activation)} · domain relevance ${Math.round(a.relevance*100)}%</p><div class="methodFactors">${factors.map(([label,value])=>`<span>${label}</span>${methodBar(value*2)}<span>${signed(value)}</span>`).join('')}</div><p class="small">Factors −1 to +1. ${catalogEscape(a.varga.evidence)}. General contribution ${signed(a.contributions.general)} × relevance floor ${a.contributions.domainFactor.toFixed(2)} × strength ${a.contributions.strengthFactor.toFixed(2)}; independent varga ${signed(a.contributions.varga)}. Dispositor: ${catalogEscape(a.dispositor.host)}. ${catalogEscape(a.functionalDetail.status)}. Rules: ${BPHS_DOMAIN_RULES[methodComparisonDomain].houses.map(h=>'H'+h).join(', ')} · karakas ${BPHS_DOMAIN_RULES[methodComparisonDomain].karakas.join(', ')}.</p></details>`;
  }).join('')}${path.slice(1).map(ad=>{const pair=bphsPairAssessment(path[0],ad,di);return `<details class="pairEvidence"><summary>${path[0]} → ${ad} · context ${signed(pair.pairSignal)}</summary>${pair.evidence.map(e=>`<p class="small">${catalogEscape(e)}</p>`).join('')}<p class="small">${catalogEscape(pair.coverage)}</p></details>`}).join('')}<p class="small">${bphsPathAssociationFactor(path,di).evidence.map(catalogEscape).join(' · ')||'No additional qualifying lord association.'}</p></section><section class="methodCard"><h3>BNN · natal circuits</h3><p class="small">Same-sign, trine, seventh, adjacent-sign, dispositor and exchange links from each domain significator; strongest relationship counted once per actor. Hero → actor; same-sign links do not imply an exact conjunction.</p>${bnn.heroRows.map(row=>`<div class="bnnCircuit"><h4>${row.hero} · circuit signal ${signed(row.score)}</h4>${bnn.connections.filter(c=>c.hero===row.hero).map(c=>`<div class="bnnLink"><span>${c.hero}</span>→<span>${c.actor}</span><small>${c.relations.map(r=>r.kind).join(" / ")} · relation ${c.weight.toFixed(2)} · valence ${signed(c.valence)}</small></div>`).join('')||'<p class="small">No registered natal links.</p>'}</div>`).join('')}<details><summary>Retrograde and degree-order evidence</summary>${bnn.nuances.map(n=>`<p class="small">${n.planet}: ${SIGNS[n.actualSign]} → ${SIGNS[n.projectedSign]} · ${n.status}.</p>`).join('')}<p class="small">${bnn.degreeOrder.map(n=>`${n.name} ${n.degree.toFixed(1)}° ${SIGNS[n.sign]}`).join(' · ')}. Ordering shown as evidence; no automatic event sequence.</p></details><details><summary>Slow-transit triggers · ${bnn.hits.length}</summary><p class="small">Midpoint ${fmt(ms)} · ${catalogEscape(bnn.provider)}. These illustrate the midpoint, not the period average.</p>${bnn.hits.map(x=>`<p class="small">${x.transit} → ${x.target} · ${x.relation} · intensity ${x.intensity.toFixed(2)} · valence ${signed(x.valence)}</p>`).join('')||'<p>No registered triggers.</p>'}</details></section></div><details><summary>Method provenance and boundaries</summary>${Object.values(ASTROLOGY_METHOD_REGISTRY.methods).map(m=>`<div class="methodSource"><h4>${catalogEscape(m.name)}</h4><p>${catalogEscape(m.boundary)}</p><ul>${m.sources.map(s=>`<li>${catalogEscape(s.label)} — ${catalogEscape(s.use)}</li>`).join('')}</ul></div>`).join('')}<p class="small">The rule audit below links the reviewed sources and separates scored rules, partial implementations and evidence-only conventions.</p></details>`;
@@ -8029,6 +8105,37 @@ function renderScaleExplorer(){
   }
   if(version!==scaleRenderVersion||chart!==calculationChart||hierarchyPending||!target.isConnected)return;
   renderHeatExplorer(target,{key:'cycle-scale',metric:'scale',title:'Scale / reach by life dimension',rows,metrics:(row,di)=>({support:scalePeriod(row.period,di),detail:()=>scalePeriodEvidence(row.period,di)}),onSelect:row=>activateCycleGroup(row.period)});
+ };
+ disclosure.open=wasOpen;
+}
+
+function metricBucketKey(){
+ return `<details><summary>Support, activation and scale buckets</summary><p class="small">Buckets use the unrounded continuous score. The number underneath is rounded for readability.</p><p class="small"><b>Support</b><br>≥+1.20 Exceptional · ≥+0.75 Great · ≥+0.35 Good<br>−0.35 &lt; score &lt; +0.35 Mixed / Neutral<br>≤−0.35 Challenging · ≤−0.75 Difficult · ≤−1.20 Very Difficult</p><p class="small"><b>Activation</b><br>≥1.50 Very High · ≥1.15 High · ≥0.75 Moderate · ≥0.35 Low · otherwise Quiet</p><p class="small"><b>Scale / reach</b><br>≥1.50 Exceptional Scale · ≥1.15 Large Scale · ≥0.75 Moderate Scale · ≥0.35 Limited Scale · otherwise Local / Narrow</p></details>`;
+}
+function directionEvidence(period,di){
+ const d=directionSynthesis(period,di);
+ return `<p><b>${d.action}</b> · ${d.why}</p><p>Support: ${metricValueHTML(d.support)}Activation: ${metricValueHTML(d.activation,'activation')}Scale / reach: ${metricValueHTML(d.scale,'scale')}</p><p>Scale uses the existing Vedic expression facet <b>${catalogEscape(DOMAIN_EXPRESSION_RULES[DOMAINS[di]][1][0])}</b>. Support and activation use the selected systems. Direction is an interpretive category, not a new score or a prediction.</p>`;
+}
+let directionRenderVersion=0;
+function renderDirectionExplorer(){
+ const version=++directionRenderVersion,calculationChart=chart;let root=$('directionComparison');const wasOpen=root?.querySelector('details')?.open||false;
+ if(!root){root=document.createElement('section');root.id='directionComparison';root.className='card';$('domainBarsContainer').parentElement.after(root)}
+ $('directionHeat')?._heatCleanup?.();
+ root.innerHTML='<details><summary style="min-height:44px;cursor:pointer"><b>Direction heatmap</b></summary><p class="small">Support sets favorable, mixed or difficult direction. Activation describes engagement; expression describes potential reach. Continuous inputs remain available in each cell.</p><details><summary>Direction key and thresholds</summary><p class="small">High activation or large scale means ≥1.15; both are required for high consequence. Support ≥0.75 with both → EXPAND; support ≥0.35 with either → ADVANCE; otherwise supportive → BUILD. Mixed support (−0.35 &lt; score &lt; +0.35) with both → PIVOT, either → SELECTIVE, neither → HOLD. Support ≤−0.35 with either → RESTRUCTURE, otherwise → PROTECT. These are display rules applied after duration averaging; categories are never averaged.</p></details><div id="directionHeat"></div></details>';
+ root.querySelector('details').insertAdjacentHTML('beforeend',metricBucketKey());
+ const disclosure=root.querySelector('details'),target=$('directionHeat');let started=false;
+ disclosure.ontoggle=async()=>{
+  if(!disclosure.open||started)return;started=true;
+  if(!selectedSystemIds.has('Vedic')){target.textContent='Select Vedic to supply the expression input required for direction.';return}
+  const rows=cycleVisualGroups().map(period=>({label:period.lord||period.label,range:zoomRangeLabel(period),period})),dims=selectedDimensions();let done=0;
+  for(const row of rows)for(const domain of dims){
+   target.textContent=`Preparing direction map… ${Math.round(100*done/Math.max(1,rows.length*dims.length))}%`;
+   await new Promise(resolve=>setTimeout(resolve,0));
+   if(version!==directionRenderVersion||chart!==calculationChart||hierarchyPending||!target.isConnected)return;
+   scalePeriod(row.period,DOMAINS.indexOf(domain));done++;
+  }
+  if(version!==directionRenderVersion||chart!==calculationChart||hierarchyPending||!target.isConnected)return;
+  renderHeatExplorer(target,{key:'cycle-direction',metric:'direction',title:'Direction by life dimension',rows,metrics:(row,di)=>({support:DIRECTION_ACTIONS.indexOf(directionSynthesis(row.period,di).action),detail:()=>directionEvidence(row.period,di)}),onSelect:row=>activateCycleGroup(row.period)});
  };
  disclosure.open=wasOpen;
 }

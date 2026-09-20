@@ -12,7 +12,7 @@ const {chromium}=require('playwright');
   await page.waitForFunction(()=>document.querySelector('#validationTable').dataset.autorun==='done');
   const audit=await page.evaluate(()=>{
    const single=t=>/^[+-]?\d+\.\d{2}$/.test(t.trim());
-   const check=selector=>{const nodes=[...document.querySelectorAll(selector)];if(!nodes.length)throw Error('Missing score nodes '+selector);return nodes.every(n=>single(n.textContent))};
+   const check=selector=>{const nodes=[...document.querySelectorAll(selector)];if(!nodes.length)throw Error('Missing score nodes '+selector);return nodes.every(n=>!!n.querySelector(".metric-bucket")&&single(n.querySelector(".metric-number")?.textContent||""))};
    const results=[];
    if($('contrastMode').value!=='absolute')throw Error('Support colors must default to the absolute semantic scale');
    $('contrastMode').value='relative';
@@ -29,7 +29,7 @@ const {chromium}=require('playwright');
    switchTab('heatmap');results.push(check('.pchip-score'));
    renderHeat(visibleGroups());results.push(check('#heat .score'));
    const noCategory=!document.querySelector('.pchip-grade,#heat .grade,#heat .agree,.dbar-grade');
-   switchTab('playbook');results.push([...$('playbookTable').querySelectorAll('tr')].slice(1).every(r=>single(r.cells[1].textContent)));
+   switchTab('playbook');results.push([...$('playbookTable').querySelectorAll('tr')].slice(1).every(r=>single(r.cells[1].querySelector(".metric-number")?.textContent||"")));
    return{results,noCategory,before,after,legend,absoluteLegend,colors:new Set(relative).size,colorChange:JSON.stringify(relative)!==JSON.stringify(absolute),negativeZero:signed(-.0001)};
   });
   assert(audit.results.every(Boolean));assert(audit.noCategory);assert.equal(audit.before,audit.after);
@@ -44,6 +44,6 @@ const {chromium}=require('playwright');
   assert(mobile.length>0);assert(mobile.every(t=>!/(?:^|\s)0\s+[+-]?\d+\.\d/.test(t)));
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   assert.deepEqual(errors,[]);
-  console.log('PASS: MD/AD/PD/SD navigation, Prana, timeline, chips, both grids, playbook, mobile layout; one support number; relative/fixed color modes leave scores unchanged.');
+  console.log('PASS: MD/AD/PD/SD navigation, Prana, timeline, chips, both grids, playbook, mobile layout; primary bucket and one underlying support number; relative/fixed color modes leave scores unchanged.');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
