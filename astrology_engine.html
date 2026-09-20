@@ -6910,7 +6910,7 @@ function renderTabContent(which){
  }else if(which==="cycles"){
   renderCrumbs();renderHierarchy();
   if(!_isMobile())renderTimeline(visibleGroups());
-  renderDomainBars();renderActivationExplorer();if($("methodComparison").open)renderMethodComparison();if($("gocharaDetails").open)renderVedicGocharaPanel();
+  renderDomainBars();renderActivationExplorer();renderScaleExplorer();if($("methodComparison").open)renderMethodComparison();if($("gocharaDetails").open)renderVedicGocharaPanel();
  }else if(which==="playbook"){renderPlaybook();renderWeights()}
  else if(which==="rankings")renderRankings();
  else if(which==="vedicYoga")renderVedicYogaTab();
@@ -7485,7 +7485,7 @@ function renderHeatExplorer(root,config){
  paint();
 }
 function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect,metric='support'}){
- const isActivation=metric==='activation',metricLabel=isActivation?'Activation':'Support',color=isActivation?activationColor:heatColor,textColor=isActivation?activationTextColor:heatTextColor,format=isActivation?activationDisplay:signed;
+ const isActivation=metric==='activation'||metric==='scale',metricLabel=metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isActivation?activationColor:heatColor,textColor=isActivation?activationTextColor:heatTextColor,format=isActivation?activationDisplay:signed;
  root.innerHTML='';const dims=selectedDimensions();
  const caption=document.createElement('p');caption.className='small';caption.textContent='Tap a cell for details. Hold briefly, then slide to explore. Lift to pin; swipe normally to scroll.';
  const grid=document.createElement('div');grid.className='touch-heat-grid';grid.setAttribute('role','grid');grid.setAttribute('aria-label',title);grid.style.setProperty('--heat-cols',Math.max(1,rows.length));
@@ -7506,7 +7506,7 @@ function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect,metric='suppor
    line.appendChild(cell);cells.push(cell);
   });grid.appendChild(line);
  });
- const legend=document.createElement('div');legend.className='small';legend.textContent=(isActivation?'Activation 0–2: intensity, not favorability. ':supportColorLegend()+'. ')+'Equal-width columns; exact dates are in the preview.';root.appendChild(legend);
+ const legend=document.createElement('div');legend.className='small';legend.textContent=(metric==='scale'?'Expression 0–2: fixed magnitude scale, not favorability. ':isActivation?'Activation 0–2: intensity, not favorability. ':supportColorLegend()+'. ')+'Equal-width columns; exact dates are in the preview.';root.appendChild(legend);
  let timer=null,start=null,holding=false,moved=false,current=null,mouseDragging=false;
  const clearTimer=()=>{clearTimeout(timer);timer=null};
  function pick(x,y){
@@ -7590,14 +7590,14 @@ function renderHeatDetails(root,{key,rows,metrics,title,onSelect,metric='support
  const dims=selectedDimensions();
  const domain=dims.includes(heatExplorerDomains[key])?heatExplorerDomains[key]:dims[0];
  heatExplorerDomains[key]=domain;
- const isActivation=metric==='activation',metricLabel=isActivation?'Activation':'Support',color=isActivation?activationColor:heatColor,textColor=isActivation?activationTextColor:heatTextColor,format=isActivation?activationDisplay:signed;
+ const isActivation=metric==='activation'||metric==='scale',metricLabel=metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isActivation?activationColor:heatColor,textColor=isActivation?activationTextColor:heatTextColor,format=isActivation?activationDisplay:signed;
  root.innerHTML="";root.classList.add("heat-explorer");
  const label=document.createElement("label");label.className="explorer-controls";label.textContent=title;
  const select=document.createElement("select");select.setAttribute("aria-label",`${title}: life dimension`);
  dims.forEach(d=>select.add(new Option(d,d)));select.value=domain;
  select.onchange=()=>{heatExplorerDomains[key]=select.value;renderHeatDetails(root,{key,rows,metrics,title,onSelect,metric})};
  label.appendChild(select);root.appendChild(label);
- const legend=document.createElement("p");legend.className="small";legend.textContent=isActivation?"Activation 0–2 · intensity, not favorability. Expand a row for details.":supportColorLegend()+". Expand a row for details.";root.appendChild(legend);
+ const legend=document.createElement("p");legend.className="small";legend.textContent=metric==='scale'?"Expression 0–2 · fixed magnitude scale, not favorability. Expand a row for details.":isActivation?"Activation 0–2 · intensity, not favorability. Expand a row for details.":supportColorLegend()+". Expand a row for details.";root.appendChild(legend);
  for(const row of rows){
   const m=metrics(row,DOMAINS.indexOf(domain)),details=document.createElement("details");details.className="explorer-item";
   const score=m.support,center=isActivation?0:50,position=Number.isFinite(score)?Math.max(0,Math.min(100,isActivation?score*50:(score+2)/4*100)):center;
@@ -8000,6 +8000,39 @@ function renderActivationExplorer(){
  $('activationHeat')?._heatCleanup?.();root.innerHTML='<h3>Activation / leverage</h3><p class="small">0 quiet → 2 highly activated. High activation with low support means an important but demanding period.</p><div id="activationHeat"></div>';
  renderHeatExplorer($('activationHeat'),{key:'cycle-activation',metric:'activation',title:'Activation by life dimension',rows:cycleVisualGroups().map(period=>({label:period.lord||period.label,range:zoomRangeLabel(period),period})),metrics:(row,di)=>({support:activationPeriod(row.period,di),detail:()=>periodMetricEvidence(row.period,di)}),onSelect:row=>activateCycleGroup(row.period)});
 }
+// A display adapter over the existing expression model; no new scoring formula.
+function scalePeriod(period,di){return domainExpressionAssessment(period,di)[1].score}
+function scalePeriodEvidence(period,di){
+ const row=domainExpressionAssessment(period,di)[1];
+ return `<p><b>${catalogEscape(row.label)}</b> · ${row.score.toFixed(2)} / 2</p><p>Existing Vedic expression index; separate from support and activation. ${catalogEscape(row.pathMode)} · ${row.samples} samples.</p><p>Structure ${row.contributions.structural.toFixed(2)} + participating yogas ${row.contributions.yoga.toFixed(2)} + transit activation ${row.contributions.transit.toFixed(2)}.</p><p>Parents average their children by actual duration through Prana. This exploratory index is not a probability, predicted achievement, or a combined Western/Saju score.</p>`;
+}
+let scaleRenderVersion=0;
+function renderScaleExplorer(){
+ const version=++scaleRenderVersion,calculationChart=chart;let root=$('scaleComparison');
+ const wasOpen=root?.querySelector('details')?.open||false;
+ if(!root){root=document.createElement('section');root.id='scaleComparison';root.className='card';$('activationComparison').after(root)}
+ $('scaleHeat')?._heatCleanup?.();
+ root.innerHTML='<details class="scaleDisclosure"><summary style="min-height:44px;cursor:pointer"><b>Scale / reach heatmap</b></summary><p class="small">Existing Vedic expression indices · 0–2 absolute magnitude. Career shows Authority / scale. Other domains show their established second expression facet, named in the key and cell details; these are not interchangeable measures of size or success.</p><details><summary>Domain measures</summary><div class="scaleKey"></div></details><div id="scaleHeat"></div></details>';
+ root.querySelector('.scaleKey').innerHTML=DOMAINS.map(d=>`<p class="small"><b>${catalogEscape(d)}</b>: ${catalogEscape(DOMAIN_EXPRESSION_RULES[d][1][0])}</p>`).join('');
+ const disclosure=root.querySelector('.scaleDisclosure'),target=$('scaleHeat');let started=false;
+ disclosure.ontoggle=async()=>{
+  if(!disclosure.open||started)return;started=true;
+  if(!selectedSystemIds.has('Vedic')){target.textContent='Select Vedic to view its expression indices. No scale values are inferred from other systems.';return}
+  const rows=cycleVisualGroups().map(period=>({label:period.lord||period.label,range:zoomRangeLabel(period),period})),dims=selectedDimensions();
+  let done=0;const total=rows.length*dims.length;
+  for(const row of rows)for(const domain of dims){
+   if(version!==scaleRenderVersion||chart!==calculationChart||hierarchyPending||!target.isConnected)return;
+   target.textContent=`Preparing duration-weighted expression map… ${Math.round(100*done/Math.max(1,total))}%`;
+   await new Promise(resolve=>setTimeout(resolve,0));
+   if(version!==scaleRenderVersion||chart!==calculationChart||hierarchyPending||!target.isConnected)return;
+   scalePeriod(row.period,DOMAINS.indexOf(domain));done++;
+  }
+  if(version!==scaleRenderVersion||chart!==calculationChart||hierarchyPending||!target.isConnected)return;
+  renderHeatExplorer(target,{key:'cycle-scale',metric:'scale',title:'Scale / reach by life dimension',rows,metrics:(row,di)=>({support:scalePeriod(row.period,di),detail:()=>scalePeriodEvidence(row.period,di)}),onSelect:row=>activateCycleGroup(row.period)});
+ };
+ disclosure.open=wasOpen;
+}
+
 </script>
 </body>
 </html>

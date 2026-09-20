@@ -1,0 +1,25 @@
+const assert=require('node:assert/strict'),{chromium}=require('playwright');
+(async()=>{const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});try{
+ const page=await browser.newPage({viewport:{width:390,height:844},hasTouch:true}),errors=[];page.setDefaultTimeout(120000);page.on('pageerror',e=>errors.push(e.message));
+ await page.route('https://**',r=>r.abort());await page.addInitScript(()=>{const t=setTimeout;window.setTimeout=(f,d,...a)=>String(f).includes('loadSwiss().then')?0:t(f,d,...a)});
+ await page.goto('file://'+process.cwd()+'/astrology_engine.html');await page.waitForFunction(()=>document.querySelector('#validationTable').dataset.autorun==='done');
+ const audit=await page.evaluate(()=>{
+  prefix=['Mercury','Venus','Mars'];switchTab('cycles');render();const period=findPeriodByPath(prefix),children=durationSummaryChildren(period);
+  const before=DOMAINS.map((_,di)=>[scorePeriod(period,di),activationPeriod(period,di)]);
+  const rows=DOMAINS.map((domain,di)=>{const value=scalePeriod(period,di),existing=domainExpressionAssessment(period,di)[1].score,mean=children.reduce((s,c)=>s+(c.b-c.a)*scalePeriod(c,di),0)/(period.b-period.a);return{domain,value,existing,mean}});
+  return{rows,unchanged:JSON.stringify(before)===JSON.stringify(DOMAINS.map((_,di)=>[scorePeriod(period,di),activationPeriod(period,di)])),absolute:$('contrastMode').value==='absolute'};
+ });
+ console.log('Arithmetic checks complete');
+ assert(audit.absolute&&audit.unchanged);audit.rows.forEach(r=>{assert.equal(r.value,r.existing);assert(Math.abs(r.value-r.mean)<1e-12);assert(r.value>=0&&r.value<=2)});
+ await page.locator('#scaleComparison > details > summary').click();await page.locator('#scaleHeat .touch-heat-cell').first().waitFor();
+ assert.equal(await page.locator('#scaleHeat .touch-heat-cell').count(),108);console.log('Map rendered');
+ const cell=page.locator('#scaleHeat .touch-heat-cell').first();assert((await cell.getAttribute('aria-label')).includes('Scale / reach'));await cell.scrollIntoViewIfNeeded();await page.waitForTimeout(250);await cell.tap();
+ await page.locator('.heat-preview-evidence > summary').click();assert((await page.locator('.heat-magnifier').innerText()).includes('Authority / scale'));await page.keyboard.press('Escape');
+ await page.locator('#scaleHeat button[data-view="details"]').click();assert((await page.locator('#scaleHeat').innerText()).includes('Expression 0–2'));
+ await page.locator('#scaleHeat select').selectOption('Wealth');await page.locator('#scaleHeat .explorer-item').first().locator('summary').click();
+ assert((await page.locator('#scaleHeat .explorer-item').first().innerText()).includes('Stewardship / continuity'));
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await page.locator('#scaleComparison').screenshot({path:'/tmp/kala-scale-mobile.png'});
+ await page.evaluate(()=>{selectedSystemIds.delete('Vedic');renderScaleExplorer()});await page.waitForFunction(()=>document.querySelector('#scaleHeat').textContent.includes('Select Vedic'));
+ assert.deepEqual(errors,[]);console.log('PASS: existing expression values, all-domain duration consistency, unchanged support/activation, absolute defaults, mobile map/preview/details/key and absent-Vedic state.');
+}finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});
