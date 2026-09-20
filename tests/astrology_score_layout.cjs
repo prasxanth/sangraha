@@ -21,7 +21,7 @@ const {chromium}=require('playwright');
     if(a.bottom>b.bottom+1||a.top<b.top-1||a.left<b.left-1||a.right>b.right+1)layout.push({container:box.className,text:n.textContent,number:{x:a.x,y:a.y,w:a.width,h:a.height},box:{x:b.x,y:b.y,w:b.width,h:b.height}});
    }};
    window.scoreLayoutIssues=()=>{layout.length=0;bounds();return layout};
-   if($('contrastMode').value!=='absolute')throw Error('Support colors must default to the absolute semantic scale');
+   if($('contrastMode').value!=='lifetime')throw Error('Support colors must default to lifetime intensity with absolute labels');
    $('contrastMode').value='relative';
    switchTab('cycles');
    const path=['Mercury','Venus','Mars','Jupiter'];

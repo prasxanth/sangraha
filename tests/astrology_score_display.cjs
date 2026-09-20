@@ -14,7 +14,7 @@ const {chromium}=require('playwright');
    const single=t=>/^[+-]?\d+\.\d{2}$/.test(t.trim());
    const check=selector=>{const nodes=[...document.querySelectorAll(selector)];if(!nodes.length)throw Error('Missing score nodes '+selector);return nodes.every(n=>!!n.querySelector(".metric-bucket")&&single(n.querySelector(".metric-number")?.textContent||""))};
    const results=[];
-   if($('contrastMode').value!=='absolute')throw Error('Support colors must default to the absolute semantic scale');
+   if($('contrastMode').value!=='lifetime')throw Error('Support colors must default to lifetime intensity with absolute labels');
    $('contrastMode').value='relative';
    switchTab('cycles');
    const path=['Mercury','Venus','Mars','Jupiter'];

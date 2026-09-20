@@ -1,0 +1,92 @@
+{
+  "bands": [
+    "Trough",
+    "Trough",
+    "Below average",
+    "Below average",
+    "Typical",
+    "Typical",
+    "Above average",
+    "Above average",
+    "Peak",
+    "Peak"
+  ],
+  "unchanged": true,
+  "careerMD": 0.2747501437659854,
+  "results": [
+    {
+      "domain": "Career",
+      "support": 0.19289385134913167,
+      "percentile": 21.249127821180853,
+      "band": "Below average"
+    },
+    {
+      "domain": "Wealth",
+      "support": 0.21442655567353325,
+      "percentile": 17.437970635609624,
+      "band": "Below average"
+    },
+    {
+      "domain": "Marriage",
+      "support": 0.054716889821775146,
+      "percentile": 12.952225110918448,
+      "band": "Below average"
+    },
+    {
+      "domain": "Family",
+      "support": 0.11872401646432974,
+      "percentile": 12.927546772546464,
+      "band": "Below average"
+    },
+    {
+      "domain": "Children",
+      "support": 0.037396959771435874,
+      "percentile": 6.500123755786929,
+      "band": "Trough"
+    },
+    {
+      "domain": "Vitality",
+      "support": 0.07058662729192906,
+      "percentile": 15.288748519483182,
+      "band": "Below average"
+    },
+    {
+      "domain": "Mind",
+      "support": 0.11505544005433328,
+      "percentile": 14.546921175733278,
+      "band": "Below average"
+    },
+    {
+      "domain": "Spiritual",
+      "support": 0.03917899983008482,
+      "percentile": 3.911001369598742,
+      "band": "Trough"
+    },
+    {
+      "domain": "Reinvention",
+      "support": 0.11876107217238416,
+      "percentile": 8.95707113233014,
+      "band": "Trough"
+    },
+    {
+      "domain": "Learning",
+      "support": 0.1626637744893548,
+      "percentile": 11.706453428819566,
+      "band": "Below average"
+    },
+    {
+      "domain": "Autonomy",
+      "support": 0.1993994906768132,
+      "percentile": 17.716707561728565,
+      "band": "Below average"
+    },
+    {
+      "domain": "Mentorship",
+      "support": 0.11046838148852614,
+      "percentile": 11.224268498048204,
+      "band": "Below average"
+    }
+  ],
+  "leafCount": 49387,
+  "defaultMode": "lifetime"
+}

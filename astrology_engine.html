@@ -728,7 +728,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
       <div class="multiDropActions"><button type="button" id="evidenceRecommendedBtn">Recommended layers</button><button type="button" id="evidenceD1Btn">D1 only</button></div>
      </div>
     </details>
-    <select id="contrastMode"><option value="absolute" selected>Absolute −2…+2 (semantic)</option><option value="relative">Relative contrast (comparison only)</option><option value="percentile">Percentile contrast</option></select>
+    <select id="contrastMode"><option value="lifetime" selected>Lifetime percentile (intensity)</option><option value="absolute">Absolute −2…+2 (semantic)</option><option value="relative">Relative contrast (comparison only)</option><option value="percentile">Percentile contrast</option></select>
     <button id="exportBtn">Export visible CSV</button>
     <button id="exportProfileBtn">Export profile/config</button>
    </div>
@@ -2284,14 +2284,71 @@ const DIRECTION_TONES=['strong-positive','positive','positive-soft','mixed-activ
 function directionSynthesis(period,di){return directionFromScores(scorePeriod(period,di),activationPeriod(period,di),selectedSystemIds.has('Vedic')?scalePeriod(period,di):null)}
 function metricBand(value,metric='support'){return(metric==='scale'?directionScaleBand:metric==='activation'?directionActivationBand:directionSupportBand)(value).label}
 function metricValueHTML(value,metric='support'){
- if(metric==='direction')return `<b class="metric-bucket">${DIRECTION_ACTIONS[value]||'Not supplied'}</b>`;
+ if(metric==='direction')return `<b class="metric-bucket">${lifetimeBand(value).label}</b><small class="metric-number">${percentileLabel(value).replace(' lifetime','')}</small>`;
  return `<b class="metric-bucket">${metricBand(value,metric)}</b><small class="metric-number">${Number.isFinite(value)?(metric==='support'?signed(value):value.toFixed(2)):'—'}</small>`;
 }
 
 function mix(a,b,t){return Math.round(a+(b-a)*t)}
 function gradientRGB(t){const S=[{p:0,c:[150,45,55]},{p:.25,c:[202,112,69]},{p:.5,c:[211,190,91]},{p:.75,c:[104,183,126]},{p:1,c:[15,133,82]}];t=clamp(t,0,1);for(let i=0;i<S.length-1;i++){let a=S[i],b=S[i+1];if(t>=a.p&&t<=b.p){let u=(t-a.p)/(b.p-a.p);return[mix(a.c[0],b.c[0],u),mix(a.c[1],b.c[1],u),mix(a.c[2],b.c[2],u)]}}return S.at(-1).c}
+// Display-only reference distribution: unchanged Prana scores, weighted by included time.
+let lifetimeDisplayState=null;
+function lifetimeDisplayReference(){
+ const bounds=lifeBounds(),signature=JSON.stringify([[...selectedSystemIds],WEIGHTS,selectedDimensions(),bounds.a,bounds.b]);
+ if(lifetimeDisplayState?.chart===chart&&lifetimeDisplayState.signature===signature&&scoreCache.get('lifetime-display-reference')===lifetimeDisplayState)return lifetimeDisplayState;
+ const leaves=[],walk=p=>{const children=durationSummaryChildren(p);if(children.length)children.forEach(walk);else if(p.b>p.a)leaves.push({period:p,duration:p.b-p.a})};
+ walk({a:bounds.a,b:bounds.b,path:[]});
+ lifetimeDisplayState={chart,signature,bounds,leaves,distributions:new Map()};scoreCache.set('lifetime-display-reference',lifetimeDisplayState);return lifetimeDisplayState;
+}
+function weightedPercentileReference(rows){
+ const sorted=rows.filter(r=>Number.isFinite(r.value)&&r.duration>0).map(r=>({value:Math.round(r.value*1e12)/1e12,duration:r.duration})).sort((a,b)=>a.value-b.value),values=[],weights=[];
+ for(const row of sorted){if(values.at(-1)===row.value)weights[weights.length-1]+=row.duration;else{values.push(row.value);weights.push(row.duration)}}
+ const cumulative=[0];weights.forEach(w=>cumulative.push(cumulative.at(-1)+w));return{values,weights,cumulative,total:cumulative.at(-1)};
+}
+function percentileFromReference(value,reference){
+ if(!Number.isFinite(value)||!reference.total)return null;
+ const x=Math.round(value*1e12)/1e12;let lo=0,hi=reference.values.length;
+ while(lo<hi){const mid=(lo+hi)>>1;if(reference.values[mid]<x)lo=mid+1;else hi=mid}
+ const tied=reference.values[lo]===x?reference.weights[lo]:0;
+ return 100*(reference.cumulative[lo]+tied/2)/reference.total;
+}
+function lifetimePercentile(value,di=null){
+ if(!chart||hierarchyPending)return null;
+ const state=lifetimeDisplayReference(),key=di===null?'selected-domains':di;
+ if(!state.distributions.has(key))state.distributions.set(key,weightedPercentileReference(state.leaves.map(row=>({duration:row.duration,value:di===null?scoreSelected(row.period):scorePeriod(row.period,di)}))));
+ return percentileFromReference(value,state.distributions.get(key));
+}
+function lifetimeBand(p){
+ if(!Number.isFinite(p))return{label:'Not supplied',code:'—'};
+ if(p>=90)return{label:'Peak',code:'PK'};
+ if(p>=70)return{label:'Above average',code:'AA'};
+ if(p>=30)return{label:'Typical',code:'TY'};
+ if(p>=10)return{label:'Below average',code:'BA'};
+ return{label:'Trough',code:'TR'};
+}
+function percentileLabel(p){
+ if(!Number.isFinite(p))return 'Percentile not supplied';
+ const n=Math.round(p),suffix=n%100>=11&&n%100<=13?'th':({1:'st',2:'nd',3:'rd'}[n%10]||'th');return `${n}${suffix} lifetime percentile`;
+}
+function lifetimeRGB(p){
+ if(!Number.isFinite(p))return[120,120,120];
+ const t=clamp(p/100,0,1);return [mix(232,31,t),mix(235,102,t),mix(232,115,t)];
+}
+function lifetimeColor(p){return `rgb(${lifetimeRGB(p).join(',')})`}
+function readableRGBText(rgb){const l=rgb.map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});return .2126*l[0]+.7152*l[1]+.0722*l[2]>.179?'#000':'#fff'}
+function periodHeatColor(value,di=null){return $('contrastMode').value==='lifetime'?lifetimeColor(lifetimePercentile(value,di)):heatColor(value)}
+function periodHeatTextColor(value,di=null){return $('contrastMode').value==='lifetime'?readableRGBText(lifetimeRGB(lifetimePercentile(value,di))):heatTextColor(value)}
+function lifetimeSupportEvidence(period,di){
+ const value=scorePeriod(period,di),p=lifetimePercentile(value,di),band=lifetimeBand(p),bounds=lifeBounds();
+ return `<p><b>${DOMAINS[di]}: ${metricBand(value)} · ${percentileLabel(p)}</b><br>${band.label} relative to this profile’s modeled lifetime; absolute support ${signed(value)}.</p><p class="small">${p<30&&value>-.35?'A relative low is not intrinsically an adverse period. ':''}Reference: ${fmt(bounds.a)} → ${fmt(bounds.b)}, all Prana intervals weighted by included duration. The selected period’s unchanged mean support is compared with that fixed distribution; zooming does not reset it. This is a model percentile, not a probability of an event. Absolute labels and percentile cutoffs are engine conventions, not BPHS thresholds.</p>`;
+}
+function existingYogaShaniContext(period,di){
+ if(!selectedSystemIds.has('Vedic'))return '<p class="small">Vedic context is not selected. No yoga or Śani adjustment is added.</p>';
+ const ms=midpoint(period.a,period.b),state=shaniStateAt(ms),facet=expressionNatalEvidence(di,1),relevant=facet.yogas.filter(y=>y.present),domainContext=({Career:'Read responsibility alongside authority / scale; intensity and ease are separate.',Mind:'Consider mental burden and focus alongside the existing Mind support and activation.',Vitality:'Read the existing vitality / resilience indicators separately from career reach.',Family:'Consider home, care and responsibility alongside the existing Family indicators.'})[DOMAINS[di]]||'Use the selected domain’s own support, activation and expression evidence; do not generalize a named transit phase to every domain.';
+ return `<details><summary>Yoga and Śani context · existing evidence</summary><p class="small">Midpoint illustration, not a second period score. Relevant detected combinations for ${catalogEscape(facet.label)}: ${relevant.map(y=>{const hits=yogaDashaActivation(y,ms).hits;return `${catalogEscape(y.name)} (${y.participants.join(', ')}); midpoint dasha participants: ${hits.map(h=>h.level+' '+h.lord).join(', ')||'none'}`}).join('; ')||'none in the implemented catalog'}.</p><p class="small">${catalogEscape(state.name)} · Saturn H${state.fromMoon} from natal Moon. See the Gochara and yoga panels for existing domain, participant and transit evidence. Named Sāḍe Sātī phases do not add a blanket penalty here. A more demanding period can still have greater engagement or reach.</p><p class="small">Unscored interpretive context: ${domainContext}</p><p class="small">No new yoga bonus, cap, cancellation test, varga condition or Śani modifier is introduced by this display. Existing evidence can overlap; it is not independent confirmation. Full Shadbala, avasthas and Ashtakavarga remain unimplemented.</p></details>`;
+}
+
 function supportDisplayRGB(x){
- if($('contrastMode')?.value==='absolute')return {'3':[44,137,89],'2':[90,166,112],'1':[156,191,139],'0':[193,187,164],'-1':[211,153,104],'-2':[190,104,79],'-3':[155,63,64]}[directionSupportBand(x).rank]||[120,120,120];
+ if(['absolute','lifetime'].includes($('contrastMode')?.value))return {'3':[44,137,89],'2':[90,166,112],'1':[156,191,139],'0':[193,187,164],'-1':[211,153,104],'-2':[190,104,79],'-3':[155,63,64]}[directionSupportBand(x).rank]||[120,120,120];
  return gradientRGB((x-COLOR_RANGE.min)/Math.max(.001,COLOR_RANGE.max-COLOR_RANGE.min));
 }
 function heatColor(x){const rgb=supportDisplayRGB(x);return `rgb(${rgb.join(',')})`}
@@ -4843,9 +4900,9 @@ function cycleContextLabel(){let f=CYCLE_FAMILIES[cycleFamilyKey];return f?.cont
 function visibleGroups(){return cycleGroups()}
 function supportColorLegend(){
  const mode=$("contrastMode").value;
- return mode==='absolute'?'Support −2 to +2 · fixed color scale':`${mode==='percentile'?'Percentile':'Relative'} colors · lower ${signed(COLOR_RANGE.min)} → higher ${signed(COLOR_RANGE.max)} in the visible comparison · support scale −2 to +2`;
+ return mode==='lifetime'?'Lifetime percentile intensity · light = relative trough, dark teal = relative peak · absolute support labels unchanged':mode==='absolute'?'Support −2 to +2 · fixed color scale':`${mode==='percentile'?'Percentile':'Relative'} colors · lower ${signed(COLOR_RANGE.min)} → higher ${signed(COLOR_RANGE.max)} in the visible comparison · support scale −2 to +2`;
 }
-function updateColorRange(groups){if($("contrastMode").value==="absolute"){COLOR_RANGE={min:-2,max:2};return}let vals=[];for(const g of groups)for(const d of selectedDimensions())vals.push(scorePeriod(g,DOMAINS.indexOf(d)));vals=vals.filter(Number.isFinite).sort((a,b)=>a-b);if(!vals.length){COLOR_RANGE={min:-2,max:2};return}let lo,hi;if($("contrastMode").value==="percentile"&&vals.length>4){lo=vals[Math.floor(vals.length*.05)];hi=vals[Math.floor(vals.length*.95)]}else{lo=vals[0];hi=vals.at(-1)}if(Math.abs(hi-lo)<.1){let m=(lo+hi)/2;lo=m-.05;hi=m+.05}let pad=(hi-lo)*.05;COLOR_RANGE={min:lo-pad,max:hi+pad}}
+function updateColorRange(groups){if(["absolute","lifetime"].includes($("contrastMode").value)){COLOR_RANGE={min:-2,max:2};return}let vals=[];for(const g of groups)for(const d of selectedDimensions())vals.push(scorePeriod(g,DOMAINS.indexOf(d)));vals=vals.filter(Number.isFinite).sort((a,b)=>a-b);if(!vals.length){COLOR_RANGE={min:-2,max:2};return}let lo,hi;if($("contrastMode").value==="percentile"&&vals.length>4){lo=vals[Math.floor(vals.length*.05)];hi=vals[Math.floor(vals.length*.95)]}else{lo=vals[0];hi=vals.at(-1)}if(Math.abs(hi-lo)<.1){let m=(lo+hi)/2;lo=m-.05;hi=m+.05}let pad=(hi-lo)*.05;COLOR_RANGE={min:lo-pad,max:hi+pad}}
 function width(g,groups){let a=Math.min(...groups.map(x=>x.a)),b=Math.max(...groups.map(x=>x.b)),span=Math.max(1,b-a);return Math.max(82,Math.round((g.b-g.a)/span*1450))}
 
 
@@ -5045,7 +5102,7 @@ function renderMobileCycleZoom(){
   const selected=cycleFamilyKey==="vimshottari"?g.path?.join(">")===prefix.join(">"):
    cycleSelection?.a===g.a&&cycleSelection?.b===g.b;
   btn.classList.toggle("active",!!selected);
-  btn.style.background=heatColor(score);btn.style.color=heatTextColor(score);
+  btn.style.background=periodHeatColor(score);btn.style.color=periodHeatTextColor(score);
   btn.innerHTML=`<strong>${g.lord||g.label}</strong><span>${zoomRangeLabel(g)}</span><span>${metricValueHTML(score)}</span>`;
   btn.onclick=()=>activateCycleGroup(g);
   grid.appendChild(btn);
@@ -5074,7 +5131,7 @@ function renderVimshottariHierarchy(){
   else for(const g of list){
    let va=Math.max(g.a,w.a),vb=Math.min(g.b,w.b),left=(va-w.a)/span*100,wid=(vb-va)/span*100,sc=scoreSelected(g),bk=bucket(sc),d=document.createElement("div");
    d.className="laneSeg"+(g.a<=inspect&&g.b>inspect?" current":"")+(prefix.length>=depth&&prefix.slice(0,depth).join(">")===g.path.join(">")?" selected":"");
-   d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
+   d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=periodHeatColor(sc);d.style.color=periodHeatTextColor(sc);
    d.innerHTML=`<div class="laneLord">${g.lord}</div><div class="laneDate">${zoomRangeLabel(g)}</div><div class="laneContinue">${metricValueHTML(sc)}</div>`;
    d.onclick=()=>{prefix=[...g.path];render()};_tap(d,()=>{prefix=[...g.path];render()});track.appendChild(d);
   }
@@ -5113,7 +5170,7 @@ function renderGenericCycleHierarchy(){
  for(const g of list){
   let va=Math.max(g.a,w.a),vb=Math.min(g.b,w.b),left=(va-w.a)/span*100,wid=(vb-va)/span*100,sc=scoreSelected(g),bk=bucket(sc),d=document.createElement("div");
   d.className="laneSeg"+(g.a<=inspect&&g.b>inspect?" current":"")+(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b?" selected":"");
-  d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
+  d.style.left=left+"%";d.style.width=Math.max(.2,wid)+"%";d.style.background=periodHeatColor(sc);d.style.color=periodHeatTextColor(sc);
   d.innerHTML=`<div class="laneLord">${g.label||g.lord}</div><div class="laneDate">${fmt(g.a)} → ${fmt(g.b)}</div><div class="laneContinue">${metricValueHTML(sc)}</div>`;
   d.onclick=()=>activateCycleGroup(g);_tap(d,()=>activateCycleGroup(g));track.appendChild(d);
  }
@@ -5181,7 +5238,7 @@ function renderTimeline(groups){
   let sc=scoreSelected(g),b=bucket(sc),d=document.createElement("div");
   d.className="phase";
   d.style.width=width(g,groups)+"px";
-  d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
+  d.style.background=periodHeatColor(sc);d.style.color=periodHeatTextColor(sc);
   d.innerHTML=`<div class="lord">${g.lord||g.label||"—"}</div><div class="date">${zoomRangeLabel(g)}</div><div class="grade">${metricValueHTML(sc)}</div>`;
   // Read-only context. Cycle Zoom is the single drill-in surface.
   d.onmousemove=ev=>tipPeriod(ev,g);d.onmouseleave=hideTip;
@@ -5205,14 +5262,14 @@ function renderHeat(groups){
   let di=DOMAINS.indexOf(dom),lab=document.createElement("div");lab.className="rowlabel";lab.textContent=dom;e.appendChild(lab);
   for(const g of groups){
    let sc=scorePeriod(g,di),cell=document.createElement("div");
-   cell.className="cell";cell.style.background=heatColor(sc);cell.style.color=heatTextColor(sc);
+   cell.className="cell";cell.style.background=periodHeatColor(sc,di);cell.style.color=periodHeatTextColor(sc,di);
    cell.innerHTML=`<div class="score">${metricValueHTML(sc)}</div>`;
    cell.onmousemove=ev=>tipDomain(ev,g,dom);cell.onmouseleave=hideTip;
    e.appendChild(cell);
   }
  }
 }
-function tipPeriod(ev,g){let rows=selectedDimensions().map(d=>{let s=scorePeriod(g,DOMAINS.indexOf(d));return`<tr><td>${d}</td><td>${signed(s)}</td></tr>`}).join("");showTip(ev,`<b>${periodTitle(g)}</b><div class="muted">${fmt(g.a)} → ${fmt(g.b)}</div><table>${rows}</table>`)}
+function tipPeriod(ev,g){let rows=selectedDimensions().map(d=>{let s=scorePeriod(g,DOMAINS.indexOf(d));return`<tr><td>${d}</td><td>${metricBand(s)} · ${signed(s)}<br>${percentileLabel(lifetimePercentile(s,DOMAINS.indexOf(d)))}</td></tr>`}).join("");showTip(ev,`<b>${periodTitle(g)}</b><div class="muted">${fmt(g.a)} → ${fmt(g.b)}</div><table>${rows}</table>`)}
 function tipDomain(ev,g,dom){
  let di=DOMAINS.indexOf(dom),
      rows=selectedSystems().map(sys=>{
@@ -5224,7 +5281,7 @@ function tipDomain(ev,g,dom){
       return`<tr><td>${sys.name}${sys.static?` <span class="muted">(${Math.round(cov*100)}% cov)</span>`:""}${detail}</td><td>${Number.isFinite(x)?x.toFixed(2):"no coverage"}</td></tr>`
      }).join(""),
      c=scorePeriod(g,di),a=agreement(g,di),act=activationPeriod(g,di);
- showTip(ev,`<b>${periodTitle(g)}</b><div class="muted">${fmt(g.a)} → ${fmt(g.b)}</div><b style="margin-top:6px">${dom}</b>
+ showTip(ev,`<b>${periodTitle(g)}</b><div class="muted">${fmt(g.a)} → ${fmt(g.b)}</div><b style="margin-top:6px">${dom}</b><div class="small">${metricBand(c)} · ${percentileLabel(lifetimePercentile(c,di))}. Relative low does not imply adversity.</div>
   <table>${rows}<tr><td><b>Combined support</b></td><td><b>${c.toFixed(2)}</b></td></tr><tr><td><b>Activation</b></td><td><b>${activationDisplay(act)}</b></td></tr></table>
   <div class="muted">${a.n}/${a.totalSystems} systems · ${Math.round(a.weighted*100)}% weighted directional agreement</div>`)
 }
@@ -5244,6 +5301,7 @@ function renderSelected(){
  $("selDates").textContent=`${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;
  $("components").innerHTML=
    `<div class="component"><div class="name">Combined · Support</div><div class="val">${metricValueHTML(meanSupport)}</div></div>`+
+   `<div class="component"><div class="name">Lifetime position · selected domains</div><div class="val">${metricValueHTML(lifetimePercentile(meanSupport),"direction")}</div></div>`+
    `<div class="component"><div class="name">Combined · Activation</div><div class="val">${metricValueHTML(meanActivation,"activation")}</div></div>`+
    selectedSystems().map(sys=>{let ds=selectedDimensions(),
       sup=ds.reduce((a,d)=>a+(perSystemPeriod(p,sys.id,DOMAINS.indexOf(d))??0),0)/ds.length,
@@ -7354,7 +7412,7 @@ function renderPeriodChips(groups){
    ?(prefix.length===g.path?.length&&g.path.join(">")===prefix.join(">"))
    :(cycleSelection&&cycleSelection.a===g.a&&cycleSelection.b===g.b);
   if(isActive)d.classList.add("active");
-  d.style.background=heatColor(sc);d.style.color=heatTextColor(sc);
+  d.style.background=periodHeatColor(sc);d.style.color=periodHeatTextColor(sc);
   d.innerHTML=`<span class="pchip-lord">${g.lord||g.label||"—"}</span><span class="pchip-score">${metricValueHTML(sc)}</span><span class="pchip-range">${zoomRangeLabel(g)}</span>`;
   d.onclick=()=>activateCycleGroup(g);
   _tap(d,()=>activateCycleGroup(g));
@@ -7582,7 +7640,7 @@ function renderHeatExplorer(root,config){
  paint();
 }
 function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect,metric='support'}){
- const isDirection=metric==='direction',isActivation=metric==='activation'||metric==='scale',metricLabel=isDirection?'Direction':metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isDirection?x=>directionColor({tone:DIRECTION_TONES[x]}):isActivation?activationColor:heatColor,textColor=isDirection?x=>directionTextColor({tone:DIRECTION_TONES[x]}):isActivation?activationTextColor:heatTextColor,format=isDirection?x=>DIRECTION_ACTIONS[x]||'Not supplied':x=>metricBand(x,metric)+' · '+(Number.isFinite(x)?(isActivation?activationDisplay(x):signed(x)):'—');
+ const isDirection=metric==='direction',isActivation=metric==='activation'||metric==='scale',metricLabel=isDirection?'Direction':metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isDirection?lifetimeColor:isActivation?activationColor:(x,di)=>rows[0]?.period?periodHeatColor(x,di):heatColor(x),textColor=isDirection?x=>readableRGBText(lifetimeRGB(x)):isActivation?activationTextColor:(x,di)=>rows[0]?.period?periodHeatTextColor(x,di):heatTextColor(x),format=isDirection?x=>lifetimeBand(x).label+' · '+percentileLabel(x):x=>metricBand(x,metric)+' · '+(Number.isFinite(x)?(isActivation?activationDisplay(x):signed(x)):'—');
  root.innerHTML='';const dims=selectedDimensions();
  const caption=document.createElement('p');caption.className='small';caption.textContent='Tap a cell for details. Hold briefly, then slide to explore. Lift to pin; swipe normally to scroll.';
  const grid=document.createElement('div');grid.className='touch-heat-grid';grid.setAttribute('role','grid');grid.setAttribute('aria-label',title);grid.style.setProperty('--heat-cols',Math.max(1,rows.length));
@@ -7599,12 +7657,12 @@ function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect,metric='suppor
   rows.forEach((row,c)=>{
    const cell=document.createElement('button');cell.type='button';cell.className='touch-heat-cell';cell.dataset.row=r;cell.dataset.col=c;cell.tabIndex=r===0&&c===0?0:-1;
    cell.setAttribute('role','gridcell');cell.setAttribute('aria-selected','false');cell.setAttribute('aria-label',`${row.label}, ${domain}, ${metricLabel} ${format(data[r][c].support)}${row.range?', '+row.range:''}`);
-   if(isDirection){cell.classList.add('direction-cell');cell.textContent=innerWidth<=600?(DIRECTION_CODES[data[r][c].support]||'—'):format(data[r][c].support)}
-   cell.style.background=color(data[r][c].support);cell.style.color=textColor(data[r][c].support);
+   if(isDirection){cell.classList.add('direction-cell');cell.textContent=innerWidth<=600?lifetimeBand(data[r][c].support).code:lifetimeBand(data[r][c].support).label}
+   cell.style.background=color(data[r][c].support,DOMAINS.indexOf(dims[r]));cell.style.color=textColor(data[r][c].support,DOMAINS.indexOf(dims[r]));
    line.appendChild(cell);cells.push(cell);
   });grid.appendChild(line);
  });
- const legend=document.createElement('div');legend.className='small';legend.textContent=(isDirection?'EX Expand · AD Advance · BU Build · PV Pivot · SE Selective · HO Hold · RS Restructure · PR Protect. Categorical direction; tap for full labels and inputs. ':metric==='scale'?'Expression 0–2: fixed magnitude scale, not favorability. ':isActivation?'Activation 0–2: intensity, not favorability. ':supportColorLegend()+'. ')+'Equal-width columns; exact dates are in the preview.';root.appendChild(legend);
+ const legend=document.createElement('div');legend.className='small';legend.textContent=(isDirection?'PK Peak · AA Above average · TY Typical · BA Below average · TR Trough. Lifetime-relative intensity, not favorable/adverse color; tap for absolute support. ':metric==='scale'?'Expression 0–2: fixed magnitude scale, not favorability. ':isActivation?'Activation 0–2: intensity, not favorability. ':(rows[0]?.period?supportColorLegend():'Absolute support −2 to +2 · fixed color scale')+'. ')+'Equal-width columns; exact dates are in the preview.';root.appendChild(legend);
  let timer=null,start=null,holding=false,moved=false,current=null,mouseDragging=false;
  const clearTimer=()=>{clearTimeout(timer);timer=null};
  function pick(x,y){
@@ -7629,12 +7687,14 @@ function renderTouchHeatMap(root,{key,rows,metrics,title,onSelect,metric='suppor
    const close=document.createElement('button');close.type='button';close.className='heat-preview-close';close.textContent='Close';close.onclick=()=>{closeHeatPreview();cell.focus({preventScroll:true})};
    const name=document.createElement('div');name.className='heat-preview-title';name.textContent=`${rows[c].label} · ${dims[r]}`;
    const score=document.createElement('div');score.className='heat-preview-score';score.setAttribute('aria-live','polite');score.innerHTML=`${metricLabel} ${metricValueHTML(data[r][c].support,metric)}`;
+   if(isDirection&&Number.isFinite(data[r][c].absoluteSupport))score.insertAdjacentHTML('beforeend',`<div class="small">Absolute support: ${metricBand(data[r][c].absoluteSupport)} ${signed(data[r][c].absoluteSupport)}</div>`);
+   else if(metric==='support'&&rows[c].period){const percentile=lifetimePercentile(data[r][c].support,DOMAINS.indexOf(dims[r]));score.insertAdjacentHTML('beforeend',`<div class="small">${percentileLabel(percentile)} · ${lifetimeBand(percentile).label}</div>`);}
    const range=document.createElement('div');range.className='small';range.textContent=rows[c].range||'';
    const neighborhood=document.createElement('div');neighborhood.className='heat-neighborhood';neighborhood.setAttribute('aria-hidden','true');
    const c0=Math.max(0,Math.min(c-1,rows.length-3)),c1=Math.min(rows.length,c0+3),r0=Math.max(0,Math.min(r-1,dims.length-3)),r1=Math.min(dims.length,r0+3);
    neighborhood.style.gridTemplateColumns=`repeat(${c1-c0},minmax(0,1fr))`;
    for(let rr=r0;rr<r1;rr++)for(let cc=c0;cc<c1;cc++){
-    const tile=document.createElement('div');tile.className='heat-neighbor'+(rr===r&&cc===c?' selected':'');tile.style.background=color(data[rr][cc].support);tile.style.color=textColor(data[rr][cc].support);
+    const tile=document.createElement('div');tile.className='heat-neighbor'+(rr===r&&cc===c?' selected':'');tile.style.background=color(data[rr][cc].support,DOMAINS.indexOf(dims[rr]));tile.style.color=textColor(data[rr][cc].support,DOMAINS.indexOf(dims[rr]));
     tile.textContent=`${rows[cc].label} · ${dims[rr]} ${format(data[rr][cc].support)}`;neighborhood.appendChild(tile);
    }
    heatPreview.append(close,name,score,range,neighborhood);
@@ -7688,18 +7748,18 @@ function renderHeatDetails(root,{key,rows,metrics,title,onSelect,metric='support
  const dims=selectedDimensions();
  const domain=dims.includes(heatExplorerDomains[key])?heatExplorerDomains[key]:dims[0];
  heatExplorerDomains[key]=domain;
- const isDirection=metric==='direction',isActivation=metric==='activation'||metric==='scale',metricLabel=isDirection?'Direction':metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isDirection?x=>directionColor({tone:DIRECTION_TONES[x]}):isActivation?activationColor:heatColor,textColor=isDirection?x=>directionTextColor({tone:DIRECTION_TONES[x]}):isActivation?activationTextColor:heatTextColor,format=isDirection?x=>DIRECTION_ACTIONS[x]||'Not supplied':x=>metricBand(x,metric)+' · '+(Number.isFinite(x)?(isActivation?activationDisplay(x):signed(x)):'—');
+ const isDirection=metric==='direction',isActivation=metric==='activation'||metric==='scale',metricLabel=isDirection?'Direction':metric==='scale'?'Scale / reach':isActivation?'Activation':'Support',color=isDirection?lifetimeColor:isActivation?activationColor:(x,di)=>rows[0]?.period?periodHeatColor(x,di):heatColor(x),textColor=isDirection?x=>readableRGBText(lifetimeRGB(x)):isActivation?activationTextColor:(x,di)=>rows[0]?.period?periodHeatTextColor(x,di):heatTextColor(x),format=isDirection?x=>lifetimeBand(x).label+' · '+percentileLabel(x):x=>metricBand(x,metric)+' · '+(Number.isFinite(x)?(isActivation?activationDisplay(x):signed(x)):'—');
  root.innerHTML="";root.classList.add("heat-explorer");
  const label=document.createElement("label");label.className="explorer-controls";label.textContent=title;
  const select=document.createElement("select");select.setAttribute("aria-label",`${title}: life dimension`);
  dims.forEach(d=>select.add(new Option(d,d)));select.value=domain;
  select.onchange=()=>{heatExplorerDomains[key]=select.value;renderHeatDetails(root,{key,rows,metrics,title,onSelect,metric})};
  label.appendChild(select);root.appendChild(label);
- const legend=document.createElement("p");legend.className="small";legend.textContent=isDirection?'Categorical direction from support, activation and expression. Expand a row for the inputs.':metric==='scale'?"Expression 0–2 · fixed magnitude scale, not favorability. Expand a row for details.":isActivation?"Activation 0–2 · intensity, not favorability. Expand a row for details.":supportColorLegend()+". Expand a row for details.";root.appendChild(legend);
+ const legend=document.createElement("p");legend.className="small";legend.textContent=isDirection?'Lifetime-relative support percentile. Expand a row for absolute support, activation, expression and context.':metric==='scale'?"Expression 0–2 · fixed magnitude scale, not favorability. Expand a row for details.":isActivation?"Activation 0–2 · intensity, not favorability. Expand a row for details.":(rows[0]?.period?supportColorLegend():'Absolute support −2 to +2 · fixed color scale')+". Expand a row for details.";root.appendChild(legend);
  for(const row of rows){
   const m=metrics(row,DOMAINS.indexOf(domain)),details=document.createElement("details");details.className="explorer-item";
   const score=m.support,center=isActivation?0:50,position=Number.isFinite(score)?Math.max(0,Math.min(100,isActivation?score*50:(score+2)/4*100)):center;
-  details.innerHTML=`<summary><span class="explorer-name">${row.label}</span><span>${metricValueHTML(score,metric)}</span><span class="explorer-range">${row.range||""}</span><span class="explorer-bar" ${isDirection?'hidden':''} aria-hidden="true"><i style="left:${Math.min(center,position)}%;width:${Math.abs(position-center)}%;background:${color(score)}"></i></span><span class="explorer-hint">Details ▾</span></summary><div class="explorer-detail"><b>${domain} · ${metricLabel} ${format(score)}</b><div>${typeof m.detail==="function"?m.detail():m.detail||""}</div></div>`;
+  details.innerHTML=`<summary><span class="explorer-name">${row.label}</span><span>${metricValueHTML(score,metric)}</span><span class="explorer-range">${row.range||""}</span><span class="explorer-bar" ${isDirection?'hidden':''} aria-hidden="true"><i style="left:${Math.min(center,position)}%;width:${Math.abs(position-center)}%;background:${color(score,DOMAINS.indexOf(domain))}"></i></span><span class="explorer-hint">Details ▾</span></summary><div class="explorer-detail"><b>${domain} · ${metricLabel} ${format(score)}</b><div>${typeof m.detail==="function"?m.detail():m.detail||""}</div></div>`;
   if(onSelect){const btn=document.createElement("button");btn.textContent="View this period in Cycle Zoom";btn.onclick=()=>onSelect(row);details.lastElementChild.appendChild(btn)}
   root.appendChild(details);
  }
@@ -7754,7 +7814,7 @@ function renderDomainBars(){
   html+=`<div class="dbar-row"><div class="dbar-label">${dom}</div><div class="dbar-track">`;
   topGroups.forEach((g,i)=>{
    const name=(g.lord||g.label||"—"),sc=scorePeriod(g,di),bk=bucket(sc);
-   const bg=heatColor(sc),tc=heatTextColor(sc),isActive=isActiveGroup(g);
+   const bg=periodHeatColor(sc,di),tc=periodHeatTextColor(sc,di),isActive=isActiveGroup(g);
    const barPct=Math.round(((sc+2)/4)*100);
    html+=`<div class="dbar-seg${isActive?" sel":""}" style="flex:0 0 ${widths[i]}%;min-width:${widths[i]}%;background:${bg};color:${tc}" data-gi="${i}" title="${dom} · ${name}: support ${signed(sc)} (${metricBand(sc)}) · ${zoomRangeLabel(g)}">
     <div class="dbar-score">${metricValueHTML(sc)}</div>
@@ -8084,13 +8144,13 @@ setTimeout(()=>{loadSwiss().then(ok=>{if(ok)calculateProfile(false)});loadBazi()
 function periodMetricEvidence(period,di){
  const sup=scorePeriod(period,di),act=activationPeriod(period,di);
  const systems=selectedSystems().map(sys=>{const s=perSystemPeriod(period,sys.id,di),a=perSystemActivationPeriod(period,sys.id,di);return '<li>'+catalogEscape(sys.name)+': support '+(Number.isFinite(s)?signed(s):'not supplied')+' · activation '+activationDisplay(a)+'</li>'}).join('');
- let detail='<p>Support '+signed(sup)+' · activation '+activationDisplay(act)+'</p><ul>'+systems+'</ul><p>For separate domain expression (for example recognition versus scale), open the Vedic methods comparison.</p>';
+ let detail=lifetimeSupportEvidence(period,di)+'<p>Support '+signed(sup)+' · activation '+activationDisplay(act)+'</p><ul>'+systems+'</ul><p>For separate domain expression (for example recognition versus scale), open the Vedic methods comparison.</p>';
  if(selectedSystems().some(s=>s.id==='Vedic')&&hasVedicPeriodPath(period)){
   const bd=vedicPeriodBreakdown(period,di);
   detail+='<p>Unaggregated selected-path context (diagnostic): '+bd.path.map(x=>x.level+' '+x.lord+' × '+Math.round(x.weight*100)+'%').join(' → ')+'</p>';
   if(bd.supportRange)detail+='<p>Next-level support '+signed(bd.supportRange.min)+' to '+signed(bd.supportRange.max)+'; activation '+activationDisplay(bd.activationRange.min)+' to '+activationDisplay(bd.activationRange.max)+'. Each parent averages its children by actual duration, down to Prana.</p>';
  }else detail+='<p>Vedic timing changes across this date range; no fixed Vimshottari path is selected.</p>';
- return detail;
+ return detail+existingYogaShaniContext(period,di);
 }
 function renderActivationExplorer(){
  let root=$('activationComparison');
@@ -8132,32 +8192,32 @@ function renderScaleExplorer(){
 }
 
 function metricBucketKey(){
- return `<details><summary>Support, activation and scale buckets</summary><p class="small">Buckets use the unrounded continuous score. The number underneath is rounded for readability.</p><p class="small"><b>Support</b><br>≥+1.20 Exceptional · ≥+0.75 Great · ≥+0.35 Good<br>−0.35 &lt; score &lt; +0.35 Mixed / Neutral<br>≤−0.35 Challenging · ≤−0.75 Difficult · ≤−1.20 Very Difficult</p><p class="small"><b>Activation</b><br>≥1.50 Very High · ≥1.15 High · ≥0.75 Moderate · ≥0.35 Low · otherwise Quiet</p><p class="small"><b>Scale / reach</b><br>≥1.50 Exceptional Scale · ≥1.15 Large Scale · ≥0.75 Moderate Scale · ≥0.35 Limited Scale · otherwise Local / Narrow</p></details>`;
+ return `<details><summary>Support, activation and scale buckets</summary><p class="small">Absolute labels are engine conventions, not BPHS thresholds. Buckets use the unrounded continuous score. The number underneath is rounded for readability.</p><p class="small"><b>Support</b><br>≥+1.20 Exceptional · ≥+0.75 Great · ≥+0.35 Good<br>−0.35 &lt; score &lt; +0.35 Mixed / Neutral<br>≤−0.35 Challenging · ≤−0.75 Difficult · ≤−1.20 Very Difficult</p><p class="small"><b>Activation</b><br>≥1.50 Very High · ≥1.15 High · ≥0.75 Moderate · ≥0.35 Low · otherwise Quiet</p><p class="small"><b>Scale / reach</b><br>≥1.50 Exceptional Scale · ≥1.15 Large Scale · ≥0.75 Moderate Scale · ≥0.35 Limited Scale · otherwise Local / Narrow</p></details>`;
 }
 function directionEvidence(period,di){
- const d=directionSynthesis(period,di);
- return `<p><b>${d.action}</b> · ${d.why}</p><p>Support: ${metricValueHTML(d.support)}Activation: ${metricValueHTML(d.activation,'activation')}Scale / reach: ${metricValueHTML(d.scale,'scale')}</p><p>Scale uses the existing Vedic expression facet <b>${catalogEscape(DOMAIN_EXPRESSION_RULES[DOMAINS[di]][1][0])}</b>. Support and activation use the selected systems. Direction is an interpretive category, not a new score or a prediction.</p>`;
+ const support=scorePeriod(period,di),activation=activationPeriod(period,di),scale=selectedSystemIds.has('Vedic')?scalePeriod(period,di):null;
+ return lifetimeSupportEvidence(period,di)+`<p>Absolute support: ${metricValueHTML(support)}Activation: ${metricValueHTML(activation,'activation')}Scale / reach: ${metricValueHTML(scale,'scale')}</p><p class="small">Scale is the existing Vedic expression facet <b>${catalogEscape(DOMAIN_EXPRESSION_RULES[DOMAINS[di]][1][0])}</b>; it is not added to support or percentile rank.</p>`+existingYogaShaniContext(period,di);
 }
+
 let directionRenderVersion=0;
 function renderDirectionExplorer(){
- const version=++directionRenderVersion,calculationChart=chart;let root=$('directionComparison');const wasOpen=root?.querySelector('details')?.open||false;
+ const version=++directionRenderVersion,calculationChart=chart;let root=$('directionComparison');const wasOpen=root?root.querySelector('details')?.open:true;
  if(!root){root=document.createElement('section');root.id='directionComparison';root.className='card';$('domainBarsContainer').parentElement.after(root)}
  $('directionHeat')?._heatCleanup?.();
- root.innerHTML='<details><summary style="min-height:44px;cursor:pointer"><b>Direction heatmap</b></summary><p class="small">Support sets favorable, mixed or difficult direction. Activation describes engagement; expression describes potential reach. Continuous inputs remain available in each cell.</p><details><summary>Direction key and thresholds</summary><p class="small">High activation or large scale means ≥1.15; both are required for high consequence. Support ≥0.75 with both → EXPAND; support ≥0.35 with either → ADVANCE; otherwise supportive → BUILD. Mixed support (−0.35 &lt; score &lt; +0.35) with both → PIVOT, either → SELECTIVE, neither → HOLD. Support ≤−0.35 with either → RESTRUCTURE, otherwise → PROTECT. These are display rules applied after duration averaging; categories are never averaged.</p></details><div id="directionHeat"></div></details>';
+ root.innerHTML='<details><summary style="min-height:44px;cursor:pointer"><b>Lifetime relative opportunity / direction</b></summary><p class="small">Relative peaks and troughs in your modeled lifetime, with absolute support kept separate. Darker teal means higher lifetime percentile; pale cells mean lower percentile, not adversity.</p><details><summary>Lifetime reference and category key</summary><p class="small">Peak ≥90th percentile; Above average ≥70th; Typical ≥30th; Below average ≥10th; Trough &lt;10th. These are percentile bands, not arithmetic-mean comparisons or classical thresholds. The reference is all Prana intervals from birth through the configured life horizon, weighted by their included duration. Ties receive the midpoint percentile (a constant distribution is 50th). All zoom levels use the same reference; changing the profile, horizon, systems or weights rebuilds it.</p><p class="small">Support, activation and expression remain unchanged. Yoga and Śani evidence is context, not an extra adjustment.</p></details><div id="directionHeat"></div></details>';
  root.querySelector('details').insertAdjacentHTML('beforeend',metricBucketKey());
  const disclosure=root.querySelector('details'),target=$('directionHeat');let started=false;
  disclosure.ontoggle=async()=>{
   if(!disclosure.open||started)return;started=true;
-  if(!selectedSystemIds.has('Vedic')){target.textContent='Select Vedic to supply the expression input required for direction.';return}
   const rows=cycleVisualGroups().map(period=>({label:period.lord||period.label,range:zoomRangeLabel(period),period})),dims=selectedDimensions();let done=0;
   for(const row of rows)for(const domain of dims){
    target.textContent=`Preparing direction map… ${Math.round(100*done/Math.max(1,rows.length*dims.length))}%`;
    await new Promise(resolve=>setTimeout(resolve,0));
    if(version!==directionRenderVersion||chart!==calculationChart||hierarchyPending||!target.isConnected)return;
-   scalePeriod(row.period,DOMAINS.indexOf(domain));done++;
+   lifetimePercentile(scorePeriod(row.period,DOMAINS.indexOf(domain)),DOMAINS.indexOf(domain));done++;
   }
   if(version!==directionRenderVersion||chart!==calculationChart||hierarchyPending||!target.isConnected)return;
-  renderHeatExplorer(target,{key:'cycle-direction',metric:'direction',title:'Direction by life dimension',rows,metrics:(row,di)=>({support:DIRECTION_ACTIONS.indexOf(directionSynthesis(row.period,di).action),detail:()=>directionEvidence(row.period,di)}),onSelect:row=>activateCycleGroup(row.period)});
+  renderHeatExplorer(target,{key:'cycle-direction',metric:'direction',title:'Lifetime direction by life dimension',rows,metrics:(row,di)=>({support:lifetimePercentile(scorePeriod(row.period,di),di),absoluteSupport:scorePeriod(row.period,di),detail:()=>directionEvidence(row.period,di)}),onSelect:row=>activateCycleGroup(row.period)});
  };
  disclosure.open=wasOpen;
 }
