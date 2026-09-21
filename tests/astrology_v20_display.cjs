@@ -9,7 +9,7 @@ const assert=require('node:assert/strict'),{chromium}=require('playwright');
   if(directionFromScores(.45,1.12,.94,92).action!=='ADVANCE'||directionFromScores(.36,.97,.82,72).action!=='ADVANCE')throw Error('Missing v20.1 refinement');
   const md=dashaRoot.find(p=>p.lord==='Mercury'&&p.a>chart.birthMs);if(Math.abs(scorePeriod(md,0)-.2747501437659854)>1e-12)throw Error('Raw Mercury score changed');
   const ad=childPeriods(md).find(p=>p.lord==='Rahu');if(Math.abs(lifetimePercentile(scorePeriod(ad,0),0)-21.249127821180853)>1e-9)throw Error('Lifetime reference changed');
-  prefix=['Mercury','Venus','Mars'];switchTab('cycles');render();
+  prefix=['Mercury','Venus','Mars'];switchTab('cycles');render();selectCycleMetric('direction');
   const period=findPeriodByPath(prefix);if(AstroHeatmap.getDirectionContext(period,'Career').scored!==false)throw Error('Context must remain unscored');
   const before=DOMAINS.map((_,di)=>[scorePeriod(period,di),activationPeriod(period,di),scalePeriod(period,di)]),direction=DOMAINS.map((_,di)=>directionAssessment(period,di));
   if(JSON.stringify(before)!==JSON.stringify(DOMAINS.map((_,di)=>[scorePeriod(period,di),activationPeriod(period,di),scalePeriod(period,di)])))throw Error('Direction altered raw scores');

@@ -8214,7 +8214,7 @@ function periodMetricEvidence(period,di){
  }else detail+='<p>Vedic timing changes across this date range; no fixed Vimshottari path is selected.</p>';
  return detail+existingYogaShaniContext(period,di);
 }
-let activeCycleMetric='direction';
+let activeCycleMetric='support';
 const CYCLE_METRICS=[['direction','Direction'],['support','Support'],['activation','Activation'],['scale','Scale']];
 function selectCycleMetric(key,focus=false){
  if(!CYCLE_METRICS.some(([id])=>id===key))return;

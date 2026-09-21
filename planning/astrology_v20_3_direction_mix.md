@@ -2,7 +2,7 @@
 
 Imported only the cumulative bar-chart feature from `astrology_engine_v20_3_cumulative_direction_mix.html`. The attachment's timeline revisions and scored yoga/Shani overlay are not imported. Direction uses the existing v20.1 unscored-context classifier without changes.
 
-Cycles now has four accessible subtabs: Direction (default), Support, Activation, Scale. Selection survives cycle rerenders; arrow keys and Home/End navigate the tab row. Direction contains both its heatmap and the new bar chart.
+Cycles now has four accessible subtabs: Direction, Support (default), Activation, Scale. Selection survives cycle rerenders; arrow keys and Home/End navigate the tab row. Direction contains both its heatmap and the new bar chart.
 
 Each domain bar groups immediate child periods by their existing Direction action and sums their actual durations. Shares use the total child duration as denominator; all shares, including unavailable Direction, remain represented. All life groups MDs, MD groups ADs, AD groups PDs, PD groups Sookshma, and Sookshma groups Prana. Terminal Prana and non-Vimshottari selections show an explanatory empty state. The chart summarizes the complete selected period, not only calendar-filtered heatmap columns.
 

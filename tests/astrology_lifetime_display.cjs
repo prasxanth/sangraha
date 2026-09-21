@@ -24,7 +24,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   const restored=lifetimeDisplayReference(),selection=selectedSystemIds;selectedSystemIds=new Set(['Vedic']);if(lifetimeDisplayReference()===restored)throw Error('System reference stale');selectedSystemIds=selection;
   const originalWeight=WEIGHTS.Career.Vedic,old=lifetimeDisplayReference();WEIGHTS.Career.Vedic=originalWeight+.01;if(lifetimeDisplayReference()===old)throw Error('Weight reference stale');WEIGHTS.Career.Vedic=originalWeight;
   const unchanged=JSON.stringify(before)===JSON.stringify(DOMAINS.map((_,di)=>[scorePeriod(md,di),activationPeriod(md,di)]));
-  prefix=['Mercury','Venus','Mars'];switchTab('cycles');render();
+  prefix=['Mercury','Venus','Mars'];switchTab('cycles');render();selectCycleMetric('direction');
   return{bands,unchanged,careerMD:before[0][0],results,leafCount:state.leaves.length,defaultMode:$('contrastMode').value};
  });
  assert(audit.unchanged);assert(Math.abs(audit.careerMD-.2747501437659854)<1e-12);assert.equal(audit.defaultMode,'lifetime');

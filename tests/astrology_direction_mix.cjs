@@ -4,6 +4,9 @@ const assert=require('node:assert/strict'),{chromium}=require('playwright');
  await page.route('https://**',r=>r.abort());await page.addInitScript(()=>{const t=setTimeout;window.setTimeout=(f,d,...a)=>String(f).includes('loadSwiss().then')?0:t(f,d,...a)});
  await page.goto('file://'+process.cwd()+'/astrology_engine.html');await page.waitForFunction(()=>document.querySelector('#validationTable').dataset.autorun==='done');
  await page.evaluate(()=>{prefix=['Mercury','Venus','Mars'];switchTab('cycles');render()});
+ assert.equal(await page.locator('#cycleMetric-support').getAttribute('aria-selected'),'true');
+ assert(await page.locator('#supportComparison').isVisible());
+ await page.locator('#cycleMetric-direction').click();
  await page.locator('#directionMixGrid .direction-mix-row').first().waitFor();
  assert.equal(await page.locator('#directionMixGrid .direction-mix-row').count(),12);
  const audit=await page.evaluate(()=>{
