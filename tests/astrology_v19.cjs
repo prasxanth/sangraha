@@ -49,6 +49,20 @@ const {chromium}=require('playwright');
    }
    const originalSelection=selectedSystemIds;selectedSystemIds=new Set(['Vedic']);
    for(let di=0;di<12;di++)close(scorePeriod(md,di),scoreVedicPeriod(md,di));selectedSystemIds=originalSelection;
+   // Internal BNN blending must still commute with duration aggregation, and
+   // must not mutate the raw BPHS channel.
+   const bnnSelection=selectedSystemIds;selectedSystemIds=new Set(['Vedic','Western','Saju','BNN']);
+   const bnnPD=childPeriods(childPeriods(md)[2])[4],bnnChildren=durationSummaryChildren(bnnPD);
+   for(let di=0;di<12;di++){
+    close(scorePeriod(bnnPD,di),bnnChildren.reduce((n,p)=>n+duration(p)*scorePeriod(p,di),0)/duration(bnnPD));
+    close(activationPeriod(bnnPD,di),bnnChildren.reduce((n,p)=>n+duration(p)*activationPeriod(p,di),0)/duration(bnnPD));
+    for(const p of all.filter((_,i)=>i%1401===0))for(const metric of ['support','activation']){
+     const raw=id=>durationSystemMetrics(p,id)[metric][di],matrix=routingMatrix(metric)[DOMAINS[di]];
+     const expected=(.85*raw('Vedic')+.15*raw('BNN'))*matrix.Vedic+raw('Western')*matrix.Western+raw('Saju')*matrix.Saju;
+     close(durationCombinedMetrics(p)[metric][di],expected);
+    }
+   }
+   selectedSystemIds=bnnSelection;
    const clipped={...md,a:md.a+duration(md)*.137,b:md.a+duration(md)*.739},parts=leaves(clipped);
    close(parts.reduce((s,p)=>s+duration(p),0)/duration(clipped),1);
    for(let di=0;di<12;di++)close(scorePeriod(clipped,di),parts.reduce((s,p)=>s+duration(p)*scorePeriod(p,di),0)/duration(clipped));

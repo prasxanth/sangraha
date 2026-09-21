@@ -637,6 +637,7 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 .cycle-metric-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:14px 0 8px}.cycle-metric-tabs button{min-width:0;min-height:44px;padding:8px 3px;font-size:13px}.cycle-metric-tabs button[aria-selected="true"]{background:var(--panel2);border-color:var(--accent);color:var(--accent)}
 [role="tabpanel"][hidden]{display:none!important}
 
+#weightsTable{min-width:0}#weightsTable th:first-child{width:27%}#weightsTable th,#weightsTable td{overflow-wrap:anywhere}@media(max-width:600px){#weightsTable th,#weightsTable td{padding:6px 3px}#weightsTable td:not(:first-child)>span{display:block}#weightsTable .routing-separator{display:none!important}#weightsTable th .small{font-size:11px}}
 </style>
 </head>
 <body>
@@ -865,7 +866,14 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
      <div class="playbookWrap"><table class="playbookTable" id="playbookTable"></table></div>
     </div>
     <div class="info" style="margin-top:10px">
-     <div class="card"><h3>Selected ensemble weights by life domain</h3><table class="weightsTable" id="weightsTable"></table></div>
+     <div class="card">
+      <div style="display:flex;gap:10px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap">
+       <div><h3 style="margin-bottom:3px">Selected ensemble routing by life domain</h3><div class="small" id="routingPolicyNote">Methodological specialization, not empirical accuracy percentages.</div></div>
+       <label class="field" style="min-width:210px"><span>Routing mode</span><select id="systemRoutingMode"><option value="specialist">Specialist routing</option><option value="equal">Equal comparison</option><option value="custom">Custom / API</option></select></label>
+      </div>
+      <div class="small" style="margin:8px 0">Each cell shows <b>Support / Activation</b>. Weights renormalize across the systems currently selected. If BPHS + BNN are both selected, BNN is a 15% internal corroborator inside the Vedic channel, not a fourth top-level vote.</div>
+      <div style="overflow-x:auto"><table class="weightsTable" id="weightsTable"></table></div>
+     </div>
     </div>
    </div>
 
@@ -1247,7 +1255,28 @@ Return one value per supported domain:
 +1 supportive
 +2 strongly supportive
 null = unsupported / no coverage</div></div>
-    <div class="guideBox"><h4>Register another dynamic system</h4><div class="code">AstroHeatmap.addSystem({
+        <div class="guideBox"><h4>Domain-specialist ensemble routing · v20.5</h4>
+      <p>Support and Activation use separate domain-specific Vedic / Western / Saju routing matrices. Each tradition contributes according to the type of evidence the engine uses for that domain and metric. These are <b>modeling choices, not experimentally established accuracy rates</b>.</p>
+      <div class="code">Support routing examples
+Career      Vedic 45 · Western 20 · Saju 35
+Mind        Vedic 25 · Western 55 · Saju 20
+Spiritual   Vedic 60 · Western 25 · Saju 15
+Reinvention Vedic 20 · Western 45 · Saju 35
+
+Activation routing examples
+Career      Vedic 50 · Western 30 · Saju 20
+Mind        Vedic 25 · Western 60 · Saju 15
+Spiritual   Vedic 55 · Western 30 · Saju 15
+Reinvention Vedic 25 · Western 45 · Saju 30</div>
+      <ul>
+       <li><b>Support</b> and <b>Activation</b> have separate routing matrices because a tradition may contribute differently to broad condition versus timing/intensity.</li>
+       <li>If a system is disabled or has missing coverage, the remaining selected channels renormalize to 100% for that domain and metric.</li>
+       <li><b>BNN is not a fourth ensemble voter</b> when BPHS is selected. If explicitly enabled, it contributes a bounded 15% corroboration inside the Vedic channel. If BPHS is disabled and BNN is selected alone, BNN can occupy the Vedic channel for comparison.</li>
+       <li><b>Equal comparison</b> is available as a control for methodological comparison. <b>Custom/API</b> can be used for research/debugging without changing the specialist defaults.</li>
+       <li>Agreement is computed across top-level channels after routing, so internally correlated Vedic methods do not masquerade as independent cross-tradition consensus.</li>
+      </ul>
+    </div>
+<div class="guideBox"><h4>Register another dynamic system</h4><div class="code">AstroHeatmap.addSystem({
   id: "provider_jyotish",
   name: "OtherProvider: Jyotish",
   targetShare: 0.10,
@@ -1511,7 +1540,7 @@ Prana      2%</div>
        <li><b>Primary Vedic engine: BPHS Classical Core.</b> Daśā interpretation is locked to natural nature + house lordship + D1 placement + dignity + relevant-varga corroboration, with projected Gochara used as a delivery overlay.</li>
        <li>Numerical heatmap values are fixed normalization for visualization; they are <b>not presented as scriptural percentages</b>. The underlying rule family and evidence are preserved in the breakdown.</li>
        <li><b>BNN is a separate independent comparator.</b> Its conservative core uses natural karakas/hero planets, conjunctions, trinal circuits and Jupiter/Saturn/Rahu/Ketu activation. It does <b>not</b> borrow Vimśottari from BPHS.</li>
-       <li><b>BNN is installed but unchecked by default</b> in Combined systems. If you explicitly enable it, its nominal comparison weight is 15% before selected-system renormalization.</li>
+       <li><b>BNN is installed but unchecked by default</b> in Combined systems. If enabled alongside BPHS, it contributes 15% inside the Vedic channel (85% BPHS + 15% BNN). Without BPHS, it occupies the Vedic channel; it is never an additional fourth vote alongside BPHS.</li>
        <li>Full Śaḍbala and Aṣṭakavarga are not silently approximated in the BPHS primary engine. They should be added only as separately verified source-locked modules so the methodology cannot drift.</li>
       </ul>
     </div>
@@ -1709,7 +1738,7 @@ const VEDIC_LEVEL_WEIGHT_POLICY={
 };
 const DOMAINS=["Career","Wealth","Marriage","Family","Children","Vitality","Mind","Spiritual","Reinvention","Learning","Autonomy","Mentorship"];
 const ASTROLOGY_METHOD_REGISTRY={
- version:"2026.09-v20.4-parent-dominant",
+ version:"2026.09-v20.5-domain-specialist-routing",
  primaryVedic:"BPHS",
  methods:{
   BPHS:{
@@ -1868,10 +1897,11 @@ function methodSelectionInvariant(){
      primary=bp?.methodKey==="BPHS"&&bp?.primary===true&&bp?.sourceLocked===true,
      bnnExists=bn?.methodKey==="BNN"&&bn?.active===true&&bn?.sourceLocked===true,
      bnnOffDefault=!DEFAULT_SELECTED_SYSTEM_IDS.includes("BNN")&&bn?.defaultSelected===false,
-     weights=DOMAINS.every(d=>Number.isFinite(WEIGHTS[d]?.BNN)),
+     internal=DOMAINS.every(d=>(CANONICAL_WEIGHTS[d]?.BNN??0)===0&&(CANONICAL_ACTIVATION_WEIGHTS[d]?.BNN??0)===0)&&SYSTEM_ROUTING_POLICY.bnnInternalShare===.15,
+     specialist=DOMAINS.every(d=>Math.abs(["Vedic","Western","Saju"].reduce((a,id)=>a+(CANONICAL_WEIGHTS[d]?.[id]||0),0)-1)<1e-9&&Math.abs(["Vedic","Western","Saju"].reduce((a,id)=>a+(CANONICAL_ACTIVATION_WEIGHTS[d]?.[id]||0),0)-1)<1e-9),
      independent=!(bn?.cycleKeys||[]).includes("vimshottari");
- return{ok:primary&&bnnExists&&bnnOffDefault&&weights&&independent,
-  detail:`BPHS primary ${primary?"PASS":"FAIL"} · BNN installed ${bnnExists?"PASS":"FAIL"} · BNN off by default ${bnnOffDefault?"PASS":"FAIL"} · comparator weights ${weights?"PASS":"FAIL"} · no Vimśottari leakage into BNN ${independent?"PASS":"FAIL"}`};
+ return{ok:primary&&bnnExists&&bnnOffDefault&&internal&&specialist&&independent,
+  detail:`BPHS primary ${primary?"PASS":"FAIL"} · BNN installed ${bnnExists?"PASS":"FAIL"} · BNN off by default ${bnnOffDefault?"PASS":"FAIL"} · BNN internal 15% corroborator ${internal?"PASS":"FAIL"} · specialist matrices normalize ${specialist?"PASS":"FAIL"} · no Vimśottari leakage into BNN ${independent?"PASS":"FAIL"}`};
 }
 
 function bnnRelationWeight(a,b){const rel=bnnRelations(a,b);return rel.length?[...rel].sort((x,y)=>y.weight-x.weight)[0]:null}
@@ -2093,14 +2123,36 @@ function bnnRelations(a,b){
  if(rulerOfSignIndex(sa)===b&&rulerOfSignIndex(sb)===a)out.push({kind:'exchange',weight:.9});
  return out;
 }
-const CANONICAL_WEIGHTS={
- Career:{Vedic:.45,Western:.35,Saju:.20,BNN:.15}, Wealth:{Vedic:.40,Western:.25,Saju:.35,BNN:.15},
- Marriage:{Vedic:.40,Western:.40,Saju:.20,BNN:.15}, Family:{Vedic:.40,Western:.35,Saju:.25,BNN:.15},
- Children:{Vedic:.50,Western:.30,Saju:.20,BNN:.15}, Vitality:{Vedic:.35,Western:.35,Saju:.30,BNN:.15},
- Mind:{Vedic:.30,Western:.50,Saju:.20,BNN:.15}, Spiritual:{Vedic:.50,Western:.30,Saju:.20,BNN:.15},
- Reinvention:{Vedic:.30,Western:.45,Saju:.25,BNN:.15}, Learning:{Vedic:.40,Western:.35,Saju:.25,BNN:.15},
- Autonomy:{Vedic:.30,Western:.45,Saju:.25,BNN:.15}, Mentorship:{Vedic:.50,Western:.30,Saju:.20,BNN:.15}
+// Domain-specialist ensemble routing.
+// These weights are methodological routing choices inside this engine, not empirically
+// established accuracy rates for astrology traditions.
+const SPECIALIST_SUPPORT_WEIGHTS={
+ Career:{Vedic:.45,Western:.20,Saju:.35,BNN:0}, Wealth:{Vedic:.45,Western:.15,Saju:.40,BNN:0},
+ Marriage:{Vedic:.40,Western:.40,Saju:.20,BNN:0}, Family:{Vedic:.40,Western:.35,Saju:.25,BNN:0},
+ Children:{Vedic:.55,Western:.25,Saju:.20,BNN:0}, Vitality:{Vedic:.35,Western:.25,Saju:.40,BNN:0},
+ Mind:{Vedic:.25,Western:.55,Saju:.20,BNN:0}, Spiritual:{Vedic:.60,Western:.25,Saju:.15,BNN:0},
+ Reinvention:{Vedic:.20,Western:.45,Saju:.35,BNN:0}, Learning:{Vedic:.35,Western:.35,Saju:.30,BNN:0},
+ Autonomy:{Vedic:.30,Western:.40,Saju:.30,BNN:0}, Mentorship:{Vedic:.40,Western:.35,Saju:.25,BNN:0}
 };
+const SPECIALIST_ACTIVATION_WEIGHTS={
+ Career:{Vedic:.50,Western:.30,Saju:.20,BNN:0}, Wealth:{Vedic:.45,Western:.25,Saju:.30,BNN:0},
+ Marriage:{Vedic:.40,Western:.40,Saju:.20,BNN:0}, Family:{Vedic:.40,Western:.40,Saju:.20,BNN:0},
+ Children:{Vedic:.50,Western:.30,Saju:.20,BNN:0}, Vitality:{Vedic:.35,Western:.35,Saju:.30,BNN:0},
+ Mind:{Vedic:.25,Western:.60,Saju:.15,BNN:0}, Spiritual:{Vedic:.55,Western:.30,Saju:.15,BNN:0},
+ Reinvention:{Vedic:.25,Western:.45,Saju:.30,BNN:0}, Learning:{Vedic:.35,Western:.40,Saju:.25,BNN:0},
+ Autonomy:{Vedic:.30,Western:.45,Saju:.25,BNN:0}, Mentorship:{Vedic:.40,Western:.40,Saju:.20,BNN:0}
+};
+const SYSTEM_ROUTING_POLICY={
+ id:"domain-specialist-v20.5",
+ version:"2026.09-v20.5",
+ defaultMode:"specialist",
+ bnnInternalShare:.15,
+ support:structuredClone(SPECIALIST_SUPPORT_WEIGHTS),
+ activation:structuredClone(SPECIALIST_ACTIVATION_WEIGHTS),
+ note:"Domain- and metric-specific methodological routing; not empirical accuracy percentages. BNN is an internal Vedic corroborator when BPHS is selected."
+};
+const CANONICAL_WEIGHTS=structuredClone(SPECIALIST_SUPPORT_WEIGHTS);
+const CANONICAL_ACTIVATION_WEIGHTS=structuredClone(SPECIALIST_ACTIVATION_WEIGHTS);
 const VEDIC_PROFILE={
  Jupiter:[1,2,1,1,2,1,1,2,1,2,1,2],Sun:[2,1,0,1,0,1,1,0,0,1,1,1],
  Mercury:[2,1,0,1,0,0,1,1,2,2,2,1],Moon:[1,1,1,2,2,0,0,2,1,1,0,2],
@@ -2191,6 +2243,8 @@ let SYSTEMS={
  Saju:{id:"Saju",name:"Built-in: Saju",active:true,defaultSelected:true,targetShare:null,cycleKeys:["saju"],structuralFamilies:[],practiceFamily:"Saju",calculator:ctx=>scoreSajuAt(ctx.ms),activationCalculator:ctx=>activationSajuAt(ctx.ms)}
 };
 let WEIGHTS=structuredClone(CANONICAL_WEIGHTS);
+let ACTIVATION_WEIGHTS=structuredClone(CANONICAL_ACTIVATION_WEIGHTS);
+let SYSTEM_ROUTING_MODE="specialist"; // specialist | equal | custom
 
 const STRUCTURAL_ROUTING={
  Career:{D1:.55,D10:.35,D9:.10},
@@ -2342,7 +2396,7 @@ function gradientRGB(t){const S=[{p:0,c:[150,45,55]},{p:.25,c:[202,112,69]},{p:.
 // Display-only reference distribution: unchanged Prana scores, weighted by included time.
 let lifetimeDisplayState=null;
 function lifetimeDisplayReference(){
- const bounds=lifeBounds(),signature=JSON.stringify([[...selectedSystemIds],WEIGHTS,selectedDimensions(),bounds.a,bounds.b]);
+ const bounds=lifeBounds(),signature=JSON.stringify([[...selectedSystemIds],routingMatrix("support"),SYSTEM_ROUTING_MODE,SYSTEM_ROUTING_POLICY.bnnInternalShare,selectedDimensions(),bounds.a,bounds.b]);
  if(lifetimeDisplayState?.chart===chart&&lifetimeDisplayState.signature===signature&&scoreCache.get('lifetime-display-reference')===lifetimeDisplayState)return lifetimeDisplayState;
  const leaves=[],walk=p=>{const children=durationSummaryChildren(p);if(children.length)children.forEach(walk);else if(p.b>p.a)leaves.push({period:p,duration:p.b-p.a})};
  walk({a:bounds.a,b:bounds.b,path:[]});
@@ -3483,17 +3537,34 @@ function durationSystemMetrics(period,id){
 }
 let durationBlendSignature='',durationBlendVersion=0;
 function durationCombinedMetrics(period){
- const signature=JSON.stringify([[...selectedSystemIds],WEIGHTS]);
+ const signature=JSON.stringify([[...selectedSystemIds],WEIGHTS,ACTIVATION_WEIGHTS,SYSTEM_ROUTING_MODE,SYSTEM_ROUTING_POLICY.bnnInternalShare]);
  if(signature!==durationBlendSignature){durationBlendSignature=signature;durationBlendVersion++}
  const key='duration-combined:'+JSON.stringify([period.a,period.b,period.path,durationBlendVersion]);
  if(scoreCache.has(key))return scoreCache.get(key);
  const children=durationSummaryChildren(period);let value;
  if(children.length)value=weightedMetricArrays(period,children,children.map(durationCombinedMetrics));
  else{
-  const systems=selectedSystems().map(s=>({id:s.id,metrics:durationSystemMetrics(period,s.id)}));value={support:[],activation:[],coverage:{support:[],activation:[]},leafCount:1};
+  const systems=selectedEnsembleSystems().map(sys=>{
+   let metrics=durationSystemMetrics(period,sys.id);
+   if(sys.id==="Vedic"&&bnnInternalCorroborationActive()){
+    const bnn=durationSystemMetrics(period,"BNN");
+    metrics={
+     ...metrics,
+     support:metrics.support.map((v,i)=>internalCorroboratorBlend(v,bnn.support?.[i])),
+     activation:metrics.activation.map((v,i)=>internalCorroboratorBlend(v,bnn.activation?.[i]))
+    };
+   }
+   return{id:sys.id,metrics};
+  });
+  value={support:[],activation:[],coverage:{support:[],activation:[]},leafCount:1};
   for(const metric of ['support','activation'])for(let di=0;di<DOMAINS.length;di++){
-   let num=0,den=0;for(const s of systems){const x=s.metrics[metric]?.[di],w=effectiveNominalWeight(DOMAINS[di],s.id);if(Number.isFinite(x)){num+=w*x;den+=w}}
-   value[metric][di]=den?num/den:metric==='support'?0:null;value.coverage[metric][di]=Number.isFinite(value[metric][di])?period.b-period.a:0;
+   let num=0,den=0;
+   for(const row of systems){
+    const x=row.metrics[metric]?.[di],w=effectiveNominalWeight(DOMAINS[di],row.id,metric);
+    if(Number.isFinite(x)){num+=w*x;den+=w}
+   }
+   value[metric][di]=den?num/den:metric==='support'?0:null;
+   value.coverage[metric][di]=Number.isFinite(value[metric][di])?period.b-period.a:0;
   }
  }
  scoreCache.set(key,value);return value;
@@ -4331,11 +4402,14 @@ function perSystemActivationPeriod(period,id,di){
 
 function activationPeriod(period,di){
  const average=durationWeightedScore(period,di,'combined-activation');if(average!==undefined)return average;
- const domain=DOMAINS[di],systems=selectedSystems(),vedic=systems.some(s=>s.id==='Vedic')?activationVedicPeriod(period,di):null;
+ const domain=DOMAINS[di],systems=selectedEnsembleSystems(),
+       vedicRaw=systems.some(s=>s.id==='Vedic')?activationVedicPeriod(period,di):null,
+       bnnRaw=bnnInternalCorroborationActive()?perSystemActivationPeriod(period,"BNN",di):null,
+       vedic=systems.some(s=>s.id==='Vedic')?internalCorroboratorBlend(vedicRaw,bnnRaw):null;
  const vals=sampleTimes(period).map(ms=>{
   const rows=systems.map(sys=>({id:sys.id,value:sys.id==='Vedic'?vedic:hasVedicPeriodPath(period)&&period.path.length===5?pranaSystemValues(period,sys.id,'activation')?.[di]:activationSystemAt(sys.id,ms)?.[di]})).filter(x=>Number.isFinite(x.value));
-  const den=rows.reduce((sum,x)=>sum+effectiveNominalWeight(domain,x.id),0);
-  return den?rows.reduce((sum,x)=>sum+x.value*effectiveNominalWeight(domain,x.id)/den,0):null;
+  const den=rows.reduce((sum,x)=>sum+effectiveNominalWeight(domain,x.id,"activation"),0);
+  return den?rows.reduce((sum,x)=>sum+x.value*effectiveNominalWeight(domain,x.id,"activation")/den,0):null;
  }).filter(Number.isFinite);
  return vals.length?clamp(avg(vals),0,2):null;
 }
@@ -4701,9 +4775,61 @@ function selectedPracticeFamilies(){
 function hasSelectedPracticeFamily(family){return selectedPracticeFamilies().includes(family)}
 
 
-function effectiveNominalWeight(domain,id){return WEIGHTS[domain]?.[id]??0}
+function bnnInternalCorroborationActive(){return SYSTEMS.Vedic?.active&&SYSTEMS.BNN?.active&&selectedSystemIds.has("Vedic")&&selectedSystemIds.has("BNN")}
+function selectedEnsembleSystems(){
+ let rows=selectedSystems();
+ // When BPHS is selected, BNN is not a second top-level voter. It becomes an
+ // internal corroborator inside the Vedic channel.
+ if(rows.some(x=>x.id==="Vedic"))rows=rows.filter(x=>x.id!=="BNN");
+ return rows;
+}
+function routingMatrix(metric="support"){return SYSTEM_ROUTING_MODE==="custom"?(metric==="activation"?ACTIVATION_WEIGHTS:WEIGHTS):(metric==="activation"?CANONICAL_ACTIVATION_WEIGHTS:CANONICAL_WEIGHTS)}
+function effectiveNominalWeight(domain,id,metric="support"){
+ if(SYSTEM_ROUTING_MODE==="equal"){
+  if(id==="BNN"&&SYSTEMS.Vedic?.active&&selectedSystemIds.has("Vedic"))return 0;
+  return 1;
+ }
+ const matrix=routingMatrix(metric);
+ // BNN substitutes for the Vedic channel only when BPHS itself is not selected.
+ if(id==="BNN"){
+  if(SYSTEMS.Vedic?.active&&selectedSystemIds.has("Vedic"))return 0;
+  return matrix[domain]?.Vedic??0;
+ }
+ return matrix[domain]?.[id]??0;
+}
+function internalCorroboratorBlend(primary,secondary){
+ if(!Number.isFinite(primary))return Number.isFinite(secondary)?secondary:null;
+ if(!Number.isFinite(secondary))return primary;
+ const share=SYSTEM_ROUTING_POLICY.bnnInternalShare;
+ return primary+(secondary-primary)*share;
+}
+function scoreEnsembleChannelAt(id,ms){
+ const base=scoreSystemAt(id,ms);
+ if(id!=="Vedic"||!bnnInternalCorroborationActive())return base;
+ const bnn=scoreSystemAt("BNN",ms);
+ return base.map((v,i)=>internalCorroboratorBlend(v,bnn?.[i]));
+}
+function activationEnsembleChannelAt(id,ms){
+ const base=activationSystemAt(id,ms);
+ if(id!=="Vedic"||!bnnInternalCorroborationActive())return base;
+ const bnn=activationSystemAt("BNN",ms);
+ return base.map((v,i)=>internalCorroboratorBlend(v,bnn?.[i]));
+}
 function scoreSystemAt(id,ms){let sys=SYSTEMS[id];if(!sys)return Array(12).fill(null);try{return sys.calculator({ms,profile,chart,domainNames:DOMAINS})}catch(e){console.error("system calculator",id,e);return Array(12).fill(null)}}
-function combinedAt(ms){let per=Object.fromEntries(selectedSystems().map(s=>[s.id,scoreSystemAt(s.id,ms)])),out=[],weightsByDomain=[];for(let di=0;di<12;di++){let domain=DOMAINS[di],eligible=selectedSystems().filter(s=>Number.isFinite(per[s.id]?.[di])),den=eligible.reduce((a,s)=>a+effectiveNominalWeight(domain,s.id),0),w={};let v=0;if(den>0)for(const sys of eligible){w[sys.id]=effectiveNominalWeight(domain,sys.id)/den;v+=per[sys.id][di]*w[sys.id]}out[di]=den?clamp(v,-2,2):0;weightsByDomain[di]=w}return{combined:out,per,weightsByDomain}}
+function combinedAt(ms){
+ const ensemble=selectedEnsembleSystems(),
+       perRaw=Object.fromEntries(selectedSystems().map(s=>[s.id,scoreSystemAt(s.id,ms)])),
+       per=Object.fromEntries(ensemble.map(s=>[s.id,scoreEnsembleChannelAt(s.id,ms)])),
+       out=[],weightsByDomain=[];
+ for(let di=0;di<12;di++){
+  const domain=DOMAINS[di],eligible=ensemble.filter(s=>Number.isFinite(per[s.id]?.[di])&&effectiveNominalWeight(domain,s.id,"support")>0),
+        den=eligible.reduce((a,s)=>a+effectiveNominalWeight(domain,s.id,"support"),0),w={};
+  let v=0;
+  if(den>0)for(const sys of eligible){w[sys.id]=effectiveNominalWeight(domain,sys.id,"support")/den;v+=per[sys.id][di]*w[sys.id]}
+  out[di]=den?clamp(v,-2,2):0;weightsByDomain[di]=w;
+ }
+ return{combined:out,per,perRaw,weightsByDomain,internalCorroborator:bnnInternalCorroborationActive()?"BNN":null};
+}
 function sampleTimes(period){
  if(hasVedicPeriodPath(period)&&period.path.length===5)return[pranaMidpoint(period)];
  const mode=$("sampleMode").value;
@@ -4716,11 +4842,14 @@ function sampleTimes(period){
 function scorePeriod(period,di){
  const average=durationWeightedScore(period,di,'combined-support');if(average!==undefined)return average;
  // Preserve per-date missing-coverage normalization for imported systems.
- const systems=selectedSystems(),domain=DOMAINS[di],vedic=systems.some(s=>s.id==='Vedic')?scoreVedicPeriod(period,di):null;
+ const systems=selectedEnsembleSystems(),domain=DOMAINS[di],
+       vedicRaw=systems.some(s=>s.id==='Vedic')?scoreVedicPeriod(period,di):null,
+       bnnRaw=bnnInternalCorroborationActive()?perSystemPeriod(period,"BNN",di):null,
+       vedic=systems.some(s=>s.id==='Vedic')?internalCorroboratorBlend(vedicRaw,bnnRaw):null;
  const values=sampleTimes(period).map(ms=>{
   const rows=systems.map(sys=>({id:sys.id,value:sys.id==='Vedic'?vedic:hasVedicPeriodPath(period)&&period.path.length===5?pranaSystemValues(period,sys.id,'support')?.[di]:scoreSystemAt(sys.id,ms)?.[di]})).filter(x=>Number.isFinite(x.value));
-  const den=rows.reduce((sum,x)=>sum+effectiveNominalWeight(domain,x.id),0);
-  return den?rows.reduce((sum,x)=>sum+x.value*effectiveNominalWeight(domain,x.id)/den,0):0;
+  const den=rows.reduce((sum,x)=>sum+effectiveNominalWeight(domain,x.id,"support"),0);
+  return den?rows.reduce((sum,x)=>sum+x.value*effectiveNominalWeight(domain,x.id,"support")/den,0):0;
  });return clamp(avg(values),-2,2);
 }
 
@@ -4733,8 +4862,22 @@ function perSystemPeriod(period,id,di){
 }
 function selectedDimensions(){let a=DOMAINS.filter(d=>selectedDimensionsSet.has(d));if(!a.length){selectedDimensionsSet.add("Career");return["Career"]}return a}
 function scoreSelected(period){let ds=selectedDimensions();return ds.reduce((a,d)=>a+scorePeriod(period,DOMAINS.indexOf(d)),0)/ds.length}
-function agreement(period,di){let c=scorePeriod(period,di),cf=c>=.45?1:c<=-.45?-1:0,sys=selectedSystems(),mid=midpoint(period.a,period.b),combo=combinedAt(mid),w=combo.weightsByDomain[di],n=0,wt=0,total=0;for(const s of sys){let x=perSystemPeriod(period,s.id,di);if(!Number.isFinite(x)||!w[s.id])continue;let f=x>=.45?1:x<=-.45?-1:0;total+=w[s.id];if(f===cf){n++;wt+=w[s.id]}}return{n,totalSystems:Object.keys(w).length,weighted:total?wt/total:0}}
-function selectedSystemLabel(){let s=selectedSystems();return s.length===1?s[0].name:`Combined · ${s.length} systems`}
+function agreement(period,di){
+ let c=scorePeriod(period,di),cf=c>=.45?1:c<=-.45?-1:0,sys=selectedEnsembleSystems(),mid=midpoint(period.a,period.b),combo=combinedAt(mid),w=combo.weightsByDomain[di],n=0,wt=0,total=0;
+ for(const row of sys){
+  let x=row.id==="Vedic"&&bnnInternalCorroborationActive()
+   ?internalCorroboratorBlend(perSystemPeriod(period,"Vedic",di),perSystemPeriod(period,"BNN",di))
+   :perSystemPeriod(period,row.id,di);
+  if(!Number.isFinite(x)||!w[row.id])continue;
+  let f=x>=.45?1:x<=-.45?-1:0;total+=w[row.id];if(f===cf){n++;wt+=w[row.id]}
+ }
+ return{n,totalSystems:Object.keys(w).length,weighted:total?wt/total:0};
+}
+function selectedSystemLabel(){
+ let channels=selectedEnsembleSystems(),bnn=bnnInternalCorroborationActive();
+ if(channels.length===1&&!bnn)return channels[0].name;
+ return`Combined · ${channels.length} channels${bnn?" + BNN corroborator":""}`;
+}
 function dimensionLabel(){let d=selectedDimensions();return d.length===12?"All dimensions · 12":d.length===1?d[0]:`${d.length} dimensions`}
 
 
@@ -5063,7 +5206,7 @@ function renderSystemPicker(){
  box.innerHTML=Object.values(SYSTEMS).map(s=>{
   let method=s.methodKey?ASTROLOGY_METHOD_REGISTRY.methods[s.methodKey]:null,
       flags=[s.primary?"PRIMARY":null,s.defaultSelected===false?"OFF by default":null,s.sourceLocked?"source-locked":null].filter(Boolean).join(" · "),
-      meta=[s.active?"Enabled":"Disabled",s.static?"static intervals":"dynamic calculator",flags,`avg nominal ${(averageSystemWeight(s.id)*100).toFixed(1)}%`].filter(Boolean).join(" · ");
+      meta=[s.active?"Enabled":"Disabled",s.static?"static intervals":"dynamic calculator",flags,(s.id==="BNN"&&selectedSystemIds.has("Vedic")?"15% inside Vedic when selected":`avg routing ${(averageSystemWeight(s.id)*100).toFixed(1)}% support / ${(averageSystemWeight(s.id,"activation")*100).toFixed(1)}% activation`)].filter(Boolean).join(" · ");
   return`<label class="multiDropOption"><input type="checkbox" data-sys="${s.id}" ${selectedSystemIds.has(s.id)&&s.active?"checked":""} ${s.active?"":"disabled"}><span><b>${s.name}</b><div class="multiDropMeta">${meta}</div>${method?`<div class="evidenceTrace">${method.boundary}</div>`:""}</span></label>`
  }).join("");
  box.querySelectorAll("input[data-sys]").forEach(i=>i.onchange=()=>{if(i.checked)selectedSystemIds.add(i.dataset.sys);else selectedSystemIds.delete(i.dataset.sys);selectedSystems();render()});
@@ -5392,8 +5535,26 @@ function renderSelected(){
 function bestCarrier(domain,vals){let choices=(CARRIERS[domain]||[]).map(d=>vals.find(x=>x.d===d)).filter(Boolean).sort((a,b)=>b.s-a.s);return choices[0]||vals[0]}
 function renderPlaybook(){let vals=phaseDomainValues(),p=currentDisplayPeriod();$("playbookPhase").textContent=`${(cycleFamilyKey==="vimshottari"&&prefix.length)?prefix.join(" → "):(cycleSelection?(cycleSelection.label||cycleSelection.lord):"All life")} · ${fmt(Math.max(p.a,chart.birthMs))} → ${fmt(Math.min(p.b,chart.birthMs+profile.horizon*YEAR_MS))}`;let rank=vals.map((x,i)=>({...x,mode:x.s>=.7?"PUSH":x.s>=.3?"BUILD":x.s<=-.45?"PROTECT":i>=Math.ceil(vals.length*.65)?"TRANSFER":"BUILD"}));let pri=[rank[0],rank.find(x=>x.mode==="BUILD"),[...rank].reverse().find(x=>x.mode==="PROTECT"||x.s<.2)].filter(Boolean);$("priorityGrid").innerHTML=pri.slice(0,3).map((x,i)=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?`${carrier.d} (${signed(carrier.s)})`:"a stronger domain");return`<div class="priorityBox"><div class="kicker">${["Exploit","Build next","Protect"][i]||x.mode}</div><div class="title">${x.d} · ${signed(x.s)}</div><div class="body">${text}</div></div>`}).join("");$("playbookTable").innerHTML=`<tr><th>Domain</th><th>Score</th><th>Mode</th><th>Guidance</th><th>Carrier</th></tr>`+rank.map(x=>{let carrier=bestCarrier(x.d,vals),key=x.mode==="PUSH"?"push":x.mode==="PROTECT"?"protect":x.mode==="TRANSFER"?"transfer":"build",text=ACTIONS[x.d][key].replace("{carrier}",carrier?carrier.d:"a stronger domain");return`<tr><td><b>${x.d}</b></td><td>${metricValueHTML(x.s)}</td><td><span class="mode">${x.mode}</span></td><td>${text}</td><td>${carrier&&carrier.d!==x.d?`${carrier.d} · ${signed(carrier.s)}`:"—"}</td></tr>`}).join("")}
 
-function averageSystemWeight(id){return DOMAINS.reduce((a,d)=>a+(WEIGHTS[d]?.[id]||0),0)/DOMAINS.length}
-function renderWeights(){let ss=selectedSystems(),t=$("weightsTable");t.innerHTML="<tr><th>Domain</th>"+ss.map(s=>`<th>${s.name}</th>`).join("")+"</tr>"+DOMAINS.map(d=>{let den=ss.reduce((a,s)=>a+effectiveNominalWeight(d,s.id),0);return`<tr><td>${d}</td>${ss.map(s=>`<td>${den?((effectiveNominalWeight(d,s.id)/den)*100).toFixed(1):"0"}%</td>`).join("")}</tr>`}).join("")}
+function averageSystemWeight(id,metric="support"){return DOMAINS.reduce((a,d)=>a+effectiveNominalWeight(d,id,metric),0)/DOMAINS.length}
+function renderWeights(){
+ const ss=selectedEnsembleSystems(),t=$("weightsTable"),mode=$("systemRoutingMode");
+ if(mode){mode.value=SYSTEM_ROUTING_MODE;mode.onchange=()=>{AstroHeatmap.setSystemRoutingMode(mode.value)}}
+ const note=$("routingPolicyNote");
+ if(note)note.textContent=SYSTEM_ROUTING_MODE==="equal"
+   ?"Equal comparison: every selected top-level channel receives the same weight; this is for methodological comparison, not the default."
+   :SYSTEM_ROUTING_MODE==="custom"
+     ?"Custom/API routing: current support and activation matrices are used as edited through AstroHeatmap.setSystemRoutingWeights()."
+     :"Specialist routing: domain- and metric-specific methodological emphasis; not empirical accuracy percentages.";
+ t.innerHTML="<tr><th>Domain</th>"+ss.map(x=>`<th>${catalogEscape(x.id)}<br><span class="small">Support / Activation</span></th>`).join("")+"</tr>"+DOMAINS.map(d=>{
+  const ds=ss.reduce((a,x)=>a+effectiveNominalWeight(d,x.id,"support"),0),
+        da=ss.reduce((a,x)=>a+effectiveNominalWeight(d,x.id,"activation"),0);
+  return`<tr><td><b>${d}</b></td>${ss.map(x=>{
+   const sw=ds?100*effectiveNominalWeight(d,x.id,"support")/ds:0,
+         aw=da?100*effectiveNominalWeight(d,x.id,"activation")/da:0;
+   return`<td aria-label="Support ${sw.toFixed(0)} percent; Activation ${aw.toFixed(0)} percent"><span>${sw.toFixed(0)}%</span><span class="routing-separator"> / </span><span>${aw.toFixed(0)}%</span></td>`;
+  }).join("")}</tr>`;
+ }).join("");
+}
 
 
 function parseDegreeText(txt){
@@ -7320,8 +7481,14 @@ function addSystem(opts={}){
    practiceFamily:opts.practiceFamily||null,
    calculator:opts.calculator,
    activationCalculator:typeof opts.activationCalculator==="function"?opts.activationCalculator:null};
- for(const d of DOMAINS){let old=Object.keys(WEIGHTS[d]).reduce((a,k)=>a+WEIGHTS[d][k],0),share=clamp(opts.targetShare??.10,0,.95);for(const k of Object.keys(WEIGHTS[d]))WEIGHTS[d][k]=old?WEIGHTS[d][k]/old*(1-share):(1-share)/Object.keys(WEIGHTS[d]).length;WEIGHTS[d][id]=share}
- selectedSystemIds.add(id);ensureCycleFamily();render();return id;
+ for(const d of DOMAINS){
+  const supportShare=clamp(opts.targetShare??.10,0,.95),activationShare=clamp(opts.activationTargetShare??opts.targetShare??.10,0,.95);
+  let oldS=Object.keys(WEIGHTS[d]).reduce((a,k)=>a+WEIGHTS[d][k],0),oldA=Object.keys(ACTIVATION_WEIGHTS[d]).reduce((a,k)=>a+ACTIVATION_WEIGHTS[d][k],0);
+  for(const k of Object.keys(WEIGHTS[d]))WEIGHTS[d][k]=oldS?WEIGHTS[d][k]/oldS*(1-supportShare):(1-supportShare)/Math.max(1,Object.keys(WEIGHTS[d]).length);
+  for(const k of Object.keys(ACTIVATION_WEIGHTS[d]))ACTIVATION_WEIGHTS[d][k]=oldA?ACTIVATION_WEIGHTS[d][k]/oldA*(1-activationShare):(1-activationShare)/Math.max(1,Object.keys(ACTIVATION_WEIGHTS[d]).length);
+  WEIGHTS[d][id]=supportShare;ACTIVATION_WEIGHTS[d][id]=activationShare;
+ }
+ SYSTEM_ROUTING_MODE="custom";selectedSystemIds.add(id);ensureCycleFamily();render();return id;
 }
 function catalogEscape(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function catalogFold(value){return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
@@ -7352,6 +7519,22 @@ function renderYogaCatalog(yogas,active,windows,ms){
 window.AstroHeatmap={
  getVedicPeriodBreakdown:(period,domain)=>structuredClone(vedicPeriodBreakdown(period,DOMAINS.indexOf(domain))),
  getVimshottariLevelWeights:()=>structuredClone(VEDIC_LEVEL_WEIGHT_POLICY),
+ getSystemRouting:()=>structuredClone({mode:SYSTEM_ROUTING_MODE,policy:SYSTEM_ROUTING_POLICY,support:routingMatrix("support"),activation:routingMatrix("activation"),customSupport:WEIGHTS,customActivation:ACTIVATION_WEIGHTS,bnnInternal:bnnInternalCorroborationActive()}),
+ setSystemRoutingMode:mode=>{if(!["specialist","equal","custom"].includes(mode))throw new Error("Routing mode must be specialist, equal, or custom");SYSTEM_ROUTING_MODE=mode;render()},
+ setSystemRoutingWeights:(metric,matrix)=>{
+  if(!["support","activation"].includes(metric))throw new Error("metric must be support or activation");
+  if(!matrix||typeof matrix!=="object"||Array.isArray(matrix))throw new Error("Routing matrix must be an object");
+  const next=structuredClone(metric==="support"?WEIGHTS:ACTIVATION_WEIGHTS);
+  for(const [domain,row] of Object.entries(matrix)){
+   if(!DOMAINS.includes(domain)||!row||typeof row!=="object"||Array.isArray(row))throw new Error("Invalid routing domain/row");
+   for(const [id,v] of Object.entries(row)){
+    if(!SYSTEMS[id]||typeof v!=="number"||!Number.isFinite(v)||v<0||id==="BNN"&&v!==0)throw new Error("Weights must be nonnegative finite numbers for installed channels; BNN uses the Vedic channel");
+    next[domain][id]=v;
+   }
+  }
+  if(metric==="support")WEIGHTS=next;else ACTIVATION_WEIGHTS=next;
+  SYSTEM_ROUTING_MODE="custom";render();
+ },
  getPeriodSupport:(period,domain)=>scorePeriod(period,DOMAINS.indexOf(domain)),
  getPeriodActivation:(period,domain)=>activationPeriod(period,DOMAINS.indexOf(domain)),
  getVedicGochara:(ms=Date.now(),domain="Career")=>structuredClone(vedicGocharaScore(ms,DOMAINS.indexOf(domain),activePathAt(ms,5))),
@@ -7559,8 +7742,8 @@ function _syncStrip(){
 }
 
 function exportCSV(){let groups=visibleGroups(),rows=[["Level","Path","Start","End",...selectedDimensions()]];for(const g of groups)rows.push([LEVELS[g.depth-1]||"Phase",g.path.join(" > "),fmt(g.a),fmt(g.b),...selectedDimensions().map(d=>scorePeriod(g,DOMAINS.indexOf(d)).toFixed(3))]);let csv=rows.map(r=>r.map(x=>`"${String(x).replaceAll('"','""')}"`).join(",")).join("\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="dynamic_astrology_heatmap_visible.csv";a.click()}
-function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.values(SYSTEMS).map(s=>[s.id,{id:s.id,name:s.name,active:s.active,targetShare:s.targetShare,cycleKeys:[...(s.cycleKeys||[])],structuralFamilies:[...(s.structuralFamilies||[])],practiceFamily:s.practiceFamily||null,static:!!s.static,missingPolicy:s.missingPolicy||null,intervals:s.static?(s.staticIntervals||[]).map(r=>({start:new Date(r.a).toISOString(),end:new Date(r.b).toISOString(),scores:Object.fromEntries(DOMAINS.map((d,i)=>[d,r.scores[i]]))})):undefined}])),weights:WEIGHTS,selectedSystems:[...selectedSystemIds],selectedDimensions:[...selectedDimensionsSet],calculation:{swissReady,baziProvider,dashaDepth:"Prana",sampling:$("sampleMode").value,samplingModel:"uniform-midbin-daily-cap192-v2",expressionModel:"domain-evidence-duration-v2-experimental",
- structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,vedicDevataFormCount:VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length,vedicPracticeCount:VEDIC_KNOWLEDGE_REGISTRY.practices.length,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,methodRegistryVersion:ASTROLOGY_METHOD_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1-gochara",periodScoringModel:"duration-weighted-prana-v19",periodAggregationBase:"Prana",contextScoringModel:"parashari-conditional-audit-v17",directionModel:"support-gated-relative-opportunity-v20.1-unscored",directionMixModel:"duration-weighted-child-action-distribution-v20.3",dashaWeightModel:"parent-dominant-50-30-12-6-2-v20.4",dashaWeightPolicy:VEDIC_LEVEL_WEIGHT_POLICY,directionContextPolicy:DIRECTION_CONTEXT_POLICY,ruleCoverage:CLASSICAL_RULE_AUDIT,activationModel:"partial-strength-and-delivery-v17",vedicPrimaryMethod:"BPHS",bnnPolicy:"installed-off-by-default-independent",interpretiveBenchmarkPolicy:"none",vedicGocharaModel:"lahiri-moon-lagna-drishti-active-lords-double-transit-v1",vedicYogaActivationModel:"major-yoga-registry-v2-natal-dasha-gochara",shaniCycleModel:"moon-sign-sade-sati-4th-8th-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
+function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.values(SYSTEMS).map(s=>[s.id,{id:s.id,name:s.name,active:s.active,targetShare:s.targetShare,cycleKeys:[...(s.cycleKeys||[])],structuralFamilies:[...(s.structuralFamilies||[])],practiceFamily:s.practiceFamily||null,static:!!s.static,missingPolicy:s.missingPolicy||null,intervals:s.static?(s.staticIntervals||[]).map(r=>({start:new Date(r.a).toISOString(),end:new Date(r.b).toISOString(),scores:Object.fromEntries(DOMAINS.map((d,i)=>[d,r.scores[i]]))})):undefined}])),weights:routingMatrix("support"),activationWeights:routingMatrix("activation"),customWeights:WEIGHTS,customActivationWeights:ACTIVATION_WEIGHTS,routingMode:SYSTEM_ROUTING_MODE,routingPolicy:SYSTEM_ROUTING_POLICY,selectedSystems:[...selectedSystemIds],selectedDimensions:[...selectedDimensionsSet],calculation:{swissReady,baziProvider,dashaDepth:"Prana",sampling:$("sampleMode").value,samplingModel:"uniform-midbin-daily-cap192-v2",expressionModel:"domain-evidence-duration-v2-experimental",
+ structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,vedicDevataFormCount:VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length,vedicPracticeCount:VEDIC_KNOWLEDGE_REGISTRY.practices.length,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,methodRegistryVersion:ASTROLOGY_METHOD_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1-gochara",periodScoringModel:"duration-weighted-prana-v19",periodAggregationBase:"Prana",contextScoringModel:"parashari-conditional-audit-v17",directionModel:"support-gated-relative-opportunity-v20.1-unscored",directionMixModel:"duration-weighted-child-action-distribution-v20.3",dashaWeightModel:"parent-dominant-50-30-12-6-2-v20.4",dashaWeightPolicy:VEDIC_LEVEL_WEIGHT_POLICY,directionContextPolicy:DIRECTION_CONTEXT_POLICY,ruleCoverage:CLASSICAL_RULE_AUDIT,activationModel:"partial-strength-and-delivery-v17",vedicPrimaryMethod:"BPHS",bnnPolicy:"internal-15pct-vedic-corroborator-when-selected",systemRoutingModel:"domain-and-metric-specialist-v20.5",interpretiveBenchmarkPolicy:"none",vedicGocharaModel:"lahiri-moon-lagna-drishti-active-lords-double-transit-v1",vedicYogaActivationModel:"major-yoga-registry-v2-natal-dasha-gochara",shaniCycleModel:"moon-sign-sade-sati-4th-8th-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
 
 function switchTab(which){
  closeHeatPreview();
@@ -8153,8 +8336,7 @@ function renderRuleCoverage(){
 function renderMethodComparison(){
  const period=currentDisplayPeriod(),ms=midpoint(period.a,period.b),di=DOMAINS.indexOf(methodComparisonDomain),path=fixedVedicPeriodPath(period),bnn=bnnTimingBreakdown(ms,di),bnSelected=selectedSystemIds.has('BNN'),root=$('methodComparisonBody');
  const scores=[{id:'Vedic',name:'BPHS · primary',support:scoreVedicPeriod(period,di),activation:activationVedicPeriod(period,di)},{id:'BNN',name:'BNN · independent comparator',support:perSystemPeriod(period,'BNN',di),activation:perSystemActivationPeriod(period,'BNN',di)}];
- const nominal=effectiveNominalWeight(methodComparisonDomain,'BNN'),den=selectedSystems().reduce((sum,s)=>sum+effectiveNominalWeight(methodComparisonDomain,s.id),0);
- root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><p class="small">Natal: ${catalogEscape(chart.natalSource)} · transits: ${catalogEscape(bnn.provider)} · ${catalogEscape(profile.ayanamsa)}. ${chart.natalSource!=='Swiss Ephemeris'?'Offline ayanāṃśa and transit positions are approximations; dates and scores can differ from Swiss Ephemeris.':''}</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · nominal ${Math.round(nominal*100)}% before renormalization${bnSelected?` · effective ${(100*nominal/den).toFixed(1)}% for ${methodComparisonDomain}`:''}. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support ${metricValueHTML(x.support)}</div>${methodBar(x.support)}<div>Period activation ${metricValueHTML(x.activation,"activation")}</div>${methodBar(x.activation,true)}<p class="small">${isDurationSummaryPeriod(period)?durationSystemMetrics(period,x.id).leafCount:(x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length)} ${isDurationSummaryPeriod(period)?'Prana midpoint samples · duration weighted':'projected samples'} · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Vimshottari active-lord weights use the v20.4 parent-dominant 50/30/12/6/2 engine normalization; they are not scriptural percentages or probabilities. Coverage is partial; full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · selected-path context</h3><p class="small">Diagnostic context, separate from the duration-weighted total above. ${hasVedicPeriodPath(period)?'Selected path':'Midpoint path illustration'}. Context transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
+ root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><p class="small">Natal: ${catalogEscape(chart.natalSource)} · transits: ${catalogEscape(bnn.provider)} · ${catalogEscape(profile.ayanamsa)}. ${chart.natalSource!=='Swiss Ephemeris'?'Offline ayanāṃśa and transit positions are approximations; dates and scores can differ from Swiss Ephemeris.':''}</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · ${selectedSystemIds.has("Vedic")?"when enabled, 15% internal corroboration inside Vedic (85% BPHS + 15% BNN), not a fourth top-level vote":"when enabled without BPHS, substitutes for the Vedic channel"}. Raw method scores below remain separate; Scale remains the existing BPHS expression index. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support ${metricValueHTML(x.support)}</div>${methodBar(x.support)}<div>Period activation ${metricValueHTML(x.activation,"activation")}</div>${methodBar(x.activation,true)}<p class="small">${isDurationSummaryPeriod(period)?durationSystemMetrics(period,x.id).leafCount:(x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length)} ${isDurationSummaryPeriod(period)?'Prana midpoint samples · duration weighted':'projected samples'} · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Vimshottari active-lord weights use the v20.4 parent-dominant 50/30/12/6/2 engine normalization; they are not scriptural percentages or probabilities. Coverage is partial; full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · selected-path context</h3><p class="small">Diagnostic context, separate from the duration-weighted total above. ${hasVedicPeriodPath(period)?'Selected path':'Midpoint path illustration'}. Context transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
  const a=bphsLordDomainAssessment(lord,di),factors=[['Lordship',a.functional],['D1 placement',a.placement],['Dignity',a.dignity],['Natural nature',a.natural],['Dispositor',a.dispositor.condition],['Associations',a.association],['Varga',a.varga.signal]];
  return `<details><summary>${LEVELS[i]} ${lord} · ${Math.round(normalizedDashaWeights(path.length)[i]*100)}% · support ${signed(a.support)}</summary><p>Activation ${activationDisplay(a.activation)} · domain relevance ${Math.round(a.relevance*100)}%</p><div class="methodFactors">${factors.map(([label,value])=>`<span>${label}</span>${methodBar(value*2)}<span>${signed(value)}</span>`).join('')}</div><p class="small">Factors −1 to +1. ${catalogEscape(a.varga.evidence)}. General contribution ${signed(a.contributions.general)} × relevance floor ${a.contributions.domainFactor.toFixed(2)} × strength ${a.contributions.strengthFactor.toFixed(2)}; independent varga ${signed(a.contributions.varga)}. Dispositor: ${catalogEscape(a.dispositor.host)}. ${catalogEscape(a.functionalDetail.status)}. Rules: ${BPHS_DOMAIN_RULES[methodComparisonDomain].houses.map(h=>'H'+h).join(', ')} · karakas ${BPHS_DOMAIN_RULES[methodComparisonDomain].karakas.join(', ')}.</p></details>`;
  }).join('')}${path.slice(1).map(ad=>{const pair=bphsPairAssessment(path[0],ad,di);return `<details class="pairEvidence"><summary>${path[0]} → ${ad} · context ${signed(pair.pairSignal)}</summary>${pair.evidence.map(e=>`<p class="small">${catalogEscape(e)}</p>`).join('')}<p class="small">${catalogEscape(pair.coverage)}</p></details>`}).join('')}<p class="small">${bphsPathAssociationFactor(path,di).evidence.map(catalogEscape).join(' · ')||'No additional qualifying lord association.'}</p></section><section class="methodCard"><h3>BNN · natal circuits</h3><p class="small">Same-sign, trine, seventh, adjacent-sign, dispositor and exchange links from each domain significator; strongest relationship counted once per actor. Hero → actor; same-sign links do not imply an exact conjunction.</p>${bnn.heroRows.map(row=>`<div class="bnnCircuit"><h4>${row.hero} · circuit signal ${signed(row.score)}</h4>${bnn.connections.filter(c=>c.hero===row.hero).map(c=>`<div class="bnnLink"><span>${c.hero}</span>→<span>${c.actor}</span><small>${c.relations.map(r=>r.kind).join(" / ")} · relation ${c.weight.toFixed(2)} · valence ${signed(c.valence)}</small></div>`).join('')||'<p class="small">No registered natal links.</p>'}</div>`).join('')}<details><summary>Retrograde and degree-order evidence</summary>${bnn.nuances.map(n=>`<p class="small">${n.planet}: ${SIGNS[n.actualSign]} → ${SIGNS[n.projectedSign]} · ${n.status}.</p>`).join('')}<p class="small">${bnn.degreeOrder.map(n=>`${n.name} ${n.degree.toFixed(1)}° ${SIGNS[n.sign]}`).join(' · ')}. Ordering shown as evidence; no automatic event sequence.</p></details><details><summary>Slow-transit triggers · ${bnn.hits.length}</summary><p class="small">Midpoint ${fmt(ms)} · ${catalogEscape(bnn.provider)}. These illustrate the midpoint, not the period average.</p>${bnn.hits.map(x=>`<p class="small">${x.transit} → ${x.target} · ${x.relation} · intensity ${x.intensity.toFixed(2)} · valence ${signed(x.valence)}</p>`).join('')||'<p>No registered triggers.</p>'}</details></section></div><details><summary>Method provenance and boundaries</summary>${Object.values(ASTROLOGY_METHOD_REGISTRY.methods).map(m=>`<div class="methodSource"><h4>${catalogEscape(m.name)}</h4><p>${catalogEscape(m.boundary)}</p><ul>${m.sources.map(s=>`<li>${catalogEscape(s.label)} — ${catalogEscape(s.use)}</li>`).join('')}</ul></div>`).join('')}<p class="small">The rule audit below links the reviewed sources and separates scored rules, partial implementations and evidence-only conventions.</p></details>`;

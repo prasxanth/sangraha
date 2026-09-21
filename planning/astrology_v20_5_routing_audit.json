@@ -1,0 +1,1367 @@
+{
+  "systems": [
+    "Vedic",
+    "Western",
+    "Saju"
+  ],
+  "levelWeights": [
+    0.5,
+    0.3,
+    0.12,
+    0.06,
+    0.02
+  ],
+  "careerSystemWeights": {
+    "Vedic": 0.45,
+    "Western": 0.2,
+    "Saju": 0.35
+  },
+  "mercuryMD": [
+    {
+      "domain": "Career",
+      "support": 0.3045283084587375,
+      "vedic": 0.014937262322831327,
+      "activation": 0.995998670079201,
+      "scale": 1.040104013333558,
+      "percentile": 44.32626657021665,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Wealth",
+      "support": 0.329562049881519,
+      "vedic": 0.05168367478847854,
+      "activation": 0.9447504748275517,
+      "scale": 0.9637585832120599,
+      "percentile": 50.660753689236095,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Marriage",
+      "support": 0.17447616997704976,
+      "vedic": -0.033937683462164095,
+      "activation": 0.8254516660524318,
+      "scale": 0.9631186036793286,
+      "percentile": 46.480566078317864,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Family",
+      "support": 0.236184536879833,
+      "vedic": 0.00407219670373393,
+      "activation": 0.8379636276181593,
+      "scale": 0.8389992493759062,
+      "percentile": 50.97069774305581,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Children",
+      "support": 0.14707943003549429,
+      "vedic": -0.05092679288685411,
+      "activation": 0.7537644183129865,
+      "scale": 0.6721131858299952,
+      "percentile": 38.1133884066358,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Vitality",
+      "support": 0.2593505046473687,
+      "vedic": -0.08665611712779141,
+      "activation": 0.8264593121269106,
+      "scale": 0.7865671753301136,
+      "percentile": 52.3896673562885,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Mind",
+      "support": 0.23954979183919892,
+      "vedic": -0.03347689259185671,
+      "activation": 0.7905864640041712,
+      "scale": 0.7282102533296747,
+      "percentile": 46.80799046103419,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Spiritual",
+      "support": 0.14308765667077608,
+      "vedic": -0.01009255700908707,
+      "activation": 0.8443997695963668,
+      "scale": 0.8079464658747021,
+      "percentile": 29.53526279899695,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Reinvention",
+      "support": 0.37283802173480834,
+      "vedic": 0.003628090401322103,
+      "activation": 0.9376908818612912,
+      "scale": 0.6333750958210854,
+      "percentile": 46.889274387538954,
+      "action": "BUILD"
+    },
+    {
+      "domain": "Learning",
+      "support": 0.3184932146545229,
+      "vedic": -0.013288676478968902,
+      "activation": 0.9884156763287534,
+      "scale": 0.7296302667756186,
+      "percentile": 44.0566648630407,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Autonomy",
+      "support": 0.3409311523506734,
+      "vedic": 0.0293610647988288,
+      "activation": 0.933185686822584,
+      "scale": 0.9977684702562687,
+      "percentile": 45.46698822337995,
+      "action": "HOLD"
+    },
+    {
+      "domain": "Mentorship",
+      "support": 0.2585393275427314,
+      "vedic": -0.0200685507922863,
+      "activation": 0.899037480798843,
+      "scale": 0.8082107271953934,
+      "percentile": 44.58851570698318,
+      "action": "HOLD"
+    }
+  ],
+  "venusAD": [
+    {
+      "domain": "Career",
+      "support": 0.4247599677918694,
+      "vedic": 0.10297850525758917,
+      "activation": 1.0162973815400607,
+      "scale": 0.9350764495447412,
+      "percentile": 85.18323232542473,
+      "action": "ADVANCE"
+    },
+    {
+      "domain": "Wealth",
+      "support": 0.4374414935153031,
+      "vedic": 0.11031212817213114,
+      "activation": 0.9885900285552562,
+      "scale": 0.8686784505818886,
+      "percentile": 89.56667296006943,
+      "action": "ADVANCE"
+    },
+    {
+      "domain": "Marriage",
+      "support": 0.2722439013519724,
+      "vedic": 0.07669631058461492,
+      "activation": 0.8633719316558667,
+      "scale": 1.0004402915223902,
+      "percentile": 80.72573676215292,
+      "action": "SELECTIVE"
+    },
+    {
+      "domain": "Family",
+      "support": 0.33821318764876923,
+      "vedic": 0.10047575048887979,
+      "activation": 0.8755946913828003,
+      "scale": 0.7523748911711025,
+      "percentile": 87.71782187982258,
+      "action": "SELECTIVE"
+    },
+    {
+      "domain": "Children",
+      "support": 0.26297280097921305,
+      "vedic": 0.07546199813989285,
+      "activation": 0.779944534003662,
+      "scale": 0.6249348831522467,
+      "percentile": 86.16338679591048,
+      "action": "SELECTIVE"
+    },
+    {
+      "domain": "Vitality",
+      "support": 0.362178725410893,
+      "vedic": -0.03854286837995884,
+      "activation": 0.8472937165795333,
+      "scale": 0.8362469013106156,
+      "percentile": 86.21716977719939,
+      "action": "ADVANCE"
+    },
+    {
+      "domain": "Mind",
+      "support": 0.34167895409010857,
+      "vedic": 0.07645296532952413,
+      "activation": 0.8464423715820305,
+      "scale": 0.6689587759397119,
+      "percentile": 78.55612291666704,
+      "action": "SELECTIVE"
+    },
+    {
+      "domain": "Spiritual",
+      "support": 0.25264439410205175,
+      "vedic": 0.06272001066765659,
+      "activation": 0.9142411659595251,
+      "scale": 0.8539689212521787,
+      "percentile": 77.613476388889,
+      "action": "SELECTIVE"
+    },
+    {
+      "domain": "Reinvention",
+      "support": 0.514545250046248,
+      "vedic": 0.1279086124320452,
+      "activation": 1.058813603998763,
+      "scale": 0.6024099144235744,
+      "percentile": 78.56673659336454,
+      "action": "ADVANCE"
+    },
+    {
+      "domain": "Learning",
+      "support": 0.43999458105045075,
+      "vedic": 0.08250139991264133,
+      "activation": 1.077616661149794,
+      "scale": 0.6811541916124368,
+      "percentile": 81.824566994599,
+      "action": "ADVANCE"
+    },
+    {
+      "domain": "Autonomy",
+      "support": 0.4275581288767125,
+      "vedic": 0.12310838390697962,
+      "activation": 1.0146169394432494,
+      "scale": 0.9238706615226674,
+      "percentile": 68.66091772280119,
+      "action": "BUILD"
+    },
+    {
+      "domain": "Mentorship",
+      "support": 0.36010087955858106,
+      "vedic": 0.07069694935377742,
+      "activation": 0.9387383752467863,
+      "scale": 0.7047374931727118,
+      "percentile": 82.19928992573301,
+      "action": "ADVANCE"
+    }
+  ],
+  "venusPDs": [
+    {
+      "lord": "Venus",
+      "start": "2024-07-05T10:51:25.992Z",
+      "end": "2024-12-24T22:16:19.992Z",
+      "domains": [
+        {
+          "domain": "Career",
+          "support": 0.3847016035959005,
+          "vedic": 0.08956140104587008,
+          "activation": 1.0013292197475874,
+          "scale": 0.8751314511634322,
+          "percentile": 73.42080705054028,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Wealth",
+          "support": 0.3666926806127871,
+          "vedic": 0.05741883309762507,
+          "activation": 0.9361222197484559,
+          "scale": 0.8073596011705998,
+          "percentile": 65.15205386766964,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Marriage",
+          "support": 0.244630458303608,
+          "vedic": 0.062363141183585706,
+          "activation": 0.8867053266950874,
+          "scale": 0.9942592162393763,
+          "percentile": 72.04532252121915,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Family",
+          "support": 0.30067171182291147,
+          "vedic": 0.08841428981328264,
+          "activation": 0.8362867158887675,
+          "scale": 0.6947249571887066,
+          "percentile": 76.90469223090264,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Children",
+          "support": 0.20416508704736047,
+          "vedic": 0.06605371277052306,
+          "activation": 0.7236035944052576,
+          "scale": 0.585562385623041,
+          "percentile": 64.99239199942153,
+          "action": "HOLD"
+        },
+        {
+          "domain": "Vitality",
+          "support": 0.26817206098295293,
+          "vedic": -0.06488491170791935,
+          "activation": 0.7734834229223156,
+          "scale": 0.8390331641060812,
+          "percentile": 55.5163847656249,
+          "action": "HOLD"
+        },
+        {
+          "domain": "Mind",
+          "support": 0.2915888582543229,
+          "vedic": 0.06800157273554537,
+          "activation": 0.8618073385856636,
+          "scale": 0.6226419286179636,
+          "percentile": 64.05016012731514,
+          "action": "HOLD"
+        },
+        {
+          "domain": "Spiritual",
+          "support": 0.18124589022789434,
+          "vedic": 0.041518906769664264,
+          "activation": 0.8007880303670188,
+          "scale": 0.8456748817841137,
+          "percentile": 45.02788567708373,
+          "action": "HOLD"
+        },
+        {
+          "domain": "Reinvention",
+          "support": 0.3913501716786203,
+          "vedic": 0.12856630423150475,
+          "activation": 1.0477005768959538,
+          "scale": 0.5684965349585464,
+          "percentile": 51.14769207175964,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Learning",
+          "support": 0.36545705070707885,
+          "vedic": 0.061882431886267665,
+          "activation": 1.0514505208470781,
+          "scale": 0.6408038734185256,
+          "percentile": 59.84071002604188,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Autonomy",
+          "support": 0.32617331869002336,
+          "vedic": 0.11372778439128636,
+          "activation": 1.0157593159966278,
+          "scale": 0.8714911780333189,
+          "percentile": 41.53460345293229,
+          "action": "HOLD"
+        },
+        {
+          "domain": "Mentorship",
+          "support": 0.3183399242907529,
+          "vedic": 0.04608196803115757,
+          "activation": 0.9024564910889449,
+          "scale": 0.6386850889402099,
+          "percentile": 68.18282705439847,
+          "action": "HOLD"
+        }
+      ]
+    },
+    {
+      "lord": "Sun",
+      "start": "2024-12-24T22:16:19.992Z",
+      "end": "2025-02-14T16:05:48.192Z",
+      "domains": [
+        {
+          "domain": "Career",
+          "support": 0.4632527511301992,
+          "vedic": 0.11816538099289857,
+          "activation": 1.066798632280191,
+          "scale": 0.9433340945808857,
+          "percentile": 93.41334567901232,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Wealth",
+          "support": 0.4485022336331821,
+          "vedic": 0.11003772155427202,
+          "activation": 0.9700939589422668,
+          "scale": 0.817317096873361,
+          "percentile": 91.91178967496138,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Marriage",
+          "support": 0.31920778302676,
+          "vedic": 0.10605955385711999,
+          "activation": 0.9225975657002561,
+          "scale": 0.9461236971549006,
+          "percentile": 91.13642167245357,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Family",
+          "support": 0.36988813800175724,
+          "vedic": 0.10424641756388175,
+          "activation": 0.880011178053554,
+          "scale": 0.7602939308301588,
+          "percentile": 93.54038247974547,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Children",
+          "support": 0.2854496346921301,
+          "vedic": 0.09991473007415025,
+          "activation": 0.7609592797569864,
+          "scale": 0.6261316237612191,
+          "percentile": 91.32911987847213,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Vitality",
+          "support": 0.3549406331945573,
+          "vedic": -0.02290982655467598,
+          "activation": 0.8105670115467363,
+          "scale": 0.8248797890271907,
+          "percentile": 84.29625566165141,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mind",
+          "support": 0.3915779921135476,
+          "vedic": 0.08886539058767828,
+          "activation": 0.8935660262508661,
+          "scale": 0.663815230423553,
+          "percentile": 89.42774152681346,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Spiritual",
+          "support": 0.24918682516991952,
+          "vedic": 0.06939145996524217,
+          "activation": 0.8458444177425968,
+          "scale": 0.8376821765552032,
+          "percentile": 76.24895809220689,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Reinvention",
+          "support": 0.5175862414729601,
+          "vedic": 0.10877630383214108,
+          "activation": 1.078531267345439,
+          "scale": 0.6224698698783698,
+          "percentile": 79.15723803530125,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Learning",
+          "support": 0.46689065635920074,
+          "vedic": 0.08878170737840911,
+          "activation": 1.078225990961185,
+          "scale": 0.7028808985854952,
+          "percentile": 87.73963827642783,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Autonomy",
+          "support": 0.44201020303942734,
+          "vedic": 0.13447849431976422,
+          "activation": 1.056348736633498,
+          "scale": 0.9389333342175237,
+          "percentile": 72.22676452546332,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mentorship",
+          "support": 0.4070754710303261,
+          "vedic": 0.086636106741906,
+          "activation": 0.9270815266326161,
+          "scale": 0.7015647426311358,
+          "percentile": 92.9128373408566,
+          "action": "ADVANCE"
+        }
+      ]
+    },
+    {
+      "lord": "Moon",
+      "start": "2025-02-14T16:05:48.192Z",
+      "end": "2025-05-11T21:48:15.192Z",
+      "domains": [
+        {
+          "domain": "Career",
+          "support": 0.4189063498008929,
+          "vedic": 0.10188989609749483,
+          "activation": 0.9678668839649212,
+          "scale": 0.9526790057654797,
+          "percentile": 83.52606177179827,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Wealth",
+          "support": 0.45626978618496533,
+          "vedic": 0.1244683972365136,
+          "activation": 0.9686470634032642,
+          "scale": 0.8894424860003025,
+          "percentile": 93.32669945505396,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Marriage",
+          "support": 0.3149257015138682,
+          "vedic": 0.10642922587387244,
+          "activation": 0.86269171820254,
+          "scale": 0.9851038000775247,
+          "percentile": 90.37086765528535,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Family",
+          "support": 0.3629396170058556,
+          "vedic": 0.11875353921868079,
+          "activation": 0.8868254071338588,
+          "scale": 0.765054030299534,
+          "percentile": 92.4060472559801,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Children",
+          "support": 0.28530549321633675,
+          "vedic": 0.09220122281818963,
+          "activation": 0.8047326830415065,
+          "scale": 0.6500500183861274,
+          "percentile": 91.31958504050917,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Vitality",
+          "support": 0.3708200763491901,
+          "vedic": -0.024089015022380197,
+          "activation": 0.7919471401644459,
+          "scale": 0.8531017474614943,
+          "percentile": 88.22120882040919,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mind",
+          "support": 0.3462441480461998,
+          "vedic": 0.09654425162428713,
+          "activation": 0.8237268728617082,
+          "scale": 0.6910950213184024,
+          "percentile": 79.7489284818677,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Spiritual",
+          "support": 0.2645574114408996,
+          "vedic": 0.08280859904127219,
+          "activation": 0.9113517469742336,
+          "scale": 0.8646647355871353,
+          "percentile": 82.12236403838746,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Reinvention",
+          "support": 0.4954955109627762,
+          "vedic": 0.1325964329934039,
+          "activation": 1.0986464565223915,
+          "scale": 0.5845051323348629,
+          "percentile": 74.7149288773152,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Learning",
+          "support": 0.42152281691876914,
+          "vedic": 0.08503278374913285,
+          "activation": 1.051102270551194,
+          "scale": 0.7109174649795824,
+          "percentile": 77.10698225308683,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Autonomy",
+          "support": 0.3895306568768434,
+          "vedic": 0.11797823862236305,
+          "activation": 1.016816150606885,
+          "scale": 0.8897126906374047,
+          "percentile": 58.71371325713763,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Mentorship",
+          "support": 0.35824839520419005,
+          "vedic": 0.0828447223016767,
+          "activation": 0.8895913360490992,
+          "scale": 0.7480599435411401,
+          "percentile": 81.66818673321764,
+          "action": "ADVANCE"
+        }
+      ]
+    },
+    {
+      "lord": "Mars",
+      "start": "2025-05-11T21:48:15.192Z",
+      "end": "2025-07-11T06:35:58.092Z",
+      "domains": [
+        {
+          "domain": "Career",
+          "support": 0.39402839504436954,
+          "vedic": 0.08525684790529761,
+          "activation": 0.964125799603238,
+          "scale": 0.933378413807964,
+          "percentile": 76.39335492862679,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Wealth",
+          "support": 0.4350790307347763,
+          "vedic": 0.11753091049851414,
+          "activation": 0.9786453949951771,
+          "scale": 0.8761271992133084,
+          "percentile": 88.98632235243049,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Marriage",
+          "support": 0.24913753799958585,
+          "vedic": 0.04100008232883541,
+          "activation": 0.8623482614373397,
+          "scale": 1.000261097862955,
+          "percentile": 73.58079522087193,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Family",
+          "support": 0.33406808539899985,
+          "vedic": 0.09322741010175262,
+          "activation": 0.8827485259868868,
+          "scale": 0.7572307715195938,
+          "percentile": 86.7461585599923,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Children",
+          "support": 0.24549588379163467,
+          "vedic": 0.05930239019373453,
+          "activation": 0.8079823369583498,
+          "scale": 0.6149211146240937,
+          "percentile": 80.98300916280876,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Vitality",
+          "support": 0.33562865318398794,
+          "vedic": -0.03401520562263219,
+          "activation": 0.8387722846432777,
+          "scale": 0.8441561282096082,
+          "percentile": 79.21101177179807,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Mind",
+          "support": 0.2813990668616026,
+          "vedic": 0.03779950026577296,
+          "activation": 0.801881907175871,
+          "scale": 0.7061648287714961,
+          "percentile": 60.82335503954498,
+          "action": "HOLD"
+        },
+        {
+          "domain": "Spiritual",
+          "support": 0.24705197102775966,
+          "vedic": 0.060147190164481945,
+          "activation": 0.9451471162951393,
+          "scale": 0.8294355590073964,
+          "percentile": 75.34364140142767,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Reinvention",
+          "support": 0.46185691072948026,
+          "vedic": 0.13510978080945354,
+          "activation": 1.1157696590140262,
+          "scale": 0.6464539041712845,
+          "percentile": 67.60588853684445,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Learning",
+          "support": 0.3888567514552226,
+          "vedic": 0.08493909976561445,
+          "activation": 1.0497715800531549,
+          "scale": 0.6715478984549663,
+          "percentile": 67.44573080632709,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Autonomy",
+          "support": 0.3597234914370408,
+          "vedic": 0.11319744651430831,
+          "activation": 1.0215427631252216,
+          "scale": 0.9622281309030567,
+          "percentile": 50.560982899306005,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Mentorship",
+          "support": 0.3285375336955876,
+          "vedic": 0.06530854792821601,
+          "activation": 0.8902747931872766,
+          "scale": 0.7376056522902182,
+          "percentile": 72.09292736786288,
+          "action": "SELECTIVE"
+        }
+      ]
+    },
+    {
+      "lord": "Rahu",
+      "start": "2025-07-11T06:35:58.092Z",
+      "end": "2025-12-13T12:04:22.692Z",
+      "domains": [
+        {
+          "domain": "Career",
+          "support": 0.4436708378656256,
+          "vedic": 0.11048177596495067,
+          "activation": 0.9451982939451262,
+          "scale": 0.8972932122409678,
+          "percentile": 89.7848227816359,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Wealth",
+          "support": 0.47435562754396393,
+          "vedic": 0.1370946818213012,
+          "activation": 0.9828742916199416,
+          "scale": 0.840074484857265,
+          "percentile": 95.842129769483,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Marriage",
+          "support": 0.27985562748315984,
+          "vedic": 0.0766228319358336,
+          "activation": 0.8587568101101167,
+          "scale": 0.9623248920989158,
+          "percentile": 82.70208559992292,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Family",
+          "support": 0.37152578651894386,
+          "vedic": 0.09364482643541729,
+          "activation": 0.8790733081860297,
+          "scale": 0.7240861405553382,
+          "percentile": 93.75389419849547,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Children",
+          "support": 0.27635182595238733,
+          "vedic": 0.05913142077170522,
+          "activation": 0.8118982353113501,
+          "scale": 0.6120850280538483,
+          "percentile": 89.46038427372675,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Vitality",
+          "support": 0.34982371980931876,
+          "vedic": -0.031907345833353626,
+          "activation": 0.8382524579962556,
+          "scale": 0.8102991320305367,
+          "percentile": 83.03996166570238,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Mind",
+          "support": 0.32349503565353666,
+          "vedic": 0.07913386818892537,
+          "activation": 0.7862036307764286,
+          "scale": 0.6532996489494087,
+          "percentile": 73.4411948157797,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Spiritual",
+          "support": 0.278336551532078,
+          "vedic": 0.04789587636212646,
+          "activation": 0.9614393369746569,
+          "scale": 0.8602085793084673,
+          "percentile": 86.6630907166282,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Reinvention",
+          "support": 0.5192602878028163,
+          "vedic": 0.1190017919104663,
+          "activation": 1.1012806739108505,
+          "scale": 0.5994073070981869,
+          "percentile": 79.43451364776269,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Learning",
+          "support": 0.4508329679207954,
+          "vedic": 0.08826182926090093,
+          "activation": 1.0435606721774042,
+          "scale": 0.6697237960103041,
+          "percentile": 84.49644036458383,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Autonomy",
+          "support": 0.41813573934181625,
+          "vedic": 0.13110194468483097,
+          "activation": 0.9984562523744576,
+          "scale": 0.9033323238944799,
+          "percentile": 66.34203835358814,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Mentorship",
+          "support": 0.3906028788692305,
+          "vedic": 0.07532740390829765,
+          "activation": 0.8949287606798048,
+          "scale": 0.6732737291853885,
+          "percentile": 89.80447818769314,
+          "action": "ADVANCE"
+        }
+      ]
+    },
+    {
+      "lord": "Jupiter",
+      "start": "2025-12-13T12:04:22.692Z",
+      "end": "2026-04-30T11:36:17.892Z",
+      "domains": [
+        {
+          "domain": "Career",
+          "support": 0.4283457834449722,
+          "vedic": 0.1452119211736483,
+          "activation": 0.9886886334520176,
+          "scale": 0.955548782105204,
+          "percentile": 86.0336751591438,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Wealth",
+          "support": 0.47249348933232393,
+          "vedic": 0.19918572410444998,
+          "activation": 1.0145685394884678,
+          "scale": 0.9027937180137339,
+          "percentile": 95.61832153260028,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Marriage",
+          "support": 0.2596503929152106,
+          "vedic": 0.10149780051654304,
+          "activation": 0.8719634196164677,
+          "scale": 1.0218720535273529,
+          "percentile": 77.08532366415893,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Family",
+          "support": 0.3472342659491158,
+          "vedic": 0.14286549514106106,
+          "activation": 0.9019988724099273,
+          "scale": 0.7730846766898186,
+          "percentile": 89.62927882908957,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Children",
+          "support": 0.2539872198326047,
+          "vedic": 0.09459928868573692,
+          "activation": 0.8212777049741757,
+          "scale": 0.659008566333702,
+          "percentile": 83.69064513888888,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Vitality",
+          "support": 0.3672724240560562,
+          "vedic": 0.02448566566098804,
+          "activation": 0.8598494636616346,
+          "scale": 0.8423615485519345,
+          "percentile": 87.42659518229192,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mind",
+          "support": 0.2945805573797157,
+          "vedic": 0.10143171447477681,
+          "activation": 0.8266749889621972,
+          "scale": 0.6829098725532942,
+          "percentile": 65.04128230131207,
+          "action": "HOLD"
+        },
+        {
+          "domain": "Spiritual",
+          "support": 0.27827905890140336,
+          "vedic": 0.11101533429571946,
+          "activation": 0.986953675852463,
+          "scale": 0.8826897886385897,
+          "percentile": 86.62924925250785,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Reinvention",
+          "support": 0.4526513322985022,
+          "vedic": 0.19047339038108593,
+          "activation": 1.0732692554279548,
+          "scale": 0.600507273040569,
+          "percentile": 65.5043147858798,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Learning",
+          "support": 0.4132721236667345,
+          "vedic": 0.14311937729561855,
+          "activation": 1.0872333829593357,
+          "scale": 0.7224672344046357,
+          "percentile": 74.72421408661299,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Autonomy",
+          "support": 0.3717201751703163,
+          "vedic": 0.1727677492727742,
+          "activation": 1.0005385198936674,
+          "scale": 0.9023554607167162,
+          "percentile": 53.79026024305595,
+          "action": "BUILD"
+        },
+        {
+          "domain": "Mentorship",
+          "support": 0.3600432358409843,
+          "vedic": 0.12883195887798315,
+          "activation": 0.9479667264713633,
+          "scale": 0.7645997094217792,
+          "percentile": 82.18466163676696,
+          "action": "ADVANCE"
+        }
+      ]
+    },
+    {
+      "lord": "Saturn",
+      "start": "2026-04-30T11:36:17.892Z",
+      "end": "2026-10-11T08:02:57.192Z",
+      "domains": [
+        {
+          "domain": "Career",
+          "support": 0.47451124366370034,
+          "vedic": 0.11731038336988656,
+          "activation": 1.0926275796199583,
+          "scale": 0.986465768735252,
+          "percentile": 95.09799080343355,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Wealth",
+          "support": 0.4687105970047222,
+          "vedic": 0.09666896611818983,
+          "activation": 1.0254629077098418,
+          "scale": 0.9279485940603995,
+          "percentile": 95.16274520158174,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Marriage",
+          "support": 0.29384948812770695,
+          "vedic": 0.08486751752471891,
+          "activation": 0.8560814399856944,
+          "scale": 1.0506057063745349,
+          "percentile": 85.96719859664346,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Family",
+          "support": 0.3493757149642491,
+          "vedic": 0.09091338959666792,
+          "activation": 0.8906059817818025,
+          "scale": 0.8036163400206915,
+          "percentile": 89.99618852237663,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Children",
+          "support": 0.3070468029050348,
+          "vedic": 0.08688748754733677,
+          "activation": 0.7819140801826568,
+          "scale": 0.6322221493056586,
+          "percentile": 94.69861865354936,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Vitality",
+          "support": 0.4391600412029615,
+          "vedic": -0.046154114280137194,
+          "activation": 0.9204875287700031,
+          "scale": 0.8517445701058817,
+          "percentile": 97.83527685667444,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mind",
+          "support": 0.4191872122304532,
+          "vedic": 0.09243903161724702,
+          "activation": 0.8840018290289042,
+          "scale": 0.6944117726878676,
+          "percentile": 93.58767593557123,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Spiritual",
+          "support": 0.30146229831066046,
+          "vedic": 0.08435118581423579,
+          "activation": 0.9489305171119876,
+          "scale": 0.8427800718969284,
+          "percentile": 92.7229001205634,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Reinvention",
+          "support": 0.6528719810146622,
+          "vedic": 0.1249774145360372,
+          "activation": 1.0381394020366272,
+          "scale": 0.6299247030735986,
+          "percentile": 96.51203685378093,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Learning",
+          "support": 0.5301963938834482,
+          "vedic": 0.07526022192324042,
+          "activation": 1.1296938276404103,
+          "scale": 0.6844308984925234,
+          "percentile": 96.38442373167459,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Autonomy",
+          "support": 0.5611447185044661,
+          "vedic": 0.13582260796330506,
+          "activation": 1.0412984960486584,
+          "scale": 0.9892407129715933,
+          "percentile": 93.33322409336421,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mentorship",
+          "support": 0.39524961702417,
+          "vedic": 0.059157880158377966,
+          "activation": 1.0044536834494695,
+          "scale": 0.7443163464177736,
+          "percentile": 90.72596837866534,
+          "action": "ADVANCE"
+        }
+      ]
+    },
+    {
+      "lord": "Mercury",
+      "start": "2026-10-11T08:02:57.192Z",
+      "end": "2027-03-06T22:33:07.092Z",
+      "domains": [
+        {
+          "domain": "Career",
+          "support": 0.38973193415042606,
+          "vedic": 0.06648587945974006,
+          "activation": 1.0618442850128722,
+          "scale": 0.9766330355512682,
+          "percentile": 75.13917723283198,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Wealth",
+          "support": 0.40213775258023615,
+          "vedic": 0.07314752182966444,
+          "activation": 1.0042412111692656,
+          "scale": 0.893997140045419,
+          "percentile": 78.70712903645817,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Marriage",
+          "support": 0.24841679530600566,
+          "vedic": 0.04793150323988438,
+          "activation": 0.838486403321284,
+          "scale": 1.0205381031423015,
+          "percentile": 73.34883350212192,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Family",
+          "support": 0.30235664472307483,
+          "vedic": 0.07977548540043007,
+          "activation": 0.8772511268259392,
+          "scale": 0.7767461156641585,
+          "percentile": 77.45480937982245,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Children",
+          "support": 0.25145275880987206,
+          "vedic": 0.05695615688940646,
+          "activation": 0.7596998384830226,
+          "scale": 0.643350449814695,
+          "percentile": 82.9280899064429,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Vitality",
+          "support": 0.3895118579549677,
+          "vedic": -0.0797903963765817,
+          "activation": 0.8950096658608727,
+          "scale": 0.8446134221963374,
+          "percentile": 91.7844211516204,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mind",
+          "support": 0.35587541889599766,
+          "vedic": 0.044443078791969744,
+          "activation": 0.8693633867753678,
+          "scale": 0.6846269177887981,
+          "percentile": 82.13756402874277,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Spiritual",
+          "support": 0.2271886686467749,
+          "vedic": 0.02608312110971198,
+          "activation": 0.93091665856947,
+          "scale": 0.8529109644901137,
+          "percentile": 66.5194843798228,
+          "action": "HOLD"
+        },
+        {
+          "domain": "Reinvention",
+          "support": 0.5402452050706086,
+          "vedic": 0.08912293997846941,
+          "activation": 0.980032579642846,
+          "scale": 0.6151522116903343,
+          "percentile": 83.11889917534738,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Learning",
+          "support": 0.4370076390016491,
+          "vedic": 0.05113798946330036,
+          "activation": 1.097597316925162,
+          "scale": 0.6928973474873892,
+          "percentile": 81.04463335744632,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Autonomy",
+          "support": 0.46004801856535243,
+          "vedic": 0.07973019962531365,
+          "activation": 0.9766803248597141,
+          "scale": 0.9726771881936697,
+          "percentile": 76.32413294270877,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mentorship",
+          "support": 0.32312769852378725,
+          "vedic": 0.04529806883358974,
+          "activation": 0.9836819002829043,
+          "scale": 0.6998394261744222,
+          "percentile": 70.0155760030867,
+          "action": "SELECTIVE"
+        }
+      ]
+    },
+    {
+      "lord": "Ketu",
+      "start": "2027-03-06T22:33:07.092Z",
+      "end": "2027-05-06T07:20:49.992Z",
+      "domains": [
+        {
+          "domain": "Career",
+          "support": 0.4385173094481761,
+          "vedic": 0.0814690695332804,
+          "activation": 1.0652708392942738,
+          "scale": 0.885775979420346,
+          "percentile": 88.58890326485357,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Wealth",
+          "support": 0.4313886955323119,
+          "vedic": 0.08950827967404942,
+          "activation": 1.0100110230957418,
+          "scale": 0.8239984753011519,
+          "percentile": 88.06522296006942,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Marriage",
+          "support": 0.281451305842773,
+          "vedic": 0.07687858816305686,
+          "activation": 0.8203901923540461,
+          "scale": 0.9507979572000785,
+          "percentile": 83.14096592881957,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Family",
+          "support": 0.33764753262744773,
+          "vedic": 0.1097437202684378,
+          "activation": 0.846854787255713,
+          "scale": 0.7144669606325275,
+          "percentile": 87.57472635995377,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Children",
+          "support": 0.2917851300389485,
+          "vedic": 0.08581100828742134,
+          "activation": 0.760919575970838,
+          "scale": 0.6011934981493888,
+          "percentile": 92.43093934702927,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Vitality",
+          "support": 0.3959760835922265,
+          "vedic": -0.042151991196762814,
+          "activation": 0.8572478626980305,
+          "scale": 0.796404515168119,
+          "percentile": 92.90307816840279,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mind",
+          "support": 0.405336530157484,
+          "vedic": 0.07027171771633874,
+          "activation": 0.8816317253822424,
+          "scale": 0.6381123168370316,
+          "percentile": 91.62082380883511,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Spiritual",
+          "support": 0.2528338171668444,
+          "vedic": 0.04944305011208384,
+          "activation": 0.8480193739352493,
+          "scale": 0.8521263968830584,
+          "percentile": 77.69938763020843,
+          "action": "SELECTIVE"
+        },
+        {
+          "domain": "Reinvention",
+          "support": 0.6353018593856875,
+          "vedic": 0.11057849033111662,
+          "activation": 1.065002635667266,
+          "scale": 0.5700866151842339,
+          "percentile": 95.33034191261582,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Learning",
+          "support": 0.5030615137610635,
+          "vedic": 0.07243065297524787,
+          "activation": 1.093292267134912,
+          "scale": 0.6424548767607328,
+          "percentile": 93.41713923128889,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Autonomy",
+          "support": 0.5373635408953071,
+          "vedic": 0.09417899509213995,
+          "activation": 1.0589610481332046,
+          "scale": 0.8770824352474795,
+          "percentile": 90.62651832079482,
+          "action": "ADVANCE"
+        },
+        {
+          "domain": "Mentorship",
+          "support": 0.38945005080802747,
+          "vedic": 0.0636141938981609,
+          "activation": 0.9751073613014625,
+          "scale": 0.6499666631004484,
+          "percentile": 89.59609926697553,
+          "action": "ADVANCE"
+        }
+      ]
+    }
+  ],
+  "rahuADCareer": {
+    "support": 0.16846852467497392,
+    "vedic": -0.0831282215095392,
+    "activation": 0.8898904150068141,
+    "scale": 0.8946750682101033,
+    "percentile": 11.861791353202237,
+    "action": "HOLD"
+  },
+  "careerPDSystems": [
+    {
+      "lord": "Venus",
+      "support": {
+        "Vedic": 0.08956140104587008,
+        "Western": 0.3657466544301143,
+        "Saju": 0.7749989778263887
+      }
+    },
+    {
+      "lord": "Sun",
+      "support": {
+        "Vedic": 0.11816538099289857,
+        "Western": 0.5629972977654123,
+        "Saju": 0.8499396289437499
+      }
+    },
+    {
+      "lord": "Moon",
+      "support": {
+        "Vedic": 0.10188989609749483,
+        "Western": 0.2685580063293721,
+        "Saju": 0.9124122722604165
+      }
+    },
+    {
+      "lord": "Mars",
+      "support": {
+        "Vedic": 0.08525684790529761,
+        "Western": 0.21510561411435547,
+        "Saju": 0.8932619733260417
+      }
+    },
+    {
+      "lord": "Rahu",
+      "support": {
+        "Vedic": 0.11048177596495067,
+        "Western": 0.3775087547802534,
+        "Saju": 0.9098636792152779
+      }
+    },
+    {
+      "lord": "Jupiter",
+      "support": {
+        "Vedic": 0.1452119211736483,
+        "Western": 0.20288585456258165,
+        "Saju": 0.9212092800123262
+      }
+    },
+    {
+      "lord": "Saturn",
+      "support": {
+        "Vedic": 0.11731038336988656,
+        "Western": 0.3338581379076115,
+        "Saju": 1.0141426959020834
+      }
+    },
+    {
+      "lord": "Mercury",
+      "support": {
+        "Vedic": 0.06648587945974006,
+        "Western": 0.19607510433403486,
+        "Saju": 0.9159950500763887
+      }
+    },
+    {
+      "lord": "Ketu",
+      "support": {
+        "Vedic": 0.0814690695332804,
+        "Western": 0.4623484796061032,
+        "Saju": 0.8839615206770832
+      }
+    }
+  ],
+  "validationBanner": "Validation failed. 0 required checks and 1 synthetic invariants failed. Treat arbitrary-profile timing as UNVALIDATED until corrected.Whole Sign invariant: PASS \u00b7 4/4 \u00b7 4/4 \u00b7 1/1 \u00b7 2/2\n Varga mapping invariant: PASS \u00b7 D2 Aries first 5/5 \u00b7 D2 Aries second 4/4 \u00b7 D2 Taurus first 4/4 \u00b7 D2 Taurus second 5/5 \u00b7 D4 Aries p2 4/4 \u00b7 D4 Aries p4 10/10 \u00b7 D9 Aries start 1/1 \u00b7 D9 Taurus start 10/10 \u00b7 D9 Gemini start 7/7 \u00b7 D9 Cancer start 4/4 \u00b7 D7 Aries start 1/1 \u00b7 D7 Taurus start 8/8 \u00b7 D10 Aries start 1/1 \u00b7 D10 Taurus start 10/10 \u00b7 D12 Taurus second 3/3 \u00b7 D20 Aries start 1/1 \u00b7 D20 Taurus start 9/9 \u00b7 D20 Gemini start 5/5 \u00b7 D24 Aries start 5/5 \u00b7 D24 Taurus start 4/4 \u00b7 D27 Aries start 1/1 \u00b7 D27 Taurus start 4/4 \u00b7 D30 odd 0-5 1/1 \u00b7 D30 odd 5-10 11/11 \u00b7 D30 even 0-5 2/2 \u00b7 D30 even 25-30 8/8 \u00b7 D60 absolute first 1/1 \u00b7 D60 absolute second 2/2\n Jaimini regression: PASS \u00b7 Sun AK \u2192 Gemini Karak\u0101\u1e43\u015ba \u2192 Taurus 12th \u2192 Venus + Rahu \u00b7 no auto-I\u1e63\u1e6da\n Classical-first devat\u0101 regression: FAIL \u00b7 Dev\u012b/Durg\u0101 > \u015ar\u012b/Lak\u1e63m\u012b > Guru\u2013\u015aiva > Vi\u1e63\u1e47u; Dak\u1e63i\u1e47\u0101m\u016brti only specialized, never core/I\u1e63\u1e6da\n Western inner-path dynamic invariant: PASS \u00b7 7 natal paths \u00b7 profection H9\u2192H10\n Saju cultivation / Ten-God invariant: PASS \u00b7 Jia Ten-God map PASS \u00b7 adjusted balance 100% \u00b7 hidden stems ON \u00b7 roots PASS \u00b7 climate PASS\n Full hidden-stem engine invariant: PASS \u00b7 hidden stems PASS \u00b7 qi weights PASS \u00b7 5 stem combinations PASS \u00b7 branch relation families PASS\n Mah\u0101da\u015b\u0101 support/leverage invariant: PASS \u00b7 9 lords PASS \u00b7 finite scores PASS \u00b7 support\u2260leverage PASS \u00b7 D60 gate PASS\n Vedic Dharma timing-practice invariant: PASS \u00b7 all 9 Vimshottari lords have generic timing-practice entries\n Vedic projected Gochara invariant: PASS \u00b7 Moon-house table PASS \u00b7 Par\u0101\u015bari aspects PASS \u00b7 nodes opposite PASS \u00b7 finite domain scores PASS\n Selected-period hierarchy invariant: PASS \u00b7 MD \u2192 AD \u2192 PD \u2192 Sookshma \u2192 Prana: all four duration partitions sum to one; maximum error 1.6e-15. Parent scores are duration-weighted child averages.\n Parent-dominant dasha-weight invariant: PASS \u00b7 MD/AD/PD/Sookshma/Prana = 50% / 30% / 12% / 6% / 2%; sum 1.00; parent-dominant PASS \u00b7 engine normalization, not a classical percentage rule.\n Method selection invariant: PASS \u00b7 BPHS primary PASS \u00b7 BNN installed PASS \u00b7 BNN off by default PASS \u00b7 BNN internal 15% corroborator PASS \u00b7 specialist matrices normalize PASS \u00b7 no Vim\u015bottari leakage into BNN PASS\n Cold-model integrity invariant: PASS \u00b7 no interpretive ranking/order fixture is exposed\n Vedic yoga activation invariant: PASS \u00b7 34 rules \u00b7 unique PASS \u00b7 major-family coverage PASS \u00b7 5 Mah\u0101puru\u1e63a PASS \u00b7 activation PASS\n \u015aani cycle invariant: PASS \u00b7 12th/1st/2nd S\u0101\u1e0de S\u0101t\u012b + 4th/8th sensitive Saturn mapping PASS\n Direction context invariant: PASS \u00b7 Unscored context; lifetime wording, support gate and percentile action refinement PASS\n Reference chart varga-placement regression: GEOMETRY PASS \u00b7 verifies canonical divisional placements only; no interpretive Mah\u0101da\u015b\u0101 order is stored.\n Generic Vedic knowledge-registry invariant: PASS \u00b7 registry 2026.09-v14 \u00b7 forms 51 \u00b7 practices 47 \u00b7 texts 33 \u00b7 unique PASS \u00b7 provenance PASS \u00b7 channel refs PASS \u00b7 practice gating PASS \u00b7 form gating PASS \u00b7 broad coverage PASS \u00b7 path switch PASS\n Generic Western knowledge-registry invariant: PASS \u00b7 registry 2026.09-v1 \u00b7 unique IDs PASS \u00b7 provenance PASS \u00b7 chart rules PASS\n Generic Saju knowledge-registry invariant: PASS \u00b7 registry 2026.09-v2-hidden-stem \u00b7 unique IDs PASS \u00b7 provenance PASS \u00b7 elements PASS \u00b7 Ten-God groups PASS",
+  "mode": "specialist",
+  "bnnSelected": false,
+  "durationChecks": {
+    "checks": 87564,
+    "maxError": 3.120600999828582e-12,
+    "leafCount": 6561,
+    "clippedLeaves": 4520
+  }
+}

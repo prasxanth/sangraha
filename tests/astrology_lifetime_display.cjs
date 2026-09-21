@@ -22,12 +22,12 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   $('contrastMode').value='absolute';near(p,lifetimePercentile(scorePeriod(ad,0),0));$('contrastMode').value='lifetime';
   const beforeState=lifetimeDisplayReference(),h=profile.horizon;profile.horizon=h-1;const clipped=lifetimeDisplayReference();if(clipped===beforeState||clipped.bounds.b===beforeState.bounds.b)throw Error('Horizon reference stale');profile.horizon=h;
   const restored=lifetimeDisplayReference(),selection=selectedSystemIds;selectedSystemIds=new Set(['Vedic']);if(lifetimeDisplayReference()===restored)throw Error('System reference stale');selectedSystemIds=selection;
-  const originalWeight=WEIGHTS.Career.Vedic,old=lifetimeDisplayReference();WEIGHTS.Career.Vedic=originalWeight+.01;if(lifetimeDisplayReference()===old)throw Error('Weight reference stale');WEIGHTS.Career.Vedic=originalWeight;
+  const priorMode=SYSTEM_ROUTING_MODE;SYSTEM_ROUTING_MODE='custom';const originalWeight=WEIGHTS.Career.Vedic,old=lifetimeDisplayReference();WEIGHTS.Career.Vedic=originalWeight+.01;if(lifetimeDisplayReference()===old)throw Error('Weight reference stale');WEIGHTS.Career.Vedic=originalWeight;SYSTEM_ROUTING_MODE=priorMode;
   const unchanged=JSON.stringify(before)===JSON.stringify(DOMAINS.map((_,di)=>[scorePeriod(md,di),activationPeriod(md,di)]));
   prefix=['Mercury','Venus','Mars'];switchTab('cycles');render();selectCycleMetric('direction');
   return{bands,unchanged,careerMD:before[0][0],results,leafCount:state.leaves.length,defaultMode:$('contrastMode').value};
  });
- assert(audit.unchanged);assert(Math.abs(audit.careerMD-.2590781152813205)<1e-12);assert.equal(audit.defaultMode,'lifetime');
+ assert(audit.unchanged);assert(Math.abs(audit.careerMD-0.3045283084587375)<1e-12);assert.equal(audit.defaultMode,'lifetime');
  assert.deepEqual(audit.bands,['Relative low','Relative low','Softer than usual','Softer than usual','Typical range','Typical range','Stronger than usual','Stronger than usual','Relative crest','Relative crest']);
  await page.locator('#directionHeat .direction-cell').first().waitFor();const cell=page.locator('#directionHeat .direction-cell').first();await cell.scrollIntoViewIfNeeded();await page.waitForTimeout(250);await cell.tap();
  assert((await page.locator('.heat-magnifier').innerText()).includes('percentile'));assert((await page.locator('.heat-magnifier').innerText()).includes('Raw support'));await page.locator('.heat-preview-evidence > summary').click();const details=await page.locator('.heat-magnifier').innerText();assert(details.includes('Raw support')&&details.includes('Activation')&&details.includes('Scale / reach'));await page.locator('.heat-magnifier').screenshot({path:'/tmp/kala-lifetime-preview.png'});await page.keyboard.press('Escape');

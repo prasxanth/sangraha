@@ -13,7 +13,7 @@ const assert=require('node:assert/strict'),{chromium}=require('playwright');
  assert.deepEqual(bands.support,['Very Difficult','Very Difficult','Difficult','Difficult','Challenging','Challenging','Mixed / Neutral','Mixed / Neutral','Mixed / Neutral','Mixed / Neutral','Good','Good','Great','Great','Exceptional','Exceptional']);
  assert.deepEqual(bands.activation,['Quiet','Quiet','Low','Low','Moderate','Moderate','High','High','Very High','Very High']);
  assert.deepEqual(bands.scale,['Local / Narrow','Limited Scale','Moderate Scale','Large Scale','Exceptional Scale']);
- assert.deepEqual(bands.directions,['EXPAND','ADVANCE','BUILD','PIVOT','SELECTIVE','HOLD','RESTRUCTURE','PROTECT']);assert.equal(bands.missing,'Not supplied');assert(bands.neutralColor);assert(Math.abs(bands.mercury-.2590781152813205)<1e-12);
+ assert.deepEqual(bands.directions,['EXPAND','ADVANCE','BUILD','PIVOT','SELECTIVE','HOLD','RESTRUCTURE','PROTECT']);assert.equal(bands.missing,'Not supplied');assert(bands.neutralColor);assert(Math.abs(bands.mercury-0.3045283084587375)<1e-12);
  const audit=await page.evaluate(()=>{
   prefix=['Mercury','Venus','Mars'];switchTab('cycles');render();const period=findPeriodByPath(prefix),children=durationSummaryChildren(period);
   const before=DOMAINS.map((_,di)=>[scorePeriod(period,di),activationPeriod(period,di)]);
