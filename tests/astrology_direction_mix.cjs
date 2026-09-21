@@ -17,8 +17,19 @@ const assert=require('node:assert/strict'),{chromium}=require('playwright');
   const old=directionAssessment;directionAssessment=()=>({action:'Not supplied'});try{const m=directionDurationMix(p,0);if(m.rows.length!==1||m.rows[0].pct!==100)throw Error('Missing values lost')}finally{directionAssessment=old}
   return{children:children.length,unchanged:true};
  });
- const bar=page.locator('.direction-mix-bar').first();await bar.scrollIntoViewIfNeeded();await page.locator('.direction-mix-meta button').first().click();assert((await page.locator('#directionMixDetail').innerText()).includes('raw support'));
- assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:'/tmp/kala-direction-mix-mobile.png'});
+ assert.equal(await page.locator('.direction-mix-meta').count(),0);
+ assert((await page.locator('.direction-mix-seg').allTextContents()).every(t=>!t.trim()));
+ for(const viewport of [{width:390,height:844},{width:320,height:667}]){
+  await page.setViewportSize(viewport);
+  assert(await page.evaluate(()=>document.querySelector('.direction-mix-card').getBoundingClientRect().height<=innerHeight-150),'Complete chart fits available mobile screen height');
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ }
+ await page.setViewportSize({width:390,height:844});
+ await page.locator('.direction-mix-card').evaluate(n=>document.querySelector('#content').scrollBy(0,n.getBoundingClientRect().top-95));
+ await page.screenshot({path:'/tmp/kala-direction-mix-mobile.png'});
+ await page.locator('.direction-mix-seg').first().click();assert(await page.locator('#directionMixDetail').isVisible());assert((await page.locator('#directionMixDetail').innerText()).includes('raw support'));
+ await page.keyboard.press('Escape');assert(!await page.locator('#directionMixDetail').isVisible());
+ await page.locator('.direction-mix-domain').first().click();assert(await page.locator('#directionMixDetail select').isVisible());await page.locator('#directionMixDetail button').click();
  assert(await page.evaluate(()=>[...document.querySelectorAll('.direction-mix-seg')].every(n=>Math.abs(n.getBoundingClientRect().width/n.parentElement.clientWidth*100-parseFloat(n.style.width))<.1)), 'Segment widths match duration shares');
  for(const key of ['support','activation','scale','direction']){await page.locator('#cycleMetric-'+key).click();assert(await page.locator('#'+key+'Comparison').isVisible());assert.equal(await page.locator('#cyclesTab [role="tabpanel"]:visible').count(),1)}
  await page.locator('#cycleMetric-direction').focus();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#cycleMetric-support').getAttribute('aria-selected'),'true');

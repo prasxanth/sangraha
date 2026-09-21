@@ -626,27 +626,16 @@ p,li,.routineBlock li,.guideBox p,.guideBox li,.rankDetailBox p,.rankDetailBox l
 .laneTrack{display:flex;align-items:stretch;height:auto!important;min-height:144px;gap:1px}.laneSeg{position:static;left:auto!important;width:auto!important;flex:1 0 124px;height:auto!important;min-height:132px;min-width:124px}.laneContinue{margin-top:4px}.lane-readability-note{margin:6px 0 10px}
 
 .direction-cell{gap:2px!important}.direction-cell .dir-action{display:block;font-weight:900;font-size:12px;line-height:1.05}.direction-cell .dir-relative{display:block;font-size:11px;font-weight:700;opacity:1;line-height:1}@media(max-width:768px){.direction-cell .dir-action{font-size:11px}.direction-cell .dir-relative{font-size:11px}}
-.direction-mix-card{margin:10px 0 14px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
-.direction-mix-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:9px}
-.direction-mix-head h4{margin:0;font-size:14px}.direction-mix-head .small{max-width:900px}
-.direction-mix-legend{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0 10px}
-.direction-mix-legend span{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 6px;background:var(--panel2)}
-.direction-mix-swatch{width:9px;height:9px;border-radius:2px;display:inline-block;flex:0 0 auto}
-.direction-mix-grid-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.direction-mix-grid{display:grid;gap:8px;min-width:540px}
-.direction-mix-row{display:grid;grid-template-columns:110px minmax(420px,1fr);gap:8px;align-items:start}
-.direction-mix-domain{font-size:12px;font-weight:850;padding-top:7px;color:var(--text)}
-.direction-mix-main{min-width:0}.direction-mix-bar{height:28px;display:flex;overflow:hidden;border:1px solid var(--line);border-radius:7px;background:var(--bg)}
-.direction-mix-seg{height:100%;min-width:0;border:0;border-right:1px solid rgba(0,0,0,.24);padding:0 3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;line-height:1;overflow:hidden;white-space:nowrap;cursor:pointer;touch-action:manipulation}
-.direction-mix-seg:last-child{border-right:0}.direction-mix-seg:hover{filter:brightness(1.10)}
-.direction-mix-meta{display:flex;flex-wrap:wrap;gap:4px 8px;margin-top:4px}.direction-mix-meta span{font-size:9px;color:var(--muted);white-space:nowrap}.direction-mix-meta b{color:var(--text);font-weight:850}
-.direction-mix-detail{margin-top:9px;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--panel2)}
-.direction-mix-detail h5{margin:0 0 5px;font-size:12px}.direction-mix-detail ul{margin:5px 0 0 16px;padding:0;font-size:11px;line-height:1.5}
-.direction-mix-total{font-size:10px;color:var(--muted);white-space:nowrap}
-@media(max-width:768px){.direction-mix-row{grid-template-columns:82px minmax(430px,1fr)}.direction-mix-domain{font-size:11px}.direction-mix-bar{height:30px}.direction-mix-seg{font-size:9px}}
+/* Compact duration overview; details stay outside the chart layout. */
+.direction-mix-card{margin:8px 0 16px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.direction-mix-head h4{margin:0;font-size:16px}.direction-mix-head p{margin:3px 0 8px;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.direction-mix-legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px 8px;margin:8px 0 10px}.direction-mix-legend span{display:flex;align-items:center;gap:4px;font-size:12px;min-width:0}.direction-mix-swatch{width:8px;height:8px;border-radius:2px;flex:none}
+.direction-mix-grid{display:grid;gap:3px}.direction-mix-row{display:grid;grid-template-columns:100px minmax(0,1fr);gap:8px;align-items:center}.direction-mix-domain{border:0;background:none;padding:0;text-align:left;min-width:0;min-height:24px;font-size:13px;color:var(--text);font-weight:600;white-space:nowrap}
+.direction-mix-bar{height:24px;display:flex;overflow:hidden;border-radius:4px;background:var(--bg)}.direction-mix-seg{height:100%;min-width:0;min-height:0;flex-shrink:0;padding:0;border:0;border-radius:0;box-shadow:inset -1px 0 #0002;cursor:pointer;touch-action:manipulation}.direction-mix-seg:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.direction-mix-dialog{position:fixed;inset:0;width:min(440px,calc(100vw - 32px));max-height:70dvh;box-sizing:border-box;margin:auto;padding:16px;color:var(--text);background:var(--panel);border:1px solid var(--accent);border-radius:12px;overflow:auto}.direction-mix-dialog::backdrop{background:#0008}.direction-mix-dialog h4{margin:0 0 10px}.direction-mix-dialog select{width:100%;min-height:44px;margin:8px 0}.direction-mix-dialog button{min-height:44px}.direction-mix-dialog ul{padding-left:20px;font-size:14px}.direction-mix-dialog p{font-size:14px}
+@media(max-width:600px){.direction-mix-card{padding:8px}.direction-mix-row{grid-template-columns:88px minmax(0,1fr);gap:5px}.direction-mix-domain{font-size:12px}.direction-mix-legend{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}.direction-mix-legend span{font-size:11px}}
 .cycle-metric-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:14px 0 8px}.cycle-metric-tabs button{min-width:0;min-height:44px;padding:8px 3px;font-size:13px}.cycle-metric-tabs button[aria-selected="true"]{background:var(--panel2);border-color:var(--accent);color:var(--accent)}
 [role="tabpanel"][hidden]{display:none!important}
-.direction-mix-grid{min-width:0}.direction-mix-row{grid-template-columns:110px minmax(0,1fr)}.direction-mix-bar{height:44px}.direction-mix-seg{flex-shrink:0;padding:0;border:0;box-shadow:inset -1px 0 #0003;font-size:12px}.direction-mix-seg:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}.direction-mix-meta button{font-size:12px;min-height:44px;padding:5px 8px;white-space:normal;text-align:left}.direction-mix-legend span,.direction-mix-total{font-size:12px;white-space:normal}.direction-mix-detail ul{font-size:14px}.direction-mix-head h4{font-size:16px}.direction-mix-detail h5{font-size:15px}
-@media(max-width:768px){.direction-mix-row{grid-template-columns:minmax(0,1fr);gap:4px}.direction-mix-domain{font-size:14px;padding-top:4px}.direction-mix-seg{font-size:11px}}
 
 </style>
 </head>
@@ -8296,26 +8285,27 @@ function directionDurationMix(parent,di){
  return{parent,children,total,rows};
 }
 function renderDirectionDurationMix(root){
- if(!root)return;if(cycleFamilyKey!=="vimshottari"){root.innerHTML='<p class="small">Cumulative Direction mix is available for Vimshottari cycles.</p>';return}const parent=currentDisplayPeriod(),children=durationSummaryChildren(parent);
- if(!children.length){root.innerHTML='<div class="direction-mix-card"><div class="small">No deeper Vimśottari level beneath this period.</div></div>';return}
- const levelName=nextVimshottariLevelName(children),parentLabel=parent.path?.length?parent.path.join(" → "):(parent.label||parent.lord||"All life"),total=children.reduce((a,p)=>a+(p.b-p.a),0);
- root.innerHTML=`<div class="direction-mix-card"><div class="direction-mix-head"><div><h4>Cumulative Direction mix · ${catalogEscape(levelName)} duration</h4><div class="small">Each life-dimension bar = <b>100% of ${catalogEscape(parentLabel)}</b>. Width = cumulative actual time in each Direction bucket, not a score or probability. This summarizes the complete selected period, independent of the calendar filter. This automatically changes MD→AD, AD→PD, PD→Sūkṣma, and Sūkṣma→Prāṇa as you drill down.</div></div><div class="direction-mix-total">${fmt(parent.a)} → ${fmt(parent.b)} · ${formatAccumulatedDuration(total)}</div></div><div class="direction-mix-legend">${DIRECTION_ACTIONS.map(action=>`<span><i class="direction-mix-swatch" style="background:${directionActionBaseColor(action)}"></i><b>${directionActionCode(action)}</b> ${catalogEscape(action)}</span>`).join("")}</div><div class="direction-mix-grid-scroll"><div class="direction-mix-grid" id="directionMixGrid"></div></div><div id="directionMixDetail"></div></div>`;
- const grid=root.querySelector("#directionMixGrid"),detail=root.querySelector("#directionMixDetail");detail.setAttribute("aria-live","polite");
+ if(!root)return;
+ if(cycleFamilyKey!=="vimshottari"){root.innerHTML='<p class="small">Direction mix is available for Vimshottari cycles.</p>';return}
+ const parent=currentDisplayPeriod(),children=durationSummaryChildren(parent);
+ if(!children.length){root.innerHTML='<p class="small">No deeper Vimshottari level beneath this period.</p>';return}
+ const levelName=nextVimshottariLevelName(children),parentLabel=parent.path?.length?parent.path.join(" → "):"All life";
+ root.innerHTML=`<div class="direction-mix-card"><div class="direction-mix-head"><h4>Direction mix</h4><p>${catalogEscape(parentLabel)} · ${catalogEscape(levelName)} duration<br>Tap a bar or domain for details.</p></div><div class="direction-mix-legend">${DIRECTION_ACTIONS.map(action=>`<span><i class="direction-mix-swatch" style="background:${directionActionBaseColor(action)}"></i>${action[0]+action.slice(1).toLowerCase()}</span>`).join("")}</div><div class="direction-mix-grid" id="directionMixGrid"></div></div><dialog id="directionMixDetail" class="direction-mix-dialog" aria-label="Direction duration details"></dialog>`;
+ const grid=root.querySelector('#directionMixGrid'),detail=root.querySelector('#directionMixDetail');
+ function showDetail(domain,mix,item){
+  detail.innerHTML=`<form method="dialog"><button style="float:right" aria-label="Close duration details">Close</button></form><h4>${catalogEscape(domain)}</h4><label>Direction bucket<select aria-label="Direction bucket">${mix.rows.map(x=>`<option value="${catalogEscape(x.action)}">${catalogEscape(x.action)}</option>`).join('')}</select></label><p><b>${item.pct.toFixed(1)}%</b> · ${formatAccumulatedDuration(item.duration)} · ${item.count} ${catalogEscape(levelName)} periods</p><ul>${item.periods.map(x=>`<li><b>${catalogEscape(x.period.lord||x.period.label||'Period')}</b> · ${fmt(x.period.a)} → ${fmt(x.period.b)} · raw support ${Number.isFinite(x.assessment.rawSupport)?signed(x.assessment.rawSupport):'Not supplied'}</li>`).join('')}</ul><p class="small">Shares cover the complete selected period, independent of the calendar filter. Widths represent time, not scores or probabilities.</p>`;
+  const select=detail.querySelector('select');select.value=item.action;select.onchange=()=>{showDetail(domain,mix,mix.rows.find(x=>x.action===select.value));detail.querySelector('select').focus()};
+  if(!detail.open)detail.showModal();
+ }
  for(const domain of selectedDimensions()){
-  const di=DOMAINS.indexOf(domain),mix=directionDurationMix(parent,di),row=document.createElement("div");row.className="direction-mix-row";
-  const label=document.createElement("div");label.className="direction-mix-domain";label.textContent=domain;row.appendChild(label);
-  const main=document.createElement("div"),bar=document.createElement("div");main.className="direction-mix-main";bar.className="direction-mix-bar";
+  const mix=directionDurationMix(parent,DOMAINS.indexOf(domain)),row=document.createElement('div');row.className='direction-mix-row';
+  const label=document.createElement('button');label.type='button';label.className='direction-mix-domain';label.textContent=domain;label.setAttribute('aria-label',domain+' duration breakdown');label.onclick=()=>{if(mix.rows.length)showDetail(domain,mix,mix.rows[0])};
+  const bar=document.createElement('div');bar.className='direction-mix-bar';
   for(const item of mix.rows){
-   const seg=document.createElement("button");seg.type="button";seg.className="direction-mix-seg";seg.style.width=item.pct+"%";seg.style.background=directionActionBaseColor(item.action);seg.style.color=directionActionBaseText(item.action);
-   seg.textContent=item.pct>=18?`${directionActionCode(item.action)} ${Math.round(item.pct)}%`:item.pct>=9?directionActionCode(item.action):"";
-   seg.title=`${domain} · ${item.action}: ${item.pct.toFixed(1)}% · ${item.count} ${levelName}${item.count===1?"":"s"} · ${formatAccumulatedDuration(item.duration)}`;
-   seg.setAttribute("aria-label",seg.title);
-   seg.onclick=()=>{row.after(detail);detail.className="direction-mix-detail";detail.innerHTML=`<h5>${catalogEscape(domain)} · ${catalogEscape(item.action)}</h5><div class="small"><b>${item.pct.toFixed(1)}%</b> · <b>${item.count}</b> ${catalogEscape(levelName)}${item.count===1?"":"s"} · cumulative <b>${formatAccumulatedDuration(item.duration)}</b>.</div><ul>${item.periods.map(x=>`<li><b>${catalogEscape(x.period.lord||x.period.label||"Period")}</b> · ${fmt(x.period.a)} → ${fmt(x.period.b)} · raw support ${Number.isFinite(x.assessment.rawSupport)?signed(x.assessment.rawSupport):'Not supplied'}</li>`).join("")}</ul>`};
-   bar.appendChild(seg);
+   const seg=document.createElement('button');seg.type='button';seg.className='direction-mix-seg';seg.style.width=item.pct+'%';seg.style.background=directionActionBaseColor(item.action);
+   seg.title=`${domain} · ${item.action}: ${item.pct.toFixed(1)}% · ${formatAccumulatedDuration(item.duration)}`;seg.setAttribute('aria-label',seg.title);seg.onclick=()=>showDetail(domain,mix,item);bar.appendChild(seg);
   }
-  main.appendChild(bar);const meta=document.createElement("div");meta.className="direction-mix-meta";
-  mix.rows.forEach((item,i)=>{const key=document.createElement("button");key.type="button";key.textContent=`${item.action} ${item.pct.toFixed(1)}% · ${item.count}× · ${formatAccumulatedDuration(item.duration)}`;key.onclick=()=>bar.children[i].click();meta.appendChild(key)});
-  main.appendChild(meta);row.appendChild(main);grid.appendChild(row);
+  row.append(label,bar);grid.appendChild(row);
  }
 }
 
@@ -8324,7 +8314,7 @@ function renderDirectionExplorer(){
  const version=++directionRenderVersion,calculationChart=chart;let root=$('directionComparison');const wasOpen=activeCycleMetric==='direction';
  if(!root){root=document.createElement('section');root.id='directionComparison';root.className='card';$('domainBarsContainer').parentElement.after(root)}
  $('directionHeat')?._heatCleanup?.();
- root.innerHTML='<details><summary style="min-height:44px;cursor:pointer"><b>Direction · primary guidance map</b></summary><p class="small">The main label is an action bucket built from absolute Support + Activation + Scale/Reach. Lifetime rank is now a bounded tie-breaker inside the same support class: it can distinguish BUILD → ADVANCE → EXPAND, but it cannot turn Mixed/Challenging support into a favorable action.</p><details><summary>How to read it</summary><p class="small"><b>Actions:</b> EXPAND / ADVANCE / BUILD = supportive; PIVOT / SELECTIVE / HOLD = mixed but usable; RESTRUCTURE / PROTECT = actual friction. <b>Lifetime rank refines intensity, never sign:</b> a relative crest can upgrade Good support from BUILD to ADVANCE/EXPAND, but cannot make Mixed support “good.” <b>Lifetime context:</b> CR Relative crest ≥90th; ST Stronger than usual ≥70th; TY Typical ≥30th; SF Softer than usual ≥10th; RL Relative low &lt;10th. SF/RL are comparative labels, not adverse outcomes.</p><p class="small">The reference is all Prana intervals from birth through the configured life horizon, weighted by included duration. Raw support remains unchanged. Relevant yogas and named Śani phases remain unscored context. No numerical overlay, bonus or penalty is applied to Direction or the underlying scores.</p></details><div id="directionDurationSummary"></div><div id="directionHeat"></div></details>';
+ root.innerHTML='<details><summary style="min-height:44px;cursor:pointer"><b>Direction · primary guidance map</b></summary><details><summary>How to read it</summary><p class="small">The main label is an action bucket built from absolute Support + Activation + Scale/Reach. Lifetime rank refines the action within the same support class; it cannot turn Mixed/Challenging support into a favorable action.</p><p class="small"><b>Actions:</b> EXPAND / ADVANCE / BUILD = supportive; PIVOT / SELECTIVE / HOLD = mixed but usable; RESTRUCTURE / PROTECT = actual friction. <b>Lifetime rank refines intensity, never sign:</b> a relative crest can upgrade Good support from BUILD to ADVANCE/EXPAND, but cannot make Mixed support “good.” <b>Lifetime context:</b> CR Relative crest ≥90th; ST Stronger than usual ≥70th; TY Typical ≥30th; SF Softer than usual ≥10th; RL Relative low &lt;10th. SF/RL are comparative labels, not adverse outcomes.</p><p class="small">The reference is all Prana intervals from birth through the configured life horizon, weighted by included duration. Raw support remains unchanged. Relevant yogas and named Śani phases remain unscored context. No numerical overlay, bonus or penalty is applied to Direction or the underlying scores.</p></details><div id="directionDurationSummary"></div><div id="directionHeat"></div></details>';
  root.querySelector('details').insertAdjacentHTML('beforeend',metricBucketKey());
  const disclosure=root.querySelector('details'),target=$('directionHeat');let started=false;
  disclosure.ontoggle=async()=>{
