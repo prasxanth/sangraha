@@ -1309,7 +1309,14 @@ Depth 1: MD
 Depth 2: AD
 Depth 3: PD
 Depth 4: Sookshma
-Depth 5: Prana</div><p>The visible branch controls navigation. Scoring evaluates underlying Prana intervals in responsive batches, then reuses their duration-weighted totals.</p></div>
+Depth 5: Prana</div><p>The visible branch controls navigation. Scoring evaluates underlying Prana intervals in responsive batches, then reuses their duration-weighted totals.</p>
+      <div class="code">Active-lord influence · engine normalization
+MD        50%
+AD        30%
+PD        12%
+Sookshma   6%
+Prana      2%</div>
+      <p><b>Parent-dominant policy:</b> the Mahadasha establishes the era/promise; the Antardasha channels it; PD sharpens manifestation; Sookshma and Prana act increasingly as local timing triggers. These are explicit computational normalization weights, <b>not BPHS/scriptural percentages</b>. Calendar duration weighting remains separate.</p></div>
     <div class="guideBox"><h4>Saju conventions</h4><p>Daeun direction follows year-stem polarity + sex. Start age uses the traditional days-to-nearest-Jie ÷ 3 approximation unless you provide an explicit start age. The UI exposes Saju Yongsin and start-age overrides because schools differ.</p></div>
 
     <div class="guideBox"><h4>Handoff rule for future chats</h4>
@@ -1512,7 +1519,7 @@ Depth 5: Prana</div><p>The visible branch controls navigation. Scoring evaluates
       <ul>
        <li><b>Support</b> is signed: constructive/easy ↔ friction. <b>Activation</b> is unsigned: quiet ↔ strongly engaged. A demanding promotion/restructuring window can therefore be high activation but only mixed support.</li>
        <li><b>Prana is the scoring base.</b> Each parent is the duration-weighted mean of its nine children: MD → AD → PD → Sookshma → Prana. Each full MD therefore summarizes 6,561 Prana intervals. Duration weights use the actual interval length and therefore the Vimshottari years/120 proportions once.</li>
-       <li>Planetary influence weights are inputs to each Prana calculation, not additional duration weights. The old selected-path context remains available as diagnostic evidence, distinct from the period average.</li>
+       <li>Planetary influence weights are inputs to each Prana calculation, not additional duration weights. v20.4 uses a <b>parent-dominant 50/30/12/6/2 hierarchy</b> for MD/AD/PD/Sūkṣma/Prāṇa so a short child period can sharpen or redirect a parent climate without routinely overpowering it. These are engine normalization weights, not classical percentages. The selected-path context remains available as diagnostic evidence, distinct from the period average.</li>
        <li>Each Prana is evaluated at its midpoint; averaging the resulting short intervals produces the parent summary. This is a numerical approximation to time-varying transits, not an exact continuous integral. Parent support and activation use the same duration aggregation. Partial date ranges use actual overlapping durations; foreign cycle views retain their own date-range calculations.</li>
        <li>Activation has native calculators for Vedic, Western and Saju. External systems may provide <code>activationCalculator(ctx)</code>; if they do not, activation coverage is omitted rather than inferred from absolute support.</li>
       </ul>
@@ -1689,10 +1696,20 @@ const NLORD=['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercu
 const DASHA={Ketu:7,Venus:20,Sun:6,Moon:10,Mars:7,Rahu:18,Jupiter:16,Saturn:19,Mercury:17};
 const DSEQ=['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
 const LEVELS=['Mahadasha','Antardasha','Pratyantardasha','Sookshma','Prana'];
-const VEDIC_LEVEL_WEIGHTS=[.15,.25,.25,.20,.15];
+const VEDIC_LEVEL_WEIGHTS=[.50,.30,.12,.06,.02];
+// Engine normalization only — NOT a BPHS percentage rule.
+// Parent-dominant hierarchy: MD establishes the era/promise, AD channels it,
+// PD sharpens manifestation, Sookshma/Prana time increasingly local triggers.
+const VEDIC_LEVEL_WEIGHT_POLICY={
+ id:"parent-dominant-v20.4",
+ labels:["Mahadasha","Antardasha","Pratyantardasha","Sookshma","Prana"],
+ weights:[...VEDIC_LEVEL_WEIGHTS],
+ classicalClaim:false,
+ note:"Computational normalization, not scriptural percentages. Full path sums to 1.00."
+};
 const DOMAINS=["Career","Wealth","Marriage","Family","Children","Vitality","Mind","Spiritual","Reinvention","Learning","Autonomy","Mentorship"];
 const ASTROLOGY_METHOD_REGISTRY={
- version:"2026.09-v19-duration",
+ version:"2026.09-v20.4-parent-dominant",
  primaryVedic:"BPHS",
  methods:{
   BPHS:{
@@ -3375,12 +3392,12 @@ function vedicBodyGocharaContribution(body,t,di,path){
  let natal=cachedVedicMetric("planet",body,di),natalDir=clamp((natal?.support||0)/2,-1,1),moonQ=vedicGocharaMoonQuality(body,t.fromMoon),
      dignity=vedicTransitDignity(body,t.sign),baseDir=clamp(.46*moonQ+.34*natalDir+.20*dignity,-1,1),
      lagnaRel=clamp(Math.abs(HOUSE_PROFILE[t.fromLagna]?.[di]||0)/1.2,0,1),activation=.44+.56*lagnaRel,
-     idx=path.indexOf(body),dashaMult=idx>=0?1+.30*(VEDIC_LEVEL_WEIGHTS[idx]||.15)/.25:1,
+     idx=path.indexOf(body),dashaMult=idx>=0?1+.30*(VEDIC_LEVEL_WEIGHTS[idx]??.02)/.50:1,
      stateMult=(t.ret?1.08:1)*(t.combust?.84:1),contacts=[];
  let contactNum=0,contactDen=0;
  for(let i=0;i<path.length;i++){
   let target=path[i],c=vedicTransitContact(body,t,target);if(!c)continue;
-  let targetDir=clamp(vedicLordDomainOutcome(target,di)/2,-1,1),lw=VEDIC_LEVEL_WEIGHTS[i]||.15,dir=clamp(.55*baseDir+.45*targetDir,-1,1),w=c.strength*lw;
+  let targetDir=clamp(vedicLordDomainOutcome(target,di)/2,-1,1),lw=VEDIC_LEVEL_WEIGHTS[i]??.02,dir=clamp(.55*baseDir+.45*targetDir,-1,1),w=c.strength*lw;
   contactNum+=dir*w;contactDen+=w;contacts.push({...c,level:LEVELS[i],direction:dir});
  }
  if(["Rahu","Ketu"].includes(body)){
@@ -3893,7 +3910,7 @@ function detectedVedicYogas(){return VEDIC_YOGA_REGISTRY.definitions.map(detectV
 function yogaDashaActivation(yoga,ms){
  let path=activePathAt(ms,5),num=0,den=0,hits=[];
  for(let i=0;i<path.length;i++){
-  let w=VEDIC_LEVEL_WEIGHTS[i]||.15;den+=w;
+  let w=VEDIC_LEVEL_WEIGHTS[i]??.02;den+=w;
   if(yoga.participants.includes(path[i])){num+=w;hits.push({level:LEVELS[i],lord:path[i],weight:w})}
  }
  return{score:den?num/den:0,hits,path};
@@ -4241,6 +4258,17 @@ function coldModelIntegrityInvariant(){
  let globals=[...Object.keys(window||{}),...Object.keys(window.AstroHeatmap||{})];
  let leaked=forbidden.filter(x=>globals.includes(x));
  return{ok:leaked.length===0,detail:leaked.length?`interpretive fixtures leaked: ${leaked.join(", ")}`:"no interpretive ranking/order fixture is exposed"};
+}
+
+function parentDominantDashaWeightInvariant(){
+ const w=VEDIC_LEVEL_WEIGHTS,expected=[.50,.30,.12,.06,.02],
+       sum=w.reduce((a,b)=>a+b,0),
+       exact=w.length===expected.length&&w.every((x,i)=>Math.abs(x-expected[i])<1e-12),
+       monotonic=w.every((x,i)=>i===0||w[i-1]>x),
+       parentMajority=w[0]>.45&&w[0]+w[1]>=.80,
+       lowerBound=w[2]+w[3]+w[4]<=.20,
+       ok=exact&&Math.abs(sum-1)<1e-12&&monotonic&&parentMajority&&lowerBound;
+ return{ok,detail:`MD/AD/PD/Sookshma/Prana = ${w.map(x=>Math.round(100*x)+"%").join(" / ")}; sum ${sum.toFixed(2)}; parent-dominant ${ok?"PASS":"FAIL"} · engine normalization, not a classical percentage rule.`};
 }
 
 function selectedPeriodHierarchyInvariant(){
@@ -5470,6 +5498,7 @@ function runValidationSuite(){
  let tx=vedicTimingPracticeInvariant();if(tx.ok)syntheticPass++;else syntheticFail++;
  let gx=vedicGocharaInvariant();if(gx.ok)syntheticPass++;else syntheticFail++;
  let px=selectedPeriodHierarchyInvariant();if(px.ok)syntheticPass++;else syntheticFail++;
+ let pdx=parentDominantDashaWeightInvariant();if(pdx.ok)syntheticPass++;else syntheticFail++;
  let methodx=methodSelectionInvariant();if(methodx.ok)syntheticPass++;else syntheticFail++;
  let cx=coldModelIntegrityInvariant();if(cx.ok)syntheticPass++;else syntheticFail++;
  let yx=vedicYogaInvariant();if(yx.ok)syntheticPass++;else syntheticFail++;
@@ -5506,6 +5535,7 @@ function runValidationSuite(){
  <div class="testDetail">Vedic Dharma timing-practice invariant: <b class="${tx.ok?"testPass":"testFail"}">${tx.ok?"PASS":"FAIL"}</b> · ${tx.detail}</div>
  <div class="testDetail">Vedic projected Gochara invariant: <b class="${gx.ok?"testPass":"testFail"}">${gx.ok?"PASS":"FAIL"}</b> · ${gx.detail}</div>
  <div class="testDetail">Selected-period hierarchy invariant: <b class="${px.ok?"testPass":"testFail"}">${px.ok?"PASS":"FAIL"}</b> · ${px.detail}</div>
+ <div class="testDetail">Parent-dominant dasha-weight invariant: <b class="${pdx.ok?"testPass":"testFail"}">${pdx.ok?"PASS":"FAIL"}</b> · ${pdx.detail}</div>
  <div class="testDetail">Method selection invariant: <b class="${methodx.ok?"testPass":"testFail"}">${methodx.ok?"PASS":"FAIL"}</b> · ${methodx.detail}</div>
  <div class="testDetail">Cold-model integrity invariant: <b class="${cx.ok?"testPass":"testFail"}">${cx.ok?"PASS":"FAIL"}</b> · ${cx.detail}</div>
  <div class="testDetail">Vedic yoga activation invariant: <b class="${yx.ok?"testPass":"testFail"}">${yx.ok?"PASS":"FAIL"}</b> · ${yx.detail}</div>
@@ -7321,6 +7351,7 @@ function renderYogaCatalog(yogas,active,windows,ms){
 
 window.AstroHeatmap={
  getVedicPeriodBreakdown:(period,domain)=>structuredClone(vedicPeriodBreakdown(period,DOMAINS.indexOf(domain))),
+ getVimshottariLevelWeights:()=>structuredClone(VEDIC_LEVEL_WEIGHT_POLICY),
  getPeriodSupport:(period,domain)=>scorePeriod(period,DOMAINS.indexOf(domain)),
  getPeriodActivation:(period,domain)=>activationPeriod(period,DOMAINS.indexOf(domain)),
  getVedicGochara:(ms=Date.now(),domain="Career")=>structuredClone(vedicGocharaScore(ms,DOMAINS.indexOf(domain),activePathAt(ms,5))),
@@ -7529,7 +7560,7 @@ function _syncStrip(){
 
 function exportCSV(){let groups=visibleGroups(),rows=[["Level","Path","Start","End",...selectedDimensions()]];for(const g of groups)rows.push([LEVELS[g.depth-1]||"Phase",g.path.join(" > "),fmt(g.a),fmt(g.b),...selectedDimensions().map(d=>scorePeriod(g,DOMAINS.indexOf(d)).toFixed(3))]);let csv=rows.map(r=>r.map(x=>`"${String(x).replaceAll('"','""')}"`).join(",")).join("\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="dynamic_astrology_heatmap_visible.csv";a.click()}
 function exportProfile(){let cfg={profile,systems:Object.fromEntries(Object.values(SYSTEMS).map(s=>[s.id,{id:s.id,name:s.name,active:s.active,targetShare:s.targetShare,cycleKeys:[...(s.cycleKeys||[])],structuralFamilies:[...(s.structuralFamilies||[])],practiceFamily:s.practiceFamily||null,static:!!s.static,missingPolicy:s.missingPolicy||null,intervals:s.static?(s.staticIntervals||[]).map(r=>({start:new Date(r.a).toISOString(),end:new Date(r.b).toISOString(),scores:Object.fromEntries(DOMAINS.map((d,i)=>[d,r.scores[i]]))})):undefined}])),weights:WEIGHTS,selectedSystems:[...selectedSystemIds],selectedDimensions:[...selectedDimensionsSet],calculation:{swissReady,baziProvider,dashaDepth:"Prana",sampling:$("sampleMode").value,samplingModel:"uniform-midbin-daily-cap192-v2",expressionModel:"domain-evidence-duration-v2-experimental",
- structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,vedicDevataFormCount:VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length,vedicPracticeCount:VEDIC_KNOWLEDGE_REGISTRY.practices.length,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,methodRegistryVersion:ASTROLOGY_METHOD_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1-gochara",periodScoringModel:"duration-weighted-prana-v19",periodAggregationBase:"Prana",contextScoringModel:"parashari-conditional-audit-v17",directionModel:"support-gated-relative-opportunity-v20.1-unscored",directionMixModel:"duration-weighted-child-action-distribution-v20.3",directionContextPolicy:DIRECTION_CONTEXT_POLICY,ruleCoverage:CLASSICAL_RULE_AUDIT,activationModel:"partial-strength-and-delivery-v17",vedicPrimaryMethod:"BPHS",bnnPolicy:"installed-off-by-default-independent",interpretiveBenchmarkPolicy:"none",vedicGocharaModel:"lahiri-moon-lagna-drishti-active-lords-double-transit-v1",vedicYogaActivationModel:"major-yoga-registry-v2-natal-dasha-gochara",shaniCycleModel:"moon-sign-sade-sati-4th-8th-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
+ structuralEvidenceMode,structuralLayers:[...enabledStructuralLayerIds],d60Convention,birthConfidence:profile.birthConfidence,receivedDharma,vedicKnowledgeRegistryVersion:VEDIC_KNOWLEDGE_REGISTRY.version,vedicDevataFormCount:VEDIC_KNOWLEDGE_REGISTRY.devataFormCatalog.length,vedicPracticeCount:VEDIC_KNOWLEDGE_REGISTRY.practices.length,westernKnowledgeRegistryVersion:WESTERN_KNOWLEDGE_REGISTRY.version,sajuKnowledgeRegistryVersion:SAJU_KNOWLEDGE_REGISTRY.version,methodRegistryVersion:ASTROLOGY_METHOD_REGISTRY.version,mahadashaRankingModel:"support-vs-leverage-domain-routed-v1-gochara",periodScoringModel:"duration-weighted-prana-v19",periodAggregationBase:"Prana",contextScoringModel:"parashari-conditional-audit-v17",directionModel:"support-gated-relative-opportunity-v20.1-unscored",directionMixModel:"duration-weighted-child-action-distribution-v20.3",dashaWeightModel:"parent-dominant-50-30-12-6-2-v20.4",dashaWeightPolicy:VEDIC_LEVEL_WEIGHT_POLICY,directionContextPolicy:DIRECTION_CONTEXT_POLICY,ruleCoverage:CLASSICAL_RULE_AUDIT,activationModel:"partial-strength-and-delivery-v17",vedicPrimaryMethod:"BPHS",bnnPolicy:"installed-off-by-default-independent",interpretiveBenchmarkPolicy:"none",vedicGocharaModel:"lahiri-moon-lagna-drishti-active-lords-double-transit-v1",vedicYogaActivationModel:"major-yoga-registry-v2-natal-dasha-gochara",shaniCycleModel:"moon-sign-sade-sati-4th-8th-v1",d60EffectiveConfidence:d60SensitivityAssessment().effectiveConfidence}};let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,2)],{type:"application/json"}));a.download=(profile.name||"profile").replace(/\s+/g,"_").toLowerCase()+"_astrology_config.json";a.click()}
 
 function switchTab(which){
  closeHeatPreview();
@@ -8123,7 +8154,7 @@ function renderMethodComparison(){
  const period=currentDisplayPeriod(),ms=midpoint(period.a,period.b),di=DOMAINS.indexOf(methodComparisonDomain),path=fixedVedicPeriodPath(period),bnn=bnnTimingBreakdown(ms,di),bnSelected=selectedSystemIds.has('BNN'),root=$('methodComparisonBody');
  const scores=[{id:'Vedic',name:'BPHS · primary',support:scoreVedicPeriod(period,di),activation:activationVedicPeriod(period,di)},{id:'BNN',name:'BNN · independent comparator',support:perSystemPeriod(period,'BNN',di),activation:perSystemActivationPeriod(period,'BNN',di)}];
  const nominal=effectiveNominalWeight(methodComparisonDomain,'BNN'),den=selectedSystems().reduce((sum,s)=>sum+effectiveNominalWeight(methodComparisonDomain,s.id),0);
- root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><p class="small">Natal: ${catalogEscape(chart.natalSource)} · transits: ${catalogEscape(bnn.provider)} · ${catalogEscape(profile.ayanamsa)}. ${chart.natalSource!=='Swiss Ephemeris'?'Offline ayanāṃśa and transit positions are approximations; dates and scores can differ from Swiss Ephemeris.':''}</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · nominal ${Math.round(nominal*100)}% before renormalization${bnSelected?` · effective ${(100*nominal/den).toFixed(1)}% for ${methodComparisonDomain}`:''}. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support ${metricValueHTML(x.support)}</div>${methodBar(x.support)}<div>Period activation ${metricValueHTML(x.activation,"activation")}</div>${methodBar(x.activation,true)}<p class="small">${isDurationSummaryPeriod(period)?durationSystemMetrics(period,x.id).leafCount:(x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length)} ${isDurationSummaryPeriod(period)?'Prana midpoint samples · duration weighted':'projected samples'} · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Numerical weights are this app’s explicit v17 modeling choices, not scriptural percentages or probabilities. Coverage is partial; full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · selected-path context</h3><p class="small">Diagnostic context, separate from the duration-weighted total above. ${hasVedicPeriodPath(period)?'Selected path':'Midpoint path illustration'}. Context transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
+ root.innerHTML=`<p class="small">${catalogEscape(periodTitle(period))} · ${zoomRangeLabel(period)}. Comparison previews both methods; only checked systems contribute to the combined result.</p><p class="small">Natal: ${catalogEscape(chart.natalSource)} · transits: ${catalogEscape(bnn.provider)} · ${catalogEscape(profile.ayanamsa)}. ${chart.natalSource!=='Swiss Ephemeris'?'Offline ayanāṃśa and transit positions are approximations; dates and scores can differ from Swiss Ephemeris.':''}</p><div class="methodControls"><label>Life dimension<select id="methodDomain">${DOMAINS.map(d=>`<option>${d}</option>`).join('')}</select></label><button type="button" id="toggleBNN" aria-pressed="${bnSelected}">${bnSelected?'Remove BNN from combined':'Include BNN in combined'}</button></div><p class="small">BNN ${bnSelected?'included':'excluded'} · nominal ${Math.round(nominal*100)}% before renormalization${bnSelected?` · effective ${(100*nominal/den).toFixed(1)}% for ${methodComparisonDomain}`:''}. BNN has no Vimshottari cycle.</p><div class="methodCompareGrid">${scores.map(x=>`<div class="methodCard"><h3>${x.name}</h3><div>Period support ${metricValueHTML(x.support)}</div>${methodBar(x.support)}<div>Period activation ${metricValueHTML(x.activation,"activation")}</div>${methodBar(x.activation,true)}<p class="small">${isDurationSummaryPeriod(period)?durationSystemMetrics(period,x.id).leafCount:(x.id==='Vedic'?vedicPeriodSampleTimes(period).length:sampleTimes(period).length)} ${isDurationSummaryPeriod(period)?'Prana midpoint samples · duration weighted':'projected samples'} · support −2 to +2; activation 0 to 2.</p></div>`).join('')}</div><p class="small">Vimshottari active-lord weights use the v20.4 parent-dominant 50/30/12/6/2 engine normalization; they are not scriptural percentages or probabilities. Coverage is partial; full Shadbala and Ashtakavarga are not implemented. Natal exploration and the separate Mahadasha ranker retain their domain-routed models.</p><div class="methodCompareGrid"><section class="methodCard"><h3>BPHS · selected-path context</h3><p class="small">Diagnostic context, separate from the duration-weighted total above. ${hasVedicPeriodPath(period)?'Selected path':'Midpoint path illustration'}. Context transit contribution: ${Math.round(gocharaWeightForDepth(path.length)*100)}% support / ${Math.round(activationGocharaWeightForDepth(path.length)*100)}% activation.</p>${path.map((lord,i)=>{
  const a=bphsLordDomainAssessment(lord,di),factors=[['Lordship',a.functional],['D1 placement',a.placement],['Dignity',a.dignity],['Natural nature',a.natural],['Dispositor',a.dispositor.condition],['Associations',a.association],['Varga',a.varga.signal]];
  return `<details><summary>${LEVELS[i]} ${lord} · ${Math.round(normalizedDashaWeights(path.length)[i]*100)}% · support ${signed(a.support)}</summary><p>Activation ${activationDisplay(a.activation)} · domain relevance ${Math.round(a.relevance*100)}%</p><div class="methodFactors">${factors.map(([label,value])=>`<span>${label}</span>${methodBar(value*2)}<span>${signed(value)}</span>`).join('')}</div><p class="small">Factors −1 to +1. ${catalogEscape(a.varga.evidence)}. General contribution ${signed(a.contributions.general)} × relevance floor ${a.contributions.domainFactor.toFixed(2)} × strength ${a.contributions.strengthFactor.toFixed(2)}; independent varga ${signed(a.contributions.varga)}. Dispositor: ${catalogEscape(a.dispositor.host)}. ${catalogEscape(a.functionalDetail.status)}. Rules: ${BPHS_DOMAIN_RULES[methodComparisonDomain].houses.map(h=>'H'+h).join(', ')} · karakas ${BPHS_DOMAIN_RULES[methodComparisonDomain].karakas.join(', ')}.</p></details>`;
  }).join('')}${path.slice(1).map(ad=>{const pair=bphsPairAssessment(path[0],ad,di);return `<details class="pairEvidence"><summary>${path[0]} → ${ad} · context ${signed(pair.pairSignal)}</summary>${pair.evidence.map(e=>`<p class="small">${catalogEscape(e)}</p>`).join('')}<p class="small">${catalogEscape(pair.coverage)}</p></details>`}).join('')}<p class="small">${bphsPathAssociationFactor(path,di).evidence.map(catalogEscape).join(' · ')||'No additional qualifying lord association.'}</p></section><section class="methodCard"><h3>BNN · natal circuits</h3><p class="small">Same-sign, trine, seventh, adjacent-sign, dispositor and exchange links from each domain significator; strongest relationship counted once per actor. Hero → actor; same-sign links do not imply an exact conjunction.</p>${bnn.heroRows.map(row=>`<div class="bnnCircuit"><h4>${row.hero} · circuit signal ${signed(row.score)}</h4>${bnn.connections.filter(c=>c.hero===row.hero).map(c=>`<div class="bnnLink"><span>${c.hero}</span>→<span>${c.actor}</span><small>${c.relations.map(r=>r.kind).join(" / ")} · relation ${c.weight.toFixed(2)} · valence ${signed(c.valence)}</small></div>`).join('')||'<p class="small">No registered natal links.</p>'}</div>`).join('')}<details><summary>Retrograde and degree-order evidence</summary>${bnn.nuances.map(n=>`<p class="small">${n.planet}: ${SIGNS[n.actualSign]} → ${SIGNS[n.projectedSign]} · ${n.status}.</p>`).join('')}<p class="small">${bnn.degreeOrder.map(n=>`${n.name} ${n.degree.toFixed(1)}° ${SIGNS[n.sign]}`).join(' · ')}. Ordering shown as evidence; no automatic event sequence.</p></details><details><summary>Slow-transit triggers · ${bnn.hits.length}</summary><p class="small">Midpoint ${fmt(ms)} · ${catalogEscape(bnn.provider)}. These illustrate the midpoint, not the period average.</p>${bnn.hits.map(x=>`<p class="small">${x.transit} → ${x.target} · ${x.relation} · intensity ${x.intensity.toFixed(2)} · valence ${signed(x.valence)}</p>`).join('')||'<p>No registered triggers.</p>'}</details></section></div><details><summary>Method provenance and boundaries</summary>${Object.values(ASTROLOGY_METHOD_REGISTRY.methods).map(m=>`<div class="methodSource"><h4>${catalogEscape(m.name)}</h4><p>${catalogEscape(m.boundary)}</p><ul>${m.sources.map(s=>`<li>${catalogEscape(s.label)} — ${catalogEscape(s.use)}</li>`).join('')}</ul></div>`).join('')}<p class="small">The rule audit below links the reviewed sources and separates scored rules, partial implementations and evidence-only conventions.</p></details>`;

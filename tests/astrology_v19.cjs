@@ -13,7 +13,20 @@ const {chromium}=require('playwright');
   const readySeconds=(Date.now()-start)/1000;
   const result=await page.evaluate(()=>{
    let maxError=0,checks=0;const close=(a,b)=>{if(!Number.isFinite(a)||!Number.isFinite(b))throw Error('Nonfinite comparison');maxError=Math.max(maxError,Math.abs(a-b));checks++;if(Math.abs(a-b)>1e-10)throw Error(`Mismatch ${a} vs ${b}`)};
+   // Isolate level influence from chart condition: the same unit signal at each
+   // level must have the declared weight, in support AND activation.
+   const expected=[.50,.30,.12,.06,.02],originalLord=bphsLordDomainAssessment,originalPair=bphsPairAssessment,originalAssociation=planetAssociation;
+   if(!parentDominantDashaWeightInvariant().ok||DIRECTION_CONTEXT_POLICY.enabled)throw Error('Hierarchy/context policy');
+   const policy=AstroHeatmap.getVimshottariLevelWeights();policy.weights[0]=0;if(VEDIC_LEVEL_WEIGHTS[0]!==.5)throw Error('Mutable public policy');
+   try{
+    bphsLordDomainAssessment=(lord)=>({support:lord==='Sun'?1:0,activation:lord==='Sun'?1:0});
+    bphsPairAssessment=()=>({pairSignal:0});planetAssociation=()=>({present:false});
+    for(let level=0;level<5;level++)for(let di=0;di<12;di++){const path=Array(5).fill('Mercury');path[level]='Sun';close(bphsPathSupport(path,di),expected[level]);close(bphsPathActivation(path,di),expected[level])}
+    for(let depth=1;depth<=5;depth++){const path=Array(depth).fill('Sun');close(bphsPathSupport(path,0),1);close(bphsPathActivation(path,0),1)}
+   }finally{bphsLordDomainAssessment=originalLord;bphsPairAssessment=originalPair;planetAssociation=originalAssociation}
    const md=dashaRoot.find(p=>p.lord==='Mercury'&&p.a>chart.birthMs),duration=p=>p.b-p.a;
+   const transit=calcVedicTransitSet(midpoint(md.a,md.b)).Sun;
+   for(let level=0;level<5;level++){const path=Array(5).fill('Mercury');path[level]='Sun';const row=vedicBodyGocharaContribution('Sun',transit,0,path);close(row.dashaMult,[1.30,1.18,1.072,1.036,1.012][level])}
    const leaves=p=>{const c=durationSummaryChildren(p);return c.length?c.flatMap(leaves):[p]},all=leaves(md);
    const ids=selectedSystems().map(s=>s.id);
    const walk=p=>{const children=durationSummaryChildren(p);if(!children.length)return;
