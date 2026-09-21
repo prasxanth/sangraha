@@ -23,7 +23,7 @@ const {chromium}=require('playwright');
    window.scoreLayoutIssues=()=>{layout.length=0;bounds();return layout};
    if($('contrastMode').value!=='lifetime')throw Error('Support colors must default to lifetime intensity with absolute labels');
    $('contrastMode').value='relative';
-   switchTab('cycles');
+   switchTab('cycles');selectCycleMetric('support');
    const path=['Mercury','Venus','Mars','Jupiter'];
    for(let depth=0;depth<=4;depth++){prefix=path.slice(0,depth);render();fitHierarchyScoreCards();bounds();results.push(check('.laneContinue'));if(depth===4)results.push(check('#pranaNavigator .ps'))}
    prefix=[];render();fitHierarchyScoreCards();bounds();results.push(check('.dbar-score'),check('.phase .grade'));
@@ -42,7 +42,7 @@ const {chromium}=require('playwright');
   assert.deepEqual(audit.layout,[],'Every number must fit inside its painted container');assert(audit.results.every(Boolean));assert(audit.noCategory);assert.equal(audit.before,audit.after);
   assert(audit.colors>5&&audit.colorChange);assert(audit.legend.includes('Relative colors')&&audit.absoluteLegend.includes('fixed color scale'));
   assert.equal(audit.negativeZero,'+0.00');
-  await page.evaluate(()=>{switchTab('cycles');prefix=[];render()});
+  await page.evaluate(()=>{switchTab('cycles');selectCycleMetric('support');prefix=[];render()});
   await page.locator('#hierarchyLanes').screenshot({path:'/tmp/kala-score-navigation.png'});
   await page.locator('#domainBarsContainer').screenshot({path:'/tmp/kala-score-grid.png'});
   await page.setViewportSize({width:390,height:844});
