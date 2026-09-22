@@ -3,6 +3,8 @@ const assert=require('node:assert/strict'),{chromium}=require('playwright');
  const page=await browser.newPage({viewport:{width:390,height:844},hasTouch:true}),errors=[];page.setDefaultTimeout(120000);page.on('pageerror',e=>errors.push(e.message));
  await page.route('https://**',r=>r.abort());await page.addInitScript(()=>{const t=setTimeout;window.setTimeout=(f,d,...a)=>String(f).includes('loadSwiss().then')?0:t(f,d,...a)});
  await page.goto('file://'+process.cwd()+'/astrology_engine.html');await page.waitForFunction(()=>document.querySelector('#validationTable').dataset.autorun==='done');
+ // These regression fixtures exercise the uncalibrated baseline.
+ await page.evaluate(()=>applyColdModel(false));
  await page.evaluate(()=>{prefix=['Mercury','Venus','Mars'];switchTab('cycles');render()});
  assert.equal(await page.locator('#cycleMetric-support').getAttribute('aria-selected'),'true');
  assert(await page.locator('#supportComparison').isVisible());

@@ -3,6 +3,8 @@ const assert=require('node:assert/strict'),{chromium}=require('playwright');
  const page=await browser.newPage({viewport:{width:390,height:844},hasTouch:true}),errors=[];page.setDefaultTimeout(120000);page.on('pageerror',e=>errors.push(e.message));
  await page.route('https://**',r=>r.abort());await page.addInitScript(()=>{const t=setTimeout;window.setTimeout=(f,d,...a)=>String(f).includes('loadSwiss().then')?0:t(f,d,...a)});
  await page.goto('file://'+process.cwd()+'/astrology_engine.html');await page.waitForFunction(()=>document.querySelector('#validationTable').dataset.autorun==='done');
+ // These regression fixtures exercise the uncalibrated baseline.
+ await page.evaluate(()=>applyColdModel(false));
  const result=await page.evaluate(()=>{
   const favorable=new Set(['BUILD','ADVANCE','EXPAND']);let checked=0;
   for(const s of [-1.5,-.75,-.35,0,.2,.349])for(const a of [0,.75,1.15,1.5,2])for(const x of [0,.75,1.15,1.5,2])for(const p of [0,20,50,70,90,100]){if(favorable.has(directionFromScores(s,a,x,p).action))throw Error('Relative rank overrode absolute gate');checked++}

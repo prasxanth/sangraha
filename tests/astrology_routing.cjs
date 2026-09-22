@@ -2,6 +2,8 @@ const assert=require('node:assert/strict'),{chromium}=require('playwright');
 (async()=>{const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});try{
  const page=await browser.newPage({viewport:{width:390,height:844}}),errors=[];page.setDefaultTimeout(120000);page.on('pageerror',e=>errors.push(e.message));await page.route('https://**',r=>r.abort());await page.addInitScript(()=>{const t=setTimeout;window.setTimeout=(f,d,...a)=>String(f).includes('loadSwiss().then')?0:t(f,d,...a)});
  await page.goto('file://'+process.cwd()+'/astrology_engine.html',{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>document.querySelector('#validationTable').dataset.autorun==='done');
+ // These regression fixtures exercise the uncalibrated baseline.
+ await page.evaluate(()=>applyColdModel(false));
  const result=await page.evaluate(()=>{
   let checks=0;const close=(a,b)=>{checks++;if(a===null||b===null){if(a!==b)throw Error('Missing coverage mismatch');return}if(Math.abs(a-b)>1e-10)throw Error(`Routing mismatch ${a} vs ${b}`)};
   const support=[[.45,.20,.35],[.45,.15,.40],[.40,.40,.20],[.40,.35,.25],[.55,.25,.20],[.35,.25,.40],[.25,.55,.20],[.60,.25,.15],[.20,.45,.35],[.35,.35,.30],[.30,.40,.30],[.40,.35,.25]],activation=[[.50,.30,.20],[.45,.25,.30],[.40,.40,.20],[.40,.40,.20],[.50,.30,.20],[.35,.35,.30],[.25,.60,.15],[.55,.30,.15],[.25,.45,.30],[.35,.40,.25],[.30,.45,.25],[.40,.40,.20]];

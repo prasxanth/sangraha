@@ -10,6 +10,8 @@ const {chromium}=require('playwright');
   await page.addInitScript(()=>{const t=setTimeout;window.setTimeout=(f,d,...a)=>String(f).includes('loadSwiss().then')?0:t(f,d,...a)});
   const start=Date.now();await page.goto('file://'+process.cwd()+'/astrology_engine.html');
   await page.waitForFunction(()=>document.querySelector('#validationTable').dataset.autorun==='done');
+ // These regression fixtures exercise the uncalibrated baseline.
+ await page.evaluate(()=>applyColdModel(false));
   const readySeconds=(Date.now()-start)/1000;
   const result=await page.evaluate(()=>{
    let maxError=0,checks=0;const close=(a,b)=>{if(!Number.isFinite(a)||!Number.isFinite(b))throw Error('Nonfinite comparison');maxError=Math.max(maxError,Math.abs(a-b));checks++;if(Math.abs(a-b)>1e-10)throw Error(`Mismatch ${a} vs ${b}`)};

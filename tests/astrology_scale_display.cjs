@@ -3,6 +3,8 @@ const assert=require('node:assert/strict'),{chromium}=require('playwright');
  const page=await browser.newPage({viewport:{width:390,height:844},hasTouch:true}),errors=[];page.setDefaultTimeout(120000);page.on('pageerror',e=>errors.push(e.message));
  await page.route('https://**',r=>r.abort());await page.addInitScript(()=>{const t=setTimeout;window.setTimeout=(f,d,...a)=>String(f).includes('loadSwiss().then')?0:t(f,d,...a)});
  await page.goto('file://'+process.cwd()+'/astrology_engine.html');await page.waitForFunction(()=>document.querySelector('#validationTable').dataset.autorun==='done');
+ // These regression fixtures exercise the uncalibrated baseline.
+ await page.evaluate(()=>applyColdModel(false));
  const bands=await page.evaluate(()=>{
   const support=[-2,-1.2,-1.199,-.75,-.749,-.35,-.349,.11,.14,.349,.35,.749,.75,1.199,1.2,2].map(x=>directionSupportBand(x).label);
   const activation=[0,.349,.35,.749,.75,1.149,1.15,1.499,1.5,2].map(x=>directionActivationBand(x).label);
