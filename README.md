@@ -416,6 +416,14 @@ The `apple-touch-icon` is inlined as an SVG data URI — no separate image file 
 
 ---
 
+## Mercury Dasha Atlas
+
+**File:** [mercury_dasha_atlas.html](mercury_dasha_atlas.html)
+
+A mobile-first map of all 81 Antardasha/Pratyantardasha combinations in the Mercury Mahadasha (2021–2038). The compact heatmap supports pinch/button zoom, drag-to-pan, a draggable minimap, keyboard navigation, and an Inspect mode with a moving magnifier. Select a period for its assessment, dates, transit snapshot and practice details. Filters dim nonmatching cells while preserving the grid.
+
+Previously named `mercury_md_ad_pd_heatmap.html`. The supplied ratings and transit data are preserved; this viewer does not recalculate them.
+
 ## Archives
 
 - [Astrology engine snapshots](archive/astrology_engine/README.md)
