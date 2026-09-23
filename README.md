@@ -416,6 +416,10 @@ The `apple-touch-icon` is inlined as an SVG data URI — no separate image file 
 
 ---
 
+## Archives
+
+- [Astrology engine snapshots](archive/astrology_engine/README.md)
+
 ## Technical Notes
 
 - **Pure HTML/CSS/JS — no framework, no build tooling.** Each file is entirely self-contained. All styles are inline `<style>` blocks, all logic is inline `<script>` blocks.
