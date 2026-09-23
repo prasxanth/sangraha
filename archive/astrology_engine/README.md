@@ -1,6 +1,6 @@
 # Astrology engine archive
 
-Dated snapshots of the engine. The active app remains at [`astrology_engine.html`](../../astrology_engine.html).
+The engine is archived here. The root-level `astrology_engine.html` has been removed; open the snapshot below to use the preserved app.
 
 | Snapshot | Source commit | Contents |
 | --- | --- | --- |

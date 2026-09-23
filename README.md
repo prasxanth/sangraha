@@ -144,7 +144,7 @@ A lab-directed metabolic protocol system built on the principle: *each lab resul
 
 ### Astrology Engine
 
-**File:** `astrology_engine.html`
+**Archived file:** [2026-09-22_calibrated_v5.html](archive/astrology_engine/2026-09-22_calibrated_v5.html)
 
 A birth-driven multi-system timing and natal evidence engine that generates a heatmap of life-dimension scores across the full lifespan, drawing from three independent astrological traditions simultaneously. All calculation is client-side — no server, no external API required, though optional Swiss Ephemeris WASM and BaZi library providers can be loaded for higher precision.
 
@@ -169,7 +169,7 @@ A birth-driven multi-system timing and natal evidence engine that generates a he
 - **Static plug-ins:** Import externally calculated date-interval arrays as JSON with domain scores and a missing-data policy (renormalize or neutral 0).
 - Coverage-aware weighting: a system missing a date or domain is automatically renormalized rather than dragging other scores toward zero.
 
-**How to use:** Open `astrology_engine.html` in any browser. Enter birth details and click **Recalculate profile**. On iPhone: Safari → Share → Add to Home Screen → launches as **Astro Engine**.
+**How to use:** Open the [archived engine](archive/astrology_engine/2026-09-22_calibrated_v5.html) in any browser. Enter birth details and click **Recalculate profile**. On iPhone: Safari → Share → Add to Home Screen → launches as **Astro Engine**.
 
 ---
 
