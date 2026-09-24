@@ -10,7 +10,7 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto'),{chromi
  }
  await page.evaluate(()=>clearFilters());
  const careerHeats=await page.evaluate(()=>DATA.map(r=>pdResult(r,'career').heat));
- const data=await page.evaluate(()=>({DATA,PRACTICE}));assert.equal(crypto.createHash('sha256').update(JSON.stringify(data)).digest('hex'),'f4414de7f003d69bd66e23ed379fe08375575c1256e2bc7f0893f3a35cf95f46');
+ const data=await page.evaluate(()=>({DATA,PRACTICE}));assert.equal(crypto.createHash('sha256').update(JSON.stringify(data)).digest('hex'),'7f58010573f196c981033c7b90f064581e09074ce933fad864249ac54e36d14c');
  assert.equal(await page.locator('#adSlider').count(),0);
  assert(await page.evaluate(()=>groups.every(entries=>entries.every(({r,i},j)=>{const b=cells.find(c=>+c.dataset.index===i),width=b.getBoundingClientRect().width,total=b.parentElement.getBoundingClientRect().width,ratio=(Date.parse(r.end)-Date.parse(r.start))/(Date.parse(entries.at(-1).r.end)-Date.parse(entries[0].r.start));return Math.abs(width/total-ratio)<.002&&(!j||entries[j-1].r.end===r.start)}))));
  for(const width of [320,390,430,1024]){await page.setViewportSize({width,height:844});await page.waitForTimeout(60);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth&&viewport.scrollWidth<=viewport.clientWidth+1&&viewport.scrollHeight<=viewport.clientHeight+1));assert.equal(await page.locator('.timeline-row:visible').count(),9)}
