@@ -34,7 +34,7 @@ Details expose existing detected yoga evidence relevant to the selected domain's
 
 ## Verification
 
-`tests/astrology_lifetime_display.cjs` independently checks duration-weighted percentile arithmetic, ties, empty distributions, all percentile boundaries, all 12 reference domains, total lifetime coverage, zoom/color invariance, horizon/system/weight invalidation, unchanged reference scores, mobile previews/details, and non-Vedic selection.
+`archive/astrology_engine/tests/astrology_lifetime_display.cjs` independently checks duration-weighted percentile arithmetic, ties, empty distributions, all percentile boundaries, all 12 reference domains, total lifetime coverage, zoom/color invariance, horizon/system/weight invalidation, unchanged reference scores, mobile previews/details, and non-Vedic selection.
 
 Existing layout and scale-display suites verify number containment, score identity, period navigation, color options, and activation/expression views. An AST comparison against the previous commit confirms existing calculation functions are unchanged; modifications are limited to renderers, evidence presentation, and color/display helpers.
 

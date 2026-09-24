@@ -49,14 +49,14 @@ Built-in validation: **66/66 required chart anchors and 29/30 synthetic checks**
 
 Chrome tests use the analytical fallback with network providers disabled:
 
-- `tests/astrology_v14.cjs`: all four profiles, catalog counts/eligibility, Saturn windows, filters and responsive existing tabs.
-- `tests/astrology_v15.cjs`: fixed parent scoring, child ranges, activation independence, foreign paths and existing heatmap interactions.
-- `tests/astrology_v16.cjs`: four-profile BPHS/BNN bounds and cache isolation, distinct transit weights at every depth, BNN independence from dasha lookup, no self-association boost, preview versus opt-in, normalized comparator weight, BNN-only selection and mobile/desktop comparison controls.
+- `archive/astrology_engine/tests/astrology_v14.cjs`: all four profiles, catalog counts/eligibility, Saturn windows, filters and responsive existing tabs.
+- `archive/astrology_engine/tests/astrology_v15.cjs`: fixed parent scoring, child ranges, activation independence, foreign paths and existing heatmap interactions.
+- `archive/astrology_engine/tests/astrology_v16.cjs`: four-profile BPHS/BNN bounds and cache isolation, distinct transit weights at every depth, BNN independence from dasha lookup, no self-association boost, preview versus opt-in, normalized comparator weight, BNN-only selection and mobile/desktop comparison controls.
 
 Run from the repository root with Playwright installed:
 
 ```sh
-NODE_PATH=/tmp/kala-v14/node_modules node tests/astrology_v16.cjs
+NODE_PATH=/tmp/kala-v14/node_modules node archive/astrology_engine/tests/astrology_v16.cjs
 ```
 
 Chrome defaults to its standard macOS path; override with `CHROME_PATH`. Live Swiss Ephemeris loading is not covered. The prior reference-profile devatā regression remains visible and has not been weakened.

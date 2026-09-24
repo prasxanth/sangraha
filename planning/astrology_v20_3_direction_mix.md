@@ -10,4 +10,4 @@ The compact stacked overview sits above the heatmap: first compare duration mix 
 
 Existing score/activation/scale, percentile and Direction classifier functions are unchanged. Browser tests cover all-domain duration conservation and bucket membership, unchanged metrics, unavailable values, terminal depth, actual segment widths, mobile overflow, subtab visibility/persistence and keyboard navigation. Scale and score-layout regression suites also pass.
 
-Tests: `tests/astrology_direction_mix.cjs`, `tests/astrology_scale_display.cjs`, `tests/astrology_score_layout.cjs` (Playwright with local Chrome; external ephemeris requests disabled for deterministic regression).
+Tests: `archive/astrology_engine/tests/astrology_direction_mix.cjs`, `archive/astrology_engine/tests/astrology_scale_display.cjs`, `archive/astrology_engine/tests/astrology_score_layout.cjs` (Playwright with local Chrome; external ephemeris requests disabled for deterministic regression).

@@ -27,6 +27,6 @@ Holdout improvement checks this supplied historical dataset; it does not establi
 
 ## Verification
 
-`tests/astrology_calibration.cjs` covers dataset integrity, zero-computation startup/reload, explicit saved-result reuse, event/options/provider/birth invalidation, stale-model rejection, manual routing transitions, Prana prediction/application equivalence, holdout exclusion, date validation, provisional fits, browser-storage failure and mobile page width. Existing cold regression fixtures explicitly select the cold model, since the matching reference profile now defaults to the validated saved fit.
+`archive/astrology_engine/tests/astrology_calibration.cjs` covers dataset integrity, zero-computation startup/reload, explicit saved-result reuse, event/options/provider/birth invalidation, stale-model rejection, manual routing transitions, Prana prediction/application equivalence, holdout exclusion, date validation, provisional fits, browser-storage failure and mobile page width. Existing cold regression fixtures explicitly select the cold model, since the matching reference profile now defaults to the validated saved fit.
 
 The routing suite passed 10,872 checks. The duration arithmetic suite passed 87,564 checks across all 6,561 Prana leaves, with maximum aggregation error 3.13e-12. Cold Mercury MD Career support remains 0.3045283084587375. JavaScript parsing and embedded JSON validation pass. Browser checks used the internal fallback providers, not live Swiss Ephemeris.

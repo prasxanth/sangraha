@@ -21,10 +21,10 @@ Raw support, activation, expression/scale, MD→AD→PD→Sookshma→Prana durat
 
 Browser regression commands (Playwright and Chrome):
 
-- `tests/astrology_v20_display.cjs`: 900 support-gate combinations, representative v20.1 classifications, unchanged all-domain raw metrics, reference percentile, mobile map/preview/details, text containment and missing-scale behavior.
-- `tests/astrology_lifetime_display.cjs`: duration weighting, ties, boundaries, all-domain baseline, zoom invariance, configuration invalidation and unchanged support.
-- `tests/astrology_scale_display.cjs`: bucket boundaries, duration-consistent expression, unchanged support/activation and mobile views.
-- `tests/astrology_score_layout.cjs`: desktop/mobile numeric containment across navigation, cards, chips, grids and playbook.
+- `archive/astrology_engine/tests/astrology_v20_display.cjs`: 900 support-gate combinations, representative v20.1 classifications, unchanged all-domain raw metrics, reference percentile, mobile map/preview/details, text containment and missing-scale behavior.
+- `archive/astrology_engine/tests/astrology_lifetime_display.cjs`: duration weighting, ties, boundaries, all-domain baseline, zoom invariance, configuration invalidation and unchanged support.
+- `archive/astrology_engine/tests/astrology_scale_display.cjs`: bucket boundaries, duration-consistent expression, unchanged support/activation and mobile views.
+- `archive/astrology_engine/tests/astrology_score_layout.cjs`: desktop/mobile numeric containment across navigation, cards, chips, grids and playbook.
 
 Offline reference Mercury MD Career support remains `0.2747501437659854`; Mercury/Rahu AD Career remains `0.19289385134913167`, at lifetime percentile `21.249127821180853`.
 

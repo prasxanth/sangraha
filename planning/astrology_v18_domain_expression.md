@@ -64,9 +64,9 @@ The v17 regression suite now also covers support-only cells, the 24 expression f
 Run the independent audit with Playwright available to Node and pyswisseph installed for the selected Python:
 
 ```sh
-ORACLE_PYTHON=/path/to/python node tests/astrology_v18_audit.cjs
+ORACLE_PYTHON=/path/to/python node archive/astrology_engine/tests/astrology_v18_audit.cjs
 ```
 
 The resulting temporary report includes full input/provider context. Live CDN/WASM loading is not validated by replay tests. Numerical convergence is checked for the listed reference periods across all domains, not every possible chart.
 
-The follow-up regression `tests/astrology_score_display.cjs` checks all navigation depths, desktop/mobile score displays, single-score formatting and color-mode invariance.
+The follow-up regression `archive/astrology_engine/tests/astrology_score_display.cjs` checks all navigation depths, desktop/mobile score displays, single-score formatting and color-mode invariance.

@@ -437,7 +437,7 @@ Timeline widths represent duration within each AD; Life map columns use equal wi
 
 ## Archives
 
-- [Astrology engine snapshots](archive/astrology_engine/README.md)
+- [Astrology engine snapshots and historical tests](archive/astrology_engine/README.md)
 
 ## Technical Notes
 

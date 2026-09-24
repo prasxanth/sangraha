@@ -54,7 +54,7 @@ Reproduce the focused checks from the repository root:
 
 ```sh
 npm install --prefix /tmp/kala-v14 playwright
-NODE_PATH=/tmp/kala-v14/node_modules node tests/astrology_v14.cjs
+NODE_PATH=/tmp/kala-v14/node_modules node archive/astrology_engine/tests/astrology_v14.cjs
 ```
 
 Set `CHROME_PATH` if Chrome is installed elsewhere.

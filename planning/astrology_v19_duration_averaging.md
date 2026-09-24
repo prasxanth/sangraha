@@ -45,9 +45,9 @@ The weighted AD mean, weighted PD mean, and direct weighted mean of all Pranas a
 Run with Playwright installed and Chrome available:
 
 ```
-NODE_PATH=/tmp/kala-v14/node_modules node tests/astrology_v19.cjs
-NODE_PATH=/tmp/kala-v14/node_modules node tests/astrology_score_display.cjs
-NODE_PATH=/tmp/kala-v14/node_modules node tests/astrology_v17.cjs
+NODE_PATH=/tmp/kala-v14/node_modules node archive/astrology_engine/tests/astrology_v19.cjs
+NODE_PATH=/tmp/kala-v14/node_modules node archive/astrology_engine/tests/astrology_score_display.cjs
+NODE_PATH=/tmp/kala-v14/node_modules node archive/astrology_engine/tests/astrology_v17.cjs
 ```
 
 The v19 regression checks every parent inside Mercury MD, every domain, selected-system support and activation, direct leaf versus nested aggregation, duration fractions, clipped boundaries, independent leaf formula reconstruction, system-selection changes, expression rollups, missing coverage and query-order independence. UI checks cover single-score navigation, colors, and mobile overflow. The v17 test's old formula assertion now explicitly tests the preserved context model; the v19 test covers the replacement period model.

@@ -91,8 +91,8 @@ The built-in validation’s pre-existing reference devata regression remains vis
 Run with Playwright available to Node, Chrome installed, and `pyswisseph` installed in the Python used for the optional independent audit:
 
 ```sh
-node tests/astrology_v17.cjs
-ORACLE_PYTHON=/path/to/python node tests/astrology_v17_audit.cjs
+node archive/astrology_engine/tests/astrology_v17.cjs
+ORACLE_PYTHON=/path/to/python node archive/astrology_engine/tests/astrology_v17_audit.cjs
 ```
 
 Set `NODE_PATH` if Playwright is installed outside the project and `CHROME_PATH` for a different Chrome location. The audit writes reproducible reports to an OS temporary directory and does not change application profiles or fixtures.

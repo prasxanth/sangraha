@@ -22,15 +22,15 @@ Source: supplied `dynamic_astrology_engine_latest_v15_1.html`, compared against 
 
 ## Verification
 
-`tests/astrology_v14.cjs` retains four-profile catalog, Saturn, eligibility, responsive-view and filter checks.
+`archive/astrology_engine/tests/astrology_v14.cjs` retains four-profile catalog, Saturn, eligibility, responsive-view and filter checks.
 
-`tests/astrology_v15.cjs` covers all four profiles; bounded native activation values; selected MD stability when descendant lookup changes; AD weights and child ranges; Saju/Western path isolation; missing and independently supplied external activation; removed benchmark symbols; mobile magnifier/details; desktop activation display.
+`archive/astrology_engine/tests/astrology_v15.cjs` covers all four profiles; bounded native activation values; selected MD stability when descendant lookup changes; AD weights and child ranges; Saju/Western path isolation; missing and independently supplied external activation; removed benchmark symbols; mobile magnifier/details; desktop activation display.
 
 Run from the repository root with Playwright installed:
 
 ```sh
-NODE_PATH=/tmp/kala-v14/node_modules node tests/astrology_v14.cjs
-NODE_PATH=/tmp/kala-v14/node_modules node tests/astrology_v15.cjs
+NODE_PATH=/tmp/kala-v14/node_modules node archive/astrology_engine/tests/astrology_v14.cjs
+NODE_PATH=/tmp/kala-v14/node_modules node archive/astrology_engine/tests/astrology_v15.cjs
 ```
 
 Chrome defaults to its standard macOS location; override with `CHROME_PATH`. Tests disable network providers for reproducible analytical-fallback behavior. Live Swiss Ephemeris loading is not covered.
