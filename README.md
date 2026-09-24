@@ -416,13 +416,24 @@ The `apple-touch-icon` is inlined as an SVG data URI — no separate image file 
 
 ---
 
-## Mercury Dasha Atlas
+## Mercury Life Atlas
 
 **File:** [mercury_atlas.html](mercury_atlas.html)
 
-A mobile-first map of all 81 Antardasha/Pratyantardasha combinations in the Mercury Mahadasha (2021–2038). All nine ADs appear together in one dated timeline plot. PDs appear chronologically in a rounded ribbon, with widths proportional to their duration within the AD. The compact heatmap supports pinch/button zoom, drag-to-pan, a draggable minimap, keyboard navigation, and an Inspect mode with a moving magnifier. Tap a PD to open its assessment, dates, transit snapshot and practice details in a popup, with previous/next navigation. A Sūkṣma tab adds nine duration-proportional SD segments, a dated dropdown, exact UTC boundaries, inherited versus composite ratings, and SD-specific transit evidence. All 729 supplied SD records are embedded; the all-AD overview remains at PD level. Click a legend rating to filter PDs; click it again or choose All ratings to clear that rating filter. Filters dim nonmatching cells while preserving the timeline layout. Inspect mode previews nearby periods and dates while pressing and sliding; turn it off to open the popup by tapping.
+A self-contained app for ten life dimensions across the Mercury Mahadasha (9 February 2021–10 February 2038). Inspired by the archived astrology engine, it has mobile bottom navigation and a desktop sidebar, with four views:
 
-Previously named `mercury_md_ad_pd_heatmap.html`. The supplied ratings and transit data are preserved; this viewer does not recalculate them.
+- **Timeline:** Current Sūkṣma ratings across all ten dimensions, followed by all nine AD timelines. Choose a dimension to recolor the 81 duration-proportional PD segments. Filters, zoom, panning, a minimap, keyboard navigation and Inspect mode support exploration.
+- **Life map:** Compare ten dimensions across nine chronological PDs or Sūkṣma periods. Move between groups, jump to the current period, or enlarge cells. Tap any cell for dimension evidence, the PD baseline, exact SD times in UTC, and midpoint transit snapshots.
+- **Practice:** The existing PD practice anchors, also available within period details.
+- **Guide:** Interpretation, scoring weights, divisional-chart anchors and planet profiles.
+
+The supplied whole-life model covers Career, Wealth, Marriage, Family, Children, Mind, Vitality, Learning, Spiritual and Reinvention. All 729 SD records and the original career assessments are preserved. The other dimension ratings use the supplied chart-specific profiles and domain-specific transit formulas; each SD result stays within one heat level of its PD baseline. PD baselines are not averages of their children. The app evaluates the embedded model offline; it does not recalculate ephemerides or natal charts.
+
+Current-period ratings and markers use exact UTC dasha boundaries and update automatically at transitions. The app checks the device clock at least once a minute and refreshes on focus, visibility restoration, or page restoration. Manual browsing selections remain in place.
+
+Timeline widths represent duration within each AD; Life map columns use equal widths for comparison. The date range covers one Mahadasha, not an entire lifetime. Ratings are interpretive categories, not probabilities.
+
+**Validation:** `tests/mercury_dasha_atlas.cjs`, `tests/mercury_sookshma.cjs`, `tests/mercury_life_atlas.cjs`, and `tests/mercury_current_period.cjs` use Playwright with local Chrome. The life-atlas test optionally accepts the supplied `mercury_md_whole_life_heatmap.html` path to compare all records and all 7,290 dimension results against the source.
 
 ## Archives
 
