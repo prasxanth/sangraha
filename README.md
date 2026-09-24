@@ -427,13 +427,13 @@ A self-contained app for ten life dimensions across the Mercury Mahadasha (9 Feb
 - **Practice:** The existing PD practice anchors, also available within period details.
 - **Guide:** Interpretation, scoring weights, divisional-chart anchors and planet profiles.
 
-The supplied whole-life model covers Career, Wealth, Marriage, Family, Children, Mind, Vitality, Learning, Spiritual and Reinvention. All 729 SD records and the original career assessments are preserved. The other dimension ratings use the supplied chart-specific profiles and domain-specific transit formulas; each SD result stays within one heat level of its PD baseline. PD baselines are not averages of their children. The app evaluates the embedded model offline; it does not recalculate ephemerides or natal charts.
+The supplied whole-life model covers Career, Wealth, Marriage, Family, Children, Mind, Vitality, Learning, Spiritual and Reinvention. All 729 SD records are preserved. The v2 model recalculates all ten dimensions, including Career, using centered chart-specific profiles, dasha-pair interactions, midpoint transits and exact contacts. Each SD support rating stays within two heat levels of its PD baseline. Intensity is calculated separately and appears as 1–4 bars in the current overview and SD comparison map, with a named category and support index in details. The old stored career ratings no longer determine displayed support. PD baselines are not averages of their children. The app evaluates the embedded model offline; it does not recalculate ephemerides or natal charts.
 
 Current-period ratings and markers use exact UTC dasha boundaries and update automatically at transitions. The app checks the device clock at least once a minute and refreshes on focus, visibility restoration, or page restoration. Manual browsing selections remain in place.
 
 Timeline widths represent duration within each AD; Life map columns use equal widths for comparison. The date range covers one Mahadasha, not an entire lifetime. Ratings are interpretive categories, not probabilities.
 
-**Validation:** `tests/mercury_dasha_atlas.cjs`, `tests/mercury_sookshma.cjs`, `tests/mercury_life_atlas.cjs`, and `tests/mercury_current_period.cjs` use Playwright with local Chrome. The life-atlas test optionally accepts the supplied `mercury_md_whole_life_heatmap.html` path to compare all records and all 7,290 dimension results against the source.
+**Validation:** `tests/mercury_dasha_atlas.cjs`, `tests/mercury_sookshma.cjs`, `tests/mercury_life_atlas.cjs`, and `tests/mercury_current_period.cjs` use Playwright with local Chrome. The life-atlas test optionally accepts the supplied `mercury_md_whole_life_heatmap_v2.html` path to compare all records and all 7,290 dimension results against the source. A checked-in v2 reference fixture also verifies all 7,290 outputs without requiring the external source file.
 
 ## Archives
 
