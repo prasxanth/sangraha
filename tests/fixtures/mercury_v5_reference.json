@@ -1,0 +1,311 @@
+{
+  "source": "mercury_md_whole_life_heatmap_v5_rules_first.html",
+  "sourceSha256": "69f3cb8a31d856f136e2716b2043d0033595c0c0e72f6e5fe11d17cc6aca2eb6",
+  "recordsSha256": "68313143b74e22c6949254a68b91cef191d32a3bb3854243d2edd06ac296e75f",
+  "resultsSha256": "8d2f2e1d944c798a085809befcee3df6857154618bc0fea12c80994d9d294e3c",
+  "recordCount": 729,
+  "resultCount": 7290,
+  "samples": [
+    {
+      "label": "jupiter_career_anchor",
+      "index": 567,
+      "dimension": "career",
+      "period": [
+        "Jupiter",
+        "Jupiter",
+        "Jupiter"
+      ],
+      "result": {
+        "heat": 1,
+        "parent": 1,
+        "parentScore": 84,
+        "raw": 1.272,
+        "score": 88,
+        "transit": 0,
+        "contact": 0,
+        "fast": 0,
+        "mark": "++",
+        "post": "MAX LEVERAGE",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and D10 10th lord Moon carry particular weight; Jupiter is constructive but qualified; Rahu is high-variance yet strengthened by D10 Saturn. The Career PD baseline is intentionally the original hand-audited first-version reading: ++ MAX LEVERAGE. D1 2L/5L; D10 Jupiter in own-sign Pisces 6H conjunct D10 10L Moon: constructive career potential through expertise, service, judgment and solving hard institutional problems. The Jupiter SD plus slow/exact transit evidence does not materially change the parent manifestation. v5 does not normalize planets against one another: a supportive Jupiter, Venus or Mercury stays supportive even if another planet is stronger. Midpoint gochara is only a snapshot; slow planets and exact contacts carry the interpretive weight. Intensity is tracked separately (LOW).",
+        "components": [
+          "Original rules-first Career AD→PD anchor: ++ MAX LEVERAGE",
+          "PD rule — Jupiter: D1 2L/5L; D10 Jupiter in own-sign Pisces 6H conjunct D10 10L Moon: constructive career potential through expertise, service, judgment and solving hard institutional problems.",
+          "SD rule — Jupiter: D1 2L/5L; D10 Jupiter in own-sign Pisces 6H conjunct D10 10L Moon: constructive career potential through expertise, service, judgment and solving hard institutional problems.",
+          "Mercury MD contribution +0.15",
+          "Jupiter AD climate +0.11",
+          "Jupiter PD manifestation +0.27",
+          "AD–PD relationship 0.00",
+          "Jupiter SD modifier +0.07",
+          "PD–SD relationship 0.00",
+          "AD–SD relationship 0.00",
+          "Slow transit snapshot 0.00",
+          "Exact natal contacts 0.00",
+          "SD-lord midpoint transit 0.00"
+        ],
+        "intensity": "LOW",
+        "intensityScore": 0.2,
+        "pdRule": "D1 2L/5L; D10 Jupiter in own-sign Pisces 6H conjunct D10 10L Moon: constructive career potential through expertise, service, judgment and solving hard institutional problems.",
+        "sdRule": "D1 2L/5L; D10 Jupiter in own-sign Pisces 6H conjunct D10 10L Moon: constructive career potential through expertise, service, judgment and solving hard institutional problems.",
+        "anchorSource": "Original rules-first Career AD→PD anchor: ++ MAX LEVERAGE"
+      }
+    },
+    {
+      "label": "venus_mercury",
+      "index": 225,
+      "dimension": "career",
+      "period": [
+        "Venus",
+        "Mercury",
+        "Mercury"
+      ],
+      "result": {
+        "heat": 2,
+        "parent": 2,
+        "parentScore": 48,
+        "raw": 0.9440000000000001,
+        "score": 65,
+        "transit": 0.19999999999999998,
+        "contact": 0,
+        "fast": -0.08,
+        "mark": "+",
+        "post": "LEVERAGE",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and D10 10th lord Moon carry particular weight; Jupiter is constructive but qualified; Rahu is high-variance yet strengthened by D10 Saturn. The Career PD baseline is intentionally the original hand-audited first-version reading: + LEVERAGE. D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders. The Mercury SD plus slow/exact transit evidence does not materially change the parent manifestation. v5 does not normalize planets against one another: a supportive Jupiter, Venus or Mercury stays supportive even if another planet is stronger. Midpoint gochara is only a snapshot; slow planets and exact contacts carry the interpretive weight. Intensity is tracked separately (LOW).",
+        "components": [
+          "Original rules-first Career AD→PD anchor: + LEVERAGE",
+          "PD rule — Mercury: D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+          "SD rule — Mercury: D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+          "Mercury MD contribution +0.15",
+          "Venus AD climate +0.14",
+          "Mercury PD manifestation +0.60",
+          "AD–PD relationship 0.00",
+          "Mercury SD modifier +0.16",
+          "PD–SD relationship 0.00",
+          "AD–SD relationship 0.00",
+          "Slow transit snapshot +0.14",
+          "Exact natal contacts 0.00",
+          "SD-lord midpoint transit -0.04"
+        ],
+        "intensity": "LOW",
+        "intensityScore": 0.22999999999999998,
+        "pdRule": "D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+        "sdRule": "D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+        "anchorSource": "Original rules-first Career AD→PD anchor: + LEVERAGE"
+      }
+    },
+    {
+      "label": "rahu_mercury",
+      "index": 513,
+      "dimension": "career",
+      "period": [
+        "Rahu",
+        "Mercury",
+        "Mercury"
+      ],
+      "result": {
+        "heat": 1,
+        "parent": 1,
+        "parentScore": 84,
+        "raw": 1.547,
+        "score": 100,
+        "transit": 0.2,
+        "contact": 0,
+        "fast": 0.08,
+        "mark": "++",
+        "post": "MAX LEVERAGE",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and D10 10th lord Moon carry particular weight; Jupiter is constructive but qualified; Rahu is high-variance yet strengthened by D10 Saturn. The Career PD baseline is intentionally the original hand-audited first-version reading: ++ MAX LEVERAGE. D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders. The Mercury SD plus slow/exact transit evidence does not materially change the parent manifestation. v5 does not normalize planets against one another: a supportive Jupiter, Venus or Mercury stays supportive even if another planet is stronger. Midpoint gochara is only a snapshot; slow planets and exact contacts carry the interpretive weight. Intensity is tracked separately (LOW).",
+        "components": [
+          "Original rules-first Career AD→PD anchor: ++ MAX LEVERAGE",
+          "PD rule — Mercury: D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+          "SD rule — Mercury: D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+          "Mercury MD contribution +0.15",
+          "Rahu AD climate +0.11",
+          "Mercury PD manifestation +0.60",
+          "AD–PD relationship +0.06",
+          "Mercury SD modifier +0.16",
+          "PD–SD relationship 0.00",
+          "AD–SD relationship +0.01",
+          "Slow transit snapshot +0.14",
+          "Exact natal contacts 0.00",
+          "SD-lord midpoint transit +0.04"
+        ],
+        "intensity": "LOW",
+        "intensityScore": 0.39999999999999997,
+        "pdRule": "D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+        "sdRule": "D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+        "anchorSource": "Original rules-first Career AD→PD anchor: ++ MAX LEVERAGE"
+      }
+    },
+    {
+      "label": "rahu_ketu",
+      "index": 522,
+      "dimension": "career",
+      "period": [
+        "Rahu",
+        "Ketu",
+        "Ketu"
+      ],
+      "result": {
+        "heat": 5,
+        "parent": 5,
+        "parentScore": -73,
+        "raw": -0.9115,
+        "score": -63,
+        "transit": 0.25,
+        "contact": 0,
+        "fast": 0,
+        "mark": "−−",
+        "post": "HIGH CAUTION",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and D10 10th lord Moon carry particular weight; Jupiter is constructive but qualified; Rahu is high-variance yet strengthened by D10 Saturn. The Career PD baseline is intentionally the original hand-audited first-version reading: −− MAXIMUM CAUTION. D1 Ketu in 2H and D10 Ketu in 11H: pruning/detachment around gains and recognition; mixed rather than automatically adverse. The Ketu SD plus slow/exact transit evidence does not materially change the parent manifestation. v5 does not normalize planets against one another: a supportive Jupiter, Venus or Mercury stays supportive even if another planet is stronger. Midpoint gochara is only a snapshot; slow planets and exact contacts carry the interpretive weight. Intensity is tracked separately (VERY HIGH).",
+        "components": [
+          "Original rules-first Career AD→PD anchor: −− MAXIMUM CAUTION",
+          "PD rule — Ketu: D1 Ketu in 2H and D10 Ketu in 11H: pruning/detachment around gains and recognition; mixed rather than automatically adverse.",
+          "SD rule — Ketu: D1 Ketu in 2H and D10 Ketu in 11H: pruning/detachment around gains and recognition; mixed rather than automatically adverse.",
+          "Mercury MD contribution +0.15",
+          "Rahu AD climate +0.11",
+          "Ketu PD manifestation -0.09",
+          "AD–PD relationship -0.06",
+          "Ketu SD modifier -0.02",
+          "PD–SD relationship 0.00",
+          "AD–SD relationship -0.01",
+          "Slow transit snapshot +0.17",
+          "Exact natal contacts 0.00",
+          "SD-lord midpoint transit 0.00"
+        ],
+        "intensity": "VERY HIGH",
+        "intensityScore": 1.055,
+        "pdRule": "D1 Ketu in 2H and D10 Ketu in 11H: pruning/detachment around gains and recognition; mixed rather than automatically adverse.",
+        "sdRule": "D1 Ketu in 2H and D10 Ketu in 11H: pruning/detachment around gains and recognition; mixed rather than automatically adverse.",
+        "anchorSource": "Original rules-first Career AD→PD anchor: −− MAXIMUM CAUTION"
+      }
+    },
+    {
+      "label": "absolute_jupiter",
+      "index": 567,
+      "dimension": "children",
+      "period": [
+        "Jupiter",
+        "Jupiter",
+        "Jupiter"
+      ],
+      "result": {
+        "heat": 2,
+        "parent": 2,
+        "parentScore": 82,
+        "raw": 1.047,
+        "score": 72,
+        "transit": -0.22,
+        "contact": 0,
+        "fast": 0,
+        "mark": "+",
+        "post": "LEVERAGE",
+        "rationale": "D1 5th/Jupiter + D7; Jupiter is D1 5th lord/natural significator, Mars is D7 5th lord, Moon/Jupiter and Mercury materially shape the D7. D1 5L and natural child significator: primary supportive planet, though D1 12H qualifies ease. The Jupiter SD plus slow/exact transit evidence does not materially change the parent manifestation. v5 does not normalize planets against one another: a supportive Jupiter, Venus or Mercury stays supportive even if another planet is stronger. Midpoint gochara is only a snapshot; slow planets and exact contacts carry the interpretive weight. Intensity is tracked separately (LOW).",
+        "components": [
+          "Absolute D1 + D7 rule baseline (no planetary mean-centering)",
+          "PD rule — Jupiter: D1 5L and natural child significator: primary supportive planet, though D1 12H qualifies ease.",
+          "SD rule — Jupiter: D1 5L and natural child significator: primary supportive planet, though D1 12H qualifies ease.",
+          "Mercury MD contribution +0.09",
+          "Jupiter AD climate +0.28",
+          "Jupiter PD manifestation +0.66",
+          "AD–PD relationship 0.00",
+          "Jupiter SD modifier +0.18",
+          "PD–SD relationship 0.00",
+          "AD–SD relationship 0.00",
+          "Slow transit snapshot -0.15",
+          "Exact natal contacts 0.00",
+          "SD-lord midpoint transit 0.00"
+        ],
+        "intensity": "LOW",
+        "intensityScore": 0.2,
+        "pdRule": "D1 5L and natural child significator: primary supportive planet, though D1 12H qualifies ease.",
+        "sdRule": "D1 5L and natural child significator: primary supportive planet, though D1 12H qualifies ease.",
+        "anchorSource": "Absolute D1 + D7 rule baseline (no planetary mean-centering)"
+      }
+    },
+    {
+      "label": "fast_sd_modifier",
+      "index": 0,
+      "dimension": "career",
+      "period": [
+        "Mercury",
+        "Mercury",
+        "Mercury"
+      ],
+      "result": {
+        "heat": 2,
+        "parent": 2,
+        "parentScore": 48,
+        "raw": 0.9720000000000001,
+        "score": 67,
+        "transit": 0.15,
+        "contact": 0,
+        "fast": 0.06,
+        "mark": "+",
+        "post": "LEVERAGE",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and D10 10th lord Moon carry particular weight; Jupiter is constructive but qualified; Rahu is high-variance yet strengthened by D10 Saturn. The Career PD baseline is intentionally the original hand-audited first-version reading: + LEVERAGE. D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders. The Mercury SD plus slow/exact transit evidence does not materially change the parent manifestation. v5 does not normalize planets against one another: a supportive Jupiter, Venus or Mercury stays supportive even if another planet is stronger. Midpoint gochara is only a snapshot; slow planets and exact contacts carry the interpretive weight. Intensity is tracked separately (LOW).",
+        "components": [
+          "Original rules-first Career AD→PD anchor: + LEVERAGE",
+          "PD rule — Mercury: D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+          "SD rule — Mercury: D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+          "Mercury MD contribution +0.15",
+          "Mercury AD climate +0.25",
+          "Mercury PD manifestation +0.60",
+          "AD–PD relationship 0.00",
+          "Mercury SD modifier +0.16",
+          "PD–SD relationship 0.00",
+          "AD–SD relationship 0.00",
+          "Slow transit snapshot +0.10",
+          "Exact natal contacts 0.00",
+          "SD-lord midpoint transit +0.03"
+        ],
+        "intensity": "LOW",
+        "intensityScore": 0.25,
+        "pdRule": "D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+        "sdRule": "D1 8L/11L conjunct 10L Sun in Aquarius; D10 9L in 7H: strategy, systems, networks, stakeholders.",
+        "anchorSource": "Original rules-first Career AD→PD anchor: + LEVERAGE"
+      }
+    },
+    {
+      "label": "strong_contact",
+      "index": 20,
+      "dimension": "mind",
+      "period": [
+        "Mercury",
+        "Venus",
+        "Moon"
+      ],
+      "result": {
+        "heat": 3,
+        "parent": 2,
+        "parentScore": 37,
+        "raw": -0.1685000000000001,
+        "score": -12,
+        "transit": -0.08000000000000004,
+        "contact": -0.55,
+        "fast": -0.05,
+        "mark": "0",
+        "post": "RESPECT / MIXED",
+        "rationale": "D1 Moon, Mercury, Lagna, 4th/5th plus Lagna- and Moon-sign gochara. This is clarity/emotional load, not psychiatric diagnosis. Venus is read through D1 Moon, Mercury, Lagna, 4th/5th plus Lagna- and Moon-sign gochara. This is clarity/emotional load, not psychiatric diagnosis. The Moon SD plus slow/exact transit evidence adds caution/obstruction to the parent manifestation. v5 does not normalize planets against one another: a supportive Jupiter, Venus or Mercury stays supportive even if another planet is stronger. Midpoint gochara is only a snapshot; slow planets and exact contacts carry the interpretive weight. Intensity is tracked separately (MEDIUM).",
+        "components": [
+          "Absolute D1 + D1 rule baseline (no planetary mean-centering)",
+          "PD rule — Venus: Venus is read through D1 Moon, Mercury, Lagna, 4th/5th plus Lagna- and Moon-sign gochara. This is clarity/emotional load, not psychiatric diagnosis.",
+          "SD rule — Moon: Directly signifies emotional state; transits to natal Moon are weighted heavily.",
+          "Mercury MD contribution +0.10",
+          "Mercury AD climate +0.17",
+          "Venus PD manifestation +0.18",
+          "AD–PD relationship 0.00",
+          "Moon SD modifier 0.00",
+          "PD–SD relationship 0.00",
+          "AD–SD relationship 0.00",
+          "Slow transit snapshot -0.06",
+          "Exact natal contacts -0.55",
+          "SD-lord midpoint transit -0.02"
+        ],
+        "intensity": "MEDIUM",
+        "intensityScore": 0.6150000000000001,
+        "pdRule": "Venus is read through D1 Moon, Mercury, Lagna, 4th/5th plus Lagna- and Moon-sign gochara. This is clarity/emotional load, not psychiatric diagnosis.",
+        "sdRule": "Directly signifies emotional state; transits to natal Moon are weighted heavily.",
+        "anchorSource": "Absolute D1 + D1 rule baseline (no planetary mean-centering)"
+      }
+    }
+  ]
+}
