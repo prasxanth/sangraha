@@ -1,0 +1,269 @@
+{
+  "source": "mercury_md_whole_life_heatmap_v4_pd_dominant.html",
+  "sourceSha256": "880669033feac0fecd19f1043eafeaa8f4f5dfee77b069e66364e47d509b4f72",
+  "recordsSha256": "68313143b74e22c6949254a68b91cef191d32a3bb3854243d2edd06ac296e75f",
+  "resultsSha256": "180b9223928165437963bda290b4e28a61e4a69757328dfd7bb94610c2907a98",
+  "recordCount": 729,
+  "resultCount": 7290,
+  "samples": [
+    {
+      "label": "pd_dominant_example",
+      "index": 225,
+      "dimension": "career",
+      "period": [
+        "Venus",
+        "Mercury",
+        "Mercury"
+      ],
+      "result": {
+        "heat": 2,
+        "parent": 2,
+        "parentScore": 23,
+        "raw": 0.4304444444444446,
+        "score": 32,
+        "transit": 0.19999999999999998,
+        "contact": 0,
+        "fast": -0.08,
+        "mark": "+",
+        "post": "LEVERAGE",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and the D10 10th lord Moon carry particular weight; Rahu is mixed but strengthened by its D10 conjunction with own-sign Saturn. Scores are relative within Mercury MD. In v4 the PD is the dominant operational layer: the AD supplies climate and the SD is a short-term modifier. The PD baseline is + (+23). Mercury SD plus the transit snapshot largely preserves that baseline. Midpoint gochara is a snapshot rather than the whole transit story; slow planets and exact contacts carry more weight than fast-planet midpoint positions. Extreme ++/−− requires convergence; intensity is tracked separately (LOW).",
+        "components": [
+          "Mercury MD +0.03",
+          "Venus AD climate -0.01",
+          "Mercury PD dominant theme +0.23",
+          "AD–PD interaction 0.00",
+          "Mercury SD modifier +0.06",
+          "PD–SD interaction 0.00",
+          "AD–SD interaction 0.00",
+          "Slow transit snapshot +0.20",
+          "Exact natal contact 0.00",
+          "SD-lord midpoint transit -0.08"
+        ],
+        "intensity": "LOW",
+        "intensityScore": 0.22999999999999998
+      }
+    },
+    {
+      "label": "career_rescored",
+      "index": 1,
+      "dimension": "career",
+      "period": [
+        "Mercury",
+        "Mercury",
+        "Ketu"
+      ],
+      "result": {
+        "heat": 2,
+        "parent": 2,
+        "parentScore": 31,
+        "raw": 0.34044444444444455,
+        "score": 25,
+        "transit": 0.15,
+        "contact": 0,
+        "fast": 0,
+        "mark": "+",
+        "post": "LEVERAGE",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and the D10 10th lord Moon carry particular weight; Rahu is mixed but strengthened by its D10 conjunction with own-sign Saturn. Scores are relative within Mercury MD. In v4 the PD is the dominant operational layer: the AD supplies climate and the SD is a short-term modifier. The PD baseline is + (+31). Ketu SD plus the transit snapshot largely preserves that baseline. Midpoint gochara is a snapshot rather than the whole transit story; slow planets and exact contacts carry more weight than fast-planet midpoint positions. Extreme ++/−− requires convergence; intensity is tracked separately (MEDIUM).",
+        "components": [
+          "Mercury MD +0.03",
+          "Mercury AD climate +0.08",
+          "Mercury PD dominant theme +0.23",
+          "AD–PD interaction 0.00",
+          "Ketu SD modifier -0.15",
+          "PD–SD interaction 0.00",
+          "AD–SD interaction 0.00",
+          "Slow transit snapshot +0.15",
+          "Exact natal contact 0.00",
+          "SD-lord midpoint transit 0.00"
+        ],
+        "intensity": "MEDIUM",
+        "intensityScore": 0.52
+      }
+    },
+    {
+      "label": "constructive_rahu",
+      "index": 30,
+      "dimension": "career",
+      "period": [
+        "Mercury",
+        "Sun",
+        "Rahu"
+      ],
+      "result": {
+        "heat": 1,
+        "parent": 2,
+        "parentScore": 43,
+        "raw": 0.8494444444444446,
+        "score": 63,
+        "transit": 0.15,
+        "contact": 0.18,
+        "fast": 0,
+        "mark": "++",
+        "post": "MAX LEVERAGE + RESPECT",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and the D10 10th lord Moon carry particular weight; Rahu is mixed but strengthened by its D10 conjunction with own-sign Saturn. Scores are relative within Mercury MD. In v4 the PD is the dominant operational layer: the AD supplies climate and the SD is a short-term modifier. The PD baseline is + (+43). Rahu SD plus the transit snapshot improves / strengthens that baseline. Midpoint gochara is a snapshot rather than the whole transit story; slow planets and exact contacts carry more weight than fast-planet midpoint positions. Extreme ++/−− requires convergence; intensity is tracked separately (HIGH).",
+        "components": [
+          "Mercury MD +0.03",
+          "Mercury AD climate +0.08",
+          "Sun PD dominant theme +0.36",
+          "AD–PD interaction 0.00",
+          "Rahu SD modifier -0.04",
+          "PD–SD interaction +0.06",
+          "AD–SD interaction +0.02",
+          "Slow transit snapshot +0.15",
+          "Exact natal contact +0.18",
+          "SD-lord midpoint transit 0.00"
+        ],
+        "intensity": "HIGH",
+        "intensityScore": 0.7725000000000001
+      }
+    },
+    {
+      "label": "two_level_shift",
+      "index": 370,
+      "dimension": "wealth",
+      "period": [
+        "Moon",
+        "Mercury",
+        "Ketu"
+      ],
+      "result": {
+        "heat": 4,
+        "parent": 2,
+        "parentScore": 34,
+        "raw": -0.3275555555555555,
+        "score": -24,
+        "transit": -0.55,
+        "contact": 0,
+        "fast": 0,
+        "mark": "−",
+        "post": "CAUTION",
+        "rationale": "D1 2/5/9/11 plus strict Parāśarī Hora condition; earnings, gains, retention and resource stability. Scores are relative within Mercury MD. In v4 the PD is the dominant operational layer: the AD supplies climate and the SD is a short-term modifier. The PD baseline is + (+34). Ketu SD plus the transit snapshot adds caution to that baseline. Midpoint gochara is a snapshot rather than the whole transit story; slow planets and exact contacts carry more weight than fast-planet midpoint positions. Extreme ++/−− requires convergence; intensity is tracked separately (MEDIUM).",
+        "components": [
+          "Mercury MD +0.05",
+          "Moon AD climate -0.04",
+          "Mercury PD dominant theme +0.36",
+          "AD–PD interaction 0.00",
+          "Ketu SD modifier -0.15",
+          "PD–SD interaction 0.00",
+          "AD–SD interaction 0.00",
+          "Slow transit snapshot -0.55",
+          "Exact natal contact 0.00",
+          "SD-lord midpoint transit 0.00"
+        ],
+        "intensity": "MEDIUM",
+        "intensityScore": 0.56
+      }
+    },
+    {
+      "label": "contact_effect",
+      "index": 6,
+      "dimension": "career",
+      "period": [
+        "Mercury",
+        "Mercury",
+        "Rahu"
+      ],
+      "result": {
+        "heat": 2,
+        "parent": 2,
+        "parentScore": 31,
+        "raw": 0.7324444444444446,
+        "score": 54,
+        "transit": 0.15,
+        "contact": 0.18,
+        "fast": 0,
+        "mark": "+",
+        "post": "LEVERAGE",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and the D10 10th lord Moon carry particular weight; Rahu is mixed but strengthened by its D10 conjunction with own-sign Saturn. Scores are relative within Mercury MD. In v4 the PD is the dominant operational layer: the AD supplies climate and the SD is a short-term modifier. The PD baseline is + (+31). Rahu SD plus the transit snapshot largely preserves that baseline. Midpoint gochara is a snapshot rather than the whole transit story; slow planets and exact contacts carry more weight than fast-planet midpoint positions. Extreme ++/−− requires convergence; intensity is tracked separately (MEDIUM).",
+        "components": [
+          "Mercury MD +0.03",
+          "Mercury AD climate +0.08",
+          "Mercury PD dominant theme +0.23",
+          "AD–PD interaction 0.00",
+          "Rahu SD modifier -0.04",
+          "PD–SD interaction +0.07",
+          "AD–SD interaction +0.02",
+          "Slow transit snapshot +0.15",
+          "Exact natal contact +0.18",
+          "SD-lord midpoint transit 0.00"
+        ],
+        "intensity": "MEDIUM",
+        "intensityScore": 0.5875
+      }
+    },
+    {
+      "label": "fast_sd_modifier",
+      "index": 0,
+      "dimension": "career",
+      "period": [
+        "Mercury",
+        "Mercury",
+        "Mercury"
+      ],
+      "result": {
+        "heat": 2,
+        "parent": 2,
+        "parentScore": 31,
+        "raw": 0.6164444444444446,
+        "score": 46,
+        "transit": 0.15,
+        "contact": 0,
+        "fast": 0.06,
+        "mark": "+",
+        "post": "LEVERAGE",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and the D10 10th lord Moon carry particular weight; Rahu is mixed but strengthened by its D10 conjunction with own-sign Saturn. Scores are relative within Mercury MD. In v4 the PD is the dominant operational layer: the AD supplies climate and the SD is a short-term modifier. The PD baseline is + (+31). Mercury SD plus the transit snapshot largely preserves that baseline. Midpoint gochara is a snapshot rather than the whole transit story; slow planets and exact contacts carry more weight than fast-planet midpoint positions. Extreme ++/−− requires convergence; intensity is tracked separately (LOW).",
+        "components": [
+          "Mercury MD +0.03",
+          "Mercury AD climate +0.08",
+          "Mercury PD dominant theme +0.23",
+          "AD–PD interaction 0.00",
+          "Mercury SD modifier +0.06",
+          "PD–SD interaction 0.00",
+          "AD–SD interaction 0.00",
+          "Slow transit snapshot +0.15",
+          "Exact natal contact 0.00",
+          "SD-lord midpoint transit +0.06"
+        ],
+        "intensity": "LOW",
+        "intensityScore": 0.25
+      }
+    },
+    {
+      "label": "convergence_downgrade",
+      "index": 29,
+      "dimension": "career",
+      "period": [
+        "Mercury",
+        "Sun",
+        "Mars"
+      ],
+      "result": {
+        "heat": 2,
+        "parent": 2,
+        "parentScore": 43,
+        "raw": 0.7964444444444445,
+        "score": 59,
+        "transit": 0.15,
+        "contact": 0.18,
+        "fast": 0,
+        "mark": "+",
+        "post": "LEVERAGE",
+        "rationale": "D1 10th lord Sun + D10. Sun, Saturn, Mercury and the D10 10th lord Moon carry particular weight; Rahu is mixed but strengthened by its D10 conjunction with own-sign Saturn. Scores are relative within Mercury MD. In v4 the PD is the dominant operational layer: the AD supplies climate and the SD is a short-term modifier. The PD baseline is + (+43). Mars SD plus the transit snapshot largely preserves that baseline. Midpoint gochara is a snapshot rather than the whole transit story; slow planets and exact contacts carry more weight than fast-planet midpoint positions. Extreme ++/−− requires convergence; intensity is tracked separately (MEDIUM).",
+        "components": [
+          "Mercury MD +0.03",
+          "Mercury AD climate +0.08",
+          "Sun PD dominant theme +0.36",
+          "AD–PD interaction 0.00",
+          "Mars SD modifier -0.01",
+          "PD–SD interaction 0.00",
+          "AD–SD interaction 0.00",
+          "Slow transit snapshot +0.15",
+          "Exact natal contact +0.18",
+          "SD-lord midpoint transit 0.00"
+        ],
+        "intensity": "MEDIUM",
+        "intensityScore": 0.51
+      }
+    }
+  ]
+}
