@@ -5,17 +5,20 @@ const path=require('node:path');
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  try{
-  for(const timezoneId of ['America/Los_Angeles','Asia/Kolkata']){
+  for(const [timezoneId,mode] of [['America/Los_Angeles','jyotish'],['Asia/Kolkata','jyotish'],['America/Los_Angeles','bazi'],['America/Los_Angeles','compare']]){
    const page=await browser.newPage({timezoneId,viewport:{width:390,height:844}}),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
    const url=pathToFileURL(path.resolve('mercury_atlas.html')).href;
-   await page.goto(url);
+   const load=async()=>{await page.goto(url);await page.evaluate(mode=>document.querySelector(`button[data-system-mode="${mode}"]`).click(),mode)};
+   await load();
    const rows=await page.evaluate(()=>SD_DATA.slice().sort((a,b)=>Date.parse(a.startExact)-Date.parse(b.startExact)));
-   await page.clock.install({time:new Date(rows[0].startExact)});
+   // Freeze wall-clock progression so page loading cannot cross a tested boundary.
+   await page.clock.install({time:Date.parse(rows[0].startExact)-60000});
+   await page.clock.pauseAt(new Date(rows[0].startExact));
    const transitions=[1,9,81]; // SD, PD and AD changes.
    for(const index of transitions){
     const before=rows[index-1],after=rows[index],boundary=Date.parse(after.startExact);
-    await page.clock.setSystemTime(boundary-1000);await page.goto(url);
+    await page.clock.setSystemTime(boundary-1000);await load();
     assert.equal(await page.evaluate(()=>currentSD().startExact),before.startExact);
     await page.evaluate(()=>{$('lifeToday').click();switchPage('life');showPeriod(DATA.findIndex(r=>isCurrent(r)));setDetailLevel('sd')});
     const selectedBefore=await page.evaluate(()=>({selected,sdIndex,ad:$('lifeAD').value,pd:$('lifePD').value}));
@@ -42,13 +45,13 @@ const path=require('node:path');
    }
    // Half-open intervals include the first instant and exclude the final instant.
    for(const edge of [Date.parse(rows[0].startExact),Date.parse(rows.at(-1).endExact)]){
-    await page.clock.setSystemTime(edge-1);await page.goto(url);await page.clock.runFor(1);
+    await page.clock.setSystemTime(edge-1);await load();await page.clock.runFor(1);
     const inside=edge===Date.parse(rows[0].startExact);
     assert.equal(await page.locator('.cell.current').count(),inside?1:0);
     assert.equal(await page.locator('[data-current-dimension]').count(),inside?10:0);
    }
    assert.deepEqual(errors,[]);await page.close();
   }
-  console.log('PASS: exact SD/PD/AD transitions, MD entry/exit, live markers and overview, Today and future filters, resume and clock jumps, preserved browsing, two time zones.');
+  console.log('PASS: exact SD/PD/AD transitions, MD entry/exit, live markers and overview, Today and future filters, resume and clock jumps, preserved browsing, two time zones and all three system modes.');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});

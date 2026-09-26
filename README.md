@@ -437,6 +437,10 @@ Current-period ratings and markers use exact UTC dasha boundaries and update aut
 
 Timeline widths represent duration within each AD; Life map columns use equal widths for comparison. The date range covers one Mahadasha, not an entire lifetime. Ratings are interpretive categories, not probabilities.
 
+The system switch adds **BaZi** and **Side by side** views from `mercury_atlas_jyotish_bazi_guidance.html`. BaZi evaluates the supplied Yi Wood / Metal Yong Shen model at each SD midpoint with 42% Da Yun, 36% annual and 22% solar-month weights. PD support averages child samples by duration; intensity combines 75% weighted mean and 25% maximum. The solar longitude and luck start are source approximations. The shared dasha dates are comparison windows, not BaZi dashas. Side-by-side readings remain separate; filters, Inspect and minimap use Jyotish in that mode. BaZi mode disables the Jyotish transit-tone filter. Practice includes Metal guidance and current-window emphasis that refreshes automatically.
+
+`tests/mercury_bazi.cjs` checks all 7,290 BaZi SD and 810 PD results against a source-captured fixture, plus system switching, keyboard/focus behavior, current guidance and responsive layouts. It optionally accepts the source HTML path for full reference comparison.
+
 **Validation:** `tests/mercury_dasha_atlas.cjs`, `tests/mercury_sookshma.cjs`, `tests/mercury_life_atlas.cjs`, and `tests/mercury_current_period.cjs` use Playwright with local Chrome. The life-atlas test optionally accepts the supplied `mercury_md_whole_life_heatmap_v6_dual_axis.html` path to compare all records and all 7,290 dimension results against the source. A checked-in v6 reference fixture also verifies all 7,290 outputs without requiring the external source file.
 
 ## Archives
