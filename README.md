@@ -360,9 +360,9 @@ A polished mobile-first app for consulting the classical Chinese divination text
 
 **File:** [tao_te_ching.html](tao_te_ching.html)
 
-A black-and-gold, phone-first reader for all 81 chapters, with James Legge’s English translation and the received Chinese text on opposite card faces. High-resolution illustrations appear above the passage; each chapter has an explicit thematic image assignment. All artwork is embedded for offline use. Longer passages receive more reading space, with scrolling confined to the passage and navigation kept in view.
+A black-and-gold, phone-first reader for all 81 chapters, with the supplied close English translation by default and the received Chinese text on the reverse. An English translation selector switches to James Legge (1891) and remembers the choice. High-resolution illustrations appear above the passage; each chapter has an explicit thematic image assignment. All artwork is embedded for offline use. Longer passages receive more reading space, with scrolling confined to the passage and navigation kept in view.
 
-Use **Chapters** to jump, **Random** to explore, and **Flip** to switch languages. Arrow keys navigate and Space flips the card. Artwork prompts and chapter-by-chapter connections are recorded in [the artwork notes](docs/tao-te-ching-artwork.md).
+Use **Chapters** to jump, **Random** to explore, and **Flip** to switch languages. Arrow keys navigate and Space flips the card. Chapter 1’s rendering note is separately expandable under the provided translation. Artwork prompts and chapter-by-chapter connections are recorded in [the artwork notes](docs/tao-te-ching-artwork.md).
 
 ---
 

@@ -1,4 +1,6 @@
 const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
+const providedReference = require('./fixtures/tao_provided_translation.json');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
@@ -15,6 +17,12 @@ const { chromium } = require('playwright');
     page.on('pageerror', error => errors.push(error.message));
     page.on('request', request => { if (/^https?:/.test(request.url())) remoteRequests.push(request.url()); });
     await page.goto(pathToFileURL(path.resolve('tao_te_ching.html')).href);
+    assert.equal(await page.locator('#translation').inputValue(), 'provided');
+    const imported = await page.evaluate(() => providedTranslation);
+    assert.equal(imported.length, 81);
+    const hash = value => crypto.createHash('sha256').update(value).digest('hex');
+    assert.deepEqual(imported.map(chapter => hash(chapter.english)), providedReference.chapterHashes);
+    assert.deepEqual(imported.map(chapter => chapter.notes.map(hash)), providedReference.noteHashes);
     const art = await page.evaluate(async () => {
       const sizes = await Promise.all(Object.entries(artCatalog).map(async ([name, src]) => {
         const image = new Image(); image.src = src; await image.decode();
@@ -44,7 +52,7 @@ const { chromium } = require('playwright');
             stacked: image.bottom <= text.top + 1,
             horizontalOverflow: reading.scrollWidth > reading.clientWidth + 1,
             readingHeight: reading.clientHeight,
-            controls: ['prev', 'next', 'flip', 'browse', 'random'].map(id => {
+            controls: ['prev', 'next', 'flip', 'browse', 'random', 'translation'].map(id => {
               const rect = document.getElementById(id).getBoundingClientRect();
               return { visible: rect.left >= 0 && rect.right <= innerWidth && rect.top >= 0 && rect.bottom <= innerHeight, height: rect.height };
             }),
@@ -63,11 +71,30 @@ const { chromium } = require('playwright');
       await page.locator('.front img').evaluate(image => image.decode());
         await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
       assert.equal(await page.locator('#currentNo').textContent(), String(chapter).padStart(2, '0'));
+      for (const version of ['provided', 'legge']) {
+        await page.selectOption('#translation', version);
+        const actual = await page.locator('.english-text').textContent();
+        const expected = await page.evaluate(() => {
+          const source = translation === 'legge' ? chapters[active - 1] : providedTranslation[active - 1];
+          return source.english.split(/\n\s*\n/).map(p => p.replace(/^\s*\d+\.\s*/, '').trim()).filter(Boolean).join('');
+        });
+        assert.equal(actual, expected, `${version}, chapter ${chapter}: passage preserved`);
+        assert.equal(await page.locator('.translation-notes').count(), version === 'provided' && chapter === 1 ? 1 : 0);
+      }
       await page.click('#flip');
       assert(await page.locator('.front').evaluate(face => face.inert));
       assert(!(await page.locator('.back').evaluate(face => face.inert)));
       assert((await page.locator('.chinese-text').textContent()).length > 0);
     }
+    await page.selectOption('#translation', 'provided');
+    assert(await page.locator('.front').evaluate(face => face.inert), 'Changing translation preserves the Chinese face');
+    await page.selectOption('#translation', 'legge');
+    await page.reload();
+    assert.equal(await page.locator('#translation').inputValue(), 'legge', 'Saved preference restored');
+    await page.selectOption('#translation', 'provided');
+    await page.reload();
+    assert.equal(await page.locator('#translation').inputValue(), 'provided');
+    await page.evaluate(() => { active = 81; render('initial'); });
     await page.click('#next');
     assert.equal(await page.locator('#currentNo').textContent(), '01');
     await page.click('#browse');
@@ -78,7 +105,7 @@ const { chromium } = require('playwright');
     await page.waitForFunction(() => document.querySelector('.front .scroll-cue').hidden);
     assert.deepEqual(errors, []);
     assert.deepEqual(remoteRequests, [], 'Reader works without remote image, script or font requests');
-    console.log('PASS: 18 high-resolution images, all 81 chapters and both faces, six viewport sizes, 44px phone controls, chapter search, wrapping and offline rendering.');
+    console.log('PASS: source-verified import, both translations across 81 chapters, saved preference, Chinese faces, 18 high-resolution images, six viewport sizes, 44px phone controls, chapter search, wrapping and offline rendering.');
   } finally {
     await browser.close();
   }
