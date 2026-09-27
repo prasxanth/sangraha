@@ -416,15 +416,17 @@ The `apple-touch-icon` is inlined as an SVG data URI — no separate image file 
 
 ---
 
-## Mercury Life Atlas
+## Life Atlas · Jyotish + BaZi
 
 **File:** [mercury_atlas.html](mercury_atlas.html)
 
-A self-contained app for ten life dimensions across the Mercury Mahadasha (9 February 2021–10 February 2038). Inspired by the archived astrology engine, it has mobile bottom navigation and a desktop sidebar, with four views:
+A self-contained app for ten life dimensions with native Jyotish and BaZi timing. It has mobile bottom navigation and a desktop sidebar. Jyotish covers the Mercury Mahadasha (9 February 2021–10 February 2038); BaZi supplies solar years 2021–2038:
 
-- **Timeline:** Current Sūkṣma ratings across all ten dimensions, followed by all nine AD timelines. Choose a dimension to recolor the 81 duration-proportional PD segments. Filters, zoom, panning, a minimap, keyboard navigation and Inspect mode support exploration.
-- **Life map:** Compare ten dimensions across nine chronological PDs or Sūkṣma periods. Move between groups, jump to the current period, or enlarge cells. Tap any cell for dimension evidence, the PD baseline, exact SD times in UTC, and midpoint transit snapshots.
-- **Practice:** The existing PD practice anchors, also available within period details.
+- **Jyotish timeline:** Current Sūkṣma ratings across all ten dimensions, followed by all nine AD timelines. Choose a dimension to recolor the 81 duration-proportional PD segments. Filters, zoom, panning, a minimap, keyboard navigation and Inspect mode support exploration.
+- **Jyotish life map:** Compare ten dimensions across nine chronological PDs or Sūkṣma periods. Move between groups, jump to the current period, or enlarge cells. Tap any cell for dimension evidence, the PD baseline, exact SD times in UTC, and midpoint transit snapshots.
+- **BaZi:** Native luck cycles, solar years, solar months and daily modifiers.
+- **Compare:** Independent Gregorian midpoint readings and agreement across dimensions.
+- **Practice:** PD practice anchors and Metal/Yong Shen guidance.
 - **Guide:** Interpretation, scoring weights, divisional-chart anchors and planet profiles.
 
 The supplied whole-life model covers Career, Wealth, Marriage, Family, Children, Mind, Vitality, Learning, Spiritual and Reinvention. V6 retains the 729 period boundaries and audited true-node Lahiri transit data. It removes mean-centering: planet profiles use absolute support with zero as neutral. Career retains the rules-first AD→PD anchors with the v6 correction of Rahu AD → Rahu PD to mixed-transformative support. Its revised qualitative assessment is shown in parent details. Other parents use 15% MD, 25% AD, 60% PD and 25% AD–PD relationship. Explicit PD/SD rule notes are shown in period details and the Guide.
@@ -437,9 +439,11 @@ Current-period ratings and markers use exact UTC dasha boundaries and update aut
 
 Timeline widths represent duration within each AD; Life map columns use equal widths for comparison. The date range covers one Mahadasha, not an entire lifetime. Ratings are interpretive categories, not probabilities.
 
-The system switch adds **BaZi** and **Side by side** views from `mercury_atlas_jyotish_bazi_guidance.html`. BaZi evaluates the supplied Yi Wood / Metal Yong Shen model at each SD midpoint with 42% Da Yun, 36% annual and 22% solar-month weights. PD support averages child samples by duration; intensity combines 75% weighted mean and 25% maximum. The solar longitude and luck start are source approximations. The shared dasha dates are comparison windows, not BaZi dashas. Side-by-side readings remain separate; filters, Inspect and minimap use Jyotish in that mode. BaZi mode disables the Jyotish transit-tone filter. Practice includes Metal guidance and current-window emphasis that refreshes automatically.
+The native BaZi screen imports `mercury_atlas_native_systems_v2.html` unchanged as its assessment dataset: 18 solar years, 216 solar months, 6,790 daily entries and 216 Gregorian comparison samples, each with ten dimensions. BaZi uses its own Da Yun → solar year → solar month → daily modifier hierarchy. The app displays supplied scores and branch-relation notes; the attachment does not include their generator. Da Yun cards show timing only, not an annual rating presented as a decade rating.
 
-`tests/mercury_bazi.cjs` checks all 7,290 BaZi SD and 810 PD results against a source-captured fixture, plus system switching, keyboard/focus behavior, current guidance and responsive layouts. It optionally accepts the source HTML path for full reference comparison.
+**Compare** shows the two systems independently at each Gregorian month midpoint. Out-of-range Jyotish dates are explicitly unavailable; internal indices are never averaged. Jyotish retains its original timeline and Life map, now grouped under one navigation tab. Practice includes both Jyotish anchors and Metal/Yong Shen guidance. Native BaZi current context follows exact supplied solar-term/luck boundaries and UTC date changes, checks the device clock every minute, and refreshes on resume without changing historical browsing selections. Daily entries are UTC date labels within solar months; boundary dates can occur in adjacent months.
+
+`tests/mercury_native_systems.cjs` verifies the complete native dataset against its source-captured hash, navigation, independent current-period boundaries, resume handling, comparison coverage and responsive layouts. An optional source HTML argument verifies the embedded dataset byte for byte. Superseded shared-dasha BaZi tests and fixture are in `archive/mercury_shared_spine/` (historical commit `5a13c8a`).
 
 **Validation:** `tests/mercury_dasha_atlas.cjs`, `tests/mercury_sookshma.cjs`, `tests/mercury_life_atlas.cjs`, and `tests/mercury_current_period.cjs` use Playwright with local Chrome. The life-atlas test optionally accepts the supplied `mercury_md_whole_life_heatmap_v6_dual_axis.html` path to compare all records and all 7,290 dimension results against the source. A checked-in v6 reference fixture also verifies all 7,290 outputs without requiring the external source file.
 

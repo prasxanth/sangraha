@@ -67,7 +67,7 @@ const {pathToFileURL} = require('node:url');
   assert(await page.evaluate(()=>$('sdSelection').textContent.includes(String(dimResult(sdByParent.get(sdParent.ad+'/'+sdParent.pd)[sdIndex],focusDimension).score))));
   await page.locator('#closeModal').click();
   assert(await page.locator('[data-current-dimension="spiritual"]').evaluate(e=>e===document.activeElement));
-  await page.locator('[data-page="life"]').click();
+  await page.locator('[data-jy-view="life"]:visible').click();
   assert.equal(await page.locator('.life-map-cell').count(),90);
   await page.locator('#lifeToday').click();
   assert.equal(await page.locator('#lifeLevel').inputValue(),'sd');
@@ -90,16 +90,16 @@ const {pathToFileURL} = require('node:url');
   for(const width of [320,390,768,1440]) {
    await page.setViewportSize({width,height:900});
    for(const view of ['timeline','life','practice','guide']) {
-    await page.locator(`[data-page="${view}"]`).click();
+    await page.locator(view==='life'?'[data-jy-view="life"]:visible':`[data-page="${view}"]`).click();
     assert.equal(await page.locator('.app-page:visible').count(),1);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${view} fits ${width}`);
    }
   }
-  await page.setViewportSize({width:1440,height:1000});await page.locator('[data-page="life"]').click();
+  await page.setViewportSize({width:1440,height:1000});await page.locator('[data-page="timeline"]').click();await page.locator('[data-jy-view="life"]:visible').click();
   await page.screenshot({path:'/tmp/mercury-life-desktop.png',fullPage:true});
   await page.setViewportSize({width:390,height:844});await page.locator('[data-page="timeline"]').click();
   await page.screenshot({path:'/tmp/mercury-life-mobile.png',fullPage:true});
-  await page.locator('[data-page="life"]').click();await page.screenshot({path:'/tmp/mercury-life-map.png',fullPage:true});
+  await page.locator('[data-jy-view="life"]:visible').click();await page.screenshot({path:'/tmp/mercury-life-map.png',fullPage:true});
   assert.deepEqual(errors,[]);
   console.log('PASS: 729 records; 7,290 dimension results'+(reference?' match supplied source':'')+'; SD caps; current overview; matrix drilldown, navigation, keyboard and 320–1440px layouts.');
  } finally {await browser.close()}

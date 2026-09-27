@@ -5,11 +5,11 @@ const path=require('node:path');
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  try{
-  for(const [timezoneId,mode] of [['America/Los_Angeles','jyotish'],['Asia/Kolkata','jyotish'],['America/Los_Angeles','bazi'],['America/Los_Angeles','compare']]){
+  for(const timezoneId of ['America/Los_Angeles','Asia/Kolkata']){
    const page=await browser.newPage({timezoneId,viewport:{width:390,height:844}}),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
    const url=pathToFileURL(path.resolve('mercury_atlas.html')).href;
-   const load=async()=>{await page.goto(url);await page.evaluate(mode=>document.querySelector(`button[data-system-mode="${mode}"]`).click(),mode)};
+   const load=async()=>page.goto(url);
    await load();
    const rows=await page.evaluate(()=>SD_DATA.slice().sort((a,b)=>Date.parse(a.startExact)-Date.parse(b.startExact)));
    // Freeze wall-clock progression so page loading cannot cross a tested boundary.
@@ -52,6 +52,6 @@ const path=require('node:path');
    }
    assert.deepEqual(errors,[]);await page.close();
   }
-  console.log('PASS: exact SD/PD/AD transitions, MD entry/exit, live markers and overview, Today and future filters, resume and clock jumps, preserved browsing, two time zones and all three system modes.');
+  console.log('PASS: exact SD/PD/AD transitions, MD entry/exit, live markers and overview, Today and future filters, resume and clock jumps, preserved browsing, two time zones.');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
