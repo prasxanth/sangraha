@@ -44,7 +44,7 @@
 .card-foot{flex:none;margin-top:7px;padding-top:7px;min-height:23px;font-size:8px;color:#bb9c63}
 .face-flip{padding:4px 8px;font-size:9px}
 .scroll-cue{position:absolute;right:28px;bottom:42px;z-index:7;padding:5px 9px;border:1px solid #b78b43;background:#19130aef;color:#f0ce7c;font:italic 12px var(--english);box-shadow:0 2px 10px #0008}
-.scroll-cue[hidden]{display:none}
+.scroll-cue[hidden],.card-face[aria-hidden="true"] .scroll-cue{display:none}
 .deck-controls{flex:none;width:100%;gap:12px;padding:9px 0 4px}
 .nav-arrow{height:36px;width:44px}.flip-button{min-width:145px;font-size:10px}
 .hint{height:17px;font-size:8px}.bottom{height:20px;font-size:8px;letter-spacing:.04em}
@@ -153,8 +153,9 @@ document.getElementById('translation').addEventListener('change',event=>{
  if(wasBack)flipCard();
 });
 const readingObservers=[];
-function wireReadingCues(){readingObservers.splice(0).forEach(observer=>observer.disconnect());document.querySelectorAll('.card-face').forEach(face=>{const reading=face.querySelector('.reading'),cue=face.querySelector('.scroll-cue');if(!reading||!cue)return;const update=()=>{cue.hidden=reading.scrollHeight<=reading.clientHeight+5||reading.scrollTop+reading.clientHeight>=reading.scrollHeight-6};reading.addEventListener('scroll',update,{passive:true});const observer=new ResizeObserver(update);observer.observe(reading);observer.observe(reading.querySelector('.english-text,.chinese-text'));face.querySelector('.translation-notes')?.addEventListener('toggle',update);readingObservers.push(observer);cue.onclick=e=>{e.stopPropagation();reading.scrollBy({top:Math.max(160,reading.clientHeight*.72),behavior:'smooth'})};update()})}
-function syncFaces(){document.querySelectorAll('.card-face').forEach(face=>{const hidden=face.classList.contains('back')!==isBack;face.inert=hidden;face.setAttribute('aria-hidden',String(hidden))})}
+function updateReadingCue(face){const reading=face.querySelector('.reading'),cue=face.querySelector('.scroll-cue');if(reading&&cue)cue.hidden=face.inert||reading.scrollHeight<=reading.clientHeight+5||reading.scrollTop+reading.clientHeight>=reading.scrollHeight-6}
+function wireReadingCues(){readingObservers.splice(0).forEach(observer=>observer.disconnect());document.querySelectorAll('.card-face').forEach(face=>{const reading=face.querySelector('.reading'),cue=face.querySelector('.scroll-cue');if(!reading||!cue)return;const update=()=>updateReadingCue(face);reading.addEventListener('scroll',update,{passive:true});const observer=new ResizeObserver(update);observer.observe(reading);observer.observe(reading.querySelector('.english-text,.chinese-text'));face.querySelector('.translation-notes')?.addEventListener('toggle',update);readingObservers.push(observer);cue.onclick=e=>{e.stopPropagation();reading.scrollBy({top:Math.max(160,reading.clientHeight*.72),behavior:'smooth'})};update()})}
+function syncFaces(){document.querySelectorAll('.card-face').forEach(face=>{const hidden=face.classList.contains('back')!==isBack;face.inert=hidden;face.setAttribute('aria-hidden',String(hidden));updateReadingCue(face)})}
 function flipCard(){isBack=!isBack;const inner=document.getElementById('cardInner');if(inner)inner.classList.toggle('is-back',isBack);const button=document.getElementById('flip');if(button){button.textContent=isBack?'↻ Flip to English':'↻ Flip to Chinese';button.setAttribute('aria-pressed',String(isBack))}syncFaces()}
 function go(delta){active=(active-1+delta+81)%81+1;render(delta<0?'prev':'next')}
 function openModal(){document.getElementById('modal').classList.add('open');document.getElementById('chapterSearch').focus()}

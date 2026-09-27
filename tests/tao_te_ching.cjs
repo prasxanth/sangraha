@@ -83,6 +83,7 @@ const { chromium } = require('playwright');
       }
       await page.click('#flip');
       assert(await page.locator('.front').evaluate(face => face.inert));
+      assert(await page.locator('.front .scroll-cue').evaluate(cue => cue.hidden && getComputedStyle(cue).display === 'none'), 'English cue cannot paint through the Chinese face');
       assert(!(await page.locator('.back').evaluate(face => face.inert)));
       assert((await page.locator('.chinese-text').textContent()).length > 0);
     }
@@ -103,6 +104,19 @@ const { chromium } = require('playwright');
     assert.equal(await page.locator('#currentNo').textContent(), '38');
     await page.locator('.front .reading').evaluate(reading => { reading.scrollTop = reading.scrollHeight; });
     await page.waitForFunction(() => document.querySelector('.front .scroll-cue').hidden);
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.selectOption('#translation', 'legge');
+    await page.evaluate(() => { active = 38; render('initial'); });
+    await page.waitForFunction(() => !document.querySelector('.front .scroll-cue').hidden);
+    await page.click('#flip');
+    assert(await page.locator('.front .scroll-cue').evaluate(cue => cue.hidden && getComputedStyle(cue).display === 'none'));
+    // Resize and observer updates must not reveal the inactive face's cue.
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    assert(await page.locator('.front .scroll-cue').evaluate(cue => cue.hidden));
+    await page.click('#flip');
+    assert(await page.locator('.back .scroll-cue').evaluate(cue => cue.hidden && getComputedStyle(cue).display === 'none'));
+    assert(await page.locator('.front .scroll-cue').evaluate(cue => !cue.hidden), 'English cue returns on a long passage');
     assert.deepEqual(errors, []);
     assert.deepEqual(remoteRequests, [], 'Reader works without remote image, script or font requests');
     console.log('PASS: source-verified import, both translations across 81 chapters, saved preference, Chinese faces, 18 high-resolution images, six viewport sizes, 44px phone controls, chapter search, wrapping and offline rendering.');
