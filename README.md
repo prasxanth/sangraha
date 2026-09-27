@@ -21,6 +21,7 @@ A collection of personal single-file web apps — project management, metabolic 
   - [Marginalia](#marginalia)
     - [Books Toolchain](#books-toolchain)
   - [I Ching Oracle](#i-ching-oracle)
+  - [Tao Te Ching](#tao-te-ching)
   - [Recipes](#recipes)
 - [iOS Home Screen Icons](#ios-home-screen-icons)
 - [Technical Notes](#technical-notes)
@@ -352,6 +353,16 @@ A polished mobile-first app for consulting the classical Chinese divination text
 - Last reading persists on the Home hero banner
 
 **How to use:** Open `iching_oracle.html` in any browser. On iPhone: Safari → Share → Add to Home Screen → launches as **I Ching Oracle**.
+
+---
+
+### Tao Te Ching
+
+**File:** [tao_te_ching.html](tao_te_ching.html)
+
+A black-and-gold, phone-first reader for all 81 chapters, with James Legge’s English translation and the received Chinese text on opposite card faces. High-resolution illustrations appear above the passage; each chapter has an explicit thematic image assignment. All artwork is embedded for offline use. Longer passages receive more reading space, with scrolling confined to the passage and navigation kept in view.
+
+Use **Chapters** to jump, **Random** to explore, and **Flip** to switch languages. Arrow keys navigate and Space flips the card. Artwork prompts and chapter-by-chapter connections are recorded in [the artwork notes](docs/tao-te-ching-artwork.md).
 
 ---
 
