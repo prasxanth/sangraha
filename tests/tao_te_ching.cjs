@@ -18,11 +18,21 @@ const { chromium } = require('playwright');
     page.on('request', request => { if (/^https?:/.test(request.url())) remoteRequests.push(request.url()); });
     await page.goto(pathToFileURL(path.resolve('tao_te_ching.html')).href);
     assert.equal(await page.locator('#translation').inputValue(), 'provided');
+    assert.equal(await page.locator('#translation option:checked').textContent(), 'ChatGPT Luna Medium');
     const imported = await page.evaluate(() => providedTranslation);
     assert.equal(imported.length, 81);
     const hash = value => crypto.createHash('sha256').update(value).digest('hex');
     assert.deepEqual(imported.map(chapter => hash(chapter.english)), providedReference.chapterHashes);
     assert.deepEqual(imported.map(chapter => chapter.notes.map(hash)), providedReference.noteHashes);
+    await page.evaluate(() => { active = 1; render('initial'); });
+    const openingLines = await page.locator('.english-text p').first().evaluate(paragraph => {
+      const node = paragraph.firstChild;
+      const breakAt = node.textContent.indexOf('\n');
+      const first = document.createRange(); first.setStart(node, 0); first.setEnd(node, breakAt);
+      const second = document.createRange(); second.setStart(node, breakAt + 1); second.setEnd(node, node.length);
+      return { firstBottom: first.getBoundingClientRect().bottom, secondTop: second.getBoundingClientRect().top };
+    });
+    assert(openingLines.secondTop >= openingLines.firstBottom, 'The Way and The name begin on separate rendered lines');
     const art = await page.evaluate(async () => {
       const sizes = await Promise.all(Object.entries(artCatalog).map(async ([name, src]) => {
         const image = new Image(); image.src = src; await image.decode();
@@ -79,6 +89,7 @@ const { chromium } = require('playwright');
           return source.english.split(/\n\s*\n/).map(p => p.replace(/^\s*\d+\.\s*/, '').trim()).filter(Boolean).join('');
         });
         assert.equal(actual, expected, `${version}, chapter ${chapter}: passage preserved`);
+        assert.equal(await page.locator('.english-text').evaluate(element => getComputedStyle(element).whiteSpace), 'pre-line', `${version}, chapter ${chapter}: explicit verse line breaks are displayed`);
         assert.equal(await page.locator('.translation-notes').count(), version === 'provided' && chapter === 1 ? 1 : 0);
       }
       await page.click('#flip');
