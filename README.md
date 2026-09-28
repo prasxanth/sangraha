@@ -362,7 +362,7 @@ A polished mobile-first app for consulting the classical Chinese divination text
 
 A black-and-gold, phone-first reader for all 81 chapters, with the supplied ChatGPT Luna Medium translation by default and the received Chinese text on the reverse. Original line breaks and paragraph spacing are preserved throughout. An English translation selector switches to James Legge (1891) and remembers the choice. High-resolution illustrations appear above the passage; each chapter has an explicit thematic image assignment. All artwork is embedded for offline use. Longer passages receive more reading space, with scrolling confined to the passage and navigation kept in view.
 
-Use **Chapters** to jump, **Random** to explore, and **Flip** to switch languages. Arrow keys navigate and Space flips the card. Chapter 1’s rendering note is separately expandable under the ChatGPT Luna Medium translation. Artwork prompts and chapter-by-chapter connections are recorded in [the artwork notes](docs/tao-te-ching-artwork.md).
+A new daily chapter opens each local calendar day, following a shuffled 81-day cycle with no repeats within a cycle. The daily selection also refreshes at midnight or when the app resumes on a new day. Use **Chapters** to jump, **Random** to explore, and **Flip** to switch languages. Arrow keys navigate and Space flips the card. Chapter 1’s rendering note is separately expandable under the ChatGPT Luna Medium translation. Artwork prompts and chapter-by-chapter connections are recorded in [the artwork notes](docs/tao-te-ching-artwork.md).
 
 ---
 
