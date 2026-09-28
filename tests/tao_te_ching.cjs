@@ -85,6 +85,8 @@ const { chromium } = require('playwright');
             stacked: image.bottom <= text.top + 1,
             horizontalOverflow: reading.scrollWidth > reading.clientWidth + 1,
             readingHeight: reading.clientHeight,
+            outerFrame: getComputedStyle(document.querySelector('.app'), '::before').content,
+            cardBorder: getComputedStyle(face).borderTopWidth,
             toolbar: ['translation', 'browse', 'random'].map(id => { const r = document.getElementById(id).getBoundingClientRect(); return { top: r.top, bottom: r.bottom, left: r.left, right: r.right }; }),
             controls: ['prev', 'next', 'flip', 'browse', 'random', 'translation'].map(id => {
               const rect = document.getElementById(id).getBoundingClientRect();
@@ -92,6 +94,8 @@ const { chromium } = require('playwright');
             }),
           };
         });
+        assert.equal(layout.outerFrame, 'none', 'No outer page frame at any viewport width');
+        assert.equal(layout.cardBorder, '1px', 'Card border remains intact');
         assert(layout.stacked, `Image above text: ${width}, chapter ${chapter}`);
         assert(!layout.horizontalOverflow, `No clipped text: ${width}, chapter ${chapter}`);
         assert(layout.readingHeight >= 150);
