@@ -104,13 +104,34 @@ button:focus-visible,a:focus-visible,.reading:focus-visible{outline:2px solid va
 .app:before,.reader-card,.card-face,.modal-box{border-radius:var(--radius-card)}
 .modal-box:before{border-radius:4px}
 .gold-button,.quiet-button,.nav-arrow,.chapter-choice,.modal-search,.translation-choice select,.scroll-cue,.art-seal{border-radius:var(--radius-control)}
+
+/* One aligned toolbar; recovered space belongs to the passage. */
+.reader-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:8px;flex:none;padding:8px 0}
+.reader-toolbar .translation-choice{margin:0;min-width:0}
+.reader-toolbar .translation-choice select{width:min(100%,280px);height:44px;min-height:44px;font-size:13px;padding:6px 8px}
+.reader-toolbar .gold-button,.reader-toolbar .quiet-button{display:block;height:44px;min-height:44px;padding:6px 12px;font-size:10px;letter-spacing:.04em;white-space:nowrap}
+.main{padding-top:0}
+.art-number{top:14px;right:16px;left:auto;font-size:28px;font-style:normal;padding:4px 8px;border:1px solid var(--gold-dim);border-radius:5px;background:#080706e6;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.card-face[aria-hidden="true"] .art-number{display:none}
+.card-foot{min-height:23px;gap:12px}
+.card-brand{margin-left:auto;text-align:right;font:10px/1.3 var(--label);letter-spacing:.08em;color:var(--gold-hi)}
+.bottom{height:18px;font-size:9px;line-height:1.4}
+@media(max-width:760px){
+ .reader-toolbar{gap:6px;padding:7px 0}
+ .reader-toolbar .translation-choice select{width:100%;font-size:13px}
+ .reader-toolbar .gold-button,.reader-toolbar .quiet-button{padding:6px 8px;font-size:9px}
+ .main{padding-top:0}.chapter-subtitle{font-size:9px;letter-spacing:.08em}
+ .card-brand{font-size:9px;letter-spacing:.05em}.card-foot{min-height:21px}
+ .bottom{height:16px;font-size:8px}
+}
+@media(max-width:350px){.reader-toolbar .translation-choice select{font-size:12px;padding-left:5px;padding-right:2px}.reader-toolbar .gold-button,.reader-toolbar .quiet-button{padding:5px 6px;font-size:8px}}
 </style>
 </head>
 <body>
 <div class="app">
-<header class="topbar"><div class="brand"><span class="brand-mark">道</span><span>The Way · Dao De Jing</span></div><div class="topnote">81 chapters · a card at a time</div><div class="top-actions"><button class="quiet-button" id="browse" aria-label="Browse chapters">Chapters</button><button class="gold-button primary" id="random" aria-label="Open a random chapter">✦ Random</button></div></header>
-<main class="main"><div class="deck-heading"><div><div class="edition">道德經 &nbsp; · &nbsp; The Classic of the Way</div><div class="section-label" id="sectionLabel">The Tao · chapters 1–37</div></div><label class="translation-choice"><span class="sr-only">English translation</span><select id="translation" aria-label="English translation"><option value="provided">ChatGPT Luna Medium</option><option value="legge">James Legge (1891)</option></select></label><div class="counter"><strong id="currentNo">12</strong> &nbsp;/&nbsp; 81</div></div><div class="stage" id="stage" aria-live="polite"></div><div class="deck-controls"><button class="nav-arrow" id="prev" aria-label="Previous chapter">←</button><button class="quiet-button flip-button" id="flip" aria-pressed="false">↻ Flip to Chinese</button><span class="turn-label" id="turnLabel">Chapter 12</span><div class="dots" id="dots" aria-hidden="true"></div><button class="nav-arrow" id="next" aria-label="Next chapter">→</button></div><div class="hint">FLIP FOR CHINESE · SWIPE OR USE ← → TO BROWSE · SPACE TO TURN</div></main>
-<footer class="bottom"><span id="translationCredit">English: ChatGPT Luna Medium</span> · Chinese: received text via <a href="https://ctext.org/dao-de-jing" target="_blank" rel="noreferrer">Chinese Text Project</a> · <a href="https://www.gutenberg.org/ebooks/216" target="_blank" rel="noreferrer">Legge source edition</a></footer>
+<header class="reader-toolbar" aria-label="Reading controls"><label class="translation-choice"><span class="sr-only">English translation</span><select id="translation" aria-label="English translation"><option value="provided">ChatGPT Luna Medium</option><option value="legge">James Legge (1891)</option></select></label><button class="quiet-button" id="browse" aria-label="Browse chapters">Chapters</button><button class="gold-button primary" id="random" aria-label="Open a random chapter">✦ Random</button></header>
+<main class="main"><div class="stage" id="stage" aria-live="polite"></div><div class="deck-controls"><button class="nav-arrow" id="prev" aria-label="Previous chapter">←</button><button class="quiet-button flip-button" id="flip" aria-pressed="false">↻ Flip to Chinese</button><button class="nav-arrow" id="next" aria-label="Next chapter">→</button></div><div class="hint">FLIP FOR CHINESE · SWIPE OR USE ← → TO BROWSE · SPACE TO TURN</div></main>
+<footer class="bottom"><a href="https://ctext.org/dao-de-jing" target="_blank" rel="noreferrer">Chinese Text Project</a> · <a href="https://www.gutenberg.org/ebooks/216" target="_blank" rel="noreferrer">Legge source edition</a></footer>
 </div>
 <div class="chapter-modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-box"><div class="modal-head"><h2 id="modalTitle">Choose a chapter</h2><input class="modal-search" id="chapterSearch" type="search" inputmode="numeric" placeholder="Find 1–81" aria-label="Find chapter by number"><button class="quiet-button" id="closeModal" aria-label="Close chapter chooser">Close</button></div><div class="chapter-grid" id="chapterGrid"></div></div></div>
 <script>
@@ -156,15 +177,11 @@ function render(direction='next'){
  const notes=translation==='provided'&&selected.notes.length?`<details class="translation-notes"><summary>Notes on this rendering</summary>${selected.notes.map(note=>`<p>${html(note)}</p>`).join('')}</details>`:'';
  isBack=false;
  stage.innerHTML=`<article class="reader-card ${selected.english.length>1400?'long-passage':''} ${direction==='initial'?'':`flip-${direction}`}" aria-label="Chapter ${active}"><div class="card-inner" id="cardInner">
- <section class="card-face front" aria-label="English translation, chapter ${active}"><div class="art-panel"><img class="card-art" decoding="async" width="${dimensions[0]}" height="${dimensions[1]}" src="${art}" alt="${html(illustration.meaning)} Black-and-gold illustration for chapter ${active}."><div class="art-number">${String(active).padStart(2,'0')}</div><div class="art-seal">${cnNum(active)}</div><div class="art-caption">${html(theme)}</div></div><div class="text-panel"><div class="chapter-subtitle">English translation · Chapter ${String(active).padStart(2,'0')} · ${active<=37?'The Tao':'The Te'}</div><h1 class="chinese-title">${html(theme)}</h1><div class="rule"></div><section class="reading english-reading" aria-label="English translation" tabindex="0"><h2>English · ${html(translationNames[translation])}</h2><div class="english-text">${englishParagraphs(selected.english)}</div>${notes}</section><button class="scroll-cue" data-scroll="true" hidden>Scroll passage ↓</button><div class="card-foot"><span>道德經 · 老子</span><button class="quiet-button face-flip" data-flip="true">Turn to Chinese ↻</button></div></div></section>
- <section class="card-face back" aria-label="Classical Chinese, chapter ${active}"><div class="art-panel"><img class="card-art" decoding="async" width="${dimensions[0]}" height="${dimensions[1]}" src="${art}" alt="${html(illustration.meaning)} Black-and-gold illustration for chapter ${active}."><div class="art-number">${String(active).padStart(2,'0')}</div><div class="art-seal">${cnNum(active)}</div><div class="art-caption">第${cnNum(active)}章 · ${html(theme)}</div></div><div class="text-panel"><div class="chapter-subtitle">原文 · 第${cnNum(active)}章 · Classical Chinese</div><h1 class="chinese-title">道德經</h1><div class="rule"></div><section class="reading chinese-reading" aria-label="Classical Chinese" tabindex="0"><h2>Chinese · 原文</h2><div class="chinese-text">${chineseLines(c.chinese)}</div></section><button class="scroll-cue" data-scroll="true" hidden>Scroll passage ↓</button><div class="card-foot"><span>道德經 · 老子</span><button class="quiet-button face-flip" data-flip="true">Turn to English ↻</button></div></div></section>
+ <section class="card-face front" aria-label="English translation, chapter ${active}"><div class="art-panel"><img class="card-art" decoding="async" width="${dimensions[0]}" height="${dimensions[1]}" src="${art}" alt="${html(illustration.meaning)} Black-and-gold illustration for chapter ${active}."><div class="art-number" id="currentNo" aria-label="Chapter ${active}">${String(active).padStart(2,'0')}</div><div class="art-caption">${html(theme)}</div></div><div class="text-panel"><div class="chapter-subtitle">English · ${html(translationNames[translation])}</div><h1 class="chinese-title">${html(theme)}</h1><div class="rule"></div><section class="reading english-reading" aria-label="English translation" tabindex="0"><div class="english-text">${englishParagraphs(selected.english)}</div>${notes}</section><button class="scroll-cue" data-scroll="true" hidden>Scroll passage ↓</button><div class="card-foot"><span>道德經 · 老子</span><span class="card-brand">The Way · Dao De Jing</span></div></div></section>
+ <section class="card-face back" aria-label="Classical Chinese, chapter ${active}"><div class="art-panel"><img class="card-art" decoding="async" width="${dimensions[0]}" height="${dimensions[1]}" src="${art}" alt="${html(illustration.meaning)} Black-and-gold illustration for chapter ${active}."><div class="art-number" aria-label="Chapter ${active}">${String(active).padStart(2,'0')}</div><div class="art-caption">第${cnNum(active)}章 · ${html(theme)}</div></div><div class="text-panel"><div class="chapter-subtitle">Chinese · 原文</div><h1 class="chinese-title">道德經</h1><div class="rule"></div><section class="reading chinese-reading" aria-label="Classical Chinese" tabindex="0"><div class="chinese-text">${chineseLines(c.chinese)}</div></section><button class="scroll-cue" data-scroll="true" hidden>Scroll passage ↓</button><div class="card-foot"><span>道德經 · 老子</span><span class="card-brand">The Way · Dao De Jing</span></div></div></section>
  </div></article>`;
- document.getElementById('currentNo').textContent=String(active).padStart(2,'0');
- document.getElementById('sectionLabel').textContent=active<=37?'The Tao · chapters 1–37':'The Te · chapters 38–81';
- document.getElementById('turnLabel').textContent='Chapter '+cnNum(active);
  document.getElementById('flip').textContent='↻ Flip to Chinese';document.getElementById('flip').setAttribute('aria-pressed','false');
  document.querySelectorAll('.chapter-choice').forEach(b=>b.classList.toggle('current',+b.dataset.number===active));
- document.getElementById('translationCredit').textContent=translation==='legge'?'English: James Legge, 1891':'English: ChatGPT Luna Medium';
  syncFaces();
  requestAnimationFrame(wireReadingCues);
 }

@@ -85,6 +85,7 @@ const { chromium } = require('playwright');
             stacked: image.bottom <= text.top + 1,
             horizontalOverflow: reading.scrollWidth > reading.clientWidth + 1,
             readingHeight: reading.clientHeight,
+            toolbar: ['translation', 'browse', 'random'].map(id => { const r = document.getElementById(id).getBoundingClientRect(); return { top: r.top, bottom: r.bottom, left: r.left, right: r.right }; }),
             controls: ['prev', 'next', 'flip', 'browse', 'random', 'translation'].map(id => {
               const rect = document.getElementById(id).getBoundingClientRect();
               return { visible: rect.left >= 0 && rect.right <= innerWidth && rect.top >= 0 && rect.bottom <= innerHeight, height: rect.height };
@@ -94,6 +95,10 @@ const { chromium } = require('playwright');
         assert(layout.stacked, `Image above text: ${width}, chapter ${chapter}`);
         assert(!layout.horizontalOverflow, `No clipped text: ${width}, chapter ${chapter}`);
         assert(layout.readingHeight >= 150);
+        assert(layout.toolbar.every(control => Math.abs(control.top - layout.toolbar[0].top) < 1 && Math.abs(control.bottom - layout.toolbar[0].bottom) < 1), 'Toolbar controls share one aligned row');
+        assert(layout.toolbar[0].right <= layout.toolbar[1].left && layout.toolbar[1].right <= layout.toolbar[2].left, 'Toolbar controls do not overlap');
+        assert.equal(await page.locator('.front .reading h2, .counter, .topbar, .art-seal').count(), 0, 'Redundant headings and counters removed');
+        assert.equal(await page.locator('.front .card-brand').textContent(), 'The Way · Dao De Jing');
         assert(layout.controls.every(control => control.visible));
         if (width <= 760) assert(layout.controls.every(control => control.height >= 44));
       }
@@ -119,6 +124,9 @@ const { chromium } = require('playwright');
       assert(await page.locator('.front').evaluate(face => face.inert));
       assert(await page.locator('.front .scroll-cue').evaluate(cue => cue.hidden && getComputedStyle(cue).display === 'none'), 'English cue cannot paint through the Chinese face');
       assert(!(await page.locator('.back').evaluate(face => face.inert)));
+      assert(await page.locator('.front .art-number').evaluate(number => getComputedStyle(number).display === 'none'), 'Hidden English chapter badge cannot paint through the Chinese face');
+      assert(await page.locator('.back .art-number').evaluate(number => getComputedStyle(number).display !== 'none'), 'Chinese face has its own visible chapter badge');
+      assert.equal(await page.locator('.back .art-number').textContent(), String(chapter).padStart(2, '0'));
       assert((await page.locator('.chinese-text').textContent()).length > 0);
     }
     await page.selectOption('#translation', 'provided');
