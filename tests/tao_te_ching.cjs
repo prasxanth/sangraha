@@ -163,6 +163,43 @@ const { chromium } = require('playwright');
     await page.click('#flip');
     assert(await page.locator('.back .scroll-cue').evaluate(cue => cue.hidden && getComputedStyle(cue).display === 'none'));
     assert(await page.locator('.front .scroll-cue').evaluate(cue => !cue.hidden), 'English cue returns on a long passage');
+    async function swipe(selector, dx, dy = 0, cancel = false) {
+      await page.locator(selector).evaluate((target, { dx, dy, cancel }) => {
+        function send(type, x, y) {
+          const touch = new Touch({ identifier: 1, target, clientX: x, clientY: y });
+          target.dispatchEvent(new TouchEvent(type, { bubbles: true, touches: type === 'touchstart' ? [touch] : [], changedTouches: [touch] }));
+        }
+        send('touchstart', 150, 220);
+        if (cancel) send('touchcancel', 150, 220);
+        send('touchend', 150 + dx, 220 + dy);
+      }, { dx, dy, cancel });
+    }
+    for (const face of ['front', 'back']) {
+      for (const area of ['.art-panel', '.reading']) {
+        await page.evaluate(isChinese => { active = 43; render('initial'); if (isChinese) flipCard(); }, face === 'back');
+        await swipe(`.${face} ${area}`, 100);
+        assert.equal(await page.locator('#currentNo').textContent(), '44', 'Right swipe advances from artwork or passage');
+        if (face === 'back') await page.click('#flip');
+        await swipe(`.${face} ${area}`, -100);
+        assert.equal(await page.locator('#currentNo').textContent(), '43', 'Left swipe goes back from artwork or passage');
+      }
+    }
+    await swipe('.front .reading', 10, 150);
+    await swipe('.front .reading', 20);
+    await swipe('.front .reading', 100, 0, true);
+    assert.equal(await page.locator('#currentNo').textContent(), '43', 'Vertical, short and cancelled gestures do not navigate');
+    await page.locator('.front .english-text p').first().evaluate(paragraph => {
+      const range = document.createRange(); range.selectNodeContents(paragraph);
+      const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
+    });
+    await swipe('.front .reading', 100);
+    assert.equal(await page.locator('#currentNo').textContent(), '43', 'Selecting passage text does not navigate');
+    await page.evaluate(() => window.getSelection().removeAllRanges());
+    await page.evaluate(() => { active = 81; render('initial'); });
+    await swipe('.front .reading', 100);
+    assert.equal(await page.locator('#currentNo').textContent(), '01');
+    await swipe('.front .reading', -100);
+    assert.equal(await page.locator('#currentNo').textContent(), '81');
     assert.deepEqual(errors, []);
     assert.deepEqual(remoteRequests, [], 'Reader works without remote image, script or font requests');
     console.log('PASS: source-verified import, both translations across 81 chapters, saved preference, Chinese faces, 18 high-resolution images, six viewport sizes, 44px phone controls, chapter search, wrapping and offline rendering.');

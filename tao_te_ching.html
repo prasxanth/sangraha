@@ -204,6 +204,19 @@ function openModal(){document.getElementById('modal').classList.add('open');docu
 function closeModal(){document.getElementById('modal').classList.remove('open')}
 function buildGrid(){const grid=document.getElementById('chapterGrid');grid.innerHTML=chapters.map(c=>`<button class="chapter-choice" data-number="${c.number}" aria-label="Go to chapter ${c.number}">${c.number}</button>`).join('');grid.querySelectorAll('button').forEach(b=>b.onclick=()=>{const old=active;active=+b.dataset.number;render(active>=old?'next':'prev');closeModal()})}
 document.getElementById('flip').onclick=flipCard;document.getElementById('stage').addEventListener('click',e=>{if(e.target.closest('[data-flip]'))flipCard()});document.getElementById('prev').onclick=()=>go(-1);document.getElementById('next').onclick=()=>go(1);document.getElementById('browse').onclick=openModal;document.getElementById('random').onclick=()=>{let n;do{n=Math.floor(Math.random()*81)+1}while(n===active);const old=active;active=n;render(n>=old?'next':'prev')};document.getElementById('closeModal').onclick=closeModal;document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});document.getElementById('chapterSearch').addEventListener('input',e=>{const q=e.target.value.trim();document.querySelectorAll('.chapter-choice').forEach(b=>b.classList.toggle('hidden',q&&!b.dataset.number.includes(q))) });document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(document.getElementById('modal').classList.contains('open'))return;if(e.target.closest('select,input,textarea,button,summary,a'))return;if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);if(e.code==='Space'){e.preventDefault();flipCard()}});
-let touchX=0,touchY=0;const stage=document.getElementById('stage');stage.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY},{passive:true});stage.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(!e.target.closest('.reading')&&Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.25)go(dx>0?1:-1)},{passive:true});buildGrid();render('initial');scheduleDailyCard();
+let swipeStart=null;
+const stage=document.getElementById('stage');
+stage.addEventListener('touchstart',event=>{
+ const touch=event.touches[0];
+ swipeStart=event.touches.length===1&&!event.target.closest('button,a,select,input,summary')?{x:touch.clientX,y:touch.clientY}:null;
+},{passive:true});
+stage.addEventListener('touchcancel',()=>{swipeStart=null},{passive:true});
+stage.addEventListener('touchend',event=>{
+ const start=swipeStart;swipeStart=null;
+ if(!start||event.touches.length||window.getSelection()?.isCollapsed===false)return;
+ const touch=event.changedTouches[0],dx=touch.clientX-start.x,dy=touch.clientY-start.y;
+ if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.25)go(dx>0?1:-1);
+},{passive:true});
+buildGrid();render('initial');scheduleDailyCard();
 </script>
 </body></html>
