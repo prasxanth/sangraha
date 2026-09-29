@@ -12,9 +12,9 @@ The welcome card uses hexagram 1 (The Creative). The casting panel uses hexagram
 
 ## Presentation
 
-The Tao Te Ching reader informs the dark lacquer backgrounds, metallic borders, serif text, illustrated headers, and reading-card hierarchy. Copper replaces gold throughout. Cast, Reading, and All 64 are the primary destinations, with navigation above the content on desktop and below it on mobile. The brand returns to the welcome card; the method guide is available in the header.
+The Tao Te Ching reader informs the dark lacquer backgrounds, metallic borders, serif text, illustrated headers, and reading-card hierarchy. Copper replaces gold throughout. The welcome card provides Cast, Explore the 64, and Your reading actions. The brand returns to this navigation hub from every view; the method guide is available in the header. There is no persistent navigation row, and the layout reserves only the device safe area below the content.
 
-The library shows one card at a time, with previous/next buttons, horizontal swipes, arrow keys, and a searchable 64-hexagram picker. Its passage scrolls independently, with a continuation control when text remains below. Consultations scroll naturally so the question, primary hexagram, moving-line reflections, and relating hexagram stay together. No language-flip control is provided because this source contains Chinese names rather than complete Chinese passages.
+The library shows one card at a time, with previous/next buttons and a searchable hexagram picker together in its heading, plus horizontal swipes and arrow keys. The card extends to the bottom of the available screen. Its passage scrolls independently, with a continuation control when text remains below. Consultations scroll naturally so the question, primary hexagram, moving-line reflections, and relating hexagram stay together. No language-flip control is provided because this source contains Chinese names rather than complete Chinese passages.
 
 All original hexagram records and the trigram lookup are retained. Moving-line text remains general reflection guidance and is labeled accordingly. Tests cover preserved source text, unique decodable artwork, trigram mappings, changing and unchanging casts, escaped questions, picker and dialog behavior, keyboard and swipe navigation, responsive layouts, and offline operation.
 

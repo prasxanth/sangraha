@@ -338,12 +338,12 @@ python update_books_navigator_from_csv.py path/to/books.csv path/to/target.html
 
 A copper-and-black illustrated reader for consulting the I Ching using the traditional three-coin method. All 64 hexagram records and 64 individually generated, context-matched illustrations are embedded — no internet connection required.
 
-**Key sections (desktop header navigation and mobile bottom navigation):**
+**Key sections (accessible from the welcome card):**
 
-- **Home:** Illustrated welcome card with Cast and Explore actions, plus a link to the latest reading during the session. Tap the brand to return home.
+- **Home:** Illustrated welcome card with Cast, Explore the 64, and Your reading actions. Tap the brand to return home from any view. No persistent navigation row takes space from the cards.
 - **Cast:** The active casting interface. Enter a question, then throw three animated coins six times — each throw appends a line to the forming hexagram (displayed in real time from bottom up). Coins display ☀ (yang, value 3) or ☽ (yin, value 2). Sums of 6 (Old Yin) or 9 (Old Yang) are flagged as moving lines.
 - **Reading:** Illustrated primary hexagram with Judgment, Image, and commentary; clearly labeled general moving-line reflection prompts; and a linked relating hexagram when applicable.
-- **Reference (All 64):** One illustrated reading card at a time, with previous/next controls, arrow keys, horizontal swipes, and a picker searchable by number, name, Chinese, or trigram. Long passages scroll within the card.
+- **Reference (All 64):** One illustrated reading card at a time, with previous/next controls and a hexagram picker in the heading, plus arrow keys and horizontal swipes. The picker is searchable by number, name, Chinese, or trigram. Long passages scroll within the card.
 
 **Key features:**
 - Coin-flip animation on each of the six throws
