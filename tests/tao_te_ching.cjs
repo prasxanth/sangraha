@@ -155,6 +155,7 @@ const { chromium } = require('playwright');
       });
       assert(allFit, 'Full chapter grid fits phone viewport');
     }
+    assert.equal(await page.locator('#chapterSearch').evaluate(input => getComputedStyle(input).fontSize), '16px', 'Mobile search text avoids input auto-zoom');
     await page.click('#chapterSearch');
     assert(await page.locator('#chapterSearch').evaluate(input => document.activeElement === input), 'Search activates when tapped');
     await page.fill('#chapterSearch', '38');
@@ -164,6 +165,7 @@ const { chromium } = require('playwright');
     assert.equal(await page.locator('#chapterSearch').inputValue(), '');
     assert.equal(await page.locator('.chapter-choice:not(.hidden)').count(), 81, 'Reopening clears the previous search');
     await page.click('#closeModal');
+    assert(await page.locator('#browse').evaluate(button => document.activeElement === button), 'Closing search returns focus to the non-input trigger');
     await page.locator('.front .reading').evaluate(reading => { reading.scrollTop = reading.scrollHeight; });
     await page.waitForFunction(() => document.querySelector('.front .scroll-cue').hidden);
     await page.setViewportSize({ width: 320, height: 568 });
