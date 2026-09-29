@@ -1,0 +1,386 @@
+[
+  {
+    "n": 1,
+    "name": "The Creative",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 1, The Creative. A majestic Chinese dragon rises through sharply engraved celestial clouds above distant peaks. Heaven moves with full power; strength, initiative, untiring creative movement. Make dragon clear and central. No text.",
+    "alt": "A dragon rising through celestial clouds above distant peaks."
+  },
+  {
+    "n": 2,
+    "name": "The Receptive",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 2: The Receptive. Image from the card: The earth's condition is receptive devotion. Meaning: Devotion · Yielding. A calm mare on broad fertile earth; receptive nourishment. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A calm mare on broad fertile earth; receptive nourishment."
+  },
+  {
+    "n": 3,
+    "name": "Difficulty at the Beginning",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 3: Difficulty at the Beginning. Image from the card: Clouds and thunder — difficulty at the beginning. Meaning: Initial hardship.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Clouds and thunder — difficulty at the beginning"
+  },
+  {
+    "n": 4,
+    "name": "Youthful Folly",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 4: Youthful Folly. Image from the card: A spring wells up at the foot of the mountain — youthful folly. Meaning: Inexperience · Learning.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A spring wells up at the foot of the mountain — youthful folly"
+  },
+  {
+    "n": 5,
+    "name": "Waiting",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 5: Waiting. Image from the card: Clouds rising to heaven — waiting. Meaning: Nourishment · Patience.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Clouds rising to heaven — waiting"
+  },
+  {
+    "n": 6,
+    "name": "Conflict",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 6: Conflict. Image from the card: Heaven and water go their opposite ways — conflict. Meaning: Opposition · Caution.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Heaven and water go their opposite ways — conflict"
+  },
+  {
+    "n": 7,
+    "name": "The Army",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 7: The Army. Image from the card: In the middle of the earth is water — the army. Meaning: Discipline · Leadership.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "In the middle of the earth is water — the army"
+  },
+  {
+    "n": 8,
+    "name": "Holding Together",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 8: Holding Together. Image from the card: On the earth is water — holding together. Meaning: Union · Accord.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "On the earth is water — holding together"
+  },
+  {
+    "n": 9,
+    "name": "Small Taming",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 9: Small Taming. Image from the card: Wind drives across heaven — the small taming. Meaning: Restraint · Gentle force.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Wind drives across heaven — the small taming"
+  },
+  {
+    "n": 10,
+    "name": "Treading",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 10: Treading. Image from the card: Heaven above, the lake below — treading. Meaning: Careful conduct. A traveler steps cautiously beside a tiger's long tail without touching it; tiger calm. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A traveler steps cautiously beside a tiger's long tail without touching it; tiger calm."
+  },
+  {
+    "n": 11,
+    "name": "Peace",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 11: Peace. Image from the card: Heaven and earth unite — peace. Meaning: Harmony · Flourishing.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Heaven and earth unite — peace"
+  },
+  {
+    "n": 12,
+    "name": "Standstill",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 12: Standstill. Image from the card: Heaven and earth do not unite — standstill. Meaning: Stagnation · Withdrawal.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Heaven and earth do not unite — standstill"
+  },
+  {
+    "n": 13,
+    "name": "Fellowship",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 13: Fellowship. Image from the card: Heaven together with fire — fellowship. Meaning: Community · Clarity.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Heaven together with fire — fellowship"
+  },
+  {
+    "n": 14,
+    "name": "Great Possession",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 14: Great Possession. Image from the card: Fire in heaven above — great possession. Meaning: Abundance · Responsibility.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Fire in heaven above — great possession"
+  },
+  {
+    "n": 15,
+    "name": "Modesty",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 15: Modesty. Image from the card: Within the earth, a mountain — modesty. Meaning: Humility · Balance. A low modest ridge largely concealed within broad earth; no towering triumphant summit. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A low modest ridge largely concealed within broad earth; no towering triumphant summit."
+  },
+  {
+    "n": 16,
+    "name": "Enthusiasm",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 16: Enthusiasm. Image from the card: Thunder issues forth from the earth with a shout — enthusiasm. Meaning: Inspiration · Movement.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Thunder issues forth from the earth with a shout — enthusiasm"
+  },
+  {
+    "n": 17,
+    "name": "Following",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 17: Following. Image from the card: Thunder in the middle of the lake — following. Meaning: Adaptability · Service.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Thunder in the middle of the lake — following"
+  },
+  {
+    "n": 18,
+    "name": "Work on the Decayed",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 18: Work on the Decayed. Image from the card: Wind blows low on the mountain — work on what has been spoiled. Meaning: Correction · Renewal. A weathered mountain pavilion under careful repair, wind through its beams. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A weathered mountain pavilion under careful repair, wind through its beams."
+  },
+  {
+    "n": 19,
+    "name": "Approach",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 19: Approach. Image from the card: The earth above the lake — approach. Meaning: Drawing near · Oversight.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "The earth above the lake — approach"
+  },
+  {
+    "n": 20,
+    "name": "Contemplation",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 20: Contemplation. Image from the card: The wind blows over the earth — contemplation. Meaning: Observation · Example.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "The wind blows over the earth — contemplation"
+  },
+  {
+    "n": 21,
+    "name": "Biting Through",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 21: Biting Through. Image from the card: Thunder and lightning — biting through. Meaning: Decision · Justice.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Thunder and lightning — biting through"
+  },
+  {
+    "n": 22,
+    "name": "Grace",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 22: Grace. Image from the card: Fire at the foot of the mountain — grace. Meaning: Adornment · Form.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Fire at the foot of the mountain — grace"
+  },
+  {
+    "n": 23,
+    "name": "Splitting Apart",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 23: Splitting Apart. Image from the card: The mountain rests on the earth — splitting apart. Meaning: Dissolution · Patience. A crumbling eroded mountain foundation, rock layers separating. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A crumbling eroded mountain foundation, rock layers separating."
+  },
+  {
+    "n": 24,
+    "name": "Return",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 24: Return. Image from the card: Thunder within the earth — return. Meaning: Turning point · Renewal. A single new shoot emerging from winter earth at the turning of the season. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A single new shoot emerging from winter earth at the turning of the season."
+  },
+  {
+    "n": 25,
+    "name": "Innocence",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 25: Innocence. Image from the card: Under heaven, thunder rolls — innocence. Meaning: Naturalness · Truth.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Under heaven, thunder rolls — innocence"
+  },
+  {
+    "n": 26,
+    "name": "Great Taming",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 26: Great Taming. Image from the card: Heaven within the mountain — great taming. Meaning: Restraint · Accumulation.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Heaven within the mountain — great taming"
+  },
+  {
+    "n": 27,
+    "name": "Nourishment",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 27: Nourishment. Image from the card: At the foot of the mountain, thunder — nourishment. Meaning: Feeding · Care. Two simple bowls of nourishing grain at the foot of a mountain. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Two simple bowls of nourishing grain at the foot of a mountain."
+  },
+  {
+    "n": 28,
+    "name": "Preponderance of the Great",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 28: Preponderance of the Great. Image from the card: The lake rises above the trees — preponderance of the great. Meaning: Critical mass · Courage. A wooden ridge beam visibly bowed under excessive weight beside flooded trees. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A wooden ridge beam visibly bowed under excessive weight beside flooded trees."
+  },
+  {
+    "n": 29,
+    "name": "The Abysmal",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 29: The Abysmal. Image from the card: Water flows on uninterruptedly — the abysmal. Meaning: Danger · Sincerity.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Water flows on uninterruptedly — the abysmal"
+  },
+  {
+    "n": 30,
+    "name": "The Clinging",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 30: The Clinging. Image from the card: That which is bright rises twice — the clinging. Meaning: Clarity · Dependence.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "That which is bright rises twice — the clinging"
+  },
+  {
+    "n": 31,
+    "name": "Influence",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 31: Influence. Image from the card: A lake on the mountain top — influence. Meaning: Attraction · Sensitivity.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A lake on the mountain top — influence"
+  },
+  {
+    "n": 32,
+    "name": "Duration",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 32: Duration. Image from the card: Thunder and wind — duration. Meaning: Perseverance · Constancy.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Thunder and wind — duration"
+  },
+  {
+    "n": 33,
+    "name": "Retreat",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 33: Retreat. Image from the card: Mountain under heaven — retreat. Meaning: Withdrawal · Timing.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Mountain under heaven — retreat"
+  },
+  {
+    "n": 34,
+    "name": "Great Power",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 34: Great Power. Image from the card: Thunder in heaven above — great power. Meaning: Strength · Righteousness.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Thunder in heaven above — great power"
+  },
+  {
+    "n": 35,
+    "name": "Progress",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 35: Progress. Image from the card: The sun rises over the earth — progress. Meaning: Advancement · Clarity.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "The sun rises over the earth — progress"
+  },
+  {
+    "n": 36,
+    "name": "Darkening of the Light",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 36: Darkening of the Light. Image from the card: Light has sunk into the earth — darkening of the light. Meaning: Concealment · Endurance. A copper sun nearly hidden below the dark earth horizon; light concealed. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A copper sun nearly hidden below the dark earth horizon; light concealed."
+  },
+  {
+    "n": 37,
+    "name": "The Family",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 37: The Family. Image from the card: Wind comes forth from fire — the family. Meaning: Household · Roles. A modest traditional home, warm hearth inside, wind curling gently from the chimney. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A modest traditional home, warm hearth inside, wind curling gently from the chimney."
+  },
+  {
+    "n": 38,
+    "name": "Opposition",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 38: Opposition. Image from the card: Above fire, below the lake — opposition. Meaning: Estrangement · Small things.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Above fire, below the lake — opposition"
+  },
+  {
+    "n": 39,
+    "name": "Obstruction",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 39: Obstruction. Image from the card: Water on the mountain — obstruction. Meaning: Difficulty · Turning inward.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Water on the mountain — obstruction"
+  },
+  {
+    "n": 40,
+    "name": "Deliverance",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 40: Deliverance. Image from the card: Thunder and rain set in — deliverance. Meaning: Release · Resolution.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Thunder and rain set in — deliverance"
+  },
+  {
+    "n": 41,
+    "name": "Decrease",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 41: Decrease. Image from the card: At the foot of the mountain, the lake — decrease. Meaning: Simplification · Sincerity. Two small plain offering bowls beside a mountain lake; sincere simplicity. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Two small plain offering bowls beside a mountain lake; sincere simplicity."
+  },
+  {
+    "n": 42,
+    "name": "Increase",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 42: Increase. Image from the card: Wind and thunder — increase. Meaning: Augmentation · Action.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Wind and thunder — increase"
+  },
+  {
+    "n": 43,
+    "name": "Breakthrough",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 43: Breakthrough. Image from the card: The lake has risen up to heaven — breakthrough. Meaning: Resolution · Determination.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "The lake has risen up to heaven — breakthrough"
+  },
+  {
+    "n": 44,
+    "name": "Coming to Meet",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 44: Coming to Meet. Image from the card: Under heaven, wind — coming to meet. Meaning: Encounter · Caution.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Under heaven, wind — coming to meet"
+  },
+  {
+    "n": 45,
+    "name": "Gathering Together",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 45: Gathering Together. Image from the card: Over the earth, the lake — gathering together. Meaning: Concentration · Assembly.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Over the earth, the lake — gathering together"
+  },
+  {
+    "n": 46,
+    "name": "Pushing Upward",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 46: Pushing Upward. Image from the card: Within the earth, wood grows — pushing upward. Meaning: Gradual ascent · Effort. A young tree pushing upward through earth, roots and shoots clearly visible. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A young tree pushing upward through earth, roots and shoots clearly visible."
+  },
+  {
+    "n": 47,
+    "name": "Oppression",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 47: Oppression. Image from the card: There is no water in the lake — oppression. Meaning: Exhaustion · Inner resources. A visibly DRY lake basin with cracked bed and empty waterline; NO full lake. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A visibly DRY lake basin with cracked bed and empty waterline; NO full lake."
+  },
+  {
+    "n": 48,
+    "name": "The Well",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 48: The Well. Image from the card: Water over wood — the well. Meaning: Source · Common good. An ancient stone well with a wooden windlass, rope and bucket drawing water. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "An ancient stone well with a wooden windlass, rope and bucket drawing water."
+  },
+  {
+    "n": 49,
+    "name": "Revolution",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 49: Revolution. Image from the card: Fire in the lake — revolution. Meaning: Transformation · Timing. A lake edge with fire and reflected flame, transformation between opposing elements. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A lake edge with fire and reflected flame, transformation between opposing elements."
+  },
+  {
+    "n": 50,
+    "name": "The Cauldron",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 50: The Cauldron. Image from the card: Fire over wood — the cauldron. Meaning: Transformation · Nourishment. An ancient three-legged ding cauldron over a small wood fire; ritual nourishment. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "An ancient three-legged ding cauldron over a small wood fire; ritual nourishment."
+  },
+  {
+    "n": 51,
+    "name": "The Arousing",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 51: The Arousing. Image from the card: Thunder repeated — the arousing. Meaning: Shock · Awakening.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Thunder repeated — the arousing"
+  },
+  {
+    "n": 52,
+    "name": "Keeping Still",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 52: Keeping Still. Image from the card: Mountains standing close together — keeping still. Meaning: Stillness · Stopping.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Mountains standing close together — keeping still"
+  },
+  {
+    "n": 53,
+    "name": "Development",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 53: Development. Image from the card: On the mountain, a tree — development. Meaning: Gradual progress · Propriety. A tree growing slowly from a rocky mountainside, roots securely anchored. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A tree growing slowly from a rocky mountainside, roots securely anchored."
+  },
+  {
+    "n": 54,
+    "name": "The Marrying Maiden",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 54: The Marrying Maiden. Image from the card: Thunder over the lake — the marrying maiden. Meaning: Subordinate position.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Thunder over the lake — the marrying maiden"
+  },
+  {
+    "n": 55,
+    "name": "Abundance",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 55: Abundance. Image from the card: Both thunder and lightning come — abundance. Meaning: Fullness · Peak.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Both thunder and lightning come — abundance"
+  },
+  {
+    "n": 56,
+    "name": "The Wanderer",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 56: The Wanderer. Image from the card: Fire on the mountain — the wanderer. Meaning: Journeying · Caution. A lone traveler with a small campfire on a mountain ledge; temporary shelter. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A lone traveler with a small campfire on a mountain ledge; temporary shelter."
+  },
+  {
+    "n": 57,
+    "name": "The Gentle",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 57: The Gentle. Image from the card: Winds following one upon the other — the gentle. Meaning: Penetrating · Adaptability.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Winds following one upon the other — the gentle"
+  },
+  {
+    "n": 58,
+    "name": "The Joyous",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 58: The Joyous. Image from the card: Lakes resting one on the other — the joyous. Meaning: Joy · Exchange.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Lakes resting one on the other — the joyous"
+  },
+  {
+    "n": 59,
+    "name": "Dispersion",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 59: Dispersion. Image from the card: The wind drives over the water — dispersion. Meaning: Dissolution · Unity.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "The wind drives over the water — dispersion"
+  },
+  {
+    "n": 60,
+    "name": "Limitation",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 60: Limitation. Image from the card: Water over lake — limitation. Meaning: Regulation · Measure. A lake contained by a carefully measured stone bank with a narrow water channel. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A lake contained by a carefully measured stone bank with a narrow water channel."
+  },
+  {
+    "n": 61,
+    "name": "Inner Truth",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 61: Inner Truth. Image from the card: Wind over lake — inner truth. Meaning: Sincerity · Center.  Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Wind over lake — inner truth"
+  },
+  {
+    "n": 62,
+    "name": "Preponderance of the Small",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 62: Preponderance of the Small. Image from the card: Thunder on the mountain — preponderance of the small. Meaning: Small exceeding · Care. A small bird flying LOW beneath a thunderous mountain landscape. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A small bird flying LOW beneath a thunderous mountain landscape."
+  },
+  {
+    "n": 63,
+    "name": "After Completion",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 63: After Completion. Image from the card: Water over fire — after completion. Meaning: Order achieved · Vigilance. Water safely contained in a pot above a controlled fire; balanced completed order. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "Water safely contained in a pot above a controlled fire; balanced completed order."
+  },
+  {
+    "n": 64,
+    "name": "Before Completion",
+    "prompt": "Use case: illustration-story. Create one exceptionally crisp high-resolution landscape artwork, 1536x1024 or larger, for an I Ching reading card. Detailed Chinese landscape engraving in polished COPPER on obsidian BLACK lacquer, intricate precise linework, dimensional metallic lighting, rich tonal separation. Strictly copper-black palette: reddish copper, burnished russet, pale rose-copper highlights and deep black. NO gold, yellow, green, blue, white. No haze, fog, blur, bloom, grain or distressed texture. No lettering, symbols, hexagram diagrams, border, watermark or calligraphy. Horizontal composition, important details within central 60% height for wide header cropping. Subject: Hexagram 64: Before Completion. Image from the card: Fire over water — before completion. Meaning: Transition · Care. A small fox nearly across a river on stepping stones, tail dipping into the water; crossing unfinished. Depict this particular natural image clearly, not a generic landscape. Symbolic editorial illustration, no written text.",
+    "alt": "A small fox nearly across a river on stepping stones, tail dipping into the water; crossing unfinished."
+  }
+]

@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="I Ching Oracle">
+<meta name="theme-color" content="#0d0d0b">
+<title>I Ching Oracle</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --bg:      #0d0d0b;
+  --bg2:     #141412;
+  --bg3:     #1c1c19;
+  --bg4:     #232320;
+  --bg5:     #2a2a26;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text:    #e8e4d8;
+  --text2:   #a8a49a;
+  --text3:   #666260;
+  --gold:    #c8a96e;
+  --gold2:   #e8c990;
+  --teal:    #5DCAA5;
+  --teal2:   #9FE1CB;
+  --purple:  #8F87E0;
+  --purple2: #CECBF6;
+  --coral:   #E07060;
+  --amber:   #D4901A;
+  --amber2:  #FAC775;
+  --safe-b:  env(safe-area-inset-bottom, 0px);
+  --safe-t:  env(safe-area-inset-top, 0px);
+  --sans:    'Nunito', system-ui, sans-serif;
+  --serif:   'Playfair Display', Georgia, serif;
+  --mono:    'DM Mono', monospace;
+  --nav-h:   64px;
+  --r-sm:    8px;
+  --r-md:    12px;
+  --r-lg:    16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; background: var(--bg); }
+body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; font-size: 15px; line-height: 1.6; }
+
+#app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+.status-bar { height: var(--safe-t); background: var(--bg); flex-shrink: 0; }
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+.app-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.app-header-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; white-space: nowrap; opacity: 0.5; flex: 1; }
+.app-header-logo { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--gold2); letter-spacing: 0.02em; white-space: nowrap; flex-shrink: 0; padding-left: 1.5ch; }
+.app-header-time { font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--text2); white-space: nowrap; flex: 1; text-align: right; }
+
+/* ─── CONTENT AREA ───────────────────────────────────────── */
+#content { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
+.screen { display: none; min-height: 100%; }
+.screen.active { display: block; }
+
+/* ─── BOTTOM NAV ─────────────────────────────────────────── */
+.bottom-nav { flex-shrink: 0; display: flex; background: var(--bg2); border-top: 1px solid var(--border2); padding-bottom: var(--safe-b); }
+.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 9px 4px; border: none; background: transparent; cursor: pointer; transition: opacity 0.15s; }
+.nav-btn:active { opacity: 0.55; }
+.nav-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+.nav-icon svg { width: 20px; height: 20px; }
+.nav-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); transition: color 0.15s; }
+.nav-btn.active .nav-label { color: var(--gold); }
+.nav-btn.active .nav-icon svg { stroke: var(--gold); }
+.nav-btn:not(.active) .nav-icon svg { stroke: var(--text3); }
+
+/* ─── SHARED COMPONENTS ──────────────────────────────────── */
+.section-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; color: var(--text3); text-transform: uppercase; margin-bottom: 12px; }
+.screen-header { margin-bottom: 20px; }
+.screen-header h2 { font-family: var(--serif); font-size: 24px; font-weight: 500; color: var(--gold2); margin-bottom: 4px; }
+.screen-header p { font-size: 13px; color: var(--text3); font-style: italic; }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); }
+.info-box { background: var(--bg3); border-radius: var(--r-sm); padding: 12px 14px; font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 14px; }
+.info-box strong { color: var(--teal2); font-weight: 600; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+/* ─── X-CARD (expandable) ─────────────────────────────────── */
+.x-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px; overflow: hidden; }
+.x-hdr { display: flex; align-items: center; gap: 10px; padding: 15px 16px; cursor: pointer; transition: background 0.15s; }
+.x-hdr:active { background: var(--bg3); }
+.x-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
+.x-num { font-family: var(--mono); font-size: 9px; color: var(--text3); min-width: 16px; }
+.x-name { font-size: 15px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.3; }
+.x-tag { font-family: var(--mono); font-size: 9px; color: var(--gold); background: rgba(200,169,110,0.12); padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.x-arr { color: var(--text3); font-size: 12px; transition: transform 0.25s; flex-shrink: 0; }
+.x-hdr.open .x-arr { transform: rotate(90deg); }
+.x-body { display: none; padding: 16px 18px 20px; }
+.x-body.open { display: block; }
+.transl { background: var(--bg4); border-left: 2px solid var(--purple); border-radius: 0 6px 6px 0; padding: 11px 14px; margin-bottom: 14px; font-size: 13px; color: var(--text2); line-height: 1.7; font-style: italic; }
+.transl strong { color: var(--purple2); font-style: normal; font-weight: 600; }
+
+/* ═══════════════════════════════════════════════════════════
+   HOME SCREEN
+══════════════════════════════════════════════════════════════ */
+.home-wrap { padding: 24px 18px 24px; }
+.home-greeting { margin-bottom: 24px; }
+.home-greeting-time { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--text3); text-transform: uppercase; margin-bottom: 5px; }
+.home-greeting-text { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--gold2); line-height: 1.2; }
+
+.hero-banner {
+  background: var(--bg3);
+  border: 1px solid rgba(200,169,110,0.18);
+  border-radius: var(--r-lg);
+  padding: 18px 18px 20px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.hero-glyph { font-size: 36px; line-height: 1; margin-bottom: 10px; opacity: 0.9; }
+.hero-label { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+.hero-name { font-family: var(--serif); font-size: 19px; color: var(--gold2); margin-bottom: 4px; }
+.hero-sub { font-size: 13px; color: var(--text3); font-style: italic; }
+
+.module-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+.module-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px 14px 14px; cursor: pointer; transition: background 0.15s, border-color 0.15s; min-height: 105px; display: flex; flex-direction: column; justify-content: space-between; }
+.module-card:active { background: var(--bg3); border-color: var(--border2); }
+.module-icon { font-size: 20px; margin-bottom: 8px; line-height: 1; }
+.module-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.module-desc { font-family: var(--mono); font-size: 9px; color: var(--text3); letter-spacing: 0.05em; }
+.module-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; align-self: flex-start; }
+
+/* ═══════════════════════════════════════════════════════════
+   CAST SCREEN
+══════════════════════════════════════════════════════════════ */
+.cast-wrap { padding: 20px 18px 36px; }
+
+.question-area {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+.qa-label { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+.qa-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--text);
+  resize: none;
+  min-height: 56px;
+  line-height: 1.6;
+}
+.qa-input::placeholder { color: var(--text3); font-style: italic; }
+
+/* Coin area */
+.coin-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.coins-row {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.coin {
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  border: 2px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.3s, background 0.3s;
+  background: var(--bg3);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+.coin.yang { border-color: var(--gold); background: rgba(200,169,110,0.12); }
+.coin.yin  { border-color: var(--purple); background: rgba(143,135,224,0.1); }
+.coin.flipping { animation: coinFlip 0.45s ease-out; }
+@keyframes coinFlip {
+  0%   { transform: rotateY(0deg) scale(1); }
+  40%  { transform: rotateY(90deg) scale(0.8); }
+  60%  { transform: rotateY(90deg) scale(0.8); }
+  100% { transform: rotateY(0deg) scale(1); }
+}
+
+.cast-btn {
+  width: 100%;
+  padding: 14px;
+  background: rgba(200,169,110,0.12);
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: var(--r-md);
+  color: var(--gold2);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+.cast-btn:active { background: rgba(200,169,110,0.2); border-color: var(--gold); }
+.cast-btn:disabled { opacity: 0.35; cursor: default; }
+
+.reset-btn {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: var(--r-md);
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.reset-btn:active { border-color: var(--border2); color: var(--text2); }
+
+/* Lines display */
+.lines-display {
+  margin: 0 0 24px 0;
+}
+.line-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.line-row:last-child { border-bottom: none; }
+.line-num { font-family: var(--mono); font-size: 9px; color: var(--text3); min-width: 16px; text-align: right; }
+.line-bars { display: flex; gap: 6px; align-items: center; flex: 1; }
+.line-seg {
+  height: 5px;
+  border-radius: 2px;
+  flex: 1;
+  background: var(--text2);
+  transition: background 0.3s;
+}
+.line-seg.yang-seg { background: var(--gold); }
+.line-seg.yin-seg  { background: var(--purple); opacity: 0.6; }
+.line-seg.gap      { background: transparent; max-width: 8px; }
+.line-moving { font-family: var(--mono); font-size: 8px; color: var(--coral); letter-spacing: 0.05em; min-width: 26px; text-align: right; }
+.line-val { font-family: var(--mono); font-size: 10px; color: var(--text3); min-width: 14px; }
+
+/* Hexagram glyph */
+.hex-glyph {
+  font-size: 52px;
+  line-height: 1;
+  text-align: center;
+  margin: 6px 0 4px;
+  letter-spacing: 2px;
+}
+
+/* Progress dots */
+.progress-dots { display: flex; gap: 7px; justify-content: center; margin-bottom: 20px; }
+.p-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border2); transition: background 0.3s, transform 0.3s; }
+.p-dot.filled { background: var(--gold); }
+.p-dot.current { background: var(--gold2); transform: scale(1.35); }
+
+/* Throw results */
+.throw-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 0;
+  font-size: 13px;
+}
+.throw-coins { display: flex; gap: 4px; }
+.throw-coin-sm {
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  border: 1px solid var(--border2);
+  background: var(--bg3);
+}
+.throw-coin-sm.heads { border-color: rgba(200,169,110,0.4); background: rgba(200,169,110,0.1); }
+.throw-coin-sm.tails { border-color: rgba(143,135,224,0.4); background: rgba(143,135,224,0.08); }
+.throw-sum { font-family: var(--mono); font-size: 10px; color: var(--text3); min-width: 20px; text-align: center; }
+.throw-line-type { font-family: var(--mono); font-size: 10px; flex: 1; }
+.throw-line-type.old-yang  { color: var(--amber2); }
+.throw-line-type.young-yang{ color: var(--gold); }
+.throw-line-type.young-yin { color: var(--purple2); }
+.throw-line-type.old-yin   { color: var(--coral); }
+
+/* ═══════════════════════════════════════════════════════════
+   READING SCREEN
+══════════════════════════════════════════════════════════════ */
+.reading-wrap { padding: 20px 18px 36px; }
+
+.hex-hero {
+  background: var(--bg3);
+  border: 1px solid rgba(200,169,110,0.18);
+  border-radius: var(--r-lg);
+  padding: 20px 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.hh-num   { font-family: var(--mono); font-size: 9px; color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.hh-glyph { font-size: 56px; line-height: 1; margin-bottom: 8px; }
+.hh-name  { font-family: var(--serif); font-size: 22px; color: var(--gold2); margin-bottom: 3px; }
+.hh-chin  { font-size: 13px; color: var(--text3); margin-bottom: 10px; font-style: italic; }
+
+.hh-tags { display: flex; gap: 7px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+.hh-tag { font-family: var(--mono); font-size: 9px; padding: 3px 10px; border-radius: 4px; }
+.hh-tag.trig { background: rgba(93,202,165,0.12); color: var(--teal2); }
+.hh-tag.elem { background: rgba(200,169,110,0.12); color: var(--gold); }
+.hh-tag.attr { background: rgba(143,135,224,0.12); color: var(--purple2); }
+
+.hh-judgment {
+  background: var(--bg4);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+  text-align: left;
+  font-style: italic;
+}
+
+/* Changing lines */
+.changing-section { margin-bottom: 20px; }
+.chg-hdr { font-family: var(--mono); font-size: 9px; color: var(--coral); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+.chg-line { background: var(--bg2); border: 1px solid rgba(224,112,96,0.2); border-radius: var(--r-md); padding: 13px 16px; margin-bottom: 9px; }
+.chg-line-num { font-family: var(--mono); font-size: 9px; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
+.chg-line-text { font-size: 13px; color: var(--text2); line-height: 1.65; }
+
+/* Relating hex */
+.rel-hex { background: var(--bg2); border: 1px solid rgba(143,135,224,0.2); border-radius: var(--r-lg); padding: 16px 18px; margin-bottom: 20px; display: flex; gap: 16px; align-items: flex-start; }
+.rel-glyph { font-size: 40px; line-height: 1; flex-shrink: 0; }
+.rel-info { flex: 1; }
+.rel-label { font-family: var(--mono); font-size: 9px; color: var(--purple); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
+.rel-name { font-family: var(--serif); font-size: 18px; color: var(--purple2); margin-bottom: 6px; }
+.rel-body { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* Image / Commentary */
+.reading-section { margin-bottom: 20px; }
+.rs-label { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+.rs-body { font-size: 14px; color: var(--text2); line-height: 1.75; }
+.rs-body em { color: var(--gold2); font-style: normal; }
+
+
+
+/* New cast btn */
+.new-cast-btn {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: var(--r-md);
+  color: var(--text2);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-bottom: 10px;
+}
+.new-cast-btn:active { background: var(--bg3); }
+
+/* ═══════════════════════════════════════════════════════════
+   REFERENCE SCREEN
+══════════════════════════════════════════════════════════════ */
+.ref-wrap { padding: 20px 18px 36px; }
+.ref-search {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ref-search-icon { font-size: 14px; color: var(--text3); flex-shrink: 0; }
+.ref-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--text);
+}
+.ref-search-input::placeholder { color: var(--text3); }
+
+.ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ref-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 12px 13px;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.ref-card:active { background: var(--bg3); }
+.ref-card-glyph { font-size: 24px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.ref-card-info { flex: 1; min-width: 0; }
+.ref-card-num { font-family: var(--mono); font-size: 8px; color: var(--text3); margin-bottom: 2px; }
+.ref-card-name { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ref-card-chin { font-size: 11px; color: var(--text3); font-style: italic; }
+
+/* Modal overlay */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 100;
+  align-items: flex-end;
+}
+.modal-overlay.open { display: flex; }
+.modal-sheet {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  width: 100%;
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 20px 18px;
+  padding-bottom: calc(20px + var(--safe-b));
+}
+.modal-hdr { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+.modal-glyph { font-size: 48px; line-height: 1; }
+.modal-title-area { flex: 1; }
+.modal-num { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+.modal-name { font-family: var(--serif); font-size: 20px; color: var(--gold2); margin-bottom: 2px; }
+.modal-chin { font-size: 13px; color: var(--text3); font-style: italic; }
+.modal-close { background: var(--bg3); border: 1px solid var(--border); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text3); font-size: 16px; flex-shrink: 0; }
+.modal-section { margin-bottom: 16px; }
+.modal-sl { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 7px; }
+.modal-text { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.modal-judgment { background: var(--bg4); border-left: 2px solid var(--gold); border-radius: 0 6px 6px 0; padding: 10px 13px; font-size: 13px; color: var(--text); line-height: 1.7; font-style: italic; margin-bottom: 14px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="status-bar"></div>
+
+  <div class="app-header">
+    <div class="app-header-label">I Ching Oracle</div>
+    <div class="app-header-logo">易經</div>
+    <div class="app-header-time" id="hdr-time"></div>
+  </div>
+
+  <div id="content">
+
+    <!-- ══ HOME ══════════════════════════════════ -->
+    <div class="screen active" id="screen-home">
+      <div class="home-wrap">
+        <div class="home-greeting">
+          <div class="home-greeting-time" id="greeting-period"></div>
+          <div class="home-greeting-text" id="greeting-text"></div>
+        </div>
+
+        <div class="hero-banner" id="home-last-hex" style="display:none">
+          <div class="hero-label" id="home-hex-label">Last Reading</div>
+          <div class="hero-glyph" id="home-hex-glyph"></div>
+          <div class="hero-name" id="home-hex-name"></div>
+          <div class="hero-sub" id="home-hex-sub"></div>
+        </div>
+
+        <div class="hero-banner" id="home-intro" style="">
+          <div class="hero-label">Book of Changes</div>
+          <div class="hero-glyph">☯</div>
+          <div class="hero-name">64 Hexagrams</div>
+          <div class="hero-sub">Cast the coins · Receive the oracle</div>
+        </div>
+
+        <div class="section-label">Modules</div>
+        <div class="module-grid">
+          <div class="module-card" onclick="navigate('cast')">
+            <div>
+              <div class="module-icon">☰</div>
+              <div class="module-name">Cast Oracle</div>
+              <div class="module-desc">Three coins · Six lines</div>
+            </div>
+            <div class="module-badge" style="background:rgba(200,169,110,0.15);color:var(--gold2);">Active</div>
+          </div>
+          <div class="module-card" onclick="navigate('reading')">
+            <div>
+              <div class="module-icon">◉</div>
+              <div class="module-name">Reading</div>
+              <div class="module-desc">Judgment · Image · Lines</div>
+            </div>
+            <div class="module-badge" style="background:rgba(93,202,165,0.15);color:var(--teal2);" id="home-reading-badge">Awaiting cast</div>
+          </div>
+          <div class="module-card" onclick="navigate('ref')">
+            <div>
+              <div class="module-icon">📜</div>
+              <div class="module-name">Reference</div>
+              <div class="module-desc">All 64 hexagrams</div>
+            </div>
+            <div class="module-badge" style="background:rgba(143,135,224,0.15);color:var(--purple2);">Browse</div>
+          </div>
+          <div class="module-card" onclick="showAbout()">
+            <div>
+              <div class="module-icon">⚬</div>
+              <div class="module-name">Method</div>
+              <div class="module-desc">Coin oracle guide</div>
+            </div>
+            <div class="module-badge" style="background:rgba(255,255,255,0.05);color:var(--text3);">Guide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CAST ══════════════════════════════════ -->
+    <div class="screen" id="screen-cast">
+      <div class="cast-wrap">
+        <div class="screen-header">
+          <h2>Cast the Oracle</h2>
+          <p>Hold your question. Three coins, six throws.</p>
+        </div>
+
+        <div class="question-area">
+          <div class="qa-label">Your Question</div>
+          <textarea class="qa-input" id="question-input" placeholder="What situation or decision are you contemplating?" rows="3"></textarea>
+        </div>
+
+        <div class="progress-dots" id="progress-dots">
+          <div class="p-dot current" id="dot-0"></div>
+          <div class="p-dot" id="dot-1"></div>
+          <div class="p-dot" id="dot-2"></div>
+          <div class="p-dot" id="dot-3"></div>
+          <div class="p-dot" id="dot-4"></div>
+          <div class="p-dot" id="dot-5"></div>
+        </div>
+
+        <div class="coin-stage">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;" id="throw-label">Line 1 · First throw</div>
+          <div class="coins-row" id="coins-row">
+            <div class="coin" id="coin0">☰</div>
+            <div class="coin" id="coin1">☰</div>
+            <div class="coin" id="coin2">☰</div>
+          </div>
+          <div id="throw-history"></div>
+        </div>
+
+        <div id="lines-section" style="display:none">
+          <div class="section-label">Hexagram forming</div>
+          <div class="lines-display" id="lines-display"></div>
+        </div>
+
+        <button class="cast-btn" id="cast-btn" onclick="throwCoins()">Throw Coins — Line 1</button>
+        <button class="reset-btn" onclick="resetCast()">↺ Reset</button>
+      </div>
+    </div>
+
+    <!-- ══ READING ════════════════════════════════ -->
+    <div class="screen" id="screen-reading">
+      <div class="reading-wrap" id="reading-content">
+        <div class="screen-header">
+          <h2>Reading</h2>
+          <p>Cast the oracle first to receive a reading.</p>
+        </div>
+        <button class="cast-btn" onclick="navigate('cast')">Go to Cast →</button>
+      </div>
+    </div>
+
+    <!-- ══ REFERENCE ══════════════════════════════ -->
+    <div class="screen" id="screen-ref">
+      <div class="ref-wrap">
+        <div class="screen-header">
+          <h2>Reference</h2>
+          <p>All 64 hexagrams of the I Ching</p>
+        </div>
+        <div class="ref-search">
+          <div class="ref-search-icon">⌕</div>
+          <input class="ref-search-input" id="ref-search" placeholder="Search name or number…" oninput="filterRef(this.value)">
+        </div>
+        <div class="ref-grid" id="ref-grid"></div>
+      </div>
+    </div>
+
+  </div><!-- #content -->
+
+  <!-- ─── BOTTOM NAV ──────────────────────────────────── -->
+  <div class="bottom-nav">
+    <button class="nav-btn active" id="nav-home" onclick="navigate('home')">
+      <div class="nav-icon"><svg fill="none" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12L12 3l9 9M4.5 10.5V20a.5.5 0 00.5.5h5v-5h4v5h5a.5.5 0 00.5-.5v-9.5"/></svg></div>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-btn" id="nav-cast" onclick="navigate('cast')">
+      <div class="nav-icon"><svg fill="none" stroke-width="1.7" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M8 12h8M12 8v8"/></svg></div>
+      <span class="nav-label">Cast</span>
+    </button>
+    <button class="nav-btn" id="nav-reading" onclick="navigate('reading')">
+      <div class="nav-icon"><svg fill="none" stroke-width="1.7" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path stroke-linecap="round" d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+      <span class="nav-label">Reading</span>
+    </button>
+    <button class="nav-btn" id="nav-ref" onclick="navigate('ref')">
+      <div class="nav-icon"><svg fill="none" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg></div>
+      <span class="nav-label">All 64</span>
+    </button>
+  </div>
+
+</div><!-- #app -->
+
+<!-- Reference modal -->
+<div class="modal-overlay" id="ref-modal" onclick="closeModal(event)">
+  <div class="modal-sheet" id="ref-modal-sheet">
+    <div class="modal-hdr">
+      <div class="modal-glyph" id="m-glyph"></div>
+      <div class="modal-title-area">
+        <div class="modal-num" id="m-num"></div>
+        <div class="modal-name" id="m-name"></div>
+        <div class="modal-chin" id="m-chin"></div>
+      </div>
+      <div class="modal-close" onclick="document.getElementById('ref-modal').classList.remove('open')">×</div>
+    </div>
+    <div class="modal-judgment" id="m-judgment"></div>
+    <div class="modal-section">
+      <div class="modal-sl">Upper · Lower Trigram</div>
+      <div class="modal-text" id="m-trigs"></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-sl">Image</div>
+      <div class="modal-text" id="m-image"></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-sl">Commentary</div>
+      <div class="modal-text" id="m-commentary"></div>
+    </div>
+  </div>
+</div>
+
+<!-- About modal -->
+<div class="modal-overlay" id="about-modal" onclick="closeAbout(event)">
+  <div class="modal-sheet">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+      <div>
+        <div class="modal-num">Coin Oracle Method</div>
+        <div class="modal-name" style="font-family:var(--serif);font-size:20px;color:var(--gold2);">How to Cast</div>
+      </div>
+      <div class="modal-close" onclick="document.getElementById('about-modal').classList.remove('open')">×</div>
+    </div>
+    <div class="info-box">
+      <strong>Preparation:</strong> Still the mind. Hold your question clearly — not as a wish, but as a genuine inquiry into the forces at play.
+    </div>
+    <div style="margin-bottom:14px;">
+      <div class="modal-sl">The Method</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.75;">
+        Three coins are thrown six times. Each throw produces one line of the hexagram, built from the bottom up. Heads = 3 (yang), Tails = 2 (yin). Sum the three coins:<br><br>
+        <span style="color:var(--amber2);">6 = Old Yin ●○  (moving, becomes yang)</span><br>
+        <span style="color:var(--gold);">7 = Young Yang ⚊ (stable yang)</span><br>
+        <span style="color:var(--purple2);">8 = Young Yin ⚋ (stable yin)</span><br>
+        <span style="color:var(--coral);">9 = Old Yang ○●  (moving, becomes yin)</span><br><br>
+        Moving lines are where the oracle speaks most directly. They show transformation — where you are in transition. The second hexagram formed by reversing moving lines shows where things are heading.
+      </div>
+    </div>
+    <div class="info-box" style="margin-bottom:0;">
+      <strong>Reading:</strong> The hexagram is a mirror, not a verdict. Read the Judgment as the overall situation; the Image as the pattern of nature to emulate; the moving lines as specific counsel for the moment.
+    </div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   HEXAGRAM DATA — all 64
+════════════════════════════════════════════════════════ */
+var HEXAGRAMS = [
+  {n:1,  glyph:'䷀', name:'The Creative',      chin:'乾 Qián',   upper:'Heaven', lower:'Heaven', attr:'Strength · Initiating',
+   judgment:'The Creative works sublime success, furthering through perseverance.',
+   image:'Heaven moves with full power. The superior person makes himself strong and untiring.',
+   commentary:'Pure yang — creative force at its fullest. This is the time for decisive leadership, bold initiative, and unwavering perseverance. The dragon rises.'},
+  {n:2,  glyph:'䷁', name:'The Receptive',     chin:'坤 Kūn',    upper:'Earth',   lower:'Earth',   attr:'Devotion · Yielding',
+   judgment:'The Receptive brings about sublime success through the perseverance of a mare.',
+   image:'The earth\'s condition is receptive devotion. The superior person carries the world with breadth of character.',
+   commentary:'Pure yin — the receptive completes what the creative begins. Yield, support, nurture. Success comes through following, not leading.'},
+  {n:3,  glyph:'䷂', name:'Difficulty at the Beginning', chin:'屯 Zhūn', upper:'Water', lower:'Thunder', attr:'Initial hardship',
+   judgment:'Difficulty at the beginning works supreme success. Furthering through perseverance. Nothing should be undertaken. It furthers to appoint helpers.',
+   image:'Clouds and thunder — difficulty at the beginning. The superior person brings order out of confusion.',
+   commentary:'Birth pangs. The situation is chaotic but full of potential. Do not act rashly. Gather support, move cautiously, and persist through the initial tangle.'},
+  {n:4,  glyph:'䷃', name:'Youthful Folly',    chin:'蒙 Méng',   upper:'Mountain',lower:'Water',   attr:'Inexperience · Learning',
+   judgment:'Youthful folly has success. It is not I who seek the young fool; the young fool seeks me. I give him the first answer, but not the second or third.',
+   image:'A spring wells up at the foot of the mountain — youthful folly. The superior person fosters character by thoroughness in all that he does.',
+   commentary:'The student must come with sincerity. Do not repeat the question expecting a different answer. Discipline and honest inquiry open the way.'},
+  {n:5,  glyph:'䷄', name:'Waiting',           chin:'需 Xū',     upper:'Water',   lower:'Heaven',  attr:'Nourishment · Patience',
+   judgment:'Waiting — if you are sincere, you have light and success. Perseverance brings good fortune. It furthers to cross the great water.',
+   image:'Clouds rising to heaven — waiting. The superior person eats and drinks, is joyous and of good cheer.',
+   commentary:'The time is not yet ripe. Strength waits at the threshold. Do not force the moment — nourish yourself, maintain confidence, and trust in the right timing.'},
+  {n:6,  glyph:'䷅', name:'Conflict',          chin:'訟 Sòng',   upper:'Heaven',  lower:'Water',   attr:'Opposition · Caution',
+   judgment:'Conflict. You are sincere and are being obstructed. A cautious halt halfway brings good fortune. Going through to the end brings misfortune.',
+   image:'Heaven and water go their opposite ways — conflict. In all his transactions, the superior person carefully considers the beginning.',
+   commentary:'Conflict arises when inner and outer move in opposite directions. Avoid prolonged disputes. Seek mediation. Know when to halt.'},
+  {n:7,  glyph:'䷆', name:'The Army',          chin:'師 Shī',    upper:'Earth',   lower:'Water',   attr:'Discipline · Leadership',
+   judgment:'The army needs perseverance and a strong man. Good fortune without blame.',
+   image:'In the middle of the earth is water — the army. The superior person increases his masses by generosity toward the people.',
+   commentary:'Collective effort requires a clear center of authority. Discipline, loyalty, and a just cause make the many into one coherent force.'},
+  {n:8,  glyph:'䷇', name:'Holding Together', chin:'比 Bǐ',    upper:'Water',   lower:'Earth',   attr:'Union · Accord',
+   judgment:'Holding together brings good fortune. Inquire of the oracle once again whether you possess sublimity, constancy, and perseverance. Then there is no blame.',
+   image:'On the earth is water — holding together. The kings of antiquity bestowed the different states as fiefs and cultivated friendly relations with the feudal lords.',
+   commentary:'Seek genuine alliance. The center must be worthy of trust. Union freely chosen and consistently maintained brings security and strength.'},
+  {n:9,  glyph:'䷈', name:'Small Taming',      chin:'小畜 Xiǎo Xù', upper:'Wind', lower:'Heaven', attr:'Restraint · Gentle force',
+   judgment:'Small taming has success. Dense clouds, no rain from our western region.',
+   image:'Wind drives across heaven — the small taming. The superior person refines the outward aspect of his nature.',
+   commentary:'Gentle restraint accumulates force. The breakthrough has not yet come. Cultivate, refine, and wait. Small actions prepare the larger movement.'},
+  {n:10, glyph:'䷉', name:'Treading',          chin:'履 Lǚ',     upper:'Heaven',  lower:'Lake',    attr:'Careful conduct',
+   judgment:'Treading upon the tail of the tiger. It does not bite the man. Success.',
+   image:'Heaven above, the lake below — treading. The superior person discriminates between high and low and gives the people the will to tread firmly.',
+   commentary:'Walk carefully in difficult terrain. Conduct yourself with awareness and grace. Appropriate behavior in a charged situation keeps you from harm.'},
+  {n:11, glyph:'䷊', name:'Peace',             chin:'泰 Tài',    upper:'Earth',   lower:'Heaven',  attr:'Harmony · Flourishing',
+   judgment:'Peace. The small departs, the great approaches. Good fortune. Success.',
+   image:'Heaven and earth unite — peace. The ruler divides and completes the course of heaven and earth.',
+   commentary:'A time of union, flourishing, and abundance. Heaven and earth in harmonious exchange. Use this auspicious time wisely and do not grow complacent.'},
+  {n:12, glyph:'䷋', name:'Standstill',        chin:'否 Pǐ',     upper:'Heaven',  lower:'Earth',   attr:'Stagnation · Withdrawal',
+   judgment:'Standstill — evil people do not further the perseverance of the superior person. The great departs, the small approaches.',
+   image:'Heaven and earth do not unite — standstill. The superior person falls back on his inner worth to escape the difficulties.',
+   commentary:'Forces are blocked and not communicating. Withdraw, preserve your integrity, and wait for the obstruction to pass. Do not force action now.'},
+  {n:13, glyph:'䷌', name:'Fellowship',        chin:'同人 Tóng Rén', upper:'Heaven', lower:'Fire', attr:'Community · Clarity',
+   judgment:'Fellowship with men in the open — success. It furthers to cross the great water. The perseverance of the superior person furthers.',
+   image:'Heaven together with fire — fellowship. The superior person organizes the clans and makes distinctions between things.',
+   commentary:'True fellowship is built on shared values, not expedience. Transparency and genuine principle are required. Cliques and partisanship divide.'},
+  {n:14, glyph:'䷍', name:'Great Possession',  chin:'大有 Dà Yǒu', upper:'Fire',  lower:'Heaven',  attr:'Abundance · Responsibility',
+   judgment:'Great possession — supreme success.',
+   image:'Fire in heaven above — great possession. The superior person curbs evil and furthers good, obeying the benevolent will of heaven.',
+   commentary:'Wealth and power have come. The danger is pride and misuse. Rule justly, share generously, and acknowledge what made success possible.'},
+  {n:15, glyph:'䷎', name:'Modesty',           chin:'謙 Qiān',   upper:'Earth',   lower:'Mountain', attr:'Humility · Balance',
+   judgment:'Modesty creates success. The superior person carries things through.',
+   image:'Within the earth, a mountain — modesty. The superior person reduces that which is too much, and augments that which is too little.',
+   commentary:'The mountain is hidden beneath the earth. Genuine modesty — not self-abasement — is the source of lasting success and good fortune.'},
+  {n:16, glyph:'䷏', name:'Enthusiasm',        chin:'豫 Yù',     upper:'Thunder', lower:'Earth',   attr:'Inspiration · Movement',
+   judgment:'Enthusiasm — it furthers one to install helpers and to set armies marching.',
+   image:'Thunder issues forth from the earth with a shout — enthusiasm. The ancient kings made music in order to honor merit.',
+   commentary:'The time calls for inspired, collective movement. Enthusiasm aligned with principle galvanizes others. Set things in motion.'},
+  {n:17, glyph:'䷐', name:'Following',         chin:'隨 Suí',    upper:'Lake',    lower:'Thunder', attr:'Adaptability · Service',
+   judgment:'Following has supreme success. Perseverance furthers. No blame.',
+   image:'Thunder in the middle of the lake — following. The superior person at nightfall goes indoors for rest and recuperation.',
+   commentary:'Adapt to the time. Sometimes the wisest leadership is knowing when to follow. Rest, recover, and remain open to where the current leads.'},
+  {n:18, glyph:'䷑', name:'Work on the Decayed', chin:'蠱 Gǔ',  upper:'Mountain',lower:'Wind',    attr:'Correction · Renewal',
+   judgment:'Work on what has been spoiled has supreme success. It furthers to cross the great water. Before the starting point, three days. After the starting point, three days.',
+   image:'Wind blows low on the mountain — work on what has been spoiled. The superior person encourages the people and strengthens their spirit.',
+   commentary:'The situation shows the consequences of past neglect. This is the moment to repair and renew. Begin carefully, proceed steadily, and complete the task.'},
+  {n:19, glyph:'䷒', name:'Approach',          chin:'臨 Lín',    upper:'Earth',   lower:'Lake',    attr:'Drawing near · Oversight',
+   judgment:'Approach has supreme success. Perseverance furthers. When the eighth month comes, there will be misfortune.',
+   image:'The earth above the lake — approach. The superior person is inexhaustible in his will to teach, and without limit in his tolerance and protection of the people.',
+   commentary:'Great influence is growing. Use this period of access and proximity wisely. Power that is not matched by ethics does not endure.'},
+  {n:20, glyph:'䷓', name:'Contemplation',     chin:'觀 Guān',   upper:'Wind',    lower:'Earth',   attr:'Observation · Example',
+   judgment:'Contemplation. The ablution has been made, but not yet the offering. Full of trust they look up to him.',
+   image:'The wind blows over the earth — contemplation. The ancient kings visited all parts of the kingdom to see their people and to school them.',
+   commentary:'Observe before acting. The example set by those at the center radiates outward. This is a time to understand deeply, not to move hastily.'},
+  {n:21, glyph:'䷔', name:'Biting Through',    chin:'噬嗑 Shì Kè', upper:'Fire', lower:'Thunder', attr:'Decision · Justice',
+   judgment:'Biting through has success. It furthers to let justice be administered.',
+   image:'Thunder and lightning — biting through. The kings of antiquity made firm the laws through clearly defined penalties.',
+   commentary:'An obstacle stands in the way of union. Cut through it decisively. Justice and clear boundaries are required now. Equivocation only prolongs the problem.'},
+  {n:22, glyph:'䷕', name:'Grace',             chin:'賁 Bì',     upper:'Mountain',lower:'Fire',    attr:'Adornment · Form',
+   judgment:'Grace has success. In small matters it is favorable to undertake something.',
+   image:'Fire at the foot of the mountain — grace. The superior person proceeds in clarifying the multifarious aspects of his conduct, but ventures on no important decision.',
+   commentary:'Adornment and form have their place. Attend to how things appear and are expressed. But know that grace is the garnishing, not the substance.'},
+  {n:23, glyph:'䷖', name:'Splitting Apart',   chin:'剝 Bō',     upper:'Mountain',lower:'Earth',   attr:'Dissolution · Patience',
+   judgment:'Splitting apart. It does not further to go anywhere.',
+   image:'The mountain rests on the earth — splitting apart. Those above can ensure their position only by giving to those below.',
+   commentary:'The dark forces are eroding the light. This is not the time to resist forcibly. Stay still, withdraw, and allow the cycle to complete itself.'},
+  {n:24, glyph:'䷗', name:'Return',            chin:'復 Fù',     upper:'Earth',   lower:'Thunder', attr:'Turning point · Renewal',
+   judgment:'Return — success. Going out and coming in without error. Friends come without blame. To and fro goes the way. On the seventh day comes return.',
+   image:'Thunder within the earth — return. The ancient kings closed the passes at the time of solstice. Merchants and strangers did not travel.',
+   commentary:'The turning point. One yang returns below six yins. The light is reborn. Do not force the pace — let natural momentum build. Rest at the solstice, then move.'},
+  {n:25, glyph:'䷘', name:'Innocence',         chin:'無妄 Wú Wàng', upper:'Heaven', lower:'Thunder', attr:'Naturalness · Truth',
+   judgment:'Innocence — supreme success. Perseverance furthers. If someone is not as he should be, he has misfortune, and it does not further to undertake anything.',
+   image:'Under heaven, thunder rolls — innocence. The kings of antiquity, as the equivalent of heaven, cultivated and nourished all beings.',
+   commentary:'Act from genuine inner truth, not calculation. When the motive is pure, heaven supports the action. Contrivance and cleverness bring misfortune.'},
+  {n:26, glyph:'䷙', name:'Great Taming',      chin:'大畜 Dà Xù', upper:'Mountain', lower:'Heaven', attr:'Restraint · Accumulation',
+   judgment:'Great taming — perseverance furthers. Not eating at home brings good fortune. It furthers to cross the great water.',
+   image:'Heaven within the mountain — great taming. The superior person acquaints himself with many sayings of antiquity and many deeds of the past.',
+   commentary:'Great force is being held and concentrated. Study, collect, accumulate. The right moment to release this stored energy will come. Wisdom comes from history.'},
+  {n:27, glyph:'䷚', name:'Nourishment',       chin:'頤 Yí',     upper:'Mountain',lower:'Thunder', attr:'Feeding · Care',
+   judgment:'Nourishment. Perseverance brings good fortune. Pay heed to the providing of nourishment, and to what a man seeks to fill his own mouth with.',
+   image:'At the foot of the mountain, thunder — nourishment. The superior person is watchful over his words, and temperate in eating and drinking.',
+   commentary:'Consider what you consume and what you provide to others — physically, mentally, spiritually. What do you take in? What do you give? Both determine character.'},
+  {n:28, glyph:'䷛', name:'Preponderance of the Great', chin:'大過 Dà Guò', upper:'Lake', lower:'Wind', attr:'Critical mass · Courage',
+   judgment:'Preponderance of the great — the ridgepole sags to the breaking point. It furthers to have somewhere to go. Success.',
+   image:'The lake rises above the trees — preponderance of the great. Thus the superior person, when he stands alone, is unconcerned, and if he has to renounce the world, he is undaunted.',
+   commentary:'The beam is overloaded. This is an exceptional time requiring exceptional action. Bold movement is needed — even unconventional paths. Do not waver.'},
+  {n:29, glyph:'䷜', name:'The Abysmal',       chin:'坎 Kǎn',    upper:'Water',   lower:'Water',   attr:'Danger · Sincerity',
+   judgment:'The abysmal repeated. If you are sincere, you have success in your heart, and whatever you do succeeds.',
+   image:'Water flows on uninterruptedly — the abysmal. The superior person walks in lasting virtue, and carries on the business of teaching.',
+   commentary:'Danger above and below. Water does not stop; it fills each hollow and moves on. Sincerity and perseverance are the only way through. Do not resist — flow.'},
+  {n:30, glyph:'䷝', name:'The Clinging',      chin:'離 Lí',     upper:'Fire',    lower:'Fire',    attr:'Clarity · Dependence',
+   judgment:'The clinging. Perseverance furthers. It brings success. Care of the cow brings good fortune.',
+   image:'That which is bright rises twice — the clinging. The great person by perpetuating this brightness illuminates the four quarters of the world.',
+   commentary:'Fire clings to wood to burn. Clarity depends on what it illuminates. Recognize your dependencies and cultivate what sustains your brightness.'},
+  {n:31, glyph:'䷞', name:'Influence',         chin:'咸 Xián',   upper:'Lake',    lower:'Mountain', attr:'Attraction · Sensitivity',
+   judgment:'Influence — success. Perseverance furthers. To take a maiden to wife brings good fortune.',
+   image:'A lake on the mountain top — influence. The superior person encourages people to approach him by his readiness to receive them.',
+   commentary:'Mutual attraction and receptivity. The still mountain yields to the joy of the lake above. Open yourself to genuine influence — give as much as you receive.'},
+  {n:32, glyph:'䷟', name:'Duration',          chin:'恆 Héng',   upper:'Thunder', lower:'Wind',    attr:'Perseverance · Constancy',
+   judgment:'Duration — success. No blame. Perseverance furthers. It furthers to have somewhere to go.',
+   image:'Thunder and wind — duration. The superior person stands firm and does not change his direction.',
+   commentary:'Enduring patterns, not rigid fixedness. The thunder\'s energy and the wind\'s flexibility together make duration possible. Commit to the right course and hold.'},
+  {n:33, glyph:'䷠', name:'Retreat',           chin:'遯 Dùn',    upper:'Heaven',  lower:'Mountain', attr:'Withdrawal · Timing',
+   judgment:'Retreat — success. In what is small, perseverance furthers.',
+   image:'Mountain under heaven — retreat. The superior person keeps the inferior man at a distance, not angrily but with dignity.',
+   commentary:'The wise retreat is not defeat — it is strategy. Withdraw with dignity before the inferior force grows stronger. Preserve your resources for the right moment.'},
+  {n:34, glyph:'䷡', name:'Great Power',       chin:'大壯 Dà Zhuàng', upper:'Thunder', lower:'Heaven', attr:'Strength · Righteousness',
+   judgment:'Great power — perseverance furthers.',
+   image:'Thunder in heaven above — great power. The superior person does not tread paths that do not accord with established order.',
+   commentary:'Great strength must be guided by principle, or it becomes brute force. True power includes the restraint to know when not to use it. Act from integrity.'},
+  {n:35, glyph:'䷢', name:'Progress',          chin:'晉 Jìn',    upper:'Fire',    lower:'Earth',   attr:'Advancement · Clarity',
+   judgment:'Progress — the powerful prince is honored with horses in large numbers. In a single day he is granted audience three times.',
+   image:'The sun rises over the earth — progress. The superior person himself brightens his bright virtue.',
+   commentary:'Rapid advance and recognition. The light rises and is welcomed. Do not overreach — allow the natural unfolding of recognition. Bright intention is rewarded.'},
+  {n:36, glyph:'䷣', name:'Darkening of the Light', chin:'明夷 Míng Yí', upper:'Earth', lower:'Fire', attr:'Concealment · Endurance',
+   judgment:'Darkening of the light — in adversity it furthers to be persevering.',
+   image:'Light has sunk into the earth — darkening of the light. In living among the masses, the superior person veils his light, yet still shines.',
+   commentary:'The light is dimmed by hostile forces. Conceal your brightness, persist inwardly. This is not the time to shine openly. Endure with patient wisdom.'},
+  {n:37, glyph:'䷤', name:'The Family',        chin:'家人 Jiā Rén', upper:'Wind',  lower:'Fire',    attr:'Household · Roles',
+   judgment:'The family — the perseverance of the woman furthers.',
+   image:'Wind comes forth from fire — the family. The superior person has substance in his words and duration in his way of life.',
+   commentary:'Order within the household is the foundation of all social harmony. Each relationship has its nature and its role. Speak with substance; act with consistency.'},
+  {n:38, glyph:'䷥', name:'Opposition',        chin:'睽 Kuí',    upper:'Fire',    lower:'Lake',    attr:'Estrangement · Small things',
+   judgment:'Opposition — in small matters, good fortune.',
+   image:'Above fire, below the lake — opposition. The superior person retains his individuality amid the masses.',
+   commentary:'Opposites repel yet complete each other. Do not attempt large undertakings in a time of fundamental estrangement. Small acts of connection build toward resolution.'},
+  {n:39, glyph:'䷦', name:'Obstruction',       chin:'蹇 Jiǎn',   upper:'Water',   lower:'Mountain', attr:'Difficulty · Turning inward',
+   judgment:'Obstruction — the southwest furthers. The northeast does not further. It furthers to see the great man. Perseverance brings good fortune.',
+   image:'Water on the mountain — obstruction. The superior person turns his attention to himself and molds his character.',
+   commentary:'The path is blocked. Do not force through. Turn inward — cultivate virtue. Seek counsel. The obstacle is also an instruction about where growth is needed.'},
+  {n:40, glyph:'䷧', name:'Deliverance',       chin:'解 Xiè',    upper:'Thunder', lower:'Water',   attr:'Release · Resolution',
+   judgment:'Deliverance — the southwest furthers. When there is no longer anything where one has to go, return brings good fortune. If there is still something where one has to go, hastening brings good fortune.',
+   image:'Thunder and rain set in — deliverance. The superior person pardons mistakes and forgives misdeeds.',
+   commentary:'The tension breaks. Move decisively to clear away what has been obstructing. Pardon and forgive. Return to simplicity. Do not linger in the aftermath of the storm.'},
+  {n:41, glyph:'䷨', name:'Decrease',          chin:'損 Sǔn',    upper:'Mountain',lower:'Lake',    attr:'Simplification · Sincerity',
+   judgment:'Decrease combined with sincerity brings about supreme good fortune without blame. One may be persevering in this. It furthers to undertake something. How is this to be carried out? One may use two small bowls for the sacrifice.',
+   image:'At the foot of the mountain, the lake — decrease. The superior person controls his anger and restrains his instincts.',
+   commentary:'Simplify, reduce, offer. A sincere small gift can accomplish what a large insincere gesture cannot. Cut away the excess; preserve the essential.'},
+  {n:42, glyph:'䷩', name:'Increase',          chin:'益 Yì',     upper:'Wind',    lower:'Thunder', attr:'Augmentation · Action',
+   judgment:'Increase — it furthers to undertake something. It furthers to cross the great water.',
+   image:'Wind and thunder — increase. The superior person, when he sees goodness, imitates it; when he has faults, he rids himself of them.',
+   commentary:'A period of genuine growth and expansion. Heaven pours abundance downward. Move boldly, act generously, model what is good. The window is open — use it.'},
+  {n:43, glyph:'䷪', name:'Breakthrough',      chin:'夬 Guài',   upper:'Lake',    lower:'Heaven',  attr:'Resolution · Determination',
+   judgment:'Breakthrough — one must resolutely make the matter known at the court of the king. It must be announced truthfully. Danger. It is necessary to notify one\'s own city. It does not further to resort to arms. It furthers to undertake something.',
+   image:'The lake has risen up to heaven — breakthrough. The superior person dispenses riches downward and refrains from resting in his virtue.',
+   commentary:'The inferior must be decisively eliminated, but not by matching its methods. Announce openly, proceed with courage and integrity. Resort to force is counter-productive.'},
+  {n:44, glyph:'䷫', name:'Coming to Meet',    chin:'姤 Gòu',    upper:'Heaven',  lower:'Wind',    attr:'Encounter · Caution',
+   judgment:'Coming to meet — the maiden is powerful. One should not marry such a maiden.',
+   image:'Under heaven, wind — coming to meet. The prince acts in promulgating his commands and proclaiming them to the four quarters of heaven.',
+   commentary:'An unexpected encounter with a rising inferior force. Do not underestimate it. Address it firmly at first emergence before it gains strength.'},
+  {n:45, glyph:'䷬', name:'Gathering Together', chin:'萃 Cuì',  upper:'Lake',    lower:'Earth',   attr:'Concentration · Assembly',
+   judgment:'Gathering together — success. The king approaches his temple. It furthers to see the great man. This brings success. Perseverance furthers. To bring great offerings creates good fortune. It furthers to undertake something.',
+   image:'Over the earth, the lake — gathering together. The superior person renews his weapons in order to meet the unforeseen.',
+   commentary:'Assembly of forces, people, and resources around a shared center. Great gatherings require preparation and a worthy focal point. Be ready for what may arise.'},
+  {n:46, glyph:'䷭', name:'Pushing Upward',    chin:'升 Shēng',  upper:'Earth',   lower:'Wind',    attr:'Gradual ascent · Effort',
+   judgment:'Pushing upward has supreme success. One must see the great man. Fear not. Departure toward the south brings good fortune.',
+   image:'Within the earth, wood grows — pushing upward. The superior person of devoted character heaps up small things in order to achieve something high and great.',
+   commentary:'Growth through steady, persistent effort — like a tree pushing upward through earth. Seek out the capable and the wise. Small, consistent steps accumulate into ascent.'},
+  {n:47, glyph:'䷮', name:'Oppression',        chin:'困 Kùn',    upper:'Lake',    lower:'Water',   attr:'Exhaustion · Inner resources',
+   judgment:'Oppression — success. Perseverance. The great man brings about good fortune. No blame. When one has something to say, it is not believed.',
+   image:'There is no water in the lake — oppression. The superior person stakes his life on following his will.',
+   commentary:'Exhaustion of outer resources. Words cannot help now — only character. Go inward. The great person endures through inner certainty when all external support fails.'},
+  {n:48, glyph:'䷯', name:'The Well',          chin:'井 Jǐng',   upper:'Water',   lower:'Wind',    attr:'Source · Common good',
+   judgment:'The well — the town may be changed, but the well cannot be changed. It neither decreases nor increases. They come and go and draw from the well.',
+   image:'Water over wood — the well. The superior person encourages the people at their work, and exhorts them to help one another.',
+   commentary:'The inexhaustible source. Character, wisdom, and genuine nourishment cannot be moved or exhausted. Draw from the deep; make yourself available to others.'},
+  {n:49, glyph:'䷰', name:'Revolution',        chin:'革 Gé',     upper:'Lake',    lower:'Fire',    attr:'Transformation · Timing',
+   judgment:'Revolution — on your own day you are believed. Supreme success, furthering through perseverance. Remorse disappears.',
+   image:'Fire in the lake — revolution. The superior person sets the calendar in order and makes the seasons clear.',
+   commentary:'Radical change is needed and is coming. Timing is everything — change too soon and you lose trust; too late and the opportunity passes. Act at the right moment.'},
+  {n:50, glyph:'䷱', name:'The Cauldron',      chin:'鼎 Dǐng',   upper:'Fire',    lower:'Wind',    attr:'Transformation · Nourishment',
+   judgment:'The cauldron — supreme good fortune. Success.',
+   image:'Fire over wood — the cauldron. The superior person consolidates his fate by making his position correct.',
+   commentary:'The sacred vessel of transformation. Raw materials become nourishment; the crude becomes refined. This is the work of culture, wisdom, and spiritual practice.'},
+  {n:51, glyph:'䷲', name:'The Arousing',      chin:'震 Zhèn',   upper:'Thunder', lower:'Thunder', attr:'Shock · Awakening',
+   judgment:'The arousing — success. Shock comes — oh, oh! Laughing words — ha, ha! The shock terrifies for a hundred miles, and he does not let fall the sacrificial spoon and chalice.',
+   image:'Thunder repeated — the arousing. The superior person, in fear and trembling, sets his life in order, and examines himself.',
+   commentary:'Sudden shock, like thunder. The first reaction is fear; the next, awakening. The superior person is shaken into self-examination rather than paralysis. Be the one still holding the sacred vessel.'},
+  {n:52, glyph:'䷳', name:'Keeping Still',     chin:'艮 Gèn',    upper:'Mountain',lower:'Mountain', attr:'Stillness · Stopping',
+   judgment:'Keeping still — keeping his back still so that he no longer feels his body. He goes into his courtyard and does not see his people. No blame.',
+   image:'Mountains standing close together — keeping still. The superior person does not permit his thoughts to go beyond his situation.',
+   commentary:'The art of stopping — of not going further than the moment requires. Stillness is not passivity; it is precise awareness of where action ends and interference begins.'},
+  {n:53, glyph:'䷴', name:'Development',       chin:'漸 Jiàn',   upper:'Wind',    lower:'Mountain', attr:'Gradual progress · Propriety',
+   judgment:'Development — the maiden is given in marriage. Good fortune. Perseverance furthers.',
+   image:'On the mountain, a tree — development. The superior person abides in dignity and virtue, in order to improve the mores.',
+   commentary:'Gradual, organic, proper development. Like a tree on a mountain growing slowly in the right conditions, or a marriage properly arranged. No shortcuts. Each step builds the next.'},
+  {n:54, glyph:'䷵', name:'The Marrying Maiden', chin:'歸妹 Guī Mèi', upper:'Thunder', lower:'Lake', attr:'Subordinate position',
+   judgment:'The marrying maiden — undertakings bring misfortune. Nothing that would further.',
+   image:'Thunder over the lake — the marrying maiden. The superior person understands the transitory in the light of the eternity of the end.',
+   commentary:'Occupying a secondary, subordinate position that is not entirely of one\'s own choosing. Do not force your way to the center. Accept the situation with dignity and wait.'},
+  {n:55, glyph:'䷶', name:'Abundance',         chin:'豐 Fēng',   upper:'Thunder', lower:'Fire',    attr:'Fullness · Peak',
+   judgment:'Abundance — success. The king attains abundance. Be not sad. Be like the sun at midday.',
+   image:'Both thunder and lightning come — abundance. The superior person decides lawsuits and carries out punishments.',
+   commentary:'The peak of fullness. Like the sun at noon, it cannot stay at this height — the decline begins. Use this moment of maximum power wisely and with clarity.'},
+  {n:56, glyph:'䷷', name:'The Wanderer',      chin:'旅 Lǚ',     upper:'Fire',    lower:'Mountain', attr:'Journeying · Caution',
+   judgment:'The wanderer — success through smallness. Perseverance brings good fortune to the wanderer.',
+   image:'Fire on the mountain — the wanderer. The superior person is clear-minded and cautious in imposing penalties, and does not prolong lawsuits.',
+   commentary:'The traveler in a foreign land. You are away from your roots, your base of support. Move carefully, accept help graciously, do not overstay, and avoid major commitments in unfamiliar territory.'},
+  {n:57, glyph:'䷸', name:'The Gentle',        chin:'巽 Xùn',    upper:'Wind',    lower:'Wind',    attr:'Penetrating · Adaptability',
+   judgment:'The gentle — success through what is small. It furthers to have somewhere to go. It furthers to see the great man.',
+   image:'Winds following one upon the other — the gentle. The superior person spreads his commands abroad and carries out his undertakings.',
+   commentary:'Gentle, persistent penetration — like wind that finds every opening. Not forceful confrontation but consistent, gentle influence that permeates everywhere.'},
+  {n:58, glyph:'䷹', name:'The Joyous',        chin:'兌 Duì',    upper:'Lake',    lower:'Lake',    attr:'Joy · Exchange',
+   judgment:'The joyous — success. Perseverance is favorable.',
+   image:'Lakes resting one on the other — the joyous. The superior person joins with his friends for discussion and practice.',
+   commentary:'Genuine joy, rooted in inner integrity, flows outward in exchange and friendship. Shallow pleasure dissipates; true joy strengthens in the company of worthy companions.'},
+  {n:59, glyph:'䷺', name:'Dispersion',        chin:'渙 Huàn',   upper:'Wind',    lower:'Water',   attr:'Dissolution · Unity',
+   judgment:'Dispersion — success. The king approaches his temple. It furthers to cross the great water. Perseverance furthers.',
+   image:'The wind drives over the water — dispersion. The kings of antiquity sacrificed to the Lord and built temples.',
+   commentary:'Rigidities and blockages within the group must be dissolved. Self-interest hardens; inspiration melts. Return to shared purpose and higher ground to restore unity.'},
+  {n:60, glyph:'䷻', name:'Limitation',        chin:'節 Jié',    upper:'Water',   lower:'Lake',    attr:'Regulation · Measure',
+   judgment:'Limitation — success. Galling limitation must not be persevered in.',
+   image:'Water over lake — limitation. The superior person creates number and measure, and examines the nature of virtue and correct conduct.',
+   commentary:'Limits are necessary and creative. But limitation must not become oppressive. Set boundaries wisely — too loose and nothing is achieved; too tight and the system breaks.'},
+  {n:61, glyph:'䷼', name:'Inner Truth',       chin:'中孚 Zhōng Fú', upper:'Wind', lower:'Lake', attr:'Sincerity · Center',
+   judgment:'Inner truth — pigs and fishes. Good fortune. It furthers to cross the great water. Perseverance furthers.',
+   image:'Wind over lake — inner truth. The superior person discusses criminal cases in order to delay executions.',
+   commentary:'When truth is at the center, it influences even those who cannot be reached by argument. Even the lowest creatures respond to sincere inner reality. The movement comes from within.'},
+  {n:62, glyph:'䷽', name:'Preponderance of the Small', chin:'小過 Xiǎo Guò', upper:'Thunder', lower:'Mountain', attr:'Small exceeding · Care',
+   judgment:'Preponderance of the small — success. Perseverance furthers. Small things may be done; great things should not be done. The flying bird brings the message: it is not well to strive upward, it is well to remain below. Great good fortune.',
+   image:'Thunder on the mountain — preponderance of the small. The superior person gives preponderance to devotion in conduct, preponderance to grief in bereavement, and preponderance to thrift in expenditure.',
+   commentary:'This is not the time for grand ambitions. Small, careful, meticulous actions carry the day. The bird that flies too high loses the wind. Stay close to the ground.'},
+  {n:63, glyph:'䷾', name:'After Completion',  chin:'既濟 Jì Jì', upper:'Water',  lower:'Fire',    attr:'Order achieved · Vigilance',
+   judgment:'After completion — success in small matters. Perseverance furthers. At the beginning, good fortune. At the end, disorder.',
+   image:'Water over fire — after completion. The superior person takes thought of misfortune and arms himself against it in advance.',
+   commentary:'The work is accomplished, the order achieved. But completion contains the seeds of the next dissolution. Vigilance now — the perfectly ordered situation can unravel if attention is withdrawn.'},
+  {n:64, glyph:'䷿', name:'Before Completion', chin:'未濟 Wèi Jì', upper:'Fire',  lower:'Water',   attr:'Transition · Care',
+   judgment:'Before completion — success. But if the little fox, after nearly completing the crossing, gets his tail in the water, there is nothing that would further.',
+   image:'Fire over water — before completion. The superior person is careful in the differentiation of things, so that each finds its place.',
+   commentary:'The end is near but not yet achieved. The young fox nearly crosses — but nearly is not across. Maintain focus, discrimination, and care right to the last step. Do not relax prematurely.'},
+];
+
+/* trigram binary keys for lookup: upper × lower → hex number */
+/* trigrams: Heaven=7(111), Earth=0(000), Water=2(010), Fire=5(101), Thunder=1(001), Lake=3(011), Mountain=4(100), Wind=6(110) */
+var TRIG_MAP = {
+  '7,7':1,'0,0':2,'2,1':3,'4,2':4,'2,7':5,'7,2':6,'0,2':7,'2,0':8,
+  '6,7':9,'7,3':10,'0,7':11,'7,0':12,'7,5':13,'5,7':14,'0,4':15,'1,0':16,
+  '3,1':17,'4,6':18,'0,3':19,'6,0':20,'5,1':21,'4,5':22,'4,0':23,'0,1':24,
+  '7,1':25,'4,7':26,'4,1':27,'3,6':28,'2,2':29,'5,5':30,'3,4':31,'1,6':32,
+  '7,4':33,'1,7':34,'5,0':35,'0,5':36,'6,5':37,'5,3':38,'2,4':39,'1,2':40,
+  '4,3':41,'6,1':42,'3,7':43,'7,6':44,'3,0':45,'0,6':46,'3,2':47,'2,6':48,
+  '3,5':49,'5,6':50,'1,1':51,'4,4':52,'6,4':53,'1,3':54,'1,5':55,'5,4':56,
+  '6,6':57,'3,3':58,'6,2':59,'2,3':60,'6,3':61,'1,4':62,'2,5':63,'5,2':64
+};
+
+/* trigram value from 3-bit binary (array of yang=1/yin=0, bottom to top) */
+function trigVal(lines) {
+  return lines[2]*4 + lines[1]*2 + lines[0]*1;
+}
+
+function hexNumFromLines(lines6) {
+  /* lines6 = [l1,l2,l3,l4,l5,l6], l1=bottom. each is 1(yang) or 0(yin) */
+  var lower = trigVal(lines6.slice(0,3));
+  var upper = trigVal(lines6.slice(3,6));
+  var key = upper + ',' + lower;
+  return TRIG_MAP[key] || 1;
+}
+
+function hexByNum(n) { return HEXAGRAMS[n-1]; }
+
+/* ════════════════════════════════════════════════════════
+   CAST STATE
+════════════════════════════════════════════════════════ */
+var castLines = []; /* array of {sum, yang, moving} for each line; line1=first thrown=bottom */
+var currentCast = null; /* {primary, relating, movingLines} */
+
+var COIN_HEADS = ['☀','☀','☀'];
+var COIN_TAILS = ['☽','☽','☽'];
+
+function throwCoins() {
+  if (castLines.length >= 6) return;
+
+  var results = [0,1,2].map(function() { return Math.random() < 0.5 ? 3 : 2; }); /* heads=3,tails=2 */
+  var sum = results.reduce(function(a,b){return a+b;},0);
+  var yang = (sum === 7 || sum === 9);
+  var moving = (sum === 6 || sum === 9);
+  castLines.push({sum:sum, yang:yang, moving:moving, results:results});
+
+  animateCoins(results);
+  updateProgressDots();
+  updateLinesDisplay();
+  updateThrowHistory(results, sum, yang, moving);
+
+  if (castLines.length === 6) {
+    finalizeCast();
+  } else {
+    var lnum = castLines.length + 1;
+    document.getElementById('throw-label').textContent = 'Line ' + lnum + ' · Throw ' + lnum;
+    document.getElementById('cast-btn').textContent = 'Throw Coins — Line ' + lnum;
+  }
+}
+
+function animateCoins(results) {
+  for (var i = 0; i < 3; i++) {
+    (function(idx, val) {
+      var el = document.getElementById('coin' + idx);
+      el.classList.remove('flipping','yang','yin');
+      void el.offsetWidth;
+      el.classList.add('flipping');
+      el.textContent = val === 3 ? '☀' : '☽';
+      setTimeout(function() {
+        el.classList.add(val === 3 ? 'yang' : 'yin');
+      }, 200);
+    })(i, results[i]);
+  }
+}
+
+function updateProgressDots() {
+  for (var i = 0; i < 6; i++) {
+    var dot = document.getElementById('dot-' + i);
+    dot.classList.remove('filled','current');
+    if (i < castLines.length) dot.classList.add('filled');
+    else if (i === castLines.length) dot.classList.add('current');
+  }
+}
+
+function updateLinesDisplay() {
+  var sec = document.getElementById('lines-section');
+  var disp = document.getElementById('lines-display');
+  sec.style.display = 'block';
+  var html = '';
+  /* display lines top to bottom (line 6 at top, line 1 at bottom) */
+  var reversed = castLines.slice().reverse();
+  for (var i = 0; i < reversed.length; i++) {
+    var lineNum = reversed.length - i;
+    var l = reversed[i];
+    html += '<div class="line-row">';
+    html += '<span class="line-num">' + lineNum + '</span>';
+    html += '<div class="line-bars">';
+    if (l.yang) {
+      html += '<div class="line-seg yang-seg"></div>';
+    } else {
+      html += '<div class="line-seg yin-seg"></div>';
+      html += '<div class="line-seg gap"></div>';
+      html += '<div class="line-seg yin-seg"></div>';
+    }
+    html += '</div>';
+    html += '<span class="line-moving">' + (l.moving ? (l.sum===9?'○':'●') : '') + '</span>';
+    html += '</div>';
+  }
+  disp.innerHTML = html;
+}
+
+function updateThrowHistory(results, sum, yang, moving) {
+  var hist = document.getElementById('throw-history');
+  var lineNum = castLines.length;
+  var typeStr, typeClass;
+  if (sum===9) { typeStr='9 · Old Yang (○) → moving'; typeClass='old-yang'; }
+  else if (sum===7) { typeStr='7 · Young Yang ⚊'; typeClass='young-yang'; }
+  else if (sum===8) { typeStr='8 · Young Yin ⚋'; typeClass='young-yin'; }
+  else { typeStr='6 · Old Yin (●) → moving'; typeClass='old-yin'; }
+
+  var div = document.createElement('div');
+  div.className = 'throw-row';
+  var coinsHtml = results.map(function(r){
+    return '<div class="throw-coin-sm '+(r===3?'heads':'tails')+'">'+(r===3?'☀':'☽')+'</div>';
+  }).join('');
+  div.innerHTML = '<span style="font-family:var(--mono);font-size:9px;color:var(--text3);min-width:16px;">'+lineNum+'</span>'
+    + '<div class="throw-coins">' + coinsHtml + '</div>'
+    + '<span class="throw-sum">' + sum + '</span>'
+    + '<span class="throw-line-type ' + typeClass + '">' + typeStr + '</span>';
+  hist.appendChild(div);
+}
+
+function finalizeCast() {
+  document.getElementById('cast-btn').textContent = 'View Reading →';
+  document.getElementById('cast-btn').onclick = function() { navigate('reading'); };
+  document.getElementById('throw-label').textContent = 'Complete · 6 lines cast';
+
+  var lines6 = castLines.map(function(l){return l.yang?1:0;});
+  var primaryNum = hexNumFromLines(lines6);
+
+  var hasMoving = castLines.some(function(l){return l.moving;});
+  var relatingNum = null;
+  if (hasMoving) {
+    var altLines = castLines.map(function(l){return l.moving ? (l.yang?0:1) : (l.yang?1:0);});
+    relatingNum = hexNumFromLines(altLines);
+  }
+
+  currentCast = {
+    primary: hexByNum(primaryNum),
+    relating: relatingNum ? hexByNum(relatingNum) : null,
+    movingLines: castLines.map(function(l,i){return l.moving ? (i+1) : null;}).filter(Boolean),
+    question: document.getElementById('question-input').value.trim()
+  };
+
+  buildReading();
+  updateHomeWithResult();
+}
+
+function buildReading() {
+  var c = currentCast;
+  if (!c) return;
+
+  var html = '';
+
+  /* Hex hero */
+  html += '<div class="hex-hero">';
+  html += '<div class="hh-num">Hexagram ' + c.primary.n + '</div>';
+  html += '<div class="hh-glyph">' + c.primary.glyph + '</div>';
+  html += '<div class="hh-name">' + c.primary.name + '</div>';
+  html += '<div class="hh-chin">' + c.primary.chin + '</div>';
+  html += '<div class="hh-tags">';
+  html += '<span class="hh-tag trig">' + c.primary.upper + ' / ' + c.primary.lower + '</span>';
+  html += '<span class="hh-tag attr">' + c.primary.attr + '</span>';
+  html += '</div>';
+  html += '<div class="hh-judgment">' + c.primary.judgment + '</div>';
+  html += '</div>';
+
+  if (c.question) {
+    html += '<div class="info-box" style="margin-bottom:20px;">';
+    html += '<strong>Question:</strong> ' + escHtml(c.question);
+    html += '</div>';
+  }
+
+  /* Image */
+  html += '<div class="reading-section">';
+  html += '<div class="rs-label">The Image</div>';
+  html += '<div class="rs-body">' + escHtml(c.primary.image) + '</div>';
+  html += '</div>';
+
+  /* Commentary */
+  html += '<div class="reading-section">';
+  html += '<div class="rs-label">Commentary</div>';
+  html += '<div class="rs-body" style="background:var(--bg3);border-radius:var(--r-md);padding:14px 16px;">' + escHtml(c.primary.commentary) + '</div>';
+  html += '</div>';
+
+  /* Moving lines */
+  if (c.movingLines.length > 0) {
+    html += '<div class="changing-section">';
+    html += '<div class="chg-hdr">Moving Lines</div>';
+    c.movingLines.forEach(function(ln) {
+      var ldata = castLines[ln-1];
+      var lineType = ldata.sum === 9 ? 'Old Yang — changing to Yin' : 'Old Yin — changing to Yang';
+      html += '<div class="chg-line">';
+      html += '<div class="chg-line-num">Line ' + ln + ' · ' + lineType + '</div>';
+      html += '<div class="chg-line-text">The oracle speaks through this line. Attend to position ' + ln + ' in your situation — it is in transformation. What must be released, and what is emerging in its place?</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  /* Relating hexagram */
+  if (c.relating) {
+    html += '<div class="rel-hex">';
+    html += '<div class="rel-glyph">' + c.relating.glyph + '</div>';
+    html += '<div class="rel-info">';
+    html += '<div class="rel-label">Relating Hexagram · ' + c.relating.n + '</div>';
+    html += '<div class="rel-name">' + c.relating.name + '</div>';
+    html += '<div class="rel-body">' + escHtml(c.relating.attr) + ' — ' + escHtml(c.relating.judgment.substring(0,80)) + '…</div>';
+    html += '</div></div>';
+  }
+
+
+
+  /* New cast */
+  html += '<button class="new-cast-btn" onclick="resetAndCast()">← New Cast</button>';
+
+  var wrap = document.createElement('div');
+  wrap.className = 'reading-wrap';
+  wrap.id = 'reading-content';
+  wrap.innerHTML = html;
+
+  document.getElementById('screen-reading').innerHTML = '';
+  document.getElementById('screen-reading').appendChild(wrap);
+
+
+}
+
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function updateHomeWithResult() {
+  var c = currentCast;
+  if (!c) return;
+  document.getElementById('home-intro').style.display = 'none';
+  var last = document.getElementById('home-last-hex');
+  last.style.display = 'block';
+  document.getElementById('home-hex-glyph').textContent = c.primary.glyph;
+  document.getElementById('home-hex-name').textContent = c.primary.name;
+  document.getElementById('home-hex-sub').textContent = c.primary.chin + ' · #' + c.primary.n;
+  document.getElementById('home-reading-badge').textContent = 'Ready';
+}
+
+function resetCast() {
+  castLines = [];
+  document.getElementById('throw-label').textContent = 'Line 1 · First throw';
+  document.getElementById('cast-btn').textContent = 'Throw Coins — Line 1';
+  document.getElementById('cast-btn').onclick = throwCoins;
+  document.getElementById('throw-history').innerHTML = '';
+  document.getElementById('lines-section').style.display = 'none';
+  for (var i = 0; i < 3; i++) {
+    var c = document.getElementById('coin'+i);
+    c.classList.remove('yang','yin','flipping');
+    c.textContent = '☰';
+  }
+  updateProgressDots();
+}
+
+function resetAndCast() {
+  resetCast();
+  navigate('cast');
+}
+
+/* ════════════════════════════════════════════════════════
+   REFERENCE
+════════════════════════════════════════════════════════ */
+function buildRef() {
+  var grid = document.getElementById('ref-grid');
+  grid.innerHTML = HEXAGRAMS.map(function(h) {
+    return '<div class="ref-card" onclick="openModal('+h.n+')">'
+      + '<div class="ref-card-glyph">'+h.glyph+'</div>'
+      + '<div class="ref-card-info">'
+      + '<div class="ref-card-num">#'+h.n+'</div>'
+      + '<div class="ref-card-name">'+h.name+'</div>'
+      + '<div class="ref-card-chin">'+h.chin+'</div>'
+      + '</div></div>';
+  }).join('');
+}
+
+function filterRef(q) {
+  q = q.toLowerCase();
+  var cards = document.querySelectorAll('#ref-grid .ref-card');
+  HEXAGRAMS.forEach(function(h, i) {
+    var match = !q || String(h.n).includes(q) || h.name.toLowerCase().includes(q) || h.chin.toLowerCase().includes(q);
+    cards[i].style.display = match ? '' : 'none';
+  });
+}
+
+function openModal(n) {
+  var h = hexByNum(n);
+  document.getElementById('m-glyph').textContent = h.glyph;
+  document.getElementById('m-num').textContent = 'Hexagram ' + h.n;
+  document.getElementById('m-name').textContent = h.name;
+  document.getElementById('m-chin').textContent = h.chin;
+  document.getElementById('m-judgment').textContent = h.judgment;
+  document.getElementById('m-trigs').textContent = 'Upper: ' + h.upper + ' · Lower: ' + h.lower;
+  document.getElementById('m-image').textContent = h.image;
+  document.getElementById('m-commentary').textContent = h.commentary;
+  document.getElementById('ref-modal').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('ref-modal')) {
+    document.getElementById('ref-modal').classList.remove('open');
+  }
+}
+
+function showAbout() { document.getElementById('about-modal').classList.add('open'); }
+function closeAbout(e) {
+  if (e.target === document.getElementById('about-modal')) {
+    document.getElementById('about-modal').classList.remove('open');
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════════════════════ */
+function navigate(screen) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.nav-btn').forEach(function(b){ b.classList.remove('active'); });
+  var sc = document.getElementById('screen-' + screen);
+  if (sc) sc.classList.add('active');
+  var nb = document.getElementById('nav-' + screen);
+  if (nb) nb.classList.add('active');
+  document.getElementById('content').scrollTop = 0;
+}
+
+/* ════════════════════════════════════════════════════════
+   CLOCK & GREETING
+════════════════════════════════════════════════════════ */
+function initClock() {
+  var now = new Date();
+  var h = now.getHours(), m = now.getMinutes();
+  var pad = function(n){ return n < 10 ? '0'+n : ''+n; };
+  document.getElementById('hdr-time').textContent = pad(h) + ':' + pad(m);
+  var period, greeting;
+  if (h >= 4 && h < 12)  { period = 'Morning';   greeting = 'What do you seek?'; }
+  else if (h >= 12 && h < 17) { period = 'Afternoon'; greeting = 'The oracle awaits'; }
+  else if (h >= 17 && h < 21) { period = 'Evening';   greeting = 'Consult the Changes'; }
+  else                     { period = 'Night';     greeting = 'Still your mind'; }
+  document.getElementById('greeting-period').textContent = period;
+  document.getElementById('greeting-text').textContent = greeting;
+}
+initClock();
+setInterval(initClock, 60000);
+
+/* ════════════════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════════════ */
+buildRef();
+</script>
+</body>
+</html>

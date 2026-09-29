@@ -336,21 +336,23 @@ python update_books_navigator_from_csv.py path/to/books.csv path/to/target.html
 
 **File:** `iching_oracle.html`
 
-A polished mobile-first app for consulting the classical Chinese divination text using the traditional three-coin method. All 64 hexagrams and their full textual content are embedded — no internet connection required for casting or reading.
+A copper-and-black illustrated reader for consulting the I Ching using the traditional three-coin method. All 64 hexagram records and 64 individually generated, context-matched illustrations are embedded — no internet connection required.
 
-**Key sections (four screens via bottom navigation):**
+**Key sections (desktop header navigation and mobile bottom navigation):**
 
-- **Home:** Time-aware greeting, a hero banner showing the last reading (hexagram glyph, name, subtitle) or an intro prompt, and module cards linking to Cast, Reading, and Reference.
+- **Home:** Illustrated welcome card with Cast and Explore actions, plus a link to the latest reading during the session. Tap the brand to return home.
 - **Cast:** The active casting interface. Enter a question, then throw three animated coins six times — each throw appends a line to the forming hexagram (displayed in real time from bottom up). Coins display ☀ (yang, value 3) or ☽ (yin, value 2). Sums of 6 (Old Yin) or 9 (Old Yang) are flagged as moving lines.
-- **Reading:** Full textual reading after casting — Primary hexagram with Judgment, Image, and moving-line commentary; Relating hexagram (derived by transforming all moving lines) when applicable.
-- **Reference (All 64):** Searchable grid of all 64 hexagrams by name or number. Tapping any hexagram opens a detail sheet with glyph, number, Chinese name + pinyin, upper/lower trigram names and attributes, Judgment, Image, and Commentary.
+- **Reading:** Illustrated primary hexagram with Judgment, Image, and commentary; clearly labeled general moving-line reflection prompts; and a linked relating hexagram when applicable.
+- **Reference (All 64):** One illustrated reading card at a time, with previous/next controls, arrow keys, horizontal swipes, and a picker searchable by number, name, Chinese, or trigram. Long passages scroll within the card.
 
 **Key features:**
 - Coin-flip animation on each of the six throws
-- Moving lines highlighted in the reading with specific counsel
+- Changing lines distinguished by symbols and color, with general reflection prompts
 - Full 64-hexagram reference database embedded in JS
 - "Coin Oracle Method" modal explaining preparation, line values (6/7/8/9), and how to interpret the result
-- Last reading persists on the Home hero banner
+- Latest reading remains accessible during the session
+
+Artwork prompts, contextual assignments, and design notes: [I Ching copper edition](docs/iching-artwork.md). Original page: [archived before the redesign](archive/iching_oracle.pre-copper-2026-09-28.html). Browser checks: `tests/iching_oracle.cjs`.
 
 **How to use:** Open `iching_oracle.html` in any browser. On iPhone: Safari → Share → Add to Home Screen → launches as **I Ching Oracle**.
 
@@ -423,7 +425,7 @@ The `apple-touch-icon` is inlined as an SVG data URI — no separate image file 
 | Yoga Sudhakara | Deep teal with white ॐ | Yoga Sudhakara |
 | Marginalia | Navy-to-steel-blue gradient with ✏️ | Marginalia |
 | Recipes | Dark green radial gradient with 🍃 | Recipes |
-| I Ching Oracle | No icon defined (uses Safari default) | I Ching Oracle |
+| I Ching Oracle | Copper 易 glyph on black | I Ching Oracle |
 
 ---
 
