@@ -47,6 +47,7 @@ const {chromium}=require('playwright');
   await page.locator('#cast-btn').click();assert.equal(await page.locator('.moving-card').count(),0);assert.equal(await page.locator('.related-card').count(),0);
   for(const width of [320,390,768,1440]){
    await page.setViewportSize({width,height:width>800?950:844});
+   await page.waitForFunction(()=>Math.abs($('app').getBoundingClientRect().height-innerHeight)<1);
    for(const screen of ['home','cast','reading','ref']){
     await page.evaluate(screen=>navigate(screen),screen);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${screen} fits ${width}px`);
@@ -74,6 +75,26 @@ const {chromium}=require('playwright');
   assert.equal(await page.evaluate(()=>referenceNumber),2);
   await swipe([200,350],[180,180]);
   assert.equal(await page.evaluate(()=>referenceNumber),2);
+  // Simulate a stale viewport-unit measurement after mobile app resume.
+  const staleViewport=await page.addStyleTag({content:'#app{height:var(--app-height,calc(100dvh - 80px))}'});
+  await page.evaluate(()=>{document.documentElement.style.removeProperty('--app-height');});
+  await page.waitForFunction(()=>$('app').getBoundingClientRect().height===innerHeight-80);
+  await page.evaluate(()=>window.dispatchEvent(new Event('pageshow')));
+  await page.waitForFunction(()=>Math.abs($('app').getBoundingClientRect().height-innerHeight)<1);
+  await staleViewport.evaluate(el=>el.remove());
+  const safeArea=await page.addStyleTag({content:':root{--safe-b:34px}#app{padding-top:47px}'});
+  for(const screen of ['home','ref']){
+   await page.evaluate(screen=>navigate(screen),screen);
+   const gap=await page.locator(screen==='home'?'.intro-card':'#ref-card').evaluate(el=>innerHeight-el.getBoundingClientRect().bottom);
+   assert(gap>=34&&gap<=40,`${screen} uses the screen down to the simulated home-indicator safe area`);
+  }
+  await safeArea.evaluate(el=>el.remove());
+  // A shorter viewport (browser chrome or keyboard) must keep casting actions reachable.
+  await page.setViewportSize({width:390,height:480});
+  await page.waitForFunction(()=>Math.abs($('app').getBoundingClientRect().height-480)<1);
+  await page.evaluate(()=>navigate('cast'));
+  const action=await page.locator('#cast-btn').boundingBox();
+  assert(action.y>=0&&action.y+action.height<=480,'Casting controls fit the reduced viewport');
   assert.deepEqual(errors,[]);assert.deepEqual(remote,[],'Entire app works without network requests');
   console.log('Passed: preserved texts, 64 unique decodable artworks, all trigram mappings, changing/unchanging casts, escaped questions, search, dialogs, keyboard/swipe navigation, home-based navigation, full-height cards at four viewport sizes, offline operation.');
  }finally{await browser.close();}
