@@ -145,9 +145,25 @@ const { chromium } = require('playwright');
     await page.click('#next');
     assert.equal(await page.locator('#currentNo').textContent(), '01');
     await page.click('#browse');
+    assert(await page.locator('#modalTitle').evaluate(title => document.activeElement === title), 'Opening focuses the chooser heading, not the search input');
+    assert.equal(await page.locator('.chapter-choice:not(.hidden)').count(), 81);
+    for (const [width, height] of [[320, 568], [390, 844]]) {
+      await page.setViewportSize({ width, height });
+      const allFit = await page.locator('.chapter-grid').evaluate(grid => {
+        const rect = grid.getBoundingClientRect();
+        return rect.left >= 0 && rect.right <= innerWidth && rect.bottom <= innerHeight;
+      });
+      assert(allFit, 'Full chapter grid fits phone viewport');
+    }
+    await page.click('#chapterSearch');
+    assert(await page.locator('#chapterSearch').evaluate(input => document.activeElement === input), 'Search activates when tapped');
     await page.fill('#chapterSearch', '38');
     await page.click('[data-number="38"]');
     assert.equal(await page.locator('#currentNo').textContent(), '38');
+    await page.click('#browse');
+    assert.equal(await page.locator('#chapterSearch').inputValue(), '');
+    assert.equal(await page.locator('.chapter-choice:not(.hidden)').count(), 81, 'Reopening clears the previous search');
+    await page.click('#closeModal');
     await page.locator('.front .reading').evaluate(reading => { reading.scrollTop = reading.scrollHeight; });
     await page.waitForFunction(() => document.querySelector('.front .scroll-cue').hidden);
     await page.setViewportSize({ width: 320, height: 568 });
