@@ -52,6 +52,10 @@ const {chromium}=require('playwright');
     await page.evaluate(screen=>navigate(screen),screen);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${screen} fits ${width}px`);
     assert(await page.evaluate(()=>$('content').scrollWidth<=$('content').clientWidth+1),`${screen} content fits ${width}px`);
+    await page.evaluate(()=>{ $('content').scrollTop=$('content').scrollHeight; $('screen-home').scrollTop=$('screen-home').scrollHeight; });
+    const bottomTarget={home:'.intro-card',cast:'.cast-actions',reading:'.new-cast',ref:'.deck-tools'}[screen];
+    const clearance=await page.locator(bottomTarget).evaluate(el=>innerHeight-el.getBoundingClientRect().bottom);
+    assert(clearance>=4,`${screen} has at least 4px bottom clearance at ${width}px (got ${clearance})`);
     if(screen==='cast'){const box=await page.locator('#cast-btn').boundingBox();assert(box.y>=0&&box.y+box.height<=(width>800?950:844),`Casting action stays visible at ${width}`);}
    }
    await page.locator('.brand').click();
@@ -60,7 +64,7 @@ const {chromium}=require('playwright');
    const card=await page.locator('#ref-card').boundingBox();
    const controls=await page.locator('.deck-tools').boundingBox();
    assert(controls.y>=card.y+card.height-1,`Library controls sit beneath the card at ${width}`);
-   assert(Math.abs((width>800?950:844)-(controls.y+controls.height))<=8,`Library footer reaches the bottom at ${width}`);
+   assert(Math.abs((width>800?950:844)-(controls.y+controls.height))<=14,`Library footer reaches the bottom at ${width}`);
    const content=await page.locator('#content').boundingBox();
    assert(card.y-content.y<=14,`Card uses the former heading space at ${width}`);
    await page.evaluate(()=>showReference(43));
@@ -88,7 +92,7 @@ const {chromium}=require('playwright');
    await page.setViewportSize({width:402,height});
    await page.evaluate(()=>navigate('home'));
    const gap=await page.locator('.intro-card').evaluate(el=>innerHeight-el.getBoundingClientRect().bottom);
-   assert(gap>=0&&gap<=12,`Welcome card fills the ${height}px safe viewport`);
+   assert(gap>=4&&gap<=18,`Welcome card fills the ${height}px safe viewport`);
    await page.evaluate(()=>navigate('cast'));
    assert(await page.locator('.cast-layout').evaluate(el=>el.scrollHeight<=el.clientHeight+1),`Casting needs no scrolling at 402 × ${height}`);
    const lastLine=await page.locator('.line-row').first().boundingBox();
@@ -100,7 +104,7 @@ const {chromium}=require('playwright');
   await page.waitForFunction(()=>Math.abs($('app').getBoundingClientRect().height-480)<1);
   await page.evaluate(()=>navigate('cast'));
   const action=await page.locator('#cast-btn').boundingBox();
-  assert(action.y>=0&&action.y+action.height<=480,'Casting controls fit the reduced viewport');
+  assert(action.y>=0&&action.y+action.height<=476,'Casting controls retain 4px clearance in the reduced viewport');
   assert.deepEqual(errors,[]);assert.deepEqual(remote,[],'Entire app works without network requests');
   console.log('Passed: preserved texts, 64 unique decodable artworks, all trigram mappings, changing/unchanging casts, escaped questions, search, dialogs, keyboard/swipe navigation, home-based navigation, full-height cards at four viewport sizes, offline operation.');
  }finally{await browser.close();}
