@@ -58,7 +58,11 @@ const {chromium}=require('playwright');
    for(const id of ['home-cast','home-ref','home-reading']){assert(await page.locator('#'+id).isVisible());}
    await page.locator('#home-ref').click();
    const card=await page.locator('#ref-card').boundingBox();
-   assert(Math.abs((width>800?950:844)-(card.y+card.height))<=14,`Card extends to the bottom at ${width}`);
+   const controls=await page.locator('.deck-tools').boundingBox();
+   assert(controls.y>=card.y+card.height-1,`Library controls sit beneath the card at ${width}`);
+   assert(Math.abs((width>800?950:844)-(controls.y+controls.height))<=8,`Library footer reaches the bottom at ${width}`);
+   const content=await page.locator('#content').boundingBox();
+   assert(card.y-content.y<=14,`Card uses the former heading space at ${width}`);
    await page.evaluate(()=>showReference(43));
    await page.locator('#ref-card .card-copy').evaluate(el=>{el.scrollTop=el.scrollHeight;});
    await page.waitForTimeout(50);
@@ -75,20 +79,22 @@ const {chromium}=require('playwright');
   assert.equal(await page.evaluate(()=>referenceNumber),2);
   await swipe([200,350],[180,180]);
   assert.equal(await page.evaluate(()=>referenceNumber),2);
-  // Simulate a stale viewport-unit measurement after mobile app resume.
-  const staleViewport=await page.addStyleTag({content:'#app{height:var(--app-height,calc(100dvh - 80px))}'});
-  await page.evaluate(()=>{document.documentElement.style.removeProperty('--app-height');});
-  await page.waitForFunction(()=>$('app').getBoundingClientRect().height===innerHeight-80);
-  await page.evaluate(()=>window.dispatchEvent(new Event('pageshow')));
-  await page.waitForFunction(()=>Math.abs($('app').getBoundingClientRect().height-innerHeight)<1);
-  await staleViewport.evaluate(el=>el.remove());
-  const safeArea=await page.addStyleTag({content:':root{--safe-b:34px}#app{padding-top:47px}'});
-  for(const screen of ['home','ref']){
-   await page.evaluate(screen=>navigate(screen),screen);
-   const gap=await page.locator(screen==='home'?'.intro-card':'#ref-card').evaluate(el=>innerHeight-el.getBoundingClientRect().bottom);
-   assert(gap>=34&&gap<=40,`${screen} uses the screen down to the simulated home-indicator safe area`);
+  // Use the same browser-managed safe viewport as the working Tao reader.
+  const tao=fs.readFileSync('tao_te_ching.html','utf8');
+  const taoViewport=tao.match(/<meta name="viewport" content="([^"]+)"/)[1];
+  assert.equal(await page.locator('meta[name=viewport]').getAttribute('content'),taoViewport);
+  // Model the available page area after the OS has reserved status/home-indicator space.
+  for(const height of [780,812,874]){
+   await page.setViewportSize({width:402,height});
+   await page.evaluate(()=>navigate('home'));
+   const gap=await page.locator('.intro-card').evaluate(el=>innerHeight-el.getBoundingClientRect().bottom);
+   assert(gap>=0&&gap<=12,`Welcome card fills the ${height}px safe viewport`);
+   await page.evaluate(()=>navigate('cast'));
+   assert(await page.locator('.cast-layout').evaluate(el=>el.scrollHeight<=el.clientHeight+1),`Casting needs no scrolling at 402 × ${height}`);
+   const lastLine=await page.locator('.line-row').first().boundingBox();
+   const castButton=await page.locator('#cast-btn').boundingBox();
+   assert(lastLine.y+lastLine.height<=castButton.y,'All six lines appear above the cast button');
   }
-  await safeArea.evaluate(el=>el.remove());
   // A shorter viewport (browser chrome or keyboard) must keep casting actions reachable.
   await page.setViewportSize({width:390,height:480});
   await page.waitForFunction(()=>Math.abs($('app').getBoundingClientRect().height-480)<1);
