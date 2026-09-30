@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kena Upaniṣad">
+<meta name="theme-color" content="#050608">
+<title>Kena Upaniṣad · केनोपनिषद्</title>
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23050b16'/%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%230d1c33'/%3E%3Cstop offset='100%25' stop-color='%23050608'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ctext x='90' y='128' font-family='serif' font-size='108' text-anchor='middle' fill='%233983ff' opacity='0.9'%3Eकेन%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --bg:      #050608;
+  --bg2:     #090e17;
+  --bg3:     #0d1726;
+  --bg4:     #111e32;
+  --bg5:     #172941;
+  --border:  rgba(57,131,255,0.25);
+  --border2: rgba(57,131,255,0.55);
+  --text:    #e0eaff;
+  --text2:   #b7c8e4;
+  --text3:   #8da6cc;
+  --gold:    #3983ff;
+  --gold2:   #8bbaff;
+  --teal:    #3983ff;
+  --teal2:   #8bbaff;
+  --purple:  #3983ff;
+  --purple2: #8bbaff;
+  --coral:   #3983ff;
+  --amber:   #3983ff;
+  --amber2:  #8bbaff;
+  --safe-b:  env(safe-area-inset-bottom, 0px);
+  --safe-t:  env(safe-area-inset-top, 0px);
+  --sans:    'Nunito', system-ui, sans-serif;
+  --devanagari: 'Tiro Devanagari Sanskrit', serif;
+  --serif:   'Playfair Display', Georgia, serif;
+  --mono:    'DM Mono', monospace;
+  --nav-h:   64px;
+  --r-sm:    8px;
+  --r-md:    12px;
+  --r-lg:    16px;
+}
+
+/* ─── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; background: var(--bg); }
+body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; font-size: 15px; line-height: 1.6; }
+
+/* ─── APP SHELL ──────────────────────────────────────────── */
+#app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+.status-bar { height: var(--safe-t); background: var(--bg); flex-shrink: 0; }
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+.app-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.app-header-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; white-space: nowrap; opacity: 0.5; flex: 1; }
+.app-header-logo { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--purple2); letter-spacing: 0.02em; white-space: nowrap; flex-shrink: 0; padding-left: 1.5ch; }
+.app-header-time { font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--text2); white-space: nowrap; flex: 1; text-align: right; }
+
+/* ─── CONTENT AREA ───────────────────────────────────────── */
+#content { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
+.screen { display: none; min-height: 100%; }
+.screen.active { display: block; }
+
+/* ─── BOTTOM NAV ─────────────────────────────────────────── */
+.bottom-nav { flex-shrink: 0; display: flex; background: var(--bg2); border-top: 1px solid var(--border2); padding-bottom: var(--safe-b); }
+.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 9px 4px; border: none; background: transparent; cursor: pointer; transition: opacity 0.15s; }
+.nav-btn:active { opacity: 0.55; }
+.nav-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+.nav-icon svg { width: 20px; height: 20px; }
+.nav-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); transition: color 0.15s; }
+.nav-btn.active .nav-label { color: var(--purple); }
+.nav-btn.active .nav-icon svg { stroke: var(--purple); }
+.nav-btn:not(.active) .nav-icon svg { stroke: var(--text3); }
+
+/* ─── SHARED COMPONENTS ──────────────────────────────────── */
+.section-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; color: var(--text3); text-transform: uppercase; margin-bottom: 12px; }
+.screen-header { margin-bottom: 20px; }
+.screen-header h2 { font-family: var(--serif); font-size: 24px; font-weight: 500; color: var(--purple2); margin-bottom: 4px; }
+.screen-header p { font-size: 13px; color: var(--text3); font-style: italic; }
+
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); }
+.card-tap { cursor: pointer; transition: background 0.15s; }
+.card-tap:active { background: var(--bg3); }
+
+/* Expandable card */
+.x-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px; overflow: hidden; }
+.x-hdr { display: flex; align-items: center; gap: 10px; padding: 15px 16px; cursor: pointer; transition: background 0.15s; }
+.x-hdr:active { background: var(--bg3); }
+.x-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
+.x-body { display: none; padding: 16px 18px 20px; }
+.x-body.open { display: block; }
+
+/* Info box */
+.info-box { background: var(--bg3); border-radius: var(--r-sm); padding: 12px 14px; font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 14px; }
+.info-box strong { color: var(--purple2); font-weight: 600; }
+.info-box em { color: var(--gold2); font-style: normal; }
+
+/* Verse */
+.v-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase; margin-bottom: 10px; }
+.v-sanskrit { font-family: var(--devanagari); font-size: 18px; line-height: 2.1; color: var(--purple2); border-left: 2px solid var(--purple); padding-left: 14px; margin-bottom: 10px; }
+.v-translit { font-family: var(--mono); font-size: 11px; color: var(--text2); line-height: 1.9; padding-left: 16px; margin-bottom: 14px; }
+
+/* WBW table */
+.wbw-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase; margin-bottom: 8px; }
+.wbw { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+.wbw th { font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; color: var(--text3); text-transform: uppercase; text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--border); }
+.wbw td { padding: 7px 8px; vertical-align: top; border-bottom: 1px solid var(--border); line-height: 1.45; font-size: 13px; }
+.wbw tr:last-child td { border-bottom: none; }
+.wbw td:first-child { font-family: var(--devanagari); color: var(--purple); font-size: 16px; }
+.wbw td.lat { font-family: var(--serif); font-style: italic; font-size: 14px; }
+.wbw td:nth-child(2) { font-family: var(--mono); font-size: 10px; color: var(--text2); }
+.wbw td:nth-child(3) { color: var(--text2); }
+
+/* Translation */
+.transl { background: var(--bg4); border-left: 2px solid var(--teal); border-radius: 0 6px 6px 0; padding: 11px 14px; margin-bottom: 14px; font-size: 13px; color: var(--text2); line-height: 1.7; font-style: italic; }
+.transl strong { color: var(--teal2); font-style: normal; font-weight: 600; }
+.signif { font-size: 13px; color: var(--text3); line-height: 1.7; padding-left: 10px; border-left: 1px solid var(--border); margin-top: 4px; }
+
+/* Commentary note */
+.w-note { border: 1px solid rgba(57,131,255,0.25); background: rgba(57,131,255,0.06); border-radius: var(--r-md); padding: 14px 16px; font-size: 13px; color: var(--purple2); line-height: 1.7; font-style: italic; text-align: center; margin-top: 14px; }
+
+/* Divider */
+.divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+/* Mantra card */
+.mantra-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px; overflow: hidden; }
+.mantra-hdr { display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer; transition: background 0.15s; }
+.mantra-hdr:active { background: var(--bg3); }
+.mantra-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
+.mantra-badge { font-family: var(--mono); font-size: 8px; color: var(--purple); background: rgba(57,131,255,0.12); padding: 3px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.mantra-title { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.3; }
+.mantra-arr { color: var(--text3); font-size: 12px; transition: transform 0.25s; flex-shrink: 0; }
+.mantra-hdr.open .mantra-arr { transform: rotate(90deg); }
+.mantra-body { display: none; padding: 16px 18px 20px; }
+.mantra-body.open { display: block; }
+.m-sanskrit { font-family: var(--devanagari); font-size: 17px; line-height: 2.1; color: var(--purple2); border-left: 2px solid var(--purple); padding-left: 14px; margin-bottom: 10px; }
+.m-translit { font-family: var(--mono); font-size: 11px; color: var(--text2); line-height: 1.9; padding-left: 16px; margin-bottom: 12px; }
+.m-english { background: var(--bg4); border-left: 2px solid var(--teal); border-radius: 0 6px 6px 0; padding: 11px 14px; margin-bottom: 12px; font-size: 13px; color: var(--text2); line-height: 1.75; }
+.m-insight { font-size: 13px; color: var(--text3); line-height: 1.7; padding-left: 10px; border-left: 1px solid var(--border); margin-top: 4px; }
+.m-commentary { background: var(--bg3); border-radius: var(--r-sm); padding: 12px 14px; font-size: 13px; color: var(--text2); line-height: 1.75; margin-bottom: 12px; border-left: 2px solid var(--amber); }
+.m-commentary strong { color: var(--amber2); }
+.m-shankara { background: var(--bg3); border-radius: var(--r-sm); padding: 12px 14px; font-size: 13px; color: var(--text2); line-height: 1.75; margin-bottom: 12px; border-left: 2px solid var(--purple); }
+.m-shankara strong { color: var(--purple2); }
+
+/* Mahavakya hero */
+.mv-hero {
+  background: var(--bg3);
+  border: 1px solid rgba(57,131,255,0.2);
+  border-radius: var(--r-lg);
+  padding: 18px 18px 16px;
+  margin-bottom: 18px;
+}
+.mv-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.14em; color: var(--purple); text-transform: uppercase; margin-bottom: 10px; }
+.mv-sanskrit { font-family: var(--devanagari); font-size: 18px; line-height: 2.0; color: var(--purple2); margin-bottom: 10px; }
+.mv-english { font-size: 13px; color: var(--text2); line-height: 1.75; font-style: italic; }
+
+/* Tabs */
+.wit-tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+.wit-tab { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+.wit-tab.active { color: var(--purple); border-color: rgba(57,131,255,0.4); background: rgba(57,131,255,0.08); }
+.wit-section { display: none; }
+.wit-section.active { display: block; }
+
+/* Khanda (section) tabs */
+.ch-tabs { display: flex; gap: 6px; margin-bottom: 18px; overflow-x: auto; padding-bottom: 2px; }
+.ch-tab { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 7px 13px; cursor: pointer; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
+.ch-tab.active { color: var(--purple); border-color: rgba(57,131,255,0.4); background: rgba(57,131,255,0.08); }
+.ch-section { display: none; }
+.ch-section.active { display: block; }
+
+/* Khanda phase badge */
+.ch-phase { font-family: var(--mono); font-size: 9px; color: var(--purple); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; padding: 6px 12px; background: rgba(57,131,255,0.08); border-radius: var(--r-sm); border: 1px solid rgba(57,131,255,0.2); display: inline-block; }
+
+/* Class item */
+.class-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px; overflow: hidden; }
+.class-hdr { display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer; transition: background 0.15s; }
+.class-hdr:active { background: var(--bg3); }
+.class-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
+.class-num { font-family: var(--mono); font-size: 9px; color: var(--text3); min-width: 28px; }
+.class-name { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.3; }
+.class-sutras { font-family: var(--mono); font-size: 9px; color: var(--purple); background: rgba(57,131,255,0.10); padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.class-arr { color: var(--text3); font-size: 12px; transition: transform 0.25s; flex-shrink: 0; }
+.class-hdr.open .class-arr { transform: rotate(90deg); }
+.class-body { display: none; padding: 16px 18px 20px; }
+.class-body.open { display: block; }
+
+/* Progress bar */
+.prob-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.prob-label { font-family: var(--mono); font-size: 9px; color: var(--text3); min-width: 110px; letter-spacing: 0.04em; }
+.prob-track { flex: 1; height: 4px; background: var(--bg4); border-radius: 2px; overflow: hidden; }
+.prob-fill { height: 100%; border-radius: 2px; }
+.prob-val { font-family: var(--mono); font-size: 9px; color: var(--text3); min-width: 42px; text-align: right; }
+
+/* Home screen */
+.home-wrap { padding: 24px 18px 24px; }
+.home-greeting { margin-bottom: 24px; }
+.home-greeting-time { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--text3); text-transform: uppercase; margin-bottom: 5px; }
+.home-greeting-text { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--purple2); line-height: 1.2; }
+
+.course-banner { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r-lg); padding: 14px 16px; margin-bottom: 22px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.course-banner:active { opacity: 0.75; }
+.course-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; background: var(--purple); animation: pulse 2.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
+.course-banner-text { flex: 1; }
+.course-banner-label { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.course-banner-name { font-size: 15px; font-weight: 500; color: var(--text); }
+.course-banner-arrow { color: var(--text3); font-size: 16px; }
+
+.module-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+.module-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px 14px 14px; cursor: pointer; transition: background 0.15s, border-color 0.15s; min-height: 105px; display: flex; flex-direction: column; justify-content: space-between; }
+.module-card:active { background: var(--bg3); border-color: var(--border2); }
+.module-icon { font-size: 20px; margin-bottom: 8px; line-height: 1; }
+.module-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.module-desc { font-family: var(--mono); font-size: 9px; color: var(--text3); letter-spacing: 0.05em; }
+.module-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; align-self: flex-start; }
+.badge-purple { background: rgba(57,131,255,0.12); color: var(--purple2); }
+.badge-teal { background: rgba(57,131,255,0.12); color: var(--teal); }
+.badge-amber { background: rgba(57,131,255,0.12); color: var(--amber2); }
+.badge-coral { background: rgba(57,131,255,0.12); color: var(--coral); }
+.badge-gold { background: rgba(57,131,255,0.12); color: var(--gold2); }
+
+/* Wrap padding */
+.wit-wrap { padding: 20px 18px 32px; }
+
+/* Lineage card */
+.lineage-card { background: var(--bg3); border: 1px solid rgba(57,131,255,0.15); border-radius: var(--r-lg); padding: 16px 18px; margin-bottom: 16px; }
+.lineage-card h3 { font-family: var(--serif); font-size: 17px; color: var(--purple2); margin-bottom: 6px; }
+.lineage-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* Stats row */
+.stats-row { display: flex; gap: 8px; margin-bottom: 18px; }
+.stat-pill { flex: 1; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 8px; text-align: center; }
+.stat-num { font-family: var(--serif); font-size: 22px; color: var(--purple2); font-weight: 400; line-height: 1; }
+.stat-lbl { font-family: var(--mono); font-size: 8px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
+
+/* Reference item */
+.ref-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); margin-bottom: 8px; overflow: hidden; }
+.ref-hdr { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; transition: background 0.15s; }
+.ref-hdr:active { background: var(--bg3); }
+.ref-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
+.ref-num { font-family: var(--mono); font-size: 10px; color: var(--text3); min-width: 32px; }
+.ref-text { font-family: var(--devanagari); font-size: 13px; color: var(--text2); flex: 1; line-height: 1.4; }
+.ref-arr { color: var(--text3); font-size: 12px; transition: transform 0.25s; }
+.ref-hdr.open .ref-arr { transform: rotate(90deg); }
+.ref-body { display: none; padding: 12px 14px 14px; }
+.ref-body.open { display: block; }
+
+/* Contemplation anchor box */
+.anchor-box { background: linear-gradient(135deg, rgba(57,131,255,0.08), rgba(57,131,255,0.06)); border: 1px solid rgba(57,131,255,0.2); border-radius: var(--r-lg); padding: 16px 18px; margin-top: 14px; }
+.anchor-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.14em; color: var(--purple); text-transform: uppercase; margin-bottom: 8px; }
+.anchor-text { font-family: var(--serif); font-size: 15px; color: var(--text); line-height: 1.7; font-style: italic; }
+
+/* Electric-blue edition: electric blue on black, engraved geometry, open reading space. */
+:root { --r-sm: 2px; --r-md: 3px; --r-lg: 4px; }
+::selection { background: #050b16; color: #94bdff; }
+body { background: var(--bg); }
+#app { max-width: 1440px; margin: auto; border-inline: 1px solid var(--border); }
+.app-header { min-height: 76px; padding-inline: clamp(18px,4vw,60px); border-bottom: 1px solid var(--border2); gap: 16px; }
+.app-header-label { opacity: 1; font-size: 9px; letter-spacing: .13em; white-space: normal; }
+.app-header-logo { padding: 0; font-size: 25px; }
+.app-header-time { font-size: 12px; }
+#content { scrollbar-color: #3983ff #050608; scrollbar-width: thin; }
+.home-wrap, .wit-wrap { max-width: 1120px; margin: auto; padding: 34px clamp(18px,4vw,52px) 40px; }
+.home-greeting { position: relative; border: 1px solid var(--border2); min-height: 360px; padding: clamp(24px,4vw,48px); display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 24px; overflow: hidden; background: linear-gradient(115deg,#0d1c33,#050608 65%); margin-bottom: 20px; }
+.home-greeting::after { content: ''; position: absolute; inset: 8px; border: 1px solid var(--border); pointer-events: none; }
+.home-greeting-time { font-size: 10px; letter-spacing: .18em; margin-bottom: 26px; }
+.home-greeting-text { font-family: var(--devanagari); font-size: clamp(38px,5.5vw,68px); line-height: 1.5; font-weight: 400; }
+.hero-question { font: italic clamp(27px,3.5vw,43px)/1.2 var(--serif); margin: 10px 0 20px; max-width: 420px; }
+.hero-caption { font: 10px/1.8 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.hero-art { color: #3983ff; width: 100%; max-height: 300px; display: block; }
+.course-banner { background: #050b16; color: #82b4ff; border-color: #3983ff; padding: 18px 24px; }
+.course-banner-name, .course-banner-label, .course-banner-arrow { color: #94bdff; }
+.course-banner-label { font-size: 9px; }
+.course-dot { background: #82b4ff; animation: none; }
+.section-label { margin-top: 26px; font-size: 10px; letter-spacing: .18em; }
+.module-grid { gap: 14px; }
+.module-card { position: relative; min-height: 210px; padding: 22px; background: transparent; border-color: var(--border2); transition: background .2s,transform .2s; }
+.module-card:hover { background: #0d1c33; transform: translateY(-3px); }
+.module-icon { color: #3983ff; margin-bottom: 22px; }
+.module-icon svg { display: block; width: 66px; height: 50px; }
+.module-name { font: 25px/1.2 var(--serif); margin-bottom: 8px; }
+.module-desc { font-size: 10px; line-height: 1.7; max-width: 90%; }
+.module-badge { position: absolute; right: 18px; top: 18px; background: transparent; border: 1px solid var(--border2); font-size: 9px; }
+.module-grid:last-child .module-card { min-height: 150px; }
+.module-grid:last-child .module-icon { margin-bottom: 14px; font: 24px var(--serif); }
+.bottom-nav { background: #050608; border-top: 1px solid var(--border2); padding-inline: max(8px,env(safe-area-inset-left)); }
+.nav-btn { min-height: 64px; border-right: 1px solid var(--border); }
+.nav-btn:last-child { border-right: 0; }
+.nav-label { font-size: 10px; }
+.nav-btn.active { background: #0f2342; }
+.nav-btn.active .nav-label { color: #94bdff; }
+.nav-btn.active .nav-icon svg { stroke: #94bdff; }
+.screen-header { padding-bottom: 20px; border-bottom: 1px solid var(--border2); margin-bottom: 24px; }
+.screen-header h2 { font-size: clamp(32px,5vw,48px); }
+.screen-header p { font-size: 14px; }
+.chapter-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.chapter-nav button, .wit-tab { min-height: 44px; padding: 10px 16px; font: 11px var(--mono); color: var(--text); border: 1px solid var(--border2); border-radius: 2px; background: transparent; cursor: pointer; }
+.chapter-nav button[aria-current=true], .wit-tab.active { background: #050b16; color: #94bdff; border-color: #3983ff; }
+.mv-hero { position: relative; padding: clamp(22px,4vw,40px); border: 1px solid var(--border2); background: linear-gradient(120deg,#0f2039,#090e17); }
+.mv-label, .v-label, .wbw-label, .anchor-label { font-size: 10px; }
+.mv-sanskrit { font-size: clamp(23px,3vw,32px); }
+.mv-english { font: italic 18px/1.8 var(--serif); max-width: 760px; }
+.class-item, .mantra-card, .x-card, .ref-item { border-color: var(--border2); margin-bottom: 14px; }
+.class-hdr, .mantra-hdr, .x-hdr, .ref-hdr { min-height: 66px; padding: 18px 22px; }
+.class-name, .mantra-title { font: 19px/1.45 var(--serif); }
+.class-num { font-size: 11px; }
+.class-sutras { border: 1px solid var(--border); font-size: 10px; }
+.class-body, .mantra-body, .x-body, .ref-body { padding: clamp(18px,3vw,32px); }
+.m-sanskrit, .v-sanskrit { font-size: clamp(21px,2.5vw,27px); line-height: 2; padding-left: 22px; margin-bottom: 20px; }
+.m-translit, .v-translit { font-size: 12px; line-height: 2; overflow-wrap: anywhere; }
+.m-english, .transl { font: 18px/1.8 var(--serif); padding: 20px 24px; border-radius: 0; }
+.m-commentary, .m-shankara, .info-box, .lineage-card p { font-size: 15px; line-height: 1.85; }
+.m-insight, .signif { font-size: 14px; }
+.lineage-card { padding: 24px; }
+.lineage-card h3 { font-size: 22px; }
+.anchor-box { border-color: var(--border2); background: transparent; padding: 24px; }
+.anchor-text { font-size: 20px; }
+.wbw { table-layout: fixed; overflow-wrap: anywhere; }
+.wbw th { font-size: 9px; }
+.wbw td { font-size: 14px; }
+.wbw td:nth-child(2) { font-size: 11px; }
+.stat-pill { background: transparent; padding: 16px; border-color: var(--border2); }
+.stat-num { font-size: 32px; }
+.stat-lbl { font-size: 10px; }
+[role=button] { cursor: pointer; }
+:focus-visible { outline: 3px solid #3983ff; outline-offset: 4px; }
+h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
+.course-banner:focus-visible, .nav-btn.active:focus-visible { outline-offset: -5px; outline-color: #94bdff; }
+@media(min-width:1000px) { .module-grid.khanda-grid { grid-template-columns: repeat(4,1fr); } }
+@media(max-width:600px) {
+ .app-header { min-height: 62px; padding: 12px 18px; }
+ .app-header-label { display: none; }
+ .app-header-logo { font-size: 22px; }
+ .home-wrap,.wit-wrap { padding-top: 20px; }
+ .home-greeting { min-height: 0; grid-template-columns: 1fr; gap: 10px; padding: 28px 24px; }
+ .home-greeting-time { margin-bottom: 18px; }
+ .home-greeting-text { font-size: 44px; }
+ .hero-question { font-size: 32px; }
+ .hero-art { height: 170px; }
+ .module-card { padding: 16px; min-height: 210px; }
+ .module-name { font-size: 21px; }
+ .module-desc { max-width: 100%; }
+ .module-badge { top: 14px; right: 12px; font-size: 8px; padding: 2px 5px; }
+ .module-icon svg { width: 46px; }
+ .class-hdr { padding: 16px 12px; gap: 8px; flex-wrap: wrap; }
+ .class-name { font-size: 17px; min-width: 130px; }
+ .class-sutras { white-space: normal; }
+ .wbw td,.wbw th { padding: 7px 4px; }
+ .wbw td:first-child { font-size: 14px; }
+}
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="status-bar"></div>
+
+  <!-- ── HEADER ──────────────────────────────────── -->
+  <header class="app-header">
+    <span class="app-header-label">Sāmaveda · Talavakāra Brāhmaṇa</span>
+    <span class="app-header-logo">Kena Upaniṣad</span>
+    <span class="app-header-time" id="hdr-time">--:--</span>
+  </header>
+
+  <div id="content">
+
+    <!-- ══ HOME ══════════════════════════════════════ -->
+    <div class="screen active" id="screen-home">
+      <div class="home-wrap">
+        <div class="home-greeting">
+          <div>
+            <div class="home-greeting-time" id="greeting-period">Svādhyāya</div>
+            <h1 class="home-greeting-text" lang="sa">केनोपनिषद्</h1>
+            <p class="hero-question">By whom does<br>the mind fly forth?</p>
+            <p class="hero-caption">An inquiry into the source of knowing<br>34 mantras / Four khaṇḍas</p>
+          </div>
+          <svg class="hero-art" viewBox="0 0 360 300" fill="none" stroke="currentColor" aria-hidden="true">
+            <circle cx="180" cy="150" r="126" stroke-width=".7"/><circle cx="180" cy="150" r="111" stroke-dasharray="1 7"/>
+            <path d="M180 8v40m0 204v40M38 150H0m322 0h38M80 50l26 26m148 148 26 26M280 50l-26 26M106 224l-26 26"/>
+            <path d="M30 150Q180 -8 330 150Q180 308 30 150Z" stroke-width="2"/>
+            <circle cx="180" cy="150" r="62"/><circle cx="180" cy="150" r="48" stroke-width=".6"/>
+            <circle cx="180" cy="150" r="27" fill="currentColor"/><circle cx="188" cy="141" r="5" fill="#050608" stroke="none"/>
+            <path d="M122 150h-65m246 0h-65M180 61v25m0 128v25" stroke-width=".7"/>
+          </svg>
+        </div>
+
+        <div class="course-banner" onclick="navigate('overview')">
+          <div class="course-dot"></div>
+          <div class="course-banner-text">
+            <div class="course-banner-label">Begin Here</div>
+            <div class="course-banner-name">Overview · Tradition · Structure</div>
+          </div>
+          <div class="course-banner-arrow">›</div>
+        </div>
+
+        <div class="section-label" style="margin-bottom:12px;">Four Khaṇḍas</div>
+        <div class="module-grid khanda-grid">
+          <div class="module-card" onclick="navigate('kh1')">
+            <div class="module-icon"><svg viewBox="0 0 80 64" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="40" cy="30" r="21"/><circle cx="40" cy="30" r="10"/><path d="M4 30h15m42 0h15M40 2v7m0 42v7"/></svg></div>
+            <div class="module-name">Khaṇḍa I</div>
+            <div class="module-desc">The Inexpressible Brahman · 8 mantras</div>
+            <span class="module-badge badge-purple">Verse</span>
+          </div>
+          <div class="module-card" onclick="navigate('kh2')">
+            <div class="module-icon"><svg viewBox="0 0 80 64" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 30Q40 -10 70 30Q40 70 10 30Z"/><circle cx="40" cy="30" r="9"/></svg></div>
+            <div class="module-name">Khaṇḍa II</div>
+            <div class="module-desc">That which is not known · 5 mantras</div>
+            <span class="module-badge badge-teal">Verse</span>
+          </div>
+          <div class="module-card" onclick="navigate('kh3')">
+            <div class="module-icon"><svg viewBox="0 0 80 64" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M42 3 23 33h17l-3 24 22-34H42Z"/><path d="M7 50h17m34 0h15"/></svg></div>
+            <div class="module-name">Khaṇḍa III</div>
+            <div class="module-desc">The Yakṣa Parable · 12 mantras</div>
+            <span class="module-badge badge-amber">Prose</span>
+          </div>
+          <div class="module-card" onclick="navigate('kh4')">
+            <div class="module-icon"><svg viewBox="0 0 80 64" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 42h74M10 51h60M19 59h42"/><path d="M18 34a22 22 0 0 1 44 0M40 1v7M8 9l8 8m48 0 8-8"/></svg></div>
+            <div class="module-name">Khaṇḍa IV</div>
+            <div class="module-desc">Knowledge · Liberation · 9 mantras</div>
+            <span class="module-badge badge-coral">Prose</span>
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-bottom:12px;">Quick access</div>
+        <div class="module-grid">
+          <div class="module-card" onclick="navigate('overview')">
+            <div class="module-icon" aria-hidden="true">↗</div>
+            <div class="module-name">Upaniṣad Overview</div>
+            <div class="module-desc">Tradition · Teachers · Context</div>
+            <span class="module-badge badge-purple">Intro</span>
+          </div>
+          <div class="module-card" onclick="navigate('reference')">
+            <div class="module-icon" aria-hidden="true">≡</div>
+            <div class="module-name">Mantra Index</div>
+            <div class="module-desc">All 34 mantras · Quick ref</div>
+            <span class="module-badge badge-gold">Reference</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ OVERVIEW ═══════════════════════════════════ -->
+    <div class="screen" id="screen-overview">
+      <div class="wit-wrap">
+        <div class="screen-header">
+          <h2>Overview</h2>
+          <p>केनोपनिषद् · Talavakāra-Brāhmaṇopaniṣad · Sāmaveda</p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-pill"><div class="stat-num">34</div><div class="stat-lbl">Mantras</div></div>
+          <div class="stat-pill"><div class="stat-num">4</div><div class="stat-lbl">Khaṇḍas</div></div>
+          <div class="stat-pill"><div class="stat-num">2</div><div class="stat-lbl">Sections</div></div>
+        </div>
+
+        <div class="mv-hero">
+          <div class="mv-label">Opening Question · The Root Inquiry</div>
+          <div class="mv-sanskrit">केनेषितं पतति प्रेषितं मनः</div>
+          <div class="mv-english">"By whom directed does the mind fly forth? By whom commanded does the breath go first?" — Kena 1.1 · The text opens with the most radical question in philosophy: what is the witness behind all witnessing?</div>
+        </div>
+
+        <div class="lineage-card">
+          <h3>Ādi Śaṅkarācārya — Bhāṣya on Kena</h3>
+          <p>Śaṅkara's commentary (Kenopaniṣad Bhāṣya) remains the definitive Advaita reading. He wrote two commentaries: one on the Padabhāṣya (word-by-word, mantra section) and one on the Vākyabhāṣya (sentence, prose section). His core argument: Brahman cannot be the object of any cognition — it is the very subject that makes all cognition possible. The Upaniṣad's radical claim is that Brahman is known precisely by NOT being known as an object.</p>
+        </div>
+
+        <div class="lineage-card" style="border-color:rgba(57,131,255,0.15);">
+          <h3 style="color:var(--amber2);">Swami Chinmayananda — Modern Exposition</h3>
+          <p>Chinmayananda's talks and written commentary (published by Chinmaya Mission) are among the most accessible modern treatments. His approach: the Kena is the "Upaniṣad of Humility" — all spiritual powers, all ego-functions, all senses operate only by the light of Brahman they cannot see. The Yakṣa parable is treated as a direct prescription for the spiritual life: the devout ego must be humbled before true Knowledge dawns.</p>
+        </div>
+
+        <div class="lineage-card" style="border-color:rgba(57,131,255,0.15);">
+          <h3 style="color:var(--teal2);">Swami Vivekananda · Swami Gambhirananda</h3>
+          <p>Vivekananda's lectures on Kena (Complete Works, Vol. 2) emphasize its universal message: the Infinite cannot be grasped by the finite. Gambhirananda's translation (Advaita Ashrama, 1958) follows Śaṅkara closely and remains the scholarly standard in English, used here alongside S. Radhakrishnan's philosophical notes (The Principal Upanishads, 1953).</p>
+        </div>
+
+        <div class="section-label" style="margin-bottom:12px;">What makes Kena distinctive</div>
+
+        <div class="mantra-card">
+          <div class="mantra-hdr" onclick="toggleMantra(this)">
+            <div class="mantra-badge">Structure</div>
+            <div class="mantra-title">Verse + Prose — Two interlocking halves</div>
+            <div class="mantra-arr">›</div>
+          </div>
+          <div class="mantra-body">
+            <div class="m-commentary"><strong>Khaṇḍas I–II (verse):</strong> Pure philosophy. Dense, elliptical mantras about the nature of Brahman as pure witnessing consciousness — not graspable by any faculty because it is the ground of all faculties. These mantras demand repeated reading; each word repays sustained attention.<br><br><strong>Khaṇḍas III–IV (prose):</strong> The Yakṣa parable — a narrative that embodies the philosophy. The gods become arrogant after a cosmic victory. Brahman appears as a mysterious Yakṣa (spirit). One by one Agni, Vāyu, and Indra fail to identify it. Uma Haimavatī reveals the truth to Indra. The narrative is the philosophy in action.</div>
+            <div class="m-insight">Śaṅkara's reading: the verse section establishes what Brahman IS. The prose section illustrates what happens when that knowledge is absent — pride in the ego's instruments — and how it is recovered: through the grace of Devī (Uma) and the humility to receive it.</div>
+          </div>
+        </div>
+
+        <div class="mantra-card">
+          <div class="mantra-hdr" onclick="toggleMantra(this)">
+            <div class="mantra-badge">Tradition</div>
+            <div class="mantra-title">Sāmaveda · Talavakāra Brāhmaṇa</div>
+            <div class="mantra-arr">›</div>
+          </div>
+          <div class="mantra-body">
+            <div class="m-commentary"><strong>Affiliation:</strong> The Kena is the ninth chapter of the Talavakāra Brāhmaṇa (also called Jaiminīya-Upaniṣad-Brāhmaṇa) of the Sāmaveda. It is one of the ten principal Upaniṣads (Daśopaniṣad) on which Śaṅkara composed bhāṣyas — a mark of its supreme canonical status in the Vedāntic tradition.<br><br><strong>Name origin:</strong> "Kena" = "by whom" — the opening word of the text. Also called Kenopaniṣad or Talavakāropaniṣad.</div>
+            <div class="m-insight">Among the Daśopaniṣads, Kena is unusual for its dramatic narrative structure in the prose section. Most Upaniṣads with prose parables (like Chāndogya or Bṛhadāraṇyaka) are far longer. Kena's economy — 34 mantras delivering complete Advaita — makes it ideal for intensive study.</div>
+          </div>
+        </div>
+
+        <div class="mantra-card">
+          <div class="mantra-hdr" onclick="toggleMantra(this)">
+            <div class="mantra-badge">Study method</div>
+            <div class="mantra-title">How to use this companion</div>
+            <div class="mantra-arr">›</div>
+          </div>
+          <div class="mantra-body">
+            <div class="m-commentary"><strong>For each mantra:</strong> Read the Devanāgarī aloud if possible. Then the IAST transliteration. Then the word-by-word. Then at least two translations (Gambhirananda and one other). Then Śaṅkara's bhāṣya note. Finally, sit with the Contemplation Anchor.<br><br><strong>Pace:</strong> The verse khaṇḍas (I–II) repay slow reading — one or two mantras per session. The prose khaṇḍas (III–IV) can be read as a continuous narrative, then unpacked mantra by mantra.<br><br><strong>Key practice:</strong> After reading Kena 1.5–1.9 (the via negativa of Brahman), sit in meditation attempting to locate the "seer behind the seeing." This is the Upaniṣad's direct pointing.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ KHAṆḌA I ═══════════════════════════════════ -->
+    <div class="screen" id="screen-kh1">
+      <div class="wit-wrap">
+        <div class="screen-header">
+          <h2>Khaṇḍa I</h2>
+          <p>प्रथमः खण्डः · The Inexpressible Brahman · 8 Mantras</p>
+        </div>
+
+        <div class="mv-hero">
+          <div class="mv-label">Khaṇḍa I — Theme</div>
+          <div class="mv-sanskrit">नेत्रस्य नेत्रं मनसो मनो यत्</div>
+          <div class="mv-english">Eye of the eye, mind of the mind — Brahman is the ultimate illuminator of all instruments of knowing. The khaṇḍa proceeds by systematic negation: Brahman is not known by speech, mind, eye, ear, or vital breath — yet these function only by its light.</div>
+        </div>
+
+        <!-- Mantra 1.1 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">1.1</div>
+            <div class="class-name">The Opening Question — By Whom?</div>
+            <div class="class-sutras">केन इषितम्</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Mantra</div>
+            <div class="v-sanskrit">केनेषितं पतति प्रेषितं मनः।<br>केन प्राणः प्रथमः प्रैति युक्तः।<br>केनेषितां वाचमिमां वदन्ति।<br>चक्षुः श्रोत्रं क उ देवो युनक्ति॥</div>
+            <div class="v-translit">kenéṣitaṃ patati préṣitaṃ manaḥ |<br>kena prāṇaḥ prathamaḥ praiti yuktaḥ |<br>kenéṣitāṃ vācam imāṃ vadanti |<br>cakṣuḥ śrotraṃ ka u devo yunakti ||</div>
+            <div class="wbw-label">Word by word</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>केन</td><td>kena</td><td>by whom — instrumental sing. of ka (interrogative pronoun); the fundamental question: what is the agent behind all our activities?</td></tr>
+              <tr><td>इषितम्</td><td>iṣitam</td><td>directed, commanded, impelled — past passive participle of √iṣ (to send, direct, command); something is directing the mind from behind</td></tr>
+              <tr><td>पतति</td><td>patati</td><td>flies forth, moves outward — 3rd sing. pres. of √pat (to fly, fall, move swiftly); the natural tendency of mind to dart toward sense objects</td></tr>
+              <tr><td>प्रेषितम्</td><td>preṣitam</td><td>sent forth, dispatched — p.p.p. of pra+√iṣ (to send forth); stronger than iṣitam: actively dispatched by an unseen authority</td></tr>
+              <tr><td>मनः</td><td>manaḥ</td><td>mind — neut. nom. sing.; the organ of thought, doubt, and will; the first faculty listed as the question opens</td></tr>
+              <tr><td>केन</td><td>kena</td><td>by whom — repeated; each line of the mantra repeats the same question for a new faculty, building cumulative force</td></tr>
+              <tr><td>प्राणः</td><td>prāṇaḥ</td><td>the vital breath, life-force — nom. sing. of prāṇa; the first and foremost of the five vāyus (vital airs) in the body</td></tr>
+              <tr><td>प्रथमः</td><td>prathamaḥ</td><td>first, foremost — nom. sing. masc. of prathama; prāṇa is singled out as "the first" vital function — the most fundamental of all life activities</td></tr>
+              <tr><td>प्रैति</td><td>praiti</td><td>goes forth, departs — 3rd sing. pres. of pra+√i (to go forth); the breath sets in motion all other bodily functions</td></tr>
+              <tr><td>युक्तः</td><td>yuktaḥ</td><td>yoked, harnessed, engaged — nom. sing. p.p.p. of √yuj (to yoke, join; root of yoga); prāṇa is "yoked" — engaged in its work — by Brahman's enabling power</td></tr>
+              <tr><td>केन इषितां</td><td>kenéṣitām</td><td>directed by whom — kena + iṣitām (acc. sing. fem. p.p.p. of √iṣ); "this speech, directed by whom?"</td></tr>
+              <tr><td>वाचम् इमाम्</td><td>vācam imām</td><td>this speech — vācam (acc. sing. of vāc, speech) + imām (acc. sing. fem. of idam, this); "this very speech" — pointing to the speech act itself, in the moment of the mantra being spoken</td></tr>
+              <tr><td>वदन्ति</td><td>vadanti</td><td>they speak, utter — 3rd pl. pres. of √vad (to speak); the impersonal plural: "people speak" / "men utter"; the very act of speaking raises the question of who is behind it</td></tr>
+              <tr><td>चक्षुः श्रोत्रम्</td><td>cakṣuḥ śrotram</td><td>the eye and the ear — neut. nom. sing. of each; both perceptual organs listed together as the two chief means of external knowledge</td></tr>
+              <tr><td>क उ</td><td>ka u</td><td>who indeed — ka (interrogative nom. sing.) + u (emphatic particle); "who indeed?" — the u adds a note of wonder and urgency to the final question</td></tr>
+              <tr><td>देवः</td><td>devaḥ</td><td>the shining one, the divine power — nom. sing. of deva (from √div, to shine); refers to Brahman as the luminous power behind all the sense organs</td></tr>
+              <tr><td>युनक्ति</td><td>yunakti</td><td>yokes, directs, enables — 3rd sing. pres. of √yuj (to yoke; the root of yoga); Brahman "yokes" the eye and ear — sets them in motion and maintains their capacity</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>Gambhirananda (Advaita Ashrama):</strong> "By whom directed does the mind fly forth? By whom commanded does the first breath go? By whose impulsion do men utter this speech? What effulgent being directs the eye and ear?"</div>
+            <div class="m-shankara"><strong>Śaṅkara's Bhāṣya:</strong> The disciple comes to the teacher already having performed the preparatory disciplines (śama, dama, etc.). His question is not academic: "I see, I think, I speak — but what am I? Who is behind all these activities?" The genius of mantra 1.1 is that it does not ask "what is God?" but asks about the agent of the seeker's own mental and sensory acts. The inquiry is turned inward from the very first word.</div>
+            <div class="m-commentary"><strong>Chinmayananda:</strong> The mantra catalogues the four great instruments: mind (thought), prāṇa (life), speech (expression), eye and ear (perception). Each of these is an instrument. An instrument requires an operator. This is the question: who operates the instruments? The answer will be: not another instrument. Not another mind above the mind, another eye above the eye. The operator is of an entirely different order.</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">Right now, you are reading. Who is reading? The eyes process light. The mind decodes symbols. But who knows that the reading is happening? Can that knower be seen? Can it be an object of your attention — or does it retreat the moment you look for it?</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mantra 1.2 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">1.2</div>
+            <div class="class-name">The Teacher's Response — Brahman Is That</div>
+            <div class="class-sutras">श्रोत्रस्य श्रोत्रम्</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Mantra</div>
+            <div class="v-sanskrit">श्रोत्रस्य श्रोत्रं मनसो मनो यत्<br>वाचो ह वाचं स उ प्राणस्य प्राणः।<br>चक्षुषश्चक्षुरतिमुच्य धीराः<br>प्रेत्यास्माल्लोकादमृता भवन्ति॥</div>
+            <div class="v-translit">śrotrasya śrotraṃ manaso mano yat<br>vāco ha vācaṃ sa u prāṇasya prāṇaḥ |<br>cakṣuṣaś cakṣur atimucya dhīrāḥ<br>pretyāsmāl lokād amṛtā bhavanti ||</div>
+            <div class="wbw-label">Word by word</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>श्रोत्रस्य श्रोत्रम्</td><td>śrotrasya śrotram</td><td>ear of the ear — śrotrasya (gen. sing. of śrotra, the ear organ) + śrotram (nom./acc. sing.); the awareness that knows hearing without itself being an organ</td></tr>
+              <tr><td>मनसो मनः</td><td>manaso manaḥ</td><td>mind of the mind — manasaḥ (gen. sing. of manas) + manaḥ (nom.); the knowing-ground behind all mental activity; not another mind above the mind but a different order altogether</td></tr>
+              <tr><td>यत्</td><td>yat</td><td>that which — neut. relative pronoun nom./acc.; "that which is the ear of the ear…"; Brahman is introduced via the relative pronoun — not named directly</td></tr>
+              <tr><td>वाचः</td><td>vācaḥ</td><td>of speech — gen. sing. of vāc (fem.); the faculty of articulate language</td></tr>
+              <tr><td>ह</td><td>ha</td><td>indeed, verily — Vedic emphatic particle; stresses the reality of the following claim</td></tr>
+              <tr><td>वाचम्</td><td>vācam</td><td>speech — acc. sing. of vāc; here as object: "that which animates / knows speech"</td></tr>
+              <tr><td>स उ</td><td>sa u</td><td>that same indeed — saḥ (nom. sing. demonstrative) + u (emphatic particle); "that very (Brahman)" — continuing the identification</td></tr>
+              <tr><td>प्राणस्य प्राणः</td><td>prāṇasya prāṇaḥ</td><td>prāṇa of prāṇa — gen. + nom. sing. of prāṇa (the vital breath); the life-force that animates life itself; Brahman is to prāṇa what prāṇa is to the body</td></tr>
+              <tr><td>चक्षुषः</td><td>cakṣuṣaḥ</td><td>of the eye — gen. sing. of cakṣus (neut. s-stem); "of the eye (it is) the eye"</td></tr>
+              <tr><td>चक्षुः</td><td>cakṣuḥ</td><td>eye — nom. sing.; that which sees the seeing; the awareness behind sight</td></tr>
+              <tr><td>अतिमुच्य</td><td>atimucya</td><td>completely releasing / freeing themselves from — gerund of ati+√muc (to release utterly); ati- (beyond, completely) + mucya (releasing); releasing identification with the five faculties just enumerated</td></tr>
+              <tr><td>धीराः</td><td>dhīrāḥ</td><td>the wise, the resolute — nom. pl. masc. of dhīra (from dhī, intellect/insight); those whose intelligence is steady, who have the courage of discrimination</td></tr>
+              <tr><td>प्रेत्य</td><td>pretya</td><td>departing / having gone beyond — gerund of pra+√i (to go forth); both: (1) departing from the body at death, and (2) going beyond identification with the body-mind complex here and now</td></tr>
+              <tr><td>अस्मात् लोकात्</td><td>asmāl lokāt</td><td>from this world — asmāt (abl. sing. of idam, this) + lokāt (abl. sing. of loka, world); the phenomenal world of saṃsāra</td></tr>
+              <tr><td>अमृताः</td><td>amṛtāḥ</td><td>immortal — nom. pl. masc. of amṛta (a + mṛta, unslain/undead); not deathlessness as a future attainment but as a recognition of what one always is</td></tr>
+              <tr><td>भवन्ति</td><td>bhavanti</td><td>become — 3rd pl. pres. of √bhū; the present tense is deliberate: immortality is not future — it is recognised now</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>Radhakrishnan (The Principal Upanishads):</strong> "That which is not thought by the mind, but by which, they say, the mind is thought — know that alone as Brahman, not this which people worship here."<br><br><strong>Gambhirananda:</strong> "It is the ear of the ear, the mind of the mind, the speech of speech, the life of the life, and the eye of the eye. Having detached from the senses and renouncing this world, the wise become immortal."</div>
+            <div class="m-shankara"><strong>Śaṅkara's key insight:</strong> The phrase "ear of the ear" does not mean a second, inner ear above the physical ear. It means the consciousness (cit) that illuminates all sensory experience. The ear hears — but it cannot hear itself hearing. The mind thinks — but cannot think the thinker. Brahman is precisely that which makes all these operations possible while remaining beyond their reach. To "know" Brahman is to recognise that you already ARE this knowing awareness.</div>
+            <div class="m-commentary"><strong>Vivekananda's formulation:</strong> We are always knowing Brahman — there is nothing else to know. What we mistake is taking Brahman to be an object. The moment the mind turns back on itself completely, what remains is Brahman. This mantra is the philosophical core of the entire Kena Upaniṣad.</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">"Ear of the ear, mind of the mind." The eye cannot see itself seeing. The mind cannot think the thinker. Brahman is what remains when every object of knowledge is exhausted. It is not found — it is what finds.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mantra 1.3 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">1.3</div>
+            <div class="class-name">Not Knowable as Object — The First Paradox</div>
+            <div class="class-sutras">न तत्र चक्षुर्गच्छति</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Mantra</div>
+            <div class="v-sanskrit">न तत्र चक्षुर्गच्छति न वाग्गच्छति नो मनः।<br>न विद्मो न विजानीमो यथैतदनुशिष्यात्॥</div>
+            <div class="v-translit">na tatra cakṣur gacchati na vāg gacchati no manaḥ |<br>na vidmo na vijānīmo yathaitad anuśiṣyāt ||</div>
+            <div class="wbw-label">Word by word</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>न</td><td>na</td><td>not — the primary negation particle</td></tr>
+              <tr><td>तत्र</td><td>tatra</td><td>there, to that place — referring to Brahman as the ultimate locus</td></tr>
+              <tr><td>चक्षुः</td><td>cakṣuḥ</td><td>the eye — organ of sight (nom. sing. of cakṣus, n-stem)</td></tr>
+              <tr><td>गच्छति</td><td>gacchati</td><td>goes, reaches — 3rd sing. pres. of √gam; the eye cannot travel to Brahman</td></tr>
+              <tr><td>न वाक्</td><td>na vāk</td><td>nor speech — vāk (nom. sing.) = the faculty of articulate language</td></tr>
+              <tr><td>गच्छति</td><td>gacchati</td><td>goes — repeated for each faculty; speech too cannot reach It</td></tr>
+              <tr><td>नो मनः</td><td>no manaḥ</td><td>nor the mind — no = na + u (emphatic); manaḥ = mind, the highest inner instrument</td></tr>
+              <tr><td>न विद्मः</td><td>na vidmaḥ</td><td>we do not know — 1st pl. perfect of √vid; collective admission by the teachers</td></tr>
+              <tr><td>न विजानीमः</td><td>na vijānīmaḥ</td><td>we do not understand / discern — vi+√jñā, pres. 1st pl.; a subtler, more active cognition than √vid</td></tr>
+              <tr><td>यथा</td><td>yathā</td><td>how, in what manner</td></tr>
+              <tr><td>एतत्</td><td>etat</td><td>this — Brahman, the subject under discussion</td></tr>
+              <tr><td>अनुशिष्यात्</td><td>anuśiṣyāt</td><td>one could teach / instruct — anu+√śās, optative 3rd sing.; the whole thrust: nobody can teach Brahman as an object of instruction</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>Gambhirananda:</strong> "The eye does not go there, nor speech, nor mind. We do not know, we do not understand how anyone can teach this."</div>
+            <div class="m-shankara"><strong>Śaṅkara:</strong> The teacher himself says "we do not know" — but this is not agnosticism. The "not knowing" here is the highest form of knowledge: knowledge that Brahman cannot be objectified. To "not know" Brahman as an object is the beginning of knowing it as oneself. The teacher teaches by communicating the impossibility of teaching — which is itself the teaching.</div>
+            <div class="m-commentary"><strong>Chinmayananda:</strong> The verse "na tatra cakṣur gacchati" — "the eye does not go there" — is the Upaniṣad's famous via negativa. Brahman is not found by looking outward, nor by memory, nor by inference. This progressively strips away all avenues of conventional knowledge, leaving the student with only awareness itself as the remaining "object" — which is precisely where Brahman is "found."</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">Sit quietly. Don't look for anything. Don't think any thought about Brahman. Don't try to feel it. What is the awareness that notices this very attempt and its failure?</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mantra 1.4 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">1.4</div>
+            <div class="class-name">What Is Unknown to the Knowers</div>
+            <div class="class-sutras">अन्यदेव तद्विदितात्</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Mantra</div>
+            <div class="v-sanskrit">अन्यदेव तद्विदितादथो अविदितादधि।<br>इति शुश्रुम पूर्वेषां ये नस्तद्व्याचचक्षिरे॥</div>
+            <div class="v-translit">anyad eva tad viditād atho aviditād adhi |<br>iti śuśruma pūrveṣāṃ ye nas tad vyācacakṣire ||</div>
+            <div class="wbw-label">Word by word</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>अन्यत्</td><td>anyat</td><td>other, different — neuter nom./acc. of anya; Brahman is categorically different in kind</td></tr>
+              <tr><td>एव</td><td>eva</td><td>indeed, verily — emphatic particle; stresses the categorical otherness</td></tr>
+              <tr><td>तत्</td><td>tat</td><td>that — demonstrative pronoun referring to Brahman</td></tr>
+              <tr><td>विदितात्</td><td>viditāt</td><td>from the known — abl. sing. of vidita (past passive participle of √vid); i.e., from any object that has been cognised</td></tr>
+              <tr><td>अथो</td><td>atho</td><td>and moreover, also — connective particle (= atha + u); adds a second point</td></tr>
+              <tr><td>अविदितात्</td><td>aviditāt</td><td>from the unknown — abl. of a-vidita; the negation of the known, i.e., sheer ignorance or void</td></tr>
+              <tr><td>अधि</td><td>adhi</td><td>above, beyond — postposition governing the ablative; Brahman transcends both categories</td></tr>
+              <tr><td>इति</td><td>iti</td><td>thus — marks the end of the doctrine just stated; introduces the traditional source</td></tr>
+              <tr><td>शुश्रुम</td><td>śuśruma</td><td>we have heard — 1st pl. perfect of √śru; the perfect tense signals tradition received from teachers</td></tr>
+              <tr><td>पूर्वेषाम्</td><td>pūrveṣām</td><td>of the ancients / former ones — gen. pl. of pūrva; the lineage of teachers stretching back to the ṛṣis</td></tr>
+              <tr><td>ये</td><td>ye</td><td>who — relative pronoun, nom. pl. masculine; refers to the ancient teachers</td></tr>
+              <tr><td>नः</td><td>naḥ</td><td>to us — enclitic dative of asmad (1st pl.)</td></tr>
+              <tr><td>तत्</td><td>tat</td><td>that — again Brahman; the object of the teachers' exposition</td></tr>
+              <tr><td>व्याचचक्षिरे</td><td>vyācacakṣire</td><td>explained, expounded, made clear — 3rd pl. perfect ātmanepada of vi+ā+√cakṣ; the root cakṣ means "to see, to declare clearly"</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>Gambhirananda:</strong> "It is indeed other than the known, and again, it is above the unknown. Thus did we hear from the ancients who explained it to us."</div>
+            <div class="m-shankara"><strong>Śaṅkara:</strong> Brahman is "other than the known" (viditāt) because the known is an object — Brahman is never an object. It is also "beyond the unknown" (aviditāt) — Brahman is not simply ignorance or void. It is the luminous ground on which both knowledge and ignorance appear. This mantra kills two possible misconceptions: (1) that Brahman is a subtle object you could eventually perceive, and (2) that Brahman is the same as nothing or darkness.</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">Not an object you can grasp. Not a void. Not the known. Not the unknown. What is left? Only the very awareness in which "known" and "unknown" arise as categories.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mantras 1.5–1.8 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">1.5–1.8</div>
+            <div class="class-name">The Four Paradoxes — Known by Not-Knowing</div>
+            <div class="class-sutras">यस्यामतं तस्य मतम्</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Mantras 1.5 & 1.6</div>
+            <div class="v-sanskrit">यस्यामतं तस्य मतं मतं यस्य न वेद सः।<br>अविज्ञातं विजानतां विज्ञातमविजानताम्॥<br><br>प्रतिबोधविदितं मतममृतत्वं हि विन्दते।<br>आत्मना विन्दते वीर्यं विद्यया विन्दतेऽमृतम्॥</div>
+            <div class="v-translit">yasyāmataṃ tasya mataṃ mataṃ yasya na veda saḥ |<br>avijñātaṃ vijānatāṃ vijñātam avijānatām ||<br><br>pratibodha-viditaṃ matam amṛtatvaṃ hi vindate |<br>ātmanā vindate vīryaṃ vidyayā vindate'mṛtam ||</div>
+            <div class="wbw-label">Word by word — Mantra 1.5</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>यस्य</td><td>yasya</td><td>by whom / for whom — gen. sing. of ya (relative pronoun); here used in instrumental sense</td></tr>
+              <tr><td>अमतम्</td><td>amatam</td><td>not thought, not made an object of cognition — a + mata (past passive participle of √man, to think); Brahman is not held as a mental object</td></tr>
+              <tr><td>तस्य</td><td>tasya</td><td>by him / for him — gen. sing. of ta (correlative pronoun)</td></tr>
+              <tr><td>मतम्</td><td>matam</td><td>thought, known — p.p.p. of √man; the paradox: the one who does not objectify Brahman truly "has" it</td></tr>
+              <tr><td>मतम्</td><td>matam</td><td>thought (repeated as subject of second clause) — he who thinks he knows It…</td></tr>
+              <tr><td>यस्य</td><td>yasya</td><td>by whom — relative pronoun; the second type of knower</td></tr>
+              <tr><td>न वेद</td><td>na veda</td><td>knows not — na + veda (3rd sing. perfect of √vid; perfect here = present in force: "he does not know")</td></tr>
+              <tr><td>सः</td><td>saḥ</td><td>he — nom. sing. demonstrative; the knower who thinks he has grasped Brahman</td></tr>
+              <tr><td>अविज्ञातम्</td><td>avijñātam</td><td>unknown — a + vijñāta (p.p.p. of vi+√jñā); not cognised as an object by the vijānantaḥ</td></tr>
+              <tr><td>विजानताम्</td><td>vijānatām</td><td>of those who know (It as object) — gen. pl. pres. participle of vi+√jñā; those who claim objective knowledge</td></tr>
+              <tr><td>विज्ञातम्</td><td>vijñātam</td><td>known — vijñāta (p.p.p. of vi+√jñā); "known" to those who do not claim to objectify It</td></tr>
+              <tr><td>अविजानताम्</td><td>avijānatām</td><td>of those who do not know (It as object) — gen. pl. of a + vijānat; those who rest without objectifying</td></tr>
+            </tbody></table>
+            <div class="wbw-label">Word by word — Mantra 1.6</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>प्रतिबोध</td><td>pratibodha</td><td>every act of cognition / awakening — prati (= in each, at every) + bodha (√budh, to wake, know); each moment of awareness</td></tr>
+              <tr><td>विदितम्</td><td>viditam</td><td>known / recognised — p.p.p. of √vid; Brahman is "known" in the sense that It is the ground of every cognition</td></tr>
+              <tr><td>मतम्</td><td>matam</td><td>this is the (accepted) view / considered thus — p.p.p. of √man; the teaching of the tradition</td></tr>
+              <tr><td>अमृतत्वम्</td><td>amṛtatvam</td><td>immortality — a (not) + mṛta (dead) + tva (abstract suffix); the state of being deathless</td></tr>
+              <tr><td>हि</td><td>hi</td><td>indeed, for — emphatic/causal particle; "for by this one attains immortality"</td></tr>
+              <tr><td>विन्दते</td><td>vindate</td><td>attains, finds, obtains — 3rd sing. pres. ātmanepada of √vid (a different √vid meaning "to find/obtain," not "to know")</td></tr>
+              <tr><td>आत्मना</td><td>ātmanā</td><td>through the Self — instrumental sing. of ātman; it is through one's own Self (not an external means) that strength arises</td></tr>
+              <tr><td>वीर्यम्</td><td>vīryam</td><td>strength, heroic power, virility — from vīra (hero); here: the inner strength of jñāna</td></tr>
+              <tr><td>विद्यया</td><td>vidyayā</td><td>through knowledge — instrumental sing. of vidyā (fem.); the liberating knowledge of Brahman</td></tr>
+              <tr><td>अमृतम्</td><td>amṛtam</td><td>immortality — acc. sing.; the direct object of vindate in this pāda</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>1.5 — Radhakrishnan:</strong> "He by whom It is not thought, by him It is thought; he by whom It is thought, knows It not. It is not understood by those who understand It; It is understood by those who do not understand It."<br><br><strong>1.6 — Gambhirananda:</strong> "It is known in every state of consciousness — it is thereby considered known as the ground of immortality. Through the Self one finds strength; through Knowledge one finds immortality."</div>
+            <div class="m-shankara"><strong>Śaṅkara on 1.5 — The great paradox:</strong> "He who thinks he knows Brahman, knows it not" — because knowing Brahman as an object is not knowing Brahman. "He by whom it is not thought" — the one who has given up the effort to make Brahman an object of thought, and rests in pure awareness — has the true "knowledge." This is the most quoted verse of the Kena, often compared with Socrates' "I know that I know nothing."<br><br><strong>On 1.6 — pratibodha-viditam:</strong> "Known in each cognition." Brahman is the witness present in every perception, every thought, every moment of consciousness. You have never NOT been in the presence of Brahman. It is the very fact of awareness itself — the "that it is" of every experience.</div>
+            <div class="v-label" style="margin-top:16px;">Mantras 1.7 & 1.8</div>
+            <div class="v-sanskrit">इह चेदवेदीदथ सत्यमस्ति<br>न चेदिहावेदीन्महती विनष्टिः।<br>भूतेषु भूतेषु विचित्य धीराः<br>प्रेत्यास्माल्लोकादमृता भवन्ति॥</div>
+            <div class="v-translit">iha ced avedīd atha satyam asti<br>na ced ihāvedīn mahatī vinaṣṭiḥ |<br>bhūteṣu bhūteṣu vicitya dhīrāḥ<br>pretyāsmāl lokād amṛtā bhavanti ||</div>
+            <div class="wbw-label">Word by word — Mantra 1.7</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>इह</td><td>iha</td><td>here, in this world, in this life — the urgency: realisation must happen now, not after death</td></tr>
+              <tr><td>चेत्</td><td>cet</td><td>if — conditional particle</td></tr>
+              <tr><td>अवेदीत्</td><td>avedīt</td><td>one knew / has known — 3rd sing. aorist of √vid (the sigmatic aorist form); "if one has come to know It here"</td></tr>
+              <tr><td>अथ</td><td>atha</td><td>then — correlative to cet; marks the consequence</td></tr>
+              <tr><td>सत्यम्</td><td>satyam</td><td>truth, reality — neut. nom. sing. of satya; not merely "truth" but the Real itself; liberation</td></tr>
+              <tr><td>अस्ति</td><td>asti</td><td>there is, it exists — 3rd sing. pres. of √as (to be)</td></tr>
+              <tr><td>न चेत्</td><td>na cet</td><td>if not — negation of the condition</td></tr>
+              <tr><td>महती</td><td>mahatī</td><td>great — fem. nom. sing. of mahat; agreeing with vinaṣṭiḥ</td></tr>
+              <tr><td>विनष्टिः</td><td>vinaṣṭiḥ</td><td>destruction, loss, ruin — fem. nom. sing. of vinaṣṭi (vi+√naś); missing the entire purpose of human birth</td></tr>
+            </tbody></table>
+            <div class="wbw-label">Word by word — Mantra 1.8</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>भूतेषु भूतेषु</td><td>bhūteṣu bhūteṣu</td><td>in (all) beings, in each and every being — loc. pl. of bhūta (that which has come into existence); the distributive repetition means "in each individual being without exception"</td></tr>
+              <tr><td>विचित्य</td><td>vicitya</td><td>having discerned, having perceived — gerund (absolutive) of vi+√cit (to perceive, distinguish); after perceiving Brahman in all…</td></tr>
+              <tr><td>धीराः</td><td>dhīrāḥ</td><td>the wise, the resolute, the courageous — nom. pl. of dhīra; those of steady, purified intelligence (dhī)</td></tr>
+              <tr><td>प्रेत्य</td><td>pretya</td><td>departing, having gone forth — gerund of pra+√i (to go); departure from the body; but Śaṅkara also reads: "having transcended (the body-mind identification)"</td></tr>
+              <tr><td>अस्मात् लोकात्</td><td>asmāt lokāt</td><td>from this world — abl. sing.; the phenomenal world of saṃsāra</td></tr>
+              <tr><td>अमृताः</td><td>amṛtāḥ</td><td>immortal — nom. pl. masc. of amṛta (a + mṛta, undead); not a future state but the recognition of what always was</td></tr>
+              <tr><td>भवन्ति</td><td>bhavanti</td><td>become — 3rd pl. pres. of √bhū; the present tense is significant: immortality is recognised, not achieved</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>1.7 — Gambhirananda:</strong> "If one has known It here, then there is truth; if one has not known It here, then there is great destruction. The wise, discerning It in all beings, become immortal on departing from this world."</div>
+            <div class="m-commentary"><strong>Chinmayananda on 1.7:</strong> "iha ced avedīt" — if one realises in this very lifetime, here, in this embodied existence — then there is truth, then life has meaning. The urgency is remarkable: there is no deferral. "The wise, discerning It in all beings" — the realised one sees the one consciousness that underlies all differentiated existence. This is not a poetic metaphor; it is the direct description of what Self-realisation looks like from within. </div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">"Known in every state of consciousness." Not only in deep meditation. Not only in silence. Right now, in this moment of reading — what is it that is always already present, that does not need to be achieved?</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ KHAṆḌA II ═══════════════════════════════════ -->
+    <div class="screen" id="screen-kh2">
+      <div class="wit-wrap">
+        <div class="screen-header">
+          <h2>Khaṇḍa II</h2>
+          <p>द्वितीयः खण्डः · That Which Is Not Known · 5 Mantras</p>
+        </div>
+
+        <div class="mv-hero">
+          <div class="mv-label">Khaṇḍa II — Theme</div>
+          <div class="mv-sanskrit">न विद्यो न विजानीमः</div>
+          <div class="mv-english">Khaṇḍa II deepens the paradox of Khaṇḍa I. If Brahman cannot be known as an object, what is the nature of the "knowing" that is available? The answer: Brahman is apprehended in each flash of cognition as its very substratum — not as a result of seeking, but as the ground of the seeking itself.</div>
+        </div>
+
+        <!-- Mantras 2.1–2.2 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">2.1–2.2</div>
+            <div class="class-name">Brahman Is Not Thought — The Teacher's Own Uncertainty</div>
+            <div class="class-sutras">मन्ये विदितम्</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Mantras</div>
+            <div class="v-sanskrit">मन्ये विदितमिति नो न विदितं परं मतम्।<br>न विदितमिति वेद तद्विदितमविदितम्॥<br><br>यस्यामतं तस्य मतं मतं यस्य न वेद सः।<br>अविज्ञातं विजानतां विज्ञातमविजानताम्॥</div>
+            <div class="v-translit">manye viditam iti no na viditaṃ paraṃ matam |<br>na viditam iti veda tad viditam aviditam ||<br><br>yasyāmataṃ tasya mataṃ mataṃ yasya na veda saḥ |<br>avijñātaṃ vijānatāṃ vijñātam avijānatām ||</div>
+            <div class="wbw-label">Word by word — Mantra 2.1</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>मन्ये</td><td>manye</td><td>I think, I consider — 1st sing. pres. ātmanepada of √man; the teacher speaks in first person, modelling the inquiry</td></tr>
+              <tr><td>विदितम्</td><td>viditam</td><td>known — p.p.p. of √vid; "(I think) It is known (to me)"</td></tr>
+              <tr><td>इति</td><td>iti</td><td>thus, so — marks quoted thought; "I think thus: 'It is known'"</td></tr>
+              <tr><td>नो</td><td>no</td><td>not so — na + u (emphatic); "but no — that is not quite right either"</td></tr>
+              <tr><td>न विदितम्</td><td>na viditam</td><td>not known — negation of vidita; "(nor do I think) It is unknown"</td></tr>
+              <tr><td>परम्</td><td>param</td><td>supreme, higher — neut. nom./acc. of para; here: the supreme (view, insight)</td></tr>
+              <tr><td>मतम्</td><td>matam</td><td>view, opinion, considered position — p.p.p. of √man used as noun; "this is the considered view"</td></tr>
+              <tr><td>न विदितम् इति वेद</td><td>na viditam iti veda</td><td>who knows "It is not (merely) known" — veda = 3rd sing. perf. of √vid; the one who understands that Brahman exceeds both "known" and "unknown"</td></tr>
+              <tr><td>तत्</td><td>tat</td><td>that — Brahman; the object of true knowledge</td></tr>
+              <tr><td>विदितम् अविदितम्</td><td>viditam aviditam</td><td>known (and yet) unknown — the paradox stated: Brahman is simultaneously recognised (as the ground of cognition) and not-known (as an object)</td></tr>
+            </tbody></table>
+            <div class="wbw-label">Word by word — Mantra 2.2 (identical to 1.5 — the paradox restated)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>यस्यामतम्</td><td>yasyāmatam</td><td>by whom not thought (as object) — yasya (gen.) + a-matam (p.p.p. of √man, neg.); sandhi: yasya + amatam</td></tr>
+              <tr><td>तस्य मतम्</td><td>tasya matam</td><td>by him it is (truly) known — the paradox: absence of objectification = proximity to Brahman</td></tr>
+              <tr><td>मतम् यस्य</td><td>matam yasya</td><td>thought (as object) by whom — second clause: the one who thinks he has grasped It</td></tr>
+              <tr><td>न वेद सः</td><td>na veda saḥ</td><td>he does not know — veda (perf. of √vid) + na; the grasper does not have It</td></tr>
+              <tr><td>अविज्ञातम्</td><td>avijñātam</td><td>not-known (as object) — a + vi+√jñā p.p.p.; "unknown to those who (think they) know"</td></tr>
+              <tr><td>विजानताम्</td><td>vijānatām</td><td>of those who (think they) know — gen. pl. pres. participle of vi+√jñā</td></tr>
+              <tr><td>विज्ञातम्</td><td>vijñātam</td><td>known — to those who rest without objectifying; Brahman is "known" precisely by not being reduced to an object</td></tr>
+              <tr><td>अविजानताम्</td><td>avijānatām</td><td>of those who do not (try to) know (It as object) — the ones who rest in not-knowing</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>2.1 — Gambhirananda:</strong> "I do not think I know It well, nor do I think that I do not know It. He among us who knows this [that It is neither known nor unknown] — he knows It; he among us who does not know this — he does not know it."<br><br><strong>2.2 — Radhakrishnan:</strong> "He by whom It is not thought, by him It is thought; he who thinks he knows It knows It not."</div>
+            <div class="m-shankara"><strong>Śaṅkara on Mantra 2.1:</strong> The teacher now speaks in the first person. "Manye viditam" — "I think I know It." But then the teacher corrects: "neti" — "not thus." This self-correction is the very teaching. The teacher models the renunciation of claiming to have Brahman as an object of knowledge. The true knower is one who knows that Brahman transcends the knower-known structure — and thereby recognises that the very "not-knowing" of Brahman is the highest proximity to it.</div>
+            <div class="m-commentary"><strong>Chinmayananda — The Double Negation:</strong> Those who claim to know Brahman (as an object they have attained) — they do not know. Those who claim complete ignorance of Brahman (as a thing entirely outside experience) — they also do not know. The one who knows NEITHER of these positions — who maintains the impossible middle: "It is beyond known and unknown" — that one is closest to the truth. This double negation is the hallmark of genuine Vedāntic knowledge.</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">Can you genuinely not-know Brahman — not as defeat, but as the most precise and honest acknowledgment of what Brahman is? Resting in not-knowing without the restlessness of seeking — is that the closest the mind can come?</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mantras 2.3–2.5 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">2.3–2.5</div>
+            <div class="class-name">Brahman Known in Each Flash of Cognition</div>
+            <div class="class-sutras">प्रतिबोधविदितम्</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Mantras</div>
+            <div class="v-sanskrit">तस्यैष आदेशो यद्विद्युत्<br>व्यद्युतदा इतीन्न्यमीमिषदा इत्यधिदैवतम्॥<br><br>अथाध्यात्मं यदेतद्गच्छतीव च मनोऽनेन<br>चैतदुपस्मरत्यभीक्ष्णं सङ्कल्पः॥<br><br>तद्धा तद्वनं नाम तद्वनमित्युपासितव्यम्<br>स य एतदेवं वेदाभि हैनं सर्वाणि भूतानि संवाञ्छन्ति॥</div>
+            <div class="v-translit">tasyaiṣa ādeśo yad vidyut<br>vyadyutadā iti nyn miyamīṣadā ity adhidaivatam ||<br><br>athādhyātmaṃ yad etad gacchatīva ca mano'nena<br>caitad upasmaranty abhīkṣṇaṃ saṅkalpaḥ ||<br><br>tad dhā tad vanaṃ nāma tad vanam ity upāsitavyam<br>sa ya etad evaṃ vedābhi hainaṃ sarvāṇi bhūtāni saṃvāñchanti ||</div>
+            <div class="wbw-label">Word by word — Mantra 2.3 (adhidaivata — the cosmic / divine analogy)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>तस्य</td><td>tasya</td><td>of That, of Brahman — gen. sing.; "of Brahman, this is the instruction"</td></tr>
+              <tr><td>एषः आदेशः</td><td>eṣa ādeśaḥ</td><td>this is the teaching / indication — eṣa (demonstrative, masc. nom.) + ādeśa (m., instruction, pointing); an upāsanā indication, not a definition</td></tr>
+              <tr><td>यत्</td><td>yat</td><td>as / like — relative pronoun neut., introducing the analogy</td></tr>
+              <tr><td>विद्युत्</td><td>vidyut</td><td>lightning — fem. nom.; the closest sensory analogy to the sudden flash of Brahman's self-recognition</td></tr>
+              <tr><td>व्यद्युतत्</td><td>vyadyutat</td><td>flashed / blazed forth — augmented aorist 3rd sing. of vi+√dyut (to shine, blaze); the sudden total illumination</td></tr>
+              <tr><td>आ इति</td><td>ā iti</td><td>— ah! thus — ā = interjection of sudden recognition; iti marks it as a quoted exclamation; the text is mimicking the experiential "ah!" of recognition</td></tr>
+              <tr><td>नि-मि-मिष-त्</td><td>ni-mi-miṣat</td><td>in the closing / opening of the eye — intensive of √miṣ (to open the eyes), augmented; the blink; duration = the flash of recognition</td></tr>
+              <tr><td>इति</td><td>iti</td><td>thus — closes the cosmic (adhidaivata) teaching section</td></tr>
+              <tr><td>अधिदैवतम्</td><td>adhidaivatam</td><td>in terms of the divine / cosmic — adhi (above, concerning) + daivata (divinity, cosmic powers); this is the "outer" or macrocosmic teaching</td></tr>
+            </tbody></table>
+            <div class="wbw-label">Word by word — Mantra 2.4 (adhyātma — the inner / Self analogy)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>अथ</td><td>atha</td><td>now, and next — transitional particle moving from cosmic to individual teaching</td></tr>
+              <tr><td>अध्यात्मम्</td><td>adhyātmam</td><td>in terms of the Self / individual — adhi (concerning) + ātman; the inner, subjective teaching</td></tr>
+              <tr><td>यत्</td><td>yat</td><td>that which / as if — introduces the inner analogy</td></tr>
+              <tr><td>एतत्</td><td>etat</td><td>this — referring to Brahman / the Self</td></tr>
+              <tr><td>गच्छति इव</td><td>gacchatīva</td><td>goes as if — gacchati (3rd sing. pres. of √gam) + iva (as if, like); the mind seems to reach toward Brahman but never actually reaches an object</td></tr>
+              <tr><td>च</td><td>ca</td><td>and — connective</td></tr>
+              <tr><td>मनः</td><td>manaḥ</td><td>the mind — nom. sing.; the subject that "goes toward" Brahman in the inner approach</td></tr>
+              <tr><td>अनेन</td><td>anena</td><td>by this (mind) — instrumental sing. of idam; through this very movement of the mind toward Brahman</td></tr>
+              <tr><td>च</td><td>ca</td><td>and — connecting the two clauses</td></tr>
+              <tr><td>एतत्</td><td>etat</td><td>this (Brahman) — the object of continuous remembrance</td></tr>
+              <tr><td>उपस्मरन्ति</td><td>upasmaranti</td><td>they remember / keep recollecting — 3rd pl. pres. of upa+√smṛ (to remember, recollect); the practice of turning toward Brahman again and again</td></tr>
+              <tr><td>अभीक्ष्णम्</td><td>abhīkṣṇam</td><td>again and again, repeatedly, constantly — adverb; the key word for practice: not once but continuously</td></tr>
+              <tr><td>सङ्कल्पः</td><td>saṅkalpaḥ</td><td>intention / will / mental resolve — sam+√kḷp; here: the faculty of will-directed attention that keeps returning to Brahman</td></tr>
+            </tbody></table>
+            <div class="wbw-label">Word by word — Mantra 2.5 (Tad Vana — the devotional name)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>तत् ह</td><td>tad dhā</td><td>that verily / that indeed — tat (Brahman) + ha (emphatic particle of assertion, Vedic)</td></tr>
+              <tr><td>तद्वनम्</td><td>tad-vanam</td><td>Tad Vana — compound: tat (that, Brahman) + vana (from √van = to wish, love, delight in); "the delight of That" or "the Desirable One" or "that which all beings desire"</td></tr>
+              <tr><td>नाम</td><td>nāma</td><td>by name, called — indeclinable; "is called by this name"</td></tr>
+              <tr><td>इति</td><td>iti</td><td>thus — marks the name as quoted</td></tr>
+              <tr><td>उपासितव्यम्</td><td>upāsitavyam</td><td>is to be meditated upon / worshipped — gerundive (future passive participle) of upa+√ās (to sit near, to worship); obligatory: "must be contemplated"</td></tr>
+              <tr><td>सः</td><td>saḥ</td><td>he — nom. sing.; the one who knows and worships thus</td></tr>
+              <tr><td>यः</td><td>yaḥ</td><td>who — relative pronoun</td></tr>
+              <tr><td>एतत् एवम्</td><td>etad evam</td><td>this thus — "this (Brahman) in this manner" (as Tad Vana)</td></tr>
+              <tr><td>वेद</td><td>veda</td><td>knows — 3rd sing. perf. of √vid (= pres. in force)</td></tr>
+              <tr><td>अभि ह एनम्</td><td>abhi ha enam</td><td>toward him indeed — abhi (toward) + ha (emphatic) + enam (acc. of enad, him); all beings turn toward / long for this knower</td></tr>
+              <tr><td>सर्वाणि भूतानि</td><td>sarvāṇi bhūtāni</td><td>all beings — sarva (all) + bhūta (pl. neut.); every creature of creation</td></tr>
+              <tr><td>संवाञ्छन्ति</td><td>saṃvāñchanti</td><td>long for, yearn toward, desire — sam+√vāñch (to wish intensely); 3rd pl. pres.; the spontaneous attraction all beings feel toward the jñānī</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>2.3 — Gambhirananda:</strong> "Its indication is this: it is like a flash of lightning — blink! Thus Brahman is taught in terms of the divine [daivata] aspect."<br><br><strong>2.4:</strong> "Then with reference to the Self: it is as if the mind reaches toward it; by this the mind recurrently (saṅkalpa, intention) remembers It."<br><br><strong>2.5 — Gambhirananda:</strong> "It is truly called Tad Vana (the delight of all). It is to be worshipped as Tad Vana. He who meditates on It thus — all beings will love him."</div>
+            <div class="m-shankara"><strong>Śaṅkara — The lightning analogy (2.3):</strong> "Like a flash of lightning" (vidyut) — Brahman is indicated not as a continuous object of meditation but as something that is suddenly recognised in each split second of consciousness. A bolt of lightning illuminates the entire landscape instantly, and in that flash the whole is seen. Similarly, Brahman is the illumination already present — recognised in each act of cognition. The "blink" (nyn = iti) marks the instant recognition, then it is gone as objectified memory — but was fully there.</div>
+            <div class="m-commentary"><strong>On "Tad Vana" (2.5):</strong> The Upaniṣad gives Brahman a devotional name here — Tad Vana, "the delight of That," or "the forest of That" (Śaṅkara reads it as "that in which all beings delight"). This is the Kena's bridge between jñāna and upāsanā: even Brahman beyond all attributes can be approached as the source of all delight, all meaning, all love. "He who knows It thus — all beings will love him" — this is the natural charisma of the jñānī: not acquired, but as the spontaneous radiation of Brahman through a transparent ego.</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">"Like a flash of lightning." In this very moment — before the thought about this moment arises — there is a bare awareness. Not "I am aware." Just awareness. The lightning. Then thought covers it again. Practice: notice the gap before the thought.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ KHAṆḌA III ═══════════════════════════════════ -->
+    <div class="screen" id="screen-kh3">
+      <div class="wit-wrap">
+        <div class="screen-header">
+          <h2>Khaṇḍa III</h2>
+          <p>तृतीयः खण्डः · The Yakṣa Parable · 12 Mantras</p>
+        </div>
+
+        <div class="mv-hero">
+          <div class="mv-label">Khaṇḍa III — Narrative Theme</div>
+          <div class="mv-sanskrit">तस्मिन् यक्षे ब्रह्म इति होवाच</div>
+          <div class="mv-english">The prose section: Brahman wins a victory for the gods. The gods, mistaking the victory as their own achievement, become arrogant. Brahman appears as an unknown Yakṣa. Agni fails. Vāyu fails. Indra, the greatest, approaches — and Uma Haimavatī reveals the secret. The narrative embodies the entire metaphysics of the verse section.</div>
+        </div>
+
+        <!-- Mantras 3.1–3.4: Setup + Agni -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">3.1–3.4</div>
+            <div class="class-name">The Victory and Agni's Failure</div>
+            <div class="class-sutras">ब्रह्म ह देवेभ्यो विजिग्ये</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Key Prose Sentences</div>
+            <div class="v-sanskrit">ब्रह्म ह देवेभ्यो विजिग्ये।<br>तस्य ह ब्रह्मणो विजये देवा अमहीयन्त।</div>
+            <div class="v-translit">brahma ha devebhyo vijigye |<br>tasya ha brahmaṇo vijaye devā amahīyanta ||</div>
+            <div class="wbw-label">Word by word — 3.1 (Opening)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>ब्रह्म</td><td>brahma</td><td>Brahman — neut. nom. sing.; the ultimate subject of the entire Upaniṣad, here acting as the real agent of the cosmic victory</td></tr>
+              <tr><td>ह</td><td>ha</td><td>verily, indeed — Vedic emphatic particle; marks what follows as historically / mythologically true</td></tr>
+              <tr><td>देवेभ्यः</td><td>devebhyaḥ</td><td>for the gods — dative plural of deva; Brahman won the victory on behalf of (for the benefit of) the gods, not they themselves</td></tr>
+              <tr><td>विजिग्ये</td><td>vijigye</td><td>won, conquered — 3rd sing. perfect ātmanepada of vi+√ji (to conquer); the perfect tense signals a completed mythological event with present relevance</td></tr>
+              <tr><td>तस्य</td><td>tasya</td><td>of that / his — gen. sing. of tat; referring to Brahman's victory</td></tr>
+              <tr><td>ह</td><td>ha</td><td>verily — emphatic; repeated for stress</td></tr>
+              <tr><td>ब्रह्मणः</td><td>brahmaṇaḥ</td><td>of Brahman — gen. sing.; the victory belongs to Brahman, not the gods</td></tr>
+              <tr><td>विजये</td><td>vijaye</td><td>in the victory — loc. sing. of vijaya; "in (the occasion of) Brahman's victory"</td></tr>
+              <tr><td>देवाः</td><td>devāḥ</td><td>the gods — nom. pl. of deva; Agni, Vāyu, Indra and all the celestial powers</td></tr>
+              <tr><td>अमहीयन्त</td><td>amahīyanta</td><td>became elated / glorified themselves — 3rd pl. imperfect ātmanepada of √mah (to be great, to exult); the prefix a- is the augment; "they began to think themselves great"</td></tr>
+            </tbody></table>
+            <div class="v-sanskrit" style="margin-top:14px;">किं त्वयि वीर्यमिति।<br>इदं सर्वं दहेयमिति।<br>तस्मै तृणं निदधौ।<br>तन्न शशाक दग्धुम्।</div>
+            <div class="v-translit">kiṃ tvayi vīryam iti |<br>idaṃ sarvaṃ daheyam iti |<br>tasmai tṛṇaṃ nidadhau |<br>tan na śaśāka dagdhum ||</div>
+            <div class="wbw-label">Word by word — 3.2–3.4 (Agni's test)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>किम्</td><td>kim</td><td>what — interrogative pronoun neut.; "what power?"</td></tr>
+              <tr><td>त्वयि</td><td>tvayi</td><td>in you — loc. sing. of tvad (2nd person pronoun); "what is the power residing in you?"</td></tr>
+              <tr><td>वीर्यम्</td><td>vīryam</td><td>power, prowess — neut. nom. sing. from vīra (hero); specifically: the active power of an element or god</td></tr>
+              <tr><td>इति</td><td>iti</td><td>thus — marks the end of direct speech</td></tr>
+              <tr><td>इदम् सर्वम्</td><td>idam sarvam</td><td>all this — idaṃ (this) + sarvam (all); the entire manifest world</td></tr>
+              <tr><td>दहेयम्</td><td>daheyam</td><td>I could burn — 1st sing. optative of √dah (to burn); Agni's claim of absolute power</td></tr>
+              <tr><td>तस्मै</td><td>tasmai</td><td>before him / for him — dative sing. of tat; Brahman places the grass "for" Agni to attempt</td></tr>
+              <tr><td>तृणम्</td><td>tṛṇam</td><td>a blade of grass — neut. acc. sing.; the most insignificant possible object; the test is total humiliation of the ego's claim</td></tr>
+              <tr><td>निदधौ</td><td>nidadhau</td><td>placed, set down — 3rd sing. perfect of ni+√dhā (to place, deposit); Brahman's deliberate act of placing the challenge</td></tr>
+              <tr><td>तत्</td><td>tat</td><td>that (blade of grass) — acc. sing.; the object of Agni's attempted burning</td></tr>
+              <tr><td>न शशाक</td><td>na śaśāka</td><td>was not able / could not — na + 3rd sing. perfect of √śak (to be able); the perfect tense shows complete, definitive failure</td></tr>
+              <tr><td>दग्धुम्</td><td>dagdhum</td><td>to burn — infinitive of √dah; the action Agni is utterly powerless to perform without Brahman's enabling power</td></tr>
+            </tbody></table>
+            <div class="m-commentary"><strong>Prose text (3.1):</strong> "brahma ha devebhyo vijigye tasya ha brahmaṇo vijaye devā amahīyanta." — "Brahman conquered for the gods. In the victory of Brahman, the gods became elated [with pride]." The gods claim: "Ours indeed is this victory, ours indeed is this greatness." Brahman, knowing their pride, appeared before them as a Yakṣa — a mysterious, unknown being.</div>
+            <div class="m-commentary" style="margin-top:10px;"><strong>Prose text (3.2–3.4) — Agni approaches:</strong> The gods sent Agni (Fire) to investigate. Brahman asked: "What power do you have?" Agni replied: "I can burn all that exists on earth." Brahman placed a blade of grass before Agni and said: "Burn this." Agni rushed at it with all his power — and could not burn it. Agni returned, saying "I could not find out what this Yakṣa is."</div>
+            <div class="m-shankara"><strong>Śaṅkara's allegory:</strong> Agni represents the power of speech and cognitive articulation. The "blade of grass" Agni cannot burn represents even the simplest object of knowledge — which Agni can name, but cannot truly penetrate. The point: all powers of knowledge, even the most refined, operate within Brahman's light and cannot turn that light upon Brahman itself. Agni burns by Brahman's power — without Brahman, there is no fire at all.</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">When you speak, describe, analyse, name — you are Agni. All your cognitive power cannot burn the grass of the question "what is awareness itself?" The very act of trying uses the power of the very thing you are trying to locate.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mantras 3.5–3.8: Vāyu -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">3.5–3.8</div>
+            <div class="class-name">Vāyu's Failure — The Breath Cannot Know the Source of Breath</div>
+            <div class="class-sutras">वायुर्वा इत्यब्रवीत्</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Key Prose Sentences — Vāyu's Encounter</div>
+            <div class="v-sanskrit">वायुर्वा अहमस्मि इत्यब्रवीत्।<br>मातरिश्वा वा अहमस्मि।<br>इदं सर्वमाददीयेति।<br>तन्न शशाकादातुम्।</div>
+            <div class="v-translit">vāyur vā aham asmi ity abravīt |<br>mātariśvā vā aham asmi |<br>idam sarvam ādadīyeti |<br>tan na śaśākādātum ||</div>
+            <div class="wbw-label">Word by word — 3.5–3.8</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>वायुः</td><td>vāyuḥ</td><td>Vāyu, Wind — nom. sing.; the deity of wind and prāṇa, second to be sent by the gods</td></tr>
+              <tr><td>वा</td><td>vā</td><td>indeed, verily — emphatic Vedic particle (not "or" here; this is the assertive vā)</td></tr>
+              <tr><td>अहम् अस्मि</td><td>aham asmi</td><td>I am — 1st sing. of √as; Vāyu identifies himself proudly</td></tr>
+              <tr><td>इति अब्रवीत्</td><td>ity abravīt</td><td>thus he said — iti (quotes speech) + abravīt (3rd sing. imperfect of √brū, to speak)</td></tr>
+              <tr><td>मातरिश्वा</td><td>mātariśvā</td><td>Mātariśvan — nom. sing.; epithet of Vāyu meaning "he who swells / breathes in the mother (space/air)"; the cosmic breath</td></tr>
+              <tr><td>इदम् सर्वम्</td><td>idam sarvam</td><td>all this — the entire manifest world, including everything Agni claimed he could burn</td></tr>
+              <tr><td>आददीय</td><td>ādadīya</td><td>I could blow away / carry off — 1st sing. optative ātmanepada of ā+√dā (here used in the sense of ā+√dā as "to take/carry away"); Vāyu's parallel claim to Agni's</td></tr>
+              <tr><td>इति</td><td>iti</td><td>thus — closes Vāyu's boast</td></tr>
+              <tr><td>तत्</td><td>tat</td><td>that (blade of grass) — the same test object as with Agni</td></tr>
+              <tr><td>न शशाक</td><td>na śaśāka</td><td>was not able — 3rd sing. perfect of √śak; total failure, identical to Agni's</td></tr>
+              <tr><td>आदातुम्</td><td>ādātum</td><td>to carry off, to lift — infinitive of ā+√dā; Vāyu could not even move the insignificant blade of grass</td></tr>
+            </tbody></table>
+            <div class="m-commentary"><strong>Prose text (3.5–3.8):</strong> The gods sent Vāyu (Wind). The Yakṣa asked: "What power do you have?" Vāyu said: "I can blow away all that exists on earth." Brahman placed the same blade of grass. Vāyu rushed at it with all his force — and could not move it. Vāyu returned, equally unable to report what the Yakṣa was.</div>
+            <div class="m-shankara"><strong>Śaṅkara on Vāyu:</strong> Vāyu represents prāṇa — the vital force, breath, life energy. The point is identical to Agni's: all vital functioning operates within Brahman. The breath cannot hold Brahman as an object because the breath is held BY Brahman. The same Upaniṣadic logic as 1.2: "It is the life of life (prāṇasya prāṇaḥ)." The vital force is powerful within the domain of life — but cannot even approach the source of life itself.</div>
+            <div class="m-commentary"><strong>Chinmayananda's reading:</strong> Agni = cognitive power (knowing faculty). Vāyu = vital power (life faculty). Both fail because both are instruments of Brahman. An instrument cannot investigate its operator. A torch cannot illuminate the sun. The failure of the gods is not their weakness — it is the nature of the relationship between finite instruments and the infinite ground.</div>
+          </div>
+        </div>
+
+        <!-- Mantras 3.9–3.12: Indra + Uma -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">3.9–3.12</div>
+            <div class="class-name">Indra and Uma Haimavatī — The Revelation</div>
+            <div class="class-sutras">सा ब्रह्मेति होवाच</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Key Prose Sentences — Indra and Uma</div>
+            <div class="v-sanskrit">स तस्मिन्नेव आकाशे स्त्रियमाजगाम<br>बहुशोभमानाम् उमां हैमवतीम्।<br>तां होवाच किमेतद्यक्षमिति।<br>ब्रह्मेति होवाच।</div>
+            <div class="v-translit">sa tasminn eva ākāśe striyam ājagāma<br>bahuśobhamānām umāṃ haimavatīm |<br>tāṃ hovāca kim etad yakṣam iti |<br>brahmeti hovāca ||</div>
+            <div class="wbw-label">Word by word — 3.9–3.12</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>सः</td><td>saḥ</td><td>he — nom. sing.; Indra, who had just approached the spot where the Yakṣa stood</td></tr>
+              <tr><td>तस्मिन् एव आकाशे</td><td>tasminn eva ākāśe</td><td>in that very space / ether — loc. sing. of ākāśa (the luminous sky/space); the Yakṣa had vanished, but in that same luminous space…</td></tr>
+              <tr><td>स्त्रियम्</td><td>striyam</td><td>a woman — acc. sing. of strī; the divine feminine presence of Knowledge</td></tr>
+              <tr><td>आजगाम</td><td>ājagāma</td><td>came upon, arrived at — 3rd sing. perfect of ā+√gam (to come toward); Indra did not seek her — she appeared</td></tr>
+              <tr><td>बहुशोभमानाम्</td><td>bahuśobhamānām</td><td>most brilliantly resplendent — acc. sing. fem. present participle of √śubh (to shine); bahu (much, greatly) + śobhamāna (shining); Uma blazes with the light of Brahman</td></tr>
+              <tr><td>उमाम्</td><td>umām</td><td>Uma — acc. sing.; the consort of Śiva, here appearing as Vidyā Devī (the goddess of Knowledge); she is the guru who reveals what the gods cannot find</td></tr>
+              <tr><td>हैमवतीम्</td><td>haimavatīm</td><td>daughter of Himavat (the Himalaya) — acc. sing. fem. patronymic from Himavat; the golden mountains = the highest abode of knowledge</td></tr>
+              <tr><td>ताम् ह उवाच</td><td>tāṃ hovāca</td><td>to her he said — tām (acc. of sā, her) + ha (emphatic) + uvāca (3rd sing. perfect of √vac, to speak)</td></tr>
+              <tr><td>किम् एतत् यक्षम्</td><td>kim etad yakṣam</td><td>what was this Yakṣa? — kim (what) + etat (this) + yakṣam (acc. of yakṣa, spirit/being); Indra's question, asked in humility</td></tr>
+              <tr><td>इति</td><td>iti</td><td>thus — marks end of Indra's question</td></tr>
+              <tr><td>ब्रह्म</td><td>brahma</td><td>Brahman — nom. sing.; Uma's answer is the single word that resolves everything</td></tr>
+              <tr><td>इति ह उवाच</td><td>iti hovāca</td><td>thus she said — iti + ha (emphatic) + uvāca (perfect of √vac); the single-word revelation delivered by grace</td></tr>
+            </tbody></table>
+            <div class="v-sanskrit" style="margin-top:14px;">तस्माद्वा एते देवा अतितराम् इवान्यान् देवान्<br>यदग्निर्वायुरिन्द्रस्ते ह्येनन्नेदिष्ठं पस्पर्शुः।</div>
+            <div class="v-translit">tasmād vā ete devā atitarām ivānyān devān<br>yad agnir vāyur indras te hy enan nediṣṭhaṃ pasparśuḥ ||</div>
+            <div class="wbw-label">Word by word — 3.11–3.12 (Indra's supremacy explained)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>तस्मात् वा</td><td>tasmād vā</td><td>therefore indeed — tasmāt (abl. of tat, "for this reason") + vā (emphatic); the narrative explains why the three gods are most honoured</td></tr>
+              <tr><td>एते देवाः</td><td>ete devāḥ</td><td>these gods — demonstrative + nom. pl.; Agni, Vāyu, Indra specifically</td></tr>
+              <tr><td>अतितराम् इव</td><td>atitarām iva</td><td>as if excelling greatly — atitarām (superlative adverb of ati, beyond, greatly) + iva (as if, like); they surpass the other gods</td></tr>
+              <tr><td>अन्यान् देवान्</td><td>anyān devān</td><td>the other gods — anyān (acc. pl. of anya, other) + devān (acc. pl.)</td></tr>
+              <tr><td>यत् अग्निः वायुः इन्द्रः</td><td>yad agnir vāyur indraḥ</td><td>that (because) Agni, Vāyu, Indra — yat (relative pronoun introducing the cause); the three named individually in ascending order</td></tr>
+              <tr><td>ते हि</td><td>te hi</td><td>they indeed — emphatic; these three specifically</td></tr>
+              <tr><td>एनत्</td><td>enat</td><td>it — acc. of enad; Brahman, referred to by the enclitic pronoun</td></tr>
+              <tr><td>नेदिष्ठम्</td><td>nediṣṭham</td><td>most closely, nearest — superlative of antika (near), neut. adverbial; "came closest to It"</td></tr>
+              <tr><td>पस्पर्शुः</td><td>pasparśuḥ</td><td>touched, came into contact with — 3rd pl. perfect of √spṛś (to touch); the perfect records the definitive sacred event: they touched Brahman most nearly</td></tr>
+            </tbody></table>
+            <div class="v-label" style="margin-top:14px;">The Climax of the Parable</div>
+            <div class="m-commentary"><strong>Prose text (3.9–3.12):</strong> The gods sent Indra, the king of gods, the most refined and powerful. But when Indra reached the place where the Yakṣa stood, the Yakṣa had vanished. In the space where the Yakṣa had been, Indra saw a most beautiful woman — Uma Haimavatī (the daughter of Himavat, consort of Śiva), resplendent with golden light. Indra asked her: "What was that Yakṣa?" Uma replied: "It was Brahman. In the victory of Brahman, you were elated with pride. Know: it was Brahman's victory, not yours." And thus Indra came to know Brahman.</div>
+            <div class="m-shankara"><strong>Śaṅkara on Uma Haimavatī:</strong> Uma is Vidyā — the power of Knowledge itself. She is Haimavatī — daughter of Himalaya, which Śaṅkara glosses as "the abode of great knowledge" (or Śiva's śakti as pure awareness). The gods could not find Brahman through direct effort — the Yakṣa vanished. Brahman cannot be found by seeking. But when Indra arrived in a state of humility (his failure to find the Yakṣa), Brahman appeared in a different form — the gracious teacher, Uma — and revealed itself. This is the Kena's teaching on grace: Brahman is not attained by force but recognized through grace when the ego's pride has been exhausted.</div>
+            <div class="m-commentary"><strong>Significance of Indra's partial success:</strong> Indra is a step ahead of Agni and Vāyu. He does not ask "what power do I have?" He simply approaches, in humility, to seek. But even Indra cannot find Brahman by seeking — only by receiving Uma's teaching. This models the relationship between inquiry (vicāra) and grace (anugraha): inquiry purifies the ego, but the final recognition comes from Brahman's own self-revelation through the teacher or the guru-śiṣya relationship.</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">You have been Agni (using all cognitive power). You have been Vāyu (using all life energy). You have been Indra (approaching with sincere inquiry but still seeking). Now Uma speaks. The Yakṣa was Brahman — and Brahman is what you already are. Can you stop seeking and simply receive this?</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ KHAṆḌA IV ═══════════════════════════════════ -->
+    <div class="screen" id="screen-kh4">
+      <div class="wit-wrap">
+        <div class="screen-header">
+          <h2>Khaṇḍa IV</h2>
+          <p>चतुर्थः खण्डः · Knowledge, Tapas, and the Final Teaching · 9 Mantras</p>
+        </div>
+
+        <div class="mv-hero">
+          <div class="mv-label">Khaṇḍa IV — Theme</div>
+          <div class="mv-sanskrit">तस्यै तपो दमः कर्मेति प्रतिष्ठा</div>
+          <div class="mv-english">Khaṇḍa IV delivers the practical teaching: the means of realisation, the nature of the knower of Brahman, and the supreme upāsanā. Brahman-knowledge rests on tapas (austerity), dama (sense-control), and karma (right action) as its foundation — and is expressed as "all the Vedas as its limbs, truth as its abode."</div>
+        </div>
+
+        <!-- Mantras 4.1–4.3 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">4.1–4.3</div>
+            <div class="class-name">Indra Supremely Blessed — The Fruit of Proximity</div>
+            <div class="class-sutras">इन्द्रो मतरिश्वानौ</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Key Prose Sentences — Why Indra Excels</div>
+            <div class="v-sanskrit">तस्माद्वा एते देवा अतितराम् इवान्यान् देवान्<br>यदग्निर्वायुरिन्द्रः।<br>स ह्येनन्नेदिष्ठं पस्पर्श।<br>स हैनत्प्रथमो विदाञ्चकार ब्रह्मेति।</div>
+            <div class="v-translit">tasmād vā ete devā atitarām ivānyān devān<br>yad agnir vāyur indraḥ |<br>sa hy enan nediṣṭhaṃ pasparśa |<br>sa hainat prathamo vidāñcakāra brahmeti ||</div>
+            <div class="wbw-label">Word by word — 4.1–4.3</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>तस्मात् वा</td><td>tasmād vā</td><td>therefore indeed — tasmāt (abl. causal, "for this reason") + vā (emphatic particle); introducing the conclusion of the Yakṣa narrative</td></tr>
+              <tr><td>एते देवाः</td><td>ete devāḥ</td><td>these gods — nom. pl.; Agni, Vāyu, Indra named as a group, distinguished from all other gods</td></tr>
+              <tr><td>अतितराम् इव</td><td>atitarām iva</td><td>as if greatly exceeding — atitarām (adverb, superlative of ati, beyond) + iva (as if); the iva qualifies: they surpass as a matter of recognition, not mere rank</td></tr>
+              <tr><td>अन्यान् देवान्</td><td>anyān devān</td><td>the other gods — acc. pl.; all the other celestial powers who did not approach Brahman</td></tr>
+              <tr><td>यत् अग्निः वायुः इन्द्रः</td><td>yad agnir vāyur indraḥ</td><td>in that Agni, Vāyu, Indra — yat (relative/causal) introducing the reason; the three are named in ascending order of proximity to Brahman</td></tr>
+              <tr><td>सः हि</td><td>sa hi</td><td>he indeed — saḥ (nom. sing., Indra specifically) + hi (emphatic causal: "for, because"); singling out Indra as the supreme among even these three</td></tr>
+              <tr><td>एनत्</td><td>enat</td><td>it — acc. of enā (enclitic pronoun); Brahman, referred to obliquely as is appropriate for what cannot be named directly</td></tr>
+              <tr><td>नेदिष्ठम्</td><td>nediṣṭham</td><td>most nearly / closest — superlative of antika (near), used adverbially; Indra touched Brahman more nearly than any other god</td></tr>
+              <tr><td>पस्पर्श</td><td>pasparśa</td><td>touched — 3rd sing. perfect of √spṛś (to touch); perfect = definitive sacred event; the very touching of Brahman, however brief, confers supreme knowledge</td></tr>
+              <tr><td>सः ह एनत्</td><td>sa hainat</td><td>he indeed it (Brahman) — triple emphasis: Indra + ha (emphatic) + enat (Brahman)</td></tr>
+              <tr><td>प्रथमः</td><td>prathamaḥ</td><td>first, foremost — nom. sing. masc. of prathama; Indra was the first (among the gods) to truly know</td></tr>
+              <tr><td>विदाञ्चकार</td><td>vidāñcakāra</td><td>came to know — periphrastic perfect of √vid (to know); vidām + cakāra (perfect of √kṛ); a solemn, emphatic perfect construction used for the most important events</td></tr>
+              <tr><td>ब्रह्म इति</td><td>brahmeti</td><td>"It is Brahman" — the content of Indra's knowledge; iti closes the quoted recognition: he knew "this is Brahman"</td></tr>
+            </tbody></table>
+            <div class="m-commentary"><strong>Text:</strong> The Upaniṣad explains why Indra excels all other gods: Agni touched the Yakṣa and tried to know it. Vāyu touched the Yakṣa and tried to know it. Indra was the closest — he was approaching the Yakṣa when it vanished. Furthermore, Uma directly gave Indra the teaching. Therefore among these three, Indra is the most blessed — and among all the gods, Indra excels — because he came closest to Brahman and received direct instruction.</div>
+            <div class="m-shankara"><strong>Śaṅkara's note on spiritual grades:</strong> The gradation Agni → Vāyu → Indra is not about cosmic power but about proximity to self-knowledge. Agni tried to demonstrate his own power (ego of capability). Vāyu tried to demonstrate his power (ego of vitality). Indra approached in inquiry without demonstrating power — and was therefore receptive to Uma's teaching. The capacity to receive (śraddhā, receptivity) is more important than any intrinsic power.</div>
+          </div>
+        </div>
+
+        <!-- Mantras 4.4–4.6 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">4.4–4.6</div>
+            <div class="class-name">The Upadeśa — Brahman Is the Basis of All Powers</div>
+            <div class="class-sutras">तस्यैष आदेशः</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Mantras 4.4 & 4.5 — The Teaching Repeated</div>
+            <div class="v-sanskrit">तस्यैष आदेशो यद्विद्युत् व्यद्युतदा इतीन्न्यमीमिषदा इत्यधिदैवतम्॥<br><br>अथाध्यात्मं यदेतद्गच्छतीव च मनोऽनेन<br>चैतदुपस्मरत्यभीक्ष्णं सङ्कल्पः॥</div>
+            <div class="v-translit">tasyaiṣa ādeśo yad vidyut vyadyutadā iti — ninyan mīmīṣadā iti — adhidaivatam |<br><br>athādhyātmaṃ yad etad gacchatīva ca mano'nena caitad upasmaranty abhīkṣṇaṃ saṅkalpaḥ ||</div>
+            <div class="wbw-label">Word by word — 4.4 (lightning teaching — adhidaivata)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>तस्य एषः आदेशः</td><td>tasyaiṣa ādeśaḥ</td><td>of That (Brahman) this is the teaching / indication — tasya (gen., Brahman's) + eṣaḥ (this) + ādeśaḥ (m., instruction, pointing); not a definition but a finger pointing at the moon</td></tr>
+              <tr><td>यत् विद्युत्</td><td>yad vidyut</td><td>as (it is with) lightning — yat (relative, "as") + vidyut (fem. nom., lightning); the nearest natural analogy</td></tr>
+              <tr><td>व्यद्युतत्</td><td>vyadyutat</td><td>blazed/flashed — 3rd sing. augmented aorist of vi+√dyut (to shine, blaze); the violent sudden total illumination</td></tr>
+              <tr><td>आ इति</td><td>ā iti</td><td>ah! — exclamatory particle ā + iti (marking it as quoted); the instant of recognition, reproduced phonically in the text</td></tr>
+              <tr><td>नि-न्यमीमिषत्</td><td>ninyan mīmīṣat</td><td>in the moment of the eye's closing (winking) — intensive aorist/descriptive of √miṣ (to open/close the eyes); the blink = the duration of the flash of recognition</td></tr>
+              <tr><td>आ इति</td><td>ā iti</td><td>ah! — the second exclamation, marking the blink itself as a moment of recognition</td></tr>
+              <tr><td>अधिदैवतम्</td><td>adhidaivatam</td><td>with reference to the divine / cosmic — adhi (concerning) + daivata (the cosmic gods / natural phenomena); this section of the teaching is the "outer" (bāhya) approach</td></tr>
+            </tbody></table>
+            <div class="wbw-label">Word by word — 4.5 (Self-teaching — adhyātma)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>अथ अध्यात्मम्</td><td>athādhyātmam</td><td>now with reference to the Self — atha (transitional, "now") + adhyātmam (adv. acc., concerning the ātman); the "inner" (āntara) teaching section</td></tr>
+              <tr><td>यत् एतत्</td><td>yad etat</td><td>that which this — relative + demonstrative; "that which (Brahman) seems to be…"</td></tr>
+              <tr><td>गच्छति इव</td><td>gacchatīva</td><td>goes as if — gacchati (3rd sing. pres. of √gam) + iva (as if); the mind does not actually reach Brahman as a destination; it only seems to approach</td></tr>
+              <tr><td>च मनः</td><td>ca manaḥ</td><td>and the mind — ca (connective) + manaḥ (nom., the mind); the mind is the instrument of the inner approach</td></tr>
+              <tr><td>अनेन</td><td>anena</td><td>by this / through this — instrumental sing. of idam; by this very movement of attention toward Brahman</td></tr>
+              <tr><td>च एतत्</td><td>ca etat</td><td>and this (Brahman) — connective + demonstrative acc.; the object of the repeated remembrance</td></tr>
+              <tr><td>उपस्मरन्ति</td><td>upasmaranti</td><td>they (constantly) recollect / remember — 3rd pl. pres. of upa+√smṛ (to remember, call to mind); upa adds the sense of "close attention"</td></tr>
+              <tr><td>अभीक्ष्णम्</td><td>abhīkṣṇam</td><td>again and again, constantly — the key word for sādhana; Brahman is not realised in a single moment of meditation but through sustained, repeated turning of attention</td></tr>
+              <tr><td>सङ्कल्पः</td><td>saṅkalpaḥ</td><td>intention / will / mental resolve — sam+√kḷp; here not "thought" but the will-faculty that repeatedly re-orients toward Brahman as its ground</td></tr>
+            </tbody></table>
+            <div class="v-label" style="margin-top:14px;">Mantra 4.6 — The Upaniṣad Declared</div>
+            <div class="v-sanskrit">उपनिषदं भो ब्रूहीत्युक्ता त उपनिषत्।</div>
+            <div class="v-translit">upaniṣadaṃ bho brūhīty uktā ta upaniṣat |</div>
+            <div class="wbw-label">Word by word — 4.6</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>उपनिषदम्</td><td>upaniṣadam</td><td>the Upaniṣad / secret teaching — acc. sing. of upaniṣad (fem.); upa (near) + ni (down) + √sad (to sit); "sitting down near (the teacher)" — the secret transmitted in proximity</td></tr>
+              <tr><td>भोः</td><td>bhoḥ</td><td>O sir / revered one — vocative particle of respectful address</td></tr>
+              <tr><td>ब्रूहि</td><td>brūhi</td><td>please tell — 2nd sing. imperative of √brū (to speak); the student's direct request</td></tr>
+              <tr><td>इति</td><td>iti</td><td>thus — marks end of the student's quoted request</td></tr>
+              <tr><td>उक्ता</td><td>uktā</td><td>has been told / spoken — fem. nom. sing. p.p.p. of √vac; the teacher's response; the entire teaching just given IS the Upaniṣad</td></tr>
+              <tr><td>ते</td><td>te</td><td>to you — enclitic dative of tvad (2nd person sing.)</td></tr>
+              <tr><td>उपनिषत्</td><td>upaniṣat</td><td>the Upaniṣad — nom. sing. fem.; the secret teaching has already been declared in what preceded; the teacher points back to what was said</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>Gambhirananda:</strong> "Its teaching is as follows: This is like a flash of lightning — ah! In the opening of the eye it manifests, thus in terms of the divine. Now in terms of the Self: it is as if the mind moves toward it; by this mind one constantly remembers it — through the repeated intention (saṅkalpa)."</div>
+            <div class="m-shankara"><strong>Śaṅkara — adhidaivata and adhyātma:</strong> Two approaches to Brahman-recognition are given. "Adhidaivata" — through natural phenomena: the lightning flash is the closest natural analogy to the sudden recognition of Brahman — total illumination, instant, then gone from objective experience. "Adhyātma" — through inner experience: the mind seems to "go toward" Brahman in meditation, never quite grasping it, but being led ever inward by the intention (saṅkalpa) to know it. Both paths converge: sudden outer recognition and gradual inner approach point to the same ground.</div>
+            <div class="m-commentary"><strong>The saṅkalpa practice:</strong> "By repeated intention (saṅkalpa) one remembers It constantly." Saṅkalpa here is not a goal-directed intention but a continuous orientation of the mind toward the ground of awareness. This is upāsanā — the practice of repeatedly turning the mind toward Brahman not as a distant object but as the present substratum. Over time, this orientation becomes the natural resting state of the purified mind.</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor</div>
+              <div class="anchor-text">Set an intention: "For the next hour, I will repeatedly remember that the awareness in which all my thoughts arise is Brahman." Not as a belief, not as a visualization — just as a remembering. This is saṅkalpa in the Kena's sense.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mantras 4.7–4.9 -->
+        <div class="class-item">
+          <div class="class-hdr" onclick="toggleClass(this)">
+            <div class="class-num">4.7–4.9</div>
+            <div class="class-name">The Fruit and the Foundation — Final Teaching</div>
+            <div class="class-sutras">तस्यै तपो दमः कर्म प्रतिष्ठा</div>
+            <div class="class-arr">›</div>
+          </div>
+          <div class="class-body">
+            <div class="v-label">Closing Mantras</div>
+            <div class="v-sanskrit">तस्यै तपो दमः कर्मेति प्रतिष्ठा।<br>वेदाः सर्वाङ्गानि। सत्यमायतनम्॥<br><br>यो वा एतामेवं वेदापहत्य पाप्मानमनन्ते स्वर्गे लोके ज्येये प्रतितिष्ठति प्रतितिष्ठति॥</div>
+            <div class="v-translit">tasyai tapo damaḥ karmeti pratiṣṭhā |<br>vedāḥ sarvāṅgāni | satyam āyatanam ||<br><br>yo vā etām evaṃ vedāpahatya pāpmānam anante svarge loke jyeye pratitiṣṭhati pratitiṣṭhati ||</div>
+            <div class="wbw-label">Word by word — 4.7 (the triple foundation)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>तस्यै</td><td>tasyai</td><td>for it / of it — dative/genitive feminine sing. of tat; referring to the upaniṣad or Brahman-knowledge just declared; "for this (knowledge)"</td></tr>
+              <tr><td>तपः</td><td>tapaḥ</td><td>austerity, heat — neut. nom. sing. from √tap (to heat, burn); not merely physical asceticism but the sustained endurance that burns away mental impurities</td></tr>
+              <tr><td>दमः</td><td>damaḥ</td><td>restraint of the senses — masc. nom. sing. from √dam (to tame, subdue); specifically: the withdrawal of the sense organs from their objects, leaving the mind free for inner inquiry</td></tr>
+              <tr><td>कर्म</td><td>karma</td><td>action, duty — neut. nom. sing. from √kṛ (to do, make); here: right action performed without ego-claim; duty fulfilled as worship</td></tr>
+              <tr><td>इति</td><td>iti</td><td>thus — groups the three as a defined set; "these (three), namely: tapas, dama, karma"</td></tr>
+              <tr><td>प्रतिष्ठा</td><td>pratiṣṭhā</td><td>foundation, basis, support — fem. nom. sing. of prati+√sthā (to stand upon); the ground on which Brahman-knowledge rests; without these, the knowledge has no stable support in the personality</td></tr>
+            </tbody></table>
+            <div class="wbw-label">Word by word — 4.8 (the Vedas as limbs; truth as home)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>वेदाः</td><td>vedāḥ</td><td>the Vedas — nom. pl. masc. of veda; all four Vedas and their auxiliaries (vedāṅgas); the entire corpus of Vedic learning</td></tr>
+              <tr><td>सर्व-अङ्गानि</td><td>sarvāṅgāni</td><td>all the limbs — sarva (all) + aṅgāni (neut. pl. of aṅga, limb, member); the Vedas are as limbs (supporting organs) of this knowledge, not the knowledge itself</td></tr>
+              <tr><td>सत्यम्</td><td>satyam</td><td>truth, the Real — neut. nom. sing. of satya; from sat (being, real) + ya (having the nature of); here: truth both as ethical conduct (satya-vāda) and as ontological Reality (Brahman)</td></tr>
+              <tr><td>आयतनम्</td><td>āyatanam</td><td>abode, home, resting-place — neut. nom. sing. from ā+√yat (to extend, rest); the place where Brahman-knowledge lives and is at home; truth is where it dwells</td></tr>
+            </tbody></table>
+            <div class="wbw-label">Word by word — 4.9 (the fruit of knowing; double pratitiṣṭhati)</div>
+            <table class="wbw"><thead><tr><th>Sanskrit</th><th>IAST</th><th>Meaning</th></tr></thead><tbody>
+              <tr><td>यः वा</td><td>yo vā</td><td>he who indeed / whoever — yaḥ (relative pronoun nom. sing.) + vā (emphatic); the universal scope: any person who knows this</td></tr>
+              <tr><td>एताम् एवम्</td><td>etām evam</td><td>this (teaching) thus — etām (acc. fem. sing. of etat, referring to the upaniṣad) + evam (thus, in this manner)</td></tr>
+              <tr><td>वेद</td><td>veda</td><td>knows — 3rd sing. perfect of √vid; the perfect = present state of realisation, not a past event</td></tr>
+              <tr><td>अपहत्य</td><td>apahatya</td><td>having struck away / repelled — gerund of apa+√han (to strike away, destroy); the act of destroying the superimposition of finitude upon the infinite</td></tr>
+              <tr><td>पाप्मानम्</td><td>pāpmānam</td><td>sin / evil / ignorance — acc. sing. of pāpman (masc.); in Śaṅkara's reading: not merely moral sin but the fundamental avidyā (ignorance) that makes one identify with the finite</td></tr>
+              <tr><td>अनन्ते</td><td>anante</td><td>in the infinite / endless — loc. sing. of ananta (a + anta, without end); the nature of Brahman itself: boundless</td></tr>
+              <tr><td>स्वर्गे</td><td>svarge</td><td>in the blissful / luminous — loc. sing. of svarga (sva = one's own + ga = going; the self-luminous); not "heaven" as a place but the self-luminous nature of Brahman</td></tr>
+              <tr><td>लोके</td><td>loke</td><td>in the world / realm — loc. sing. of loka; here: the "world" of Brahman, meaning Brahman itself experienced as one's own nature</td></tr>
+              <tr><td>ज्येये</td><td>jyeye</td><td>in the supreme / the greatest — loc. sing. of jyeyas (superlative of jya, great); the superlative: the highest of all possible "worlds"</td></tr>
+              <tr><td>प्रतितिष्ठति</td><td>pratitiṣṭhati</td><td>becomes firmly established — 3rd sing. pres. of prati+√sthā (to stand firmly upon); the double repetition (pratitiṣṭhati pratitiṣṭhati) is the Upaniṣad's final emphasis: not tentative, not temporary — utterly and permanently established in Brahman</td></tr>
+              <tr><td>प्रतितिष्ठति</td><td>pratitiṣṭhati</td><td>(repeated) — the doubling of the verb is the ānuprāsa (anaphora) device of Vedic emphasis; Chinmayananda: "established — yes, truly established." The Upaniṣad ends not with a question but with the certainty of liberation.</td></tr>
+            </tbody></table>
+            <div class="transl"><strong>4.8 — Gambhirananda:</strong> "For It [Brahman-knowledge], austerity (tapas), restraint (dama), and action (karma) are the foundation. The Vedas are its limbs; truth is its abode."<br><br><strong>4.9:</strong> "He who knows this, having repelled evil, becomes firmly established in the infinite, supreme, blissful world — he becomes firmly established."</div>
+            <div class="m-shankara"><strong>Śaṅkara on the triple foundation:</strong><br><em>Tapas</em> — not merely physical austerity but the burning away of attachment through endurance. The capacity to bear without disturbance what cannot be avoided.<br><em>Dama</em> — restraint of the senses. Not suppression but the redirection of sensory energy toward the inner inquiry.<br><em>Karma</em> — right action, duty fulfilled without ego. The Kena puts action as a foundation of knowledge — karma is not opposed to jñāna but prepares the citta for it by removing the grosser kleśas.<br><br>"Vedāḥ sarvāṅgāni" — all the Vedas are as the limbs (aṅga) of this knowledge. Meaning: ritual, grammar, philosophy, astronomy — all of Vedic learning is in service of this single recognition. "Satyam āyatanam" — truth is its home, its abode, its resting place.</div>
+            <div class="m-commentary"><strong>Chinmayananda on the double repetition "pratitiṣṭhati pratitiṣṭhati":</strong> The text says "he becomes established, established" — the repetition in Upaniṣadic style signals emphasis and certainty. This is not future-oriented. "He becomes established in the blissful infinite" — this is describing the immediate reality of the one who knows. The "infinite supreme blissful world" (anante svarge loke) is not a location after death; it is the nature of Brahman itself, recognized here and now. "Having repelled evil (pāpman)" means: the superimposition of finitude upon the infinite has been dissolved.</div>
+            <div class="anchor-box">
+              <div class="anchor-label">Contemplation Anchor · The Final Anchor of Kena</div>
+              <div class="anchor-text">Tapas — can you bear the discomfort of not-knowing without filling it with mental constructs?<br>Dama — can you withdraw the mind from its habitual outward movement, just for this moment?<br>Karma — have you acted rightly today, without demanding a particular result?<br><br>These three are the preparation. The recognition itself is the response of Brahman to this preparation — it cannot be forced. But the preparation can be made now.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ REFERENCE ═══════════════════════════════════ -->
+    <div class="screen" id="screen-reference">
+      <div class="wit-wrap">
+        <div class="screen-header">
+          <h2>Mantra Index</h2>
+          <p>सर्वमन्त्राः · All 34 mantras · Quick reference</p>
+        </div>
+
+        <div class="wit-tabs" id="ref-tabs">
+          <button class="wit-tab active" onclick="switchRefTab(1,this)">Khaṇḍa I</button>
+          <button class="wit-tab" onclick="switchRefTab(2,this)">Khaṇḍa II</button>
+          <button class="wit-tab" onclick="switchRefTab(3,this)">Khaṇḍa III</button>
+          <button class="wit-tab" onclick="switchRefTab(4,this)">Khaṇḍa IV</button>
+        </div>
+
+        <div id="ref-list"></div>
+      </div>
+    </div>
+
+  </div><!-- /#content -->
+
+  <!-- ── BOTTOM NAV ──────────────────────────────────── -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" onclick="navigate('home',this)">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-btn" onclick="navigate('overview',this)">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z"/><path d="M12 8v4l3 3"/></svg></div>
+      <span class="nav-label">Overview</span>
+    </button>
+    <button class="nav-btn" onclick="navigate('kh1',this)">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/></svg></div>
+      <span class="nav-label">Khaṇḍas</span>
+    </button>
+    <button class="nav-btn" onclick="navigate('reference',this)">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+      <span class="nav-label">Index</span>
+    </button>
+  </nav>
+
+</div><!-- /#app -->
+
+<script>
+/* ── TIME ─────────────────────────────────────────── */
+function updateTime(){
+  var d=new Date();
+  var h=d.getHours(), m=d.getMinutes();
+  document.getElementById('hdr-time').textContent=
+    (h<10?'0':'')+h+':'+(m<10?'0':'')+m;
+  var greet='Svādhyāya';
+  if(h<5)greet='Brahmamuhūrta';
+  else if(h<12)greet='Prātaḥ-svādhyāya';
+  else if(h<17)greet='Madhyāhna-svādhyāya';
+  else if(h<21)greet='Sāyaṃ-svādhyāya';
+  else greet='Rātri-svādhyāya';
+  var gp=document.getElementById('greeting-period');
+  if(gp)gp.textContent=greet;
+}
+setInterval(updateTime,30000);
+updateTime();
+
+/* ── NAVIGATION ───────────────────────────────────── */
+function navigate(id, btn){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  var t=document.getElementById('screen-'+id);
+  if(t)t.classList.add('active');
+  document.getElementById('content').scrollTop=0;
+  var navId = /^kh/.test(id) ? 'kh1' : id;
+  document.querySelectorAll('.nav-btn').forEach(function(b){
+    var active = b.getAttribute('onclick').includes("'"+navId+"'");
+    b.classList.toggle('active', active);
+    if(active)b.setAttribute('aria-current','page');
+    else b.removeAttribute('aria-current');
+  });
+  var heading = t && t.querySelector('h1,h2');
+  if(heading){ heading.tabIndex=-1; heading.focus({preventScroll:true}); }
+}
+
+/* ── TOGGLE FUNCTIONS ─────────────────────────────── */
+function toggleMantra(hdr){
+  var body=hdr.nextElementSibling;
+  var open=hdr.classList.contains('open');
+  hdr.classList.toggle('open',!open);
+  body.classList.toggle('open',!open);
+}
+function toggleClass(hdr){
+  var body=hdr.nextElementSibling;
+  var open=hdr.classList.contains('open');
+  hdr.classList.toggle('open',!open);
+  body.classList.toggle('open',!open);
+}
+function switchRefTab(kh, btn){
+  document.querySelectorAll('#ref-tabs .wit-tab').forEach(function(t){t.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  renderRefList(kh);
+  document.getElementById('content').scrollTop=0;
+}
+
+/* ── MANTRA INDEX DATA ────────────────────────────── */
+var MANTRAS = {
+1: [
+  ["1.1","केनेषितं पतति प्रेषितं मनः","kenéṣitaṃ patati préṣitaṃ manaḥ","By whom directed does the mind fly forth? By whom commanded does the first breath go?"],
+  ["1.2","श्रोत्रस्य श्रोत्रं मनसो मनो यत्","śrotrasya śrotraṃ manaso mano yat","That is the ear of the ear, the mind of the mind — the eye of the eye. Having abandoned the senses, the wise become immortal."],
+  ["1.3","न तत्र चक्षुर्गच्छति न वाग्गच्छति","na tatra cakṣur gacchati na vāg gacchati","The eye does not go there, nor speech, nor mind. We do not know how anyone could teach this."],
+  ["1.4","अन्यदेव तद्विदितादथो अविदितादधि","anyad eva tad viditād atho aviditād adhi","It is other than the known. And again, it is beyond the unknown. Thus we have heard from the ancients."],
+  ["1.5","यस्यामतं तस्य मतं मतं यस्य न वेद सः","yasyāmataṃ tasya mataṃ mataṃ yasya na veda saḥ","He by whom It is not thought, by him It is thought. He who thinks he knows It, knows It not. It is unknown to those who know; known to those who know not."],
+  ["1.6","प्रतिबोधविदितं मतममृतत्वं हि विन्दते","pratibodha-viditaṃ matam amṛtatvaṃ hi vindate","Known in every state of cognition — this is considered the truth. Through the Self one obtains strength; through knowledge one attains immortality."],
+  ["1.7","इह चेदवेदीदथ सत्यमस्ति","iha ced avedīd atha satyam asti","If one has known It here, then there is truth. If not, then there is great destruction."],
+  ["1.8","भूतेषु भूतेषु विचित्य धीराः","bhūteṣu bhūteṣu vicitya dhīrāḥ","The wise, discerning It in all beings, on departing from this world become immortal."]
+],
+2: [
+  ["2.1","मन्ये विदितमिति नो न विदितं परं मतम्","manye viditam iti no na viditaṃ paraṃ matam","I think I know It — not so, nor is It unknown to me. He among us who knows this boundary: knows It truly."],
+  ["2.2","यस्यामतं तस्य मतम् (reprise)","yasyāmataṃ tasya matam (reprise)","He by whom It is not thought, by him It is thought. He who thinks he has found It — he knows It not."],
+  ["2.3","तस्यैष आदेशो यद्विद्युत्","tasyaiṣa ādeśo yad vidyut","Its indication is this: it is like a flash of lightning. Ah! And the eye blinks — thus the divine teaching."],
+  ["2.4","अथाध्यात्मं यदेतद्गच्छतीव च मनः","athādhyātmaṃ yad etad gacchatīva ca manaḥ","And in terms of the Self: it is as if the mind moves toward it. By the mind one repeatedly remembers it through saṅkalpa."],
+  ["2.5","तद्धा तद्वनं नाम तद्वनमित्युपासितव्यम्","tad dhā tad vanaṃ nāma tad vanam ity upāsitavyam","It is truly called Tad Vana — the delight of all. It is to be meditated upon as Tad Vana. All beings will love one who knows It thus."]
+],
+3: [
+  ["3.1","ब्रह्म ह देवेभ्यो विजिग्ये","brahma ha devebhyo vijigye","Brahman won the victory for the gods. In Brahman's victory, the gods became elated with pride."],
+  ["3.2","त एतस्मिन् यक्षे किं स्विदिदं यक्षमिति","ta etasmin yakṣe kiṃ svid idaṃ yakṣam iti","Among the gods, they did not discern what this Yakṣa was. They sent Agni to investigate it."],
+  ["3.3","तमभ्यवदत् कोऽसीति","tam abhyavadat ko'sīti","The Yakṣa asked Agni: 'Who are you?' Agni replied: 'I am Agni, I am Jātavedas (the knower of all creatures).'"],
+  ["3.4","किं त्वयि वीर्यमिति","kiṃ tvayi vīryam iti","'What power is in you?' 'I can burn all that exists on earth.' Brahman placed a blade of grass and said: 'Burn this.' Agni rushed at it with all his might and could not burn it."],
+  ["3.5","ततो निववृते नैतदशकं विज्ञातुं","tato nivavṛte naitad aśakaṃ vijñātuṃ","Agni returned, saying: 'I could not find out what this Yakṣa is.' The gods then sent Vāyu."],
+  ["3.6","वायुर्वा इत्यब्रवीत्","vāyur vā ity abravīt","'I am Vāyu, I am Mātariśvan (the all-pervading wind).' 'What power is in you?' 'I can blow away all that exists on earth.'"],
+  ["3.7","तस्मै तृणं निदधौ","tasmai tṛṇaṃ nidadhau","Brahman placed a blade of grass. Vāyu rushed at it with all his force and could not move it. Vāyu returned equally baffled."],
+  ["3.8","ततो निववृते नैतदशकं विज्ञातुम्","tato nivavṛte naitad aśakaṃ vijñātum","'I could not discover what this Yakṣa is.' Then the gods spoke to Indra: 'O Maghavan, find out what this spirit is.'"],
+  ["3.9","तस्यां दिशि स्त्रियमाजगाम","tasyāṃ diśi striyam ājagāma","Indra went toward it, but the Yakṣa disappeared. In that same direction, Indra saw a most beautiful woman — Uma, daughter of Himavat."],
+  ["3.10","तां होवाच किमेतद्यक्षमिति","tāṃ hovāca kim etad yakṣam iti","He asked her: 'What was that Yakṣa?' She replied: 'It is Brahman. In Brahman's victory you were elated. Know — it was Brahman's victory, not yours.'"],
+  ["3.11","तस्मादेव इन्द्रो मतरिश्वानसंस्पृश्य","tasmād eva indro matariśvāna-saṃspṛśya","For this reason Indra excels all other gods — he came closest to Brahman, and Uma gave him knowledge of Brahman directly."],
+  ["3.12","एतद्ध वाव तदिन्द्रं पुरस्ताद्","etad dha vāva tad indraṃ purastād","For this reason Indra, Vāyu, and Agni are the foremost among the gods — Indra above all — for he touched Brahman most closely."]
+],
+4: [
+  ["4.1","स तस्मिन्नेव ब्रह्मणि विदिते","sa tasminn eva brahmaṇi vidite","With Brahman thus known, the truth is established: it was not the gods' victory — it was Brahman's."],
+  ["4.2","यस्मिन्नेवं वेद","yasminn evaṃ veda","He who knows Brahman in this manner — the upadeśa is given to him as follows."],
+  ["4.3","तस्यैष आदेशः","tasyaiṣa ādeśaḥ","The teaching for the seeker: it is like the flash of lightning — thus in the cosmic aspect; and like the movement of the mind — thus in the individual aspect."],
+  ["4.4","अथाध्यात्मं यदेतद्गच्छतीव मनः","athādhyātmaṃ yad etad gacchatīva manaḥ","The mind goes toward it, as it were — and through repeated saṅkalpa the mind continually returns to this recognition."],
+  ["4.5","तद्ध तद्वनं नाम","tad dha tad vanaṃ nāma","It is known as Tad Vana — 'the delight of That.' As Tad Vana it is to be contemplated. All beings will love the one who knows it thus."],
+  ["4.6","उपनिषदं भो ब्रूहीति","upaniṣadaṃ bho brūhīti","The disciple asks: 'Tell me the Upaniṣad.' The teacher says: 'The Upaniṣad has been told to you.'"],
+  ["4.7","तपो दमः कर्म प्रतिष्ठा","tapo damaḥ karma pratiṣṭhā","For this Brahman-knowledge: tapas, dama, and karma are the foundation. The Vedas are its limbs. Truth is its abode."],
+  ["4.8","वेदाः सर्वाङ्गानि सत्यमायतनम्","vedāḥ sarvāṅgāni satyam āyatanam","All the Vedas are the limbs of this knowledge. Truth (satya) is its home, its resting place."],
+  ["4.9","यो वा एतामेवं वेद","yo vā etām evaṃ veda","He who knows this — having dispelled sin — becomes firmly established in the infinite, supreme, blissful world. He becomes established, established."]
+]
+};
+
+var refCurrentKhanda = 1;
+
+function renderRefList(kh) {
+  var rows = MANTRAS[kh];
+  var colors = {1:'var(--purple)',2:'var(--teal)',3:'var(--amber)',4:'var(--coral)'};
+  var c = colors[kh];
+  var html = rows.map(function(r){
+    return '<div class="ref-item">'
+      + '<div class="ref-hdr" onclick="toggleRef(this)">'
+      + '<div class="ref-num" style="color:'+c+';font-size:10px;">'+r[0]+'</div>'
+      + '<div class="ref-text" style="color:var(--text2);font-size:13px;">'+r[1]+'</div>'
+      + '<div class="ref-arr">›</div>'
+      + '</div>'
+      + '<div class="ref-body">'
+      + '<div class="v-translit" style="padding-left:0;margin-bottom:10px;">'+r[2]+'</div>'
+      + '<div class="transl"><strong>'+r[0]+':</strong> '+r[3]+'</div>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+  document.getElementById('ref-list').innerHTML = html;
+  prepareControls(document.getElementById('ref-list'));
+}
+
+function toggleRef(hdr){
+  var body = hdr.nextElementSibling;
+  var open = hdr.classList.contains('open');
+  hdr.classList.toggle('open', !open);
+  body.classList.toggle('open', !open);
+}
+
+/* init */
+function prepareControls(root) {
+  root.querySelectorAll('div[onclick]').forEach(function(el){
+    el.setAttribute('role','button'); el.tabIndex=0;
+    if(el.nextElementSibling && /(?:class|mantra|ref|x)-body/.test(el.nextElementSibling.className))
+      el.setAttribute('aria-expanded',String(el.classList.contains('open')));
+  });
+}
+document.addEventListener('keydown', function(event){
+  var el=event.target;
+  if(el.matches('div[role="button"]') && (event.key==='Enter'||event.key===' ')){
+    event.preventDefault(); el.click();
+  }
+});
+document.addEventListener('click', function(event){
+  var el=event.target.closest('[aria-expanded]');
+  if(el)el.setAttribute('aria-expanded',String(el.classList.contains('open')));
+});
+document.addEventListener('DOMContentLoaded', function(){
+  renderRefList(1);
+  for(var i=1;i<=4;i++){
+    var nav=document.createElement('nav'); nav.className='chapter-nav'; nav.setAttribute('aria-label','Khaṇḍas');
+    for(var j=1;j<=4;j++){
+      var button=document.createElement('button'); button.textContent='Khaṇḍa '+['I','II','III','IV'][j-1];
+      button.dataset.chapter=j; button.setAttribute('aria-current',String(i===j));
+      button.onclick=function(){navigate('kh'+this.dataset.chapter);}; nav.appendChild(button);
+    }
+    document.querySelector('#screen-kh'+i+' .screen-header').after(nav);
+  }
+  prepareControls(document);
+  document.querySelector('.nav-btn.active').setAttribute('aria-current','page');
+});
+</script>
+</body>
+</html>
