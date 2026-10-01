@@ -8,7 +8,8 @@
 <meta name="apple-mobile-web-app-title" content="Kena Upaniṣad">
 <meta name="theme-color" content="#050608">
 <title>Kena Upaniṣad · केनोपनिषद्</title>
-<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23050b16'/%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%230d1c33'/%3E%3Cstop offset='100%25' stop-color='%23050608'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ctext x='90' y='128' font-family='serif' font-size='108' text-anchor='middle' fill='%233983ff' opacity='0.9'%3Eकेन%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%2307101d%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2226%22%20stroke%3D%22%233983ff%22%20stroke-width%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M10%2032Q32%208%2054%2032Q32%2056%2010%2032Z%22%20stroke%3D%22%238bbaff%22%20stroke-width%3D%222.5%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2210%22%20stroke%3D%22%233983ff%22%20stroke-width%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M32%2024%2034%2030%2040%2032%2034%2034%2032%2040%2030%2034%2024%2032%2030%2030Z%22%20fill%3D%22%23c8e0ff%22%2F%3E%3C%2Fsvg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%2307101d%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2226%22%20stroke%3D%22%233983ff%22%20stroke-width%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M10%2032Q32%208%2054%2032Q32%2056%2010%2032Z%22%20stroke%3D%22%238bbaff%22%20stroke-width%3D%222.5%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2210%22%20stroke%3D%22%233983ff%22%20stroke-width%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M32%2024%2034%2030%2040%2032%2034%2034%2032%2040%2030%2034%2024%2032%2030%2030Z%22%20fill%3D%22%23c8e0ff%22%2F%3E%3C%2Fsvg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 /* ─── TOKENS ─────────────────────────────────────────────── */
@@ -482,6 +483,33 @@ button,.wit-tab,.chapter-nav button { border-radius:5px; }
  .image-heading .reading-title { font-size:18px; }
  .welcome-art { height:150px; }
 }
+
+/* The eye of the eye: perception illuminated from within. */
+.brand-mark { border:0; border-radius:8px; background:transparent; }
+.brand-mark svg { display:block; width:100%; height:100%; }
+.reading-card { touch-action:pan-y pinch-zoom; }
+.reading-art img { -webkit-user-drag:none; user-select:none; }
+.pada-help { font:13px/1.6 var(--sans); color:var(--text3); margin-bottom:14px; }
+.pada-label { font:10px/1.7 var(--mono); color:#8bbaff; letter-spacing:.08em; text-transform:uppercase; margin:20px 0 12px; }
+.pada-viccheda { display:flex; flex-wrap:wrap; align-items:start; gap:16px 18px; padding:18px 0 24px; margin-bottom:20px; border-bottom:1px solid var(--border); }
+.pada-unit { display:inline-flex; flex-direction:column; gap:3px; max-width:100%; }
+.pada-script { display:flex; flex-wrap:wrap; gap:2px 5px; align-items:center; }
+.pada-word { border:0; border-radius:3px; background:transparent; padding:3px 2px; min-height:44px; color:#a8ccff; cursor:pointer; text-decoration:underline; text-decoration-color:#3983ff88; text-underline-offset:7px; text-decoration-style:dotted; max-width:100%; overflow-wrap:anywhere; }
+.pada-sanskrit .pada-word { font:23px/1.6 var(--devanagari); }
+.pada-iast .pada-word { font:italic 15px/1.5 var(--serif); color:#b7c8e4; }
+.pada-word:hover,.pada-word[aria-expanded=true] { color:#e0eaff; background:#142b4b; text-decoration-style:solid; }
+.word-dialog { margin:auto; width:min(520px,calc(100% - 32px)); max-height:calc(100dvh - 40px); overflow:auto; padding:26px; border:1px solid #3983ff; border-radius:8px; background:linear-gradient(140deg,#12233c,#070b12); color:var(--text); box-shadow:0 24px 100px #000c; }
+.word-dialog::backdrop { background:#010409cf; backdrop-filter:blur(5px); }
+.word-dialog-top { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px; }
+.word-dialog-label { font:10px/1.6 var(--mono); color:#8bbaff; text-transform:uppercase; letter-spacing:.1em; }
+.word-dialog h2 { font:30px/1.6 var(--devanagari); color:#a8ccff; margin:0 0 4px; overflow-wrap:anywhere; }
+.word-dialog .word-iast { font:italic 19px/1.6 var(--serif); color:var(--text2); margin-bottom:20px; overflow-wrap:anywhere; }
+.word-definition { font:16px/1.8 var(--sans); border-top:1px solid var(--border); padding-top:18px; }
+@media(max-width:600px) {
+ .pada-viccheda { gap:12px 14px; }
+ .pada-sanskrit .pada-word { font-size:21px; }
+ .word-dialog { padding:20px; }
+}
 </style>
 </head>
 <body>
@@ -491,7 +519,7 @@ button,.wit-tab,.chapter-nav button { border-radius:5px; }
   <!-- ── HEADER ──────────────────────────────────── -->
   <header class="app-header">
     <button class="brand" id="brand-home" onclick="navigate('home')" aria-label="Kena Upaniṣad home">
-      <span class="brand-mark" aria-hidden="true">के</span><span class="app-header-logo">Kena Upaniṣad</span>
+      <span class="brand-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="#07101d"/><circle cx="32" cy="32" r="26" stroke="#3983ff" stroke-width="1.5"/><path d="M10 32Q32 8 54 32Q32 56 10 32Z" stroke="#8bbaff" stroke-width="2.5"/><circle cx="32" cy="32" r="10" stroke="#3983ff" stroke-width="1.5"/><path d="M32 24 34 30 40 32 34 34 32 40 30 34 24 32 30 30Z" fill="#c8e0ff"/></svg></span><span class="app-header-logo">Kena Upaniṣad</span>
     </button>
     <span class="app-header-time" id="hdr-time">--:--</span>
   </header>
@@ -1363,6 +1391,14 @@ button,.wit-tab,.chapter-nav button { border-radius:5px; }
 
 </div><!-- /#app -->
 
+
+<dialog class="word-dialog" id="word-dialog" aria-labelledby="word-title" aria-describedby="word-definition">
+  <div class="word-dialog-top"><span class="word-dialog-label">Word meaning</span><button class="deck-button" id="word-close" type="button" aria-label="Close word meaning" autofocus>Close ×</button></div>
+  <h2 id="word-title" lang="sa"></h2>
+  <p class="word-iast" id="word-iast" lang="sa-Latn"></p>
+  <div class="word-definition" id="word-definition"></div>
+</dialog>
+
 <script>
 /* ── TIME ─────────────────────────────────────────── */
 function updateTime(){
@@ -1384,6 +1420,8 @@ updateTime();
 
 /* ── NAVIGATION ───────────────────────────────────── */
 function navigate(id, btn){
+  const wordDialog=document.getElementById('word-dialog');
+  if(wordDialog.open)wordDialog.close();
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
   var t=document.getElementById('screen-'+id);
   if(t)t.classList.add('active');
@@ -1555,7 +1593,9 @@ function renderReading(){
  document.getElementById('reading-flip').setAttribute('aria-pressed',String(!readingSanskrit));
 }
 function turnReading(direction){
- readingIndex=Math.max(0,Math.min(readingDeck.length-1,readingIndex+direction));readingSanskrit=true;renderReading();
+ const next=Math.max(0,Math.min(readingDeck.length-1,readingIndex+direction));
+ if(next===readingIndex)return;
+ readingIndex=next;readingSanskrit=true;renderReading();
 }
 document.addEventListener('DOMContentLoaded',function(){
  document.querySelectorAll('#screen-kh1,#screen-kh2,#screen-kh3,#screen-kh4').forEach(function(screen){
@@ -1586,6 +1626,7 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('study-khanda').textContent='Khaṇḍa '+['I','II','III','IV'][item.kh-1]+' · '+item.number;
   document.getElementById('study-title').textContent=item.title;
   document.getElementById('study-passage').innerHTML=item.element.querySelector('.class-body').innerHTML;
+  buildPadaViccheda(document.getElementById('study-passage'));
   navigate('study');
  };
  document.getElementById('study-back').onclick=()=>{
@@ -1599,6 +1640,87 @@ document.addEventListener('DOMContentLoaded',function(){
  });
  document.getElementById('home-image').src=KENA_ART.source;
  renderReading();
+});
+
+/* Use the document's existing word analyses, including its phrase-level entries. */
+let studyWords=[], wordInvoker=null;
+function buildPadaViccheda(root){
+ studyWords=[];
+ root.querySelectorAll('table.wbw').forEach((table,tableIndex)=>{
+  const label=table.previousElementSibling;
+  const reference=label&&label.classList.contains('wbw-label')?label.textContent.replace(/^Word by word/i,'Pada-viccheda'):'Pada-viccheda';
+  if(label&&label.classList.contains('wbw-label')){
+   label.className='pada-label';label.textContent=reference;
+  }
+  const words=document.createElement('div');words.className='pada-viccheda';words.setAttribute('role','group');words.setAttribute('aria-label',reference);
+  table.querySelectorAll('tbody tr').forEach(row=>{
+   const cells=row.querySelectorAll('td');if(cells.length<3)return;
+   const entry={sanskrit:cells[0].textContent.trim(),iast:cells[1].textContent.trim(),meaning:cells[2].innerHTML,reference};
+   const index=studyWords.push(entry)-1;
+   const unit=document.createElement('span');unit.className='pada-unit';
+   for(const [key,language] of [['sanskrit','sa'],['iast','sa-Latn']]){
+    const script=document.createElement('span');script.className='pada-script pada-'+key;
+    // Sanskrit and IAST may retain different sandhi forms; never infer new translations.
+    entry[key].split(/\s+/u).forEach(word=>{
+     const button=document.createElement('button');button.type='button';button.className='pada-word';button.lang=language;button.textContent=word;
+     button.dataset.wordIndex=index;button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-controls','word-dialog');button.setAttribute('aria-expanded','false');
+     button.setAttribute('aria-label','Meaning of '+word+(entry[key]!==word?' in '+entry[key]:''));
+     script.appendChild(button);
+    });
+    unit.appendChild(script);
+   }
+   words.appendChild(unit);
+  });
+  if(tableIndex===0){
+   const help=document.createElement('p');help.className='pada-help';help.textContent='Tap a Sanskrit word or its IAST to see its meaning.';table.before(help);
+  }
+  table.replaceWith(words);
+ });
+}
+function openWordMeaning(button){
+ const entry=studyWords[Number(button.dataset.wordIndex)];if(!entry)return;
+ wordInvoker=button;button.setAttribute('aria-expanded','true');
+ document.getElementById('word-title').textContent=entry.sanskrit;
+ document.getElementById('word-iast').textContent=entry.iast;
+ document.getElementById('word-definition').innerHTML=entry.meaning;
+ document.getElementById('word-dialog').showModal();
+}
+document.addEventListener('DOMContentLoaded',()=>{
+ const dialog=document.getElementById('word-dialog');
+ document.getElementById('study-passage').addEventListener('click',event=>{
+  const button=event.target.closest('.pada-word');if(button)openWordMeaning(button);
+ });
+ document.getElementById('word-close').onclick=()=>dialog.close();
+ dialog.addEventListener('close',()=>{
+  const invoker=wordInvoker;wordInvoker=null;
+  if(invoker){invoker.setAttribute('aria-expanded','false');if(invoker.isConnected&&invoker.closest('.screen.active'))invoker.focus({preventScroll:true});}
+ });
+ dialog.addEventListener('click',event=>{
+  if(event.target!==dialog)return;
+  const bounds=dialog.getBoundingClientRect();
+  if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)dialog.close();
+ });
+ const card=document.querySelector('.reading-card');let gesture=null;
+ card.addEventListener('pointerdown',event=>{
+  if(!event.isPrimary){gesture=null;return;}
+  if(event.pointerType==='mouse'||event.target.closest('button,select,input,a'))return;
+  gesture={id:event.pointerId,x:event.clientX,y:event.clientY,time:performance.now()};
+ });
+ card.addEventListener('pointermove',event=>{
+  if(!gesture||gesture.id!==event.pointerId)return;
+  const dx=event.clientX-gesture.x,dy=event.clientY-gesture.y;
+  if(Math.abs(dy)>20&&Math.abs(dy)>Math.abs(dx))gesture=null;
+ });
+ card.addEventListener('pointercancel',()=>{gesture=null;});
+ card.addEventListener('pointerup',event=>{
+  if(!gesture||gesture.id!==event.pointerId)return;
+  const start=gesture;gesture=null;
+  const dx=event.clientX-start.x,dy=event.clientY-start.y;
+  if(performance.now()-start.time>1000||Math.abs(dx)<Math.max(48,card.clientWidth*.1)||Math.abs(dx)<Math.abs(dy)*1.4)return;
+  if(window.getSelection().toString().trim())return;
+  // Requested direction: swipe right advances; swipe left goes back.
+  turnReading(dx>0?1:-1);
+ });
 });
 </script>
 </body>

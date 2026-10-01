@@ -9,13 +9,14 @@ const { chromium } = require('playwright');
     headless: true,
   });
   try {
-    const page = await browser.newPage();
+    const page = await browser.newPage({ hasTouch: true });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(pathToFileURL(path.resolve('kena_upanishad.html')).href);
     assert(await page.locator('#screen-home').isVisible());
     assert.equal(await page.locator('.bottom-nav').count(), 0);
     assert.equal(await page.locator('.reader-heading').count(), 0);
+    assert.equal(await page.locator('#brand-home .brand-mark svg').count(), 1);
     for (const [button, screen] of [['home-read','read'], ['home-overview','overview'], ['home-khandas','khandas'], ['home-index','reference']]) {
       await page.locator('#'+button).click();
       assert(await page.locator('#screen-'+screen).isVisible());
@@ -70,8 +71,38 @@ const { chromium } = require('playwright');
           assert.equal(await page.locator('.screen.active .class-hdr').count(), 0, 'No other verse headers');
           assert.equal(await page.locator('#study-khanda').textContent(),
             await page.evaluate(() => 'Khaṇḍa ' + ['I','II','III','IV'][readingDeck[readingIndex].kh-1] + ' · ' + readingDeck[readingIndex].number));
-          assert.equal(await page.locator('#study-passage').innerHTML(),
-            await page.evaluate(() => readingDeck[readingIndex].element.querySelector('.class-body').innerHTML), 'All original study material retained');
+          assert.equal(await page.locator('#study-passage table').count(), 0, 'Word tables replaced in study view');
+          const preserved = await page.evaluate(() => {
+            const source = readingDeck[readingIndex].element.querySelector('.class-body');
+            const study = document.getElementById('study-passage');
+            const selector = '.v-sanskrit,.v-translit,.transl,.m-english,.m-commentary,.m-shankara,.anchor-box';
+            return {
+              original: Array.from(source.querySelectorAll(selector), e => e.outerHTML),
+              rendered: Array.from(study.querySelectorAll(selector), e => e.outerHTML),
+              sourceWords: Array.from(source.querySelectorAll('table.wbw tbody tr'), row => ({
+                sanskrit: row.cells[0].textContent.trim(), iast: row.cells[1].textContent.trim(), meaning: row.cells[2].innerHTML,
+              })),
+              renderedWords: studyWords.map(({sanskrit,iast,meaning}) => ({sanskrit,iast,meaning})),
+            };
+          });
+          assert.deepEqual(preserved.rendered, preserved.original, 'Other explanations and original mantra unchanged');
+          assert.deepEqual(preserved.renderedWords, preserved.sourceWords, 'Every existing word meaning preserved');
+          assert.equal(await page.locator('#study-passage .pada-unit').count(), preserved.sourceWords.length);
+          if (face === 'English') {
+            for (const script of ['sanskrit','iast']) {
+              const word = page.locator('#study-passage .pada-'+script+' .pada-word').first();
+              await word.click();
+              assert(await page.locator('#word-dialog').isVisible());
+              assert.equal(await page.locator('#word-title').textContent(), preserved.sourceWords[0].sanskrit);
+              assert.equal(await page.locator('#word-iast').textContent(), preserved.sourceWords[0].iast);
+              assert.equal(await page.locator('#word-definition').innerHTML(), preserved.sourceWords[0].meaning);
+              if (width === 390 && i === 0 && script === 'sanskrit') await page.screenshot({path:'/tmp/kena-word-popup.png'});
+              if (script === 'sanskrit') await page.keyboard.press('Escape');
+              else await page.locator('#word-close').click();
+              assert(!(await page.locator('#word-dialog').isVisible()));
+              assert(await word.evaluate(e => e === document.activeElement));
+            }
+          }
           assert(await page.locator('#study-passage').evaluate(e => e.scrollWidth <= e.clientWidth + 1));
           await page.locator('#study-back').click();
           assert.equal(await page.locator('#reading-picker').inputValue(), String(i));
@@ -88,6 +119,38 @@ const { chromium } = require('playwright');
       assert(await page.locator('#reading-prev').isDisabled());
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.screenshot({ path: `/tmp/kena-cards-${width}.png` });
+      if (width === 390) {
+        const cdp = await page.context().newCDPSession(page);
+        const swipe = async (x,y,endX,endY) => {
+          await cdp.send('Input.dispatchTouchEvent', {type:'touchStart',touchPoints:[{x,y}]});
+          for (let step=1;step<=5;step++) {
+            await cdp.send('Input.dispatchTouchEvent', {type:'touchMove',touchPoints:[{x:x+(endX-x)*step/5,y:y+(endY-y)*step/5}]});
+            await page.waitForTimeout(20);
+          }
+          await cdp.send('Input.dispatchTouchEvent', {type:'touchEnd',touchPoints:[]});
+          await page.waitForTimeout(80);
+        };
+        await swipe(80,150,250,150);
+        assert.equal(await page.locator('#reading-picker').inputValue(), '1', 'Right swipe advances');
+        await swipe(250,150,80,150);
+        assert.equal(await page.locator('#reading-picker').inputValue(), '0', 'Left swipe goes back');
+        await swipe(250,150,80,150);
+        assert.equal(await page.locator('#reading-picker').inputValue(), '0', 'No wrap before first card');
+        await page.selectOption('#reading-picker','4');
+        const copy = await page.locator('#reading-copy').boundingBox();
+        await swipe(copy.x+100,copy.y+170,copy.x+100,copy.y+50);
+        assert.equal(await page.locator('#reading-picker').inputValue(),'4','Vertical reading scroll does not change cards');
+        assert(await page.locator('#reading-copy').evaluate(e=>e.scrollTop>0),'Vertical touch scrolling still works');
+        await page.selectOption('#reading-picker','12');
+        await swipe(80,150,250,150);
+        assert.equal(await page.locator('#reading-picker').inputValue(),'12','No wrap after last card');
+        await cdp.detach();
+        await page.selectOption('#reading-picker','0');
+        await page.locator('#reading-study').click();
+        await page.locator('.pada-viccheda').first().scrollIntoViewIfNeeded();
+        await page.screenshot({path:'/tmp/kena-word-study.png'});
+        await page.locator('#study-back').click();
+      }
       await page.locator('#brand-home').click();
       await page.screenshot({ path: `/tmp/kena-home-${width}.png` });
       await page.locator('#home-read').click();
@@ -98,7 +161,7 @@ const { chromium } = require('playwright');
       assert.equal(await page.locator('.ref-item').count(), [8, 5, 12, 9][i]);
     }
     assert.deepEqual(errors, []);
-    console.log('PASS: full-height cards, image titles, homepage links and brand navigation, 13 unique artworks, Sanskrit-first readings, isolated studies, return state, keyboard navigation, index, desktop/mobile/landscape layouts.');
+    console.log('PASS: responsive cards, eye icon, right/left touch swipes, vertical scroll, all word meanings in accessible Sanskrit/IAST popups, unchanged explanations, isolated studies, 13 artworks, homepage navigation and index.');
   } finally {
     await browser.close();
   }

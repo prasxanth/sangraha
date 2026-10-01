@@ -32,6 +32,14 @@ Sanskrit is on the front and English on the back. New card selections open in Sa
 
 The original pre-redesign backup is `archive/kena_upanishad.pre-electric-blue-2026-09-30.html`. The preceding geometric design is preserved as `archive/kena_upanishad.pre-illustrated-cards-2026-09-30.html`. Later published versions are preserved in Git history.
 
+## Icon, gestures and word study
+
+The header and browser icon use the same original vector symbol, [`assets/kena/awareness-mark.svg`](../assets/kena/awareness-mark.svg): an eye with a luminous point within it, inspired by the passage “eye of the eye.” This code-native SVG is embedded in the header and icon links and needs no image-generation service.
+
+A rightward touch swipe advances to the next card; a leftward swipe returns to the previous card. The gesture rejects vertical movement, multi-touch, long presses, text selections and drags beginning on controls. Native vertical scrolling and pinch zoom remain available. Swipes stop at the first and last cards.
+
+In “Study this passage,” the word-by-word tables become flowing pada-viccheda sections, pairing Sanskrit terms with their IAST. Each displayed word can open a native modal dialog containing the existing Sanskrit/IAST entry and its complete meaning. Phrase-level entries retain their shared explanation, and sandhi differences between the two scripts are preserved rather than mechanically realigned. Escape, the Close button or the backdrop dismiss the popup and return focus to its word. Original continuous mantra text, translations, commentary and contemplation anchors are unchanged; chapter study source tables remain the authoritative data for this presentation.
+
 ## Validation
 
-`NODE_PATH=/path/to/node_modules node tests/kena_upanishad.cjs` uses Playwright to check all thirteen unique artworks, image decoding, Sanskrit-first cards, language switching, isolated study content, return state, homepage links, brand navigation, keyboard navigation, corner radius, the 34-entry index, and viewport fit at desktop, phone and landscape sizes. Chrome defaults to its macOS application path; set `CHROME_PATH` to override it.
+`NODE_PATH=/path/to/node_modules node tests/kena_upanishad.cjs` uses Playwright to check all thirteen unique artworks, image decoding, Sanskrit-first cards, language switching, isolated study content, return state, homepage links, brand navigation, keyboard navigation, corner radius, the 34-entry index, viewport fit at desktop, phone and landscape sizes, real right/left touch gestures, vertical scrolling, preserved word meanings and both Sanskrit/IAST popup triggers. Chrome defaults to its macOS application path; set `CHROME_PATH` to override it.
