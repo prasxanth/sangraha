@@ -13,18 +13,30 @@ const { chromium } = require('playwright');
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(pathToFileURL(path.resolve('kena_upanishad.html')).href);
+    assert(await page.locator('#screen-home').isVisible());
+    assert.equal(await page.locator('.bottom-nav').count(), 0);
+    assert.equal(await page.locator('.reader-heading').count(), 0);
+    for (const [button, screen] of [['home-read','read'], ['home-overview','overview'], ['home-khandas','khandas'], ['home-index','reference']]) {
+      await page.locator('#'+button).click();
+      assert(await page.locator('#screen-'+screen).isVisible());
+      await page.locator('#brand-home').click();
+      assert(await page.locator('#screen-home').isVisible());
+    }
+    await page.locator('#home-read').click();
     assert.equal(await page.locator('#reading-picker option').count(), 13);
     assert.equal(await page.locator('#reading-flip').textContent(), 'Read English ↻');
     assert(await page.locator('#reading-copy .v-sanskrit').count() > 0);
     const passages = await page.evaluate(() => readingDeck.map(item => ({
       number: item.number, english: item.english, sanskrit: item.sanskrit, art: item.art,
     })));
+    assert.equal(new Set(passages.map(item => item.art)).size, 13, 'A distinct contextual illustration for every reading');
+    assert.equal(await page.evaluate(() => new Set(readingDeck.map(item => KENA_ART[item.art])).size), 13);
     for (const passage of passages) {
       assert(passage.english.length > 20, `English present: ${passage.number}`);
       assert(passage.sanskrit.length > 20, `Sanskrit present: ${passage.number}`);
     }
-    for (const width of [1440, 390, 320]) {
-      await page.setViewportSize({ width, height: 900 });
+    for (const [width, height] of [[1440,900], [390,844], [320,568], [844,390]]) {
+      await page.setViewportSize({ width, height });
       for (let i = 0; i < passages.length; i++) {
         await page.selectOption('#reading-picker', String(i));
         assert.equal(await page.locator('#reading-number').textContent(), passages[i].number);
@@ -34,6 +46,18 @@ const { chromium } = require('playwright');
           await image.decode(); return image.naturalWidth >= 1024;
         }));
         assert.equal(await page.locator('.reading-card').evaluate(e => getComputedStyle(e).borderRadius), '8px');
+        assert(await page.locator('.reading-art #reading-title').isVisible());
+        const layout = await page.evaluate(() => ({
+          card: document.querySelector('.reading-card').getBoundingClientRect().bottom,
+          controls: document.querySelector('.reader-controls').getBoundingClientRect().bottom,
+          passageHeight: document.getElementById('reading-copy').clientHeight,
+          contentScroll: document.getElementById('content').scrollHeight - document.getElementById('content').clientHeight,
+          height: innerHeight,
+        }));
+        assert(Math.abs(layout.controls - (layout.height - 12)) < 2, 'Controls reach the bottom gutter');
+        assert(layout.controls - layout.card <= 60, 'Card extends down to the controls');
+        assert(layout.passageHeight >= 75, 'Readable passage area on short screens');
+        assert(layout.contentScroll <= 1, 'Reading view fits the viewport');
         assert(await page.locator('#reading-copy').evaluate(e => e.scrollWidth <= e.clientWidth + 1));
         await page.locator('#reading-flip').click();
         assert.equal(await page.locator('#reading-flip').getAttribute('aria-pressed'), 'true');
@@ -64,6 +88,9 @@ const { chromium } = require('playwright');
       assert(await page.locator('#reading-prev').isDisabled());
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.screenshot({ path: `/tmp/kena-cards-${width}.png` });
+      await page.locator('#brand-home').click();
+      await page.screenshot({ path: `/tmp/kena-home-${width}.png` });
+      await page.locator('#home-read').click();
     }
     await page.evaluate(() => navigate('reference'));
     for (let i = 0; i < 4; i++) {
@@ -71,7 +98,7 @@ const { chromium } = require('playwright');
       assert.equal(await page.locator('.ref-item').count(), [8, 5, 12, 9][i]);
     }
     assert.deepEqual(errors, []);
-    console.log('PASS: 13 Sanskrit-first cards, isolated study passages, complete study content, return-state preservation on both faces, image decoding, keyboard navigation, 34-entry index, desktop and mobile layouts.');
+    console.log('PASS: full-height cards, image titles, homepage links and brand navigation, 13 unique artworks, Sanskrit-first readings, isolated studies, return state, keyboard navigation, index, desktop/mobile/landscape layouts.');
   } finally {
     await browser.close();
   }
