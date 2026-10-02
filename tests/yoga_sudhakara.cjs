@@ -18,6 +18,9 @@ const { chromium } = require('playwright');
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(pathToFileURL(path.resolve('yoga_sudhakara.html')).href);
+    assert.equal(await page.evaluate(()=>Object.keys(YOGA_PADA.sutras).length),78);
+    assert.deepEqual(await page.evaluate(()=>YOGA_PADA.sutras['1.2'].words.map(w=>w[0])),['योगः','चित्त','वृत्ति','निरोधः']);
+    assert.deepEqual(await page.evaluate(()=>YOGA_PADA.sutras['3.20'].words.slice(0,3).map(w=>w[1])),['na','ca','tat'],'Local chapter-three numbering is retained');
     const originalLessons = await page.evaluate(html => {
       const doc = new DOMParser().parseFromString(html, 'text/html');
       return [...doc.querySelectorAll('[id^="screen-ch"] .class-body')].map(el => el.textContent);
@@ -81,8 +84,62 @@ const { chromium } = require('playwright');
           assert(await page.locator('#screen-study').isVisible());
           assert.equal(await page.locator('#study-khanda').textContent(),
             await page.evaluate(() => YOGA_CHAPTERS[readingDeck[readingIndex].chapter-1] + ' · ' + readingDeck[readingIndex].number));
-          assert.equal(await page.locator('#study-passage').textContent(),
-            await page.evaluate(() => readingDeck[readingIndex].element.querySelector('.class-body').textContent));
+          const study = await page.evaluate(() => {
+            const source=readingDeck[readingIndex].element.querySelector('.class-body');
+            const rendered=document.getElementById('study-passage');
+            const selector='.v-sanskrit,.v-translit,.s-sanskrit,.s-translit,.transl,.s-english,.s-commentary,.s-insight,.w-note,.anchor-box';
+            const isWordTable=table=>Array.from(table.querySelectorAll('th'),e=>e.textContent.trim()).join('|')==='Sanskrit|IAST|Meaning';
+            return {
+              sourceText:Array.from(source.querySelectorAll(selector),e=>e.innerHTML),
+              studyText:Array.from(rendered.querySelectorAll(selector),e=>e.innerHTML),
+              sourceTables:Array.from(source.querySelectorAll('table')).filter(t=>!isWordTable(t)).map(t=>t.outerHTML),
+              studyTables:Array.from(rendered.querySelectorAll('table'),t=>t.outerHTML),
+              sourceMeanings:Array.from(source.querySelectorAll('table')).filter(isWordTable).flatMap(t=>Array.from(t.querySelectorAll('tbody tr'),r=>r.cells[2].innerHTML)),
+              words:studyWords,
+              expectedGroups:YOGA_PADA.passages[readingIndex],
+              expectedWords:YOGA_PADA.passages[readingIndex].flatMap(ref=>YOGA_PADA.sutras[ref].words),
+              labels:Array.from(rendered.querySelectorAll('.pada-label'),e=>e.textContent),
+            };
+          });
+          assert.deepEqual(study.studyText,study.sourceText,'Verses and explanations preserved');
+          assert.deepEqual(study.studyTables,study.sourceTables,'Comparison tables preserved');
+          for(const meaning of study.sourceMeanings)assert(study.words.some(w=>w.meaning===meaning),'Existing word meaning preserved');
+          for(const ref of study.expectedGroups)assert(study.labels.includes('Pada-viccheda · '+ref));
+          assert(study.words.length>=study.expectedWords.length);
+          assert.deepEqual(study.words.slice(0,study.expectedWords.length).map(w=>[w.sanskrit,w.iast]),study.expectedWords.map(w=>w.slice(0,2)));
+          assert.equal(await page.locator('#study-passage .pada-unit').count(),study.words.length);
+          assert(study.words.every(w=>/[\u0900-\u097f]/u.test(w.sanskrit)&&w.iast&&w.meaning));
+          if(width===390&&face==='English'){
+            for(const index of new Set([0,study.words.length-1])){
+              for(const script of ['sanskrit','iast']){
+                const word=page.locator('.pada-'+script+' .pada-word[data-word-index="'+index+'"]').first();
+                await word.click();
+                assert(await page.locator('#word-dialog').isVisible());
+                assert.equal(await page.locator('#word-title').textContent(),study.words[index].sanskrit);
+                assert.equal(await page.locator('#word-iast').textContent(),study.words[index].iast);
+                assert.equal(await page.locator('#word-definition').innerHTML(),study.words[index].meaning);
+                assert.equal(await word.getAttribute('aria-expanded'),'true');
+                assert(await page.locator('#word-dialog').evaluate(e=>e.scrollWidth<=e.clientWidth+1));
+                if(i===0&&index===0&&script==='sanskrit')await page.screenshot({path:'/tmp/yoga-word-popup.png'});
+                if(script==='sanskrit')await page.keyboard.press('Escape');
+                else await page.locator('#word-close').click();
+                assert(!(await page.locator('#word-dialog').isVisible()));
+                await page.waitForFunction(()=>wordInvoker===null);
+                assert.equal(await word.getAttribute('aria-expanded'),'false');
+                assert(await word.evaluate(e=>e===document.activeElement));
+              }
+            }
+            if(i===0){
+              await page.locator('.pada-word').first().focus();
+              await page.keyboard.press('Enter');
+              assert(await page.locator('#word-dialog').isVisible());
+              await page.mouse.click(2,2);
+              assert(!(await page.locator('#word-dialog').isVisible()));
+              await page.waitForFunction(()=>wordInvoker===null);
+              await page.locator('.pada-study').scrollIntoViewIfNeeded();
+              await page.screenshot({path:'/tmp/yoga-pada-study.png'});
+            }
+          }
           assert(await page.locator('#study-passage').evaluate(e => e.scrollWidth <= e.clientWidth + 1));
           await page.locator('#study-back').click();
           assert.equal(await page.locator('#reading-picker').inputValue(), String(i));
@@ -151,7 +208,7 @@ const { chromium } = require('playwright');
       await page.locator('#home-khandas').click();
     }
     assert.deepEqual(errors, []);
-    console.log('PASS: all 27 bilingual cards, four viewport sizes, study text preservation, touch and keyboard navigation, contextual art, homepage and index.');
+    console.log('PASS: 27 bilingual cards, 78 sutra word breakdowns, Sanskrit/IAST meaning popups, Escape/backdrop/close dismissal, restored focus, preserved commentary and comparison tables, four viewport sizes, touch navigation, homepage and index.');
   } finally {
     await browser.close();
   }

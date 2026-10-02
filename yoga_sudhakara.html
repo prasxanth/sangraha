@@ -496,6 +496,28 @@ button,.wit-tab,.chapter-nav button { border-radius:5px; }
 .chapter-cover { width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:16px; }
 .chapter-count { font:10px var(--mono); color:var(--text3); margin-top:12px; }
 @media(max-width:650px) { .reading-copy .s-sanskrit { font-size:22px; } .brand { gap:7px; } .app-header-logo { font-size:20px; } }
+.pada-help { font:13px/1.6 var(--sans); color:var(--text3); margin-bottom:14px; }
+.pada-help a { color:var(--teal2); text-underline-offset:3px; }
+.pada-label { font:10px/1.7 var(--mono); color:#ffae78; letter-spacing:.08em; text-transform:uppercase; margin:20px 0 12px; }
+.pada-viccheda { display:flex; flex-wrap:wrap; align-items:start; gap:16px 18px; padding:18px 0 24px; margin-bottom:20px; border-bottom:1px solid var(--border); }
+.pada-unit { display:inline-flex; flex-direction:column; gap:3px; max-width:100%; }
+.pada-script { display:flex; flex-wrap:wrap; gap:2px 5px; align-items:center; }
+.pada-word { border:0; border-radius:3px; background:transparent; padding:3px 2px; min-height:44px; color:#ffc5a8; cursor:pointer; text-decoration:underline; text-decoration-color:#ff5e0088; text-underline-offset:7px; text-decoration-style:dotted; max-width:100%; overflow-wrap:anywhere; }
+.pada-sanskrit .pada-word { font:23px/1.6 var(--devanagari); }
+.pada-iast .pada-word { font:italic 15px/1.5 var(--serif); color:#dfc5b5; }
+.pada-word:hover,.pada-word[aria-expanded=true] { color:#ffe0d1; background:#3b2012; text-decoration-style:solid; }
+.word-dialog { margin:auto; width:min(520px,calc(100% - 32px)); max-height:calc(100dvh - 40px); overflow:auto; padding:26px; border:1px solid #ff5e00; border-radius:8px; background:linear-gradient(140deg,#321b10,#100a07); color:var(--text); box-shadow:0 24px 100px #000c; }
+.word-dialog::backdrop { background:#090401cf; backdrop-filter:blur(5px); }
+.word-dialog-top { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px; }
+.word-dialog-label { font:10px/1.6 var(--mono); color:#ffae78; text-transform:uppercase; letter-spacing:.1em; }
+.word-dialog h2 { font:30px/1.6 var(--devanagari); color:#ffc5a8; margin:0 0 4px; overflow-wrap:anywhere; }
+.word-dialog .word-iast { font:italic 19px/1.6 var(--serif); color:var(--text2); margin-bottom:20px; overflow-wrap:anywhere; }
+.word-definition { font:16px/1.8 var(--sans); border-top:1px solid var(--border); padding-top:18px; }
+@media(max-width:600px) {
+ .pada-viccheda { gap:12px 14px; }
+ .pada-sanskrit .pada-word { font-size:21px; }
+ .word-dialog { padding:20px; }
+}
 </style>
 </head>
 <body>
@@ -1534,6 +1556,14 @@ button,.wit-tab,.chapter-nav button { border-radius:5px; }
 
 </div>
 
+<dialog class="word-dialog" id="word-dialog" aria-labelledby="word-title" aria-describedby="word-definition">
+  <div class="word-dialog-top"><span class="word-dialog-label">Word meaning</span><button class="deck-button" id="word-close" type="button" aria-label="Close word meaning" autofocus>Close ×</button></div>
+  <h2 id="word-title" lang="sa"></h2>
+  <p class="word-iast" id="word-iast" lang="sa-Latn"></p>
+  <div class="word-definition" id="word-definition"></div>
+</dialog>
+
+<script src="assets/yoga/pada-viccheda.js"></script>
 <script>
 /* ── TIME ─────────────────────────────── */
 function initClock(){
@@ -1545,6 +1575,7 @@ initClock(); setInterval(initClock,60000);
 
 /* ── NAVIGATION ─────────────────────────────── */
 function navigate(screen){
+  const dialog=document.getElementById('word-dialog');if(dialog.open)dialog.close();
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
   document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
   var sc=document.getElementById('screen-'+screen);
@@ -1926,6 +1957,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('study-khanda').textContent=YOGA_CHAPTERS[item.chapter-1]+' · '+item.number;
   document.getElementById('study-title').textContent=item.title;
   document.getElementById('study-passage').innerHTML=item.element.querySelector('.class-body').innerHTML;
+  buildPadaViccheda(document.getElementById('study-passage'));
   prepareControls(document.getElementById('study-passage'));navigate('study');
  };
  document.getElementById('study-back').onclick=()=>{navigate('read');document.getElementById('reading-study').focus({preventScroll:true});};
@@ -1958,8 +1990,91 @@ document.addEventListener('keydown',event=>{
  if(!document.getElementById('screen-read').classList.contains('active')||el.closest('select,input,textarea,button,[role="button"]'))return;
  if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();turnReading(event.key==='ArrowLeft'?-1:1);}
 });
-document.addEventListener('click',event=>{const el=event.target.closest('[aria-expanded]');if(el)el.setAttribute('aria-expanded',String(el.classList.contains('open')));});
+document.addEventListener('click',event=>{const el=event.target.closest('.class-hdr[aria-expanded],.sutra-hdr[aria-expanded],.x-hdr[aria-expanded]');if(el)el.setAttribute('aria-expanded',String(el.classList.contains('open')));});
 
+
+let studyWords=[], wordInvoker=null;
+function buildPadaViccheda(root){
+ studyWords=[];
+ const commentaryWords=[];
+ // Only word-meaning tables have this schema. Comparison tables stay intact.
+ root.querySelectorAll('table.wbw').forEach(table=>{
+  const headings=Array.from(table.querySelectorAll('th'),el=>el.textContent.trim());
+  if(headings[0]!=='Sanskrit'||headings[1]!=='IAST'||headings[2]!=='Meaning')return;
+  table.querySelectorAll('tbody tr').forEach(row=>{
+   const cells=row.cells;if(cells.length!==3)return;
+   commentaryWords.push({sanskrit:cells[0].textContent.trim(),iast:cells[1].textContent.trim(),meaning:cells[2].innerHTML});
+  });
+  const label=table.previousElementSibling;
+  if(label&&label.classList.contains('wbw-label'))label.remove();
+  table.remove();
+ });
+ const section=document.createElement('section');section.className='pada-study';section.setAttribute('aria-label','Pada-viccheda');
+ const help=document.createElement('p');help.className='pada-help';help.textContent='Tap a Sanskrit word or its IAST to see its meaning. Compounds are separated into meaningful components.';section.append(help);
+ const used=new Set();
+ const normalize=word=>word.normalize('NFC').replace(/[\s‐‑–—-]/gu,'').toLowerCase();
+ function appendGroup(reference,entries){
+  const label=document.createElement('h3');label.className='pada-label';label.textContent=reference;section.append(label);
+  const words=document.createElement('div');words.className='pada-viccheda';words.setAttribute('role','group');words.setAttribute('aria-label',reference);
+  entries.forEach(entry=>{
+   const index=studyWords.push({...entry,reference})-1;
+   const unit=document.createElement('span');unit.className='pada-unit';
+   for(const [key,language] of [['sanskrit','sa'],['iast','sa-Latn']]){
+    const script=document.createElement('span');script.className='pada-script pada-'+key;
+    entry[key].split(/\s+/u).forEach(word=>{
+     const button=document.createElement('button');button.type='button';button.className='pada-word';button.lang=language;button.textContent=word;
+     button.dataset.wordIndex=index;button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-controls','word-dialog');button.setAttribute('aria-expanded','false');
+     button.setAttribute('aria-label','Meaning of '+word+(entry[key]!==word?' in '+entry[key]:''));script.append(button);
+    });
+    unit.append(script);
+   }
+   words.append(unit);
+  });
+  section.append(words);
+ }
+ YOGA_PADA.passages[readingIndex].forEach(reference=>{
+  const gloss=YOGA_PADA.sutras[reference];
+  const entries=gloss.words.map(([sanskrit,iast,meaning])=>{
+   const original=commentaryWords.find(word=>normalize(word.iast)===normalize(iast)||word.sanskrit===sanskrit);
+   if(original){used.add(original);return {sanskrit,iast,meaning:original.meaning};}
+   // Gloss data is plain text; only the existing local commentary contains HTML.
+   const text=document.createElement('span');text.textContent=meaning;
+   return {sanskrit,iast,meaning:text.innerHTML};
+  });
+  appendGroup('Pada-viccheda · '+reference,entries);
+ });
+ const remaining=commentaryWords.filter(word=>!used.has(word));
+ if(remaining.length)appendGroup('Commentary word meanings',remaining);
+ const note=document.createElement('p');note.className='pada-help';
+ note.append('Additional word glosses adapted from ');
+ const source=document.createElement('a');source.href='https://www.wisdomlib.org/hinduism/book/yoga-sutras-with-commentaries';source.textContent='Rama Prasada (1924)';source.target='_blank';source.rel='noopener noreferrer';note.append(source);section.append(note);
+ const opening=Array.from(root.children).find(el=>el.matches('.v-translit,.s-translit'));
+ if(opening)opening.after(section);else root.prepend(section);
+}
+function openWordMeaning(button){
+ const entry=studyWords[Number(button.dataset.wordIndex)];if(!entry)return;
+ wordInvoker=button;button.setAttribute('aria-expanded','true');
+ document.getElementById('word-title').textContent=entry.sanskrit;
+ document.getElementById('word-iast').textContent=entry.iast;
+ document.getElementById('word-definition').innerHTML=entry.meaning;
+ document.getElementById('word-dialog').showModal();
+}
+document.addEventListener('DOMContentLoaded',()=>{
+ const dialog=document.getElementById('word-dialog');
+ document.getElementById('study-passage').addEventListener('click',event=>{
+  const button=event.target.closest('.pada-word');if(button)openWordMeaning(button);
+ });
+ document.getElementById('word-close').onclick=()=>dialog.close();
+ dialog.addEventListener('close',()=>{
+  const invoker=wordInvoker;wordInvoker=null;
+  if(invoker){invoker.setAttribute('aria-expanded','false');if(invoker.isConnected&&invoker.closest('.screen.active'))invoker.focus({preventScroll:true});}
+ });
+ dialog.addEventListener('click',event=>{
+  if(event.target!==dialog)return;
+  const bounds=dialog.getBoundingClientRect();
+  if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)dialog.close();
+ });
+});
 </script>
 </body>
 </html>
