@@ -1,0 +1,115 @@
+{
+  "generator": "Built-in image_gen",
+  "format": "WebP, quality 82, 1024 × 1536",
+  "promptTemplate": "Use case: illustration-story. Create one portrait illustration for a Yoga Sudhakara reading card. Subject: {scene} Style: rich detailed painterly engraving, deep black shadows and electric fire orange ember highlights, restrained cream highlights, contemplative dignified atmosphere, ancient Indian setting where applicable. Full bleed vertical composition 2:3. No text, letters, labels, borders or watermark. Each scene must visually communicate its specific philosophical metaphor.",
+  "scenes": [
+    {
+      "asset": "assets/yoga/opening.webp",
+      "scene": "A student entering an Indian forest hermitage through a stone doorway, teacher with palm-leaf manuscript and oil lamp. The beginning of Yoga, sutra 1.1."
+    },
+    {
+      "asset": "assets/yoga/stillness.webp",
+      "scene": "A black mountain lake, restless concentric ripples becoming perfectly still around one unwavering reflection of a flame. Yoga is the cessation of the movements of mind, sutra 1.2."
+    },
+    {
+      "asset": "assets/yoga/seer.webp",
+      "scene": "One seated contemplative beside two pools, one perfectly reflecting the moon, the other broken by waves. The seer resting in its own nature versus identifying with mental fluctuations, 1.3–1.4."
+    },
+    {
+      "asset": "assets/yoga/vrittis.webp",
+      "scene": "Five separate streams emerge from a mountain spring and flow through distinct landscapes: a clear crystal, a distorted reflection, swirling mist, a dark cave, ancient tree rings. Five activities of mind, 1.5–1.11."
+    },
+    {
+      "asset": "assets/yoga/practice.webp",
+      "scene": "A solitary practitioner ascending worn stone steps beside a river, many tiny oil lamps mark years of patient steady practice. Abhyasa, 1.12–1.14."
+    },
+    {
+      "asset": "assets/yoga/dispassion.webp",
+      "scene": "An open relaxed hand releasing golden autumn leaves into a river; a simple meditator behind, distant palace fading into fog. Vairagya, 1.15–1.16."
+    },
+    {
+      "asset": "assets/yoga/absorption.webp",
+      "scene": "Four ascending mountain terraces each supporting a quiet meditator, progressing from a stone object to a luminous subtle horizon. Four stages of conscious absorption, 1.17."
+    },
+    {
+      "asset": "assets/yoga/faith.webp",
+      "scene": "Five lamps along a dark mountain trail lead to an empty luminous sanctuary beyond all form. Faith, energy, memory, concentration and wisdom, 1.18–1.22."
+    },
+    {
+      "asset": "assets/yoga/ishvara.webp",
+      "scene": "A pure luminous flame at the center of a translucent crystal untouched by a storm of dark threads and wind outside. Ishvara untouched by affliction, karma and time, 1.24–1.26."
+    },
+    {
+      "asset": "assets/yoga/pranava.webp",
+      "scene": "An ancient bronze singing bowl in a quiet Indian shrine radiates concentric luminous sound waves through darkness toward a solitary meditator. Pranava and contemplation, 1.27–1.29. No letters or Om text."
+    },
+    {
+      "asset": "assets/yoga/obstacles.webp",
+      "scene": "Nine dark rough stones block a stream that gathers into one clear current, an unwavering lamp on its bank. Obstacles and single-pointed practice, 1.30–1.32."
+    },
+    {
+      "asset": "assets/yoga/stability.webp",
+      "scene": "Seven small stone niches in a banyan grove each hold a lamp, a tranquil meditator in foreground with a warm open gesture of compassion. Seven ways to settle the mind, 1.33–1.39."
+    },
+    {
+      "asset": "assets/yoga/crystal.webp",
+      "scene": "A large flawless transparent quartz crystal on black stone beside a flower and lamp, crystal faithfully reflecting the colors of what surrounds it. Crystal-like absorption, 1.40–1.45."
+    },
+    {
+      "asset": "assets/yoga/seedless.webp",
+      "scene": "An empty quiet earthen bowl beside a small pile of completely burned seeds and a dying ember; infinite clear sky beyond. Seedless absorption, 1.46–1.51."
+    },
+    {
+      "asset": "assets/yoga/kriya.webp",
+      "scene": "Three objects in an Indian hermitage: a disciplined sacred fire, an open palm-leaf manuscript, and folded hands offered toward a glowing shrine. Austerity, self-study, surrender, 2.1–2.2."
+    },
+    {
+      "asset": "assets/yoga/kleshas.webp",
+      "scene": "Five dark tangled roots grip a translucent heart-shaped stone; a careful hand loosens the roots by lamplight. Ignorance, ego, attachment, aversion, clinging, 2.3–2.11."
+    },
+    {
+      "asset": "assets/yoga/karma.webp",
+      "scene": "An ancient wheel casts a repeating shadow on a path; a seeker steps out of the wheel's track into clear light. Karma, suffering and discerning the seer from the seen, 2.12–2.27."
+    },
+    {
+      "asset": "assets/yoga/limbs.webp",
+      "scene": "Eight stone steps lead from a grove to a mountain meditation pavilion; at the base, open hands gently protect a small deer. Eight limbs of yoga and ethical foundation, 2.28–2.45."
+    },
+    {
+      "asset": "assets/yoga/breath.webp",
+      "scene": "A dignified seated yogi in a stable posture, subtle warm flowing breath ribbons, lotus petals gently closing around a quiet center. Posture, breath regulation, withdrawal of senses, 2.46–2.55."
+    },
+    {
+      "asset": "assets/yoga/samyama.webp",
+      "scene": "Three rivers converge into one luminous stream that flows toward a lamp at the center of a still circular pool. Concentration, meditation and absorption united as samyama, 3.1–3.8."
+    },
+    {
+      "asset": "assets/yoga/transformation.webp",
+      "scene": "Three earthen vessels in a potter's quiet workshop, raw clay, shaped form, and a finished bowl reflecting a steady lamp. Three transformations of consciousness, 3.9–3.16."
+    },
+    {
+      "asset": "assets/yoga/powers.webp",
+      "scene": "A contemplative meditator on a rocky ledge beneath luminous constellations, sun and moon, subtle waves connecting the natural world. Powers described through samyama, 3.17–3.49. Contemplative symbolic scene, not superhero."
+    },
+    {
+      "asset": "assets/yoga/discernment.webp",
+      "scene": "A seeker walks past floating jewels and a radiant palace toward a simple clear mountain horizon, refusing distraction. Discernment beyond powers, 3.50–3.56."
+    },
+    {
+      "asset": "assets/yoga/minds.webp",
+      "scene": "One oil lamp lights several other separate lamps on a stone terrace; each flame casts a different pattern into the same dark night. Sources of powers and created minds, 4.1–4.6."
+    },
+    {
+      "asset": "assets/yoga/consciousness.webp",
+      "scene": "A luminous moon shines above a still lake with several vessels of water each reflecting the same moon, one clear quartz beside them. Mind, consciousness and objects, 4.7–4.24."
+    },
+    {
+      "asset": "assets/yoga/cloud.webp",
+      "scene": "A vast glowing monsoon cloud rains soft luminous drops over a silent Indian forest and solitary seated sage. Cloud of virtue, dharmamegha samadhi, 4.25–4.30."
+    },
+    {
+      "asset": "assets/yoga/freedom.webp",
+      "scene": "An opened empty birdcage on a mountain ledge, a bird soaring into boundless sunrise, three colored threads lying still on the stone. Kaivalya, absolute freedom, 4.31–4.34."
+    }
+  ]
+}

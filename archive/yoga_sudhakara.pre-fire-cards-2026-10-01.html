@@ -6,9 +6,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Yoga Sudhakara">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#0d0d0b">
 <title>Yoga Sudhakara · Patañjala Yoga Sūtrāṇi</title>
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%228%22%20fill%3D%22%231c110b%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2227%22%20stroke%3D%22%23ff5e00%22%20stroke-width%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M34%2010C39%2024%2023%2025%2027%2035C20%2033%2020%2027%2020%2027C8%2046%2025%2057%2037%2051C53%2043%2043%2029%2043%2029C44%2038%2035%2040%2035%2033C35%2027%2041%2022%2034%2010Z%22%20fill%3D%22%23ff5e00%22%2F%3E%3Cpath%20d%3D%22M32%2035C35%2042%2027%2042%2030%2049C40%2051%2042%2042%2037%2038C37%2042%2033%2043%2032%2035Z%22%20fill%3D%22%23ffe0b8%22%2F%3E%3C%2Fsvg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23084040'/%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%231D9E75'/%3E%3Cstop offset='100%25' stop-color='%23083A28'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ctext x='90' y='128' font-family='serif' font-size='108' text-anchor='middle' fill='white' opacity='0.9'%3Eॐ%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 /* ─── TOKENS ─────────────────────────────────────────────── */
@@ -99,7 +99,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .x-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
 .x-num { font-family: var(--mono); font-size: 9px; color: var(--text3); min-width: 16px; }
 .x-name { font-size: 15px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.3; }
-.x-tag { font-family: var(--mono); font-size: 9px; color: var(--teal); background: rgba(255,94,0,0.12); padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.x-tag { font-family: var(--mono); font-size: 9px; color: var(--teal); background: rgba(93,202,165,0.12); padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
 .x-arr { color: var(--text3); font-size: 12px; transition: transform 0.25s; flex-shrink: 0; }
 .x-hdr.open .x-arr { transform: rotate(90deg); }
 .x-body { display: none; padding: 16px 18px 20px; }
@@ -132,7 +132,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .signif { font-size: 13px; color: var(--text3); line-height: 1.7; padding-left: 10px; border-left: 1px solid var(--border); margin-top: 4px; }
 
 /* Commentary note */
-.w-note { border: 1px solid rgba(255,94,0,0.25); background: rgba(255,94,0,0.06); border-radius: var(--r-md); padding: 14px 16px; font-size: 13px; color: var(--teal2); line-height: 1.7; font-style: italic; text-align: center; margin-top: 14px; }
+.w-note { border: 1px solid rgba(93,202,165,0.25); background: rgba(93,202,165,0.06); border-radius: var(--r-md); padding: 14px 16px; font-size: 13px; color: var(--teal2); line-height: 1.7; font-style: italic; text-align: center; margin-top: 14px; }
 
 /* Divider */
 .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
@@ -142,7 +142,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .sutra-hdr { display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer; transition: background 0.15s; }
 .sutra-hdr:active { background: var(--bg3); }
 .sutra-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
-.sutra-badge { font-family: var(--mono); font-size: 8px; color: var(--teal); background: rgba(255,94,0,0.12); padding: 3px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.sutra-badge { font-family: var(--mono); font-size: 8px; color: var(--teal); background: rgba(93,202,165,0.12); padding: 3px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
 .sutra-title { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.3; }
 .sutra-arr { color: var(--text3); font-size: 12px; transition: transform 0.25s; flex-shrink: 0; }
 .sutra-hdr.open .sutra-arr { transform: rotate(90deg); }
@@ -158,7 +158,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 /* Mahasutra hero */
 .mahasutra-hero {
   background: var(--bg3);
-  border: 1px solid rgba(255,94,0,0.2);
+  border: 1px solid rgba(93,202,165,0.2);
   border-radius: var(--r-lg);
   padding: 18px 18px 16px;
   margin-bottom: 18px;
@@ -170,19 +170,19 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 /* Tabs */
 .wit-tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
 .wit-tab { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
-.wit-tab.active { color: var(--teal); border-color: rgba(255,94,0,0.4); background: rgba(255,94,0,0.08); }
+.wit-tab.active { color: var(--teal); border-color: rgba(93,202,165,0.4); background: rgba(93,202,165,0.08); }
 .wit-section { display: none; }
 .wit-section.active { display: block; }
 
 /* Chapter tabs */
 .ch-tabs { display: flex; gap: 6px; margin-bottom: 18px; overflow-x: auto; padding-bottom: 2px; }
 .ch-tab { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 7px 13px; cursor: pointer; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
-.ch-tab.active { color: var(--teal); border-color: rgba(255,94,0,0.4); background: rgba(255,94,0,0.08); }
+.ch-tab.active { color: var(--teal); border-color: rgba(93,202,165,0.4); background: rgba(93,202,165,0.08); }
 .ch-section { display: none; }
 .ch-section.active { display: block; }
 
 /* Chapter header badge */
-.ch-phase { font-family: var(--mono); font-size: 9px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; padding: 6px 12px; background: rgba(255,94,0,0.08); border-radius: var(--r-sm); border: 1px solid rgba(255,94,0,0.2); display: inline-block; }
+.ch-phase { font-family: var(--mono); font-size: 9px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; padding: 6px 12px; background: rgba(93,202,165,0.08); border-radius: var(--r-sm); border: 1px solid rgba(93,202,165,0.2); display: inline-block; }
 
 /* Class item */
 .class-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); margin-bottom: 10px; overflow: hidden; }
@@ -191,7 +191,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .class-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
 .class-num { font-family: var(--mono); font-size: 9px; color: var(--text3); min-width: 22px; }
 .class-name { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.3; }
-.class-sutras { font-family: var(--mono); font-size: 9px; color: var(--teal); background: rgba(255,94,0,0.10); padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.class-sutras { font-family: var(--mono); font-size: 9px; color: var(--teal); background: rgba(93,202,165,0.10); padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
 .class-arr { color: var(--text3); font-size: 12px; transition: transform 0.25s; flex-shrink: 0; }
 .class-hdr.open .class-arr { transform: rotate(90deg); }
 .class-body { display: none; padding: 16px 18px 20px; }
@@ -226,10 +226,10 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .module-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
 .module-desc { font-family: var(--mono); font-size: 9px; color: var(--text3); letter-spacing: 0.05em; }
 .module-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; align-self: flex-start; }
-.badge-teal { background: rgba(255,94,0,0.12); color: var(--teal); }
-.badge-purple { background: rgba(255,94,0,0.12); color: var(--purple2); }
-.badge-amber { background: rgba(255,94,0,0.12); color: var(--amber2); }
-.badge-coral { background: rgba(255,94,0,0.12); color: var(--coral); }
+.badge-teal { background: rgba(93,202,165,0.12); color: var(--teal); }
+.badge-purple { background: rgba(143,135,224,0.12); color: var(--purple2); }
+.badge-amber { background: rgba(212,144,26,0.12); color: var(--amber2); }
+.badge-coral { background: rgba(224,112,96,0.12); color: var(--coral); }
 
 /* Wrap padding */
 .wit-wrap { padding: 20px 18px 32px; }
@@ -242,10 +242,10 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .more-card-name { font-size: 15px; font-weight: 500; color: var(--text); }
 .more-card-desc { font-family: var(--mono); font-size: 9px; color: var(--text3); margin-top: 2px; }
 .more-card-tag { font-family: var(--mono); font-size: 8px; padding: 3px 8px; border-radius: 4px; margin-left: auto; flex-shrink: 0; }
-.tag-active { background: rgba(255,94,0,0.12); color: var(--teal); }
+.tag-active { background: rgba(93,202,165,0.12); color: var(--teal); }
 
 /* Teacher + lineage card */
-.lineage-card { background: var(--bg3); border: 1px solid rgba(255,94,0,0.15); border-radius: var(--r-lg); padding: 16px 18px; margin-bottom: 16px; }
+.lineage-card { background: var(--bg3); border: 1px solid rgba(93,202,165,0.15); border-radius: var(--r-lg); padding: 16px 18px; margin-bottom: 16px; }
 .lineage-card h3 { font-family: var(--serif); font-size: 17px; color: var(--teal2); margin-bottom: 6px; }
 .lineage-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
 
@@ -254,248 +254,6 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .stat-pill { flex: 1; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 8px; text-align: center; }
 .stat-num { font-family: var(--serif); font-size: 22px; color: var(--teal2); font-weight: 400; line-height: 1; }
 .stat-lbl { font-family: var(--mono); font-size: 8px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
-
-:root { --bg:#050505; --bg2:#100c09; --bg3:#1c110b; --bg4:#28170d; --bg5:#332015; --border:rgba(255,94,0,.25); --border2:rgba(255,94,0,.55); --text:#fff0e5; --text2:#dfc6b6; --text3:#ba9780; --gold:#ff5e00; --gold2:#ffae78; --teal:#ff5e00; --teal2:#ffae78; --purple:#ff5e00; --purple2:#ffae78; --coral:#ff5e00; --amber:#ff5e00; --amber2:#ffae78; }
-/* Electric-orange edition: electric orange on black, engraved geometry, open reading space. */
-:root { --r-sm: 2px; --r-md: 3px; --r-lg: 4px; }
-::selection { background: #160b05; color: #ffb794; }
-body { background: var(--bg); }
-#app { max-width: 1440px; margin: auto; border-inline: 1px solid var(--border); }
-.app-header { min-height: 76px; padding-inline: clamp(18px,4vw,60px); border-bottom: 1px solid var(--border2); gap: 16px; }
-.app-header-label { opacity: 1; font-size: 9px; letter-spacing: .13em; white-space: normal; }
-.app-header-logo { padding: 0; font-size: 25px; }
-.app-header-time { font-size: 12px; }
-#content { scrollbar-color: #ff7a39 #080605; scrollbar-width: thin; }
-.home-wrap, .wit-wrap { max-width: 1120px; margin: auto; padding: 34px clamp(18px,4vw,52px) 40px; }
-.home-greeting { position: relative; border: 1px solid var(--border2); min-height: 360px; padding: clamp(24px,4vw,48px); display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 24px; overflow: hidden; background: linear-gradient(115deg,#331a0d,#080605 65%); margin-bottom: 20px; }
-.home-greeting::after { content: ''; position: absolute; inset: 8px; border: 1px solid var(--border); pointer-events: none; }
-.home-greeting-time { font-size: 10px; letter-spacing: .18em; margin-bottom: 26px; }
-.home-greeting-text { font-family: var(--devanagari); font-size: clamp(38px,5.5vw,68px); line-height: 1.5; font-weight: 400; }
-.hero-question { font: italic clamp(27px,3.5vw,43px)/1.2 var(--serif); margin: 10px 0 20px; max-width: 420px; }
-.hero-caption { font: 10px/1.8 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-.hero-art { color: #ff7a39; width: 100%; max-height: 300px; display: block; }
-.course-banner { background: #160b05; color: #ffab82; border-color: #ff7a39; padding: 18px 24px; }
-.course-banner-name, .course-banner-label, .course-banner-arrow { color: #ffb794; }
-.course-banner-label { font-size: 9px; }
-.course-dot { background: #ffab82; animation: none; }
-.section-label { margin-top: 26px; font-size: 10px; letter-spacing: .18em; }
-.module-grid { gap: 14px; }
-.module-card { position: relative; min-height: 210px; padding: 22px; background: transparent; border-color: var(--border2); transition: background .2s,transform .2s; }
-.module-card:hover { background: #331a0d; transform: translateY(-3px); }
-.module-icon { color: #ff7a39; margin-bottom: 22px; }
-.module-icon svg { display: block; width: 66px; height: 50px; }
-.module-name { font: 25px/1.2 var(--serif); margin-bottom: 8px; }
-.module-desc { font-size: 10px; line-height: 1.7; max-width: 90%; }
-.module-badge { position: absolute; right: 18px; top: 18px; background: transparent; border: 1px solid var(--border2); font-size: 9px; }
-.module-grid:last-child .module-card { min-height: 150px; }
-.module-grid:last-child .module-icon { margin-bottom: 14px; font: 24px var(--serif); }
-.bottom-nav { background: #080605; border-top: 1px solid var(--border2); padding-inline: max(8px,env(safe-area-inset-left)); }
-.nav-btn { min-height: 64px; border-right: 1px solid var(--border); }
-.nav-btn:last-child { border-right: 0; }
-.nav-label { font-size: 10px; }
-.nav-btn.active { background: #42200f; }
-.nav-btn.active .nav-label { color: #ffb794; }
-.nav-btn.active .nav-icon svg { stroke: #ffb794; }
-.screen-header { padding-bottom: 20px; border-bottom: 1px solid var(--border2); margin-bottom: 24px; }
-.screen-header h2 { font-size: clamp(32px,5vw,48px); }
-.screen-header p { font-size: 14px; }
-.chapter-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-.chapter-nav button, .wit-tab { min-height: 44px; padding: 10px 16px; font: 11px var(--mono); color: var(--text); border: 1px solid var(--border2); border-radius: 2px; background: transparent; cursor: pointer; }
-.chapter-nav button[aria-current=true], .wit-tab.active { background: #160b05; color: #ffb794; border-color: #ff7a39; }
-.mv-hero { position: relative; padding: clamp(22px,4vw,40px); border: 1px solid var(--border2); background: linear-gradient(120deg,#391d0f,#170e09); }
-.mv-label, .v-label, .wbw-label, .anchor-label { font-size: 10px; }
-.mv-sanskrit { font-size: clamp(23px,3vw,32px); }
-.mv-english { font: italic 18px/1.8 var(--serif); max-width: 760px; }
-.class-item, .mantra-card, .x-card, .ref-item { border-color: var(--border2); margin-bottom: 14px; }
-.class-hdr, .mantra-hdr, .x-hdr, .ref-hdr { min-height: 66px; padding: 18px 22px; }
-.class-name, .mantra-title { font: 19px/1.45 var(--serif); }
-.class-num { font-size: 11px; }
-.class-sutras { border: 1px solid var(--border); font-size: 10px; }
-.class-body, .mantra-body, .x-body, .ref-body { padding: clamp(18px,3vw,32px); }
-.m-sanskrit, .v-sanskrit { font-size: clamp(21px,2.5vw,27px); line-height: 2; padding-left: 22px; margin-bottom: 20px; }
-.m-translit, .v-translit { font-size: 12px; line-height: 2; overflow-wrap: anywhere; }
-.m-english, .transl { font: 18px/1.8 var(--serif); padding: 20px 24px; border-radius: 0; }
-.m-commentary, .m-shankara, .info-box, .lineage-card p { font-size: 15px; line-height: 1.85; }
-.m-insight, .signif { font-size: 14px; }
-.lineage-card { padding: 24px; }
-.lineage-card h3 { font-size: 22px; }
-.anchor-box { border-color: var(--border2); background: transparent; padding: 24px; }
-.anchor-text { font-size: 20px; }
-.wbw { table-layout: fixed; overflow-wrap: anywhere; }
-.wbw th { font-size: 9px; }
-.wbw td { font-size: 14px; }
-.wbw td:nth-child(2) { font-size: 11px; }
-.stat-pill { background: transparent; padding: 16px; border-color: var(--border2); }
-.stat-num { font-size: 32px; }
-.stat-lbl { font-size: 10px; }
-[role=button] { cursor: pointer; }
-:focus-visible { outline: 3px solid #ff7a39; outline-offset: 4px; }
-h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
-.course-banner:focus-visible, .nav-btn.active:focus-visible { outline-offset: -5px; outline-color: #ffb794; }
-@media(min-width:1000px) { .module-grid.khanda-grid { grid-template-columns: repeat(4,1fr); } }
-@media(max-width:600px) {
- .app-header { min-height: 62px; padding: 12px 18px; }
- .app-header-label { display: none; }
- .app-header-logo { font-size: 22px; }
- .home-wrap,.wit-wrap { padding-top: 20px; }
- .home-greeting { min-height: 0; grid-template-columns: 1fr; gap: 10px; padding: 28px 24px; }
- .home-greeting-time { margin-bottom: 18px; }
- .home-greeting-text { font-size: 44px; }
- .hero-question { font-size: 32px; }
- .hero-art { height: 170px; }
- .module-card { padding: 16px; min-height: 210px; }
- .module-name { font-size: 21px; }
- .module-desc { max-width: 100%; }
- .module-badge { top: 14px; right: 12px; font-size: 8px; padding: 2px 5px; }
- .module-icon svg { width: 46px; }
- .class-hdr { padding: 16px 12px; gap: 8px; flex-wrap: wrap; }
- .class-name { font-size: 17px; min-width: 130px; }
- .class-sutras { white-space: normal; }
- .wbw td,.wbw th { padding: 7px 4px; }
- .wbw td:first-child { font-size: 14px; }
-}
-@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
-
-/* Illustrated reading deck. */
-:root { --r-sm:5px; --r-md:8px; --r-lg:8px; }
-button,.wit-tab,.chapter-nav button { border-radius:5px; }
-.home-greeting,.home-greeting::after { border-radius:8px; }
-#screen-home > .home-wrap { display:none; }
-.reader-wrap { max-width:1120px; margin:auto; padding:20px 28px 18px; }
-.reader-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:12px; }
-.reader-heading h1 { font:italic 26px var(--serif); color:var(--purple2); }
-.reader-edition { font:9px/1.6 var(--mono); text-transform:uppercase; letter-spacing:.16em; color:var(--text3); }
-.reading-card { height: min(690px,calc(100dvh - 310px)); min-height:460px; display:grid; grid-template-columns:44% 56%; border:1px solid #ff7a39; border-radius:8px; overflow:hidden; background:#160d08; box-shadow:0 18px 60px #0009,0 0 0 3px #2a1409; }
-.reading-art { position:relative; overflow:hidden; background:#120a06; }
-.reading-art img { height:100%; width:100%; object-fit:cover; display:block; }
-.reading-art::after { content:''; position:absolute; inset:0; background:linear-gradient(0deg,#0a0502ea,transparent 40%); pointer-events:none; }
-.reading-seal { position:absolute; top:20px; left:20px; z-index:1; background:#0d0603e6; color:#ffc5a8; border:1px solid #ff7a39; border-radius:5px; padding:7px 12px; font:14px var(--mono); }
-.reading-caption { position:absolute; bottom:25px; left:25px; right:25px; color:#ffc5a8; font:italic 21px/1.4 var(--serif); z-index:1; }
-.reading-text { padding:clamp(22px,3vw,38px); min-height:0; min-width:0; display:flex; flex-direction:column; background:radial-gradient(ellipse at top right,#432110,transparent 60%),#110b08; }
-.reading-khanda { font:10px var(--mono); text-transform:uppercase; letter-spacing:.16em; color:#ff9d6c; margin-bottom:14px; }
-.reading-title { font:500 clamp(24px,2.7vw,36px)/1.2 var(--serif); color:#ffc5a8; padding-bottom:20px; margin-bottom:20px; border-bottom:1px solid #ff7a3966; }
-.reading-copy { flex:1; min-height:0; overflow:auto; scrollbar-width:thin; scrollbar-color:#ff7a39 #170e09; padding-right:12px; }
-.reading-copy .transl,.reading-copy .m-english,.reading-copy .m-commentary { background:none; border:0; padding:0; margin-bottom:20px; font:19px/1.8 var(--serif); }
-.reading-copy .transl strong,.reading-copy .m-commentary strong { display:block; margin-bottom:8px; color:#ffb18b; font:11px/1.8 var(--sans); letter-spacing:.03em; }
-.reading-copy .v-sanskrit,.reading-copy .m-sanskrit { border:0; padding:0; font-size:25px; }
-.reading-copy .v-translit,.reading-copy .m-translit { padding:0; font-size:12px; }
-.reading-copy .v-label { margin-top:14px; }
-.reading-foot { border-top:1px solid #ff7a3944; margin-top:20px; padding-top:16px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-.deck-button { color:#ffc5a8; border:1px solid #ff7a3988; background:#26150d; padding:10px 14px; min-height:44px; cursor:pointer; font:11px var(--mono); }
-.deck-button:hover { background:#4b2614; border-color:#ffb18b; }
-.deck-button:disabled { opacity:.35; cursor:default; }
-.reader-controls { display:flex; align-items:center; justify-content:center; gap:14px; padding-top:18px; }
-.reader-controls select { min-width:0; max-width:440px; flex:1; color:#ffc5a8; background:#170e09; border:1px solid #ff7a3988; border-radius:5px; min-height:44px; padding:10px; font:12px var(--sans); }
-.reader-hint { text-align:center; font:10px/1.7 var(--mono); color:#cca28d; margin-top:10px; }
-.study-return { display:block; margin-bottom:18px; }
-.module-card,.mv-hero,.stat-pill,.anchor-box { border-radius:8px; }
-.module-card { overflow:hidden; }
-.chapter-art { display:block; width:100%; height:220px; object-fit:cover; object-position:center 42%; border-radius:7px; margin-bottom:22px; border:1px solid #ff7a3966; }
-@media(max-width:650px) {
- .reader-wrap { padding:16px 14px 20px; }
- .reader-heading h1 { font-size:22px; }
- .reader-heading { align-items:flex-start; }
- .reader-edition { font-size:8px; text-align:right; }
- .reading-card { height:auto; min-height:0; grid-template-columns:1fr; }
- .reading-art { height:260px; }
- .reading-art img { object-position:center 40%; }
- .reading-caption { font-size:18px; bottom:18px; left:20px; }
- .reading-text { padding:24px 20px; }
- .reading-title { font-size:28px; }
- .reading-copy { max-height:480px; }
- .reading-copy .transl { font-size:18px; }
- .reader-controls { gap:8px; }
- .reader-controls .deck-button { padding:10px 12px; }
- .reader-controls select { font-size:11px; }
- .reading-foot { flex-wrap:wrap; }
-}
-
-/* Full-height reading and homepage navigation, following the I Ching reader. */
-#app { width:min(100%,1120px); border:0; padding:0 clamp(12px,2.5vw,28px) 12px; }
-.app-header { flex:none; min-height:0; height:65px; padding:0; gap:16px; }
-.brand { display:flex; align-items:center; gap:11px; min-height:44px; padding:4px 0; border:0; background:transparent; cursor:pointer; color:var(--purple2); text-align:left; }
-.brand-mark { width:36px; height:36px; flex:none; border:1px solid #ff7a39; border-radius:50%; display:grid; place-items:center; font:22px/1 var(--devanagari); background:#231209; }
-.app-header-logo { font-size:23px; padding:0; }
-.app-header-time { flex:none; margin-left:auto; font-size:11px; }
-#content { min-height:0; }
-#screen-read.active { display:flex; flex-direction:column; height:100%; min-height:0; padding:12px 2px 0; overflow:hidden; }
-.reader-wrap { flex:1; display:flex; flex-direction:column; min-height:0; width:100%; max-width:none; margin:0; padding:0; }
-.reading-card { flex:1; height:auto; min-height:0; grid-template-columns:44% 56%; }
-.reading-art { min-height:0; }
-.reading-art img { object-fit:contain; object-position:center; }
-.reading-art::after { background:linear-gradient(0deg,#0b0603 0%,#0b0603dd 10%,transparent 43%); }
-.image-heading { position:absolute; left:24px; right:24px; bottom:24px; z-index:1; }
-.image-heading .reading-khanda { font-size:9px; color:#ffcfb8; margin-bottom:8px; text-shadow:0 1px 5px #000; }
-.image-heading .reading-title { font:500 clamp(24px,2.8vw,34px)/1.15 var(--serif); color:#ffe0d1; padding:0; margin:0; border:0; text-shadow:0 2px 10px #000; }
-.reading-seal { top:16px; left:18px; font-size:12px; }
-.reading-text { min-height:0; padding:24px; }
-.reading-copy { max-height:none; overscroll-behavior:contain; }
-.reading-foot { flex:none; padding-top:12px; margin-top:12px; gap:8px; }
-.reading-foot .deck-button { font-size:10px; padding:9px 11px; }
-.reader-controls { flex:none; justify-content:space-between; gap:10px; padding-top:8px; }
-.reader-controls select { max-width:440px; }
-#screen-home.active { display:flex; flex-direction:column; height:100%; min-height:0; padding:12px 2px 0; overflow:auto; }
-.welcome-card { display:flex; flex-direction:column; flex:1 0 auto; width:100%; border:1px solid #ff7a39; border-radius:8px; overflow:hidden; background:linear-gradient(135deg,#321b10,#100a07); }
-.welcome-art { height:clamp(210px,43dvh,450px); flex:none; position:relative; background:#080605; overflow:hidden; }
-.welcome-art img { display:block; height:100%; width:100%; object-fit:cover; object-position:center 62%; }
-.welcome-art::after { content:''; position:absolute; inset:0; background:linear-gradient(0deg,#100a07,transparent 70%); }
-.welcome-art-title { position:absolute; left:clamp(22px,5vw,48px); bottom:16px; z-index:1; color:#ffd0b9; font:clamp(30px,5vw,48px)/1.5 var(--devanagari); text-shadow:0 2px 15px #000; }
-.welcome-copy { flex:1; display:flex; flex-direction:column; padding:20px clamp(22px,5vw,48px) 24px; }
-.welcome-copy h1 { font:italic 500 clamp(28px,4vw,42px)/1.2 var(--serif); color:#ffc5a8; margin-bottom:14px; }
-.welcome-copy p { font:18px/1.65 var(--serif); color:var(--text2); margin-bottom:16px; }
-.home-links { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:auto; padding-top:12px; }
-.home-links .deck-button { min-height:48px; }
-.home-links .primary { background:#ff7a39; border-color:#ffa578; color:#110804; }
-.wit-wrap { padding:24px 2px 16px; }
-@media(max-width:650px) {
- .app-header { height:58px; }
- .brand { gap:9px; }
- .brand-mark { width:30px; height:30px; font-size:19px; }
- .app-header-logo { font-size:21px; }
- .app-header-time { font-size:10px; }
- .reading-card { display:flex; flex-direction:column; }
- .reading-art { flex:none; height:clamp(155px,26dvh,250px); }
- .reading-art::after { background:linear-gradient(0deg,#0b0603f2,transparent 85%); }
- .image-heading { left:16px; right:16px; bottom:14px; }
- .image-heading .reading-title { font-size:clamp(19px,5vw,25px); line-height:1.12; }
- .image-heading .reading-khanda { font-size:8px; margin-bottom:6px; }
- .reading-seal { top:10px; left:12px; font-size:10px; padding:5px 8px; }
- .reading-text { flex:1; padding:16px; }
- .reading-copy .v-sanskrit,.reading-copy .m-sanskrit { font-size:22px; line-height:1.85; }
- .reading-copy .v-translit,.reading-copy .m-translit { font-size:11px; }
- .reading-foot { flex-wrap:nowrap; }
- .reading-foot .deck-button { flex:1; padding:8px 6px; font-size:9px; }
- .reader-controls select { font-size:11px; }
- .welcome-art { height:clamp(160px,34dvh,300px); }
- .welcome-copy { padding:16px 20px 20px; }
- .welcome-copy p { font-size:17px; }
- .home-links { grid-template-columns:1fr 1fr; gap:8px; }
-}
-@media(max-height:600px) and (max-width:650px) {
- .reading-art { height:140px; }
- .reading-text { padding:12px; }
- .reading-foot { margin-top:6px; padding-top:6px; }
- .image-heading .reading-title { font-size:18px; }
- .welcome-art { height:150px; }
-}
-
-/* Fire artwork and Yoga-specific verse typography. */
-
-.brand-mark { border:0; border-radius:8px; background:transparent; } .brand-mark svg { width:100%; height:100%; display:block; }
-.reading-card { touch-action:pan-y pinch-zoom; border-color:#ff5e00; }
-.reading-art img { -webkit-user-drag:none; user-select:none; }
-.deck-button,.chapter-nav button,.ch-tab,.wit-tab,.transl,.s-english { border-radius:5px; }
-.reading-copy .s-sanskrit { border:0; padding:0; font-size:25px; line-height:2; }
-.reading-copy .s-translit { padding:0; font-size:12px; }
-.reading-copy .s-english { background:none; border:0; padding:0; font:19px/1.8 var(--serif); }
-.reading-copy [lang=sa] { color:var(--teal2); }
-.reading-copy { overflow-wrap:anywhere; }
-.reading-verse-number { font:11px var(--mono); color:var(--amber); margin-top:18px; }
-.sutra-hdr { min-height:60px; } .sutra-body,.class-body { overflow-wrap:anywhere; }
-.mahasutra-hero,.sutra-card,.more-card { border-radius:8px; }
-.chapter-cover { width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:16px; }
-.chapter-count { font:10px var(--mono); color:var(--text3); margin-top:12px; }
-@media(max-width:650px) { .reading-copy .s-sanskrit { font-size:22px; } .brand { gap:7px; } .app-header-logo { font-size:20px; } }
 </style>
 </head>
 <body>
@@ -503,54 +261,78 @@ button,.wit-tab,.chapter-nav button { border-radius:5px; }
   <div class="status-bar"></div>
 
   <!-- ── HEADER ──────────────────────────────────── -->
-  <header class="app-header"><button class="brand" id="brand-home" onclick="navigate('home')" aria-label="Yoga Sudhākara home"><span class="brand-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="8" fill="#1c110b"/><circle cx="32" cy="32" r="27" stroke="#ff5e00" stroke-width="1.5"/><path d="M34 10C39 24 23 25 27 35C20 33 20 27 20 27C8 46 25 57 37 51C53 43 43 29 43 29C44 38 35 40 35 33C35 27 41 22 34 10Z" fill="#ff5e00"/><path d="M32 35C35 42 27 42 30 49C40 51 42 42 37 38C37 42 33 43 32 35Z" fill="#ffe0b8"/></svg></span><span class="app-header-logo">Yoga Sudhākara</span></button><span class="app-header-time" id="hdr-time">--:--</span></header>
+  <header class="app-header">
+    <span class="app-header-label">Parampara Rishividya</span>
+    <span class="app-header-logo">Yoga Sudhākara</span>
+    <span class="app-header-time" id="hdr-time">--:--</span>
+  </header>
 
   <div id="content">
 
     <!-- ══ HOME ══════════════════════════════════════ -->
-    <section class="screen" id="screen-study" aria-labelledby="study-title">
-      <div class="wit-wrap">
-        <button class="deck-button study-return" id="study-back" type="button">← Back to card</button>
-        <header class="screen-header">
-          <div class="reading-khanda" id="study-khanda"></div>
-          <h2 id="study-title"></h2>
-        </header>
-        <article class="class-item" aria-labelledby="study-title">
-          <div class="class-body open" id="study-passage"></div>
-        </article>
-      </div>
-    </section>
-
-
-    <!-- ══ HOME ══════════════════════════════════════ -->
-    <section class="screen active" id="screen-home" aria-labelledby="home-title">
-      <article class="welcome-card">
-        <div class="welcome-art"><img id="home-image" alt="A student enters a forest hermitage to begin the instruction on Yoga."><div class="welcome-art-title" lang="sa">योगसुधाकरः</div></div>
-        <div class="welcome-copy">
-          <h1 id="home-title">Now begins the instruction on Yoga.</h1>
-          <p>Read the Sanskrit. Turn to the meaning.<br>Let the mind become still.</p>
-          <nav class="home-links" aria-label="Explore Yoga Sudhākara">
-            <button class="deck-button primary" id="home-read" onclick="navigate('read')">Read</button>
-            <button class="deck-button" id="home-overview" onclick="navigate('overview')">Overview</button>
-            <button class="deck-button" id="home-khandas" onclick="navigate('khandas')">Khaṇḍas</button>
-            <button class="deck-button" id="home-index" onclick="navigate('reference')">Index</button>
-          </nav>
+    <div class="screen active" id="screen-home">
+      <div class="home-wrap">
+        <div class="home-greeting">
+          <div class="home-greeting-time" id="greeting-period">Welcome</div>
+          <div class="home-greeting-text">Yoga Sudhākara</div>
         </div>
-      </article>
-    </section>
-    <section class="screen" id="screen-read" aria-label="Reading cards">
-      <section class="reader-wrap" aria-label="Illustrated Yoga readings">
-        <article class="reading-card" aria-labelledby="reading-title">
-          <div class="reading-art"><img id="reading-image" alt=""><span class="reading-seal" id="reading-number"></span><div class="image-heading"><div class="reading-khanda" id="reading-khanda"></div><h1 class="reading-title" id="reading-title"></h1></div></div>
-          <div class="reading-text">
-            <div class="reading-copy" id="reading-copy" tabindex="0" aria-label="Reading passage"></div>
-            <div class="reading-foot"><button class="deck-button" id="reading-flip" type="button" aria-pressed="false">Read English ↻</button><button class="deck-button" id="reading-study" type="button">Study this passage ↗</button></div>
+
+        <div class="course-banner" onclick="navigate('overview')">
+          <div class="course-dot"></div>
+          <div class="course-banner-text">
+            <div class="course-banner-label">In Progress</div>
+            <div class="course-banner-name">Samādhi Pāda — Class 1 active</div>
           </div>
-        </article>
-        <div class="reader-controls"><button class="deck-button" id="reading-prev" aria-label="Previous reading">←</button><select id="reading-picker" aria-label="Choose a reading"></select><button class="deck-button" id="reading-next" aria-label="Next reading">→</button></div>
-      </section>
-    </section>
-<section class="screen" id="screen-khandas" aria-labelledby="khandas-title"><div class="wit-wrap"><header class="screen-header"><h2 id="khandas-title">Four Pādas</h2><p>The four chapters of the Yoga Sūtras.</p></header><div class="module-grid khanda-grid" id="chapter-cards"></div></div></section>
+          <div class="course-banner-arrow">›</div>
+        </div>
+
+        <div class="section-label" style="margin-bottom:12px;">Course chapters</div>
+        <div class="module-grid">
+          <div class="module-card" onclick="navigate('ch1')">
+            <div class="module-icon">🧘</div>
+            <div class="module-name">Samādhi Pāda</div>
+            <div class="module-desc">Absorption · 51 sūtras</div>
+            <span class="module-badge badge-teal">Chapter I</span>
+          </div>
+          <div class="module-card" onclick="navigate('ch2')">
+            <div class="module-icon">🔥</div>
+            <div class="module-name">Sādhana Pāda</div>
+            <div class="module-desc">Practice · 55 sūtras</div>
+            <span class="module-badge badge-amber">Chapter II</span>
+          </div>
+          <div class="module-card" onclick="navigate('ch3')">
+            <div class="module-icon">⚡</div>
+            <div class="module-name">Vibhūti Pāda</div>
+            <div class="module-desc">Powers · 56 sūtras</div>
+            <span class="module-badge badge-purple">Chapter III</span>
+          </div>
+          <div class="module-card" onclick="navigate('ch4')">
+            <div class="module-icon">∞</div>
+            <div class="module-name">Kaivalya Pāda</div>
+            <div class="module-desc">Liberation · 34 sūtras</div>
+            <span class="module-badge badge-coral">Chapter IV</span>
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-bottom:12px;">Quick access</div>
+        <div class="module-grid">
+          <div class="module-card" onclick="navigate('overview')">
+            <div class="module-icon">📜</div>
+            <div class="module-name">Course Overview</div>
+            <div class="module-desc">Teacher · Lineage · Structure</div>
+            <span class="module-badge badge-teal">Intro</span>
+          </div>
+          <div class="module-card" onclick="navigate('reference')">
+            <div class="module-icon">🔍</div>
+            <div class="module-name">Sūtra Index</div>
+            <div class="module-desc">All 196 sūtras · Quick ref</div>
+            <span class="module-badge badge-amber">Reference</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ OVERVIEW ═══════════════════════════════════ -->
     <div class="screen" id="screen-overview">
       <div class="wit-wrap">
         <div class="screen-header">
@@ -1531,15 +1313,38 @@ button,.wit-tab,.chapter-nav button { border-radius:5px; }
   </div><!-- end #content -->
 
   <!-- ── BOTTOM NAV ──────────────────────────────── -->
-
+  <nav class="bottom-nav">
+    <button class="nav-btn active" id="nav-home" onclick="navigate('home')">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-btn" id="nav-overview" onclick="navigate('overview')">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg></div>
+      <span class="nav-label">Overview</span>
+    </button>
+    <button class="nav-btn" id="nav-reference" onclick="navigate('reference')">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"/><path d="M8 4v16M12 8h4M12 12h4M12 16h4"/></svg></div>
+      <span class="nav-label">Index</span>
+    </button>
+    <button class="nav-btn" id="nav-more" onclick="navigate('more')">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></div>
+      <span class="nav-label">More</span>
+    </button>
+  </nav>
 </div>
 
 <script>
-/* ── TIME ─────────────────────────────── */
+/* ── TIME & GREETING ─────────────────────────────── */
 function initClock(){
   var now=new Date(),h=now.getHours(),m=now.getMinutes();
   var pad=function(n){return n<10?'0'+n:n};
   document.getElementById('hdr-time').textContent=pad(h)+':'+pad(m);
+  var period;
+  if(h>=4&&h<12)period='Brahma Muhūrta';
+  else if(h>=12&&h<17)period='Madhyāhna';
+  else if(h>=17&&h<21)period='Sandhyā';
+  else period='Rātri';
+  document.getElementById('greeting-period').textContent=period;
 }
 initClock(); setInterval(initClock,60000);
 
@@ -1575,7 +1380,6 @@ function navigate(screen){
   if(nb)nb.classList.add('active');
   if(screen==='reference'){ renderRefList(refCurrentChapter); }
   document.getElementById('content').scrollTop=0;
-  if(sc){const heading=sc.querySelector('h1,h2');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}}
 }
 
 /* ── EXPANDABLE CARDS ────────────────────────────── */
@@ -1855,110 +1659,10 @@ function renderRefList(ch) {
       + '</div>';
   }).join('');
   document.getElementById('ref-list').innerHTML = html;
-  prepareControls(document.getElementById('ref-list'));
 }
 
 /* init reference on first load */
 document.addEventListener('DOMContentLoaded', function(){ renderRefList(1); });
-
-/* Fire edition: preserve the original lesson text on both reading faces. */
-const YOGA_ART_INFO={"opening": "A student entering a forest hermitage, with a teacher and manuscript", "stillness": "A flame reflected in water whose ripples become still", "seer": "A contemplative figure beside clear and rippled pools", "vrittis": "Five streams crossing landscapes of cognition, error, imagination, sleep and memory", "practice": "Stone steps and lamps representing patient practice", "dispassion": "An open hand releases leaves into a river", "absorption": "Four terraces representing stages of conscious absorption", "faith": "Five lamps lead to an empty sanctuary", "ishvara": "A pure flame untouched by a surrounding storm", "pranava": "A singing bowl radiates waves of sound", "obstacles": "Nine stones obstruct a stream that unites in one clear current", "stability": "Seven lamps and a compassionate meditator", "crystal": "A crystal reflects the objects surrounding it", "seedless": "An empty bowl and burned seeds represent seedless absorption", "kriya": "Sacred fire, manuscript and offering hands represent the threefold practice", "kleshas": "Five tangled roots represent the afflictions", "karma": "A seeker steps out of the tracks of a wheel", "limbs": "Eight steps and hands protecting a deer represent ethical practice", "breath": "A seated yogi with flowing breath and closing lotus petals", "samyama": "Three streams unite in a still pool", "transformation": "Clay and vessels illustrate three transformations", "powers": "A meditator beneath constellations, sun and moon", "discernment": "A seeker passes jewels toward a clear horizon", "minds": "One lamp lights several separate lamps", "consciousness": "Vessels reflect the same moon", "cloud": "A luminous cloud rains over a forest and sage", "freedom": "A bird soars beyond an open cage"};
-const YOGA_ART_KEYS=['opening','stillness','seer','vrittis','practice','dispassion','absorption','faith','ishvara','pranava','obstacles','stability','crystal','seedless','kriya','kleshas','karma','limbs','breath','samyama','transformation','powers','discernment','minds','consciousness','cloud','freedom'];
-const YOGA_CHAPTERS=['Samādhi Pāda','Sādhana Pāda','Vibhūti Pāda','Kaivalya Pāda'];
-const YOGA_CHAPTER_ART=['stillness','kriya','samyama','freedom'];
-let readingIndex=0,readingSanskrit=true,readingDeck=[];
-function prepareControls(root){
- root.querySelectorAll('div[onclick]').forEach(el=>{
-  el.setAttribute('role','button');el.tabIndex=0;
-  if(el.nextElementSibling && /(?:class|sutra|x)-body/.test(el.nextElementSibling.className))el.setAttribute('aria-expanded',String(el.classList.contains('open')));
- });
-}
-function renderReading(){
- const item=readingDeck[readingIndex],image=document.getElementById('reading-image');
- image.src='assets/yoga/'+item.art+'.webp';image.alt=YOGA_ART_INFO[item.art];
- document.getElementById('reading-number').textContent=item.number;
- document.getElementById('reading-khanda').textContent=YOGA_CHAPTERS[item.chapter-1]+' · '+(readingSanskrit?'Sanskrit & transliteration':'English');
- document.getElementById('reading-title').textContent=item.title;
- const copy=document.getElementById('reading-copy');copy.innerHTML=readingSanskrit?item.sanskrit:item.english;copy.scrollTop=0;
- copy.querySelectorAll('.v-sanskrit,.s-sanskrit').forEach(el=>el.lang='sa');
- document.getElementById('reading-picker').value=readingIndex;
- document.getElementById('reading-prev').disabled=readingIndex===0;
- document.getElementById('reading-next').disabled=readingIndex===readingDeck.length-1;
- const flip=document.getElementById('reading-flip');flip.textContent=readingSanskrit?'Read English ↻':'Read Sanskrit ↻';flip.setAttribute('aria-pressed',String(!readingSanskrit));
-}
-function turnReading(direction){
- const next=Math.max(0,Math.min(readingDeck.length-1,readingIndex+direction));
- if(next===readingIndex)return;
- readingIndex=next;readingSanskrit=true;renderReading();
-}
-document.addEventListener('DOMContentLoaded',()=>{
- for(let chapter=1;chapter<=4;chapter++){
-  const screen=document.getElementById('screen-ch'+chapter);
-  screen.querySelectorAll('.class-item').forEach(element=>{
-   const body=element.querySelector('.class-body');
-   const number=(chapter===1?element.querySelector('.class-num'):element.querySelector('.class-sutras')).textContent.trim().replace(/^YS\s*/, '');
-   const entry={chapter,number,title:element.querySelector('.class-name').textContent.trim(),element,art:YOGA_ART_KEYS[readingDeck.length],
-    sanskrit:Array.from(body.querySelectorAll('.v-sanskrit,.v-translit,.s-sanskrit,.s-translit')).map(e=>e.outerHTML).join(''),
-    english:Array.from(body.querySelectorAll('.transl,.s-english')).map(e=>e.outerHTML).join('')};
-   if(!entry.sanskrit || !entry.english){
-    const bounds=number.match(/\d+\.\d+/g).map(value=>Number(value.split('.')[1]));
-    const verses=SUTRAS[chapter].filter(row=>Number(row[0].split('.')[1])>=bounds[0] && Number(row[0].split('.')[1])<=bounds[bounds.length-1]);
-    entry.sanskrit=verses.map(row=>'<div class="reading-verse-number">'+row[0]+'</div><div class="v-sanskrit">'+row[1]+'</div><div class="v-translit">'+row[2]+'</div>').join('');
-    entry.english=verses.map(row=>'<div class="transl"><strong>'+row[0]+'</strong> '+row[3]+'</div>').join('');
-   }
-   readingDeck.push(entry);
-  });
-  const card=document.createElement('div');card.className='module-card';card.onclick=()=>navigate('ch'+chapter);
-  card.innerHTML='<img class="chapter-cover" loading="lazy" src="assets/yoga/'+YOGA_CHAPTER_ART[chapter-1]+'.webp" alt="'+YOGA_ART_INFO[YOGA_CHAPTER_ART[chapter-1]]+'"><div class="module-name">'+YOGA_CHAPTERS[chapter-1]+'</div><div class="module-desc">'+['Absorption · stilling the mind','Practice · the eight limbs','Saṃyama · discernment','Liberation · absolute freedom'][chapter-1]+'</div><div class="chapter-count">'+[51,55,56,34][chapter-1]+' sūtras</div>';
-  document.getElementById('chapter-cards').append(card);
-  const nav=document.createElement('nav');nav.className='chapter-nav';nav.setAttribute('aria-label','Chapters');
-  for(let ch=1;ch<=4;ch++){const button=document.createElement('button');button.textContent=YOGA_CHAPTERS[ch-1];button.setAttribute('aria-current',String(ch===chapter));button.onclick=()=>navigate('ch'+ch);nav.append(button);}
-  screen.querySelector('.screen-header').after(nav);
- }
- const picker=document.getElementById('reading-picker');
- readingDeck.forEach((item,i)=>{const option=document.createElement('option');option.value=i;option.textContent=item.number+' · '+item.title;picker.append(option);});
- picker.onchange=()=>{readingIndex=Number(picker.value);readingSanskrit=true;renderReading();};
- document.getElementById('reading-prev').onclick=()=>turnReading(-1);
- document.getElementById('reading-next').onclick=()=>turnReading(1);
- document.getElementById('reading-flip').onclick=()=>{readingSanskrit=!readingSanskrit;renderReading();};
- document.getElementById('reading-study').onclick=()=>{
-  const item=readingDeck[readingIndex];
-  document.getElementById('study-khanda').textContent=YOGA_CHAPTERS[item.chapter-1]+' · '+item.number;
-  document.getElementById('study-title').textContent=item.title;
-  document.getElementById('study-passage').innerHTML=item.element.querySelector('.class-body').innerHTML;
-  prepareControls(document.getElementById('study-passage'));navigate('study');
- };
- document.getElementById('study-back').onclick=()=>{navigate('read');document.getElementById('reading-study').focus({preventScroll:true});};
- document.getElementById('home-image').src='assets/yoga/opening.webp';
- prepareControls(document);renderReading();
- const card=document.querySelector('.reading-card');let gesture=null;
- card.addEventListener('pointerdown',event=>{
-  if(!event.isPrimary){gesture=null;return;}
-  if(event.pointerType==='mouse'||event.target.closest('button,select,input,a'))return;
-  gesture={id:event.pointerId,x:event.clientX,y:event.clientY,time:performance.now()};
- });
- card.addEventListener('pointermove',event=>{
-  if(!gesture||gesture.id!==event.pointerId)return;
-  const dx=event.clientX-gesture.x,dy=event.clientY-gesture.y;
-  if(Math.abs(dy)>20&&Math.abs(dy)>Math.abs(dx))gesture=null;
- });
- card.addEventListener('pointercancel',()=>{gesture=null;});
- card.addEventListener('pointerup',event=>{
-  if(!gesture||gesture.id!==event.pointerId)return;
-  const start=gesture;gesture=null;
-  const dx=event.clientX-start.x,dy=event.clientY-start.y;
-  if(performance.now()-start.time>1000||Math.abs(dx)<Math.max(48,card.clientWidth*.1)||Math.abs(dx)<Math.abs(dy)*1.4)return;
-  if(window.getSelection().toString().trim())return;
-  turnReading(dx>0?1:-1);
- });
-});
-document.addEventListener('keydown',event=>{
- const el=event.target;
- if(el.matches('div[role="button"]')&&(event.key==='Enter'||event.key===' ')){event.preventDefault();el.click();return;}
- if(!document.getElementById('screen-read').classList.contains('active')||el.closest('select,input,textarea,button,[role="button"]'))return;
- if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();turnReading(event.key==='ArrowLeft'?-1:1);}
-});
-document.addEventListener('click',event=>{const el=event.target.closest('[aria-expanded]');if(el)el.setAttribute('aria-expanded',String(el.classList.contains('open')));});
 
 </script>
 </body>
