@@ -93,10 +93,6 @@ body[data-system-mode="compare"] .bazi-practice{display:block}
 @media(max-width:520px){.app-nav button{font-size:10px}.app-nav button span{font-size:18px}}
 
 
-/* Native lower-layer comparison: proportional overview plus readable controls. */
-.lower-layer{border-top:1px solid var(--line);margin-top:16px;padding-top:16px;min-width:0}.lower-layer h3{margin-bottom:8px}.lower-toolbar{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:6px;align-items:end;margin:12px 0}.lower-toolbar button{padding:8px}.lower-toolbar select{font-size:13px}.lower-timeline{display:flex;height:18px;overflow:hidden;border-radius:5px;margin:8px 0 4px;background:#303027}.lower-segment{height:100%;min-width:0;position:relative;box-shadow:inset 1px 0 #151510}.lower-segment.selected{box-shadow:inset 0 0 0 2px white}.lower-segment.current::after{content:'';position:absolute;left:50%;top:5px;width:5px;height:5px;border-radius:50%;background:white}.lower-axis{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.lower-summary{display:grid;gap:10px}.lower-summary>section{min-width:0;background:#151b22;border:1px solid var(--line);border-radius:10px;padding:10px}.lower-summary h4{margin:6px 0;font-size:14px}.lower-summary .support-intensity{flex-wrap:wrap}.lower-daily-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:10px}.lower-day{min-width:0;padding:5px 3px;min-height:50px;display:grid;grid-template-columns:1fr auto;gap:3px;border:0;border-radius:5px;text-align:left}.lower-day small{font-size:10px;grid-column:1/-1}.lower-day b{font-size:13px}.lower-day .intensity-bars{margin:0;gap:1px}.lower-day .intensity-bars i{width:3px}.lower-day[aria-current=date]{outline:2px solid white;outline-offset:-3px}.lower-day[aria-pressed=true]{box-shadow:inset 0 0 0 2px #111}.lower-day-detail{margin:8px 0 0;font-size:12px}.lower-distribution{height:10px;display:flex;border-radius:4px;overflow:hidden;margin:8px 0}.lower-distribution span{min-width:0}.band-summary{display:flex;gap:4px;flex-wrap:wrap;font-size:11px;margin-bottom:10px}.band-count{border-radius:4px;padding:3px 5px}.lower-exact{font-size:11px;color:var(--muted)}.lower-exact time{display:block}.lower-more{padding:8px;margin:10px 0 0}.lower-more summary{font-size:12px}.lower-help{font-size:12px;color:var(--muted)}
-@media(min-width:700px){.lower-summary{grid-template-columns:1fr 1.5fr}.lower-daily-grid{grid-template-columns:repeat(7,minmax(0,1fr))}}
-
 </style></head><body><main>
 <header class="app-header"><div class="eyebrow">Life Atlas</div><h1 id="pageTitle">Jyotish</h1><p class="sub">Native Jyotish + native BaZi · neutral comparison layer<br>10 life dimensions · 2021–2038</p></header><section id="timelinePage" class="app-page"><div class="native-tabs jy-native-tabs"><button type="button" data-jy-view="timeline" aria-pressed="true">Jyotish timeline</button><button type="button" data-jy-view="life" aria-pressed="false">Jyotish life map</button></div><section id="currentPeriod" class="panel now-card" aria-label="Current period"></section><div class="intensity-legend" data-intensity-legend></div><div class="panel dimension-control"><label for="focusDimension">Life dimension<select id="focusDimension"></select></label><p class="small" id="dimensionHint"></p></div>
 <details id="filters"><summary>Find a period <span class="small" id="filterCount"></span></summary><div class="filters"><label>Antardasha<select id="adFilter"><option value="">All ADs</option></select></label><label>PD support<select id="heatFilter"><option value="">All ratings</option><option value="1">1 · Max leverage</option><option value="2">2 · Leverage</option><option value="3">3 · Respect</option><option value="4">4 · Caution</option><option value="5">5 · Max caution</option></select></label><label>SD transit tone (any child)<select id="toneFilter"><option value="">All tones</option><option>SUPPORTIVE</option><option>MIXED</option><option>INTENSE</option></select></label><label>SD intensity (any child)<select id="intensityFilter"><option value="">All intensities</option><option>LOW</option><option>MEDIUM</option><option>HIGH</option><option>VERY HIGH</option></select></label><label>Search<input type="search" id="search" placeholder="Planet, theme, practice…"></label></div><div class="actions"><button id="futureOnly" aria-pressed="false">Current + future</button><button id="reset">Clear filters</button></div></details>
@@ -127,7 +123,7 @@ body[data-system-mode="compare"] .bazi-practice{display:block}
     <p class="small">Same dates, independent readings. Internal scores are never averaged.</p>
     <div class="compare-controls"><label>Calendar year<select id="compareYear"></select></label><label>Life dimension<select id="compareDimension"></select></label></div>
   </section>
-  <section class="panel"><h2>Year at a glance</h2><p class="compare-calendar-help">Color = support · bars = intensity. Select a month, then explore its Sūkṣma periods and overlapping BaZi days.</p><div class="compare-columns" aria-hidden="true"><span>Month</span><span>Jyotish</span><span>BaZi</span><span>Agreement</span></div><div id="compareCalendar" class="compare-calendar" role="group" aria-label="Monthly Jyotish and BaZi readings"></div><p class="compare-calendar-help">Same band = matching support; broad agreement = one band apart; divergent = two or more. Each row samples the Gregorian month midpoint.</p></section>
+  <section class="panel"><h2>Year at a glance</h2><p class="compare-calendar-help">Color = support · bars = intensity. Select a month for both readings.</p><div class="compare-columns" aria-hidden="true"><span>Month</span><span>Jyotish</span><span>BaZi</span><span>Agreement</span></div><div id="compareCalendar" class="compare-calendar" role="group" aria-label="Monthly Jyotish and BaZi readings"></div><p class="compare-calendar-help">Same band = matching support; broad agreement = one band apart; divergent = two or more. Each row samples the Gregorian month midpoint.</p></section>
   <section class="panel compare-detail" id="compareNativeDetail" tabindex="-1" aria-label="Selected month details" hidden><h2>Select a month</h2><p class="small">Tap either system card for a month to inspect the mechanisms and all ten dimensions.</p></section>
 </section>
 <section id="practicePage" class="app-page" hidden>
@@ -181,7 +177,7 @@ body[data-system-mode="compare"] .bazi-practice{display:block}
 </section>
 </section><section id="guidePage" class="app-page" hidden><section class="panel"><h2>Architecture · native systems first</h2>
 <p><b>Jyotish</b> keeps its own Vimshottari MD → AD → PD → Sūkṣma clock, natal lordship, vargas and transit evidence. <b>BaZi</b> now has a separate Da Yun → Liu Nian → Liu Yue → Liu Ri screen.</p>
-<p>The <b>Compare</b> page uses a neutral Gregorian calendar. It maps each system independently to five descriptive support bands and four intensity bands. Those display bands are intentionally comparable; the underlying numerical indices are not. Select a month to explore its overlapping Jyotish Sūkṣma periods and the BaZi daily pillars whose UTC dates intersect the full selected interval. The distribution counts dates, not duration, and never blends the two systems. Where a solar-term date appears in two BaZi months, the lower-layer view uses the later month’s supplied record, matching the reference file.</p>
+<p>The <b>Compare</b> page uses a neutral Gregorian calendar. It maps each system independently to five descriptive support bands and four intensity bands. Those display bands are intentionally comparable; the underlying numerical indices are not.</p>
 <p>Rahu/Ketu therefore remain fully visible on the Jyotish side without forcing BaZi to invent a node analogue. Conversely, BaZi branch clashes, combinations, punishments, Ten Gods and useful-element logic remain native rather than being translated into planetary language.</p></section><section class="panel"><h2>Reading the atlas</h2><p>Mercury Life Atlas explores ten dimensions within the Mercury Mahadasha, not an entire lifetime. These are independent interpretive Jyotish and BaZi ratings, not probabilities or deterministic forecasts.</p><p>Color represents domain support: green for leverage, yellow for mixed conditions, and orange/red for lower support or greater caution. Intensity is a separate measure, shown as 1–4 bars on SD cells and as a named category in details. Spiritual leverage means inner-development potential and can accompany difficult external circumstances. Mind describes clarity and emotional load; Vitality describes energy and stress burden. Neither is a diagnosis. Reinvention measures constructive change capacity, not comfort.</p><p>The Timeline shows all nine ADs. Each row spans its own dates, and its PD segments have duration-proportional widths. Vertically aligned positions are not the same calendar date. Tap a rating in the legend to filter; tap a PD to open its details. Inspect lets you press and slide for a preview. Pinch or use +/− to zoom, drag to pan, and use the minimap to jump.</p><p>The Life map compares ten dimensions across nine PDs or SDs. Its columns are equal-width for readability. A dimension selector recolors the main timeline without changing the dates.</p></section><section class="panel"><h2>Calculation approach · v6 dual-axis</h2><p>Functional lordship, natal condition and the relevant divisional chart establish the model’s support profiles. AD supplies climate, PD is the main operational manifestation, and SD adds a short modifier. Profiles are absolute: zero is neutral. V6 retains the removal of planetary mean-centering and comparisons against the average planet.</p><p><b>Career parent:</b> retain the supplied rules-first AD→PD heat levels and qualitative assessments, with Rahu AD → Rahu PD corrected to heat 3 (mixed-transformative support). Heat 1/2/3/4/5 maps to a raw anchor of 1.20 / 0.68 / 0.05 / −0.52 / −1.05. Parent index = anchor × 70, rounded. The weighted profile terms shown in SD evidence do not replace Career’s anchor.</p><p><b>Other parents:</b> 15% MD + 25% AD + 60% PD profile + 25% AD–PD relationship. Parent index = baseline / 1.25, clamped to −1…+1, × 100 and rounded.</p><p><b>SD layer:</b> 16% SD profile + 20% PD–SD relationship + 5% AD–SD relationship. <b>Transit layer:</b> 70% slow transit + full exact-contact adjustment + 45% fast SD-lord adjustment. The underlying slow term remains capped at ±0.65 and contacts at ±0.55. Moon’s fast modifier is halved; Jupiter, Saturn, Rahu and Ketu have no fast modifier.</p><p><b>Support buckets:</b> raw ≥1.15 → 1; ≥0.40 → 2; &gt;−0.15 → 3; &gt;−0.65 → 4; otherwise 5. SD normally stays within one band of its parent. Two bands require |SD layer + transit layer| ≥0.70, and either matching signs of the two layers or |exact contact| ≥0.20. If |transit layer| &gt;0.55 while |SD layer| &lt;0.10, the result is limited back to one band.</p><p><b>Extreme ratings:</b> after those caps, ++ requires baseline ≥1.10 or all of baseline ≥0.65, SD layer ≥0.10, transit layer ≥0.05; otherwise it becomes +. −− requires baseline ≤−0.95 or all of baseline ≤−0.50, SD layer ≤−0.10, transit layer ≤−0.05; otherwise it becomes −.</p><p><b>SD support index:</b> raw / 1.45, clamped to −1…+1, × 100 and rounded. It precedes heat caps and extreme checks, so it does not uniquely determine color. Indices are model scales, not probabilities; they do not imply empirical validation.</p><p><b>Intensity:</b> 20% AD + 35% PD + 45% SD volatility plus repetition, pair and contact boosts, capped at 1.35. Repeating the same AD and PD adds 0.34 for Rahu, 0.24 for Ketu, 0.16 for Mars, 0.12 for Saturn, or 0.05 for other planets. This increases intensity only; it does not reduce support. Low is below 0.42; medium starts at 0.42; high at 0.72; very high at 1.00. High intensity can coexist with support.</p></section><section class="panel"><h2>Why v6 separates support and intensity</h2><p>The source removes relative planetary normalization to avoid treating a supportive planet as adverse simply because another is stronger. V6 retains that rules-first approach and corrects Rahu AD → Rahu PD to mixed-transformative Career support with heightened intensity. Bars always reflect the computed SD intensity rather than a blanket label for its parent. Jupiter AD → Jupiter PD Career remains ++ Max Leverage as a parent baseline. Venus AD → Mercury PD remains + Leverage, Rahu AD → Mercury PD retains its original strategic reading, and Rahu AD → Ketu PD retains its high-caution baseline. SD and transit evidence qualify those anchors.</p><p>V6 retains the supplied 729 periods and audited Lahiri true-node transit dataset. Mind includes houses from both Scorpio Lagna and Libra Moon. Midpoint gochara is a snapshot, not the entire transit story. This app imports that evidence and evaluates the supplied v6 rules; it does not independently recompute ephemerides or repeat the source’s astronomical audit.</p></section><section class="panel"><h2>Divisional-chart anchors</h2><p class="small">Chart-specific context supplied with the model. The numerical model uses the planet profiles below; it does not calculate divisional charts at runtime.</p><div class="varga-grid">
       <div class="varga"><b>Wealth — D2 Hora</b> Strict Parāśarī Hora: Cancer Lagna; Sun/Moon/Venus/Jupiter/Rahu/Ketu in Cancer, Mercury/Mars/Saturn in Leo. Used as Hora condition alongside D1 2/5/9/11—not as a conventional 12-house D2.</div>
       <div class="varga"><b>Family / Home — D4 + D12 support</b> D4 Aquarius Lagna: Mercury 1H, Sun 10H, Mars/Saturn 5H, Ketu 8H. D12 Aquarius Lagna is used secondarily for parental/ancestral load. Read with D1 2nd/4th and Moon.</div>
@@ -521,7 +517,7 @@ function renderNativeCurrent(){
  $('baziDaYun').querySelectorAll('.dayun-card').forEach((el,i)=>{const current=nativeLuck[i]===n.luck;el.classList.toggle('current',current);el.querySelector('.luck-status').textContent=current?'● Current cycle':'Luck cycle'});
 }
 function refreshNativeCurrent(){
- clearTimeout(nativeTimer);renderNativeCurrent();refreshLowerMarkers();
+ clearTimeout(nativeTimer);renderNativeCurrent();
  const now=Date.now(),next=nativeBoundaries.find(t=>t>now),midnight=(Math.floor(now/86400000)+1)*86400000;
  nativeTimer=setTimeout(refreshNativeCurrent,Math.max(1,Math.min(60000,midnight-now,next===undefined?60000:next-now)));
 }
@@ -582,75 +578,6 @@ function renderDayDetail(){
 }
 function renderBaziNative(){renderDaYun();renderYears();renderMonths();renderNativeCurrent()}
 
-const nativeDayIndex=new Map();
-Object.entries(NATIVE.years).forEach(([solarYear,y])=>y.months.forEach(m=>m.days.forEach(day=>{
- nativeDayIndex.set(day.date,{day,solarYear,yearPillar:y.pillar,luck:y.luck,monthPillar:m.pillar,monthStart:m.start,monthEnd:m.end});
-})));
-let compareSelectedSDStart=null;
-
-function daysBetweenExact(startExact,endExact){
- const a=new Date(startExact),b=new Date(endExact),out=[];
- let d=new Date(Date.UTC(a.getUTCFullYear(),a.getUTCMonth(),a.getUTCDate()));
- const last=new Date(Date.UTC(b.getUTCFullYear(),b.getUTCMonth(),b.getUTCDate()));
- while(d<=last){
-   // Include a civil date when any part of that UTC date intersects the exact interval.
-   const ds=d.getTime(),de=ds+86400000;
-   if(de>Date.parse(startExact)&&ds<Date.parse(endExact)){
-     const iso=d.toISOString().slice(0,10),rec=nativeDayIndex.get(iso);
-     if(rec)out.push(rec);
-   }
-   d=new Date(d.getTime()+86400000);
- }
- return out;
-}
-function sookshmasOverlappingMonth(year,monthIndex){
- const ms=Date.UTC(year,monthIndex,1),me=Date.UTC(year,monthIndex+1,1);
- return SD_DATA.filter(r=>Date.parse(r.endExact)>ms&&Date.parse(r.startExact)<me);
-}
-function clipPct(r,year,monthIndex){
- const ms=Date.UTC(year,monthIndex,1),me=Date.UTC(year,monthIndex+1,1);
- const a=Math.max(ms,Date.parse(r.startExact)),b=Math.min(me,Date.parse(r.endExact));
- return Math.max(0,(b-a)/(me-ms)*100);
-}
-function maxIntensityLabel(days,dim){
- const rank={LOW:1,MEDIUM:2,HIGH:3,'VERY HIGH':4},back={1:'LOW',2:'MEDIUM',3:'HIGH',4:'VERY HIGH'};
- let mx=1;days.forEach(x=>{const d=x.day.dims[dim];if(d)mx=Math.max(mx,rank[d.intensity]||1)});
- return back[mx];
-}
-
-function renderLowerLayer(monthIndex,sdStart){
- const rows=sookshmasOverlappingMonth(cYear,monthIndex);
- if(!rows.length){compareSelectedSDStart=null;return '<section class="lower-layer"><h3>Explore shorter periods</h3><p class="small">No Jyotish Sūkṣma period overlaps this calendar month inside the atlas range.</p></section>'}
- const selected=rows.find(r=>r.startExact===sdStart)||rows.find(r=>isCurrent(r))||rows[0];compareSelectedSDStart=selected.startExact;
- const index=rows.indexOf(selected),j=dimResult(selected,cDim),days=daysBetweenExact(selected.startExact,selected.endExact),counts=[0,0,0,0,0,0];
- days.forEach(x=>counts[x.day.dims[cDim].heat]++);
- const peak=days.length?maxIntensityLabel(days,cDim).toLowerCase():'unavailable';
- return `<section class="lower-layer"><h3>Explore shorter periods</h3><p class="lower-help">Choose a Jyotish Sūkṣma period to see BaZi daily readings across its full dates, including days beyond this calendar month.</p>
- <div class="lower-timeline" role="img" aria-label="Sūkṣma durations clipped to ${monthNames[monthIndex]} ${cYear}; use the selector below to explore">${rows.map((r,i)=>{const d=dimResult(r,cDim),monthStart=Date.UTC(cYear,monthIndex,1),monthEnd=Date.UTC(cYear,monthIndex+1,1),gap=i===0?Math.max(0,(Date.parse(r.startExact)-monthStart)/(monthEnd-monthStart)*100):0;return `<span class="lower-segment h${d.heat} ${r===selected?'selected':''} ${isCurrent(r)?'current':''}" style="width:${clipPct(r,cYear,monthIndex)}%;margin-left:${gap}%" data-lower-start="${r.startExact}" data-lower-end="${r.endExact}"></span>`}).join('')}</div>
- <div class="lower-axis"><span>1 ${monthNames[monthIndex]}</span><span>Width = time within this month</span><span>${new Date(Date.UTC(cYear,monthIndex+1,0)).getUTCDate()}</span></div>
- <div class="lower-toolbar"><button id="lowerPrevious" aria-label="Previous Sūkṣma in this month" ${index===0?'disabled':''}>←</button><label> Sūkṣma · ${index+1} of ${rows.length}<select id="lowerSD">${rows.map((r,i)=>`<option value="${r.startExact}" ${r===selected?'selected':''}>${i+1} · ${r.ad} / ${r.pd} / ${r.sd}</option>`).join('')}</select></label><button id="lowerNext" aria-label="Next Sūkṣma in this month" ${index===rows.length-1?'disabled':''}>→</button></div>
- <div class="lower-summary"><section><span class="system-tag">Jyotish · Sūkṣma</span><h4>${selected.ad} → ${selected.pd} → ${selected.sd}</h4><p class="lower-exact"><time datetime="${selected.startExact}">From ${fmtExact(selected.startExact)}</time><time datetime="${selected.endExact}">Until ${fmtExact(selected.endExact)}</time></p><div class="support-intensity"><span class="pill h${j.heat}">${j.mark} ${j.post}</span>${intensityBadge(j)}</div><details class="lower-more"><summary>Why this Sūkṣma reading</summary><p>${esc(j.rationale)}</p></details></section>
- <section><span class="system-tag">BaZi · daily distribution</span><h4>${days.length} overlapping UTC dates</h4><p class="lower-help">Peak daily intensity: ${peak}. Counts describe days, not a combined score.</p>
- <div class="lower-distribution" role="img" aria-label="Daily support counts: ${[1,2,3,4,5].map(h=>`${HEAT[h].post}: ${counts[h]}`).join('; ')}">${[1,2,3,4,5].filter(h=>counts[h]).map(h=>`<span class="h${h}" style="width:${counts[h]/days.length*100}%"></span>`).join('')}</div>
- <div class="band-summary">${[1,2,3,4,5].map(h=>`<span class="band-count h${h}" data-band="${h}" data-count="${counts[h]}">${HEAT[h].mark} · ${counts[h]}d</span>`).join('')}</div>
- <details class="lower-more" open><summary>Daily heatmap · select a date</summary><div class="lower-daily-grid">${days.map(x=>{const d=x.day.dims[cDim];return `<button class="lower-day h${d.heat}" data-lower-day="${x.day.date}" aria-pressed="false" aria-label="${x.day.date}, ${x.day.pillar}, ${nPost(d.heat,d.intensity)}, ${d.intensity.toLowerCase()} intensity"><small>${x.day.date.slice(5)}</small><b>${HEAT[d.heat].mark}</b>${nBars(d)}</button>`}).join('')}</div><p id="lowerDayDetail" class="lower-day-detail" aria-live="polite">Color = support · bars = intensity. Select a day for its pillar and solar-month context.</p></details>
- <p class="lower-help">A date is included when any part overlaps the Sūkṣma interval. Solar-term boundary dates use the later month’s supplied daily record.</p></section></div></section>`;
-}
-function wireLowerLayer(monthIndex){
- const select=$('lowerSD');if(!select)return;
- const change=(start,focusId)=>{compareSelectedSDStart=start;$('compareLowerLayer').innerHTML=renderLowerLayer(monthIndex,start);wireLowerLayer(monthIndex);const target=$(focusId);(target&&!target.disabled?target:$('lowerSD')).focus({preventScroll:true})};
- select.onchange=()=>change(select.value,'lowerSD');
- $('lowerPrevious').onclick=()=>change(select.options[select.selectedIndex-1].value,'lowerPrevious');
- $('lowerNext').onclick=()=>change(select.options[select.selectedIndex+1].value,'lowerNext');
- document.querySelectorAll('[data-lower-day]').forEach(b=>b.onclick=()=>{const x=nativeDayIndex.get(b.dataset.lowerDay),d=x.day.dims[cDim];document.querySelectorAll('[data-lower-day]').forEach(e=>e.setAttribute('aria-pressed',String(e===b)));$('lowerDayDetail').textContent=`${x.day.date} · ${nPillar(x.day.pillar)} · ${nPost(d.heat,d.intensity)} · ${d.intensity.toLowerCase()} intensity. Solar month ${x.monthPillar}, year ${x.yearPillar}.`});
- refreshLowerMarkers();
-}
-function refreshLowerMarkers(){
- const now=Date.now(),date=new Date(now).toISOString().slice(0,10);
- document.querySelectorAll('[data-lower-start]').forEach(el=>el.classList.toggle('current',Date.parse(el.dataset.lowerStart)<=now&&now<Date.parse(el.dataset.lowerEnd)));
- document.querySelectorAll('[data-lower-day]').forEach(el=>{if(el.dataset.lowerDay===date)el.setAttribute('aria-current','date');else el.removeAttribute('aria-current')});
-}
-
 function renderCompare(){
  const rows=NATIVE.compare[String(cYear)]||[];
  $('compareCalendar').innerHTML=rows.map((bm,i)=>{
@@ -666,8 +593,7 @@ function renderCompareDetail(i){
  <div class="system-card"><span class="system-tag">Jyotish</span><h3>${jr?`${jr.ad} → ${jr.pd} → ${jr.sd}`:'Outside Jyotish coverage'}</h3>${j?`<span class="pill h${j.heat}">${j.mark} ${j.post}</span>${intensityBadge(j)}<details><summary>Why this reading</summary><p>${esc(j.rationale)}</p><p class="small">Internal Jyotish index ${j.score}; not calibrated to BaZi.</p></details>`:'<p>No Jyotish reading is available at this date.</p>'}</div>
  <div class="system-card bazi"><span class="system-tag">BaZi</span><h3>${nPillar(bm.luck)} · ${nPillar(bm.annual)} · ${nPillar(bm.solarMonth)}</h3><span class="pill h${b.heat}">${HEAT[b.heat].mark} ${nPost(b.heat,b.intensity)}</span><span class="intensity-badge">${nBars(b)} ${b.intensity}</span><details><summary>Why this reading</summary><p>Supplied Da Yun, annual and solar-month assessment.</p><p class="small">Internal BaZi index ${b.score>0?'+':''}${b.score}; not calibrated to Jyotish.</p></details></div></div>
  <details class="comparison-dimensions"><summary>Compare all ten dimensions</summary><div class="agreement-map">${nativeDims.map(k=>{const jj=jr?dimResult(jr,k):null,bb=bm.dims[k],aa=jj?bandAgreement(jj,bb):['Unavailable',''];return `<div class="agreement-cell"><b>${DIMS[k].short}</b><span>J ${jj?.mark||'—'} · B ${HEAT[bb.heat].mark}</span><small class="agreement ${aa[1]}">${aa[0]}</small></div>`}).join('')}</div></details>
- <p class="small">Shared sample: <time datetime="${bm.mid}">${fmtExact(bm.mid)}</time>. Jyotish derives its reading from the active dasha/transit context; BaZi derives it from Da Yun/year/solar month. No blended verdict is produced.</p><div id="compareLowerLayer">${renderLowerLayer(i,compareSelectedSDStart)}</div>`;
- wireLowerLayer(i);
+ <p class="small">Shared sample: <time datetime="${bm.mid}">${fmtExact(bm.mid)}</time>. Jyotish derives its reading from the active dasha/transit context; BaZi derives it from Da Yun/year/solar month. No blended verdict is produced.</p>`;
  $('compareBack').onclick=()=>{$('compareNativeDetail').hidden=true;const row=$('compareCalendar').querySelector(`[data-cmonth="${cMonth}"]`);row.focus({preventScroll:true});$('compareCalendar').scrollIntoView({block:'start',behavior:'instant'})};
 }
 
