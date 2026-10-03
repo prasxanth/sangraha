@@ -17,21 +17,21 @@ function pureRules(html){const c={};vm.createContext(c);for(const name of ['orie
  await p.locator('#guidanceToday').click();assert.equal(await p.locator('#guidanceDate').inputValue(),'2026-10-03');
  await p.clock.setSystemTime(new Date('2026-10-04T08:00:00Z'));await p.evaluate(()=>window.dispatchEvent(new Event('pageshow')));assert.equal(await p.locator('#guidanceDate').inputValue(),'2026-10-04');
  await p.locator('#guidanceDate').fill('2026-09-01');await p.locator('#guidanceDate').dispatchEvent('change');await p.clock.setSystemTime(new Date('2026-10-05T08:00:00Z'));await p.evaluate(()=>window.dispatchEvent(new Event('pageshow')));assert.equal(await p.locator('#guidanceDate').inputValue(),'2026-09-01');
- await p.locator('#journalNote').fill('<img src=x onerror=window.injected=1> literal note');await p.locator('#journalSave').click();assert.equal(await p.locator('.journal-entry').count(),1);assert.equal(await p.locator('.journal-entry img').count(),0);
+ await p.locator('#guidance-tab-journal').click();await p.locator('#journalNote').fill('<img src=x onerror=window.injected=1> literal note');await p.locator('#journalSave').click();assert.equal(await p.locator('.journal-entry').count(),1);assert.equal(await p.locator('.journal-entry img').count(),0);
  const frozen=await p.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);assert(frozen[0].snapshot.jyPD.label);assert(frozen[0].snapshot.baDay.label);
  await p.reload();await p.locator('[data-page="practice"]').click();assert.equal(await p.locator('.journal-entry').count(),1);assert.deepEqual(await p.evaluate(key=>JSON.parse(localStorage.getItem(key)),key),frozen);
- const downloadPromise=p.waitForEvent('download');await p.locator('#journalExport').click();const download=await downloadPromise;const exported=JSON.parse(fs.readFileSync(await download.path(),'utf8'));assert.deepEqual(exported.entries,frozen);
+ await p.locator('#guidance-tab-journal').click();const downloadPromise=p.waitForEvent('download');await p.locator('#journalExport').click();const download=await downloadPromise;const exported=JSON.parse(fs.readFileSync(await download.path(),'utf8'));assert.deepEqual(exported.entries,frozen);
  const importFile=async(obj)=>p.locator('#journalImportFile').setInputFiles({name:'journal.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(obj))});
  await importFile({entries:[{id:'broken'}]});await p.waitForFunction(()=>document.querySelector('#journalStatus').textContent.includes('Invalid'));assert.equal(await p.locator('.journal-entry').count(),1);
  await importFile(exported);await p.waitForFunction(()=>document.querySelector('#journalStatus').textContent.includes('Imported 0'));
  const extra=JSON.parse(JSON.stringify(frozen[0]));extra.id='another';extra.snapshot.jyPD.label='<img src=x onerror=window.injected=1>';await importFile({entries:[extra]});await p.waitForFunction(()=>document.querySelectorAll('.journal-entry').length===2);assert.equal(await p.locator('.journal-entry img').count(),0);
- await p.locator('[data-jdel]').first().click();assert.equal(await p.locator('.journal-entry').count(),1);
- p.once('dialog',d=>d.dismiss());await p.locator('#journalClear').click();assert.equal(await p.locator('.journal-entry').count(),1);
+ await p.locator('#guidance-tab-review').click();await p.locator('[data-jdel]').first().click();assert.equal(await p.locator('.journal-entry').count(),1);
+ await p.locator('#guidance-tab-journal').click();p.once('dialog',d=>d.dismiss());await p.locator('#journalClear').click();assert.equal(await p.locator('.journal-entry').count(),1);
  for(const width of [320,390,1440]){await p.setViewportSize({width,height:900});assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
- await p.setViewportSize({width:390,height:844});await p.locator('#guidanceEngine').screenshot({path:'/tmp/mercury-guidance.png'});
+ await p.setViewportSize({width:390,height:844});await p.locator('#guidance-tab-plan').click();await p.locator('#guidanceEngine').screenshot({path:'/tmp/mercury-guidance.png'});
  await p.locator('[data-page="compare"]').click();await p.locator('[data-cmonth="9"]').click();assert.equal(await p.locator('#compareNativeDetail .synthesis-panel').count(),2);
  assert.deepEqual(errors,[]);
- const denied=await browser.newPage();await denied.addInitScript(()=>Storage.prototype.setItem=function(){throw new Error('storage denied')});await denied.goto(url);await denied.locator('[data-page="practice"]').click();await denied.locator('#journalSave').click();await denied.locator('#journalSave').click();assert.equal(await denied.locator('.journal-entry').count(),2);assert((await denied.locator('#journalStatus').textContent()).includes('Session only'));
+ const denied=await browser.newPage();await denied.addInitScript(()=>Storage.prototype.setItem=function(){throw new Error('storage denied')});await denied.goto(url);await denied.locator('[data-page="practice"]').click();await denied.locator('#guidance-tab-journal').click();await denied.locator('#journalSave').click();await denied.locator('#journalSave').click();assert.equal(await denied.locator('.journal-entry').count(),2);assert((await denied.locator('#journalStatus').textContent()).includes('Session only'));
  console.log('PASS: source guidance rules; four horizons; date following; native luck context; frozen snapshots; journal persistence, export, validated merge, escaping and storage fallback; responsive layout');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
