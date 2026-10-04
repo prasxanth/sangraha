@@ -1,0 +1,81 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const {pathToFileURL} = require('node:url');
+const {chromium} = require('playwright');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ try {
+  const page=await browser.newPage({acceptDownloads:true}), errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  const original=fs.readFileSync('books/marginalia.html','utf8'); let remote=original, offline=false, checks=0;
+  await page.route('https://openlibrary.org/**',r=>r.fulfill({json:{docs:[]}}));
+  await page.route('https://covers.openlibrary.org/**',r=>r.abort());
+  await page.route('https://raw.githubusercontent.com/**',r=>{checks++;return offline?r.abort():r.fulfill({contentType:'text/plain',body:remote});});
+  await page.goto(pathToFileURL(path.resolve('books/marginalia.html')).href);
+  await page.locator('.shelf-book').first().click();
+  await page.getByRole('button',{name:'Edit metadata',exact:true}).click();
+  await page.waitForFunction(()=>!document.getElementById('metadata-fields').disabled);
+  assert.equal(checks,1);
+  const index=await page.evaluate(()=>editingIndex);
+  const note='A reflection with <script>window.injected=true</script> & "quotes"';
+  await page.locator('[name="Impact (1–5)"]').fill('4.25');
+  await page.locator('[name="Re-read?"]').selectOption('N');
+  await page.locator('[name="Would Recommend"]').selectOption('N');
+  await page.locator('[name="Completion Date"]').fill('Graduate School');
+  await page.locator('[name="Genre"]').fill('Reader\'s "choice" <test>');
+  await page.locator('[name="Notes"]').fill(note);
+  await page.getByRole('button',{name:'Apply changes',exact:true}).click();
+  await page.waitForFunction(()=>!metadataBusy);
+  assert.equal(checks,2);
+  assert.equal(await page.evaluate(i=>BOOKS[i].optional['Impact (1–5)'],index),'4.25');
+  assert.equal(await page.locator('.detail-notes').textContent(),note);
+  assert.equal(await page.evaluate(()=>window.injected),undefined);
+  const downloadPromise=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Download HTML',exact:true}).click();
+  const download=await downloadPromise;
+  const saved=fs.readFileSync(await download.path(),'utf8');
+  assert.equal(checks,3); assert(saved.includes('metadata-baseline')); assert(saved.includes('\\u003cscript\\u003e'));
+  const output=path.join('/tmp','marginalia-metadata-test.html');fs.writeFileSync(output,saved);
+  page.on('dialog',dialog=>dialog.accept());
+  await page.goto(pathToFileURL(output).href);
+  assert.equal(await page.evaluate(i=>BOOKS[i].optional.Notes,index),note);
+  assert.equal(await page.evaluate(i=>BOOKS[i].optional['Re-read?'],index),'N');
+  await page.evaluate(i=>openBook(i),index);
+  await page.getByRole('button',{name:'Edit metadata',exact:true}).click();
+  await page.waitForFunction(()=>!document.getElementById('metadata-fields').disabled);
+  assert.equal(await page.locator('[name="Notes"]').inputValue(),note,'Saved local changes survive GitHub baseline check');
+  // Server changes during editing must block apply and preserve current data.
+  remote=original.replace('Order vs chaos','Changed remotely');
+  await page.locator('[name="Notes"]').fill('must not apply');
+  await page.getByRole('button',{name:'Apply changes',exact:true}).click();
+  await page.waitForFunction(()=>!metadataBusy);
+  assert((await page.locator('#editor-status').textContent()).includes('different book data'));
+  assert.equal(await page.evaluate(i=>BOOKS[i].optional.Notes,index),note);
+  await page.getByRole('button',{name:'Close editor',exact:true}).click();
+  offline=true;
+  await page.getByRole('button',{name:'Edit metadata',exact:true}).click();
+  await page.waitForFunction(()=>!metadataBusy);
+  assert(await page.evaluate(()=>document.getElementById('metadata-fields').disabled));
+  assert((await page.locator('#editor-status').textContent()).includes('Cannot check GitHub'));
+  await page.getByRole('button',{name:'Close editor',exact:true}).click();
+  await page.evaluate(()=>showSaveStatus('Pending changes'));
+  await page.getByRole('button',{name:'Download HTML',exact:true}).click();
+  await page.waitForFunction(()=>!metadataBusy);
+  assert((await page.locator('#save-status').textContent()).includes('Cannot check GitHub'));
+  // Mock native file access: verify the saved bytes, including the embedded data.
+  offline=false;remote=original;
+  await page.evaluate(()=>{window.showSaveFilePicker=async()=>({name:'marginalia.html',getFile:async()=>new File([],'marginalia.html'),createWritable:async()=>({write:async data=>{window.savedHTML=data},close:async()=>{},abort:async()=>{}})});showSaveStatus('Pending changes')});
+  await page.getByRole('button',{name:'Save HTML file…',exact:true}).click();
+  await page.waitForFunction(()=>!metadataBusy);
+  assert((await page.evaluate(()=>window.savedHTML)).includes('4.25'));
+  assert.equal(await page.evaluate(()=>metadataDirty),false);
+  for(const width of [390,320]) {
+   await page.setViewportSize({width,height:844});await page.getByRole('button',{name:'Edit metadata',exact:true}).click();await page.waitForFunction(()=>!metadataBusy);
+   assert(await page.evaluate(()=>{const d=document.getElementById('metadata-editor');return d.scrollWidth<=d.clientWidth && d.getBoundingClientRect().right<=innerWidth}));
+   await page.screenshot({path:`/tmp/marginalia-editor-${width}.png`});await page.getByRole('button',{name:'Close editor',exact:true}).click();
+  }
+  assert.deepEqual(errors,[]);
+  console.log('Metadata edit/save/reopen, GitHub conflicts, offline blocking, escaping, native writes and mobile editor checks passed.');
+ } finally {await browser.close()}
+})().catch(e=>{console.error(e);process.exit(1)});
