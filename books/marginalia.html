@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Marginalia">
@@ -743,6 +743,13 @@ button{color:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px s
 .github-target{font:12px/1.7 var(--mono);color:var(--text2);margin:15px 0}#github-form label{display:flex;flex-direction:column;gap:6px;font:12px var(--sans);color:var(--text2);margin:16px 0}#github-form input{width:100%;padding:10px;background:var(--bg);color:var(--text);border:1px solid var(--border2);border-radius:5px;font:16px var(--sans)}
 #github-commit a{color:var(--gold2)}#github-status{font-size:13px;color:var(--gold2);margin:14px 0;white-space:pre-line}#github-changes{max-height:30dvh;overflow:auto;border-block:1px solid var(--border2);padding:10px 0}#github-changes details{margin:6px 0;font-size:13px}#github-changes summary{cursor:pointer;color:var(--gold2)}.metadata-change{padding:8px 10px;overflow-wrap:anywhere;font-size:12px}.metadata-change del{color:var(--text3)}.metadata-change ins{color:var(--text);text-decoration:none}button:disabled{opacity:.5;cursor:default}
 @media(max-width:600px){#metadata-editor{width:100%;max-width:100vw;padding-inline:16px}#editor-book{margin:8px 0}#editor-status{margin:4px 0 10px}#metadata-editor>.editor-help{font-size:11px}#save-bar>div{flex-shrink:1}}
+
+/* Like Kena/I Ching, let the browser own safe-area layout. Pin the shell to
+   its viewport edges rather than stacking safe insets onto a dvh-sized box. */
+#app{position:fixed;inset:0;width:100%;height:auto;margin:0 auto}
+.status-bar{display:none}.bottom-nav{padding-bottom:0}
+#content{flex:1 1 0;min-height:0}.bottom-nav{flex:0 0 auto}
+#github-setup{font-size:12px;color:var(--text2);margin:12px 0}#github-setup summary{cursor:pointer;color:var(--gold2)}#github-setup ol{padding-left:20px;margin:8px 0}#github-setup li{margin:5px 0}
 </style>
 </head>
 <body>
@@ -886,7 +893,9 @@ button{color:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px s
   <form id="github-form">
     <label>Commit message<input id="github-message" required maxlength="200" value="Update reading metadata in Marginalia"></label>
     <label>GitHub token<input id="github-token" type="password" required autocomplete="off" spellcheck="false" placeholder="Fine-grained personal access token"></label>
-    <p class="editor-help">Use a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">fine-grained token</a> limited to sangraha, with Contents: read and write. It is sent only to GitHub and cleared after each attempt; it is never saved in this file or browser storage.</p>
+    <p class="editor-help">Use a <a href="https://github.com/settings/personal-access-tokens/new?name=Marginalia&amp;target_name=prasxanth&amp;contents=write" target="_blank" rel="noopener noreferrer">fine-grained token</a> limited to sangraha, with Contents: read and write. It is sent only to GitHub and cleared after each attempt; it is never saved in this file or browser storage.</p>
+    <details id="github-setup"><summary>Token setup & access troubleshooting</summary><ol><li>Resource owner: <strong>prasxanth</strong>.</li><li>Repository access: <strong>Only select repositories → sangraha</strong>. “Public repositories (read-only)” cannot commit.</li><li>Repository permissions: <strong>Contents → Read and write</strong>. Metadata-only access is insufficient.</li><li>Ensure the token has not expired or been revoked. The account must have write access to the repository.</li></ol><p>Check access verifies authentication and file reading without writing. Only a commit can verify that token permissions and branch rules allow this update.</p></details>
+    <button id="github-check" type="button" onclick="checkGitHubAccess()">Check access (no changes)</button>
     <p id="github-status" role="status"></p>
     <div class="editor-actions"><button type="button" onclick="document.getElementById('github-commit').close()">Cancel</button><button id="github-submit" type="submit">Commit to main</button></div>
   </form>
@@ -1692,11 +1701,48 @@ function encodeGitHubContent(content) {
   let binary = ''; for (const byte of new TextEncoder().encode(content)) binary += String.fromCharCode(byte);
   return btoa(binary);
 }
-function gitHubError(status) {
-  if (status === 401 || status === 403) return 'GitHub denied access. Check the token, its expiry, and Contents: read and write permission for sangraha. Branch rules may also prevent direct commits.';
-  if (status === 409 || status === 422) return 'GitHub rejected the update. The file may have changed or main may require a pull request. No changes were overwritten; fetch the latest file and try again.';
-  if (status === 404) return 'GitHub could not find this file with the supplied token. Check repository access.';
-  return 'GitHub could not complete the request (HTTP '+status+'). Your session changes are still here.';
+async function gitHubError(response, operation, token = '') {
+  let message = '';
+  try { message = String((await response.json()).message || ''); } catch (_) {}
+  // Only display API diagnostics, never credentials or request headers.
+  if (token) message = message.split(token).join('[redacted]');
+  message = message.replace(/(?:github_pat_|gh[pousr]_)[A-Za-z0-9_]+/g,'[redacted]').slice(0,500);
+  const status = response.status;
+  let advice;
+  if (status === 401) advice = 'GitHub denied access: the token was not accepted. It may be expired, revoked, incomplete, or invalid. Create a replacement and paste it only here.';
+  else if ((status === 403 || status === 429) && (response.headers.get('x-ratelimit-remaining') === '0' || /rate limit/i.test(message))) advice = 'GitHub rate limit reached. Wait before retrying; this is not necessarily a token-permission problem.';
+  else if (status === 403) advice = 'GitHub denied access. Set resource owner to prasxanth, select sangraha, and grant Contents: read and write. Public-repositories-only access is read-only. If these are correct, check repository/branch policies.';
+  else if (status === 409 || status === 422) advice = 'GitHub rejected the update. The file may have changed or main may require a pull request. Your changes are preserved; reconcile the latest file before retrying.';
+  else if (status === 404) advice = 'GitHub could not find this file with the supplied token. Check resource owner prasxanth and selected repository sangraha.';
+  else advice = 'GitHub could not complete this request. Your session changes are still here.';
+  return `${operation} · HTTP ${status}\n${message ? message+'\n' : ''}${advice}`;
+}
+async function checkGitHubAccess() {
+  if (metadataBusy) return;
+  const status = document.getElementById('github-status');
+  let token = document.getElementById('github-token').value.trim(), headers;
+  if (!token) { status.textContent = 'Enter your replacement token above to check access.'; return; }
+  metadataBusy = true;
+  document.querySelectorAll('#github-commit button, #github-form input').forEach(el=>el.disabled=true);
+  document.getElementById('github-token').value='';
+  try {
+    headers = {Accept:'application/vnd.github+json',Authorization:'Bearer '+token,'X-GitHub-Api-Version':'2026-03-10'};
+    status.textContent='Checking GitHub authentication…';
+    const user = await githubRequest('https://api.github.com/user',{headers});
+    if (!user.ok) throw new Error(await gitHubError(user,'Authentication check',token));
+    const account = await user.json();
+    status.textContent='Checking access to sangraha…';
+    const file = await githubRequest(GITHUB_CONTENTS+'?ref=main',{headers});
+    if (!file.ok) throw new Error(await gitHubError(file,'Repository read check',token));
+    status.textContent=`Authenticated as ${account.login}. Marginalia is readable. No changes were made. Reading this public file does not prove write permission: confirm Contents: read and write, then re-enter the token to commit.`;
+  } catch (error) {
+    status.textContent=error.name==='AbortError' || error instanceof TypeError ? 'Cannot reach GitHub. Check your connection and retry; no changes were made.' : error.message;
+  } finally {
+    token='';if(headers)delete headers.Authorization;metadataBusy=false;
+    document.getElementById('github-token').value='';
+    document.querySelectorAll('#github-commit button, #github-form input').forEach(el=>el.disabled=false);
+    document.getElementById('github-submit').disabled=!pendingMetadataChanges().length;
+  }
 }
 async function githubRequest(url, options) {
   const controller = new AbortController(), timeout = setTimeout(()=>controller.abort(),20000);
@@ -1720,7 +1766,7 @@ document.getElementById('github-form').addEventListener('submit',async event=>{
     headers = {Accept:'application/vnd.github+json',Authorization:'Bearer '+token,'X-GitHub-Api-Version':'2026-03-10'};
     status.textContent = 'Fetching the latest file and checking for conflicts…';
     const response = await githubRequest(GITHUB_CONTENTS+'?ref=main',{headers});
-    if (!response.ok) throw new Error(gitHubError(response.status));
+    if (!response.ok) throw new Error(await gitHubError(response,'Fetch latest file',token));
     const file = await response.json();
     if (file.encoding !== 'base64' || !file.sha || typeof file.content !== 'string') throw new Error('GitHub returned an unexpected file response. Nothing was committed.');
     const latest = decodeGitHubContent(file.content), remote = sourceBooks(latest), current = JSON.stringify(BOOKS);
@@ -1736,7 +1782,7 @@ document.getElementById('github-form').addEventListener('submit',async event=>{
     const html = metadataFileHTML(current);
     putStarted = true;
     const result = await githubRequest(GITHUB_CONTENTS,{method:'PUT',headers:{...headers,'Content-Type':'application/json'},body:JSON.stringify({message,content:encodeGitHubContent(html),sha:file.sha,branch:'main'})});
-    if (!result.ok) {putStarted=false;throw new Error(gitHubError(result.status));}
+    if (!result.ok) {putStarted=false;throw new Error(await gitHubError(result,'Commit to main',token));}
     const commit = await result.json();
     githubBaseline = current; preferGitHubAPI = true; githubSourceHTML = html;
     // A GitHub commit persists metadata remotely. Local saving remains available.

@@ -15,6 +15,10 @@ const {chromium}=require('playwright');
    if(mode==='offline')return r.abort();
    if(r.request().method()==='PUT' || r.request().headers().authorization) assert(r.request().headers().authorization==='Bearer test-only-token');
    if(mode==='unauthorized')return r.fulfill({status:401,json:{message:'Bad credentials'}});
+   if(mode==='forbidden')return r.fulfill({status:403,json:{message:'Resource not accessible by personal access token'}});
+   if(mode==='limited')return r.fulfill({status:403,headers:{'x-ratelimit-remaining':'0'},json:{message:'API rate limit exceeded'}});
+   if(new URL(r.request().url()).pathname==='/user')return r.fulfill({json:{login:'prasxanth'}});
+   if(mode==='write-denied' && r.request().method()==='PUT')return r.fulfill({status:403,json:{message:'Resource not accessible by personal access token'}});
    if(r.request().method()==='GET')return r.fulfill({json:{sha:'original-sha',encoding:'base64',content:Buffer.from(remote).toString('base64')}});
    const body=r.request().postDataJSON(); puts.push(body);
    if(mode==='race')return r.fulfill({status:409,json:{message:'SHA mismatch'}});
@@ -27,6 +31,17 @@ const {chromium}=require('playwright');
   const submit=async()=>{await page.getByRole('button',{name:'Commit to main',exact:true}).click();await page.waitForFunction(()=>!metadataBusy);assert.equal(await page.locator('#github-token').inputValue(),'')};
   await open();assert((await page.locator('#github-changes').textContent()).includes('Notes'));
   mode='unauthorized';await submit();assert((await page.locator('#github-status').textContent()).includes('denied access'));assert.equal(puts.length,0);
+  assert((await page.locator('#github-status').textContent()).includes('HTTP 401'));
+  assert((await page.locator('#github-status').textContent()).includes('Bad credentials'));
+  mode='forbidden';await page.locator('#github-token').fill('test-only-token');await submit();
+  assert((await page.locator('#github-status').textContent()).includes('HTTP 403'));
+  assert((await page.locator('#github-status').textContent()).includes('Resource not accessible by personal access token'));
+  mode='limited';await page.locator('#github-token').fill('test-only-token');await submit();assert((await page.locator('#github-status').textContent()).includes('rate limit reached'));
+  mode='ok';await page.locator('#github-token').fill('test-only-token');await page.locator('#github-check').click();await page.waitForFunction(()=>!metadataBusy);
+  assert((await page.locator('#github-status').textContent()).includes('Authenticated as prasxanth'));
+  assert((await page.locator('#github-status').textContent()).includes('does not prove write permission'));assert.equal(puts.length,0);
+  assert.equal(await page.locator('#github-token').inputValue(),'');
+  mode='write-denied';await page.locator('#github-token').fill('test-only-token');await submit();assert((await page.locator('#github-status').textContent()).includes('Commit to main · HTTP 403'));assert(await page.evaluate(()=>metadataDirty));
   mode='offline';await page.locator('#github-token').fill('test-only-token');await submit();assert((await page.locator('#github-status').textContent()).includes('Cannot reach'));assert.equal(puts.length,0);
   mode='ok';remote=original.replace('Order vs chaos','Someone else edited this');await page.locator('#github-token').fill('test-only-token');await submit();assert((await page.locator('#github-status').textContent()).includes('different metadata'));assert.equal(puts.length,0);
   remote=original;mode='race';await page.locator('#github-token').fill('test-only-token');await submit();assert((await page.locator('#github-status').textContent()).includes('rejected'));assert(await page.evaluate(()=>metadataDirty));
@@ -45,9 +60,18 @@ assert(await page.locator('#github-submit').isDisabled());
   await page.evaluate(source=>{githubBaseline=sourceBooks(source);BOOKS[0].optional.Notes='Updated reflection — λ <script>never()</script>'},original);
   await open();await submit();assert((await page.locator('#github-status').textContent()).includes('already on GitHub'));assert.equal(puts.length,2);
   await page.getByRole('button',{name:'Close GitHub commit',exact:true}).click();
-  for(const [width,height] of [[1440,1000],[390,844],[320,568],[844,390]]){
+  for(const [width,height] of [[1440,1000],[402,874],[390,844],[320,568],[844,390]]){
    await page.setViewportSize({width,height});
    assert.equal(await page.evaluate(()=>Math.round(document.getElementById('app').getBoundingClientRect().height)),height);
+   await page.evaluate(()=>{document.documentElement.style.setProperty('--safe-b','34px');document.documentElement.style.setProperty('--safe-t','59px')});
+   for(const screen of ['home','library','stats']) {
+    await page.locator('#nav-'+screen).click();
+    const edges=await page.evaluate(()=>({app:document.getElementById('app').getBoundingClientRect().bottom,nav:document.querySelector('.bottom-nav').getBoundingClientRect().bottom,padding:getComputedStyle(document.querySelector('.bottom-nav')).paddingBottom}));
+    assert.equal(edges.app,height);assert.equal(edges.nav,height);assert.equal(edges.padding,'0px');
+   }
+   await page.evaluate(()=>insightsNavigate('No completion date',b=>!b.optional['Completion Date']));
+   assert.equal(await page.evaluate(()=>document.querySelector('.bottom-nav').getBoundingClientRect().bottom),height);
+   await page.screenshot({path:`/tmp/marginalia-viewport-${width}.png`});
    await page.evaluate(()=>openBook(0));await page.getByRole('button',{name:'Edit metadata',exact:true}).click();await page.waitForFunction(()=>!metadataBusy);
    const dims=await page.evaluate(()=>{const d=document.getElementById('metadata-editor').getBoundingClientRect(),a=document.querySelector('#metadata-editor .editor-actions').getBoundingClientRect();return{height:d.height,top:d.top,bottom:a.bottom}});
    assert.equal(Math.round(dims.height),height);assert.equal(dims.top,0);assert(dims.bottom<=height);
