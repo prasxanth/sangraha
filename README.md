@@ -484,3 +484,5 @@ The complete atlas before this change is archived at [the October 3 backup](arch
 - **Mobile-first layout.** Fixed bottom navigation bar, scrollable content area, and thumb-sized tap targets. Viewport set to `width=device-width, initial-scale=1, viewport-fit=cover` with `env(safe-area-inset-*)` padding for notch / Dynamic Island compatibility.
 
 `tests/mercury_app_navigation.cjs` checks mutually exclusive task views, BaZi popup navigation, Compare drill-downs, responsive widths from 320–1440px, and bounded BaZi screen heights on mobile. Guidance uses a compact horizon grid with details in popups; Practices and Guide use expandable topics.
+
+`tests/mercury_control_layout.cjs` checks individual control bounds, text overflow, expanded popup content, sibling overlap, and clearance above bottom navigation at 320–1024px with standard and enlarged text.
