@@ -30,30 +30,30 @@ const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
   assert.equal(await page.locator('#baziDaYun .pill').count(),0,'Do not mislabel annual results as decade results');
   await page.locator('#baziNativeDimension').selectOption('mind');
   assert((await page.locator('#baziMonthDetail').textContent()).includes('Mind'));
-  await page.locator('#baziDays button').nth(1).click();await page.locator('#baziDays button').nth(2).click();
+  await page.locator('#bazi-tab-days').click();await page.locator('#baziDays button').nth(1).click();await page.locator('#insightClose').click();await page.locator('#baziDays button').nth(2).click();await page.locator('#insightClose').click();
   assert.equal(await page.locator('#baziDayDetail h3').count(),1,'Selecting days replaces, not appends, details');
   await page.locator('#baziNativeMonth').selectOption('0');assert(await page.locator('#baziDayDetail').isHidden());
   await page.locator('[data-page="compare"]').click();
   assert.equal(await page.locator('.compare-month').count(),12);
   await page.locator('[data-cmonth="8"]').first().click();
   assert.equal(await page.locator('#compareNativeDetail .agreement-cell').count(),10);
-  await page.locator('#compareDimension').selectOption('wealth');assert((await page.locator('#compareNativeDetail').textContent()).includes('Wealth'));
-  await page.locator('#compareYear').selectOption('2021');
+  await page.locator('#compareBack').click();await page.locator('#compareDimension').selectOption('wealth');await page.locator('[data-cmonth="8"]').click();assert((await page.locator('#compareNativeDetail').textContent()).includes('Wealth'));
+  await page.locator('#compareBack').click();await page.locator('#compareYear').selectOption('2021');
   await page.locator('[data-cmonth="0"]').first().click();assert((await page.locator('#compareNativeDetail').textContent()).includes('No Jyotish reading'));
-  await page.locator('#compareYear').selectOption('2038');
+  await page.locator('#compareBack').click();await page.locator('#compareYear').selectOption('2038');
   await page.locator('[data-cmonth="11"]').first().click();assert((await page.locator('#compareNativeDetail').textContent()).includes('No Jyotish reading'));
   // Independent year, solar month, luck and UTC-day transitions, without changing browsing selections.
   for(const boundary of [data.years['2027'].start,data.years['2026'].months[7].start,data.years['2030'].luckStart,'2026-09-27T00:00:00Z']){
    const t=Date.parse(boundary);await page.clock.setSystemTime(t-1);await page.goto(url);
    await page.locator('[data-page="bazi"]').click();
-   await page.locator('#baziNativeYear').selectOption('2024');
+   await page.locator('#bazi-tab-months').click();await page.locator('#baziNativeYear').selectOption('2024');
    const before=await page.locator('#baziCurrent').textContent();await page.clock.runFor(1);
    assert.notEqual(await page.locator('#baziCurrent').textContent(),before,`Native context updates at ${boundary}`);
    assert.equal(await page.locator('#baziNativeYear').inputValue(),'2024');
    assert.equal(await page.locator('#baziNativeMonth').inputValue(),'0');
    const date=new Date(t).toISOString().slice(0,10);
    assert((await page.locator('#baziCurrentGuidance').textContent()).includes(date));
-   await page.locator('#baziToday').click();
+   await page.locator('#bazi-tab-now').click();await page.locator('#baziToday').click();
    const y=Object.entries(data.years).find(([,y])=>Date.parse(y.start)<=t&&t<Date.parse(y.end));
    assert.equal(await page.locator('#baziNativeYear').inputValue(),y[0]);
   }

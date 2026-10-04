@@ -121,6 +121,12 @@ textarea{font:inherit;color:inherit;background:#20201a;border:1px solid var(--li
 @media(max-width:699px){html{scroll-padding-top:12px;scroll-padding-bottom:calc(var(--mobile-nav-height,76px) + 16px)}main{padding-bottom:calc(var(--mobile-nav-height,76px) + 24px)}input,select,textarea,.sd-controls select,.popup-dimension select{font-size:16px}button,input,select,textarea{scroll-margin-block:12px}.keyboard-open .app-nav{display:none}.guidance-controls,.journal-form{grid-template-columns:minmax(0,1fr)}.horizon-grid{grid-template-columns:minmax(0,1fr)}.horizon-systems{grid-template-columns:minmax(0,1fr)}.popup-nav{flex-wrap:wrap}.popup-nav #popupScope{flex:1;min-width:0}.native-rating .pill{min-width:0}.compare-detail .selection-head button{width:100%}}
 @media(min-width:700px){.horizon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.insight-body .horizon-systems{grid-template-columns:1fr 1fr}}
 @media(max-width:699px){body{height:100dvh;overflow:hidden}main{height:calc(var(--app-view-height,100dvh) - var(--mobile-nav-height,76px));width:100%;overflow:auto;overscroll-behavior-y:contain;padding-bottom:24px;scroll-padding:12px 0 24px}.insight-open main{overflow:hidden}.app-nav{background:var(--panel)}}
+
+.section-tabs{display:flex;gap:5px;margin:0 0 12px}.section-tabs button{flex:1;min-width:0;font-size:13px;padding:7px 4px}.section-tabs [aria-selected=true]{border-color:var(--gold);color:var(--gold)}.compact-rating{display:flex;align-items:center;justify-content:space-between;gap:4px;margin-top:5px}.compact-rating .intensity-bars{margin:0}#baziMonths{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}#baziMonths .month-card{padding:8px 6px}#baziMonths strong{font-size:12px;overflow-wrap:anywhere}#baziMonths small{font-size:10px}#baziDays{grid-template-columns:repeat(5,minmax(0,1fr));max-height:none;overflow:visible}#baziDays .day-card{display:grid;justify-items:center;gap:3px;padding:6px 3px;min-height:62px}#baziDays .intensity-bars{margin:0}#baziDayDetail,#baziMonthDetail{display:none!important}.app-header .sub{display:none}.app-header{margin-bottom:12px;padding-bottom:8px}#guidanceEngine>p:not(:first-of-type){font-size:11px}#guidanceEngine>.insight-link{display:inline-block;width:auto;margin-right:6px}.guidance-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.guidance-controls label:first-child{grid-column:auto}.guidance-controls label:last-child{grid-column:1/-1}.horizon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.horizon-launch{padding:10px;gap:5px}.horizon-label{font-size:14px}.horizon-preview .small{display:none}.horizon-name{font-size:10px}.guidance-hero>h2{font-size:18px}#guidanceOverview{padding:10px}#guidanceOverview>p{font-size:13px}.native-controls{margin-bottom:12px}#bazi-view-now .now-dimensions{margin:8px 0}#compareNativeDetail{margin-top:0}#compareNativeDetail>.section-tabs{margin-bottom:12px}
+@media(min-width:700px){#baziMonths{grid-template-columns:repeat(4,minmax(0,1fr))}#baziDays{grid-template-columns:repeat(7,minmax(0,1fr))}}
+
+.native-controls{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px}.native-controls label:first-child{grid-column:auto}.native-controls label:has(#baziNativeMonth){grid-column:1/-1}#baziPage:has(#bazi-tab-now[aria-selected=true]) .native-controls label:first-child,#baziPage:has(#bazi-tab-cycles[aria-selected=true]) .native-controls label:first-child{grid-column:1/-1}#baziYears{grid-template-columns:repeat(4,minmax(0,1fr))}.native-year-card{padding:6px 4px;min-height:52px}.year-number{font-size:12px}.native-year-card .year-mark{min-width:20px;font-size:12px}.dayun-card{padding:8px}.dayun-card .pillar-big{font-size:15px}#bazi-view-cycles .panel{padding:10px}#bazi-view-cycles h2{font-size:16px}#bazi-view-cycles p.small{font-size:11px;margin-bottom:6px}#baziDays .day-card{min-height:56px;gap:2px}#baziDays .pill{padding:1px 5px;line-height:1.2}#baziDays{gap:5px}.guidance-controls{margin:10px 0}.horizon-launch{min-height:92px}#guidanceOverview{margin:10px 0}#comparePage>.panel>h2{font-size:16px}.compare-calendar-help{margin:5px 0}#baziYearSummary{font-size:11px}#baziYears .intensity-bars i{width:3px}
+@media(min-width:700px){#baziYears{grid-template-columns:repeat(6,minmax(0,1fr))}.native-controls{grid-template-columns:repeat(3,minmax(0,1fr))}.native-controls label:has(#baziNativeMonth){grid-column:auto}}
 </style></head><body><main>
 <header class="app-header"><div class="eyebrow">Life Atlas</div><h1 id="pageTitle">Jyotish</h1><p class="sub">Native Jyotish + native BaZi · neutral comparison layer<br>10 life dimensions · 2021–2038</p></header><section id="timelinePage" class="app-page"><div class="native-tabs jy-native-tabs"><button type="button" data-jy-view="timeline" aria-pressed="true">Jyotish timeline</button><button type="button" data-jy-view="life" aria-pressed="false">Jyotish life map</button></div><section id="currentPeriod" class="panel now-card" aria-label="Current period"></section><div class="intensity-legend" data-intensity-legend></div><div class="panel dimension-control"><label for="focusDimension">Life dimension<select id="focusDimension"></select></label><p class="small" id="dimensionHint"></p></div>
 <details id="filters"><summary>Find a period <span class="small" id="filterCount"></span></summary><div class="filters"><label>Antardasha<select id="adFilter"><option value="">All ADs</option></select></label><label>PD support<select id="heatFilter"><option value="">All ratings</option><option value="1">1 · Max leverage</option><option value="2">2 · Leverage</option><option value="3">3 · Respect</option><option value="4">4 · Caution</option><option value="5">5 · Max caution</option></select></label><label>SD transit tone (any child)<select id="toneFilter"><option value="">All tones</option><option>SUPPORTIVE</option><option>MIXED</option><option>INTENSE</option></select></label><label>SD intensity (any child)<select id="intensityFilter"><option value="">All intensities</option><option>LOW</option><option>MEDIUM</option><option>HIGH</option><option>VERY HIGH</option></select></label><label>Search<input type="search" id="search" placeholder="Planet, theme, practice…"></label></div><div class="actions"><button id="futureOnly" aria-pressed="false">Current + future</button><button id="reset">Clear filters</button></div></details>
@@ -139,10 +145,10 @@ textarea{font:inherit;color:inherit;background:#20201a;border:1px solid var(--li
     <label>Solar year<select id="baziNativeYear"></select></label>
     <label>Selected solar month<select id="baziNativeMonth"></select></label>
   </div>
-  <section class="panel"><h2>Da Yun · 10-year luck pillars</h2><p class="small">Luck pillars overlapping this atlas range. Ratings below belong to individual years and months.</p><div id="baziDaYun" class="dayun-track"></div></section>
-  <section class="panel"><h2>Liu Nian · solar years</h2><p class="small">The year changes at Li Chun, not January 1.</p><p class="small">Color = support · bars = intensity · dot = current year. Select a year for its months.</p><div id="baziYears" class="native-year-track" role="group" aria-label="Solar year assessments"></div><p id="baziYearSummary" class="year-summary" aria-live="polite"></p></section>
+  <section class="panel"><h2>Da Yun · 10-year luck pillars</h2><p class="small">Luck-cycle dates; individual ratings are below.</p><div id="baziDaYun" class="dayun-track"></div></section>
+  <section class="panel"><h2>Liu Nian · solar years</h2><p class="small">Solar years change at Li Chun.</p><p class="small">Select a year → months. Color = support; bars = intensity.</p><div id="baziYears" class="native-year-track" role="group" aria-label="Solar year assessments"></div><p id="baziYearSummary" class="year-summary" aria-live="polite"></p></section>
   <section class="panel"><h2>Liu Yue · solar months</h2><p id="baziYearRange" class="small"></p><div id="baziMonths" class="month-grid"></div><div id="baziMonthDetail" class="native-detail"></div></section>
-  <section class="panel"><h2>Liu Ri · daily modifier</h2><p class="small">Daily pillars are shown only at this drill-down level. They modify the month; they do not replace the Da Yun/year context.</p><div id="baziDays" class="day-grid"></div><div id="baziDayDetail" class="native-detail" hidden></div></section>
+  <section class="panel"><h2>Liu Ri · daily modifier</h2><p class="small">Select a date for its pillar and context.</p><div id="baziDays" class="day-grid"></div><div id="baziDayDetail" class="native-detail" hidden></div></section>
 </section>
 
 <section id="comparePage" class="app-page native-page" hidden>
@@ -638,14 +644,14 @@ function renderYears(){
  root.innerHTML=Object.entries(NATIVE.years).map(([y,x])=>{const d=x.dims[bDim],cn=x.pillar.split(' ').map((p,i)=>(i?branchCN:stemCN)[p]).join('');return `<button class="native-year-card" data-byear="${y}" aria-pressed="${y===bYear}" aria-label="${y}, ${x.pillar}, ${DIMS[bDim].name}: ${nPost(d.heat,d.intensity)}, ${d.intensity.toLowerCase()} intensity"><b class="year-number">${y}</b><span class="year-mark h${d.heat}">${HEAT[d.heat].mark}</span><span class="year-pillar">${cn}</span>${nBars(d)}</button>`}).join('');
  const year=NATIVE.years[bYear],d=year.dims[bDim];
  $('baziYearSummary').innerHTML=`<b>${bYear} · ${nPillar(year.pillar)}</b> · ${nGod(year.pillar)}<br>${DIMS[bDim].short}: ${nPost(d.heat,d.intensity)} · ${d.intensity.toLowerCase()} intensity`;
- root.querySelectorAll('button').forEach(b=>b.onclick=()=>{bYear=b.dataset.byear;bMonth=0;bDay=null;$('baziNativeYear').value=bYear;renderBaziNative();$('baziYears').querySelector(`[data-byear="${bYear}"]`).focus({preventScroll:true})});
+ root.querySelectorAll('button').forEach(b=>b.onclick=()=>{bYear=b.dataset.byear;bMonth=0;bDay=null;$('baziNativeYear').value=bYear;renderBaziNative();setBaziView('months');$('bazi-tab-months').focus({preventScroll:true})});
 }
 function renderMonths(){
  const y=NATIVE.years[bYear],sel=$('baziNativeMonth');
  sel.innerHTML=y.months.map((m,i)=>`<option value="${i}">${nPillar(m.pillar)} · ${nFmt(m.start)} – ${nFmt(m.end)}</option>`).join('');sel.value=String(bMonth);
  $('baziYearRange').textContent=`${bYear} solar year · ${nFmt(y.start)} – ${nFmt(y.end)} · Annual sample Da Yun ${y.luck}`;
- $('baziMonths').innerHTML=y.months.map((m,i)=>{const d=m.dims[bDim];return `<button class="month-card" data-bmonth="${i}" aria-pressed="${i===bMonth}"><small>${nFmt(m.start)} – ${nFmt(m.end)}</small><strong>${nPillar(m.pillar)}</strong><small>${nGod(m.pillar)}</small>${nRating(d)}</button>`}).join('');
- $('baziMonths').querySelectorAll('button').forEach(b=>b.onclick=()=>{bMonth=+b.dataset.bmonth;bDay=null;sel.value=String(bMonth);renderMonthDetail()});
+ $('baziMonths').innerHTML=y.months.map((m,i)=>{const d=m.dims[bDim];return `<button class="month-card" data-bmonth="${i}" aria-pressed="${i===bMonth}" aria-haspopup="dialog" aria-label="${m.pillar}, ${nFmt(m.start)} to ${nFmt(m.end)}, ${nPost(d.heat,d.intensity)}"><small>${nFmt(m.start).replace(', '+bYear,'')}</small><strong>${m.pillar}</strong><span class="compact-rating"><b class="pill h${d.heat}">${HEAT[d.heat].mark}</b>${nBars(d)}</span></button>`}).join('');
+ $('baziMonths').querySelectorAll('button').forEach(b=>b.onclick=()=>{bMonth=+b.dataset.bmonth;bDay=null;sel.value=String(bMonth);renderMonthDetail();showMonthInsight(b)});
  renderMonthDetail();
 }
 function renderMonthDetail(){
@@ -655,13 +661,13 @@ function renderMonthDetail(){
  const notes=d.notes?.length?`<ul>${d.notes.map(x=>`<li>${x}</li>`).join('')}</ul>`:'<p class="small">No tracked natal-branch clash/harm/punishment/repetition dominates this layer.</p>';
  $('baziMonthDetail').innerHTML=`<div class="eyebrow">${DIMS[bDim].name} · native BaZi month</div><h3>${nPillar(m.pillar)}</h3><p class="small"><time datetime="${m.start}">${fmtExact(m.start)}</time> → <time datetime="${m.end}">${fmtExact(m.end)}</time> · Da Yun ${nativeLuck.filter(l=>Date.parse(l.start)<Date.parse(m.end)&&Date.parse(l.end)>Date.parse(m.start)).map(l=>l.pillar).join(" → ")} · Year ${y.pillar}</p>${nRating(d)}<p>${BAZI_DIM_BASIS_NATIVE[bDim]}</p>${notes}<details><summary>All ten dimensions</summary><div class="dimension-tiles">${nativeDims.map(k=>{const x=m.dims[k];return `<button class="dimension-tile h${x.heat}" data-native-dim="${k}"><span>${DIMS[k].short}</span><b>${HEAT[x.heat].mark}</b><small>${nPost(x.heat,x.intensity)}</small>${nBars(x)}</button>`}).join('')}</div></details>`;
  $('baziMonthDetail').querySelectorAll('[data-native-dim]').forEach(b=>b.onclick=()=>{bDim=b.dataset.nativeDim;$('baziNativeDimension').value=bDim;renderBaziNative()});
- $('baziDays').innerHTML=m.days.map((day,i)=>{const x=day.dims[bDim];return `<button class="day-card" data-day-index="${i}" aria-pressed="false"><small>${day.date.slice(5)}</small><b>${nPillar(day.pillar)}</b><small>${nGod(day.pillar)}</small><span class="pill h${x.heat}">${HEAT[x.heat].mark}</span>${nBars(x)}</button>`}).join('');
- $('baziDays').querySelectorAll('button').forEach(b=>b.onclick=()=>{bDay=+b.dataset.dayIndex;renderDayDetail()});
+ $('baziDays').innerHTML=m.days.map((day,i)=>{const x=day.dims[bDim];return `<button class="day-card" data-day-index="${i}" aria-pressed="false" aria-haspopup="dialog" aria-label="${day.date}, ${day.pillar}, ${nPost(x.heat,x.intensity)}"><small>${day.date.slice(5)}</small><b class="pill h${x.heat}">${HEAT[x.heat].mark}</b>${nBars(x)}</button>`}).join('');
+ $('baziDays').querySelectorAll('button').forEach(b=>b.onclick=()=>{bDay=+b.dataset.dayIndex;renderDayDetail();openInsight('Daily BaZi reading',$('baziDayDetail').innerHTML,b)});
  renderDayDetail();renderNativeCurrent();
 }
 function renderDayDetail(){
  const m=NATIVE.years[bYear].months[bMonth],day=bDay===null?null:m.days[bDay],root=$('baziDayDetail');
- root.hidden=!day;$('baziDays').querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===bDay)));
+ root.hidden=true;$('baziDays').querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===bDay)));
  if(!day){root.innerHTML='';return}
  const d=day.dims[bDim];root.innerHTML=`<h3>${day.date} · ${nPillar(day.pillar)}</h3><p>${DIMS[bDim].name} · ${nGod(day.pillar)}</p>${nRating(d)}<p class="small">Supplied daily modifier within ${nPillar(m.pillar)}. Date labels use UTC; the month’s exact solar-term boundaries still apply.</p>`;
 }
@@ -743,7 +749,7 @@ function renderCompare(){
   return `<button class="compare-month" data-cmonth="${i}" aria-pressed="${cMonth===i}" aria-controls="compareNativeDetail" aria-label="${monthNames[i]} ${cYear}, ${DIMS[cDim].name}. Jyotish: ${j?`${j.post}, ${j.intensity.toLowerCase()} intensity`:'unavailable'}. BaZi: ${nPost(b.heat,b.intensity)}, ${b.intensity.toLowerCase()} intensity. ${ag[0]}. Show details."><span class="month-name">${monthNames[i]}</span><span class="compare-rating">${j?`<b class="h${j.heat}">${j.mark}</b>${nBars(j)}`:'—'}</span><span class="compare-rating"><b class="h${b.heat}">${HEAT[b.heat].mark}</b>${nBars(b)}</span><span class="compare-agreement ${ag[1]}">${ag[0]}</span></button>`;
  }).join('');
  $('compareCalendar').querySelectorAll('button').forEach(b=>b.onclick=()=>{renderCompareDetail(+b.dataset.cmonth);$('compareNativeDetail').scrollIntoView({block:'start',behavior:'instant'});$('compareNativeDetail').focus({preventScroll:true})});
- if(cMonth!==null)renderCompareDetail(cMonth);
+ if(cMonth!==null&&!$('compareNativeDetail').hidden)renderCompareDetail(cMonth);
 }
 function renderCompareDetail(i){
  cMonth=i;$('compareNativeDetail').hidden=false;$('compareCalendar').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.cmonth===i)));const bm=NATIVE.compare[String(cYear)][i],jr=activeJy(bm.mid),j=jr?dimResult(jr,cDim):null,b=bm.dims[cDim],ag=j?bandAgreement(j,b):['Unavailable',''];
@@ -754,6 +760,7 @@ function renderCompareDetail(i){
  <p class="small">Shared sample: <time datetime="${bm.mid}">${fmtExact(bm.mid)}</time>. Jyotish derives its reading from the active dasha/transit context; BaZi derives it from Da Yun/year/solar month. No blended verdict is produced.</p><div id="compareLowerLayer">${renderLowerLayer(i,compareSelectedSDStart)}</div>`;
  wireLowerLayer(i);prepareInsightLinks($('compareNativeDetail'));
  $('compareBack').onclick=()=>{$('compareNativeDetail').hidden=true;const row=$('compareCalendar').querySelector(`[data-cmonth="${cMonth}"]`);row.focus({preventScroll:true});$('compareCalendar').scrollIntoView({block:'start',behavior:'instant'})};
+ configureCompareDetail();
 }
 
 /* ---------- v4 guidance + convergence + validation ---------- */
@@ -965,9 +972,11 @@ function renderCalibration(entries){
  const useful={yes:0,partial:0,no:0,'not-assessed':0};entries.forEach(e=>useful[e.useful]=(useful[e.useful]||0)+1);
  root.innerHTML=`<p class="small">Guidance usefulness: ${useful.yes} yes · ${useful.partial} partial · ${useful.no} no · ${useful['not-assessed']} not assessed.</p><div class="calibration-scroll"><table class="calibration-table"><thead><tr><th>Domain</th><th>Jyotish PD</th><th>Jyotish Sūkṣma</th><th>BaZi month</th><th>BaZi day</th></tr></thead><tbody>${rows||'<tr><td colspan="5">No domain has logged outcomes yet.</td></tr>'}</tbody></table></div>`;
 }
+let journalVisibleCount=10;
 function renderJournal(){
  const entries=journalLoad(),root=$('journalList');if(!root)return;renderCalibration(entries);
- root.innerHTML=entries.length?entries.map(e=>`<article class="journal-entry"><div class="journal-entry-head"><div><b>${esc(e.date)} · ${esc(DIMS[e.dimension]?.name||e.dimension)}</b><div class="small">Observed: ${esc(e.direction)} · ${esc(e.intensity)} intensity · ${esc(e.scope)}</div></div><button data-jdel="${esc(e.id)}" aria-label="Delete entry">Delete</button></div>${e.note?`<p>${esc(e.note)}</p>`:''}<div class="prediction-row"><div class="prediction-chip h${e.snapshot.jyPD.heat}"><small>Jyotish PD</small><b>${HEAT[e.snapshot.jyPD.heat].mark} ${esc(e.snapshot.jyPD.label)}</b></div><div class="prediction-chip h${e.snapshot.jySD.heat}"><small>Jyotish Sūkṣma</small><b>${HEAT[e.snapshot.jySD.heat].mark} ${esc(e.snapshot.jySD.label)}</b></div><div class="prediction-chip h${e.snapshot.baMonth.heat}"><small>BaZi month</small><b>${HEAT[e.snapshot.baMonth.heat].mark} ${esc(e.snapshot.baMonth.label)}</b></div><div class="prediction-chip h${e.snapshot.baDay.heat}"><small>BaZi day</small><b>${HEAT[e.snapshot.baDay.heat].mark} ${esc(e.snapshot.baDay.label)}</b></div></div><p class="small">Guidance usefulness: ${esc(e.useful)}.</p></article>`).join(''):'<p class="journal-empty">No entries yet.</p>';
+ root.innerHTML=entries.length?entries.slice(0,journalVisibleCount).map(e=>`<article class="journal-entry"><div class="journal-entry-head"><div><b>${esc(e.date)} · ${esc(DIMS[e.dimension]?.name||e.dimension)}</b><div class="small">Observed: ${esc(e.direction)} · ${esc(e.intensity)} intensity · ${esc(e.scope)}</div></div><button data-jdel="${esc(e.id)}" aria-label="Delete entry">Delete</button></div>${e.note?`<p>${esc(e.note)}</p>`:''}<div class="prediction-row"><div class="prediction-chip h${e.snapshot.jyPD.heat}"><small>Jyotish PD</small><b>${HEAT[e.snapshot.jyPD.heat].mark} ${esc(e.snapshot.jyPD.label)}</b></div><div class="prediction-chip h${e.snapshot.jySD.heat}"><small>Jyotish Sūkṣma</small><b>${HEAT[e.snapshot.jySD.heat].mark} ${esc(e.snapshot.jySD.label)}</b></div><div class="prediction-chip h${e.snapshot.baMonth.heat}"><small>BaZi month</small><b>${HEAT[e.snapshot.baMonth.heat].mark} ${esc(e.snapshot.baMonth.label)}</b></div><div class="prediction-chip h${e.snapshot.baDay.heat}"><small>BaZi day</small><b>${HEAT[e.snapshot.baDay.heat].mark} ${esc(e.snapshot.baDay.label)}</b></div></div><p class="small">Guidance usefulness: ${esc(e.useful)}.</p></article>`).join(''):'<p class="journal-empty">No entries yet.</p>';
+ if(entries.length>journalVisibleCount){const more=document.createElement('button');more.type='button';more.className='insight-link';more.textContent=`Show next ${Math.min(10,entries.length-journalVisibleCount)} entries (${journalVisibleCount} of ${entries.length} shown)`;more.onclick=()=>{journalVisibleCount+=10;renderJournal()};root.appendChild(more)}
  root.querySelectorAll('[data-jdel]').forEach(b=>b.onclick=()=>{const next=journalLoad().filter(e=>e.id!==b.dataset.jdel);journalStore(next);renderJournal()});
 }
 function exportJournal(){
@@ -1012,6 +1021,47 @@ function initGuidanceNavigation(){
  const intro=document.createElement('p');intro.className='section-hint';intro.textContent='Open a topic to explore the methods and reference material.';$('guidePage').prepend(intro);
 }
 
+let baziView='now',jyView='now';
+function sectionTabs(root,prefix,items,onSelect){
+ const nav=document.createElement('div');nav.className='section-tabs';nav.setAttribute('role','tablist');nav.setAttribute('aria-label',prefix+' views');
+ nav.innerHTML=items.map(([key,label],i)=>`<button type="button" id="${prefix}-tab-${key}" data-${prefix}-view="${key}" role="tab" aria-controls="${prefix}-view-${key}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${label}</button>`).join('');root.prepend(nav);
+ nav.querySelectorAll('button').forEach((button,i)=>{button.onclick=()=>onSelect(items[i][0]);button.onkeydown=e=>{let n;if(e.key==='ArrowRight')n=(i+1)%items.length;else if(e.key==='ArrowLeft')n=(i+items.length-1)%items.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=items.length-1;else return;e.preventDefault();onSelect(items[n][0]);nav.children[n].focus({preventScroll:true})}});return nav;
+}
+function setSectionTabs(prefix,key){document.querySelectorAll(`[role="tab"][data-${prefix}-view]`).forEach(b=>{const yes=b.getAttribute('data-'+prefix+'-view')===key;b.setAttribute('aria-selected',String(yes));b.tabIndex=yes?0:-1});document.querySelectorAll(`[data-${prefix}-panel]`).forEach(p=>p.hidden=p.getAttribute('data-'+prefix+'-panel')!==key)}
+function makeSectionPanel(prefix,key,root){const p=document.createElement('div');p.id=prefix+'-view-'+key;p.setAttribute('data-'+prefix+'-panel',key);p.setAttribute('role','tabpanel');p.setAttribute('aria-labelledby',prefix+'-tab-'+key);root.appendChild(p);return p}
+function setBaziView(key){baziView=key;setSectionTabs('bazi',key);$('baziNativeYear').closest('label').hidden=key==='now'||key==='cycles';$('baziNativeMonth').closest('label').hidden=key!=='days';$('baziToday').parentElement.hidden=key!=='now';document.querySelector('main').scrollTo({top:0,behavior:'instant'})}
+function setJyView(key){jyView=key;if(appPage!=='timeline')showNativePage('timeline');setSectionTabs('jy',key);if(key==='timeline')resize();document.querySelector('main').scrollTo({top:0,behavior:'instant'})}
+function initAppSections(){
+ const b=$('baziPage'),intro=b.querySelector(':scope > .metal-hero'),controls=b.querySelector('.native-controls');
+ const introHTML=intro.innerHTML;intro.remove();
+ const panels={};['now','cycles','months','days'].forEach(k=>panels[k]=makeSectionPanel('bazi',k,b));
+ panels.now.appendChild($('baziCurrent'));panels.cycles.appendChild($('baziDaYun').closest('section'));panels.cycles.appendChild($('baziYears').closest('section'));panels.months.appendChild($('baziMonths').closest('section'));panels.days.appendChild($('baziDays').closest('section'));
+ const nav=sectionTabs(b,'bazi',[['now','Now'],['cycles','Cycles'],['months','Months'],['days','Days']],setBaziView);nav.after(controls);const about=document.createElement('button');about.className='insight-link';about.textContent='About this BaZi chart ↗';about.onclick=()=>openInsight('BaZi chart',introHTML,about);panels.now.appendChild(about);
+ $('baziMonthDetail').hidden=true;$('baziDayDetail').hidden=true;
+ const today=$('baziToday');today.textContent='Browse current month →';today.onclick=()=>{selectNativeNow();$('baziNativeYear').value=bYear;renderBaziNative();setBaziView('months');$('bazi-tab-months').focus({preventScroll:true})};
+ const timeline=$('timelinePage'),oldTabs=timeline.querySelector('.jy-native-tabs');oldTabs.remove();
+ const now=makeSectionPanel('jy','now',timeline),chart=makeSectionPanel('jy','timeline',timeline);now.appendChild($('currentPeriod'));
+ [...timeline.children].filter(el=>el!==now&&el!==chart).forEach(el=>chart.appendChild(el));
+ const jnav=sectionTabs(timeline,'jy',[['now','Now'],['timeline','Timeline']],setJyView);const life=document.createElement('button');life.type='button';life.className='life-map-link';life.dataset.jyView='life';life.textContent='Life map ↗';life.onclick=()=>showNativePage('life');const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:8px';jnav.before(row);row.append(jnav,life);jnav.style.flex='1';$('lifePage').querySelector('[data-jy-view="timeline"]').onclick=()=>setJyView('timeline');
+ setSectionTabs('jy',jyView);setBaziView(baziView);
+ const plan=$('guidanceEngine'),notes=[...plan.querySelectorAll(':scope > p')].slice(1);const help=document.createElement('button');help.className='insight-link';help.textContent='Timing & interpretation ↗';const content=notes.map(p=>p.outerHTML).join('');notes.forEach(p=>p.remove());help.onclick=()=>openInsight('Timing & interpretation',content,help);plan.appendChild(help);
+ const compareIntro=$('comparePage').querySelector(':scope > section');compareIntro.querySelector('h2').textContent='Year & focus';compareIntro.querySelector('p').remove();
+
+}
+function showMonthInsight(origin){
+ openInsight(`${bYear} · ${NATIVE.years[bYear].months[bMonth].pillar}`,$('baziMonthDetail').innerHTML,origin);
+ const daysButton=document.createElement('button');daysButton.type='button';daysButton.className='insight-link';daysButton.textContent='Explore this month’s days →';daysButton.onclick=()=>{insightOrigin=$('bazi-tab-days');insightDialog.close();setBaziView('days')};$('insightBody').prepend(daysButton);
+ $('insightBody').querySelectorAll('[data-native-dim]').forEach(button=>button.onclick=()=>{bDim=button.dataset.nativeDim;$('baziNativeDimension').value=bDim;renderBaziNative();showMonthInsight($('baziMonths').querySelector(`[data-bmonth="${bMonth}"]`))});
+}
+function configureCompareDetail(){
+ const root=$('compareNativeDetail');if(root.hidden)return;
+ [...$('comparePage').children].forEach(el=>{if(el!==root)el.hidden=true});
+ const lower=$('compareLowerLayer'),month=document.createElement('div');month.id='comparison-view-month';month.dataset.comparisonPanel='month';month.setAttribute('role','tabpanel');month.setAttribute('aria-labelledby','comparison-tab-month');
+ [...root.children].filter(el=>el!==lower&&!el.classList.contains('eyebrow')&&!el.classList.contains('selection-head')).forEach(el=>month.appendChild(el));root.appendChild(month);root.appendChild(lower);lower.dataset.comparisonPanel='shorter';lower.id='compareLowerLayer';lower.setAttribute('role','tabpanel');lower.setAttribute('aria-labelledby','comparison-tab-shorter');
+ const nav=sectionTabs(root,'comparison',[['month','Month'],['shorter','Shorter periods']],key=>{setSectionTabs('comparison',key);root.scrollIntoView({block:'start'})});nav.children[1].setAttribute('aria-controls','compareLowerLayer');setSectionTabs('comparison','month');
+ const back=$('compareBack');back.textContent='← Year overview';back.onclick=()=>{root.hidden=true;[...$('comparePage').children].forEach(el=>{if(el!==root)el.hidden=false});const row=$('compareCalendar').querySelector(`[data-cmonth="${cMonth}"]`);row.focus({preventScroll:true});$('compareCalendar').scrollIntoView({block:'start'})};
+}
+
 function showNativePage(page){
  const ids=['timeline','life','bazi','compare','practice','guide'];
  if(!ids.includes(page))return;appPage=page;lens.hidden=true;
@@ -1020,7 +1070,7 @@ function showNativePage(page){
  document.querySelectorAll('[data-jy-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.jyView===page)));
  const title={timeline:'Jyotish',life:'Jyotish · Life map',bazi:'BaZi',compare:'Compare',practice:'Guidance',guide:'Guide'}[page];
  $('pageTitle').textContent=title;document.title='Life Atlas · '+title;
- if(page==='timeline')resize();
+ if(page==='timeline'){setSectionTabs('jy',jyView);resize()};
  if(page==='life')renderLifeMap();
  if(page==='bazi')renderBaziNative();
  if(page==='compare')renderCompare();
@@ -1039,7 +1089,7 @@ $('compareDimension').onchange=e=>{cDim=e.target.value;renderCompare()};
 
 switchPage=showNativePage;
 $('baziToday').onclick=()=>{selectNativeNow();$('baziNativeYear').value=bYear;renderBaziNative()};
-refreshNativeCurrent();
+initAppSections();refreshNativeCurrent();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshNativeCurrent()});
 window.addEventListener('focus',refreshNativeCurrent);window.addEventListener('pageshow',refreshNativeCurrent);
 showNativePage('timeline');

@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),crypto=require('node:crypto'),{chromium}=require('playwright');
 (async()=>{const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});try{
- const page=await browser.newPage({viewport:{width:390,height:844},hasTouch:true,isMobile:true}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('file://'+process.cwd()+'/mercury_atlas.html');
+ const page=await browser.newPage({viewport:{width:390,height:844},hasTouch:true,isMobile:true}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('file://'+process.cwd()+'/mercury_atlas.html');await page.locator('#jy-tab-timeline').click();
  assert.equal(await page.locator('.cell').count(),81);assert.equal(await page.locator('.cell:visible').count(),81);assert.equal(await page.locator('#selection').count(),0);assert.equal(await page.locator('table').count(),0);
  const sdRecords=await page.evaluate(()=>SD_DATA);
  for(const tone of ['SUPPORTIVE','MIXED','INTENSE']){

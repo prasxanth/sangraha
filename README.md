@@ -435,10 +435,10 @@ The `apple-touch-icon` is inlined as an SVG data URI — no separate image file 
 
 A self-contained app for ten life dimensions with native Jyotish and BaZi timing. It has mobile bottom navigation and a desktop sidebar. Jyotish covers the Mercury Mahadasha (9 February 2021–10 February 2038); BaZi supplies solar years 2021–2038:
 
-- **Jyotish timeline:** Current Sūkṣma ratings across all ten dimensions, followed by all nine AD timelines. Choose a dimension to recolor the 81 duration-proportional PD segments. Filters, zoom, panning, a minimap, keyboard navigation and Inspect mode support exploration.
+- **Jyotish:** Separate Now and Timeline views show current Sūkṣma ratings across all ten dimensions and all nine AD timelines. Choose a dimension to recolor the 81 duration-proportional PD segments. Filters, zoom, panning, a minimap, keyboard navigation and Inspect mode support exploration.
 - **Jyotish life map:** Compare ten dimensions across nine chronological PDs or Sūkṣma periods. Move between groups, jump to the current period, or enlarge cells. Tap any cell for dimension evidence, the PD baseline, exact SD times in UTC, and midpoint transit snapshots.
-- **BaZi:** Native luck cycles, solar years, solar months and daily modifiers.
-- **Compare:** Independent Gregorian midpoint readings and agreement across dimensions.
+- **BaZi:** Now, Cycles, Months and Days views keep current context, luck/solar-year grids, month tiles and the daily calendar separate. Month and day details open in accessible popups.
+- **Compare:** A yearly overview opens a dedicated month view, with a separate Shorter periods tab and a return-to-overview button.
 - **Practice:** PD practice anchors and Metal/Yong Shen guidance.
 - **Guide:** Interpretation, scoring weights, divisional-chart anchors and planet profiles.
 
@@ -460,7 +460,7 @@ Guidance is organized into Plan, Journal, Review and Practices sub-tabs, with ke
 
 The Guidance tab adds the v4.2 date/domain/mode dashboard with strategic, medium, tactical and immediate horizons, action postures, reassessment boundaries, and explanations of directional convergence or contradiction. The source posture/classification rules are retained. Strategic summaries aggregate display bands within each system, not cross-system indices. Dates are sampled at 12:00 UTC; Today follows the local calendar until a historical date is selected. BaZi date context resolves the solar month and active luck pillar at that sample instant.
 
-The local outcome journal freezes Jyotish PD/SD and BaZi month/day snapshots alongside observations, notes and usefulness ratings. Calibration reports descriptive match counts (percentages only from five entries), not predictive validation. JSON exports preserve snapshots. Validated imports merge new IDs while keeping existing entries; malformed imports change nothing. Storage failures are explicitly marked as session-only. `tests/mercury_guidance_journal.cjs` covers rule parity, journal round trips, frozen snapshots, invalid imports, safe text rendering, storage fallback and date following. It optionally accepts `mercury_atlas_guidance_convergence_journal_v4_2.html` for exhaustive rule comparison.
+Journal history initially shows ten entries, with a button to load the next batch; calibration continues to use all entries. The local outcome journal freezes Jyotish PD/SD and BaZi month/day snapshots alongside observations, notes and usefulness ratings. Calibration reports descriptive match counts (percentages only from five entries), not predictive validation. JSON exports preserve snapshots. Validated imports merge new IDs while keeping existing entries; malformed imports change nothing. Storage failures are explicitly marked as session-only. `tests/mercury_guidance_journal.cjs` covers rule parity, journal round trips, frozen snapshots, invalid imports, safe text rendering, storage fallback and date following. It optionally accepts `mercury_atlas_guidance_convergence_journal_v4_2.html` for exhaustive rule comparison.
 
 The v3 lower-layer Compare drill-down follows `mercury_atlas_native_systems_v3_lower_layer.html`: choose a Sūkṣma overlapping the displayed calendar month, then inspect all BaZi UTC dates intersecting its full exact interval. A proportional strip shows the month-clipped durations; separate previous/next and select controls keep short segments accessible. The daily support distribution and selectable heatmap show individual readings without averaging systems. Solar-term dates duplicated in the source use the later month’s record, as in the supplied logic. Current markers refresh without changing selected historical intervals.
 
@@ -482,3 +482,5 @@ The complete atlas before this change is archived at [the October 3 backup](arch
 - **Data embedding pattern.** Marginalia uses a `<script type="application/json">` block for book data; the other apps embed data directly in JavaScript constants. Everything stays in one file while keeping data clearly separated from logic.
 - **Dark theme throughout.** All apps use CSS custom properties for a consistent dark palette with status bar styling set to `black-translucent` for edge-to-edge appearance on iPhone.
 - **Mobile-first layout.** Fixed bottom navigation bar, scrollable content area, and thumb-sized tap targets. Viewport set to `width=device-width, initial-scale=1, viewport-fit=cover` with `env(safe-area-inset-*)` padding for notch / Dynamic Island compatibility.
+
+`tests/mercury_app_navigation.cjs` checks mutually exclusive task views, BaZi popup navigation, Compare drill-downs, responsive widths from 320–1440px, and bounded BaZi screen heights on mobile. Guidance uses a compact horizon grid with details in popups; Practices and Guide use expandable topics.

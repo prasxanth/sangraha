@@ -50,7 +50,7 @@ const {pathToFileURL} = require('node:url');
   await page.evaluate(()=>renderCurrentPeriod());
   assert.equal(await page.locator('[data-current-dimension]').count(),10);
   assert.equal(await page.locator('#currentPeriod .intensity-bars').count(),10);
-  await page.locator('[data-current-dimension="spiritual"]').click();
+  await page.locator('#jy-tab-now').click();await page.locator('[data-current-dimension="spiritual"]').click();
   assert(await page.locator('#sdPanel').isVisible());
   assert.equal(await page.locator('#detailDimension').inputValue(),'spiritual');
   assert(await page.locator('#sdPanel .intensity-badge').isVisible());

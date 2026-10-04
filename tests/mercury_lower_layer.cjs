@@ -21,7 +21,7 @@ function evaluateModel(html){
  try{
  const p=await browser.newPage({viewport:{width:390,height:844}}),errors=[];p.on('pageerror',e=>errors.push(e.message));
  await p.clock.install({time:new Date('2026-10-03T11:00:00Z')});await p.clock.pauseAt(new Date('2026-10-03T12:00:00Z'));
- await p.goto(pathToFileURL(path.resolve('mercury_atlas.html')).href);await p.locator('[data-page="compare"]').click();await p.locator('[data-cmonth="9"]').click();
+ await p.goto(pathToFileURL(path.resolve('mercury_atlas.html')).href);await p.locator('[data-page="compare"]').click();await p.locator('[data-cmonth="9"]').click();await p.locator('#comparison-tab-shorter').click();
  const validate=async()=>{
   const start=await p.locator('#lowerSD').inputValue(),r=actual.context.SD_DATA.find(r=>r.startExact===start),expected=actual.results.windows.find(w=>w.start===start).days;
   assert.deepEqual(await p.locator('[data-lower-day]').evaluateAll(es=>es.map(e=>e.dataset.lowerDay)),expected.map(d=>d.day.date));
@@ -34,14 +34,14 @@ function evaluateModel(html){
  await validate();
  const options=await p.locator('#lowerSD option').evaluateAll(es=>es.map(e=>e.value));
  for(const option of options){await p.locator('#lowerSD').selectOption(option);await validate()}
- for(const dim of ['wealth','mind','spiritual']){await p.locator('#compareDimension').selectOption(dim);await validate()}
+ for(const dim of ['wealth','mind','spiritual']){await p.locator('#compareBack').click();await p.locator('#compareDimension').selectOption(dim);await p.locator('[data-cmonth="9"]').click();await p.locator('#comparison-tab-shorter').click();await validate()}
  await p.locator('[data-lower-day]').first().click();assert((await p.locator('#lowerDayDetail').textContent()).includes('Solar month'));
  // Current markers refresh without changing the selected interval or date details.
  const selected=await p.locator('#lowerSD').inputValue();await p.clock.setSystemTime(new Date('2026-10-04T00:00:00Z'));await p.evaluate(()=>window.dispatchEvent(new Event('pageshow')));
  assert.equal(await p.locator('#lowerSD').inputValue(),selected);
- await p.locator('#compareYear').selectOption('2021');await p.locator('[data-cmonth="0"]').click();assert.equal(await p.locator('#lowerSD').count(),0);
- await p.locator('[data-cmonth="1"]').click();await validate();
- await p.locator('#compareYear').selectOption('2026');await p.locator('[data-cmonth="9"]').click();
+ await p.locator('#compareBack').click();await p.locator('#compareYear').selectOption('2021');await p.locator('[data-cmonth="0"]').click();await p.locator('#comparison-tab-shorter').click();assert.equal(await p.locator('#lowerSD').count(),0);
+ await p.locator('#compareBack').click();await p.locator('[data-cmonth="1"]').click();await p.locator('#comparison-tab-shorter').click();await validate();
+ await p.locator('#compareBack').click();await p.locator('#compareYear').selectOption('2026');await p.locator('[data-cmonth="9"]').click();await p.locator('#comparison-tab-shorter').click();
  for(const width of [320,390,768,1440]){
   await p.setViewportSize({width,height:900});assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   assert(await p.locator('#compareLowerLayer').evaluate(e=>e.scrollWidth<=e.clientWidth+1));
