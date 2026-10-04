@@ -35,6 +35,7 @@ const {chromium}=require('playwright');
   await page.evaluate(()=>{BOOKS[0].optional.Notes='Device token test change';document.getElementById('github-submit').disabled=false});
   await page.locator('#github-submit').click();await page.waitForFunction(()=>!metadataBusy && document.getElementById('github-status').textContent.includes('Committed'));
   assert.equal(writes,1);assert(!(await page.evaluate(()=>metadataFileHTML())).includes(expectedToken));
+  assert(await page.locator('#github-commit').isHidden());await open();await page.waitForFunction(()=>savedTokenAvailable);
   await page.locator('#token-change').click();expectedToken='replacement-device-test';await page.locator('#github-token').fill(expectedToken);await page.locator('#token-remember').click();await page.waitForFunction(()=>!metadataBusy);
   await page.reload();await open();await page.waitForFunction(()=>savedTokenAvailable);await page.locator('#github-check').click();await page.waitForFunction(()=>!metadataBusy && document.getElementById('github-status').textContent.includes('Authenticated'));
   // A failed replacement retains the existing encrypted record.

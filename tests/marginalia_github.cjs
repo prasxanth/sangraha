@@ -27,8 +27,11 @@ const {chromium}=require('playwright');
   });
   await page.goto(pathToFileURL(path.resolve('books/marginalia.html')).href);
   await page.evaluate(()=>{BOOKS[0].optional.Notes='Updated reflection — λ <script>never()</script>';metadataDirty=true;showSaveStatus('Pending changes')});
-  const open=async()=>{await page.getByRole('button',{name:'Commit to GitHub',exact:true}).click();await page.locator('#github-token').fill('test-only-token')};
+  const open=async()=>{await page.getByRole('button',{name:'GitHub settings',exact:true}).click();await page.locator('#github-token').fill('test-only-token')};
   const submit=async()=>{await page.getByRole('button',{name:'Commit to main',exact:true}).click();await page.waitForFunction(()=>!metadataBusy);assert.equal(await page.locator('#github-token').inputValue(),'')};
+  await page.getByRole('button',{name:'Dismiss save notice'}).click();
+  assert(await page.locator('#save-bar').isHidden());assert(await page.evaluate(()=>metadataDirty));
+  assert.equal(await page.locator('#github-settings').getAttribute('data-pending'),'true');
   await open();assert((await page.locator('#github-changes').textContent()).includes('Notes'));
   mode='unauthorized';await submit();assert((await page.locator('#github-status').textContent()).includes('denied access'));assert.equal(puts.length,0);
   assert((await page.locator('#github-status').textContent()).includes('HTTP 401'));
@@ -51,15 +54,18 @@ const {chromium}=require('playwright');
   const published=Buffer.from(puts[1].content,'base64').toString('utf8');
   assert(published.includes('Updated reflection — λ'));assert(!published.includes('test-only-token'));assert(published.includes('\\u003cscript\\u003e'));
   assert.equal(await page.evaluate(()=>metadataDirty),false);
+  assert(await page.locator('#save-bar').isHidden());assert(await page.locator('#github-commit').isHidden());
+  assert.equal(await page.locator('#github-settings').getAttribute('data-pending'),'false');
+  await page.waitForFunction(()=>document.getElementById('save-toast').hidden,{},{timeout:6000});
   await page.route('https://raw.githubusercontent.com/**',r=>r.fulfill({contentType:'text/plain',body:original}));
   await page.evaluate(()=>checkGitHub()); // Bypass a stale raw CDN after committing.
 assert(await page.locator('#github-submit').isDisabled());
   assert(!(await page.evaluate(()=>JSON.stringify(localStorage))).includes('test-only-token'));
-  await page.getByRole('button',{name:'Close GitHub commit',exact:true}).click();
+  assert(await page.locator('#github-commit').isHidden()); assert(await page.locator('#save-bar').isHidden());
   // Changes already applied remotely should not produce duplicate commits.
   await page.evaluate(source=>{githubBaseline=sourceBooks(source);BOOKS[0].optional.Notes='Updated reflection — λ <script>never()</script>'},original);
   await open();await submit();assert((await page.locator('#github-status').textContent()).includes('already on GitHub'));assert.equal(puts.length,2);
-  await page.getByRole('button',{name:'Close GitHub commit',exact:true}).click();
+  assert(await page.locator('#github-commit').isHidden()); assert(await page.locator('#save-bar').isHidden());
   for(const [width,height] of [[1440,1000],[402,874],[390,844],[320,568],[844,390]]){
    await page.setViewportSize({width,height});
    assert.equal(await page.evaluate(()=>Math.round(document.getElementById('app').getBoundingClientRect().height)),height);
