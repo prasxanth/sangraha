@@ -10,7 +10,7 @@ const {chromium} = require('playwright');
  await page.route('https://openlibrary.org/search.json?*',r=>r.fulfill({json:{docs:[]}}));
  await page.goto(pathToFileURL(path.resolve('books/marginalia.html')).href);
  assert(await page.locator('#screen-home').isVisible());
- const original=JSON.parse(fs.readFileSync('archive/marginalia.pre-dashboard-2026-10-03.html','utf8').match(/<script id="embeddedData" type="application\/json">(.*?)<\/script>/s)[1]);
+ const original=JSON.parse(require('node:child_process').execFileSync('git',['show','HEAD:books/marginalia.html'],{encoding:'utf8'}).match(/<script id="embeddedData" type="application\/json">(.*?)<\/script>/s)[1]);
  assert.deepEqual(await page.evaluate(()=>BOOKS),original);
  console.log('Books preserved:',original.length);
  assert.deepEqual(await page.evaluate(()=>['Graduate School','2011 - 2017','2024-2025','2026-03','2020/03/20','August, 2019'].map(date=>completionYear({optional:{'Completion Date':date}}))),[null,null,null,'2026','2020','2019']);
