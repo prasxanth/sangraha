@@ -1,0 +1,240 @@
+[
+  {
+    "name": "source",
+    "reading": "1.1",
+    "asset": "assets/kena/source-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "lightning",
+    "reading": "2.3",
+    "asset": "assets/kena/lightning-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "grass",
+    "reading": "3.4",
+    "asset": "assets/kena/grass-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "uma",
+    "reading": "3.10",
+    "asset": "assets/kena/uma-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "senses",
+    "reading": "1.2",
+    "asset": "assets/kena/senses-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "beyond",
+    "reading": "1.3",
+    "asset": "assets/kena/beyond-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "unknown",
+    "reading": "1.4",
+    "asset": "assets/kena/unknown-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "paradoxes",
+    "reading": "1.5",
+    "asset": "assets/kena/paradoxes-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "uncertainty",
+    "reading": "2.1",
+    "asset": "assets/kena/uncertainty-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "wind",
+    "reading": "3.7",
+    "asset": "assets/kena/wind-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "proximity",
+    "reading": "3.12",
+    "asset": "assets/kena/proximity-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "intention",
+    "reading": "2.4",
+    "asset": "assets/kena/intention-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "foundation",
+    "reading": "4.7",
+    "asset": "assets/kena/foundation-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "awareness-each",
+    "reading": "1.6",
+    "asset": "assets/kena/awareness-each-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "here-now",
+    "reading": "1.7",
+    "asset": "assets/kena/here-now-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "all-beings",
+    "reading": "1.8",
+    "asset": "assets/kena/all-beings-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "ungrasped",
+    "reading": "2.2",
+    "asset": "assets/kena/ungrasped-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "delight",
+    "reading": "2.5",
+    "asset": "assets/kena/delight-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "victory",
+    "reading": "3.1",
+    "asset": "assets/kena/victory-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "yaksha",
+    "reading": "3.2",
+    "asset": "assets/kena/yaksha-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "agni-identity",
+    "reading": "3.3",
+    "asset": "assets/kena/agni-identity-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "fire-return",
+    "reading": "3.5",
+    "asset": "assets/kena/fire-return-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "vayu-boast",
+    "reading": "3.6",
+    "asset": "assets/kena/vayu-boast-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "wind-return",
+    "reading": "3.8",
+    "asset": "assets/kena/wind-return-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "uma-encounter",
+    "reading": "3.9",
+    "asset": "assets/kena/uma-encounter-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "indra-grace",
+    "reading": "3.11",
+    "asset": "assets/kena/indra-grace-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "nearness",
+    "reading": "4.1",
+    "asset": "assets/kena/nearness-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "indra-recognition",
+    "reading": "4.2",
+    "asset": "assets/kena/indra-recognition-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "first-knower",
+    "reading": "4.3",
+    "asset": "assets/kena/first-knower-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "brief-flash",
+    "reading": "4.4",
+    "asset": "assets/kena/brief-flash-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "returning-mind",
+    "reading": "4.5",
+    "asset": "assets/kena/returning-mind-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "teaching-given",
+    "reading": "4.6",
+    "asset": "assets/kena/teaching-given-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "truth-home",
+    "reading": "4.8",
+    "asset": "assets/kena/truth-home-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "established",
+    "reading": "4.9",
+    "asset": "assets/kena/established-wide.webp",
+    "width": 2172,
+    "height": 724
+  }
+]

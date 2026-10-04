@@ -69,8 +69,15 @@ const { chromium } = require('playwright');
         assert.equal(await page.locator('#reading-flip').getAttribute('aria-pressed'), 'false');
         assert(await page.locator('#reading-copy .v-sanskrit').count() > 0, 'Each card opens on Sanskrit');
         assert(await page.locator('#reading-image').evaluate(async image => {
-          await image.decode(); return image.naturalWidth >= 1024;
+          await image.decode(); return image.naturalWidth >= 1024 && Math.abs(image.naturalWidth/image.naturalHeight-3)<0.02;
         }));
+        const framing=await page.locator('#reading-image').evaluate(image=>{
+          const r=image.getBoundingClientRect(), card=image.closest('.reading-card').getBoundingClientRect();
+          return {ratio:r.width/r.height,native:image.naturalWidth/image.naturalHeight,width:r.width,cardWidth:card.width,fit:getComputedStyle(image).objectFit};
+        });
+        assert(Math.abs(framing.ratio-framing.native)<0.01,'Whole image retains its native proportions: '+passages[i].number);
+        assert(Math.abs(framing.width-(framing.cardWidth-2))<1,'Artwork spans the card width');
+        assert.equal(framing.fit,'contain','No cover cropping');
         assert.equal(await page.locator('.reading-card').evaluate(e => getComputedStyle(e).borderRadius), '8px');
         assert(await page.locator('.reading-art #reading-title').isVisible());
         const layout = await page.evaluate(() => ({

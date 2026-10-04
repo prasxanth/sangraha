@@ -4,54 +4,54 @@ The reader has 34 individually numbered cards and corresponding study views, fol
 
 ## Artwork
 
-Each reading has its own distinct contextual illustration. All 34 were created using the built-in imagegen tool: thirteen existing illustrations are retained and 21 new illustrations accompany the separated readings. Complete final prompts are in [kena-artwork-prompts.json](kena-artwork-prompts.json). Images are artistic interpretations, not historical reproductions.
+Each reading has a distinct contextual illustration regenerated specifically as a wide 3:1 composition using the built-in imagegen tool. The full scene spans the card width without cropping or stretching. Figures and important objects fit within the frame; quiet foreground and a dark title area keep the caption away from the subject. Current prompts are in [kena-wide-artwork-prompts.json](kena-wide-artwork-prompts.json), and asset dimensions are recorded in [kena-wide-artwork-manifest.json](kena-wide-artwork-manifest.json). Original portrait assets and their [prompts](kena-artwork-prompts.json) remain available for comparison. Images are artistic interpretations, not historical reproductions.
 
 | Reading | Asset under `assets/kena/` | Subject |
 | --- | --- | --- |
-| 1.1 | `source.webp` | The Opening Question |
-| 1.2 | `senses.webp` | The Ear of the Ear |
-| 1.3 | `beyond.webp` | Beyond Sight, Speech and Mind |
-| 1.4 | `unknown.webp` | Beyond the Known and Unknown |
-| 1.5 | `paradoxes.webp` | Known by Not-Knowing |
-| 1.6 | `awareness-each.webp` | Known in Every Cognition |
-| 1.7 | `here-now.webp` | Realization Here and Now |
-| 1.8 | `all-beings.webp` | Discerning in All Beings |
-| 2.1 | `uncertainty.webp` | Neither Certainty nor Ignorance |
-| 2.2 | `ungrasped.webp` | The Paradox Restated |
-| 2.3 | `lightning.webp` | A Flash of Recognition |
-| 2.4 | `intention.webp` | The Mind Returns |
-| 2.5 | `delight.webp` | Tad Vana — The Delight of That |
-| 3.1 | `victory.webp` | Whose Victory? |
-| 3.2 | `yaksha.webp` | The Mysterious Presence |
-| 3.3 | `agni-identity.webp` | Agni Declares His Identity |
-| 3.4 | `grass.webp` | The Grass Agni Cannot Burn |
-| 3.5 | `fire-return.webp` | Agni Returns Without an Answer |
-| 3.6 | `vayu-boast.webp` | Vāyu Declares His Power |
-| 3.7 | `wind.webp` | The Grass Vāyu Cannot Move |
-| 3.8 | `wind-return.webp` | Vāyu Returns; Indra Approaches |
-| 3.9 | `uma-encounter.webp` | Indra Encounters Umā |
-| 3.10 | `uma.webp` | It Was Brahman |
-| 3.11 | `indra-grace.webp` | Indra Receives the Recognition |
-| 3.12 | `proximity.webp` | Those Who Came Closest |
-| 4.1 | `nearness.webp` | Agni, Vāyu and Indra |
-| 4.2 | `indra-recognition.webp` | Indra’s Nearness |
-| 4.3 | `first-knower.webp` | The First Recognition |
-| 4.4 | `brief-flash.webp` | The Lightning Analogy |
-| 4.5 | `returning-mind.webp` | Repeated Remembrance |
-| 4.6 | `teaching-given.webp` | The Teaching Has Been Given |
-| 4.7 | `foundation.webp` | The Threefold Foundation |
-| 4.8 | `truth-home.webp` | Truth Is Its Home |
-| 4.9 | `established.webp` | Firmly Established |
+| 1.1 | `source-wide.webp` | The Opening Question |
+| 1.2 | `senses-wide.webp` | The Ear of the Ear |
+| 1.3 | `beyond-wide.webp` | Beyond Sight, Speech and Mind |
+| 1.4 | `unknown-wide.webp` | Beyond the Known and Unknown |
+| 1.5 | `paradoxes-wide.webp` | Known by Not-Knowing |
+| 1.6 | `awareness-each-wide.webp` | Known in Every Cognition |
+| 1.7 | `here-now-wide.webp` | Realization Here and Now |
+| 1.8 | `all-beings-wide.webp` | Discerning in All Beings |
+| 2.1 | `uncertainty-wide.webp` | Neither Certainty nor Ignorance |
+| 2.2 | `ungrasped-wide.webp` | The Paradox Restated |
+| 2.3 | `lightning-wide.webp` | A Flash of Recognition |
+| 2.4 | `intention-wide.webp` | The Mind Returns |
+| 2.5 | `delight-wide.webp` | Tad Vana — The Delight of That |
+| 3.1 | `victory-wide.webp` | Whose Victory? |
+| 3.2 | `yaksha-wide.webp` | The Mysterious Presence |
+| 3.3 | `agni-identity-wide.webp` | Agni Declares His Identity |
+| 3.4 | `grass-wide.webp` | The Grass Agni Cannot Burn |
+| 3.5 | `fire-return-wide.webp` | Agni Returns Without an Answer |
+| 3.6 | `vayu-boast-wide.webp` | Vāyu Declares His Power |
+| 3.7 | `wind-wide.webp` | The Grass Vāyu Cannot Move |
+| 3.8 | `wind-return-wide.webp` | Vāyu Returns; Indra Approaches |
+| 3.9 | `uma-encounter-wide.webp` | Indra Encounters Umā |
+| 3.10 | `uma-wide.webp` | It Was Brahman |
+| 3.11 | `indra-grace-wide.webp` | Indra Receives the Recognition |
+| 3.12 | `proximity-wide.webp` | Those Who Came Closest |
+| 4.1 | `nearness-wide.webp` | Agni, Vāyu and Indra |
+| 4.2 | `indra-recognition-wide.webp` | Indra’s Nearness |
+| 4.3 | `first-knower-wide.webp` | The First Recognition |
+| 4.4 | `brief-flash-wide.webp` | The Lightning Analogy |
+| 4.5 | `returning-mind-wide.webp` | Repeated Remembrance |
+| 4.6 | `teaching-given-wide.webp` | The Teaching Has Been Given |
+| 4.7 | `foundation-wide.webp` | The Threefold Foundation |
+| 4.8 | `truth-home-wide.webp` | Truth Is Its Home |
+| 4.9 | `established-wide.webp` | Firmly Established |
 
-The full-resolution illustrations are encoded as WebP at quality 90 and are also embedded in `kena_upanishad.html`, so artwork travels with the HTML file. Existing external font loading is unchanged. The reader crops each portrait illustration to fill a full-width banner at the top of the card; its title is overlaid near the bottom. The homepage uses the opening illustration as a cropped welcome image. Chapter study headers retain representative images.
+The full-resolution illustrations are encoded as WebP at quality 90 and are also embedded in `kena_upanishad.html`, so artwork travels with the HTML file. Existing external font loading is unchanged. The reader uses `width:100%; height:auto` to display the entire wide illustration at its natural aspect ratio. A dark extension of the artwork area accommodates the title without covering the scene. Homepage and chapter images also retain their natural proportions. On short landscape screens, the card scrolls to preserve the complete image and readable passage; navigation remains at the bottom of the viewport. Changing readings returns the card to its top.
 
 ## Reading and navigation
 
 The clickable logo and title open a homepage with Read, Overview, Khaṇḍas and Index links at the bottom. No persistent bottom navigation consumes the reading viewport. The card fills the available height below the header, with previous/next buttons and a passage picker immediately above a 12px bottom gutter. The redundant heading, edition label and reading-count line are removed. Cards retain 8px corners; controls use 5px corners.
 
-Sanskrit is on the front and English on the back. New card selections open in Sanskrit. “Study this passage” opens only the selected numbered reading. The Index and Khaṇḍas also link directly to individual studies. Readings 1.5–1.8 remain adjacent under “From the paradox of knowing to realization.” “Back to card” preserves the selected card, language face and reading position. Desktop and mobile stack the full-width image above independently scrolling text. The card controls remain visible on short screens. Arrow keys work when the reading passage has focus.
+Sanskrit is on the front and English on the back. New card selections open in Sanskrit. “Study this passage” opens only the selected numbered reading. The Index and Khaṇḍas also link directly to individual studies. Readings 1.5–1.8 remain adjacent under “From the paradox of knowing to realization.” “Back to card” preserves the selected card, language face and reading position. Desktop and mobile stack the full-width image above independently scrolling text. The previous/next and passage-picker controls remain visible on short screens; the card itself can scroll to its language and study buttons. Arrow keys work when the reading passage has focus.
 
-The original pre-redesign backup is `archive/kena_upanishad.pre-electric-blue-2026-09-30.html`. The preceding geometric design is preserved as `archive/kena_upanishad.pre-illustrated-cards-2026-09-30.html`. The version immediately before separating the grouped passages is preserved byte-for-byte in `archive/kena_upanishad.pre-individual-mantras-2026-10-03.html`. Later published versions are preserved in Git history.
+The original pre-redesign backup is `archive/kena_upanishad.pre-electric-blue-2026-09-30.html`. The preceding geometric design is preserved as `archive/kena_upanishad.pre-illustrated-cards-2026-09-30.html`. The version immediately before separating the grouped passages is preserved byte-for-byte in `archive/kena_upanishad.pre-individual-mantras-2026-10-03.html`. The version before this wide-artwork correction is saved in `archive/kena_upanishad.pre-wide-art-2026-10-03.html`. Later published versions are preserved in Git history.
 
 ## Icon, gestures and word study
 
@@ -63,4 +63,4 @@ In “Study this passage,” the word-by-word tables become flowing pada-vicched
 
 ## Validation
 
-`NODE_PATH=/path/to/node_modules node tests/kena_upanishad.cjs` uses Playwright to check all 34 unique artworks, image decoding, Sanskrit-first cards, language switching, isolated study content, return state, homepage links, brand navigation, keyboard navigation, corner radius, individual chapter/index routes, the 34-entry index, separation of 1.5–1.8, labelled shared material, viewport fit at desktop, phone and landscape sizes, real right/left touch gestures, vertical scrolling, preserved word meanings and both Sanskrit/IAST popup triggers. Chrome defaults to its macOS application path; set `CHROME_PATH` to override it.
+`NODE_PATH=/path/to/node_modules node tests/kena_upanishad.cjs` uses Playwright to check all 34 unique artworks, image decoding, native 3:1 proportions and full-width uncropped rendering, Sanskrit-first cards, language switching, isolated study content, return state, homepage links, brand navigation, keyboard navigation, corner radius, individual chapter/index routes, the 34-entry index, separation of 1.5–1.8, labelled shared material, viewport fit at desktop, phone and landscape sizes, real right/left touch gestures, vertical scrolling, preserved word meanings and both Sanskrit/IAST popup triggers. Chrome defaults to its macOS application path; set `CHROME_PATH` to override it.
