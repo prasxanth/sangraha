@@ -12,7 +12,7 @@ const { chromium } = require('playwright');
     const page = await browser.newPage({ hasTouch: true });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
-    await page.goto(pathToFileURL(path.resolve('kena_upanishad.html')).href);
+    await page.goto(pathToFileURL(path.resolve('kena_upanishad.html')).href, {waitUntil:'domcontentloaded'});
     assert(await page.locator('#screen-home').isVisible());
     assert.equal(await page.locator('.bottom-nav').count(), 0);
     assert.equal(await page.locator('.reader-heading').count(), 0);
@@ -24,14 +24,39 @@ const { chromium } = require('playwright');
       assert(await page.locator('#screen-home').isVisible());
     }
     await page.locator('#home-read').click();
-    assert.equal(await page.locator('#reading-picker option').count(), 13);
+    assert.equal(await page.locator('#reading-picker option').count(), 34);
     assert.equal(await page.locator('#reading-flip').textContent(), 'Read English ↻');
     assert(await page.locator('#reading-copy .v-sanskrit').count() > 0);
     const passages = await page.evaluate(() => readingDeck.map(item => ({
       number: item.number, english: item.english, sanskrit: item.sanskrit, art: item.art,
     })));
-    assert.equal(new Set(passages.map(item => item.art)).size, 13, 'A distinct contextual illustration for every reading');
-    assert.equal(await page.evaluate(() => new Set(readingDeck.map(item => KENA_ART[item.art])).size), 13);
+    assert.equal(new Set(passages.map(item => item.art)).size, 34, 'A distinct contextual illustration for every reading');
+    assert.equal(await page.evaluate(() => new Set(readingDeck.map(item => KENA_ART[item.art])).size), 34);
+    const expected = require('./fixtures/kena_individual_mantras.json');
+    assert.deepEqual(passages.map(p=>p.number), expected.map(p=>p.number), 'All 34 single-mantra units in order');
+    assert.deepEqual(await page.locator('.class-num').allTextContents(), expected.map(p=>p.number));
+    const integrity = await page.evaluate(() => readingDeck.map(item=>({
+      number:item.number, section:item.section,
+      sourceGroup:KENA_MANTRA_META[item.number].sourceGroup,
+      wordContext:KENA_MANTRA_META[item.number].wordContext,
+      tables:item.element.querySelectorAll('table.wbw').length,
+      shared:Array.from(item.element.querySelectorAll('[data-shared-from]'),e=>e.dataset.sharedFrom),
+      hasFocus:!!item.element.querySelector('.study-focus'),
+      hasAnchor:!!item.element.querySelector('.anchor-box'),
+    })));
+    for (const item of integrity) {
+      assert(item.tables>0 && item.hasAnchor, 'Word study and contemplation available for '+item.number);
+      if (item.number!=='1.1' && item.number!=='1.2' && item.number!=='1.3' && item.number!=='1.4') assert(item.hasFocus);
+      if (['1.5','1.6','1.7','1.8'].includes(item.number)) {
+        assert.equal(item.section,'From the paradox of knowing to realization');
+        assert.equal(item.tables,1,'Each has its own existing word notes');
+      }
+      if (item.wordContext) assert(['3.2','3.3','3.5','3.8'].includes(item.number));
+    }
+    assert(!passages.find(p=>p.number==='1.5').sanskrit.includes('प्रतिबोध'));
+    assert(!passages.find(p=>p.number==='1.6').sanskrit.includes('यस्यामतं'));
+    assert(!passages.find(p=>p.number==='1.7').sanskrit.includes('भूतेषु'));
+    assert(!passages.find(p=>p.number==='1.8').sanskrit.includes('इह चेद'));
     for (const passage of passages) {
       assert(passage.english.length > 20, `English present: ${passage.number}`);
       assert(passage.sanskrit.length > 20, `Sanskrit present: ${passage.number}`);
@@ -96,7 +121,7 @@ const { chromium } = require('playwright');
               assert.equal(await page.locator('#word-title').textContent(), preserved.sourceWords[0].sanskrit);
               assert.equal(await page.locator('#word-iast').textContent(), preserved.sourceWords[0].iast);
               assert.equal(await page.locator('#word-definition').innerHTML(), preserved.sourceWords[0].meaning);
-              if (width === 390 && i === 0 && script === 'sanskrit') await page.screenshot({path:'/tmp/kena-word-popup.png'});
+              if (width === 390 && i === 4 && script === 'sanskrit') await page.screenshot({path:'/tmp/kena-word-popup.png'});
               if (script === 'sanskrit') await page.keyboard.press('Escape');
               else await page.locator('#word-close').click();
               assert(!(await page.locator('#word-dialog').isVisible()));
@@ -136,16 +161,19 @@ const { chromium } = require('playwright');
         assert.equal(await page.locator('#reading-picker').inputValue(), '0', 'Left swipe goes back');
         await swipe(250,150,80,150);
         assert.equal(await page.locator('#reading-picker').inputValue(), '0', 'No wrap before first card');
-        await page.selectOption('#reading-picker','4');
+        await page.setViewportSize({width:390,height:568});
+        await page.selectOption('#reading-picker','1');
+        await page.locator('#reading-flip').click();
         const copy = await page.locator('#reading-copy').boundingBox();
         await swipe(copy.x+100,copy.y+170,copy.x+100,copy.y+50);
-        assert.equal(await page.locator('#reading-picker').inputValue(),'4','Vertical reading scroll does not change cards');
+        assert.equal(await page.locator('#reading-picker').inputValue(),'1','Vertical reading scroll does not change cards');
         assert(await page.locator('#reading-copy').evaluate(e=>e.scrollTop>0),'Vertical touch scrolling still works');
-        await page.selectOption('#reading-picker','12');
+        await page.selectOption('#reading-picker','33');
         await swipe(80,150,250,150);
-        assert.equal(await page.locator('#reading-picker').inputValue(),'12','No wrap after last card');
+        assert.equal(await page.locator('#reading-picker').inputValue(),'33','No wrap after last card');
         await cdp.detach();
-        await page.selectOption('#reading-picker','0');
+        await page.setViewportSize({width,height});
+        await page.selectOption('#reading-picker','4');
         await page.locator('#reading-study').click();
         await page.locator('.pada-viccheda').first().scrollIntoViewIfNeeded();
         await page.screenshot({path:'/tmp/kena-word-study.png'});
@@ -159,9 +187,23 @@ const { chromium } = require('playwright');
     for (let i = 0; i < 4; i++) {
       await page.locator('#ref-tabs button').nth(i).click();
       assert.equal(await page.locator('.ref-item').count(), [8, 5, 12, 9][i]);
+      await page.locator('.ref-hdr').last().click();
+      await page.locator('.ref-body.open .index-actions button').last().click();
+      assert.equal(await page.locator('#reading-number').textContent(), String(i+1)+'.'+[8,5,12,9][i]);
+      assert(await page.locator('#screen-study').isVisible());
+      await page.locator('#brand-home').click();
+      await page.locator('#home-index').click();
+    }
+    for (let kh=1;kh<=4;kh++) {
+      await page.evaluate(kh=>navigate('kh'+kh),kh);
+      const entries=page.locator('#screen-kh'+kh+' .class-hdr');
+      assert.equal(await entries.count(),[8,5,12,9][kh-1]);
+      await entries.last().click();
+      assert(await page.locator('#screen-study').isVisible());
+      assert.equal(await page.locator('#reading-number').textContent(),kh+'.'+[8,5,12,9][kh-1]);
     }
     assert.deepEqual(errors, []);
-    console.log('PASS: responsive cards, eye icon, right/left touch swipes, vertical scroll, all word meanings in accessible Sanskrit/IAST popups, unchanged explanations, isolated studies, 13 artworks, homepage navigation and index.');
+    console.log('PASS: responsive cards, eye icon, right/left touch swipes, vertical scroll, all word meanings in accessible Sanskrit/IAST popups, unchanged explanations, isolated studies, 34 artworks, homepage navigation and index.');
   } finally {
     await browser.close();
   }

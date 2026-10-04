@@ -1,0 +1,308 @@
+[
+  {
+    "number": "1.1",
+    "title": "The Opening Question",
+    "section": "The source behind perception",
+    "art": "source",
+    "sourceGroup": "1.1",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "1.2",
+    "title": "The Ear of the Ear",
+    "section": "The source behind perception",
+    "art": "senses",
+    "sourceGroup": "1.2",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "1.3",
+    "title": "Beyond Sight, Speech and Mind",
+    "section": "The source behind perception",
+    "art": "beyond",
+    "sourceGroup": "1.3",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "1.4",
+    "title": "Beyond the Known and Unknown",
+    "section": "The source behind perception",
+    "art": "unknown",
+    "sourceGroup": "1.4",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "1.5",
+    "title": "Known by Not-Knowing",
+    "section": "From the paradox of knowing to realization",
+    "art": "paradoxes",
+    "sourceGroup": "1.5–1.8",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "1.6",
+    "title": "Known in Every Cognition",
+    "section": "From the paradox of knowing to realization",
+    "art": "awareness-each",
+    "sourceGroup": "1.5–1.8",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "1.7",
+    "title": "Realization Here and Now",
+    "section": "From the paradox of knowing to realization",
+    "art": "here-now",
+    "sourceGroup": "1.5–1.8",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "1.8",
+    "title": "Discerning in All Beings",
+    "section": "From the paradox of knowing to realization",
+    "art": "all-beings",
+    "sourceGroup": "1.5–1.8",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "2.1",
+    "title": "Neither Certainty nor Ignorance",
+    "section": "Humility in knowing",
+    "art": "uncertainty",
+    "sourceGroup": "2.1–2.2",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "2.2",
+    "title": "The Paradox Restated",
+    "section": "Humility in knowing",
+    "art": "ungrasped",
+    "sourceGroup": "2.1–2.2",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "2.3",
+    "title": "A Flash of Recognition",
+    "section": "Glimpse, remembrance and delight",
+    "art": "lightning",
+    "sourceGroup": "2.3–2.5",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "2.4",
+    "title": "The Mind Returns",
+    "section": "Glimpse, remembrance and delight",
+    "art": "intention",
+    "sourceGroup": "2.3–2.5",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "2.5",
+    "title": "Tad Vana — The Delight of That",
+    "section": "Glimpse, remembrance and delight",
+    "art": "delight",
+    "sourceGroup": "2.3–2.5",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "3.1",
+    "title": "Whose Victory?",
+    "section": "Agni and the limit of power",
+    "art": "victory",
+    "sourceGroup": "3.1–3.4",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "3.2",
+    "title": "The Mysterious Presence",
+    "section": "Agni and the limit of power",
+    "art": "yaksha",
+    "sourceGroup": "3.1–3.4",
+    "excerpt": true,
+    "wordContext": "3.2–3.4"
+  },
+  {
+    "number": "3.3",
+    "title": "Agni Declares His Identity",
+    "section": "Agni and the limit of power",
+    "art": "agni-identity",
+    "sourceGroup": "3.1–3.4",
+    "excerpt": true,
+    "wordContext": "3.2–3.4"
+  },
+  {
+    "number": "3.4",
+    "title": "The Grass Agni Cannot Burn",
+    "section": "Agni and the limit of power",
+    "art": "grass",
+    "sourceGroup": "3.1–3.4",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "3.5",
+    "title": "Agni Returns Without an Answer",
+    "section": "Vāyu and the limit of breath",
+    "art": "fire-return",
+    "sourceGroup": "3.5–3.8",
+    "excerpt": true,
+    "wordContext": "3.5–3.8"
+  },
+  {
+    "number": "3.6",
+    "title": "Vāyu Declares His Power",
+    "section": "Vāyu and the limit of breath",
+    "art": "vayu-boast",
+    "sourceGroup": "3.5–3.8",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "3.7",
+    "title": "The Grass Vāyu Cannot Move",
+    "section": "Vāyu and the limit of breath",
+    "art": "wind",
+    "sourceGroup": "3.5–3.8",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "3.8",
+    "title": "Vāyu Returns; Indra Approaches",
+    "section": "Vāyu and the limit of breath",
+    "art": "wind-return",
+    "sourceGroup": "3.5–3.8",
+    "excerpt": true,
+    "wordContext": "3.5–3.8"
+  },
+  {
+    "number": "3.9",
+    "title": "Indra Encounters Umā",
+    "section": "From seeking to receiving instruction",
+    "art": "uma-encounter",
+    "sourceGroup": "3.9–3.12",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "3.10",
+    "title": "It Was Brahman",
+    "section": "From seeking to receiving instruction",
+    "art": "uma",
+    "sourceGroup": "3.9–3.12",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "3.11",
+    "title": "Indra Receives the Recognition",
+    "section": "From seeking to receiving instruction",
+    "art": "indra-grace",
+    "sourceGroup": "3.9–3.12",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "3.12",
+    "title": "Those Who Came Closest",
+    "section": "From seeking to receiving instruction",
+    "art": "proximity",
+    "sourceGroup": "3.9–3.12",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "4.1",
+    "title": "Agni, Vāyu and Indra",
+    "section": "Nearness and recognition",
+    "art": "nearness",
+    "sourceGroup": "4.1–4.3",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "4.2",
+    "title": "Indra’s Nearness",
+    "section": "Nearness and recognition",
+    "art": "indra-recognition",
+    "sourceGroup": "4.1–4.3",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "4.3",
+    "title": "The First Recognition",
+    "section": "Nearness and recognition",
+    "art": "first-knower",
+    "sourceGroup": "4.1–4.3",
+    "excerpt": true,
+    "wordContext": null
+  },
+  {
+    "number": "4.4",
+    "title": "The Lightning Analogy",
+    "section": "Indication, remembrance and instruction",
+    "art": "brief-flash",
+    "sourceGroup": "4.4–4.6",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "4.5",
+    "title": "Repeated Remembrance",
+    "section": "Indication, remembrance and instruction",
+    "art": "returning-mind",
+    "sourceGroup": "4.4–4.6",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "4.6",
+    "title": "The Teaching Has Been Given",
+    "section": "Indication, remembrance and instruction",
+    "art": "teaching-given",
+    "sourceGroup": "4.4–4.6",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "4.7",
+    "title": "The Threefold Foundation",
+    "section": "Foundation, truth and establishment",
+    "art": "foundation",
+    "sourceGroup": "4.7–4.9",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "4.8",
+    "title": "Truth Is Its Home",
+    "section": "Foundation, truth and establishment",
+    "art": "truth-home",
+    "sourceGroup": "4.7–4.9",
+    "excerpt": false,
+    "wordContext": null
+  },
+  {
+    "number": "4.9",
+    "title": "Firmly Established",
+    "section": "Foundation, truth and establishment",
+    "art": "established",
+    "sourceGroup": "4.7–4.9",
+    "excerpt": false,
+    "wordContext": null
+  }
+]
