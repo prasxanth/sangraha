@@ -43,13 +43,13 @@ Each reading has its own distinct contextual illustration. All 34 were created u
 | 4.8 | `truth-home.webp` | Truth Is Its Home |
 | 4.9 | `established.webp` | Firmly Established |
 
-The full-resolution illustrations are encoded as WebP at quality 90 and are also embedded in `kena_upanishad.html`, so artwork travels with the HTML file. Existing external font loading is unchanged. The reader contains the full portrait image without cropping; its title is overlaid near the bottom. The homepage uses the opening illustration as a cropped welcome image. Chapter study headers retain representative images.
+The full-resolution illustrations are encoded as WebP at quality 90 and are also embedded in `kena_upanishad.html`, so artwork travels with the HTML file. Existing external font loading is unchanged. The reader crops each portrait illustration to fill a full-width banner at the top of the card; its title is overlaid near the bottom. The homepage uses the opening illustration as a cropped welcome image. Chapter study headers retain representative images.
 
 ## Reading and navigation
 
 The clickable logo and title open a homepage with Read, Overview, Khaṇḍas and Index links at the bottom. No persistent bottom navigation consumes the reading viewport. The card fills the available height below the header, with previous/next buttons and a passage picker immediately above a 12px bottom gutter. The redundant heading, edition label and reading-count line are removed. Cards retain 8px corners; controls use 5px corners.
 
-Sanskrit is on the front and English on the back. New card selections open in Sanskrit. “Study this passage” opens only the selected numbered reading. The Index and Khaṇḍas also link directly to individual studies. Readings 1.5–1.8 remain adjacent under “From the paradox of knowing to realization.” “Back to card” preserves the selected card, language face and reading position. Desktop uses image and passage side by side; mobile stacks the image above independently scrolling text. The card controls remain visible on short screens. Arrow keys work when the reading passage has focus.
+Sanskrit is on the front and English on the back. New card selections open in Sanskrit. “Study this passage” opens only the selected numbered reading. The Index and Khaṇḍas also link directly to individual studies. Readings 1.5–1.8 remain adjacent under “From the paradox of knowing to realization.” “Back to card” preserves the selected card, language face and reading position. Desktop and mobile stack the full-width image above independently scrolling text. The card controls remain visible on short screens. Arrow keys work when the reading passage has focus.
 
 The original pre-redesign backup is `archive/kena_upanishad.pre-electric-blue-2026-09-30.html`. The preceding geometric design is preserved as `archive/kena_upanishad.pre-illustrated-cards-2026-09-30.html`. The version immediately before separating the grouped passages is preserved byte-for-byte in `archive/kena_upanishad.pre-individual-mantras-2026-10-03.html`. Later published versions are preserved in Git history.
 
