@@ -731,6 +731,18 @@ button{color:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px s
 #metadata-editor::backdrop{background:#08050be6;backdrop-filter:blur(5px)}.editor-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.editor-heading h2{font:26px var(--serif);color:var(--gold2)}#editor-book{margin:12px 0;color:var(--text2)}#editor-status{font-size:13px;margin:10px 0 18px;color:var(--gold2)}
 #metadata-fields{border:0;padding:0;min-width:0}.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.editor-grid label{display:flex;flex-direction:column;gap:6px;font:12px var(--sans);color:var(--text2);min-width:0}.editor-grid input,.editor-grid select,.editor-grid textarea{width:100%;min-width:0;padding:10px;background:var(--bg);color:var(--text);border:1px solid var(--border2);border-radius:5px;font:16px var(--sans)}.editor-grid textarea{resize:vertical}.editor-wide{grid-column:1/-1}.editor-actions{display:flex;justify-content:flex-end;gap:10px;margin:20px 0}.editor-help,#latest-source{font-size:12px;color:var(--text2)}#latest-source{display:inline-block;margin-top:12px;color:var(--gold2)}fieldset:disabled{opacity:.45}
 @media(max-width:600px){#save-bar{flex-direction:column;align-items:stretch}#save-bar>div{flex-wrap:wrap}.editor-grid{grid-template-columns:1fr}#metadata-editor{padding:18px}}
+
+/* Fill the viewport; keep editor actions visible while its fields scroll. */
+#app{min-height:0;height:100dvh}#screen-home,#screen-library{min-height:100%}
+#metadata-editor{height:100dvh;max-height:100dvh;box-sizing:border-box;margin:0 auto;border-block:0;border-radius:0;overflow:hidden;padding-top:max(18px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}
+#metadata-editor[open]{display:flex;flex-direction:column;gap:0}#metadata-editor>.editor-heading,#editor-book,#editor-status,#metadata-editor>.editor-help,#latest-source{flex:none}
+#metadata-form{display:flex;flex:1;min-height:0}#metadata-fields{display:flex;flex-direction:column;flex:1;min-height:0}.editor-grid{overflow-y:auto;align-content:start;scrollbar-color:var(--gold) var(--bg2);padding:4px 5px 8px 2px}.editor-actions{flex:none;margin:12px 0}.editor-help{line-height:1.5}#metadata-editor #latest-source{margin-top:6px}
+#save-bar>div{flex-wrap:wrap}#save-bar>span{min-width:0}
+#github-commit{margin:auto;max-height:100dvh;width:min(660px,100%);overflow:auto;padding:24px;background:var(--bg2);border:1px solid var(--gold);border-radius:8px;color:var(--text)}#github-commit::backdrop{background:#08050be6;backdrop-filter:blur(5px)}
+#github-commit button{border:1px solid var(--border2);border-radius:5px;padding:10px 13px;color:var(--gold2);background:var(--bg3);cursor:pointer;font:12px var(--sans)}
+.github-target{font:12px/1.7 var(--mono);color:var(--text2);margin:15px 0}#github-form label{display:flex;flex-direction:column;gap:6px;font:12px var(--sans);color:var(--text2);margin:16px 0}#github-form input{width:100%;padding:10px;background:var(--bg);color:var(--text);border:1px solid var(--border2);border-radius:5px;font:16px var(--sans)}
+#github-commit a{color:var(--gold2)}#github-status{font-size:13px;color:var(--gold2);margin:14px 0;white-space:pre-line}#github-changes{max-height:30dvh;overflow:auto;border-block:1px solid var(--border2);padding:10px 0}#github-changes details{margin:6px 0;font-size:13px}#github-changes summary{cursor:pointer;color:var(--gold2)}.metadata-change{padding:8px 10px;overflow-wrap:anywhere;font-size:12px}.metadata-change del{color:var(--text3)}.metadata-change ins{color:var(--text);text-decoration:none}button:disabled{opacity:.5;cursor:default}
+@media(max-width:600px){#metadata-editor{width:100%;max-width:100vw;padding-inline:16px}#editor-book{margin:8px 0}#editor-status{margin:4px 0 10px}#metadata-editor>.editor-help{font-size:11px}#save-bar>div{flex-shrink:1}}
 </style>
 </head>
 <body>
@@ -817,7 +829,7 @@ button{color:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px s
     </button>
   </div>
 
-  <div id="save-bar" hidden><span id="save-status" role="status"></span><div><button id="save-file" onclick="saveMetadataFile(true)">Save HTML file…</button><button onclick="saveMetadataFile(false)">Download HTML</button></div></div>
+  <div id="save-bar" hidden><span id="save-status" role="status"></span><div><button id="commit-github" onclick="openGitHubCommit()">Commit to GitHub</button><button id="save-file" onclick="saveMetadataFile(true)">Save HTML file…</button><button onclick="saveMetadataFile(false)">Download HTML</button></div></div>
   <!-- Content area -->
   <div id="content">
     <section id="screen-home" class="home-screen" aria-label="Reading home"></section>
@@ -864,8 +876,20 @@ button{color:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px s
     <label class="editor-wide">Genre<input name="Genre" placeholder="Separate genres with semicolons"></label>
     <label class="editor-wide">Notes & reflections<textarea name="Notes" rows="5"></textarea></label>
   </div><div class="editor-actions"><button type="button" onclick="document.getElementById('metadata-editor').close()">Cancel</button><button type="submit">Apply changes</button></div></fieldset></form>
-  <p class="editor-help">GitHub is checked before edits and file saves. Apply updates this session; Save HTML file writes the metadata into the file. Download HTML saves a new copy. Neither action commits to GitHub.</p>
+  <p class="editor-help">GitHub is checked before edits and file saves. Apply updates this session; Save HTML file writes the metadata into the file. Download HTML saves a new copy. Use Commit to GitHub to publish your changes directly.</p>
   <a id="latest-source" href="https://github.com/prasxanth/sangraha/blob/main/books/marginalia.html" target="_blank" rel="noopener noreferrer">View the GitHub file ↗</a>
+</dialog>
+<dialog id="github-commit" aria-labelledby="github-title">
+  <div class="editor-heading"><h2 id="github-title">Commit metadata</h2><button type="button" onclick="document.getElementById('github-commit').close()" aria-label="Close GitHub commit">×</button></div>
+  <p class="github-target">prasxanth/sangraha · main<br>books/marginalia.html</p>
+  <div id="github-changes" aria-label="Changes to publish"></div>
+  <form id="github-form">
+    <label>Commit message<input id="github-message" required maxlength="200" value="Update reading metadata in Marginalia"></label>
+    <label>GitHub token<input id="github-token" type="password" required autocomplete="off" spellcheck="false" placeholder="Fine-grained personal access token"></label>
+    <p class="editor-help">Use a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">fine-grained token</a> limited to sangraha, with Contents: read and write. It is sent only to GitHub and cleared after each attempt; it is never saved in this file or browser storage.</p>
+    <p id="github-status" role="status"></p>
+    <div class="editor-actions"><button type="button" onclick="document.getElementById('github-commit').close()">Cancel</button><button id="github-submit" type="submit">Commit to main</button></div>
+  </form>
 </dialog>
 <script>
 // ─── DATA ────────────────────────────────────────────────────────────────────
@@ -1538,6 +1562,7 @@ function renderHome() {
 const GITHUB_SOURCE = 'https://raw.githubusercontent.com/prasxanth/sangraha/main/books/marginalia.html';
 const initialBooksJSON = JSON.stringify(BOOKS);
 let githubBaseline = document.getElementById('metadata-baseline') ? JSON.stringify(JSON.parse(document.getElementById('metadata-baseline').textContent)) : initialBooksJSON;
+let preferGitHubAPI = false;
 let githubSourceHTML = '', editingIndex = null, metadataBusy = false, metadataDirty = false;
 const metadataKeys = ['Impact (1–5)','Re-read?','Would Recommend','Audiobook','Completion Date','Fiction/Nonfiction','Genre','Notes'];
 function sourceBooks(html) {
@@ -1550,9 +1575,10 @@ async function checkGitHub() {
   const controller = new AbortController(), timeout = setTimeout(()=>controller.abort(),12000);
   let html;
   try {
-    const response = await fetch(GITHUB_SOURCE+'?check='+Date.now(),{cache:'no-store',signal:controller.signal});
+    const url = preferGitHubAPI ? GITHUB_CONTENTS+'?ref=main&check='+Date.now() : GITHUB_SOURCE+'?check='+Date.now();
+    const response = await fetch(url,{cache:'no-store',signal:controller.signal});
     if (!response.ok) throw new Error('HTTP '+response.status);
-    html = await response.text();
+    html = preferGitHubAPI ? decodeGitHubContent((await response.json()).content) : await response.text();
   } catch (_) {
     throw new Error('Cannot check GitHub. Connect to the internet and try again; editing and file saving are blocked until the latest copy can be checked.');
   } finally { clearTimeout(timeout); }
@@ -1600,14 +1626,14 @@ document.getElementById('metadata-form').addEventListener('submit', async event 
   } catch (error) { document.getElementById('editor-status').textContent = error.message; }
   finally { metadataBusy = false; fields.disabled = false; }
 });
-function metadataFileHTML() {
+function metadataFileHTML(baselineJSON = githubBaseline) {
   // Always retain the freshly fetched app code; only replace its data blocks.
   const safeJSON = value => value.replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/&/g,'\\u0026');
   const doc = new DOMParser().parseFromString(githubSourceHTML,'text/html');
   doc.getElementById('embeddedData').textContent = safeJSON(JSON.stringify(BOOKS));
   let baseline = doc.getElementById('metadata-baseline');
   if (!baseline) { baseline = doc.createElement('script'); baseline.id = 'metadata-baseline'; baseline.type = 'application/json'; doc.head.append(baseline); }
-  baseline.textContent = safeJSON(githubBaseline);
+  baseline.textContent = safeJSON(baselineJSON);
   return '<!DOCTYPE html>\n'+doc.documentElement.outerHTML+'\n';
 }
 async function saveMetadataFile(usePicker) {
@@ -1627,13 +1653,13 @@ async function saveMetadataFile(usePicker) {
       const writer = await handle.createWritable();
       try { await writer.write(html); await writer.close(); } catch (error) { try { await writer.abort(); } catch (_) {} throw error; }
       metadataDirty = false;
-      showSaveStatus('Saved into '+handle.name+'. Commit this file to GitHub to publish the changes.');
+      showSaveStatus('Saved into '+handle.name+'. Use Commit to GitHub to publish the changes.');
     } else {
       const url = URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));
       const link = document.createElement('a'); link.href = url; link.download = 'marginalia.html'; document.body.append(link); link.click(); link.remove();
       setTimeout(()=>URL.revokeObjectURL(url),60000);
       // Browser downloads cannot confirm that the user retained the file.
-      showSaveStatus('Download started. Keep the downloaded HTML and replace books/marginalia.html before committing to GitHub.');
+      showSaveStatus('Download started. Keep the downloaded HTML. You can also commit these changes directly to GitHub.');
     }
   } catch (error) {
     showSaveStatus(error.name === 'AbortError' ? 'Save cancelled. Your session changes are still here.' : error.message);
@@ -1641,11 +1667,101 @@ async function saveMetadataFile(usePicker) {
 }
 window.addEventListener('beforeunload', event => { if (metadataDirty) { event.preventDefault(); event.returnValue = ''; } });
 
+const GITHUB_CONTENTS = 'https://api.github.com/repos/prasxanth/sangraha/contents/books/marginalia.html';
+function pendingMetadataChanges() {
+  const baseline = JSON.parse(githubBaseline);
+  return BOOKS.flatMap(book => {
+    const before = baseline.find(b => b.title === book.title && b.author === book.author);
+    const changes = metadataKeys.filter(key => (before?.optional[key] || '') !== (book.optional[key] || ''));
+    return changes.length ? [{book,before,changes}] : [];
+  });
+}
+function openGitHubCommit() {
+  if (metadataBusy) return;
+  const changes = pendingMetadataChanges();
+  document.getElementById('github-token').value = '';
+  document.getElementById('github-status').textContent = changes.length ? 'Review the changes, then commit to main.' : 'No metadata changes to commit.';
+  document.getElementById('github-submit').disabled = !changes.length;
+  document.getElementById('github-changes').innerHTML = changes.map(({book,before,changes}) => `<details><summary>${escapeHtml(book.title)} · ${changes.length} changed field${changes.length===1?'':'s'}</summary>${changes.map(key => `<div class="metadata-change"><strong>${escapeHtml(key)}</strong><br><del>${escapeHtml(before?.optional[key] || '(empty)')}</del><br><ins>${escapeHtml(book.optional[key] || '(empty)')}</ins></div>`).join('')}</details>`).join('');
+  document.getElementById('github-commit').showModal();
+}
+function decodeGitHubContent(content) {
+  return new TextDecoder().decode(Uint8Array.from(atob(content.replace(/\s/g,'')),c=>c.charCodeAt(0)));
+}
+function encodeGitHubContent(content) {
+  let binary = ''; for (const byte of new TextEncoder().encode(content)) binary += String.fromCharCode(byte);
+  return btoa(binary);
+}
+function gitHubError(status) {
+  if (status === 401 || status === 403) return 'GitHub denied access. Check the token, its expiry, and Contents: read and write permission for sangraha. Branch rules may also prevent direct commits.';
+  if (status === 409 || status === 422) return 'GitHub rejected the update. The file may have changed or main may require a pull request. No changes were overwritten; fetch the latest file and try again.';
+  if (status === 404) return 'GitHub could not find this file with the supplied token. Check repository access.';
+  return 'GitHub could not complete the request (HTTP '+status+'). Your session changes are still here.';
+}
+async function githubRequest(url, options) {
+  const controller = new AbortController(), timeout = setTimeout(()=>controller.abort(),20000);
+  try { return await fetch(url,{...options,cache:'no-store',signal:controller.signal}); }
+  finally { clearTimeout(timeout); }
+}
+document.getElementById('github-commit').addEventListener('close',()=>{document.getElementById('github-token').value='';});
+document.getElementById('github-commit').addEventListener('cancel',event=>{if(metadataBusy)event.preventDefault();});
+document.getElementById('github-form').addEventListener('submit',async event=>{
+  event.preventDefault(); if (metadataBusy || !pendingMetadataChanges().length) return;
+  const status = document.getElementById('github-status');
+  let token = document.getElementById('github-token').value.trim();
+  if (!token) return;
+  const message = document.getElementById('github-message').value.trim();
+  if (!message) return;
+  metadataBusy = true;
+  document.querySelectorAll('#github-commit button, #github-form input').forEach(el=>el.disabled=true);
+  document.getElementById('github-token').value='';
+  let putStarted = false, headers;
+  try {
+    headers = {Accept:'application/vnd.github+json',Authorization:'Bearer '+token,'X-GitHub-Api-Version':'2026-03-10'};
+    status.textContent = 'Fetching the latest file and checking for conflicts…';
+    const response = await githubRequest(GITHUB_CONTENTS+'?ref=main',{headers});
+    if (!response.ok) throw new Error(gitHubError(response.status));
+    const file = await response.json();
+    if (file.encoding !== 'base64' || !file.sha || typeof file.content !== 'string') throw new Error('GitHub returned an unexpected file response. Nothing was committed.');
+    const latest = decodeGitHubContent(file.content), remote = sourceBooks(latest), current = JSON.stringify(BOOKS);
+    if (remote !== githubBaseline && remote !== current) throw new Error('GitHub has different metadata. Your changes are preserved; pull and reconcile the latest file before committing.');
+    githubSourceHTML = latest;
+    if (remote === current) {
+      githubBaseline = current; preferGitHubAPI = true;
+      status.textContent = 'These metadata changes are already on GitHub. No new commit was needed.';
+      showSaveStatus('Metadata is already on GitHub. Save HTML to update your local copy.');
+      return;
+    }
+    status.textContent = 'Committing metadata to main…';
+    const html = metadataFileHTML(current);
+    putStarted = true;
+    const result = await githubRequest(GITHUB_CONTENTS,{method:'PUT',headers:{...headers,'Content-Type':'application/json'},body:JSON.stringify({message,content:encodeGitHubContent(html),sha:file.sha,branch:'main'})});
+    if (!result.ok) {putStarted=false;throw new Error(gitHubError(result.status));}
+    const commit = await result.json();
+    githubBaseline = current; preferGitHubAPI = true; githubSourceHTML = html;
+    // A GitHub commit persists metadata remotely. Local saving remains available.
+    metadataDirty = false;
+    status.textContent = 'Committed to GitHub'+(commit.commit?.sha ? ' · '+commit.commit.sha.slice(0,7) : '')+'. Save HTML if you also want to update your local file.';
+    if (/^[a-f0-9]{40}$/.test(commit.commit?.sha || '')) {
+      const link = document.createElement('a');link.href='https://github.com/prasxanth/sangraha/commit/'+commit.commit.sha;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View commit ↗';status.append(document.createElement('br'),link);
+    }
+    showSaveStatus('Metadata committed to GitHub. Save HTML to update your local copy.');
+  } catch (error) {
+    status.textContent = putStarted ? 'The commit result could not be confirmed. Your changes are still here. Check GitHub or retry; an already-applied change will not be committed twice.' : (error.name === 'AbortError' || error instanceof TypeError ? 'Cannot reach GitHub. Connect to the internet and retry. Your changes are still here.' : error.message);
+  } finally {
+    token=''; if(headers)delete headers.Authorization;
+    document.getElementById('github-token').value='';metadataBusy=false;
+    document.querySelectorAll('#github-commit button, #github-form input').forEach(el=>el.disabled=false);
+    document.getElementById('github-submit').disabled=!pendingMetadataChanges().length;
+  }
+});
+
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 renderThemeDropdown();
 renderList();
 updateSortUI();
 switchScreen('home');
+if (pendingMetadataChanges().length) showSaveStatus('This file has local metadata changes. Commit to GitHub to publish them.');
 </script>
 </body>
 </html>
