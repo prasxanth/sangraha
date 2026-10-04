@@ -1,7 +1,16 @@
 # Book library updates
 
-Before modifying book files locally, fetch and pull the latest GitHub branch (`git pull --ff-only`). Preserve any local edits; if the pull cannot be completed or conflicts with local changes, stop and reconcile them before editing. Do not update the library from a stale offline checkout.
+Follow `../AGENTS.md` before every edit and before publishing. Fetch and pull the latest GitHub branch (`git pull --ff-only`) without discarding local work. If the pull cannot be completed or conflicts with local changes, preserve and reconcile them before editing. Do not update the library from a stale offline checkout.
 
 Marginalia stores its library in the HTML's `embeddedData` JSON block. Metadata edited in the browser must be saved/downloaded into `books/marginalia.html` and committed to publish it, or published through the app’s Commit to GitHub action. Browser edits fetch the GitHub source before editing and again before saving; do not remove that freshness check. Keep the `metadata-baseline` block in exported files so uncommitted metadata can be compared safely with GitHub on reopening.
 
-Run `tests/marginalia.cjs` and `tests/marginalia_metadata.cjs` and `tests/marginalia_github.cjs` when changing Marginalia. Use mocked network responses for repeatable checks.
+## Marginalia metadata reconciliation
+
+- Before changing the HTML, inspect the latest GitHub `embeddedData`, the working copy, and any user-provided saved/downloaded copy. Preserve affected originals byte-for-byte before replacing or merging them. Never assume `books_db.csv` or an archived HTML contains the latest ratings, reread flags, dates, genres, recommendations, audiobook flags, themes, or notes.
+- Use `metadata-baseline` as the common metadata ancestor when applicable; otherwise use a verified common Git version. Match records by title and author, but do not guess when identity changed or is ambiguous. Compare individual fields, including absent values and record additions/deletions. Preserve all nonconflicting local and remote changes; ask about conflicting values instead of choosing by timestamp or replacing the entire JSON block with one side.
+- Keep the latest app code and the reconciled metadata together. Preserve unknown optional fields. Do not overwrite saved user notes or metadata while changing styles, layout, or JavaScript. For code-only work, compare parsed metadata before and after and require equality with the reconciled starting data.
+- A local HTML save does not publish to GitHub. A GitHub commit does not update a downloaded/local HTML automatically. Preserve both until synchronization is verified; an unsaved browser session must be exported or committed before its data can be protected by this workflow.
+- Keep the app's fetch-before-edit/save checks, conflict blocking, baseline persistence, and SHA-checked GitHub commits. Never embed or persist GitHub tokens. If implementing automatic merging later, retain field-level conflict detection and recheck the remote SHA before writing.
+- Before every commit/push, fetch again to catch metadata committed through the app while local code work was in progress. Merge those metadata changes into the updated app; never push the earlier snapshot over them.
+
+Run `tests/marginalia.cjs`, `tests/marginalia_metadata.cjs`, and `tests/marginalia_github.cjs` when changing Marginalia behavior. Use mocked network responses for repeatable checks. Instruction-only changes need a diff review, not browser tests.
