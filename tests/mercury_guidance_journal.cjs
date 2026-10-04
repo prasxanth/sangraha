@@ -11,8 +11,8 @@ function pureRules(html){const c={};vm.createContext(c);for(const name of ['orie
  try{const p=await browser.newPage({viewport:{width:390,height:844},timezoneId:'America/Los_Angeles'}),errors=[];p.on('pageerror',e=>errors.push(e.message));
  await p.clock.install({time:new Date('2026-10-03T11:00:00Z')});await p.clock.pauseAt(new Date('2026-10-03T12:00:00Z'));
  const url=pathToFileURL(path.resolve('mercury_atlas.html')).href;await p.goto(url);await p.locator('[data-page="practice"]').click();
- assert.equal(await p.locator('.horizon-card').count(),4);
- await p.locator('#guidanceDate').fill('2029-08-11');await p.locator('#guidanceDate').dispatchEvent('change');assert((await p.locator('#guidanceOverview').textContent()).includes('Wu Shen'));
+ assert.equal(await p.locator('.horizon-card').count(),4);await p.locator('.horizon-launch').first().click();assert.equal(await p.locator('#insightDialog details').count(),0);await p.keyboard.press('Tab');assert(await p.evaluate(()=>document.querySelector('#insightDialog').contains(document.activeElement)));await p.keyboard.press('Escape');await p.waitForFunction(()=>document.activeElement.classList.contains('horizon-launch'));
+ await p.locator('#guidanceDate').fill('2029-08-11');await p.locator('#guidanceDate').dispatchEvent('change');await p.locator('#guidanceOverview .insight-link').click();assert((await p.locator('#insightBody').textContent()).includes('Wu Shen'));await p.locator('#insightClose').click();
  await p.locator('#guidanceDate').fill('2020-01-01');await p.locator('#guidanceDate').dispatchEvent('change');assert.equal(await p.locator('.horizon-card').count(),0);
  await p.locator('#guidanceToday').click();assert.equal(await p.locator('#guidanceDate').inputValue(),'2026-10-03');
  await p.clock.setSystemTime(new Date('2026-10-04T08:00:00Z'));await p.evaluate(()=>window.dispatchEvent(new Event('pageshow')));assert.equal(await p.locator('#guidanceDate').inputValue(),'2026-10-04');

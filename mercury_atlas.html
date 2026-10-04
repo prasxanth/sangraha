@@ -115,6 +115,12 @@ textarea{font:inherit;color:inherit;background:#20201a;border:1px solid var(--li
 
 .horizon-card,.horizon-system,.mechanism,.prediction-chip{min-width:0;overflow-wrap:anywhere}.horizon-title{flex-wrap:wrap}.synthesis-tag{max-width:100%;white-space:normal}.guidance-details{margin:8px 0 0;padding:8px}.guidance-details summary{font-size:13px}.journal-entry p{white-space:pre-wrap;overflow-wrap:anywhere}.guidance-controls input{min-width:0}.calibration-table{min-width:0}.calibration-table th,.calibration-table td{padding:5px 3px;font-size:10px;overflow-wrap:anywhere}.journal-status{font-size:12px;color:var(--gold)}
 .guidance-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;position:sticky;top:0;z-index:4;padding:8px 0;background:var(--bg);margin-bottom:8px}.guidance-nav button{font-size:13px;padding:8px 4px;min-width:0}.guidance-nav [aria-selected=true]{border-color:var(--gold);color:var(--gold);background:#e5c78a12}.guidance-view[hidden]{display:none!important}.section-hint{font-size:13px;color:var(--muted);margin:4px 0 14px}.horizon-card{margin:0}.horizon-card>summary{min-height:44px;cursor:pointer;list-style:none}.horizon-card>summary::before{content:'▸';color:var(--gold);align-self:center}.horizon-card[open]>summary::before{content:'▾'}.horizon-card>summary>div{flex:1;min-width:0}.horizon-label{display:block;font-size:16px;color:var(--gold);margin-top:3px}.topic-section>summary{font-size:16px;min-height:44px;align-content:center;color:var(--gold)}.topic-section>.eyebrow{margin-top:10px}.guidance-nav:focus-within{z-index:5}
+
+/* Flat guidance cards and accessible single-layer details. */
+.guidance-nav{position:static;z-index:auto}.horizon-launch{display:grid;gap:8px;text-align:left;min-width:0;width:100%;padding:14px}.horizon-preview{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.horizon-launch .horizon-label{margin:0}.insight-link{display:block;width:100%;margin:10px 0 0;text-align:left;font-size:13px;white-space:normal}.insight-head{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:14px 16px;position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);z-index:2}.insight-head h2{min-width:0;overflow-wrap:anywhere;margin:0}.insight-head button{flex-shrink:0}.insight-body{padding:16px;overflow-wrap:anywhere}.insight-body h3{margin:18px 0 8px}.insight-body .horizon-systems{grid-template-columns:1fr}.insight-open{overflow:hidden}#insightDialog{max-height:88dvh;overscroll-behavior:contain}.native-rating,.support-intensity{flex-wrap:wrap}.native-rating .intensity-bars,.support-intensity .intensity-bars{flex-shrink:0}.guidance-controls>label,.journal-form>label,.compare-controls>label{min-width:0}.modal-head>div{min-width:0}.selection-head{flex-wrap:wrap}.horizon-system b,.prediction-chip{overflow-wrap:anywhere}.journal-entry-head{flex-wrap:wrap}.journal-entry-head>div{min-width:0;flex:1 1 150px}.journal-entry-head button{flex:0 0 auto}.synthesis-tags{align-items:flex-start}.posture{max-width:100%;white-space:normal}
+@media(max-width:699px){html{scroll-padding-top:12px;scroll-padding-bottom:calc(var(--mobile-nav-height,76px) + 16px)}main{padding-bottom:calc(var(--mobile-nav-height,76px) + 24px)}input,select,textarea,.sd-controls select,.popup-dimension select{font-size:16px}button,input,select,textarea{scroll-margin-block:12px}.keyboard-open .app-nav{display:none}.guidance-controls,.journal-form{grid-template-columns:minmax(0,1fr)}.horizon-grid{grid-template-columns:minmax(0,1fr)}.horizon-systems{grid-template-columns:minmax(0,1fr)}.popup-nav{flex-wrap:wrap}.popup-nav #popupScope{flex:1;min-width:0}.native-rating .pill{min-width:0}.compare-detail .selection-head button{width:100%}}
+@media(min-width:700px){.horizon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.insight-body .horizon-systems{grid-template-columns:1fr 1fr}}
+@media(max-width:699px){body{height:100dvh;overflow:hidden}main{height:calc(var(--app-view-height,100dvh) - var(--mobile-nav-height,76px));width:100%;overflow:auto;overscroll-behavior-y:contain;padding-bottom:24px;scroll-padding:12px 0 24px}.insight-open main{overflow:hidden}.app-nav{background:var(--panel)}}
 </style></head><body><main>
 <header class="app-header"><div class="eyebrow">Life Atlas</div><h1 id="pageTitle">Jyotish</h1><p class="sub">Native Jyotish + native BaZi · neutral comparison layer<br>10 life dimensions · 2021–2038</p></header><section id="timelinePage" class="app-page"><div class="native-tabs jy-native-tabs"><button type="button" data-jy-view="timeline" aria-pressed="true">Jyotish timeline</button><button type="button" data-jy-view="life" aria-pressed="false">Jyotish life map</button></div><section id="currentPeriod" class="panel now-card" aria-label="Current period"></section><div class="intensity-legend" data-intensity-legend></div><div class="panel dimension-control"><label for="focusDimension">Life dimension<select id="focusDimension"></select></label><p class="small" id="dimensionHint"></p></div>
 <details id="filters"><summary>Find a period <span class="small" id="filterCount"></span></summary><div class="filters"><label>Antardasha<select id="adFilter"><option value="">All ADs</option></select></label><label>PD support<select id="heatFilter"><option value="">All ratings</option><option value="1">1 · Max leverage</option><option value="2">2 · Leverage</option><option value="3">3 · Respect</option><option value="4">4 · Caution</option><option value="5">5 · Max caution</option></select></label><label>SD transit tone (any child)<select id="toneFilter"><option value="">All tones</option><option>SUPPORTIVE</option><option>MIXED</option><option>INTENSE</option></select></label><label>SD intensity (any child)<select id="intensityFilter"><option value="">All intensities</option><option>LOW</option><option>MEDIUM</option><option>HIGH</option><option>VERY HIGH</option></select></label><label>Search<input type="search" id="search" placeholder="Planet, theme, practice…"></label></div><div class="actions"><button id="futureOnly" aria-pressed="false">Current + future</button><button id="reset">Clear filters</button></div></details>
@@ -151,15 +157,15 @@ textarea{font:inherit;color:inherit;background:#20201a;border:1px solid var(--li
 <section id="practicePage" class="app-page" hidden>
 <section class="panel guidance-hero" id="guidanceEngine">
   <div class="eyebrow">Decision guidance · both systems</div>
-  <h2>What phase am I in—and how should I operate?</h2>
-  <p>This engine translates each tradition into action without blending their scores. Long-term, medium-term, tactical and day-level guidance remain linked to their native timing layers. Strategic summaries average display bands within each system: AD across PDs, and Da Yun across the available atlas years. They are not full-cycle native scores.</p>
+  <h2>Plan your next steps</h2>
+  <p class="small">Choose a date and focus, then open a horizon for suggested actions.</p><details class="guidance-details"><summary>How guidance is derived</summary><p>This engine translates each tradition into action without blending their scores. Long-term, medium-term, tactical and day-level guidance remain linked to their native timing layers. Strategic summaries average display bands within each system: AD across PDs, and Da Yun across the available atlas years. They are not full-cycle native scores.</p></details>
   <div class="guidance-controls">
     <label>Date<input type="date" id="guidanceDate" min="2021-02-09" max="2038-02-10"></label>
     <label>Life dimension<select id="guidanceDimension"></select></label>
     <label>Mode<select id="guidanceMode"><option value="balanced">Balanced guidance</option><option value="opportunity">Opportunity-first</option><option value="risk">Risk-control first</option></select></label>
   </div>
   <button id="guidanceToday" type="button">Today</button><p class="small">Selected dates are sampled at 12:00 UTC. Today follows your device’s local date; choosing a historical date pauses that following.</p><div id="guidanceOverview" class="synthesis-panel"></div>
-  <p class="small">Choose a time horizon to see its readings, actions, and reassessment triggers.</p><div id="horizonGuidance" class="horizon-grid"></div>
+  <p class="small">Choose a horizon for its actions and reassessment triggers in a focused detail view.</p><div id="horizonGuidance" class="horizon-grid"></div>
   <p class="small">Postures are action heuristics derived from the displayed support/intensity bands—not probabilities or guarantees. “What changes this?” marks the next timing boundary or evidence condition that should trigger reassessment.</p>
 </section>
 
@@ -716,7 +722,7 @@ function renderLowerLayer(monthIndex,sdStart){
  <p class="lower-help">A date is included when any part overlaps the Sūkṣma interval. Solar-term boundary dates use the later month’s supplied daily record.</p></section></div></section>`;
 }
 function wireLowerLayer(monthIndex){
- const select=$('lowerSD');if(!select)return;
+ prepareInsightLinks($('compareLowerLayer'));const select=$('lowerSD');if(!select)return;
  const change=(start,focusId)=>{compareSelectedSDStart=start;$('compareLowerLayer').innerHTML=renderLowerLayer(monthIndex,start);wireLowerLayer(monthIndex);const target=$(focusId);(target&&!target.disabled?target:$('lowerSD')).focus({preventScroll:true})};
  select.onchange=()=>change(select.value,'lowerSD');
  $('lowerPrevious').onclick=()=>change(select.options[select.selectedIndex-1].value,'lowerPrevious');
@@ -746,7 +752,7 @@ function renderCompareDetail(i){
  <div class="system-card bazi"><span class="system-tag">BaZi</span><h3>${nPillar(bm.luck)} · ${nPillar(bm.annual)} · ${nPillar(bm.solarMonth)}</h3><span class="pill h${b.heat}">${HEAT[b.heat].mark} ${nPost(b.heat,b.intensity)}</span><span class="intensity-badge">${nBars(b)} ${b.intensity}</span><details><summary>Why this reading</summary><p>Supplied Da Yun, annual and solar-month assessment.</p><p class="small">Internal BaZi index ${b.score>0?'+':''}${b.score}; not calibrated to Jyotish.</p></details></div></div>
  ${j?renderSynthesisPanel(j,b,jr,{text:`${bm.luck} Da Yun → ${bm.annual} solar year → ${bm.solarMonth} solar month.`},cDim):''}<details class="comparison-dimensions"><summary>Compare all ten dimensions</summary><div class="agreement-map">${nativeDims.map(k=>{const jj=jr?dimResult(jr,k):null,bb=bm.dims[k],aa=jj?bandAgreement(jj,bb):['Unavailable',''];return `<div class="agreement-cell"><b>${DIMS[k].short}</b><span>J ${jj?.mark||'—'} · B ${HEAT[bb.heat].mark}</span><small class="agreement ${aa[1]}">${aa[0]}</small></div>`}).join('')}</div></details>
  <p class="small">Shared sample: <time datetime="${bm.mid}">${fmtExact(bm.mid)}</time>. Jyotish derives its reading from the active dasha/transit context; BaZi derives it from Da Yun/year/solar month. No blended verdict is produced.</p><div id="compareLowerLayer">${renderLowerLayer(i,compareSelectedSDStart)}</div>`;
- wireLowerLayer(i);
+ wireLowerLayer(i);prepareInsightLinks($('compareNativeDetail'));
  $('compareBack').onclick=()=>{$('compareNativeDetail').hidden=true;const row=$('compareCalendar').querySelector(`[data-cmonth="${cMonth}"]`);row.focus({preventScroll:true});$('compareCalendar').scrollIntoView({block:'start',behavior:'instant'})};
 }
 
@@ -856,12 +862,40 @@ function nextBoundaryLabel(...isos){
  const valid=isos.filter(Boolean).map(x=>Date.parse(x)).filter(Number.isFinite);if(!valid.length)return 'Reassess when the next native timing layer changes or material evidence changes.';
  const t=Math.min(...valid);return `Next scheduled timing review: ${nFmt(new Date(t).toISOString())}. Reassess earlier if material evidence changes.`;
 }
+let insightDialog=null,insightOrigin=null;
+function openInsight(title,html,origin){
+ if(!insightDialog){
+  insightDialog=document.createElement('dialog');insightDialog.id='insightDialog';insightDialog.setAttribute('aria-labelledby','insightTitle');
+  insightDialog.innerHTML='<div class="insight-head"><h2 id="insightTitle"></h2><button type="button" id="insightClose" aria-label="Close details">Close</button></div><div id="insightBody" class="insight-body"></div>';
+  insightDialog.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const items=[...insightDialog.querySelectorAll('button,a[href],input,select,textarea,[tabindex]')].filter(x=>!x.disabled&&x.tabIndex>=0&&x.getClientRects().length),first=items[0],last=items.at(-1);if((e.shiftKey&&document.activeElement===first)||(!e.shiftKey&&document.activeElement===last)){e.preventDefault();(e.shiftKey?last:first)?.focus()}});
+  document.body.appendChild(insightDialog);$('insightClose').onclick=()=>insightDialog.close();
+  insightDialog.addEventListener('close',()=>{document.body.classList.remove('insight-open');if(insightOrigin?.isConnected)insightOrigin.focus({preventScroll:true})});
+  insightDialog.addEventListener('click',e=>{if(e.target===insightDialog){const r=insightDialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)insightDialog.close()}});
+ }
+ insightOrigin=origin||document.activeElement;$('insightTitle').textContent=title;$('insightBody').innerHTML=html;
+ $('insightBody').querySelectorAll('details').forEach(d=>{const section=document.createElement('section'),summary=d.querySelector(':scope > summary');if(summary){const h=document.createElement('h3');h.textContent=summary.textContent;section.appendChild(h);summary.remove()}while(d.firstChild)section.appendChild(d.firstChild);d.replaceWith(section)});
+ document.body.classList.add('insight-open');insightDialog.showModal();insightDialog.scrollTop=0;$('insightClose').focus({preventScroll:true});
+}
+function prepareInsightLinks(root){
+ root.querySelectorAll('details.guidance-details,.system-card > details').forEach(details=>{
+  const summary=details.querySelector(':scope > summary');if(!summary)return;
+  const title=summary.textContent,button=document.createElement('button');button.type='button';button.className='insight-link';button.setAttribute('aria-haspopup','dialog');button.textContent=title+' ↗';
+  summary.remove();const content=details.innerHTML;button.onclick=()=>openInsight(title,content,button);details.replaceWith(button);
+ });
+}
+function openHorizon(h,origin){
+ const syn=synthesisMechanism(h.j,h.b,h.sd||{},{text:h.bText},h.dim),posture=choosePosture(h.j,h.b,h.dim,$('guidanceMode').value);
+ openInsight(h.label,`<p class="small">${h.horizon} · ${DIMS[h.dim].name} · ${$('guidanceDate').value}</p><span class="posture">${posture}</span><h3>Suggested actions</h3><ul class="action-list">${actionsFor(posture,h.dim).map(x=>`<li>${esc(x)}</li>`).join('')}</ul><section class="change-trigger"><h3>When to reassess</h3><p>${esc(h.change)}</p></section><h3>Independent readings</h3><div class="horizon-systems"><section class="horizon-system"><small>Jyotish · ${h.jLabel}</small><b>${h.j.mark||HEAT[h.j.heat].mark} ${h.j.post}</b>${h.j.intensity?nBars(h.j):'<small>Intensity is assessed at Sūkṣma level.</small>'}</section><section class="horizon-system bazi"><small>BaZi · ${h.bLabel}</small><b>${HEAT[h.b.heat].mark} ${nPost(h.b.heat,h.b.intensity)}</b>${nBars(h.b)}</section></div><h3>${syn.title}</h3><p>${syn.narrative}</p>`,origin);
+}
+function initMobileSpacing(){
+ const nav=document.querySelector('.app-nav');const measure=()=>{document.documentElement.style.setProperty('--mobile-nav-height',nav.getBoundingClientRect().height+'px')};new ResizeObserver(measure).observe(nav);measure();
+ const keyboard=()=>{document.documentElement.style.setProperty('--app-view-height',(window.visualViewport?.height||innerHeight)+'px');const editing=document.activeElement?.matches('input,textarea,select'),reduced=window.visualViewport&&innerHeight-window.visualViewport.height>120;document.body.classList.toggle('keyboard-open',!!(editing&&reduced))};
+ keyboard();window.addEventListener('resize',keyboard);window.visualViewport?.addEventListener('resize',keyboard);document.addEventListener('focusin',keyboard);document.addEventListener('focusout',()=>setTimeout(keyboard,0));
+}
+
 function horizonCard(h){
- const syn=synthesisMechanism(h.j,h.b,h.sd||{}, {text:h.bText},h.dim),posture=choosePosture(h.j,h.b,h.dim,$('guidanceMode')?.value||'balanced'),acts=actionsFor(posture,h.dim);
- return `<details class="horizon-card"><summary class="horizon-title"><div><span class="horizon-name">${h.horizon}</span><span class="horizon-label">${h.label}</span></div><span class="posture">${posture}</span></summary>
- <div class="horizon-systems"><div class="horizon-system"><small>Jyotish</small><b>${h.j.mark||HEAT[h.j.heat].mark} ${h.j.post||nPost(h.j.heat,h.j.intensity)}</b><small>${h.jLabel}</small>${nBars(h.j)}</div><div class="horizon-system bazi"><small>BaZi</small><b>${HEAT[h.b.heat].mark} ${nPost(h.b.heat,h.b.intensity)}</b><small>${h.bLabel}</small>${nBars(h.b)}</div></div>
- <div class="synthesis-tags"><span class="synthesis-tag ${syn.cls}">${syn.status}</span></div><p class="small">${syn.narrative}</p>
- <details class="guidance-details"><summary>Actions &amp; reassessment</summary><ul class="action-list">${acts.map(x=>`<li>${x}</li>`).join('')}</ul><div class="change-trigger"><b>What changes this?</b> ${h.change}</div></details></details>`;
+ const posture=choosePosture(h.j,h.b,h.dim,$('guidanceMode').value);
+ return `<button type="button" class="horizon-card horizon-launch" aria-haspopup="dialog"><span class="horizon-name">${h.horizon}</span><span class="horizon-label">${h.label}</span><span class="horizon-preview"><span class="posture">${posture}</span><span class="small">View actions ↗</span></span></button>`;
 }
 function buildGuidanceContext(dateStr,dim){
  const sd=findSDByDate(dateStr);if(!sd)return null;const pd=pdForSD(sd),ctx=nativeContextForDate(dateStr,dim);if(!pd||!ctx)return null;
@@ -881,7 +915,7 @@ function renderGuidanceDashboard(){
  const g=buildGuidanceContext(date,dim);if(!g){overview.innerHTML='<h3>Date outside modeled range</h3><p>Choose a date between 9 Feb 2021 and 10 Feb 2038.</p>';root.innerHTML='';return}
  const immediate=g.horizons.at(-1),syn=synthesisMechanism(immediate.j,immediate.b,g.sd,{text:immediate.bText},dim),posture=choosePosture(immediate.j,immediate.b,dim,$('guidanceMode').value);
  overview.innerHTML=`<div class="synthesis-tags"><span class="synthesis-tag ${syn.cls}">${syn.status}</span><span class="posture">${posture}</span></div><h3>${DIMS[dim].name} · ${date}</h3><p>${syn.narrative}</p><details class="guidance-details"><summary>Underlying mechanisms</summary><div class="mechanism-grid"><div class="mechanism"><b>Jyotish · selected date</b><p class="small">${mechanismTextJy(g.sd)}</p></div><div class="mechanism bazi"><b>BaZi · selected date</b><p class="small">${mechanismTextBa(g.ctx)}</p></div></div></details>`;
- root.innerHTML=g.horizons.map(h=>horizonCard(h)).join('');
+ root.innerHTML=g.horizons.map(h=>horizonCard(h)).join('');root.querySelectorAll('.horizon-launch').forEach((b,i)=>b.onclick=()=>openHorizon(g.horizons[i],b));prepareInsightLinks($('guidanceEngine'));
 }
 
 /* Personal journal */
@@ -991,12 +1025,12 @@ function showNativePage(page){
  if(page==='bazi')renderBaziNative();
  if(page==='compare')renderCompare();
  if(page==='practice'){renderNativeCurrent();renderGuidanceDashboard();renderJournal()}
- window.scrollTo({top:0,behavior:'instant'});
+ document.querySelector('main').scrollTo({top:0,behavior:'instant'});window.scrollTo({top:0,behavior:'instant'});
 }
 document.querySelectorAll('.app-nav button[data-page]').forEach(b=>b.onclick=()=>showNativePage(b.dataset.page));
 document.querySelectorAll('[data-jy-view]').forEach(b=>b.onclick=()=>showNativePage(b.dataset.jyView));
 
-selectNativeNow();setNativeOptions();initGuidanceAndJournal();initGuidanceNavigation();
+selectNativeNow();setNativeOptions();initGuidanceAndJournal();initGuidanceNavigation();initMobileSpacing();
 $('baziNativeDimension').onchange=e=>{bDim=e.target.value;renderBaziNative()};
 $('baziNativeYear').onchange=e=>{bYear=e.target.value;bMonth=0;bDay=null;renderBaziNative()};
 $('baziNativeMonth').onchange=e=>{bMonth=+e.target.value;bDay=null;renderMonthDetail()};
