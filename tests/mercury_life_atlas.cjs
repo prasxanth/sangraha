@@ -19,9 +19,11 @@ const {pathToFileURL} = require('node:url');
   assert.equal(actual.records.length,729);
   const hash=v=>crypto.createHash('sha256').update(JSON.stringify(v)).digest('hex');
   assert.equal(hash(actual.records),golden.recordsSha256);
-  assert.equal(hash(actual.results),golden.resultsSha256,'All 7,290 results match the independently captured v6 source');
-  for(const sample of golden.samples)assert.deepEqual(actual.results[sample.index][sample.dimension],sample.result,sample.label);
-  if(reference) assert.deepEqual(actual,reference,'Source data and all 7,290 dimension results must match');
+  // Presentation now uses generic model wording; restore only that phrase for legacy fixture comparison.
+  const legacyResults=JSON.parse(JSON.stringify(actual.results).replaceAll('The model does not normalize planets','v5 does not normalize planets'));
+  assert.equal(hash(legacyResults),golden.resultsSha256,'All 7,290 results match the independently captured v6 source');
+  for(const sample of golden.samples)assert.deepEqual(legacyResults[sample.index][sample.dimension],sample.result,sample.label);
+  if(reference) assert.deepEqual({...actual,results:legacyResults},reference,'Source data and all 7,290 dimension results must match');
   assert(await page.evaluate(()=>SD_DATA.every(r=>DIM_ORDER.every(k=>{const d=dimResult(r,k);return d.heat>=1&&d.heat<=5&&Math.abs(d.heat-d.parent)<=2}))), 'SD cap');
   assert(await page.evaluate(()=>DATA.every(pd=>DIM_ORDER.every(k=>sdByParent.get(pd.ad+'/'+pd.pd).every(sd=>(pdResult(pd,k).heat===dimResult(sd,k).parent&&pdResult(pd,k).score===dimResult(sd,k).parentScore))))), 'Every parent view matches v6 parent heat');
   assert(await page.evaluate(()=>DATA.every(r=>pdResult(r,'career').heat===r.heat&&pdResult(r,'career').rationale===r.assessment)), 'All 81 Career anchors and assessments match v6, including its Rahu/Rahu correction');

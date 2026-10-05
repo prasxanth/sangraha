@@ -486,3 +486,5 @@ The complete atlas before this change is archived at [the October 3 backup](arch
 `tests/mercury_app_navigation.cjs` checks mutually exclusive task views, BaZi popup navigation, Compare drill-downs, responsive widths from 320–1440px, and bounded BaZi screen heights on mobile. Guidance uses a compact horizon grid with details in popups; Practices and Guide use expandable topics.
 
 `tests/mercury_control_layout.cjs` checks individual control bounds, text overflow, expanded popup content, sibling overlap, and clearance above bottom navigation at 320–1024px with standard and enlarged text.
+
+Guide and Practices retain expandable categories, with a topic picker and Previous/Next controls inside each multi-topic section. Interface labels describe the support/intensity logic rather than source revision numbers. `tests/mercury_iphone_ux.cjs` checks aligned Jyotish navigation, date input bounds and editing, and every reference topic in Chrome and WebKit at phone and landscape widths. Install Playwright WebKit to run that suite.
