@@ -14,3 +14,7 @@ Marginalia stores its library in the HTML's `embeddedData` JSON block. Metadata 
 - Before every commit/push, fetch again to catch metadata committed through the app while local code work was in progress. Merge those metadata changes into the updated app; never push the earlier snapshot over them.
 
 Run `tests/marginalia.cjs`, `tests/marginalia_metadata.cjs`, and `tests/marginalia_github.cjs`, and `tests/marginalia_tokens.cjs` when changing Marginalia behavior. Use mocked network responses for repeatable checks. Instruction-only changes need a diff review, not browser tests.
+
+## Related Life Atlas workflow
+
+The repository-root `mercury_atlas.html` journal follows the **Life Atlas journal persistence** section in `../AGENTS.md`. It uses `journalData` and `journalBaseline`, immutable entry IDs, field-level reconciliation and SHA-checked GitHub commits. Do not copy Marginalia's book baseline, records or stored credentials into Atlas. Changes to Atlas alone do not require modifying or regenerating `books/marginalia.html`.

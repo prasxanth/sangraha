@@ -28,22 +28,22 @@ const path=require('node:path');
    for(const area of ['guide','practices']){
     await page.locator('[data-page="'+(area==='guide'?'guide':'practice')+'"]').click();if(area==='practices')await page.locator('#guidance-tab-practices').click();
     const root=area==='guide'?'#guidePage':'#guidance-view-practices';
-    for(const topic of await page.locator(root+' .topic-section').all()){
-     await topic.locator(':scope > summary').click();
+    for(const card of await page.locator(root+' .library-open').all()){
+     const topic=page.locator('#'+await card.getAttribute('aria-controls'));await card.click();
      const reader=topic.locator('.topic-reader');if(await reader.count()){
       const selector=reader.locator('.reader-controls select');const total=await selector.locator('option').count();
       for(let i=0;i<total;i++){
        await selector.selectOption(String(i));assert.equal(await reader.locator('.reader-page:visible').count(),1);
-       assert(await reader.evaluate(e=>e.scrollWidth<=e.clientWidth+1),engine+' reader stays within panel: '+await topic.locator(':scope > summary').textContent()+' / '+i);
+       assert(await reader.evaluate(e=>e.scrollWidth<=e.clientWidth+1),engine+' reader stays within panel: '+await topic.locator(':scope > h2').textContent()+' / '+i);
        assert(!/\bv[3-6]\b/i.test(await reader.innerText()),'No visible source-version labels');
       }
       await selector.selectOption('0');await reader.locator('button[aria-label="Next topic"]').click();assert.equal(await selector.inputValue(),'1');
      }
-     await topic.locator(':scope > summary').click();
+     await topic.locator('.library-back').click();
     }
    }
    await page.locator('[data-page="practice"]').click();await page.locator('#guidance-tab-plan').click();await page.screenshot({path:'/tmp/atlas-'+engine+'-plan.png'});
-   await page.locator('#guidance-tab-practices').click();const topic=page.locator('#guidance-view-practices .topic-section').nth(2);await topic.locator('summary').first().click();await page.screenshot({path:'/tmp/atlas-'+engine+'-reader.png'});
+   await page.locator('#guidance-tab-practices').click();await page.locator('#guidance-view-practices .library-open').first().click();await page.screenshot({path:'/tmp/atlas-'+engine+'-reader.png'});
    assert.deepEqual(errors,[]);console.log('PASS '+engine+': aligned navigation, native date bounds/input, topic reader navigation and generic labels.');
   }finally{await browser.close()}
  }
