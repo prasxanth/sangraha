@@ -6,32 +6,32 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Jyotish Sādhana">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#0d0d0b">
 <title>Jyotish Sādhana</title>
-<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23555555'/%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%23D8D8D8'/%3E%3Cstop offset='100%25' stop-color='%23303030'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ctext x='90' y='128' font-family='serif' font-size='108' text-anchor='middle' fill='white' opacity='0.95'%3Eॐ%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&amp;display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23A0610A'/%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%23E8A030'/%3E%3Cstop offset='100%25' stop-color='%238B4A08'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ctext x='90' y='128' font-family='serif' font-size='108' text-anchor='middle' fill='white' opacity='0.95'%3Eॐ%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 /* ─── TOKENS ─────────────────────────────────────────────── */
 :root {
-  --bg:      #0d0d0d;
-  --bg2:     #141414;
-  --bg3:     #1c1c1c;
-  --bg4:     #232323;
-  --bg5:     #2a2a2a;
+  --bg:      #0d0d0b;
+  --bg2:     #141412;
+  --bg3:     #1c1c19;
+  --bg4:     #232320;
+  --bg5:     #2a2a26;
   --border:  rgba(255,255,255,0.07);
   --border2: rgba(255,255,255,0.13);
-  --text:    #e4e4e4;
-  --text2:   #a4a4a4;
-  --text3:   #636363;
-  --gold:    #ababab;
-  --gold2:   #cbcbcb;
-  --teal:    #b0b0b0;
-  --teal2:   #d1d1d1;
-  --purple:  #8f8f8f;
-  --purple2: #cfcfcf;
-  --coral:   #878787;
-  --amber:   #969696;
-  --amber2:  #cccccc;
+  --text:    #e8e4d8;
+  --text2:   #a8a49a;
+  --text3:   #666260;
+  --gold:    #c8a96e;
+  --gold2:   #e8c990;
+  --teal:    #5DCAA5;
+  --teal2:   #9FE1CB;
+  --purple:  #8F87E0;
+  --purple2: #CECBF6;
+  --coral:   #E07060;
+  --amber:   #D4901A;
+  --amber2:  #FAC775;
   --safe-b:  env(safe-area-inset-bottom, 0px);
   --safe-t:  env(safe-area-inset-top, 0px);
   --sans:    'Nunito', system-ui, sans-serif;
@@ -99,7 +99,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .x-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
 .x-num { font-family: var(--mono); font-size: 9px; color: var(--text3); min-width: 16px; }
 .x-name { font-size: 15px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.3; }
-.x-tag { font-family: var(--mono); font-size: 9px; color: var(--gold); background: rgba(200,206,214,0.12); padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.x-tag { font-family: var(--mono); font-size: 9px; color: var(--gold); background: rgba(200,169,110,0.12); padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
 .x-arr { color: var(--text3); font-size: 12px; transition: transform 0.25s; flex-shrink: 0; }
 .x-hdr.open .x-arr { transform: rotate(90deg); }
 .x-body { display: none; padding: 16px 18px 20px; }
@@ -138,7 +138,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .reps-lbl { font-family: var(--mono); font-size: 8px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
 
 /* Witness note */
-.w-note { border: 1px solid rgba(200,206,214,0.25); background: rgba(200,206,214,0.06); border-radius: var(--r-md); padding: 14px 16px; font-size: 13px; color: var(--purple2); line-height: 1.7; font-style: italic; text-align: center; margin-top: 14px; }
+.w-note { border: 1px solid rgba(143,135,224,0.25); background: rgba(143,135,224,0.06); border-radius: var(--r-md); padding: 14px 16px; font-size: 13px; color: var(--purple2); line-height: 1.7; font-style: italic; text-align: center; margin-top: 14px; }
 
 /* Divider */
 .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
@@ -190,7 +190,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 /* Mahasutra hero */
 .mahasutra-hero {
   background: var(--bg3);
-  border: 1px solid rgba(200,206,214,0.2);
+  border: 1px solid rgba(143,135,224,0.2);
   border-radius: var(--r-lg);
   padding: 18px 18px;
   margin-bottom: 20px;
@@ -213,14 +213,14 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .sutra-hdr { display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px; cursor: pointer; transition: background 0.15s; }
 .sutra-hdr:active { background: var(--bg3); }
 .sutra-hdr.open { background: var(--bg3); border-bottom: 1px solid var(--border); }
-.sutra-badge { font-family: var(--mono); font-size: 8px; color: var(--purple2); background: rgba(200,206,214,0.12); padding: 3px 7px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.sutra-badge { font-family: var(--mono); font-size: 8px; color: var(--purple2); background: rgba(143,135,224,0.12); padding: 3px 7px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
 .sutra-title { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; line-height: 1.4; }
 .sutra-arr { color: var(--text3); font-size: 11px; transition: transform 0.25s; flex-shrink: 0; margin-top: 2px; }
 .sutra-hdr.open .sutra-arr { transform: rotate(90deg); }
 .sutra-body { display: none; padding: 14px 16px 18px; }
 .sutra-body.open { display: block; }
 
-.s-sanskrit { font-family: var(--devanagari); font-size: 16px; line-height: 2.1; color: var(--gold2); border-left: 2px solid rgba(200,206,214,0.5); padding-left: 12px; margin-bottom: 8px; }
+.s-sanskrit { font-family: var(--devanagari); font-size: 16px; line-height: 2.1; color: var(--gold2); border-left: 2px solid rgba(200,169,110,0.5); padding-left: 12px; margin-bottom: 8px; }
 .s-english { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 12px; }
 .s-insight { font-size: 13px; color: var(--text3); line-height: 1.7; background: var(--bg4); border-radius: var(--r-sm); padding: 10px 12px; }
 .s-insight strong { color: var(--teal2); font-weight: 600; }
@@ -233,11 +233,11 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .prob-val { font-family: var(--mono); font-size: 10px; color: var(--text3); min-width: 32px; text-align: right; }
 
 /* Practice loop */
-.practice-loop { background: var(--bg4); border: 1px solid rgba(200,206,214,0.2); border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 14px; }
+.practice-loop { background: var(--bg4); border: 1px solid rgba(93,202,165,0.2); border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 14px; }
 .pl-label { font-family: var(--mono); font-size: 9px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
 .pl-step { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
 .pl-step:last-child { margin-bottom: 0; }
-.pl-num { width: 22px; height: 22px; border-radius: 50%; background: rgba(200,206,214,0.15); border: 1px solid rgba(200,206,214,0.3); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 9px; color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+.pl-num { width: 22px; height: 22px; border-radius: 50%; background: rgba(93,202,165,0.15); border: 1px solid rgba(93,202,165,0.3); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 9px; color: var(--teal); flex-shrink: 0; margin-top: 1px; }
 .pl-text { font-size: 13px; color: var(--text2); line-height: 1.6; flex: 1; }
 .pl-text strong { color: var(--teal2); font-weight: 600; }
 
@@ -287,7 +287,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .practice-session { display: none; }
 .practice-session.active { display: block; }
 .time-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
-.time-badge { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 3px; text-transform: uppercase; color: #0d0d0d; font-weight: 700; }
+.time-badge { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 3px; text-transform: uppercase; color: #0d0d0b; font-weight: 700; }
 .time-badge.morning { background: var(--gold); }
 .time-badge.midday  { background: var(--teal); }
 .time-badge.evening { background: var(--purple); }
@@ -305,86 +305,9 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .more-card-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 1px; }
 .more-card-desc { font-size: 12px; color: var(--text3); font-family: var(--mono); }
 .more-card-tag { font-family: var(--mono); font-size: 8px; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase; flex-shrink: 0; }
-.tag-active { background: rgba(200,206,214,0.15); color: var(--teal); }
-.tag-soon   { background: rgba(200,206,214,0.12); color: var(--gold); }
+.tag-active { background: rgba(93,202,165,0.15); color: var(--teal); }
+.tag-soon   { background: rgba(200,169,110,0.12); color: var(--gold); }
 .tag-future { background: rgba(255,255,255,0.05); color: var(--text3); }
-
-/* Silver on black — the editorial hierarchy and outlined panels of Life Atlas. */
-:root {
-  color-scheme: dark;
-  --bg: #050505; --bg2: #111111; --bg3: #191919; --bg4: #202020; --bg5: #282828;
-  --border: #303030; --border2: #484848;
-  --text: #ededed; --text2: #bcbcbc; --text3: #999999;
-  --gold: #d2d2d2; --gold2: #f2f2f2;
-  --teal: #c8c8c8; --teal2: #e4e4e4; --purple: #bcbcbc; --purple2: #dedede;
-  --coral: #c4c4c4; --amber: #b8b8b8; --amber2: #e0e0e0;
-  --sans: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --serif: Georgia, 'Times New Roman', serif;
-  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-  --r-sm: 8px; --r-md: 14px; --r-lg: 14px;
-}
-html, body { width: 100%; height: 100%; }
-body { font-size: 16px; line-height: 1.5; }
-/* Only the reading area scrolls; the bar and its safe-area background reach the bottom. */
-#app { width: 100%; height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; }
-#content { min-height: 0; flex: 1 1 0; scrollbar-color: var(--border2) var(--bg); }
-.app-header {
-  display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 5px 12px;
-  padding: 18px max(16px,calc((100% - 908px)/2),env(safe-area-inset-left)) 16px;
-  border-bottom-color: var(--border);
-}
-.app-header-label { grid-column: 1; font-size: 11px; letter-spacing: .15em; color: var(--text2); opacity: 1; }
-.app-header-logo { grid-column: 1; grid-row: 2; padding: 0; font-size: clamp(25px,4vw,36px); line-height: 1.2; letter-spacing: -.025em; white-space: normal; }
-.app-header-time { grid-column: 2; grid-row: 1 / 3; font-size: 12px; }
-.screen { width: 100%; max-width: 940px; margin: 0 auto; }
-.home-wrap, .wit-wrap, .practice-wrap, .more-wrap {
-  padding: 22px max(16px,env(safe-area-inset-right)) 28px max(16px,env(safe-area-inset-left));
-}
-.home-greeting { margin-bottom: 20px; }
-.home-greeting-time, .section-label { font-size: 11px; letter-spacing: .12em; }
-.home-greeting-text { font-size: clamp(28px,4vw,36px); letter-spacing: -.025em; white-space: pre-line; }
-.screen-header h2 { font-size: 27px; letter-spacing: -.02em; }
-.screen-header p { color: var(--text2); }
-.session-banner, .mahasutra-hero { background: linear-gradient(125deg,#252525,var(--bg2) 75%); border-color: #505050; padding: 18px; }
-.module-grid { gap: 10px; }
-.module-card { padding: 18px; min-width: 0; min-height: 148px; background: var(--bg2); }
-.module-name { font-size: 16px; line-height: 1.25; }
-.module-desc { font-family: var(--sans); font-size: 12px; line-height: 1.4; letter-spacing: 0; margin-top: 6px; }
-.module-icon, .more-card-icon { filter: grayscale(1); }
-.module-badge, .more-card-tag, .x-tag, .sutra-badge { font-size: 10px; }
-.session-banner-label, .v-label, .wbw-label { font-size: 10px; }
-.wit-tabs, .session-tabs { gap: 5px; border: 0; padding: 2px 0 4px; margin-bottom: 16px; }
-.wit-tab, .session-tab { min-height: 44px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; margin: 0; font-family: var(--sans); font-size: 13px; letter-spacing: 0; text-transform: none; background: var(--bg2); }
-.wit-tab.active, .session-tab.active { color: var(--gold2); border-color: var(--gold); background: #ffffff0d; }
-.x-hdr, .sutra-hdr { min-height: 52px; }
-.x-name, .sutra-title { min-width: 0; }
-.rhythm-strip { gap: 8px; }
-.rhythm-item { padding: 12px 4px; min-width: 0; }
-.rhythm-time { font-size: 10px; }
-.rhythm-item.current { background: #ffffff0d; }
-.bottom-nav {
-  width: 100%; min-height: calc(72px + var(--safe-b)); gap: 5px;
-  padding: 8px max(10px,calc((100% - 908px)/2),env(safe-area-inset-right)) calc(8px + var(--safe-b)) max(10px,calc((100% - 908px)/2),env(safe-area-inset-left));
-  background: var(--bg2); border-top: 1px solid var(--border2);
-}
-.nav-btn { min-width: 0; min-height: 48px; padding: 6px 2px; border: 1px solid transparent; border-radius: 8px; }
-.nav-label { font-family: var(--sans); font-size: 11px; letter-spacing: 0; text-transform: none; }
-.nav-btn.active { border-color: var(--gold); background: #ffffff0d; }
-.nav-btn.active .nav-label { color: var(--gold2); }
-button { color: inherit; touch-action: manipulation; }
-button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2); outline-offset: 3px; }
-.screen table { width: 100%; table-layout: fixed; }
-.screen td, .screen th { overflow-wrap: anywhere; }
-@media (hover: hover) {
-  .module-card:hover, .more-card:hover, .rhythm-item:hover, .x-hdr:hover, .sutra-hdr:hover { background: var(--bg3); border-color: var(--gold); }
-  .nav-btn:hover, .wit-tab:hover, .session-tab:hover { border-color: var(--gold); }
-}
-@media (min-width: 700px) { .module-grid { grid-template-columns: repeat(4,minmax(0,1fr)); } }
-@media (max-width: 380px) {
-  .module-card { padding: 14px; } .x-hdr, .sutra-hdr { padding: 12px; gap: 7px; }
-  .x-tag { white-space: normal; max-width: 80px; } .more-card { flex-wrap: wrap; }
-}
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
@@ -424,7 +347,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <div class="module-name">Witnessing</div>
               <div class="module-desc">Sutras · Practice · Scenarios</div>
             </div>
-            <div class="module-badge" style="background:rgba(200,206,214,0.15);color:var(--purple2);">Core</div>
+            <div class="module-badge" style="background:rgba(143,135,224,0.15);color:var(--purple2);">Core</div>
           </div>
           <div class="module-card" onclick="navigate('practice')">
             <div>
@@ -432,7 +355,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <div class="module-name">Daily Practice</div>
               <div class="module-desc">Mantra · Sanskrit · Verses</div>
             </div>
-            <div class="module-badge" style="background:rgba(200,206,214,0.15);color:var(--gold2);">Active</div>
+            <div class="module-badge" style="background:rgba(200,169,110,0.15);color:var(--gold2);">Active</div>
           </div>
           <div class="module-card" onclick="navigate('deities')">
             <div>
@@ -440,7 +363,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <div class="module-name">Devatā System</div>
               <div class="module-desc">Mantras · Sequence · Kula</div>
             </div>
-            <div class="module-badge" style="background:rgba(200,206,214,0.15);color:#a9a9a9;">Active</div>
+            <div class="module-badge" style="background:rgba(224,112,96,0.15);color:#F0997B;">Active</div>
           </div>
           <div class="module-card" onclick="navigate('sutras')">
             <div>
@@ -448,7 +371,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <div class="module-name">Chart Sutras</div>
               <div class="module-desc">Verses · Daily cycle · Recitation</div>
             </div>
-            <div class="module-badge" style="background:rgba(200,206,214,0.15);color:var(--gold2);">Active</div>
+            <div class="module-badge" style="background:rgba(200,169,110,0.15);color:var(--gold2);">Active</div>
           </div>
         </div>
 
@@ -545,9 +468,9 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
                 <em>Mind generates interpretations automatically → identification creates distortion (~40–70%) → witnessing inserts separation ("this is seen") → distortion drops (~30–60%) → reality perceived more directly.</em><br><br>
                 Outcome: not new knowledge but removal of misinterpretation → apparent clarity ↑ 2–3×.
               </div>
-              <div class="prob-row"><span class="prob-label">Identification (default)</span><div class="prob-track"><div class="prob-fill" style="width:75%;background:#727272"></div></div><span class="prob-val">~75%</span></div>
-              <div class="prob-row"><span class="prob-label">After witnessing insertion</span><div class="prob-track"><div class="prob-fill" style="width:25%;background:#b0b0b0"></div></div><span class="prob-val">~25%</span></div>
-              <div class="prob-row"><span class="prob-label">Clarity increase</span><div class="prob-track"><div class="prob-fill" style="width:80%;background:#808080"></div></div><span class="prob-val">2–3×</span></div>
+              <div class="prob-row"><span class="prob-label">Identification (default)</span><div class="prob-track"><div class="prob-fill" style="width:75%;background:#D85A30"></div></div><span class="prob-val">~75%</span></div>
+              <div class="prob-row"><span class="prob-label">After witnessing insertion</span><div class="prob-track"><div class="prob-fill" style="width:25%;background:#5DCAA5"></div></div><span class="prob-val">~25%</span></div>
+              <div class="prob-row"><span class="prob-label">Clarity increase</span><div class="prob-track"><div class="prob-fill" style="width:80%;background:#7F77DD"></div></div><span class="prob-val">2–3×</span></div>
             </div>
           </div>
 
@@ -577,7 +500,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
             <div class="pl-step"><div class="pl-num">1</div><div class="pl-text"><strong>Blank pause</strong> — your natural strength, already present</div></div>
             <div class="pl-step"><div class="pl-num">2</div><div class="pl-text"><strong>Recognition</strong> — "this too is seen" (1 second)</div></div>
             <div class="pl-step"><div class="pl-num">3</div><div class="pl-text"><strong>Natural action</strong> — act without overthinking</div></div>
-            <div class="pl-step" style="border-top:1px solid rgba(200,206,214,0.2);padding-top:10px;margin-top:4px;"><div class="pl-num" style="background:rgba(200,206,214,0.25);">✓</div><div class="pl-text" style="color:var(--teal2);font-size:12px;">85–95% effectiveness rating for your specific structure</div></div>
+            <div class="pl-step" style="border-top:1px solid rgba(93,202,165,0.2);padding-top:10px;margin-top:4px;"><div class="pl-num" style="background:rgba(93,202,165,0.25);">✓</div><div class="pl-text" style="color:var(--teal2);font-size:12px;">85–95% effectiveness rating for your specific structure</div></div>
           </div>
 
           <div class="sutra-card" style="margin-top:10px;">
@@ -591,13 +514,13 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
                 <em>Apply at:</em> decision points · emotional spikes · idle moments · before meetings · after difficult events<br><br>
                 <em>Frequency target:</em> 20–50 times/day (brief 1-second recognitions count)
               </div>
-              <div class="prob-row"><span class="prob-label">30–60 days</span><div class="prob-track"><div class="prob-fill" style="width:70%;background:#808080"></div></div><span class="prob-val">30→70%</span></div>
-              <div class="prob-row"><span class="prob-label">90–180 days</span><div class="prob-track"><div class="prob-fill" style="width:90%;background:#afafaf"></div></div><span class="prob-val">70→90%</span></div>
+              <div class="prob-row"><span class="prob-label">30–60 days</span><div class="prob-track"><div class="prob-fill" style="width:70%;background:#7F77DD"></div></div><span class="prob-val">30→70%</span></div>
+              <div class="prob-row"><span class="prob-label">90–180 days</span><div class="prob-track"><div class="prob-fill" style="width:90%;background:#AFA9EC"></div></div><span class="prob-val">70→90%</span></div>
               <div style="margin-top:14px;">
                 <div class="prob-label" style="min-width:unset;margin-bottom:8px;font-size:11px;color:var(--text2);">Three layers of practice depth:</div>
-                <div class="prob-row"><span class="prob-label">Micro (2 sec pauses)</span><div class="prob-track"><div class="prob-fill" style="width:60%;background:#b0b0b0"></div></div><span class="prob-val">Daily</span></div>
-                <div class="prob-row"><span class="prob-label">Mid (2–5 min sitting)</span><div class="prob-track"><div class="prob-fill" style="width:40%;background:#8f8f8f"></div></div><span class="prob-val">Sessions</span></div>
-                <div class="prob-row"><span class="prob-label">Macro (continuous background)</span><div class="prob-track"><div class="prob-fill" style="width:70%;background:#a7a7a7"></div></div><span class="prob-val">50–70%</span></div>
+                <div class="prob-row"><span class="prob-label">Micro (2 sec pauses)</span><div class="prob-track"><div class="prob-fill" style="width:60%;background:#5DCAA5"></div></div><span class="prob-val">Daily</span></div>
+                <div class="prob-row"><span class="prob-label">Mid (2–5 min sitting)</span><div class="prob-track"><div class="prob-fill" style="width:40%;background:#8F87E0"></div></div><span class="prob-val">Sessions</span></div>
+                <div class="prob-row"><span class="prob-label">Macro (continuous background)</span><div class="prob-track"><div class="prob-fill" style="width:70%;background:#EF9F27"></div></div><span class="prob-val">50–70%</span></div>
               </div>
             </div>
           </div>
@@ -626,7 +549,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <div class="s-english">Your intellect (80–90% refined) tries to objectify everything — even the witness. This creates an infinite recursive loop. The solution: don't ask "who sees?" again and again. Rest in "seeing is happening."</div>
               <div class="practice-loop" style="margin-top:10px;">
                 <div class="pl-label">When recursion starts — apply instantly</div>
-                <div class="pl-step"><div class="pl-num">✗</div><div class="pl-text" style="color:#727272;">Stop repeating "who sees? who sees that?"</div></div>
+                <div class="pl-step"><div class="pl-num">✗</div><div class="pl-text" style="color:#D85A30;">Stop repeating "who sees? who sees that?"</div></div>
                 <div class="pl-step"><div class="pl-num">✓</div><div class="pl-text"><strong>"Stop seeking, stay seeing"</strong> — 80–90% of loops dissolve</div></div>
                 <div class="pl-step"><div class="pl-num">✓</div><div class="pl-text">Rest in "this is seen" — no answer required</div></div>
               </div>
@@ -638,32 +561,32 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
         <div class="wit-section" id="ws-experience">
           <div class="info-box">The experience is subtle: nothing dramatic changes externally, but internally everything becomes clearer and less reactive. You will not gain something new — you will lose confusion. Clarity feels like simplicity, not intensity.</div>
 
-          <div class="stage-card" style="border-color:rgba(200,206,214,0.3);background:rgba(200,206,214,0.04);">
+          <div class="stage-card" style="border-color:rgba(93,202,165,0.3);background:rgba(93,202,165,0.04);">
             <div class="stage-num">Phase 1 · Intermittent</div>
             <div class="stage-title">Brief gaps where thoughts feel separate</div>
             <div class="stage-body">30–50% recognition. Brief pauses where thoughts feel separate. Unstable — comes and goes. Key signal: even one moment of "I notice this thought" counts.</div>
-            <span class="stage-signal" style="background:rgba(200,206,214,0.12);color:var(--teal);">30–50% recognition</span>
+            <span class="stage-signal" style="background:rgba(93,202,165,0.12);color:var(--teal);">30–50% recognition</span>
           </div>
 
-          <div class="stage-card" style="border-color:rgba(200,206,214,0.3);background:rgba(200,206,214,0.04);">
+          <div class="stage-card" style="border-color:rgba(143,135,224,0.3);background:rgba(143,135,224,0.04);">
             <div class="stage-num">Phase 2 · Stable</div>
             <div class="stage-title">Clear sense "I am not the thought"</div>
             <div class="stage-body">50–70% clarity. Reactivity drops. Clear sense of "I see thoughts" for 10–30 seconds. Emotional charge reduces ~50%. Decisions feel clearer. You are here or approaching.</div>
-            <span class="stage-signal" style="background:rgba(200,206,214,0.12);color:var(--purple2);">50–70% stability</span>
+            <span class="stage-signal" style="background:rgba(143,135,224,0.12);color:var(--purple2);">50–70% stability</span>
           </div>
 
-          <div class="stage-card" style="border-color:rgba(200,206,214,0.3);background:rgba(200,206,214,0.04);">
+          <div class="stage-card" style="border-color:rgba(200,169,110,0.3);background:rgba(200,169,110,0.04);">
             <div class="stage-num">Phase 3 · Continuous</div>
             <div class="stage-title">Background awareness persists while acting</div>
             <div class="stage-body">70–85% stability. Thoughts arise but don't dominate. Actions become natural. Decisions feel obvious rather than forced. 50–70% of the day witnessing is present without effort.</div>
-            <span class="stage-signal" style="background:rgba(200,206,214,0.12);color:var(--gold2);">70–85% stability</span>
+            <span class="stage-signal" style="background:rgba(200,169,110,0.12);color:var(--gold2);">70–85% stability</span>
           </div>
 
-          <div class="stage-card" style="border-color:rgba(200,206,214,0.3);background:rgba(200,206,214,0.04);">
+          <div class="stage-card" style="border-color:rgba(239,159,39,0.3);background:rgba(239,159,39,0.04);">
             <div class="stage-num">Phase 4 · Integration</div>
             <div class="stage-title">No effort to witness — it is the default context</div>
             <div class="stage-body">80–90%+ stability. Identity shifts from "I am thinking" to "thinking is happening in me." Causeless peace. Less effort, better timing. Life feels less controlled but more accurate.</div>
-            <span class="stage-signal" style="background:rgba(200,206,214,0.1);color:var(--amber2);">80–90%+ stability</span>
+            <span class="stage-signal" style="background:rgba(239,159,39,0.1);color:var(--amber2);">80–90%+ stability</span>
           </div>
 
           <div class="sutra-card" style="margin-top:4px;">
@@ -737,9 +660,9 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
             <div class="sutra-body">
               <div class="s-sanskrit">साक्षि सिद्धः कदा? — यदा (१) प्रतिक्रिया स्वतः विलम्बते,<br>(२) निर्णयः स्पष्टः भवति, (३) भावाः आगच्छन्ति गच्छन्ति च।</div>
               <div class="s-english">Witnessing confirmed when: (1) reactions slow down ~50%, (2) decisions become clearer 60→85%, (3) emotions come and go but don't consume you ~70%.</div>
-              <div class="prob-row" style="margin-top:12px;"><span class="prob-label">Reaction slowdown</span><div class="prob-track"><div class="prob-fill" style="width:50%;background:#b0b0b0"></div></div><span class="prob-val">~50%↓</span></div>
-              <div class="prob-row"><span class="prob-label">Decision clarity</span><div class="prob-track"><div class="prob-fill" style="width:85%;background:#808080"></div></div><span class="prob-val">60→85%</span></div>
-              <div class="prob-row"><span class="prob-label">Emotional non-consumption</span><div class="prob-track"><div class="prob-fill" style="width:70%;background:#a7a7a7"></div></div><span class="prob-val">~70%</span></div>
+              <div class="prob-row" style="margin-top:12px;"><span class="prob-label">Reaction slowdown</span><div class="prob-track"><div class="prob-fill" style="width:50%;background:#5DCAA5"></div></div><span class="prob-val">~50%↓</span></div>
+              <div class="prob-row"><span class="prob-label">Decision clarity</span><div class="prob-track"><div class="prob-fill" style="width:85%;background:#7F77DD"></div></div><span class="prob-val">60→85%</span></div>
+              <div class="prob-row"><span class="prob-label">Emotional non-consumption</span><div class="prob-track"><div class="prob-fill" style="width:70%;background:#EF9F27"></div></div><span class="prob-val">~70%</span></div>
             </div>
           </div>
 
@@ -782,8 +705,8 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <div class="s-sanskrit">त्वं "witness-essential subtype" — यत्र साक्षि-मार्ग-आवश्यकता ७०–९०%।<br>तव बुद्धिः रेखीय-उपयोगाय न, सूक्ष्म-प्रतिबिम्बाय निर्मिता।</div>
               <div class="s-english">Your structure is a "witness-essential subtype" — need for this path is ~70–90%. Your intellect is not built for purely linear utility but for subtle reflection. Even your strengths become burdens without witnessing as the ground.</div>
               <div class="prob-row" style="margin-top:12px;"><span class="prob-label">General population benefit</span><div class="prob-track"><div class="prob-fill" style="width:90%;background:var(--text3)"></div></div><span class="prob-val">80–100%</span></div>
-              <div class="prob-row"><span class="prob-label">Primary path need</span><div class="prob-track"><div class="prob-fill" style="width:20%;background:#808080"></div></div><span class="prob-val">10–20%</span></div>
-              <div class="prob-row"><span class="prob-label">Your necessity level</span><div class="prob-track"><div class="prob-fill" style="width:80%;background:#a7a7a7"></div></div><span class="prob-val">70–90%</span></div>
+              <div class="prob-row"><span class="prob-label">Primary path need</span><div class="prob-track"><div class="prob-fill" style="width:20%;background:#7F77DD"></div></div><span class="prob-val">10–20%</span></div>
+              <div class="prob-row"><span class="prob-label">Your necessity level</span><div class="prob-track"><div class="prob-fill" style="width:80%;background:#EF9F27"></div></div><span class="prob-val">70–90%</span></div>
             </div>
           </div>
         </div>
@@ -858,58 +781,58 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </marker>
           </defs>
-          <ellipse cx="340" cy="190" rx="170" ry="160" fill="#808080" fill-opacity="0.06"/>
-          <circle cx="340" cy="190" r="105" fill="none" stroke="#808080" stroke-width="0.75" stroke-dasharray="4 7" opacity="0.3"/>
-          <circle cx="340" cy="190" r="148" fill="none" stroke="#808080" stroke-width="0.5" stroke-dasharray="3 9" opacity="0.18"/>
-          <line x1="340" y1="190" x2="120" y2="55"  stroke="#808080" stroke-width="0.5" opacity="0.15"/>
-          <line x1="340" y1="190" x2="560" y2="55"  stroke="#808080" stroke-width="0.5" opacity="0.15"/>
-          <line x1="340" y1="190" x2="120" y2="325" stroke="#808080" stroke-width="0.5" opacity="0.15"/>
-          <line x1="340" y1="190" x2="560" y2="325" stroke="#808080" stroke-width="0.5" opacity="0.15"/>
-          <line x1="340" y1="190" x2="340" y2="30"  stroke="#808080" stroke-width="0.5" opacity="0.15"/>
-          <line x1="340" y1="190" x2="340" y2="350" stroke="#808080" stroke-width="0.5" opacity="0.15"/>
-          <line x1="340" y1="190" x2="195" y2="190" stroke="#808080" stroke-width="0.5" opacity="0.15"/>
-          <line x1="340" y1="190" x2="485" y2="190" stroke="#808080" stroke-width="0.5" opacity="0.15"/>
-          <path d="M 252 160 Q 298 98 318 82"  fill="none" stroke="#a0a0a0" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.5" marker-end="url(#farr)"/>
-          <path d="M 364 55  Q 428 98 444 162" fill="none" stroke="#a0a0a0" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.5" marker-end="url(#farr)"/>
-          <path d="M 468 220 Q 432 294 392 322" fill="none" stroke="#a0a0a0" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.5" marker-end="url(#farr)"/>
-          <path d="M 290 328 Q 244 292 220 220" fill="none" stroke="#a0a0a0" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.5" marker-end="url(#farr)"/>
-          <line x1="136" y1="90"  x2="188" y2="162" stroke="#7b7b7b" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.5"/>
-          <line x1="136" y1="290" x2="186" y2="222" stroke="#9b9b9b" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.5"/>
-          <line x1="544" y1="90"  x2="492" y2="162" stroke="#8f8f8f" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.5"/>
-          <line x1="544" y1="290" x2="492" y2="222" stroke="#969696" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.5"/>
-          <circle id="f-pulse" cx="214" cy="190" r="54" fill="none" stroke="#b0b0b0" stroke-width="1.5" opacity="0.3"/>
-          <circle id="fn0" class="node-hit" cx="214" cy="190" r="44" fill="#808080" fill-opacity="0.25" stroke="#b0b0b0" stroke-width="1.5"/>
-          <text x="214" y="183" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#d1d1d1" font-weight="600" pointer-events="none">causal</text>
-          <text x="214" y="197" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b0b0b0" pointer-events="none">perception</text>
-          <text x="214" y="210" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#808080" pointer-events="none">0 – 30</text>
-          <circle id="fn1" class="node-hit" cx="340" cy="334" r="44" fill="#555555" fill-opacity="0.25" stroke="#b0b0b0" stroke-width="1.5"/>
-          <text x="340" y="327" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#d0d0d0" font-weight="600" pointer-events="none">timing</text>
-          <text x="340" y="341" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b0b0b0" pointer-events="none">awareness</text>
-          <text x="340" y="354" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#7e7e7e" pointer-events="none">30 – 40</text>
-          <circle id="fn2" class="node-hit" cx="466" cy="190" r="44" fill="#565656" fill-opacity="0.25" stroke="#cccccc" stroke-width="1.5"/>
-          <text x="466" y="183" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cccccc" font-weight="600" pointer-events="none">samyama</text>
-          <text x="466" y="197" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#a7a7a7" pointer-events="none">matures</text>
-          <text x="466" y="210" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#7d7d7d" pointer-events="none">40 – 55</text>
-          <circle id="fn3" class="node-hit" cx="340" cy="56" r="44" fill="#3c3c3c" fill-opacity="0.25" stroke="#afafaf" stroke-width="1.5"/>
-          <text x="340" y="47" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#cfcfcf" font-weight="600" pointer-events="none">continuous</text>
-          <text x="340" y="61" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#afafaf" pointer-events="none">witnessing</text>
-          <text x="340" y="74" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#808080" pointer-events="none">55+</text>
-          <circle id="fn4" class="node-hit" cx="340" cy="190" r="38" fill="#262626" fill-opacity="0.5" stroke="#808080" stroke-width="1.5"/>
-          <circle cx="340" cy="190" r="28" fill="none" stroke="#545454" stroke-width="0.75" opacity="0.5"/>
-          <text x="340" y="184" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#cfcfcf" font-weight="600" pointer-events="none">witness</text>
-          <text x="340" y="199" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#808080" opacity="0.85" pointer-events="none">tap me</text>
-          <circle id="fn5" class="node-hit" cx="112" cy="68" r="26" fill="#292929" fill-opacity="0.45" stroke="#a9a9a9" stroke-width="1.25"/>
-          <text x="112" y="63" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#cdcdcd" font-weight="600" pointer-events="none">risks</text>
-          <text x="112" y="78" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#a9a9a9" pointer-events="none">&amp; limits</text>
-          <circle id="fn6" class="node-hit" cx="112" cy="312" r="26" fill="#404040" fill-opacity="0.45" stroke="#b0b0b0" stroke-width="1.25"/>
-          <text x="112" y="307" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#d1d1d1" font-weight="600" pointer-events="none">daily</text>
-          <text x="112" y="322" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#b0b0b0" pointer-events="none">practice</text>
-          <circle id="fn7" class="node-hit" cx="568" cy="68" r="26" fill="#262626" fill-opacity="0.5" stroke="#afafaf" stroke-width="1.25"/>
-          <text x="568" y="63" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#cfcfcf" font-weight="600" pointer-events="none">samyama</text>
-          <text x="568" y="78" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#afafaf" pointer-events="none">mechanics</text>
-          <circle id="fn8" class="node-hit" cx="568" cy="312" r="26" fill="#282828" fill-opacity="0.5" stroke="#cccccc" stroke-width="1.25"/>
-          <text x="568" y="307" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#cccccc" font-weight="600" pointer-events="none">post</text>
-          <text x="568" y="322" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#a7a7a7" pointer-events="none">2032</text>
+          <ellipse cx="340" cy="190" rx="170" ry="160" fill="#7F77DD" fill-opacity="0.06"/>
+          <circle cx="340" cy="190" r="105" fill="none" stroke="#7F77DD" stroke-width="0.75" stroke-dasharray="4 7" opacity="0.3"/>
+          <circle cx="340" cy="190" r="148" fill="none" stroke="#7F77DD" stroke-width="0.5" stroke-dasharray="3 9" opacity="0.18"/>
+          <line x1="340" y1="190" x2="120" y2="55"  stroke="#7F77DD" stroke-width="0.5" opacity="0.15"/>
+          <line x1="340" y1="190" x2="560" y2="55"  stroke="#7F77DD" stroke-width="0.5" opacity="0.15"/>
+          <line x1="340" y1="190" x2="120" y2="325" stroke="#7F77DD" stroke-width="0.5" opacity="0.15"/>
+          <line x1="340" y1="190" x2="560" y2="325" stroke="#7F77DD" stroke-width="0.5" opacity="0.15"/>
+          <line x1="340" y1="190" x2="340" y2="30"  stroke="#7F77DD" stroke-width="0.5" opacity="0.15"/>
+          <line x1="340" y1="190" x2="340" y2="350" stroke="#7F77DD" stroke-width="0.5" opacity="0.15"/>
+          <line x1="340" y1="190" x2="195" y2="190" stroke="#7F77DD" stroke-width="0.5" opacity="0.15"/>
+          <line x1="340" y1="190" x2="485" y2="190" stroke="#7F77DD" stroke-width="0.5" opacity="0.15"/>
+          <path d="M 252 160 Q 298 98 318 82"  fill="none" stroke="#9F99E8" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.5" marker-end="url(#farr)"/>
+          <path d="M 364 55  Q 428 98 444 162" fill="none" stroke="#9F99E8" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.5" marker-end="url(#farr)"/>
+          <path d="M 468 220 Q 432 294 392 322" fill="none" stroke="#9F99E8" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.5" marker-end="url(#farr)"/>
+          <path d="M 290 328 Q 244 292 220 220" fill="none" stroke="#9F99E8" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.5" marker-end="url(#farr)"/>
+          <line x1="136" y1="90"  x2="188" y2="162" stroke="#E86040" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.5"/>
+          <line x1="136" y1="290" x2="186" y2="222" stroke="#2DBD8A" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.5"/>
+          <line x1="544" y1="90"  x2="492" y2="162" stroke="#8F87E0" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.5"/>
+          <line x1="544" y1="290" x2="492" y2="222" stroke="#D4901A" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.5"/>
+          <circle id="f-pulse" cx="214" cy="190" r="54" fill="none" stroke="#5DCAA5" stroke-width="1.5" opacity="0.3"/>
+          <circle id="fn0" class="node-hit" cx="214" cy="190" r="44" fill="#1D9E75" fill-opacity="0.25" stroke="#5DCAA5" stroke-width="1.5"/>
+          <text x="214" y="183" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#9FE1CB" font-weight="600" pointer-events="none">causal</text>
+          <text x="214" y="197" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#5DCAA5" pointer-events="none">perception</text>
+          <text x="214" y="210" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#1D9E75" pointer-events="none">0 – 30</text>
+          <circle id="fn1" class="node-hit" cx="340" cy="334" r="44" fill="#185FA5" fill-opacity="0.25" stroke="#85B7EB" stroke-width="1.5"/>
+          <text x="340" y="327" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#B5D4F4" font-weight="600" pointer-events="none">timing</text>
+          <text x="340" y="341" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#85B7EB" pointer-events="none">awareness</text>
+          <text x="340" y="354" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#378ADD" pointer-events="none">30 – 40</text>
+          <circle id="fn2" class="node-hit" cx="466" cy="190" r="44" fill="#854F0B" fill-opacity="0.25" stroke="#FAC775" stroke-width="1.5"/>
+          <text x="466" y="183" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#FAC775" font-weight="600" pointer-events="none">samyama</text>
+          <text x="466" y="197" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#EF9F27" pointer-events="none">matures</text>
+          <text x="466" y="210" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#BA7517" pointer-events="none">40 – 55</text>
+          <circle id="fn3" class="node-hit" cx="340" cy="56" r="44" fill="#3C3489" fill-opacity="0.25" stroke="#AFA9EC" stroke-width="1.5"/>
+          <text x="340" y="47" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#CECBF6" font-weight="600" pointer-events="none">continuous</text>
+          <text x="340" y="61" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#AFA9EC" pointer-events="none">witnessing</text>
+          <text x="340" y="74" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#7F77DD" pointer-events="none">55+</text>
+          <circle id="fn4" class="node-hit" cx="340" cy="190" r="38" fill="#26215C" fill-opacity="0.5" stroke="#7F77DD" stroke-width="1.5"/>
+          <circle cx="340" cy="190" r="28" fill="none" stroke="#534AB7" stroke-width="0.75" opacity="0.5"/>
+          <text x="340" y="184" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#CECBF6" font-weight="600" pointer-events="none">witness</text>
+          <text x="340" y="199" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#7F77DD" opacity="0.85" pointer-events="none">tap me</text>
+          <circle id="fn5" class="node-hit" cx="112" cy="68" r="26" fill="#71170B" fill-opacity="0.45" stroke="#F0997B" stroke-width="1.25"/>
+          <text x="112" y="63" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#F5C4B3" font-weight="600" pointer-events="none">risks</text>
+          <text x="112" y="78" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#F0997B" pointer-events="none">&amp; limits</text>
+          <circle id="fn6" class="node-hit" cx="112" cy="312" r="26" fill="#085041" fill-opacity="0.45" stroke="#5DCAA5" stroke-width="1.25"/>
+          <text x="112" y="307" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#9FE1CB" font-weight="600" pointer-events="none">daily</text>
+          <text x="112" y="322" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#5DCAA5" pointer-events="none">practice</text>
+          <circle id="fn7" class="node-hit" cx="568" cy="68" r="26" fill="#26215C" fill-opacity="0.5" stroke="#AFA9EC" stroke-width="1.25"/>
+          <text x="568" y="63" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#CECBF6" font-weight="600" pointer-events="none">samyama</text>
+          <text x="568" y="78" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#AFA9EC" pointer-events="none">mechanics</text>
+          <circle id="fn8" class="node-hit" cx="568" cy="312" r="26" fill="#412402" fill-opacity="0.5" stroke="#FAC775" stroke-width="1.25"/>
+          <text x="568" y="307" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#FAC775" font-weight="600" pointer-events="none">post</text>
+          <text x="568" y="322" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#EF9F27" pointer-events="none">2032</text>
         </svg>
         <div class="field-hint" id="f-hint">Tap any node to explore</div>
         <div class="field-panel" id="f-panel">
@@ -1181,7 +1104,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
         <!-- Operational rule banner -->
         <div class="practice-loop" style="margin-bottom:18px;">
           <div class="pl-label">Operational rule · वर्षप्र४ता०न–नत्रम्</div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--gold);">70</div><div class="pl-text"><strong>Awareness quality</strong> (≈70%) dominates ritual correctness (≈30%). The internal state of the witness is the primary driver of efficacy.</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(200,169,110,0.15);border-color:rgba(200,169,110,0.3);color:var(--gold);">70</div><div class="pl-text"><strong>Awareness quality</strong> (≈70%) dominates ritual correctness (≈30%). The internal state of the witness is the primary driver of efficacy.</div></div>
           <div class="pl-step"><div class="pl-num" style="background:rgba(255,255,255,0.05);border-color:var(--border2);color:var(--text3);">30</div><div class="pl-text"><strong>Ritual consistency</strong> matters but is secondary. System degrades only when both practice and witnessing drop simultaneously.</div></div>
         </div>
 
@@ -1223,8 +1146,8 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <strong>How to use:</strong> Rest in the pre-thought gap during each repetition. The mantra is recognition of the witness-essence — not petition for an external result. Over-intensity increases distortion risk (40–60%).<br><br>
               <strong>Dakṣiṇāmūrti is:</strong> Śiva seated facing south, teaching in silence. He is the guru of all gurus — his teaching is the absence of words, the direct transmission of the witnessing state. Your iṣṭa is precisely calibrated to your witness-essential structure.
             </div>
-            <div class="prob-row" style="margin-top:12px;"><span class="prob-label">Witness-realization efficacy</span><div class="prob-track"><div class="prob-fill" style="width:85%;background:#808080"></div></div><span class="prob-val">80–90%</span></div>
-            <div class="prob-row"><span class="prob-label">Over-intensity distortion risk</span><div class="prob-track"><div class="prob-fill" style="width:50%;background:#727272"></div></div><span class="prob-val">40–60%</span></div>
+            <div class="prob-row" style="margin-top:12px;"><span class="prob-label">Witness-realization efficacy</span><div class="prob-track"><div class="prob-fill" style="width:85%;background:#7F77DD"></div></div><span class="prob-val">80–90%</span></div>
+            <div class="prob-row"><span class="prob-label">Over-intensity distortion risk</span><div class="prob-track"><div class="prob-fill" style="width:50%;background:#D85A30"></div></div><span class="prob-val">40–60%</span></div>
           </div>
         </div>
 
@@ -1241,19 +1164,19 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
             <div class="practice-loop">
               <div class="pl-label">Sequence — in order</div>
               <div class="pl-step">
-                <div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--coral);">1</div>
+                <div class="pl-num" style="background:rgba(224,112,96,0.15);border-color:rgba(224,112,96,0.3);color:var(--coral);">1</div>
                 <div class="pl-text"><strong>Yoga Narasimha</strong> — ×11 · Obstacle-dissolution (75–85%)</div>
               </div>
               <div class="pl-step">
-                <div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--amber2);">2</div>
+                <div class="pl-num" style="background:rgba(212,144,26,0.15);border-color:rgba(212,144,26,0.3);color:var(--amber2);">2</div>
                 <div class="pl-text"><strong>Aṅgāla Parameśvarī</strong> — ×5–11 · Energy cleansing + boundaries (78–84%)</div>
               </div>
               <div class="pl-step">
-                <div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--purple2);">3</div>
+                <div class="pl-num" style="background:rgba(143,135,224,0.15);border-color:rgba(143,135,224,0.3);color:var(--purple2);">3</div>
                 <div class="pl-text"><strong>Dakṣiṇāmūrti</strong> — ×21 · Witness-realization (80–90%)</div>
               </div>
               <div class="pl-step">
-                <div class="pl-num" style="background:rgba(200,206,214,0.12);border-color:rgba(200,206,214,0.25);color:var(--teal);">+</div>
+                <div class="pl-num" style="background:rgba(93,202,165,0.12);border-color:rgba(93,202,165,0.25);color:var(--teal);">+</div>
                 <div class="pl-text"><strong>Monday nights:</strong> Śiva mantra ×21–54 — internal pressure release</div>
               </div>
             </div>
@@ -1319,9 +1242,9 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <strong>Practical rule:</strong> If you miss a mantra session, the witness-gap micro-practice (1-second "this is seen") is sufficient to maintain baseline alignment. Ritual is the structure; witnessing is the substrate. The substrate is never absent — only unrecognized.<br><br>
               <strong>Do not accumulate guilt</strong> about missed ritual counts. The system is designed to self-correct through the witnessing layer, not through compensatory repetitions.
             </div>
-            <div class="prob-row" style="margin-top:12px;"><span class="prob-label">System with witnessing intact</span><div class="prob-track"><div class="prob-fill" style="width:90%;background:#808080"></div></div><span class="prob-val">~90%</span></div>
-            <div class="prob-row"><span class="prob-label">System if rule-centered only</span><div class="prob-track"><div class="prob-fill" style="width:65%;background:#a7a7a7"></div></div><span class="prob-val">60–70%</span></div>
-            <div class="prob-row"><span class="prob-label">Simultaneous drop risk</span><div class="prob-track"><div class="prob-fill" style="width:65%;background:#727272"></div></div><span class="prob-val">60–70%</span></div>
+            <div class="prob-row" style="margin-top:12px;"><span class="prob-label">System with witnessing intact</span><div class="prob-track"><div class="prob-fill" style="width:90%;background:#7F77DD"></div></div><span class="prob-val">~90%</span></div>
+            <div class="prob-row"><span class="prob-label">System if rule-centered only</span><div class="prob-track"><div class="prob-fill" style="width:65%;background:#EF9F27"></div></div><span class="prob-val">60–70%</span></div>
+            <div class="prob-row"><span class="prob-label">Simultaneous drop risk</span><div class="prob-track"><div class="prob-fill" style="width:65%;background:#D85A30"></div></div><span class="prob-val">60–70%</span></div>
           </div>
         </div>
 
@@ -1365,10 +1288,10 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
         <!-- Execution rule -->
         <div class="practice-loop" style="margin-bottom:18px;">
           <div class="pl-label">Correct execution rule — sequence determines outcome (30–40% difference)</div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--purple2);">1</div><div class="pl-text"><strong>Awareness</strong> (sākṣi) — establish the witness first</div></div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--gold);">2</div><div class="pl-text"><strong>Clarity</strong> (buddhi-śuddhi) — illuminate the intellect</div></div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.12);border-color:rgba(200,206,214,0.25);color:var(--teal);">3</div><div class="pl-text"><strong>Equanimity</strong> (samatva) — stabilize in action</div></div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.12);border-color:rgba(200,206,214,0.25);color:var(--amber2);">4</div><div class="pl-text"><strong>Detachment</strong> (vairāgya) — release outcome-grip</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(143,135,224,0.15);border-color:rgba(143,135,224,0.3);color:var(--purple2);">1</div><div class="pl-text"><strong>Awareness</strong> (sākṣi) — establish the witness first</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(200,169,110,0.15);border-color:rgba(200,169,110,0.3);color:var(--gold);">2</div><div class="pl-text"><strong>Clarity</strong> (buddhi-śuddhi) — illuminate the intellect</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(93,202,165,0.12);border-color:rgba(93,202,165,0.25);color:var(--teal);">3</div><div class="pl-text"><strong>Equanimity</strong> (samatva) — stabilize in action</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(212,144,26,0.12);border-color:rgba(212,144,26,0.25);color:var(--amber2);">4</div><div class="pl-text"><strong>Detachment</strong> (vairāgya) — release outcome-grip</div></div>
           <div class="pl-step"><div class="pl-num" style="background:rgba(255,255,255,0.07);border-color:var(--border2);color:var(--text3);">5</div><div class="pl-text"><strong>Stillness</strong> (antarmukhatā) — dissolve into source</div></div>
         </div>
 
@@ -1386,9 +1309,9 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
           <div class="info-box" style="margin-bottom:16px;"><strong>Anchor + Clarity</strong> — facing east, a few steady breaths, then this sequence. Non-negotiable core: Kena + Gāyatrī. If reversed, effect drops significantly. Your system needs witness → clarity → action.</div>
           <div class="practice-loop" style="margin-bottom:16px;">
             <div class="pl-label">Morning sequence</div>
-            <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--purple2);">1</div><div class="pl-text"><strong>Kena Upaniṣad 1.2</strong> — ×3–5 → witness-awareness (85%)</div></div>
-            <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--gold);">2</div><div class="pl-text"><strong>Gāyatrī mantra</strong> — ×108 → illuminates intellect (85–88%)</div></div>
-            <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.12);border-color:rgba(200,206,214,0.25);color:var(--teal);">3</div><div class="pl-text"><strong>Bhagavad Gītā 2.48</strong> — ×3 → equanimity in action (80–85%)</div></div>
+            <div class="pl-step"><div class="pl-num" style="background:rgba(143,135,224,0.15);border-color:rgba(143,135,224,0.3);color:var(--purple2);">1</div><div class="pl-text"><strong>Kena Upaniṣad 1.2</strong> — ×3–5 → witness-awareness (85%)</div></div>
+            <div class="pl-step"><div class="pl-num" style="background:rgba(200,169,110,0.15);border-color:rgba(200,169,110,0.3);color:var(--gold);">2</div><div class="pl-text"><strong>Gāyatrī mantra</strong> — ×108 → illuminates intellect (85–88%)</div></div>
+            <div class="pl-step"><div class="pl-num" style="background:rgba(93,202,165,0.12);border-color:rgba(93,202,165,0.25);color:var(--teal);">3</div><div class="pl-text"><strong>Bhagavad Gītā 2.48</strong> — ×3 → equanimity in action (80–85%)</div></div>
           </div>
 
           <div class="sutra-card">
@@ -1444,7 +1367,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               </tbody></table>
               <div class="transl"><strong>Translation:</strong> Established in yoga, perform your actions, casting off attachment, remaining the same in success and failure — equanimity is called yoga.</div>
               <div class="s-insight"><strong>Chart alignment:</strong> Anchors your high-intensity energy into a stable, non-reactive center. Recite ×3 after Gāyatrī — it bridges witness-awareness into the day's actions, preventing intensity from becoming distortion.</div>
-              <div class="prob-row" style="margin-top:12px;"><span class="prob-label">Equanimity stabilization</span><div class="prob-track"><div class="prob-fill" style="width:82%;background:#808080"></div></div><span class="prob-val">80–85%</span></div>
+              <div class="prob-row" style="margin-top:12px;"><span class="prob-label">Equanimity stabilization</span><div class="prob-track"><div class="prob-fill" style="width:82%;background:#7F77DD"></div></div><span class="prob-val">80–85%</span></div>
             </div>
           </div>
         </div>
@@ -1614,9 +1537,9 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
 
           <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 16px;">
             <div class="section-label" style="margin-bottom:8px;">Weighting note</div>
-            <div class="prob-row"><span class="prob-label">Vedic source weight</span><div class="prob-track"><div class="prob-fill" style="width:32%;background:#808080"></div></div><span class="prob-val">32%</span></div>
-            <div class="prob-row"><span class="prob-label">System refinement weight</span><div class="prob-track"><div class="prob-fill" style="width:68%;background:#a7a7a7"></div></div><span class="prob-val">68%</span></div>
-            <div class="prob-row"><span class="prob-label">Witness validation</span><div class="prob-track"><div class="prob-fill" style="width:100%;background:#b0b0b0"></div></div><span class="prob-val">100%</span></div>
+            <div class="prob-row"><span class="prob-label">Vedic source weight</span><div class="prob-track"><div class="prob-fill" style="width:32%;background:#7F77DD"></div></div><span class="prob-val">32%</span></div>
+            <div class="prob-row"><span class="prob-label">System refinement weight</span><div class="prob-track"><div class="prob-fill" style="width:68%;background:#EF9F27"></div></div><span class="prob-val">68%</span></div>
+            <div class="prob-row"><span class="prob-label">Witness validation</span><div class="prob-track"><div class="prob-fill" style="width:100%;background:#5DCAA5"></div></div><span class="prob-val">100%</span></div>
             <div style="font-size:12px;color:var(--text3);margin-top:10px;font-family:var(--mono);">±5–15% adjustment for multi-system agreement</div>
           </div>
         </div>
@@ -1639,18 +1562,18 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
 
         <div class="practice-loop" style="margin-bottom:20px;">
           <div class="pl-label">The correct inner sequence — same as daily practice</div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--purple2);">1</div><div class="pl-text"><strong>Stabilization</strong> — Yoga Sūtra (44–47) · vessel-building before accumulation</div></div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.15);border-color:rgba(200,206,214,0.3);color:var(--gold);">2</div><div class="pl-text"><strong>Action</strong> — Gītā (44–47) · keeps method from becoming brittle</div></div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.12);border-color:rgba(200,206,214,0.25);color:var(--teal);">3</div><div class="pl-text"><strong>Recognition</strong> — Kena (47–50) · identity-anchor, only after stability</div></div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.12);border-color:rgba(200,206,214,0.25);color:var(--amber2);">4</div><div class="pl-text"><strong>Bridge</strong> — Ātmabodha (47–50) · ordered Advaita understanding</div></div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.12);border-color:rgba(200,206,214,0.25);color:var(--coral);">5</div><div class="pl-text"><strong>Discrimination</strong> — Vivekacūḍāmaṇi + Kaṭha (50–55) · purifying judgment</div></div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.2);border-color:rgba(200,206,214,0.4);color:var(--purple2);">6</div><div class="pl-text"><strong>Non-dual shock</strong> — Aṣṭāvakra (55–60) · only after witness matures</div></div>
-          <div class="pl-step"><div class="pl-num" style="background:rgba(200,206,214,0.2);border-color:rgba(200,206,214,0.4);color:var(--gold2);">7</div><div class="pl-text"><strong>Compression</strong> — Māṇḍūkya (58–62) · after ripening, not early brilliance</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(143,135,224,0.15);border-color:rgba(143,135,224,0.3);color:var(--purple2);">1</div><div class="pl-text"><strong>Stabilization</strong> — Yoga Sūtra (44–47) · vessel-building before accumulation</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(200,169,110,0.15);border-color:rgba(200,169,110,0.3);color:var(--gold);">2</div><div class="pl-text"><strong>Action</strong> — Gītā (44–47) · keeps method from becoming brittle</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(93,202,165,0.12);border-color:rgba(93,202,165,0.25);color:var(--teal);">3</div><div class="pl-text"><strong>Recognition</strong> — Kena (47–50) · identity-anchor, only after stability</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(212,144,26,0.12);border-color:rgba(212,144,26,0.25);color:var(--amber2);">4</div><div class="pl-text"><strong>Bridge</strong> — Ātmabodha (47–50) · ordered Advaita understanding</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(224,112,96,0.12);border-color:rgba(224,112,96,0.25);color:var(--coral);">5</div><div class="pl-text"><strong>Discrimination</strong> — Vivekacūḍāmaṇi + Kaṭha (50–55) · purifying judgment</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(143,135,224,0.2);border-color:rgba(143,135,224,0.4);color:var(--purple2);">6</div><div class="pl-text"><strong>Non-dual shock</strong> — Aṣṭāvakra (55–60) · only after witness matures</div></div>
+          <div class="pl-step"><div class="pl-num" style="background:rgba(200,169,110,0.2);border-color:rgba(200,169,110,0.4);color:var(--gold2);">7</div><div class="pl-text"><strong>Compression</strong> — Māṇḍūkya (58–62) · after ripening, not early brilliance</div></div>
           <div class="pl-step"><div class="pl-num" style="background:rgba(255,255,255,0.12);border-color:var(--border2);color:var(--text2);">8</div><div class="pl-text"><strong>Transmission</strong> — Dakṣiṇāmūrti Stotra + Upadeśa Sāhasrī (62+) · late-life home</div></div>
         </div>
 
         <!-- PHASE 1: 44–47 -->
-        <div style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;padding:6px 12px;background:rgba(200,206,214,0.08);border-radius:var(--r-sm);border:1px solid rgba(200,206,214,0.2);">Phase 1 · Ages 44–47 · Vessel-building</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;padding:6px 12px;background:rgba(200,169,110,0.08);border-radius:var(--r-sm);border:1px solid rgba(200,169,110,0.2);">Phase 1 · Ages 44–47 · Vessel-building</div>
 
         <div class="sutra-card">
           <div class="sutra-hdr" onclick="toggleSutra(this)">
@@ -1704,7 +1627,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
         </div>
 
         <!-- PHASE 2: 47–50 -->
-        <div style="font-family:var(--mono);font-size:9px;color:var(--purple);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(200,206,214,0.08);border-radius:var(--r-sm);border:1px solid rgba(200,206,214,0.2);">Phase 2 · Ages 47–50 · Witness-recognition</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--purple);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(143,135,224,0.08);border-radius:var(--r-sm);border:1px solid rgba(143,135,224,0.2);">Phase 2 · Ages 47–50 · Witness-recognition</div>
 
         <div class="sutra-card">
           <div class="sutra-hdr" onclick="toggleSutra(this)">
@@ -1742,7 +1665,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
         </div>
 
         <!-- PHASE 3: 50–55 -->
-        <div style="font-family:var(--mono);font-size:9px;color:var(--coral);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(200,206,214,0.08);border-radius:var(--r-sm);border:1px solid rgba(200,206,214,0.2);">Phase 3 · Ages 50–55 · Discrimination</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--coral);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(224,112,96,0.08);border-radius:var(--r-sm);border:1px solid rgba(224,112,96,0.2);">Phase 3 · Ages 50–55 · Discrimination</div>
 
         <div class="sutra-card">
           <div class="sutra-hdr" onclick="toggleSutra(this)">
@@ -1788,7 +1711,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
         </div>
 
         <!-- PHASE 4: 55–60 -->
-        <div style="font-family:var(--mono);font-size:9px;color:var(--purple2);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(200,206,214,0.12);border-radius:var(--r-sm);border:1px solid rgba(200,206,214,0.3);">Phase 4 · Ages 55–60 · Non-dual shock</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--purple2);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(143,135,224,0.12);border-radius:var(--r-sm);border:1px solid rgba(143,135,224,0.3);">Phase 4 · Ages 55–60 · Non-dual shock</div>
 
         <div class="sutra-card">
           <div class="sutra-hdr" onclick="toggleSutra(this)">
@@ -1803,7 +1726,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
               <strong>Sections:</strong> Read fully, but slowly — not as a single burst<br><br>
               <strong>Why delayed:</strong> This is not gradual instruction but a rapid loosening of the ego-knot. When the vessel is prepared it is medicine; when unprepared it can become destabilizing. Therefore delayed reading is best. This is your first explicitly nondual shock text, but only after witness and discrimination have matured.
             </div>
-            <div class="scenario-card" style="margin-top:12px;border-color:rgba(200,206,214,0.3);">
+            <div class="scenario-card" style="margin-top:12px;border-color:rgba(143,135,224,0.3);">
               <div class="sc-label">Warning</div>
               <div class="sc-body" style="font-size:13px;">Reading this text before Phase 3 is complete risks intellectual appropriation of nondual language without embodied stability. The text will seem to confirm what you already think rather than dissolving what you are.</div>
             </div>
@@ -1812,7 +1735,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
         </div>
 
         <!-- PHASE 5: 58–62 -->
-        <div style="font-family:var(--mono);font-size:9px;color:var(--gold2);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(200,206,214,0.12);border-radius:var(--r-sm);border:1px solid rgba(200,206,214,0.3);">Phase 5 · Ages 58–62 · Compression</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--gold2);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(200,169,110,0.12);border-radius:var(--r-sm);border:1px solid rgba(200,169,110,0.3);">Phase 5 · Ages 58–62 · Compression</div>
 
         <div class="sutra-card">
           <div class="sutra-hdr" onclick="toggleSutra(this)">
@@ -1839,7 +1762,7 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
         </div>
 
         <!-- PHASE 6: 62+ -->
-        <div style="font-family:var(--mono);font-size:9px;color:var(--teal2);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(200,206,214,0.08);border-radius:var(--r-sm);border:1px solid rgba(200,206,214,0.2);">Phase 6 · Ages 62+ · Transmission</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--teal2);text-transform:uppercase;letter-spacing:0.12em;margin:20px 0 10px;padding:6px 12px;background:rgba(93,202,165,0.08);border-radius:var(--r-sm);border:1px solid rgba(93,202,165,0.2);">Phase 6 · Ages 62+ · Transmission</div>
 
         <div class="sutra-card">
           <div class="sutra-hdr" onclick="toggleSutra(this)">
@@ -1950,10 +1873,10 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
 <script>
 /* ── TIME & GREETING ─────────────────────────────── */
 var SESSION_CONFIG = [
-  { id:'morning', name:'Morning practice',   hours:[4,11],  color:'#ababab' },
-  { id:'midday',  name:'Midday micro-reset', hours:[11,17], color:'#b0b0b0' },
-  { id:'evening', name:'Evening practice',   hours:[17,21], color:'#8f8f8f' },
-  { id:'night',   name:'Night witnessing',   hours:[21,28], color:'#a4a4a4' }
+  { id:'morning', name:'Morning practice',   hours:[4,11],  color:'#c8a96e' },
+  { id:'midday',  name:'Midday micro-reset', hours:[11,17], color:'#5DCAA5' },
+  { id:'evening', name:'Evening practice',   hours:[17,21], color:'#8F87E0' },
+  { id:'night',   name:'Night witnessing',   hours:[21,28], color:'#a8a49a' }
 ];
 function getSession(h){ for(var i=0;i<SESSION_CONFIG.length;i++){var s=SESSION_CONFIG[i];var hi=h<4?h+24:h;if(hi>=s.hours[0]&&hi<s.hours[1])return s;}return SESSION_CONFIG[0]; }
 function getGreeting(h){ if(h>=4&&h<12)return['Brahma Muhurta','Good morning,\nPrashanth']; if(h>=12&&h<17)return['Afternoon','Good afternoon,\nPrashanth']; if(h>=17&&h<21)return['Sandhyā','Good evening,\nPrashanth']; return['Rātri','Good night,\nPrashanth']; }
@@ -2020,15 +1943,15 @@ function toggleSutra(hdr){var body=hdr.nextElementSibling;var open=hdr.classList
 
 /* ── WITNESSING FIELD ────────────────────────────── */
 var FSTAGES=[
-  {cx:214,cy:190,stroke:'#b0b0b0',age:'Youth · 0 – 30',title:'Causal perception rises',body:'Analytical power surges (70–85%) in education, yet institutional friction and career ambiguity challenge you (50–70%). Relationships face tension from intellectual sharpness. Finances unstable but learning curve is exceptional. Witnessing appears intermittently — hidden causes attract you strongly (60–80%).',bars:[{l:'Analytical power',v:78,c:'#808080'},{l:'Learning curve',v:85,c:'#b0b0b0'},{l:'Institutional friction',v:60,c:'#727272'}],sutra:'Youth is causal perception — the mind sees hidden causes before the self learns to see itself.'},
-  {cx:340,cy:334,stroke:'#b0b0b0',age:'Early midlife · 30 – 40',title:'Timing awareness emerges',body:'Career grows through structural shifts (60–75%) not simple promotions. Decision clarity sharpens (65–80%). Finances can scale 2–4×. Relationships deepen through children, patience, and discernment. Witnessing becomes dominant over analysis (70%).',bars:[{l:'Decision clarity',v:72,c:'#7e7e7e'},{l:'Financial scaling',v:68,c:'#b0b0b0'},{l:'Witnessing vs analysis',v:70,c:'#808080'}],sutra:'Midlife is timing alignment — sense the field, align with it, act cleanly and release.'},
-  {cx:466,cy:190,stroke:'#a7a7a7',age:'Later midlife · 40 – 55',title:'Samyama matures',body:'High-impact leadership roles emerge (70–85%). Decision latency reduces (50–70%). Systemic influence expands. Finances may reach peak scaling (3–5×). Burnout risk (30–50%) if inner intensity is unmanaged.',bars:[{l:'Leadership emergence',v:77,c:'#7d7d7d'},{l:'Peak finance scaling',v:70,c:'#a7a7a7'},{l:'Burnout risk',v:40,c:'#727272'}],sutra:'Maturity is samyama — dharana, dhyana, samadhi unified. Object, attention, and awareness merge.'},
-  {cx:340,cy:56,stroke:'#afafaf',age:'Later life · 55+',title:'Witnessing becomes continuous',body:'Advisory influence and guidance roles emerge (75–90%). Career becomes less title-dependent, more impact-deep. Finances stabilize (70–85%). Relationships evolve into detached compassion (70–85%). Witnessing becomes continuous (70–90%).',bars:[{l:'Witnessing continuity',v:80,c:'#545454'},{l:'Advisory impact',v:82,c:'#808080'},{l:'Inner freedom',v:85,c:'#afafaf'}],sutra:'Later life is continuous witnessing — seeking stops and the witness shines by itself.'},
-  {cx:340,cy:190,stroke:'#808080',age:'Core principle',title:'The witnessing nature',body:'Ketu-ascendant + Mercury-Moon-Jupiter create an inborn witnessing tendency. Three rare superpowers: causal-field perception, blank-pause capacity, and subtle self-observation. A self-correcting intelligence system.',bars:[{l:'Causal-field perception',v:90,c:'#808080'},{l:'Blank-pause capacity',v:85,c:'#afafaf'},{l:'Subtle self-observation',v:88,c:'#545454'}],sutra:'What is seen is not you; the one who sees is you. When seeking stops, the witness shines by itself.'},
-  {cx:112,cy:68,stroke:'#a9a9a9',age:'Distortions and risks',title:'Where strengths become bondage',body:'Primary risks: clinging to past successful strategies (50–60%) and premature meaning-making (40–50%). AI amplifies natural meaning-making 2–3×, leading to borrowed certainty (40–60%) and witness displacement.',bars:[{l:'Strategy clinging risk',v:55,c:'#727272'},{l:'Premature closure risk',v:45,c:'#a9a9a9'},{l:'AI amplification risk',v:50,c:'#a7a7a7'}],sutra:'Insert 2–5 second witnessing pauses before decisions. Not everything is to be controlled by me.'},
-  {cx:112,cy:312,stroke:'#b0b0b0',age:'Daily system',title:'Practice architecture',body:'Morning: pranayama → Kena ×3–5 → Gāyatrī ×21–108 → meditation → witnessing. Midday: 3 breaths + witnessing + Gita verse. Evening: pranayama → Om Namaḥ Śivāya ×11–54 → meditation. Night: review + witnessing.',bars:[{l:'Minimal form yield',v:65,c:'#808080'},{l:'Full form yield',v:78,c:'#b0b0b0'},{l:'Witnessing priority',v:95,c:'#808080'}],sutra:'Pranayama and mantra are vehicles, not goals. If they become the goal, progress drops 30–40%.'},
-  {cx:568,cy:68,stroke:'#afafaf',age:'Advanced integration',title:'Samyama mechanics',body:'Integration of dharana + dhyana + samadhi — unbroken cognitive lock where object, attention, and awareness merge. Causal-field perception → pure guidance. Blank-pause → field of clear decision. Siddhis are side-effects, not goals.',bars:[{l:'Decision latency reduction',v:60,c:'#545454'},{l:'Outcome shift range',v:35,c:'#808080'},{l:'Timing alignment',v:75,c:'#afafaf'}],sutra:'Fix the fixed. Play the flexible. Navigate the field with epistemic humility and right timing.'},
-  {cx:568,cy:312,stroke:'#a7a7a7',age:'Post-2032 synthesis',title:'High-impact leadership + witnessing',body:'Mercury Mahadasha trajectory: life stabilizes toward "high-impact leadership + witnessing-based decision system" where external influence and inner freedom coexist. 2026 foundation-building; recognition aligns to 2027 (Mercury-Sun antardasha).',bars:[{l:'Leadership stabilization',v:75,c:'#7d7d7d'},{l:'Inner freedom coexistence',v:80,c:'#808080'},{l:'Foundation (2026)',v:65,c:'#a7a7a7'}],sutra:'Accept the fixed. Optimize the flexible. When favorable, act. When unfavorable, hold.'}
+  {cx:214,cy:190,stroke:'#5DCAA5',age:'Youth · 0 – 30',title:'Causal perception rises',body:'Analytical power surges (70–85%) in education, yet institutional friction and career ambiguity challenge you (50–70%). Relationships face tension from intellectual sharpness. Finances unstable but learning curve is exceptional. Witnessing appears intermittently — hidden causes attract you strongly (60–80%).',bars:[{l:'Analytical power',v:78,c:'#1D9E75'},{l:'Learning curve',v:85,c:'#5DCAA5'},{l:'Institutional friction',v:60,c:'#D85A30'}],sutra:'Youth is causal perception — the mind sees hidden causes before the self learns to see itself.'},
+  {cx:340,cy:334,stroke:'#85B7EB',age:'Early midlife · 30 – 40',title:'Timing awareness emerges',body:'Career grows through structural shifts (60–75%) not simple promotions. Decision clarity sharpens (65–80%). Finances can scale 2–4×. Relationships deepen through children, patience, and discernment. Witnessing becomes dominant over analysis (70%).',bars:[{l:'Decision clarity',v:72,c:'#378ADD'},{l:'Financial scaling',v:68,c:'#85B7EB'},{l:'Witnessing vs analysis',v:70,c:'#7F77DD'}],sutra:'Midlife is timing alignment — sense the field, align with it, act cleanly and release.'},
+  {cx:466,cy:190,stroke:'#EF9F27',age:'Later midlife · 40 – 55',title:'Samyama matures',body:'High-impact leadership roles emerge (70–85%). Decision latency reduces (50–70%). Systemic influence expands. Finances may reach peak scaling (3–5×). Burnout risk (30–50%) if inner intensity is unmanaged.',bars:[{l:'Leadership emergence',v:77,c:'#BA7517'},{l:'Peak finance scaling',v:70,c:'#EF9F27'},{l:'Burnout risk',v:40,c:'#D85A30'}],sutra:'Maturity is samyama — dharana, dhyana, samadhi unified. Object, attention, and awareness merge.'},
+  {cx:340,cy:56,stroke:'#AFA9EC',age:'Later life · 55+',title:'Witnessing becomes continuous',body:'Advisory influence and guidance roles emerge (75–90%). Career becomes less title-dependent, more impact-deep. Finances stabilize (70–85%). Relationships evolve into detached compassion (70–85%). Witnessing becomes continuous (70–90%).',bars:[{l:'Witnessing continuity',v:80,c:'#534AB7'},{l:'Advisory impact',v:82,c:'#7F77DD'},{l:'Inner freedom',v:85,c:'#AFA9EC'}],sutra:'Later life is continuous witnessing — seeking stops and the witness shines by itself.'},
+  {cx:340,cy:190,stroke:'#7F77DD',age:'Core principle',title:'The witnessing nature',body:'Ketu-ascendant + Mercury-Moon-Jupiter create an inborn witnessing tendency. Three rare superpowers: causal-field perception, blank-pause capacity, and subtle self-observation. A self-correcting intelligence system.',bars:[{l:'Causal-field perception',v:90,c:'#7F77DD'},{l:'Blank-pause capacity',v:85,c:'#AFA9EC'},{l:'Subtle self-observation',v:88,c:'#534AB7'}],sutra:'What is seen is not you; the one who sees is you. When seeking stops, the witness shines by itself.'},
+  {cx:112,cy:68,stroke:'#F0997B',age:'Distortions and risks',title:'Where strengths become bondage',body:'Primary risks: clinging to past successful strategies (50–60%) and premature meaning-making (40–50%). AI amplifies natural meaning-making 2–3×, leading to borrowed certainty (40–60%) and witness displacement.',bars:[{l:'Strategy clinging risk',v:55,c:'#D85A30'},{l:'Premature closure risk',v:45,c:'#F0997B'},{l:'AI amplification risk',v:50,c:'#EF9F27'}],sutra:'Insert 2–5 second witnessing pauses before decisions. Not everything is to be controlled by me.'},
+  {cx:112,cy:312,stroke:'#5DCAA5',age:'Daily system',title:'Practice architecture',body:'Morning: pranayama → Kena ×3–5 → Gāyatrī ×21–108 → meditation → witnessing. Midday: 3 breaths + witnessing + Gita verse. Evening: pranayama → Om Namaḥ Śivāya ×11–54 → meditation. Night: review + witnessing.',bars:[{l:'Minimal form yield',v:65,c:'#1D9E75'},{l:'Full form yield',v:78,c:'#5DCAA5'},{l:'Witnessing priority',v:95,c:'#7F77DD'}],sutra:'Pranayama and mantra are vehicles, not goals. If they become the goal, progress drops 30–40%.'},
+  {cx:568,cy:68,stroke:'#AFA9EC',age:'Advanced integration',title:'Samyama mechanics',body:'Integration of dharana + dhyana + samadhi — unbroken cognitive lock where object, attention, and awareness merge. Causal-field perception → pure guidance. Blank-pause → field of clear decision. Siddhis are side-effects, not goals.',bars:[{l:'Decision latency reduction',v:60,c:'#534AB7'},{l:'Outcome shift range',v:35,c:'#7F77DD'},{l:'Timing alignment',v:75,c:'#AFA9EC'}],sutra:'Fix the fixed. Play the flexible. Navigate the field with epistemic humility and right timing.'},
+  {cx:568,cy:312,stroke:'#EF9F27',age:'Post-2032 synthesis',title:'High-impact leadership + witnessing',body:'Mercury Mahadasha trajectory: life stabilizes toward "high-impact leadership + witnessing-based decision system" where external influence and inner freedom coexist. 2026 foundation-building; recognition aligns to 2027 (Mercury-Sun antardasha).',bars:[{l:'Leadership stabilization',v:75,c:'#BA7517'},{l:'Inner freedom coexistence',v:80,c:'#7F77DD'},{l:'Foundation (2026)',v:65,c:'#EF9F27'}],sutra:'Accept the fixed. Optimize the flexible. When favorable, act. When unfavorable, hold.'}
 ];
 function showFStage(i){
   var s=FSTAGES[i];
