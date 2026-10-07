@@ -426,29 +426,6 @@ button:focus-visible, [onclick]:focus-visible { outline: 2px solid var(--gold2);
 @media(min-width:700px) { .topic-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } .reader-scroll { padding: 24px 32px; } }
 @media(max-width:380px) { .topic-open { padding: 12px; } .topic-open strong { font-size: 13px; } }
 @media(max-height:500px) { .reader-head { padding-top: 6px; padding-bottom: 6px; } .reader-jump { padding-bottom: 6px; } .reader-title { font-size: 22px; } }
-
-/* Brief guidance stays visible; longer, related passages share a reader topic. */
-.topic-inline:empty { display: none; }
-.topic-inline { margin-bottom: 18px; }
-.topic-note + .topic-note { margin-top: 14px; }
-.topic-inline .x-card { background: none; border: 0; margin-bottom: 14px; }
-.topic-inline .x-hdr { pointer-events: none; padding: 0 0 8px; min-height: 0; gap: 8px; }
-.topic-inline .x-arr { display: none; }
-.topic-inline .x-body { display: block; padding: 0; }
-.topic-inline .x-name { font-size: 14px; }
-.topic-inline .info-box { padding: 10px 12px; font-size: 13px; line-height: 1.55; }
-.topic-inline .reps-pill { flex-direction: row; gap: 5px; padding: 6px 9px; }
-.topic-inline .reps-num { font-size: 16px; }
-.topic-inline .reps-lbl { margin-top: 0; }
-.topic-inline .mahasutra-hero { padding: 14px; }
-.topic-inline .step-seq { font-size: 11px; margin-bottom: 14px; }
-.topic-inline .practice-loop { padding: 12px; }
-.topic-inline .time-hdr { margin-bottom: 12px; }
-.reader-article .sutra-title,.reader-article .x-name { display: block; font-size: 16px; font-weight: 600; }
-.reader-article .sutra-hdr,.reader-article .x-hdr { align-items: flex-start; flex-wrap: wrap; }
-.reader-article .topic-page > .sutra-card + .sutra-card,
-.reader-article .topic-page > .x-card + .x-card { padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--border); }
-.reader-title:focus { outline: none; }
 </style>
 </head>
 <body>
@@ -2115,7 +2092,7 @@ function showFStage(i){
 for(var fi=0;fi<9;fi++){(function(i){var el=document.getElementById('fn'+i);if(el)el.addEventListener('click',function(){showFStage(i);});})(fi);}
 </script>
 <script>
-/* Curated topic libraries reuse original nodes, preserving all verses and tables. */
+/* Topic libraries reuse the original nodes, preserving verses, tables and ordering. */
 (function initTopicReaders(){
   var dialog=document.createElement('dialog');
   dialog.id='topic-reader';
@@ -2148,54 +2125,27 @@ for(var fi=0;fi<9;fi++){(function(i){var el=document.getElementById('fn'+i);if(e
   dialog.querySelector('.reader-next').onclick=function(){if(position<current.pages.length-1)show(position+1);};
   jump.onchange=function(){show(Number(jump.value));};
   function text(node){return node.textContent.replace(/\s+/g,' ').trim();}
-  // Each collection has an editorial outline: [short title, source indexes, placement].
-  // A null title surfaces a brief passage on the page; "after" keeps closing steps last.
-  // Indexes refer to the original direct children, checked for complete coverage below.
-  var outlines={
-    'ws-nature':[['Recognizing witnessing',[0,1]],['Thoughts & the witness',[2]],['The inner sequence',[3]],[null,[4],'after']],
-    'ws-practice':[[null,[0,1]],['Your daily rhythm',[2,3]],['The blank pause',[4]],['Beyond self-questioning',[5]]],
-    'ws-experience':[[null,[0]],['Four stages of witnessing',[1,2,3,4]],['Emptiness & disinterest',[5]]],
-    'ws-scenarios':[[null,[0]],['Work & decisions',[1,2,5]],['Family & conflict',[3,4]],[null,[6],'after']],
-    'ws-check':[['Signs of progress',[0,2]],['The awareness test',[1]],['Why this practice matters',[3]]],
-    'ws-nondual':[[null,[0]],['Beyond the witness',[1,2]],['Glimpses & integration',[3,4]]],
-    'ps-morning':[[null,[0,1,2]],['Kena Upaniṣad',[3]],['Gāyatrī mantra',[4]],[null,[5,6],'after']],
-    'ps-midday':[[null,[0,1,2]],['Gītā: action & balance',[3]]],
-    'ps-evening':[[null,[0,1,2]],['Om Namaḥ Śivāya',[3]],[null,[4],'after']],
-    'ps-night':[[null,[0,1,2]],['Resting as the witness',[3]]],
-    'screen-deities':[[null,[1]],['Witness-led practice',[2,3]],['Dakṣiṇāmūrti',[4]],['The full deity sequence',[5,7]],['When practice fluctuates',[6]]],
-    'ss-morning':[[null,[0,1]],['Kena: the witness',[2]],['Gītā: equanimity',[3]]],
-    'ss-midday':[[null,[0]],['What you can control',[1]],['Action without attachment',[2]]],
-    'ss-evening':[[null,[0]],['Returning to stillness',[1]],['The causal engine',[2]]],
-    'ss-night':[[null,[0]],['The nature of Self',[1]],[null,[2],'after']],
-    'ss-all':[[null,[0,1]]],
-    'screen-canon':[[null,[1]],['Reading roadmap',[2,19]],['Foundations',[3,4,5]],['Self-inquiry',[6,7,8]],['Discernment',[9,10,11]],['Non-dual insight',[12,13]],['Māṇḍūkya & Kārikā',[14,15]],['Teaching & transmission',[16,17,18]]],
-    'witness-intro':[[null,[0]]],
-    'sutras-intro':[['The daily verse cycle',[0,1]]]
-  };
-  function build(root,nodes,name,key){
-    key=key||root.id;
-    var outline=outlines[key];
-    if(!outline)throw new Error('Missing topic outline: '+key);
-    var expected=nodes.map(function(node,i){return node.matches('.screen-header')?null:i;}).filter(function(i){return i!==null;});
-    var used=outline.flatMap(function(entry){return entry[1];});
-    if(used.length!==expected.length||new Set(used).size!==used.length||expected.some(function(i){return !used.includes(i);}))throw new Error('Incomplete topic outline: '+key);
+  function pageTitle(node,index){
+    var heading=node.querySelector('.sutra-title,.x-name,.scenario-title,.pl-label,.ms-label,.section-label,.time-title,h2,h3,strong');
+    var label=heading?text(heading):text(node);
+    return label.length>100?label.slice(0,97)+'…':label||'Topic '+(index+1);
+  }
+  function build(root,nodes,name){
+    if(!nodes.length)return;
     var store=document.createElement('div');store.hidden=true;store.className='topic-source';
-    var library={name:name,pages:[],store:store};
-    var before=document.createElement('div'),after=document.createElement('div');
-    before.className=after.className='topic-inline';
-    outline.forEach(function(entry){
-      var page=document.createElement('section');page.className=entry[0]?'topic-page':'topic-note';
-      entry[1].forEach(function(i){nodes[i].dataset.topicOrigin=key+':'+i;page.appendChild(nodes[i]);});
-      if(entry[0]){
-        store.appendChild(page);
-        library.pages.push({title:entry[0],node:page,search:(entry[0]+' '+text(page)).toLocaleLowerCase()});
-      }else (entry[2]==='after'?after:before).appendChild(page);
+    var library={name:name,pages:[],store:store},pending=[];
+    nodes.forEach(function(node,index){
+      // Keep short phase/section labels with the following passage.
+      if((node.matches('hr,.section-label')||(!node.children.length&&text(node).length<150))&&index<nodes.length-1){pending.push(node);return;}
+      var page=document.createElement('section');page.className='topic-page';
+      pending.forEach(function(n){page.appendChild(n);});pending=[];
+      var label=pageTitle(node,index);page.appendChild(node);store.appendChild(page);
+      library.pages.push({title:label,node:page,search:text(page).toLocaleLowerCase()});
     });
-    root.appendChild(before);
-    if(!library.pages.length){root.appendChild(after);return null;}
+    if(pending.length){var last=library.pages[library.pages.length-1];if(last)pending.forEach(function(n){last.node.appendChild(n);});}
     var panel=document.createElement('section');panel.className='topic-library';panel.setAttribute('aria-label',name+' topics');
     panel.innerHTML='<div class="topic-intro"><span class="section-label">Choose a topic</span><span class="topic-count"></span></div><input class="topic-search" type="search" placeholder="Search this collection…" aria-label="Search '+name.replace(/"/g,'')+' topics"><div class="topic-grid"></div><p class="topic-empty" hidden>No matching topics. Try another word.</p><div class="topic-pager"><button type="button">← Back</button><output aria-live="polite"></output><button type="button">More →</button></div>';
-    root.append(panel,after,store);
+    root.append(panel,store);
     var input=panel.querySelector('input'),grid=panel.querySelector('.topic-grid'),pager=panel.querySelector('.topic-pager'),buttons=pager.querySelectorAll('button'),pageIndex=0;
     function render(){
       var query=input.value.trim().toLocaleLowerCase();var matches=library.pages.map(function(p,i){return {page:p,index:i};}).filter(function(item){return item.page.search.includes(query);});
@@ -2209,25 +2159,24 @@ for(var fi=0;fi<9;fi++){(function(i){var el=document.getElementById('fn'+i);if(e
       panel.querySelector('.topic-count').textContent=matches.length+' topics';panel.querySelector('.topic-empty').hidden=matches.length!==0;
       pager.hidden=total===1;pager.querySelector('output').textContent=(pageIndex+1)+' / '+total;buttons[0].disabled=pageIndex===0;buttons[1].disabled=pageIndex===total-1;
     }
-    input.hidden=library.pages.length<=3;
     input.oninput=function(){pageIndex=0;render();};
     buttons.forEach(function(button,i){button.onclick=function(){pageIndex+=i?1:-1;render();panel.scrollIntoView({block:'start'});buttons[i].focus({preventScroll:true});};});
     render();
-    return panel;
   }
   document.querySelectorAll('.wit-section,.practice-session').forEach(function(root){
     var screen=root.closest('.screen'),heading=screen.querySelector('.screen-header h2');
     var name=(heading?text(heading):'Practice')+' · '+root.id.split('-').slice(1).join(' ');
     build(root,Array.from(root.children),name);
   });
-  ['canon','deities'].forEach(function(id){var root=document.querySelector('#screen-'+id+' .wit-wrap');build(root,Array.from(root.children),text(root.querySelector('h2')),'screen-'+id);});
-  // Surface the brief witness introduction; group the longer verse introduction.
+  ['canon','deities'].forEach(function(id){var root=document.querySelector('#screen-'+id+' .wit-wrap');build(root,Array.from(root.children).filter(function(n){return !n.matches('.screen-header');}),text(root.querySelector('h2')));});
+  // Put long introductions behind one compact entry so section tabs stay near the top.
   ['witness','sutras'].forEach(function(id){
     var root=document.querySelector('#screen-'+id+' .wit-wrap'),tabs=root.querySelector('.wit-tabs');
     var nodes=Array.from(root.children).filter(function(n){return !n.matches('.screen-header,.wit-tabs,.wit-section');});
     if(!nodes.length)return;
-    var intro=document.createElement('div');intro.className='topic-overview';root.insertBefore(intro,tabs);var panel=build(intro,nodes,'Introduction',id+'-intro');
-    if(panel){panel.querySelector('.topic-intro .section-label').textContent='Start here';panel.querySelector('.topic-search').hidden=true;}
+    var intro=document.createElement('div');intro.className='topic-overview';root.insertBefore(intro,tabs);build(intro,nodes,'Introduction');
+    intro.querySelector('.topic-intro .section-label').textContent='Start here';
+    intro.querySelector('.topic-search').hidden=true;
   });
 })();
 </script>
