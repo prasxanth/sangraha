@@ -221,7 +221,7 @@
     "sourceGroup": "3.1–3.4",
     "kh": 3,
     "excerpt": true,
-    "wordContext": "3.2–3.4",
+    "wordContext": null,
     "english": "<div class=\"transl\"><strong>English reading:</strong> Among the gods, they did not discern what this Yakṣa was. They sent Agni to investigate it.</div>",
     "sanskrit": "त एतस्मिन् यक्षे किं स्विदिदं यक्षमिति",
     "iast": "ta etasmin yakṣe kiṃ svid idaṃ yakṣam iti"
@@ -236,7 +236,7 @@
     "sourceGroup": "3.1–3.4",
     "kh": 3,
     "excerpt": true,
-    "wordContext": "3.2–3.4",
+    "wordContext": null,
     "english": "<div class=\"transl\"><strong>English reading:</strong> The Yakṣa asked Agni: &#x27;Who are you?&#x27; Agni replied: &#x27;I am Agni, I am Jātavedas (the knower of all creatures).&#x27;</div>",
     "sanskrit": "तमभ्यवदत् कोऽसीति",
     "iast": "tam abhyavadat ko&#x27;sīti"
@@ -266,7 +266,7 @@
     "sourceGroup": "3.5–3.8",
     "kh": 3,
     "excerpt": true,
-    "wordContext": "3.5–3.8",
+    "wordContext": null,
     "english": "<div class=\"transl\"><strong>English reading:</strong> Agni returned, saying: &#x27;I could not find out what this Yakṣa is.&#x27; The gods then sent Vāyu.</div>",
     "sanskrit": "ततो निववृते नैतदशकं विज्ञातुं",
     "iast": "tato nivavṛte naitad aśakaṃ vijñātuṃ"
@@ -311,7 +311,7 @@
     "sourceGroup": "3.5–3.8",
     "kh": 3,
     "excerpt": true,
-    "wordContext": "3.5–3.8",
+    "wordContext": null,
     "english": "<div class=\"transl\"><strong>English reading:</strong> &#x27;I could not discover what this Yakṣa is.&#x27; Then the gods spoke to Indra: &#x27;O Maghavan, find out what this spirit is.&#x27;</div>",
     "sanskrit": "ततो निववृते नैतदशकं विज्ञातुम्",
     "iast": "tato nivavṛte naitad aśakaṃ vijñātum"

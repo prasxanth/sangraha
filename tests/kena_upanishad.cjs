@@ -35,6 +35,11 @@ const { chromium } = require('playwright');
     const expected = require('./fixtures/kena_individual_mantras.json');
     assert.deepEqual(passages.map(p=>p.number), expected.map(p=>p.number), 'All 34 single-mantra units in order');
     assert.deepEqual(await page.locator('.class-num').allTextContents(), expected.map(p=>p.number));
+    const padaExpected = require('./fixtures/kena_pada_sequences.json');
+    for(const [number,word,count] of [['1.6','विन्दते',3],['1.7','इह',2],['1.7','अवेदीत्',2],['1.8','भूतेषु',2],['2.5','तद्वनम्',2],['3.4','इति',2],['3.6','वा',2],['3.6','अहम्',2],['3.6','अस्मि',2],['4.9','प्रतितिष्ठति',2]]) {
+      assert.equal(padaExpected.find(x=>x.number===number).sanskrit.filter(x=>x===word).length,count,number+' retains every occurrence of '+word);
+    }
+
     const integrity = await page.evaluate(() => readingDeck.map(item=>({
       number:item.number, section:item.section,
       sourceGroup:KENA_MANTRA_META[item.number].sourceGroup,
@@ -100,6 +105,23 @@ const { chromium } = require('playwright');
           await page.locator('#reading-study').click();
           assert(await page.locator('#screen-study').isVisible());
           assert.equal(await page.locator('.screen.active .class-item').count(), 1, 'Only this passage is shown');
+          const expectedPada=padaExpected.find(x=>x.number===passages[i].number);
+          assert.deepEqual(await page.locator('#study-passage .pada-sanskrit .pada-word').allTextContents(),expectedPada.sanskrit,'Every Sanskrit occurrence in verse order: '+passages[i].number);
+          assert.deepEqual(await page.locator('#study-passage .pada-iast .pada-word').allTextContents(),expectedPada.iast,'Matching separated IAST words: '+passages[i].number);
+          assert.equal((await page.locator('#study-passage .v-sanskrit').first().textContent()).replace(/\s/g,''),expectedPada.sourceSanskrit.replace(/\s/g,''),'Displayed Sanskrit preserved');
+          if(width===1440 && face==='English') {
+            const bad=await page.evaluate(()=>{
+              const failures=[];
+              for(const button of document.querySelectorAll('#study-passage .pada-word')){
+                button.click();const e=studyWords[Number(button.dataset.wordIndex)];
+                if(!document.querySelector('#word-dialog').open || document.querySelector('#word-title').textContent!==e.sanskrit || document.querySelector('#word-iast').textContent!==e.iast || document.querySelector('#word-definition').innerHTML!==e.meaning || !e.meaning.trim())failures.push(button.textContent);
+                document.querySelector('#word-close').click();
+              }
+              return failures;
+            });
+            assert.deepEqual(bad,[],'Every Sanskrit and IAST word opens its own meaning');
+          }
+
           assert.equal(await page.locator('.screen.active .class-hdr').count(), 0, 'No other verse headers');
           assert.equal(await page.locator('#study-khanda').textContent(),
             await page.evaluate(() => 'Khaṇḍa ' + ['I','II','III','IV'][readingDeck[readingIndex].kh-1] + ' · ' + readingDeck[readingIndex].number));
