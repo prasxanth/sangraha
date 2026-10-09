@@ -1,0 +1,44 @@
+{
+  "shankara": {
+    "author": "Śaṅkara",
+    "title": "Kena Upanishad with Śaṅkara’s Commentary, translated by S. Sitarama Sastri (1905)",
+    "url": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya",
+    "note": "Public-domain English translation. Summaries below are newly written; short quotations are identified separately. Some source pages discuss several consecutive mantras together."
+  },
+  "sarvananda": {
+    "author": "Swami Sarvananda",
+    "title": "Kena Upanishad, Sanskrit–English PDF",
+    "url": "https://estudantedavedanta.net/Kena%20Upanishad%20-%20Swami%20Sarvanand%20%5BSanskrit-English%5D.pdf",
+    "note": "The title page spells the author’s name Swami Sharvananda; the linked filename uses Sarvanand. PDF references use file-page numbers, including front matter. Summaries were checked against the audited local copy."
+  },
+  "gambhirananda": {
+    "author": "Swami Gambhirananda, translator of Śaṅkara",
+    "title": "Śaṅkara’s bhāṣya in English, presented alongside A. K. Aruna’s analysis at UpasanaYoga",
+    "url": "https://www.upasanayoga.org/KenU.htm",
+    "note": "The labelled bhāṣya translation is distinguished from the site’s separate translation and grammatical analysis by A. K. Aruna. This is another English presentation of Śaṅkara, not a different author’s bhāṣya."
+  },
+  "chinmayananda1": {
+    "author": "Swami Chinmayananda",
+    "title": "Kenopanishad Yajna Prasad, vol. 4, p. 130; excerpt reproduced in Chinmaya Archives, Jnana Yajna 1",
+    "url": "https://archives.chinmayamission.com/gurudev-108/jnana-yajna-1",
+    "note": "The excerpt discusses the power behind the senses. Its placement beside 1.2 is an editorial thematic match; the archive excerpt does not supply a mantra number."
+  },
+  "chinmayananda6": {
+    "author": "Swami Chinmayananda",
+    "title": "Kenopanishad teaching excerpt, Chinmaya Archives, Jnana Yajna 6",
+    "url": "https://archives.chinmayamission.com/gurudev-108/jnana-yajna-6",
+    "note": "A short quotation on expressing the Infinite. Its connection to 1.3 is thematic; it is not represented as a numbered verse commentary."
+  },
+  "vivekananda": {
+    "author": "Swami Vivekananda",
+    "title": "Soul, Nature and God, Complete Works, volume 2",
+    "url": "https://www.ramakrishnavivekananda.info/vivekananda/volume_2/practical_vedanta_and_other_lectures/soul_nature_and_god.htm",
+    "note": "A related lecture, not a Kena bhāṣya. The passage on hearing and attention is placed beside 1.2 as a clearly labelled parallel."
+  },
+  "radhakrishnan": {
+    "author": "S. Radhakrishnan",
+    "title": "The Principal Upaniṣads, Kena, section II, notes on 2.3–2.5 (printed pp. 585–587)",
+    "url": "https://archive.org/stream/PrincipalUpanishads/129481965-The-Principal-Upanishads-by-S-Radhakrishnan_djvu.txt",
+    "note": "Brief paraphrases of the author’s notes, checked in the digitized text. No OCR Sanskrit or long modern translation is reproduced."
+  }
+}

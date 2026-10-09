@@ -48,7 +48,9 @@ for(let i=0;i<data.length;i++) {
  assert.equal(decode(body.match(/class="v-translit"[^>]*>([^<]+)</)[1]),d.iast,d.number+' matching IAST');
  const row=index[d.kh].find(r=>r[0]===d.number);
  assert.deepEqual(row,[d.number,d.sanskrit,d.iast,d.english],d.number+' index agrees');
- assert(body.includes(d.wisdomlib),d.number+' specific source link');
+ assert(body.includes("openSourceAppendix('"+d.number+"',this)"),d.number+' verse-specific appendix route');
+ const appendix=html.match(new RegExp('<article class="appendix-verse lineage-card" id="source-'+d.number.replace('.','-')+'"[\\s\\S]*?</article>'))[0];
+ assert(appendix.includes(d.wisdomlib),d.number+' specific source link in appendix');
  assert(body.includes('English rendering · editorial:'),d.number+' honest attribution');
  assert.equal(d.excerpt,false,d.number+' no truncated mantra');
  assert(d.words.every(w=>w.sanskrit && w.iast && w.meaning),d.number+' no empty word study');

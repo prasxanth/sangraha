@@ -129,7 +129,7 @@ const { chromium } = require('playwright');
           const preserved = await page.evaluate(() => {
             const source = readingDeck[readingIndex].element.querySelector('.class-body');
             const study = document.getElementById('study-passage');
-            const selector = '.v-sanskrit,.v-translit,.transl,.m-english,.m-commentary,.m-shankara,.anchor-box';
+            const selector = '.v-sanskrit,.v-translit,.transl,.m-english,.m-commentary,.m-shankara,.anchor-box,.verse-commentaries';
             return {
               original: Array.from(source.querySelectorAll(selector), e => e.outerHTML),
               rendered: Array.from(study.querySelectorAll(selector), e => e.outerHTML),
