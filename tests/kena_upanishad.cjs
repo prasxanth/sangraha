@@ -36,7 +36,7 @@ const { chromium } = require('playwright');
     assert.deepEqual(passages.map(p=>p.number), expected.map(p=>p.number), 'All 34 single-mantra units in order');
     assert.deepEqual(await page.locator('.class-num').allTextContents(), expected.map(p=>p.number));
     const padaExpected = require('./fixtures/kena_pada_sequences.json');
-    for(const [number,word,count] of [['1.6','विन्दते',3],['1.7','इह',2],['1.7','अवेदीत्',2],['1.8','भूतेषु',2],['2.5','तद्वनम्',2],['3.4','इति',2],['3.6','वा',2],['3.6','अहम्',2],['3.6','अस्मि',2],['4.9','प्रतितिष्ठति',2]]) {
+    for(const [number,word,count] of [['2.4','विन्दते',3],['2.5','इह',2],['2.5','अवेदीत्',2],['2.5','भूतेषु',2],['4.6','तद्वनम्',2],['3.4','इति',3],['3.8','वै',2],['3.8','अहम्',2],['3.8','अस्मि',2],['4.9','प्रतितिष्ठति',2]]) {
       assert.equal(padaExpected.find(x=>x.number===number).sanskrit.filter(x=>x===word).length,count,number+' retains every occurrence of '+word);
     }
 
@@ -52,7 +52,7 @@ const { chromium } = require('playwright');
     for (const item of integrity) {
       assert(item.tables>0 && item.hasAnchor, 'Word study and contemplation available for '+item.number);
       if (item.number!=='1.1' && item.number!=='1.2' && item.number!=='1.3' && item.number!=='1.4') assert(item.hasFocus);
-      if (['1.5','1.6','1.7','1.8'].includes(item.number)) {
+      if (['2.3','2.4','2.5'].includes(item.number)) {
         assert.equal(item.section,'From the paradox of knowing to realization');
         assert.equal(item.tables,1,'Each has its own existing word notes');
       }
@@ -139,8 +139,8 @@ const { chromium } = require('playwright');
               renderedWords: studyWords.map(({sanskrit,iast,meaning}) => ({sanskrit,iast,meaning})),
             };
           });
-          assert.deepEqual(preserved.rendered, preserved.original, 'Other explanations and original mantra unchanged');
-          assert.deepEqual(preserved.renderedWords, preserved.sourceWords, 'Every existing word meaning preserved');
+          assert.deepEqual(preserved.rendered, preserved.original, 'Audited explanations and mantra preserved in study view');
+          assert.deepEqual(preserved.renderedWords, preserved.sourceWords, 'Every audited word meaning preserved');
           assert.equal(await page.locator('#study-passage .pada-unit').count(), preserved.sourceWords.length);
           if (face === 'English') {
             for (const script of ['sanskrit','iast']) {
@@ -191,11 +191,11 @@ const { chromium } = require('playwright');
         await swipe(250,150,80,150);
         assert.equal(await page.locator('#reading-picker').inputValue(), '0', 'No wrap before first card');
         await page.setViewportSize({width:390,height:568});
-        await page.selectOption('#reading-picker','1');
+        await page.selectOption('#reading-picker','18');
         await page.locator('#reading-flip').click();
         const copy = await page.locator('#reading-copy').boundingBox();
         await swipe(copy.x+100,copy.y+170,copy.x+100,copy.y+50);
-        assert.equal(await page.locator('#reading-picker').inputValue(),'1','Vertical reading scroll does not change cards');
+        assert.equal(await page.locator('#reading-picker').inputValue(),'18','Vertical reading scroll does not change cards');
         assert(await page.locator('#reading-copy').evaluate(e=>e.scrollTop>0),'Vertical touch scrolling still works');
         await page.selectOption('#reading-picker','33');
         await swipe(80,150,250,150);
@@ -232,7 +232,7 @@ const { chromium } = require('playwright');
       assert.equal(await page.locator('#reading-number').textContent(),kh+'.'+[8,5,12,9][kh-1]);
     }
     assert.deepEqual(errors, []);
-    console.log('PASS: responsive cards, eye icon, right/left touch swipes, vertical scroll, all word meanings in accessible Sanskrit/IAST popups, unchanged explanations, isolated studies, 34 artworks, homepage navigation and index.');
+    console.log('PASS: responsive cards, eye icon, right/left touch swipes, vertical scroll, all word meanings in accessible Sanskrit/IAST popups, audited explanations, isolated studies, 34 artworks, homepage navigation and index.');
   } finally {
     await browser.close();
   }

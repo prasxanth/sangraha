@@ -1,0 +1,51 @@
+[
+  {
+    "name": "speech-source",
+    "prompt": "Use case: illustration-story. New wide 3:1 panoramic illustration, 2304x768, for an electric-blue on black Kena Upanishad reader. Exquisite engraved storybook linework, painterly deep shadows, blue and icy-blue illumination only. Full bleed, no text, no borders, no watermark. Compose the complete story horizontally with entire figures and symbolic objects visible, breathing room around them. Bottom 25 percent quiet dark foreground for a title. The source of speech: an ancient Indian teacher speaking gently to a seated disciple in a forest hermitage. A subtle blue light is shared between their hearts; no visible words or lettering. Both entire seated bodies visible.",
+    "asset": "assets/kena/speech-source-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "breath-source",
+    "prompt": "Use case: illustration-story. New wide 3:1 panoramic illustration, 2304x768, for an electric-blue on black Kena Upanishad reader. Exquisite engraved storybook linework, painterly deep shadows, blue and icy-blue illumination only. Full bleed, no text, no borders, no watermark. Compose the complete story horizontally with entire figures and symbolic objects visible, breathing room around them. Bottom 25 percent quiet dark foreground for a title. The source of breath: an ancient Indian sage seated in meditation beside a river, with soft luminous blue currents of air moving through leaves around them. Whole seated body, quiet natural breathing, no diagram, no arrows.",
+    "asset": "assets/kena/breath-source-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "agni-power",
+    "prompt": "Use case: illustration-story. New wide 3:1 panoramic illustration, 2304x768, for an electric-blue on black Kena Upanishad reader. Exquisite engraved storybook linework, painterly deep shadows, blue and icy-blue illumination only. Full bleed, no text, no borders, no watermark. Compose the complete story horizontally with entire figures and symbolic objects visible, breathing room around them. Bottom 25 percent quiet dark foreground for a title. Agni, ancient Indian fire deity, stands with his entire body visible and one small electric-blue flame held confidently in his palm, declaring his power before a mysterious blue radiance at the opposite side of a clearing. No grass test yet.",
+    "asset": "assets/kena/agni-power-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "vayu-sent",
+    "prompt": "Use case: illustration-story. New wide 3:1 panoramic illustration, 2304x768, for an electric-blue on black Kena Upanishad reader. Exquisite engraved storybook linework, painterly deep shadows, blue and icy-blue illumination only. Full bleed, no text, no borders, no watermark. Compose the complete story horizontally with entire figures and symbolic objects visible, breathing room around them. Bottom 25 percent quiet dark foreground for a title. Vayu, ancient Indian wind deity with flowing blue garments, receives a commission from a small group of seated gods in a Himalayan grove. A mysterious luminous presence in the distance. Entire figures visible. No Indra walking away, no grass test.",
+    "asset": "assets/kena/vayu-sent-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "vayu-power",
+    "prompt": "Use case: illustration-story. New wide 3:1 panoramic illustration, 2304x768, for an electric-blue on black Kena Upanishad reader. Exquisite engraved storybook linework, painterly deep shadows, blue and icy-blue illumination only. Full bleed, no text, no borders, no watermark. Compose the complete story horizontally with entire figures and symbolic objects visible, breathing room around them. Bottom 25 percent quiet dark foreground for a title. Vayu, ancient Indian wind deity, stands with both arms extended while a vast electric-blue vortex raises leaves and small stones across a mountain clearing. He confidently declares his ability to carry all things away. A veiled mysterious presence observes. Whole body visible. No blade of grass.",
+    "asset": "assets/kena/vayu-power-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "indra-vanishing",
+    "prompt": "Use case: illustration-story. New wide 3:1 panoramic illustration, 2304x768, for an electric-blue on black Kena Upanishad reader. Exquisite engraved storybook linework, painterly deep shadows, blue and icy-blue illumination only. Full bleed, no text, no borders, no watermark. Compose the complete story horizontally with entire figures and symbolic objects visible, breathing room around them. Bottom 25 percent quiet dark foreground for a title. Indra, ancient Indian king of gods, approaches a mountain clearing as a mysterious blue luminous figure dissolves into mist before him. Indra entire body visible, paused in surprise. No Uma present yet; no teaching scene.",
+    "asset": "assets/kena/indra-vanishing-wide.webp",
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "name": "agni-sent",
+    "prompt": "Use case: illustration-story. New wide 3:1 panoramic illustration, 2304x768, for an electric-blue on black Kena Upanishad reader. Exquisite engraved storybook linework, painterly deep shadows, blue and icy-blue illumination only. Full bleed, no text, no borders, no watermark. Compose the complete story horizontally with entire figures and symbolic objects visible, breathing room around them. Bottom 25 percent quiet dark foreground for a title. Agni, ancient Indian fire deity with a small electric-blue flame in his palm, receives a commission from a small group of seated gods in a Himalayan grove. A mysterious luminous presence in the distance. Entire figures visible. No Indra walking away, no grass test.",
+    "asset": "assets/kena/agni-sent-wide.webp",
+    "width": 2172,
+    "height": 724
+  }
+]

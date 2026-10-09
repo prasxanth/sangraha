@@ -4,237 +4,327 @@
     "reading": "1.1",
     "asset": "assets/kena/source-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "lightning",
-    "reading": "2.3",
+    "reading": null,
     "asset": "assets/kena/lightning-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": false
   },
   {
     "name": "grass",
-    "reading": "3.4",
+    "reading": "3.6",
     "asset": "assets/kena/grass-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "uma",
-    "reading": "3.10",
+    "reading": "4.1",
     "asset": "assets/kena/uma-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "senses",
     "reading": "1.2",
     "asset": "assets/kena/senses-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "beyond",
     "reading": "1.3",
     "asset": "assets/kena/beyond-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "unknown",
-    "reading": "1.4",
+    "reading": "1.7",
     "asset": "assets/kena/unknown-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "paradoxes",
-    "reading": "1.5",
+    "reading": "2.3",
     "asset": "assets/kena/paradoxes-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "uncertainty",
     "reading": "2.1",
     "asset": "assets/kena/uncertainty-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "wind",
-    "reading": "3.7",
+    "reading": "3.10",
     "asset": "assets/kena/wind-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "proximity",
-    "reading": "3.12",
+    "reading": "4.2",
     "asset": "assets/kena/proximity-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "intention",
-    "reading": "2.4",
+    "reading": "1.5",
     "asset": "assets/kena/intention-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "foundation",
-    "reading": "4.7",
+    "reading": "4.8",
     "asset": "assets/kena/foundation-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "awareness-each",
-    "reading": "1.6",
+    "reading": "2.4",
     "asset": "assets/kena/awareness-each-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "here-now",
-    "reading": "1.7",
+    "reading": null,
     "asset": "assets/kena/here-now-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": false
   },
   {
     "name": "all-beings",
-    "reading": "1.8",
+    "reading": "2.5",
     "asset": "assets/kena/all-beings-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "ungrasped",
-    "reading": "2.2",
+    "reading": "1.6",
     "asset": "assets/kena/ungrasped-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "delight",
-    "reading": "2.5",
+    "reading": "4.6",
     "asset": "assets/kena/delight-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "victory",
     "reading": "3.1",
     "asset": "assets/kena/victory-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "yaksha",
     "reading": "3.2",
     "asset": "assets/kena/yaksha-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "agni-identity",
-    "reading": "3.3",
+    "reading": "3.4",
     "asset": "assets/kena/agni-identity-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "fire-return",
-    "reading": "3.5",
+    "reading": null,
     "asset": "assets/kena/fire-return-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": false
   },
   {
     "name": "vayu-boast",
-    "reading": "3.6",
+    "reading": "3.8",
     "asset": "assets/kena/vayu-boast-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "wind-return",
-    "reading": "3.8",
+    "reading": null,
     "asset": "assets/kena/wind-return-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": false
   },
   {
     "name": "uma-encounter",
-    "reading": "3.9",
+    "reading": "3.12",
     "asset": "assets/kena/uma-encounter-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "indra-grace",
-    "reading": "3.11",
+    "reading": "2.2",
     "asset": "assets/kena/indra-grace-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "nearness",
-    "reading": "4.1",
+    "reading": null,
     "asset": "assets/kena/nearness-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": false
   },
   {
     "name": "indra-recognition",
-    "reading": "4.2",
+    "reading": "4.3",
     "asset": "assets/kena/indra-recognition-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "first-knower",
-    "reading": "4.3",
+    "reading": null,
     "asset": "assets/kena/first-knower-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": false
   },
   {
     "name": "brief-flash",
     "reading": "4.4",
     "asset": "assets/kena/brief-flash-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "returning-mind",
     "reading": "4.5",
     "asset": "assets/kena/returning-mind-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "teaching-given",
-    "reading": "4.6",
+    "reading": "4.7",
     "asset": "assets/kena/teaching-given-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
   },
   {
     "name": "truth-home",
-    "reading": "4.8",
+    "reading": null,
     "asset": "assets/kena/truth-home-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": false
   },
   {
     "name": "established",
     "reading": "4.9",
     "asset": "assets/kena/established-wide.webp",
     "width": 2172,
-    "height": 724
+    "height": 724,
+    "active": true
+  },
+  {
+    "name": "speech-source",
+    "asset": "assets/kena/speech-source-wide.webp",
+    "width": 2172,
+    "height": 724,
+    "reading": "1.4",
+    "active": true
+  },
+  {
+    "name": "breath-source",
+    "asset": "assets/kena/breath-source-wide.webp",
+    "width": 2172,
+    "height": 724,
+    "reading": "1.8",
+    "active": true
+  },
+  {
+    "name": "agni-power",
+    "asset": "assets/kena/agni-power-wide.webp",
+    "width": 2172,
+    "height": 724,
+    "reading": "3.5",
+    "active": true
+  },
+  {
+    "name": "vayu-sent",
+    "asset": "assets/kena/vayu-sent-wide.webp",
+    "width": 2172,
+    "height": 724,
+    "reading": "3.7",
+    "active": true
+  },
+  {
+    "name": "vayu-power",
+    "asset": "assets/kena/vayu-power-wide.webp",
+    "width": 2172,
+    "height": 724,
+    "reading": "3.9",
+    "active": true
+  },
+  {
+    "name": "indra-vanishing",
+    "asset": "assets/kena/indra-vanishing-wide.webp",
+    "width": 2172,
+    "height": 724,
+    "reading": "3.11",
+    "active": true
+  },
+  {
+    "name": "agni-sent",
+    "asset": "assets/kena/agni-sent-wide.webp",
+    "width": 2172,
+    "height": 724,
+    "reading": "3.3",
+    "active": true
   }
 ]

@@ -1,3 +1,9 @@
+# Current edition: source-audited 8 October 2026
+
+The reader now contains 34 complete source-checked mantras and 601 word occurrences. See [the complete audit and verse cross-reference](kena-source-audit.md) and [the current content manifest](kena-individual-mantras.json). The numbering, excerpts and inherited attributions described below were superseded after errors were found. The following is retained only as a record of earlier layout work; it is not authority for the Sanskrit.
+
+---
+
 # Individual Kena readings: content provenance
 
 The pre-change page is preserved byte-for-byte at `archive/kena_upanishad.pre-individual-mantras-2026-10-03.html`. Its thirteen grouped reading units are now 34 separately numbered cards and study views. The order and numbering follow this study edition, not a newly established canonical text. [The content manifest](kena-individual-mantras.json) records each reading’s text, original group, artwork, thematic section, excerpt status and shared word-study scope.

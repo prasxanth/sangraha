@@ -1,3 +1,13 @@
+# Current artwork assignments · 8 October 2026
+
+The [source audit](kena-source-audit.md) restored the complete text and corrected its numbering. The current 34 unique artwork assignments are in [the wide manifest](kena-wide-artwork-manifest.json). Seven new 3:1 images cover speech, breath, Agni’s commission and power, Vāyu’s commission and power, and the disappearance before Indra. Their [saved prompts](kena-source-audit-artwork-prompts.json) identify their project assets. Historical unused assets and prompts remain available, marked inactive in the wide manifest. Images are symbolic illustrations, not textual evidence.
+
+All full-width native-aspect rendering, blue-on-black styling, swipe directions and reader controls are retained. For current validation, run `node tests/kena_text_audit.cjs` and `NODE_PATH=/path/to/node_modules node tests/kena_upanishad.cjs`.
+
+## Historical visual implementation notes
+
+The following records earlier work. Passage assignments, excerpt labels and numbering were superseded by the audit above.
+
 # Kena illustrated electric-blue edition
 
 The reader has 34 individually numbered cards and corresponding study views, following this study edition’s existing numbering (8, 5, 12 and 9 readings in its four khaṇḍas). Previously grouped passages are separated using the existing Sanskrit, transliteration and word notes. This change preserves the edition’s numbering; it is not a correction to a canonical Sanskrit edition. See [content provenance](kena-individual-mantras.md) for excerpt, editorial and shared-commentary details.

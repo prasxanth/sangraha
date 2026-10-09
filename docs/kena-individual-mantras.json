@@ -1,515 +1,3755 @@
 [
   {
     "number": "1.1",
-    "title": "The Opening Question",
-    "art": "source",
-    "section": "The source behind perception",
-    "focus": "Notice how the opening question turns attention from what the senses perceive toward what makes perceiving possible.",
-    "anchor": "While reading, notice the difference between the words on the page and the awareness of reading.",
-    "sourceGroup": "1.1",
     "kh": 1,
+    "sanskrit": "ॐ केनेषितं पतति प्रेषितं मनः केन प्राणः प्रथमः प्रैति युक्तः । केनेषितां वाचमिमां वदन्ति चक्षुः श्रोत्रं क उ देवो युनक्ति ॥",
+    "shlokam": "1.1",
+    "title": "The Source of Mind and Senses",
+    "art": "source",
+    "english": "By whose impulse does the directed mind go forth? At whose bidding does the foremost vital breath proceed? By whom is this speech prompted? What shining power directs eye and ear?",
+    "focus": "The inquiry concerns what enables the faculties to function, rather than another object perceived by those faculties.",
+    "anchor": "Notice both a sensation and the fact that you are aware of it.",
+    "pdfPages": "8–9",
+    "section": "The source behind perception",
+    "iast": "oṃ keneṣitaṃ patati preṣitaṃ manaḥ kena prāṇaḥ prathamaḥ praiti yuktaḥ | keneṣitāṃ vācamimāṃ vadanti cakṣuḥ śrotraṃ ka u devo yunakti ||",
     "excerpt": false,
+    "sourceGroup": "1.1",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>Gambhirananda (Advaita Ashrama):</strong> \"By whom directed does the mind fly forth? By whom commanded does the first breath go? By whose impulsion do men utter this speech? What effulgent being directs the eye and ear?\"</div>",
-    "sanskrit": "केनेषितं पतति प्रेषितं मनः।<br>केन प्राणः प्रथमः प्रैति युक्तः।<br>केनेषितां वाचमिमां वदन्ति।<br>चक्षुः श्रोत्रं क उ देवो युनक्ति॥",
-    "iast": "kenéṣitaṃ patati préṣitaṃ manaḥ |<br>kena prāṇaḥ prathamaḥ praiti yuktaḥ |<br>kenéṣitāṃ vācam imāṃ vadanti |<br>cakṣuḥ śrotraṃ ka u devo yunakti ||"
+    "sourceNote": "Om is included as in Shlokam; Wisdomlib writes the same syllable ओं. Vedic pitch accents are not reproduced in this reader.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145038.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.1.01",
+    "words": [
+      {
+        "sanskrit": "ॐ",
+        "iast": "oṃ",
+        "meaning": "Om; the sacred syllable."
+      },
+      {
+        "sanskrit": "केन",
+        "iast": "kena",
+        "meaning": "by whom?"
+      },
+      {
+        "sanskrit": "इषितम्",
+        "iast": "iṣitam",
+        "meaning": "willed; impelled."
+      },
+      {
+        "sanskrit": "पतति",
+        "iast": "patati",
+        "meaning": "goes towards; literally, falls or alights."
+      },
+      {
+        "sanskrit": "प्रेषितम्",
+        "iast": "preṣitam",
+        "meaning": "sent forth; directed."
+      },
+      {
+        "sanskrit": "मनः",
+        "iast": "manaḥ",
+        "meaning": "mind."
+      },
+      {
+        "sanskrit": "केन",
+        "iast": "kena",
+        "meaning": "by whom?"
+      },
+      {
+        "sanskrit": "प्राणः",
+        "iast": "prāṇaḥ",
+        "meaning": "the vital breath or life-force."
+      },
+      {
+        "sanskrit": "प्रथमः",
+        "iast": "prathamaḥ",
+        "meaning": "first; foremost."
+      },
+      {
+        "sanskrit": "प्रैति",
+        "iast": "praiti",
+        "meaning": "proceeds; goes forth."
+      },
+      {
+        "sanskrit": "युक्तः",
+        "iast": "yuktaḥ",
+        "meaning": "engaged; directed to its work."
+      },
+      {
+        "sanskrit": "केन",
+        "iast": "kena",
+        "meaning": "by whom?"
+      },
+      {
+        "sanskrit": "इषिताम्",
+        "iast": "iṣitām",
+        "meaning": "willed; impelled (qualifying speech)."
+      },
+      {
+        "sanskrit": "वाचम्",
+        "iast": "vācam",
+        "meaning": "speech (as object)."
+      },
+      {
+        "sanskrit": "इमाम्",
+        "iast": "imām",
+        "meaning": "this (feminine, referring to speech)."
+      },
+      {
+        "sanskrit": "वदन्ति",
+        "iast": "vadanti",
+        "meaning": "they speak; people utter."
+      },
+      {
+        "sanskrit": "चक्षुः",
+        "iast": "cakṣuḥ",
+        "meaning": "eye; faculty of sight."
+      },
+      {
+        "sanskrit": "श्रोत्रम्",
+        "iast": "śrotram",
+        "meaning": "ear; faculty of hearing."
+      },
+      {
+        "sanskrit": "कः",
+        "iast": "kaḥ",
+        "meaning": "which? (qualifying the shining power, deva)."
+      },
+      {
+        "sanskrit": "उ",
+        "iast": "u",
+        "meaning": "indeed; an emphatic particle."
+      },
+      {
+        "sanskrit": "देवः",
+        "iast": "devaḥ",
+        "meaning": "the shining one; divine power."
+      },
+      {
+        "sanskrit": "युनक्ति",
+        "iast": "yunakti",
+        "meaning": "directs; engages; joins to an activity."
+      }
+    ]
   },
   {
     "number": "1.2",
+    "kh": 1,
+    "sanskrit": "श्रोत्रस्य श्रोत्रं मनसो मनो यद् वाचो ह वाचं स उ प्राणस्य प्राणः । चक्षुषश्चक्षुरतिमुच्य धीराः प्रेत्यास्माल्लोकादमृता भवन्ति ॥",
+    "shlokam": "1.2",
     "title": "The Ear of the Ear",
     "art": "senses",
+    "english": "It is the ear of the ear, the mind of the mind, the speech of speech, the life of the vital breath, and the eye of the eye. Relinquishing identification with these, the wise depart from this world and become immortal.",
+    "focus": "The repeated “of the” distinguishes a faculty from the conscious principle through which its activity is known. The verse does not identify the Self with an organ.",
+    "anchor": "Listen without reducing awareness to the sound or the ear.",
+    "pdfPages": "9–10",
     "section": "The source behind perception",
-    "focus": "The repeated expression “of the” points beyond an organ to the awareness in which its activity is known.",
-    "anchor": "Listen to a sound. Can the fact of hearing itself become another sound?",
-    "sourceGroup": "1.2",
-    "kh": 1,
+    "iast": "śrotrasya śrotraṃ manaso mano yad vāco ha vācaṃ sa u prāṇasya prāṇaḥ | cakṣuṣaścakṣuratimucya dhīrāḥ pretyāsmāllokādamṛtā bhavanti ||",
     "excerpt": false,
+    "sourceGroup": "1.2",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>Radhakrishnan (The Principal Upanishads):</strong> \"That which is not thought by the mind, but by which, they say, the mind is thought — know that alone as Brahman, not this which people worship here.\"<br><br><strong>Gambhirananda:</strong> \"It is the ear of the ear, the mind of the mind, the speech of speech, the life of the life, and the eye of the eye. Having detached from the senses and renouncing this world, the wise become immortal.\"</div>",
-    "sanskrit": "श्रोत्रस्य श्रोत्रं मनसो मनो यत्<br>वाचो ह वाचं स उ प्राणस्य प्राणः।<br>चक्षुषश्चक्षुरतिमुच्य धीराः<br>प्रेत्यास्माल्लोकादमृता भवन्ति॥",
-    "iast": "śrotrasya śrotraṃ manaso mano yat<br>vāco ha vācaṃ sa u prāṇasya prāṇaḥ |<br>cakṣuṣaś cakṣur atimucya dhīrāḥ<br>pretyāsmāl lokād amṛtā bhavanti ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145039.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.1.02",
+    "words": [
+      {
+        "sanskrit": "श्रोत्रस्य",
+        "iast": "śrotrasya",
+        "meaning": "of the ear or hearing."
+      },
+      {
+        "sanskrit": "श्रोत्रम्",
+        "iast": "śrotram",
+        "meaning": "ear; faculty of hearing."
+      },
+      {
+        "sanskrit": "मनसः",
+        "iast": "manasaḥ",
+        "meaning": "of the mind."
+      },
+      {
+        "sanskrit": "मनः",
+        "iast": "manaḥ",
+        "meaning": "mind."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "वाचः",
+        "iast": "vācaḥ",
+        "meaning": "of speech."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "वाचम्",
+        "iast": "vācam",
+        "meaning": "speech (as object)."
+      },
+      {
+        "sanskrit": "सः",
+        "iast": "saḥ",
+        "meaning": "he; that one."
+      },
+      {
+        "sanskrit": "उ",
+        "iast": "u",
+        "meaning": "indeed; an emphatic particle."
+      },
+      {
+        "sanskrit": "प्राणस्य",
+        "iast": "prāṇasya",
+        "meaning": "of the vital breath."
+      },
+      {
+        "sanskrit": "प्राणः",
+        "iast": "prāṇaḥ",
+        "meaning": "the vital breath or life-force."
+      },
+      {
+        "sanskrit": "चक्षुषः",
+        "iast": "cakṣuṣaḥ",
+        "meaning": "of the eye or sight."
+      },
+      {
+        "sanskrit": "चक्षुः",
+        "iast": "cakṣuḥ",
+        "meaning": "eye; faculty of sight."
+      },
+      {
+        "sanskrit": "अतिमुच्य",
+        "iast": "atimucya",
+        "meaning": "having released oneself; having relinquished identification."
+      },
+      {
+        "sanskrit": "धीराः",
+        "iast": "dhīrāḥ",
+        "meaning": "the discerning; the wise."
+      },
+      {
+        "sanskrit": "प्रेत्य",
+        "iast": "pretya",
+        "meaning": "having departed; having gone beyond."
+      },
+      {
+        "sanskrit": "अस्मात्",
+        "iast": "asmāt",
+        "meaning": "from this."
+      },
+      {
+        "sanskrit": "लोकात्",
+        "iast": "lokāt",
+        "meaning": "from the world."
+      },
+      {
+        "sanskrit": "अमृताः",
+        "iast": "amṛtāḥ",
+        "meaning": "immortal."
+      },
+      {
+        "sanskrit": "भवन्ति",
+        "iast": "bhavanti",
+        "meaning": "become; are."
+      }
+    ]
   },
   {
     "number": "1.3",
-    "title": "Beyond Sight, Speech and Mind",
-    "art": "beyond",
-    "section": "The source behind perception",
-    "focus": "The inability to reach Brahman as an object is a limit of objectification, not an instruction to stop attending.",
-    "anchor": "Let a description fall silent for a moment. What remains present before the next description?",
-    "sourceGroup": "1.3",
     "kh": 1,
+    "sanskrit": "न तत्र चक्षुर्गच्छति न वाग्गच्छति नो मनः । न विद्मो न विजानीमो यथैतदनुशिष्यात् । अन्यदेव तद्विदितादथो अविदितादधि । इति शुश्रुम पूर्वेषां ये नस्तद्व्याचचक्षिरे ॥",
+    "shlokam": "1.3–1.4",
+    "title": "Beyond the Known and Unknown",
+    "art": "beyond",
+    "english": "The eye does not reach it, nor speech, nor mind. We do not know; we do not understand how one might teach it. It is different from the known and beyond the unknown. Thus we have heard from the earlier teachers who explained it to us.",
+    "focus": "This edition keeps both parts together, as Sarvananda and Sitarama Sastri do. Brahman is not another item within the categories of known and unknown; the passage also acknowledges instruction received from teachers.",
+    "anchor": "Consider why the knower cannot be approached in exactly the same way as a known object.",
+    "pdfPages": "10–12",
+    "section": "The source behind perception",
+    "iast": "na tatra cakṣurgacchati na vāggacchati no manaḥ | na vidmo na vijānīmo yathaitadanuśiṣyāt | anyadeva tadviditādatho aviditādadhi | iti śuśruma pūrveṣāṃ ye nastadvyācacakṣire ||",
     "excerpt": false,
+    "sourceGroup": "1.3",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>Gambhirananda:</strong> \"The eye does not go there, nor speech, nor mind. We do not know, we do not understand how anyone can teach this.\"</div>",
-    "sanskrit": "न तत्र चक्षुर्गच्छति न वाग्गच्छति नो मनः।<br>न विद्मो न विजानीमो यथैतदनुशिष्यात्॥",
-    "iast": "na tatra cakṣur gacchati na vāg gacchati no manaḥ |<br>na vidmo na vijānīmo yathaitad anuśiṣyāt ||"
+    "sourceNote": "Sarvananda and Sitarama Sastri combine both parts as 1.3. Shlokam and Sanskrit Documents number them 1.3 and 1.4. Punctuation permits the pause form मनः and अनुशिष्यात्; continuous editions join them as मनो न and अनुशिष्यादन्यदेव.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145040.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.1.03",
+    "words": [
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "तत्र",
+        "iast": "tatra",
+        "meaning": "there; with regard to That."
+      },
+      {
+        "sanskrit": "चक्षुः",
+        "iast": "cakṣuḥ",
+        "meaning": "eye; faculty of sight."
+      },
+      {
+        "sanskrit": "गच्छति",
+        "iast": "gacchati",
+        "meaning": "goes; reaches."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "वाक्",
+        "iast": "vāk",
+        "meaning": "speech (as subject)."
+      },
+      {
+        "sanskrit": "गच्छति",
+        "iast": "gacchati",
+        "meaning": "goes; reaches."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "उ",
+        "iast": "u",
+        "meaning": "indeed; an emphatic particle."
+      },
+      {
+        "sanskrit": "मनः",
+        "iast": "manaḥ",
+        "meaning": "mind."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "विद्मः",
+        "iast": "vidmaḥ",
+        "meaning": "we know."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "विजानीमः",
+        "iast": "vijānīmaḥ",
+        "meaning": "we understand distinctly."
+      },
+      {
+        "sanskrit": "यथा",
+        "iast": "yathā",
+        "meaning": "how; in what manner."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "अनुशिष्यात्",
+        "iast": "anuśiṣyāt",
+        "meaning": "one might teach or explain."
+      },
+      {
+        "sanskrit": "अन्यत्",
+        "iast": "anyat",
+        "meaning": "other; different."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "विदितात्",
+        "iast": "viditāt",
+        "meaning": "from what is known."
+      },
+      {
+        "sanskrit": "अथो",
+        "iast": "atho",
+        "meaning": "and also; moreover."
+      },
+      {
+        "sanskrit": "अविदितात्",
+        "iast": "aviditāt",
+        "meaning": "from what is unknown."
+      },
+      {
+        "sanskrit": "अधि",
+        "iast": "adhi",
+        "meaning": "above; beyond."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "शुश्रुम",
+        "iast": "śuśruma",
+        "meaning": "we have heard."
+      },
+      {
+        "sanskrit": "पूर्वेषाम्",
+        "iast": "pūrveṣām",
+        "meaning": "of or from the earlier teachers."
+      },
+      {
+        "sanskrit": "ये",
+        "iast": "ye",
+        "meaning": "who (plural)."
+      },
+      {
+        "sanskrit": "नः",
+        "iast": "naḥ",
+        "meaning": "to us; of us."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "व्याचचक्षिरे",
+        "iast": "vyācacakṣire",
+        "meaning": "they explained; expounded."
+      }
+    ]
   },
   {
     "number": "1.4",
-    "title": "Beyond the Known and Unknown",
-    "art": "unknown",
-    "section": "The source behind perception",
-    "focus": "The teaching resists both possession through knowledge and dismissal as something wholly outside experience.",
-    "anchor": "Notice the urge to place awareness in either the “known” or “unknown” category.",
-    "sourceGroup": "1.4",
     "kh": 1,
+    "sanskrit": "यद्वाचाऽनभ्युदितं येन वागभ्युद्यते । तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+    "shlokam": "1.5",
+    "title": "That Which Enables Speech",
+    "art": "speech-source",
+    "english": "What speech does not express, but by which speech is expressed—know that alone as Brahman, not this that people worship as an object.",
+    "focus": "The refrain distinguishes Brahman, the ground of the worshipper's awareness, from a limited object conceived as separate from that awareness. It is not a dismissal of every form of devotional practice.",
+    "anchor": "Attend to the awareness present before and during an utterance.",
+    "pdfPages": "12–14",
+    "section": "The source behind perception",
+    "iast": "yadvācā’nabhyuditaṃ yena vāgabhyudyate | tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||",
     "excerpt": false,
+    "sourceGroup": "1.4",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>Gambhirananda:</strong> \"It is indeed other than the known, and again, it is above the unknown. Thus did we hear from the ancients who explained it to us.\"</div>",
-    "sanskrit": "अन्यदेव तद्विदितादथो अविदितादधि।<br>इति शुश्रुम पूर्वेषां ये नस्तद्व्याचचक्षिरे॥",
-    "iast": "anyad eva tad viditād atho aviditād adhi |<br>iti śuśruma pūrveṣāṃ ye nas tad vyācacakṣire ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145041.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.1.04",
+    "words": [
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "वाचा",
+        "iast": "vācā",
+        "meaning": "by speech."
+      },
+      {
+        "sanskrit": "अनभ्युदितम्",
+        "iast": "anabhyuditam",
+        "meaning": "not expressed; not revealed by speech."
+      },
+      {
+        "sanskrit": "येन",
+        "iast": "yena",
+        "meaning": "by which; through whom."
+      },
+      {
+        "sanskrit": "वाक्",
+        "iast": "vāk",
+        "meaning": "speech (as subject)."
+      },
+      {
+        "sanskrit": "अभ्युद्यते",
+        "iast": "abhyudyate",
+        "meaning": "is expressed; is brought into activity."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "त्वम्",
+        "iast": "tvam",
+        "meaning": "you."
+      },
+      {
+        "sanskrit": "विद्धि",
+        "iast": "viddhi",
+        "meaning": "know; recognize (imperative)."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "उपासते",
+        "iast": "upāsate",
+        "meaning": "they worship; meditate upon."
+      }
+    ]
   },
   {
     "number": "1.5",
-    "title": "Known by Not-Knowing",
-    "art": "paradoxes",
-    "section": "From the paradox of knowing to realization",
-    "focus": "This is the paradox of knowing: treating Brahman as a captured object misses the awareness that makes knowing possible.",
-    "anchor": "Can you release a conclusion about awareness without trying to manufacture another experience?",
-    "sourceGroup": "1.5–1.8",
     "kh": 1,
+    "sanskrit": "यन्मनसा न मनुते येनाहुर्मनो मतम् । तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+    "shlokam": "1.6",
+    "title": "That Which Enables Thought",
+    "art": "intention",
+    "english": "What one cannot think with the mind, but by which, they say, the mind is known—know that alone as Brahman, not this that people worship as an object.",
+    "focus": "The mind can be noticed through its changing thoughts. This verse turns inquiry towards that in whose presence those thoughts are known.",
+    "anchor": "Observe a thought arise and pass; distinguish its content from knowing it.",
+    "pdfPages": "14–15",
+    "section": "The source behind perception",
+    "iast": "yanmanasā na manute yenāhurmano matam | tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||",
     "excerpt": false,
+    "sourceGroup": "1.5",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>1.5 — Radhakrishnan:</strong> \"He by whom It is not thought, by him It is thought; he by whom It is thought, knows It not. It is not understood by those who understand It; It is understood by those who do not understand It.\"</div>",
-    "sanskrit": "यस्यामतं तस्य मतं मतं यस्य न वेद सः।<br>अविज्ञातं विजानतां विज्ञातमविजानताम्॥",
-    "iast": "yasyāmataṃ tasya mataṃ mataṃ yasya na veda saḥ |<br>avijñātaṃ vijānatāṃ vijñātam avijānatām ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145042.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.1.05",
+    "words": [
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "मनसा",
+        "iast": "manasā",
+        "meaning": "by the mind."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "मनुते",
+        "iast": "manute",
+        "meaning": "one thinks; conceives."
+      },
+      {
+        "sanskrit": "येन",
+        "iast": "yena",
+        "meaning": "by which; through whom."
+      },
+      {
+        "sanskrit": "आहुः",
+        "iast": "āhuḥ",
+        "meaning": "they say."
+      },
+      {
+        "sanskrit": "मनः",
+        "iast": "manaḥ",
+        "meaning": "mind."
+      },
+      {
+        "sanskrit": "मतम्",
+        "iast": "matam",
+        "meaning": "known; understood; considered."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "त्वम्",
+        "iast": "tvam",
+        "meaning": "you."
+      },
+      {
+        "sanskrit": "विद्धि",
+        "iast": "viddhi",
+        "meaning": "know; recognize (imperative)."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "उपासते",
+        "iast": "upāsate",
+        "meaning": "they worship; meditate upon."
+      }
+    ]
   },
   {
     "number": "1.6",
-    "title": "Known in Every Cognition",
-    "art": "awareness-each",
-    "section": "From the paradox of knowing to realization",
-    "focus": "Pratibodha-viditam shifts the emphasis to recognition in each act of knowing. Awareness is not reserved for an exceptional state.",
-    "anchor": "Notice a thought, then a sound. What is present in the knowing of both?",
-    "sourceGroup": "1.5–1.8",
     "kh": 1,
+    "sanskrit": "यच्चक्षुषा न पश्यति येन चक्षूँषि पश्यति । तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+    "shlokam": "1.7",
+    "title": "That Which Enables Sight",
+    "art": "ungrasped",
+    "english": "What one does not see with the eye, but by which the eyes see—know that alone as Brahman, not this that people worship as an object.",
+    "focus": "Brahman is not a special visible object. The teaching concerns the basis of seeing, and the Sanskrit repeats “sees” on both sides of that distinction.",
+    "anchor": "Look at something ordinary and attend to the fact of seeing.",
+    "pdfPages": "15–16",
+    "section": "The source behind perception",
+    "iast": "yaccakṣuṣā na paśyati yena cakṣūm̐ṣi paśyati | tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||",
     "excerpt": false,
+    "sourceGroup": "1.6",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>1.6 — Gambhirananda:</strong> \"It is known in every state of consciousness — it is thereby considered known as the ground of immortality. Through the Self one finds strength; through Knowledge one finds immortality.\"</div>",
-    "sanskrit": "प्रतिबोधविदितं मतममृतत्वं हि विन्दते।<br>आत्मना विन्दते वीर्यं विद्यया विन्दतेऽमृतम्॥",
-    "iast": "pratibodha-viditaṃ matam amṛtatvaṃ hi vindate |<br>ātmanā vindate vīryaṃ vidyayā vindate'mṛtam ||",
-    "originalAnchor": "<div class=\"anchor-box\">\n              <div class=\"anchor-label\">Contemplation Anchor</div>\n              <div class=\"anchor-text\">\"Known in every state of consciousness.\" Not only in deep meditation. Not only in silence. Right now, in this moment of reading — what is it that is always already present, that does not need to be achieved?</div>\n            </div>"
+    "sourceNote": "चक्षूँषि retains the source’s Vedic nasal notation; the separated word is shown as चक्षूंषि.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145043.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.1.06",
+    "words": [
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "चक्षुषा",
+        "iast": "cakṣuṣā",
+        "meaning": "by the eye."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "पश्यति",
+        "iast": "paśyati",
+        "meaning": "sees; perceives."
+      },
+      {
+        "sanskrit": "येन",
+        "iast": "yena",
+        "meaning": "by which; through whom."
+      },
+      {
+        "sanskrit": "चक्षूंषि",
+        "iast": "cakṣūṃṣi",
+        "meaning": "eyes; faculties of sight. The continuous text uses Vedic nasalization: चक्षूँषि."
+      },
+      {
+        "sanskrit": "पश्यति",
+        "iast": "paśyati",
+        "meaning": "sees; perceives."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "त्वम्",
+        "iast": "tvam",
+        "meaning": "you."
+      },
+      {
+        "sanskrit": "विद्धि",
+        "iast": "viddhi",
+        "meaning": "know; recognize (imperative)."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "उपासते",
+        "iast": "upāsate",
+        "meaning": "they worship; meditate upon."
+      }
+    ]
   },
   {
     "number": "1.7",
-    "title": "Realization Here and Now",
-    "art": "here-now",
-    "section": "From the paradox of knowing to realization",
-    "focus": "The emphasis is “here”: the question concerns this life and this present capacity for recognition, rather than endless postponement.",
-    "anchor": "What would change if you stopped postponing attentive inquiry until conditions were perfect?",
-    "sourceGroup": "1.5–1.8",
     "kh": 1,
+    "sanskrit": "यच्छ्रोत्रेण न शृणोति येन श्रोत्रमिदं श्रुतम् । तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+    "shlokam": "1.8",
+    "title": "That Which Enables Hearing",
+    "art": "unknown",
+    "english": "What one does not hear with the ear, but by which this hearing is known—know that alone as Brahman, not this that people worship as an object.",
+    "focus": "The repetition of the same refrain across the faculties is deliberate. None of the senses makes Brahman into an object, yet each depends on the reality being indicated.",
+    "anchor": "Listen for a sound, then notice the awareness of its absence.",
+    "pdfPages": "16",
+    "section": "The source behind perception",
+    "iast": "yacchrotreṇa na śṛṇoti yena śrotramidaṃ śrutam | tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||",
     "excerpt": false,
+    "sourceGroup": "1.7",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> If one has known It here, then there is truth. If not, then there is great destruction.</div>",
-    "sanskrit": "इह चेदवेदीदथ सत्यमस्ति<br>न चेदिहावेदीन्महती विनष्टिः।",
-    "iast": "iha ced avedīd atha satyam asti<br>na ced ihāvedīn mahatī vinaṣṭiḥ |"
+    "sourceNote": "The reading श्रोत्रमिदं श्रुतम् agrees with the supplied PDF, Shlokam and Sanskrit Documents; the Wisdomlib web transcription has a typographical corruption here.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145044.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.1.07",
+    "words": [
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "श्रोत्रेण",
+        "iast": "śrotreṇa",
+        "meaning": "by the ear; through hearing."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "शृणोति",
+        "iast": "śṛṇoti",
+        "meaning": "hears."
+      },
+      {
+        "sanskrit": "येन",
+        "iast": "yena",
+        "meaning": "by which; through whom."
+      },
+      {
+        "sanskrit": "श्रोत्रम्",
+        "iast": "śrotram",
+        "meaning": "ear; faculty of hearing."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "श्रुतम्",
+        "iast": "śrutam",
+        "meaning": "heard; apprehended as hearing."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "त्वम्",
+        "iast": "tvam",
+        "meaning": "you."
+      },
+      {
+        "sanskrit": "विद्धि",
+        "iast": "viddhi",
+        "meaning": "know; recognize (imperative)."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "उपासते",
+        "iast": "upāsate",
+        "meaning": "they worship; meditate upon."
+      }
+    ]
   },
   {
     "number": "1.8",
-    "title": "Discerning in All Beings",
-    "art": "all-beings",
-    "section": "From the paradox of knowing to realization",
-    "focus": "The movement is from a private claim of knowledge toward discerning the same ground through the diversity of beings.",
-    "anchor": "Meet one living being without immediately reducing it to a name, role or use.",
-    "sourceGroup": "1.5–1.8",
     "kh": 1,
+    "sanskrit": "यत्प्राणेन न प्राणिति येन प्राणः प्रणीयते । तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+    "shlokam": "1.9",
+    "title": "That Which Directs Breath",
+    "art": "breath-source",
+    "english": "What one does not breathe with the breath, but by which the breath is directed—know that alone as Brahman, not this that people worship as an object.",
+    "focus": "Prāṇa can indicate vital breath; in a sensory reading it can refer to the faculty of smell. Sarvananda explicitly notes both interpretations. Neither reading makes Brahman a thing inhaled.",
+    "anchor": "Notice breathing without trying to turn its conscious ground into another sensation.",
+    "pdfPages": "16–17",
+    "section": "The source behind perception",
+    "iast": "yatprāṇena na prāṇiti yena prāṇaḥ praṇīyate | tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||",
     "excerpt": false,
+    "sourceGroup": "1.8",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> The wise, discerning It in all beings, on departing from this world become immortal.</div>",
-    "sanskrit": "भूतेषु भूतेषु विचित्य धीराः<br>प्रेत्यास्माल्लोकादमृता भवन्ति॥",
-    "iast": "bhūteṣu bhūteṣu vicitya dhīrāḥ<br>pretyāsmāl lokād amṛtā bhavanti ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145045.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.1.08",
+    "words": [
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "प्राणेन",
+        "iast": "prāṇena",
+        "meaning": "by the vital breath; by the faculty of smell in a sensory interpretation."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "प्राणिति",
+        "iast": "prāṇiti",
+        "meaning": "breathes; in the sensory interpretation, smells."
+      },
+      {
+        "sanskrit": "येन",
+        "iast": "yena",
+        "meaning": "by which; through whom."
+      },
+      {
+        "sanskrit": "प्राणः",
+        "iast": "prāṇaḥ",
+        "meaning": "the vital breath or life-force."
+      },
+      {
+        "sanskrit": "प्रणीयते",
+        "iast": "praṇīyate",
+        "meaning": "is directed; led into activity."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "त्वम्",
+        "iast": "tvam",
+        "meaning": "you."
+      },
+      {
+        "sanskrit": "विद्धि",
+        "iast": "viddhi",
+        "meaning": "know; recognize (imperative)."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "उपासते",
+        "iast": "upāsate",
+        "meaning": "they worship; meditate upon."
+      }
+    ]
   },
   {
     "number": "2.1",
-    "title": "Neither Certainty nor Ignorance",
-    "art": "uncertainty",
-    "section": "Humility in knowing",
-    "focus": "The speaker withdraws both an easy claim to know and an easy claim not to know. The inquiry stays open without becoming indifference.",
-    "anchor": "Can you remain attentive without claiming that the question has been settled?",
-    "sourceGroup": "2.1–2.2",
     "kh": 2,
+    "sanskrit": "यदि मन्यसे सुवेदेति दभ्रमेवापि नूनं त्वं वेत्थ ब्रह्मणो रूपम् । यदस्य त्वं यदस्य देवेष्वथ नु मीमाँस्यमेव ते मन्ये विदितम् ॥",
+    "shlokam": "2.1",
+    "title": "The Need for Further Inquiry",
+    "art": "uncertainty",
+    "english": "If you think “I know it well,” you know only a little of Brahman's form—its appearance in yourself and among the gods. It still calls for inquiry. [The pupil, after reflection:] “I think I have understood.”",
+    "focus": "The teacher questions premature certainty. The final words are read here as the pupil's response, following Sarvananda's explanation; some English renderings attach the sentence differently.",
+    "anchor": "Distinguish understanding a description from recognizing what it points to.",
+    "pdfPages": "18–20",
+    "section": "Inquiry and the limits of certainty",
+    "iast": "yadi manyase suvedeti dabhramevāpi nūnaṃ tvaṃ vettha brahmaṇo rūpam | yadasya tvaṃ yadasya deveṣvatha nu mīmām̐syameva te manye viditam ||",
     "excerpt": false,
+    "sourceGroup": "2.1",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>2.1 — Gambhirananda:</strong> \"I do not think I know It well, nor do I think that I do not know It. He among us who knows this [that It is neither known nor unknown] — he knows It; he among us who does not know this — he does not know it.\"</div>",
-    "sanskrit": "मन्ये विदितमिति नो न विदितं परं मतम्।<br>न विदितमिति वेद तद्विदितमविदितम्॥",
-    "iast": "manye viditam iti no na viditaṃ paraṃ matam |<br>na viditam iti veda tad viditam aviditam ||"
+    "sourceNote": "दभ्रमेवापि follows the supplied PDF and is a variant recorded by Shlokam. The Sitarama Sastri web transcription and Shlokam’s primary reading have दहरमेवापि. मीमाँस्यम् is shown as मीमांस्यम् in the separated-word view.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145048.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.2.01",
+    "words": [
+      {
+        "sanskrit": "यदि",
+        "iast": "yadi",
+        "meaning": "if."
+      },
+      {
+        "sanskrit": "मन्यसे",
+        "iast": "manyase",
+        "meaning": "you think; consider."
+      },
+      {
+        "sanskrit": "सुवेद",
+        "iast": "suveda",
+        "meaning": "I know well (su + veda)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "दभ्रम्",
+        "iast": "dabhram",
+        "meaning": "little; a limited measure. Another reading is दहरम्."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "अपि",
+        "iast": "api",
+        "meaning": "also; even."
+      },
+      {
+        "sanskrit": "नूनम्",
+        "iast": "nūnam",
+        "meaning": "certainly; surely."
+      },
+      {
+        "sanskrit": "त्वम्",
+        "iast": "tvam",
+        "meaning": "you."
+      },
+      {
+        "sanskrit": "वेत्थ",
+        "iast": "vettha",
+        "meaning": "you know."
+      },
+      {
+        "sanskrit": "ब्रह्मणः",
+        "iast": "brahmaṇaḥ",
+        "meaning": "of Brahman."
+      },
+      {
+        "sanskrit": "रूपम्",
+        "iast": "rūpam",
+        "meaning": "form; aspect."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "अस्य",
+        "iast": "asya",
+        "meaning": "of this; of it."
+      },
+      {
+        "sanskrit": "त्वम्",
+        "iast": "tvam",
+        "meaning": "you."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "अस्य",
+        "iast": "asya",
+        "meaning": "of this; of it."
+      },
+      {
+        "sanskrit": "देवेषु",
+        "iast": "deveṣu",
+        "meaning": "among the gods."
+      },
+      {
+        "sanskrit": "अथ",
+        "iast": "atha",
+        "meaning": "now; then; therefore."
+      },
+      {
+        "sanskrit": "नु",
+        "iast": "nu",
+        "meaning": "indeed; a particle emphasizing the inquiry."
+      },
+      {
+        "sanskrit": "मीमांस्यम्",
+        "iast": "mīmāṃsyam",
+        "meaning": "to be investigated; deserving further inquiry."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "ते",
+        "iast": "te",
+        "meaning": "for you; to you."
+      },
+      {
+        "sanskrit": "मन्ये",
+        "iast": "manye",
+        "meaning": "I think; consider."
+      },
+      {
+        "sanskrit": "विदितम्",
+        "iast": "viditam",
+        "meaning": "known; understood."
+      }
+    ]
   },
   {
     "number": "2.2",
-    "title": "The Paradox Restated",
-    "art": "ungrasped",
-    "section": "Humility in knowing",
-    "focus": "The refrain returns to the distinction between possessing an idea of Brahman and recognizing the ground of knowing.",
-    "anchor": "Notice the difference between repeating an answer and attending to the experience it points toward.",
-    "sourceGroup": "2.1–2.2",
     "kh": 2,
+    "sanskrit": "नाहं मन्ये सुवेदेति नो न वेदेति वेद च । यो नस्तद्वेद तद्वेद नो न वेदेति वेद च ॥",
+    "shlokam": "2.2",
+    "title": "Knowing Without Claiming Mastery",
+    "art": "indra-grace",
+    "english": "I do not think “I know it well”; nor is it that I do not know it. I know it too. Whoever among us understands this understands it: not that I do not know it, and yet I know it.",
+    "focus": "The pupil distinguishes ordinary knowledge of an object from the inseparable awareness of one's own existence. The repeated clauses belong to the text and must not be collapsed into one occurrence.",
+    "anchor": "Consider the difference between being aware and claiming exhaustive knowledge of awareness.",
+    "pdfPages": "21",
+    "section": "Inquiry and the limits of certainty",
+    "iast": "nāhaṃ manye suvedeti no na vedeti veda ca | yo nastadveda tadveda no na vedeti veda ca ||",
     "excerpt": false,
+    "sourceGroup": "2.2",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>2.2 — Radhakrishnan:</strong> \"He by whom It is not thought, by him It is thought; he who thinks he knows It knows It not.\"</div>",
-    "sanskrit": "यस्यामतं तस्य मतं मतं यस्य न वेद सः।<br>अविज्ञातं विजानतां विज्ञातमविजानताम्॥",
-    "iast": "yasyāmataṃ tasya mataṃ mataṃ yasya na veda saḥ |<br>avijñātaṃ vijānatāṃ vijñātam avijānatām ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145049.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.2.02",
+    "words": [
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "अहम्",
+        "iast": "aham",
+        "meaning": "I."
+      },
+      {
+        "sanskrit": "मन्ये",
+        "iast": "manye",
+        "meaning": "I think; consider."
+      },
+      {
+        "sanskrit": "सुवेद",
+        "iast": "suveda",
+        "meaning": "I know well (su + veda)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "उ",
+        "iast": "u",
+        "meaning": "indeed; an emphatic particle."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "वेद",
+        "iast": "veda",
+        "meaning": "know; in the quoted first-person clauses: I know; with यः or तत्: knows."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "वेद",
+        "iast": "veda",
+        "meaning": "know; in the quoted first-person clauses: I know; with यः or तत्: knows."
+      },
+      {
+        "sanskrit": "च",
+        "iast": "ca",
+        "meaning": "and."
+      },
+      {
+        "sanskrit": "यः",
+        "iast": "yaḥ",
+        "meaning": "who; whoever."
+      },
+      {
+        "sanskrit": "नः",
+        "iast": "naḥ",
+        "meaning": "to us; of us."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "वेद",
+        "iast": "veda",
+        "meaning": "know; in the quoted first-person clauses: I know; with यः or तत्: knows."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "वेद",
+        "iast": "veda",
+        "meaning": "know; in the quoted first-person clauses: I know; with यः or तत्: knows."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "उ",
+        "iast": "u",
+        "meaning": "indeed; an emphatic particle."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "वेद",
+        "iast": "veda",
+        "meaning": "know; in the quoted first-person clauses: I know; with यः or तत्: knows."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "वेद",
+        "iast": "veda",
+        "meaning": "know; in the quoted first-person clauses: I know; with यः or तत्: knows."
+      },
+      {
+        "sanskrit": "च",
+        "iast": "ca",
+        "meaning": "and."
+      }
+    ]
   },
   {
     "number": "2.3",
-    "title": "A Flash of Recognition",
-    "art": "lightning",
-    "section": "Glimpse, remembrance and delight",
-    "focus": "Lightning provides an image of sudden illumination. The analogy points to recognition rather than an object that can be held still.",
-    "anchor": "Notice the instant of awareness before you begin to describe what has appeared.",
-    "sourceGroup": "2.3–2.5",
     "kh": 2,
+    "sanskrit": "यस्यामतं तस्य मतं मतं यस्य न वेद सः । अविज्ञातं विजानतां विज्ञातमविजानताम् ॥",
+    "shlokam": "2.3",
+    "title": "Known Through Not-Knowing",
+    "art": "paradoxes",
+    "english": "It is understood by the one for whom it is not grasped as an object; the one who thinks it so grasped does not know it. It is unknown to those who claim to know, and known to those who do not claim that kind of knowledge.",
+    "focus": "The apparent paradox concerns the manner of knowing. It does not praise lack of inquiry or mere ignorance.",
+    "anchor": "Notice any attempt to possess the Self as a mental image.",
+    "pdfPages": "22–23",
+    "section": "From the paradox of knowing to realization",
+    "iast": "yasyāmataṃ tasya mataṃ mataṃ yasya na veda saḥ | avijñātaṃ vijānatāṃ vijñātamavijānatām ||",
     "excerpt": false,
+    "sourceGroup": "2.3",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>2.3 — Gambhirananda:</strong> \"Its indication is this: it is like a flash of lightning — blink! Thus Brahman is taught in terms of the divine [daivata] aspect.\"</div>",
-    "sanskrit": "तस्यैष आदेशो यद्विद्युत्<br>व्यद्युतदा इतीन्न्यमीमिषदा इत्यधिदैवतम्॥",
-    "iast": "tasyaiṣa ādeśo yad vidyut<br>vyadyutadā iti nyn miyamīṣadā ity adhidaivatam ||",
-    "originalAnchor": "<div class=\"anchor-box\">\n              <div class=\"anchor-label\">Contemplation Anchor</div>\n              <div class=\"anchor-text\">\"Like a flash of lightning.\" In this very moment — before the thought about this moment arises — there is a bare awareness. Not \"I am aware.\" Just awareness. The lightning. Then thought covers it again. Practice: notice the gap before the thought.</div>\n            </div>"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145050.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.2.03",
+    "words": [
+      {
+        "sanskrit": "यस्य",
+        "iast": "yasya",
+        "meaning": "for whom; of whom."
+      },
+      {
+        "sanskrit": "अमतम्",
+        "iast": "amatam",
+        "meaning": "not grasped as a thought or object."
+      },
+      {
+        "sanskrit": "तस्य",
+        "iast": "tasya",
+        "meaning": "of that; for that person."
+      },
+      {
+        "sanskrit": "मतम्",
+        "iast": "matam",
+        "meaning": "known; understood; considered."
+      },
+      {
+        "sanskrit": "मतम्",
+        "iast": "matam",
+        "meaning": "known; understood; considered."
+      },
+      {
+        "sanskrit": "यस्य",
+        "iast": "yasya",
+        "meaning": "for whom; of whom."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "वेद",
+        "iast": "veda",
+        "meaning": "knows; I know (as spoken in the first-person passages)."
+      },
+      {
+        "sanskrit": "सः",
+        "iast": "saḥ",
+        "meaning": "he; that one."
+      },
+      {
+        "sanskrit": "अविज्ञातम्",
+        "iast": "avijñātam",
+        "meaning": "not known as an object."
+      },
+      {
+        "sanskrit": "विजानताम्",
+        "iast": "vijānatām",
+        "meaning": "of those who suppose they know."
+      },
+      {
+        "sanskrit": "विज्ञातम्",
+        "iast": "vijñātam",
+        "meaning": "known; recognized."
+      },
+      {
+        "sanskrit": "अविजानताम्",
+        "iast": "avijānatām",
+        "meaning": "of those who do not claim such objectifying knowledge."
+      }
+    ]
   },
   {
     "number": "2.4",
-    "title": "The Mind Returns",
-    "art": "intention",
-    "section": "Glimpse, remembrance and delight",
-    "focus": "The inward analogy emphasizes repeated remembrance: the mind returns toward the ground of its own activity.",
-    "anchor": "When attention wanders, gently return to the fact that the wandering is known.",
-    "sourceGroup": "2.3–2.5",
     "kh": 2,
+    "sanskrit": "प्रतिबोधविदितं मतममृतत्वं हि विन्दते । आत्मना विन्दते वीर्यं विद्यया विन्दतेऽमृतम् ॥",
+    "shlokam": "2.4",
+    "title": "Known in Every Cognition",
+    "art": "awareness-each",
+    "english": "It is rightly known when recognized in every cognition; through this one attains immortality. Through the Self one gains strength; through knowledge one gains immortality.",
+    "focus": "Pratibodha-viditam means known with reference to each cognition. The three occurrences of vindate carry the progression from immortality, through strength, to immortality again.",
+    "anchor": "Attend to the awareness common to changing perceptions.",
+    "pdfPages": "23–24",
+    "section": "From the paradox of knowing to realization",
+    "iast": "pratibodhaviditaṃ matamamṛtatvaṃ hi vindate | ātmanā vindate vīryaṃ vidyayā vindate’mṛtam ||",
     "excerpt": false,
+    "sourceGroup": "2.4",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>2.4:</strong> \"Then with reference to the Self: it is as if the mind reaches toward it; by this the mind recurrently (saṅkalpa, intention) remembers It.\"</div>",
-    "sanskrit": "अथाध्यात्मं यदेतद्गच्छतीव च मनोऽनेन<br>चैतदुपस्मरत्यभीक्ष्णं सङ्कल्पः॥",
-    "iast": "athādhyātmaṃ yad etad gacchatīva ca mano'nena<br>caitad upasmaranty abhīkṣṇaṃ saṅkalpaḥ ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145051.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.2.04",
+    "words": [
+      {
+        "sanskrit": "प्रतिबोधविदितम्",
+        "iast": "pratibodhaviditam",
+        "meaning": "known in each cognition; prati-bodha-viditam, recognized with reference to every act of knowing."
+      },
+      {
+        "sanskrit": "मतम्",
+        "iast": "matam",
+        "meaning": "known; understood; considered."
+      },
+      {
+        "sanskrit": "अमृतत्वम्",
+        "iast": "amṛtatvam",
+        "meaning": "immortality."
+      },
+      {
+        "sanskrit": "हि",
+        "iast": "hi",
+        "meaning": "for; indeed."
+      },
+      {
+        "sanskrit": "विन्दते",
+        "iast": "vindate",
+        "meaning": "attains; obtains."
+      },
+      {
+        "sanskrit": "आत्मना",
+        "iast": "ātmanā",
+        "meaning": "by the Self; through oneself."
+      },
+      {
+        "sanskrit": "विन्दते",
+        "iast": "vindate",
+        "meaning": "attains; obtains."
+      },
+      {
+        "sanskrit": "वीर्यम्",
+        "iast": "vīryam",
+        "meaning": "strength; power; capacity."
+      },
+      {
+        "sanskrit": "विद्यया",
+        "iast": "vidyayā",
+        "meaning": "through knowledge."
+      },
+      {
+        "sanskrit": "विन्दते",
+        "iast": "vindate",
+        "meaning": "attains; obtains."
+      },
+      {
+        "sanskrit": "अमृतम्",
+        "iast": "amṛtam",
+        "meaning": "immortality; the deathless."
+      }
+    ]
   },
   {
     "number": "2.5",
-    "title": "Tad Vana — The Delight of That",
-    "art": "delight",
-    "section": "Glimpse, remembrance and delight",
-    "focus": "Tad Vana gives contemplation a devotional orientation: Brahman is approached as the source of delight rather than as an intellectual possession.",
-    "anchor": "Sit with one quiet moment of delight without trying to hold or own it.",
-    "sourceGroup": "2.3–2.5",
     "kh": 2,
+    "sanskrit": "इह चेदवेदीदथ सत्यमस्ति न चेदिहावेदीन्महती विनष्टिः । भूतेषु भूतेषु विचित्य धीराः प्रेत्यास्माल्लोकादमृता भवन्ति ॥",
+    "shlokam": "2.5",
+    "title": "Realization Here, in All Beings",
+    "art": "all-beings",
+    "english": "If one realizes it here, there is true fulfilment; if one does not realize it here, the loss is great. Discerning it in every being, the wise depart from this world and become immortal.",
+    "focus": "Both halves form one complete mantra in the consulted editions. The urgency of realization here belongs with the recognition of the Self in all beings.",
+    "anchor": "Let attention extend from your own experience to the presence of other beings.",
+    "pdfPages": "24",
+    "section": "From the paradox of knowing to realization",
+    "iast": "iha cedavedīdatha satyamasti na cedihāvedīnmahatī vinaṣṭiḥ | bhūteṣu bhūteṣu vicitya dhīrāḥ pretyāsmāllokādamṛtā bhavanti ||",
     "excerpt": false,
+    "sourceGroup": "2.5",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>2.5 — Gambhirananda:</strong> \"It is truly called Tad Vana (the delight of all). It is to be worshipped as Tad Vana. He who meditates on It thus — all beings will love him.\"</div>",
-    "sanskrit": "तद्धा तद्वनं नाम तद्वनमित्युपासितव्यम्<br>स य एतदेवं वेदाभि हैनं सर्वाणि भूतानि संवाञ्छन्ति॥",
-    "iast": "tad dhā tad vanaṃ nāma tad vanam ity upāsitavyam<br>sa ya etad evaṃ vedābhi hainaṃ sarvāṇi bhūtāni saṃvāñchanti ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145052.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.2.05",
+    "words": [
+      {
+        "sanskrit": "इह",
+        "iast": "iha",
+        "meaning": "here; in this life."
+      },
+      {
+        "sanskrit": "चेत्",
+        "iast": "cet",
+        "meaning": "if."
+      },
+      {
+        "sanskrit": "अवेदीत्",
+        "iast": "avedīt",
+        "meaning": "one knew; realized."
+      },
+      {
+        "sanskrit": "अथ",
+        "iast": "atha",
+        "meaning": "now; then; therefore."
+      },
+      {
+        "sanskrit": "सत्यम्",
+        "iast": "satyam",
+        "meaning": "truth; reality; true fulfilment."
+      },
+      {
+        "sanskrit": "अस्ति",
+        "iast": "asti",
+        "meaning": "is; exists."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "चेत्",
+        "iast": "cet",
+        "meaning": "if."
+      },
+      {
+        "sanskrit": "इह",
+        "iast": "iha",
+        "meaning": "here; in this life."
+      },
+      {
+        "sanskrit": "अवेदीत्",
+        "iast": "avedīt",
+        "meaning": "one knew; realized."
+      },
+      {
+        "sanskrit": "महती",
+        "iast": "mahatī",
+        "meaning": "great (feminine)."
+      },
+      {
+        "sanskrit": "विनष्टिः",
+        "iast": "vinaṣṭiḥ",
+        "meaning": "loss; ruin."
+      },
+      {
+        "sanskrit": "भूतेषु",
+        "iast": "bhūteṣu",
+        "meaning": "in beings; repeated to mean in every being."
+      },
+      {
+        "sanskrit": "भूतेषु",
+        "iast": "bhūteṣu",
+        "meaning": "in beings; repeated to mean in every being."
+      },
+      {
+        "sanskrit": "विचित्य",
+        "iast": "vicitya",
+        "meaning": "having discerned; having recognized."
+      },
+      {
+        "sanskrit": "धीराः",
+        "iast": "dhīrāḥ",
+        "meaning": "the discerning; the wise."
+      },
+      {
+        "sanskrit": "प्रेत्य",
+        "iast": "pretya",
+        "meaning": "having departed; having gone beyond."
+      },
+      {
+        "sanskrit": "अस्मात्",
+        "iast": "asmāt",
+        "meaning": "from this."
+      },
+      {
+        "sanskrit": "लोकात्",
+        "iast": "lokāt",
+        "meaning": "from the world."
+      },
+      {
+        "sanskrit": "अमृताः",
+        "iast": "amṛtāḥ",
+        "meaning": "immortal."
+      },
+      {
+        "sanskrit": "भवन्ति",
+        "iast": "bhavanti",
+        "meaning": "become; are."
+      }
+    ]
   },
   {
     "number": "3.1",
-    "title": "Whose Victory?",
-    "art": "victory",
-    "section": "Agni and the limit of power",
-    "focus": "The story begins with a confusion about agency: the gods take ownership of a victory whose source they have not recognized.",
-    "anchor": "Recall a success and notice the conditions and help that made it possible.",
-    "sourceGroup": "3.1–3.4",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "ब्रह्म ह देवेभ्यो विजिग्ये तस्य ह ब्रह्मणो विजये देवा अमहीयन्त । त ऐक्षन्तास्माकमेवायं विजयोऽस्माकमेवायं महिमेति ॥",
+    "shlokam": "3.1 + opening of 3.2",
+    "title": "The Gods Claim the Victory",
+    "art": "victory",
+    "english": "Brahman won a victory for the gods. In that victory the gods became exalted. They thought, “This victory is ours; this greatness is ours alone.”",
+    "focus": "The story begins with a mistaken attribution of power. Sarvananda and Sitarama Sastri include the gods' claim in this mantra; Shlokam places that sentence at the beginning of 3.2.",
+    "anchor": "Recall an achievement and the conditions that made it possible.",
+    "pdfPages": "25",
+    "section": "The gods and the mysterious presence",
+    "iast": "brahma ha devebhyo vijigye tasya ha brahmaṇo vijaye devā amahīyanta | ta aikṣantāsmākamevāyaṃ vijayo’smākamevāyaṃ mahimeti ||",
+    "excerpt": false,
+    "sourceGroup": "3.1",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> Brahman won the victory for the gods. In Brahman&#x27;s victory, the gods became elated with pride.</div>",
-    "sanskrit": "ब्रह्म ह देवेभ्यो विजिग्ये।<br>तस्य ह ब्रह्मणो विजये देवा अमहीयन्त।",
-    "iast": "brahma ha devebhyo vijigye |<br>tasya ha brahmaṇo vijaye devā amahīyanta ||"
+    "sourceNote": "This edition ends 3.1 after the gods’ claim, following Sarvananda and Sitarama Sastri. Shlokam and Sanskrit Documents place that claim at the start of 3.2; no words are omitted.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145054.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.01",
+    "words": [
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "देवेभ्यः",
+        "iast": "devebhyaḥ",
+        "meaning": "for the gods."
+      },
+      {
+        "sanskrit": "विजिग्ये",
+        "iast": "vijigye",
+        "meaning": "won a victory."
+      },
+      {
+        "sanskrit": "तस्य",
+        "iast": "tasya",
+        "meaning": "of that; for that person."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "ब्रह्मणः",
+        "iast": "brahmaṇaḥ",
+        "meaning": "of Brahman."
+      },
+      {
+        "sanskrit": "विजये",
+        "iast": "vijaye",
+        "meaning": "in the victory."
+      },
+      {
+        "sanskrit": "देवाः",
+        "iast": "devāḥ",
+        "meaning": "the gods."
+      },
+      {
+        "sanskrit": "अमहीयन्त",
+        "iast": "amahīyanta",
+        "meaning": "became exalted; took glory."
+      },
+      {
+        "sanskrit": "ते",
+        "iast": "te",
+        "meaning": "they; the gods."
+      },
+      {
+        "sanskrit": "ऐक्षन्त",
+        "iast": "aikṣanta",
+        "meaning": "they considered; thought."
+      },
+      {
+        "sanskrit": "अस्माकम्",
+        "iast": "asmākam",
+        "meaning": "ours; of us."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "अयम्",
+        "iast": "ayam",
+        "meaning": "this (masculine)."
+      },
+      {
+        "sanskrit": "विजयः",
+        "iast": "vijayaḥ",
+        "meaning": "victory."
+      },
+      {
+        "sanskrit": "अस्माकम्",
+        "iast": "asmākam",
+        "meaning": "ours; of us."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "अयम्",
+        "iast": "ayam",
+        "meaning": "this (masculine)."
+      },
+      {
+        "sanskrit": "महिमा",
+        "iast": "mahimā",
+        "meaning": "greatness; glory."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.2",
-    "title": "The Mysterious Presence",
-    "art": "yaksha",
-    "section": "Agni and the limit of power",
-    "focus": "The unknown presence interrupts the gods’ certainty. Agni is sent to investigate what their familiar categories cannot identify.",
-    "anchor": "Can an unanswered question interrupt certainty without immediately becoming a threat?",
-    "sourceGroup": "3.1–3.4",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "तद्धैषां विजज्ञौ तेभ्यो ह प्रादुर्बभूव तन्न व्यजानत किमिदं यक्षमिति ॥",
+    "shlokam": "3.2 after the gods’ claim",
+    "title": "The Unrecognized Presence",
+    "art": "yaksha",
+    "english": "Brahman understood their thought and appeared before them. They did not recognize it: “What is this wondrous being?”",
+    "focus": "Yakṣa names the mysterious presence encountered by the gods. Their uncertainty follows their earlier confidence about their own power.",
+    "anchor": "Notice how uncertainty changes the gods' attitude.",
+    "pdfPages": "25–26",
+    "section": "The gods and the mysterious presence",
+    "iast": "taddhaiṣāṃ vijajñau tebhyo ha prādurbabhūva tanna vyajānata kimidaṃ yakṣamiti ||",
+    "excerpt": false,
+    "sourceGroup": "3.2",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> Among the gods, they did not discern what this Yakṣa was. They sent Agni to investigate it.</div>",
-    "sanskrit": "त एतस्मिन् यक्षे किं स्विदिदं यक्षमिति",
-    "iast": "ta etasmin yakṣe kiṃ svid idaṃ yakṣam iti"
+    "sourceNote": "The opening gods’ claim in Shlokam 3.2 is included in the preceding mantra here. This passage begins तद्धैषां, as in Sarvananda and Sitarama Sastri.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145055.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.02",
+    "words": [
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "एषाम्",
+        "iast": "eṣām",
+        "meaning": "of these; their."
+      },
+      {
+        "sanskrit": "विजज्ञौ",
+        "iast": "vijajñau",
+        "meaning": "understood; knew distinctly."
+      },
+      {
+        "sanskrit": "तेभ्यः",
+        "iast": "tebhyaḥ",
+        "meaning": "to them; before them."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "प्रादुः",
+        "iast": "prāduḥ",
+        "meaning": "manifestly; forth (with बभूव: appeared)."
+      },
+      {
+        "sanskrit": "बभूव",
+        "iast": "babhūva",
+        "meaning": "became; came to be."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "व्यजानत",
+        "iast": "vyajānata",
+        "meaning": "they recognized; knew."
+      },
+      {
+        "sanskrit": "किम्",
+        "iast": "kim",
+        "meaning": "what?"
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "यक्षम्",
+        "iast": "yakṣam",
+        "meaning": "the mysterious, wondrous or venerable being."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.3",
-    "title": "Agni Declares His Identity",
-    "art": "agni-identity",
-    "section": "Agni and the limit of power",
-    "focus": "Agni responds with his name and identity. The narrative prepares a test of whether naming a power explains its source.",
-    "anchor": "When asked who you are, which roles or abilities do you instinctively offer?",
-    "sourceGroup": "3.1–3.4",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "तेऽग्निमब्रुवञ्जातवेद एतद्विजानीहि किमेतद्यक्षमिति तथेति ॥",
+    "shlokam": "3.3",
+    "title": "Agni Is Sent to Inquire",
+    "art": "agni-sent",
+    "english": "They said to Agni, “Jātavedas, find out what this wondrous being is.” “So be it,” he replied.",
+    "focus": "Agni is commissioned to investigate; the declaration of his identity follows in the next mantra. The complete question and reply belong here.",
+    "anchor": "Read the commission before moving on to Agni's claim.",
+    "pdfPages": "26",
+    "section": "Agni and the limit of power",
+    "iast": "te’gnimabruvañjātaveda etadvijānīhi kimetadyakṣamiti tatheti ||",
+    "excerpt": false,
+    "sourceGroup": "3.3",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> The Yakṣa asked Agni: &#x27;Who are you?&#x27; Agni replied: &#x27;I am Agni, I am Jātavedas (the knower of all creatures).&#x27;</div>",
-    "sanskrit": "तमभ्यवदत् कोऽसीति",
-    "iast": "tam abhyavadat ko&#x27;sīti"
+    "sourceNote": "किमेतत् follows the supplied PDF and Sitarama Sastri; Shlokam reads किमिदम्. Both ask what the mysterious being is.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145056.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.03",
+    "words": [
+      {
+        "sanskrit": "ते",
+        "iast": "te",
+        "meaning": "to you; your; they (the sentence determines the sense)."
+      },
+      {
+        "sanskrit": "अग्निम्",
+        "iast": "agnim",
+        "meaning": "Agni, the fire deity (as object)."
+      },
+      {
+        "sanskrit": "अब्रुवन्",
+        "iast": "abruvan",
+        "meaning": "they said."
+      },
+      {
+        "sanskrit": "जातवेदः",
+        "iast": "jātavedaḥ",
+        "meaning": "O Jātavedas; a vocative epithet of Agni."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "विजानीहि",
+        "iast": "vijānīhi",
+        "meaning": "find out; recognize (imperative)."
+      },
+      {
+        "sanskrit": "किम्",
+        "iast": "kim",
+        "meaning": "what?"
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "यक्षम्",
+        "iast": "yakṣam",
+        "meaning": "the mysterious, wondrous or venerable being."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "तथा",
+        "iast": "tathā",
+        "meaning": "so; yes (in the reply)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.4",
-    "title": "The Grass Agni Cannot Burn",
-    "art": "grass",
-    "section": "Agni and the limit of power",
-    "focus": "The smallest object exposes the limit of Agni’s claim. The test distinguishes the exercise of a power from knowledge of its ground.",
-    "anchor": "Notice one situation in which greater force does not bring greater understanding.",
-    "sourceGroup": "3.1–3.4",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीत्यग्निर्वा अहमस्मीत्यब्रवीज्जातवेदा वा अहमस्मीति ॥",
+    "shlokam": "3.4",
+    "title": "Agni Names Himself",
+    "art": "agni-identity",
+    "english": "He ran towards it. It asked him, “Who are you?” He replied, “I am Agni; I am Jātavedas.”",
+    "focus": "The dialogue distinguishes naming oneself from understanding the source of one's ability. The Sanskrit contains both self-identifications in full.",
+    "anchor": "Consider what a name or title tells us—and what it leaves unanswered.",
+    "pdfPages": "26",
+    "section": "Agni and the limit of power",
+    "iast": "tadabhyadravattamabhyavadatko’sītyagnirvā ahamasmītyabravījjātavedā vā ahamasmīti ||",
+    "excerpt": false,
+    "sourceGroup": "3.4",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> &#x27;What power is in you?&#x27; &#x27;I can burn all that exists on earth.&#x27; Brahman placed a blade of grass and said: &#x27;Burn this.&#x27; Agni rushed at it with all his might and could not burn it.</div>",
-    "sanskrit": "किं त्वयि वीर्यमिति।<br>इदं सर्वं दहेयमिति।<br>तस्मै तृणं निदधौ।<br>तन्न शशाक दग्धुम्।",
-    "iast": "kiṃ tvayi vīryam iti |<br>idaṃ sarvaṃ daheyam iti |<br>tasmai tṛṇaṃ nidadhau |<br>tan na śaśāka dagdhum ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145056.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.04",
+    "words": [
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "अभ्यद्रवत्",
+        "iast": "abhyadravat",
+        "meaning": "ran towards; approached swiftly."
+      },
+      {
+        "sanskrit": "तम्",
+        "iast": "tam",
+        "meaning": "him; to him."
+      },
+      {
+        "sanskrit": "अभ्यवदत्",
+        "iast": "abhyavadat",
+        "meaning": "addressed; spoke to."
+      },
+      {
+        "sanskrit": "कः",
+        "iast": "kaḥ",
+        "meaning": "who?"
+      },
+      {
+        "sanskrit": "असि",
+        "iast": "asi",
+        "meaning": "you are."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "अग्निः",
+        "iast": "agniḥ",
+        "meaning": "Agni; fire."
+      },
+      {
+        "sanskrit": "वै",
+        "iast": "vai",
+        "meaning": "indeed; certainly. In connected Vedic text before a vowel it appears as वा."
+      },
+      {
+        "sanskrit": "अहम्",
+        "iast": "aham",
+        "meaning": "I."
+      },
+      {
+        "sanskrit": "अस्मि",
+        "iast": "asmi",
+        "meaning": "I am."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "अब्रवीत्",
+        "iast": "abravīt",
+        "meaning": "he said."
+      },
+      {
+        "sanskrit": "जातवेदाः",
+        "iast": "jātavedāḥ",
+        "meaning": "Jātavedas; an epithet of Agni, traditionally explained as knower of beings."
+      },
+      {
+        "sanskrit": "वै",
+        "iast": "vai",
+        "meaning": "indeed; certainly. In connected Vedic text before a vowel it appears as वा."
+      },
+      {
+        "sanskrit": "अहम्",
+        "iast": "aham",
+        "meaning": "I."
+      },
+      {
+        "sanskrit": "अस्मि",
+        "iast": "asmi",
+        "meaning": "I am."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.5",
-    "title": "Agni Returns Without an Answer",
-    "art": "fire-return",
-    "section": "Vāyu and the limit of breath",
-    "focus": "Agni’s admission makes room for the inquiry to continue. A failed demonstration does not need to become a false claim of understanding.",
-    "anchor": "Practice saying “I do not know” where that is the most accurate response.",
-    "sourceGroup": "3.5–3.8",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "तस्मिꣳस्त्वयि किं वीर्यमित्यपीदꣳ सर्वं दहेयं यदिदं पृथिव्यामिति ॥",
+    "shlokam": "3.5",
+    "title": "Agni Declares His Power",
+    "art": "agni-power",
+    "english": "“What power is in you?” it asked. “I could burn all this, whatever is on the earth,” he replied.",
+    "focus": "Agni makes a comprehensive claim. The test in the next mantra reduces that claim to a single blade of grass.",
+    "anchor": "Compare the breadth of the claim with the smallness of the coming test.",
+    "pdfPages": "26–27",
+    "section": "Agni and the limit of power",
+    "iast": "tasmiṃstvayi kiṃ vīryamityapīdaṃ sarvaṃ daheyaṃ yadidaṃ pṛthivyāmiti ||",
+    "excerpt": false,
+    "sourceGroup": "3.5",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> Agni returned, saying: &#x27;I could not find out what this Yakṣa is.&#x27; The gods then sent Vāyu.</div>",
-    "sanskrit": "ततो निववृते नैतदशकं विज्ञातुं",
-    "iast": "tato nivavṛte naitad aśakaṃ vijñātuṃ"
+    "sourceNote": "Vedic nasal signs in the continuous text are retained; तस्मिन् and इदम् restore the separated forms.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145056.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.05",
+    "words": [
+      {
+        "sanskrit": "तस्मिन्",
+        "iast": "tasmin",
+        "meaning": "in that one; in you of that description."
+      },
+      {
+        "sanskrit": "त्वयि",
+        "iast": "tvayi",
+        "meaning": "in you."
+      },
+      {
+        "sanskrit": "किम्",
+        "iast": "kim",
+        "meaning": "what?"
+      },
+      {
+        "sanskrit": "वीर्यम्",
+        "iast": "vīryam",
+        "meaning": "strength; power; capacity."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "अपि",
+        "iast": "api",
+        "meaning": "indeed; even (introducing the extent of the claim)."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "सर्वम्",
+        "iast": "sarvam",
+        "meaning": "all; the whole."
+      },
+      {
+        "sanskrit": "दहेयम्",
+        "iast": "daheyam",
+        "meaning": "I could burn."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "पृथिव्याम्",
+        "iast": "pṛthivyām",
+        "meaning": "on the earth."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.6",
-    "title": "Vāyu Declares His Power",
-    "art": "vayu-boast",
-    "section": "Vāyu and the limit of breath",
-    "focus": "Vāyu’s assertion echoes Agni’s. Changing from fire to wind does not yet change the assumption that power can disclose its own source.",
-    "anchor": "Distinguish being capable of an action from understanding everything that enables it.",
-    "sourceGroup": "3.5–3.8",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "तस्मै तृणं निदधावेतद्दहेति । तदुपप्रेयाय सर्वजवेन तन्न शशाक दग्धुं स तत एव निववृते नैतदशकं विज्ञातुं यदेतद्यक्षमिति ॥",
+    "shlokam": "3.6",
+    "title": "The Grass Agni Cannot Burn",
+    "art": "grass",
+    "english": "It placed a blade of grass before him: “Burn this.” He approached with all his force but could not burn it. He returned from there, saying, “I could not discover what this wondrous being is.”",
+    "focus": "The command, the attempt, the failure and the report are all parts of one mantra. An excerpt containing only the failed burning leaves the episode incomplete.",
+    "anchor": "Notice the difference between power exercised and power presumed independent.",
+    "pdfPages": "27",
+    "section": "Agni and the limit of power",
+    "iast": "tasmai tṛṇaṃ nidadhāvetaddaheti | tadupapreyāya sarvajavena tanna śaśāka dagdhuṃ sa tata eva nivavṛte naitadaśakaṃ vijñātuṃ yadetadyakṣamiti ||",
+    "excerpt": false,
+    "sourceGroup": "3.6",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> &#x27;I am Vāyu, I am Mātariśvan (the all-pervading wind).&#x27; &#x27;What power is in you?&#x27; &#x27;I can blow away all that exists on earth.&#x27;</div>",
-    "sanskrit": "वायुर्वा अहमस्मि इत्यब्रवीत्।<br>मातरिश्वा वा अहमस्मि।<br>इदं सर्वमाददीयेति।",
-    "iast": "vāyur vā aham asmi ity abravīt |<br>mātariśvā vā aham asmi |<br>idam sarvam ādadīyeti |"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145056.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.06",
+    "words": [
+      {
+        "sanskrit": "तस्मै",
+        "iast": "tasmai",
+        "meaning": "to him; before him."
+      },
+      {
+        "sanskrit": "तृणम्",
+        "iast": "tṛṇam",
+        "meaning": "a blade of grass; a straw."
+      },
+      {
+        "sanskrit": "निदधौ",
+        "iast": "nidadhau",
+        "meaning": "placed; set down."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "दह",
+        "iast": "daha",
+        "meaning": "burn (imperative)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "उपप्रेयाय",
+        "iast": "upapreyāya",
+        "meaning": "approached; went up to."
+      },
+      {
+        "sanskrit": "सर्वजवेन",
+        "iast": "sarvajavena",
+        "meaning": "with full speed; with all one's force."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "शशाक",
+        "iast": "śaśāka",
+        "meaning": "was able."
+      },
+      {
+        "sanskrit": "दग्धुम्",
+        "iast": "dagdhum",
+        "meaning": "to burn."
+      },
+      {
+        "sanskrit": "सः",
+        "iast": "saḥ",
+        "meaning": "he; that one."
+      },
+      {
+        "sanskrit": "ततः",
+        "iast": "tataḥ",
+        "meaning": "from there; then; from that."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "निववृते",
+        "iast": "nivavṛte",
+        "meaning": "returned; turned back."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "अशकम्",
+        "iast": "aśakam",
+        "meaning": "I was able (with न: I was unable)."
+      },
+      {
+        "sanskrit": "विज्ञातुम्",
+        "iast": "vijñātum",
+        "meaning": "to recognize; to ascertain."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "यक्षम्",
+        "iast": "yakṣam",
+        "meaning": "the mysterious, wondrous or venerable being."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.7",
-    "title": "The Grass Vāyu Cannot Move",
-    "art": "wind",
-    "section": "Vāyu and the limit of breath",
-    "focus": "The unmoved grass repeats the lesson in another element. The source of breath is not mastered by increasing the force of breathing.",
-    "anchor": "Observe one ordinary, unforced breath without trying to control or improve it.",
-    "sourceGroup": "3.5–3.8",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "अथ वायुमब्रुवन्वायवेतद्विजानीहि किमेतद्यक्षमिति तथेति ॥",
+    "shlokam": "3.7",
+    "title": "Vāyu Is Sent to Inquire",
+    "art": "vayu-sent",
+    "english": "Then they said to Vāyu, “Vāyu, find out what this wondrous being is.” “So be it,” he replied.",
+    "focus": "The parallel with Agni begins with a fresh commission. This is not yet Vāyu's boast or the grass test.",
+    "anchor": "Read this beside 3.3 and notice the deliberate narrative repetition.",
+    "pdfPages": "28",
+    "section": "Vāyu and the limit of power",
+    "iast": "atha vāyumabruvanvāyavetadvijānīhi kimetadyakṣamiti tatheti ||",
+    "excerpt": false,
+    "sourceGroup": "3.7",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> Brahman placed a blade of grass. Vāyu rushed at it with all his force and could not move it. Vāyu returned equally baffled.</div>",
-    "sanskrit": "तस्मै तृणं निदधौ।<br>तन्न शशाकादातुम्।",
-    "iast": "tasmai tṛṇaṃ nidadhau |<br>tan na śaśākādātum ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145057.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.07",
+    "words": [
+      {
+        "sanskrit": "अथ",
+        "iast": "atha",
+        "meaning": "now; then; therefore."
+      },
+      {
+        "sanskrit": "वायुम्",
+        "iast": "vāyum",
+        "meaning": "Vāyu, the wind deity (as object)."
+      },
+      {
+        "sanskrit": "अब्रुवन्",
+        "iast": "abruvan",
+        "meaning": "they said."
+      },
+      {
+        "sanskrit": "वायो",
+        "iast": "vāyo",
+        "meaning": "O Vāyu (vocative); before एतत्, वायवेतत्."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "विजानीहि",
+        "iast": "vijānīhi",
+        "meaning": "find out; recognize (imperative)."
+      },
+      {
+        "sanskrit": "किम्",
+        "iast": "kim",
+        "meaning": "what?"
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "यक्षम्",
+        "iast": "yakṣam",
+        "meaning": "the mysterious, wondrous or venerable being."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "तथा",
+        "iast": "tathā",
+        "meaning": "so; yes (in the reply)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.8",
-    "title": "Vāyu Returns; Indra Approaches",
-    "art": "wind-return",
-    "section": "Vāyu and the limit of breath",
-    "focus": "The inquiry passes to Indra after another honest admission of limitation. The sequence now turns from display toward approach and receptivity.",
-    "anchor": "What becomes possible when proving an ability gives way to listening?",
-    "sourceGroup": "3.5–3.8",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीति वायुर्वा अहमस्मीत्यब्रवीन्मातरिश्वा वा अहमस्मीति ॥",
+    "shlokam": "3.8",
+    "title": "Vāyu Names Himself",
+    "art": "vayu-boast",
+    "english": "He ran towards it. It asked, “Who are you?” He replied, “I am Vāyu; I am Mātariśvan.”",
+    "focus": "Mātariśvan is another name for Vāyu. The two naming clauses are retained, including their repeated “I am.”",
+    "anchor": "Ask what is established by naming a capacity.",
+    "pdfPages": "28",
+    "section": "Vāyu and the limit of power",
+    "iast": "tadabhyadravattamabhyavadatko’sīti vāyurvā ahamasmītyabravīnmātariśvā vā ahamasmīti ||",
+    "excerpt": false,
+    "sourceGroup": "3.8",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> &#x27;I could not discover what this Yakṣa is.&#x27; Then the gods spoke to Indra: &#x27;O Maghavan, find out what this spirit is.&#x27;</div>",
-    "sanskrit": "ततो निववृते नैतदशकं विज्ञातुम्",
-    "iast": "tato nivavṛte naitad aśakaṃ vijñātum"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145057.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.08",
+    "words": [
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "अभ्यद्रवत्",
+        "iast": "abhyadravat",
+        "meaning": "ran towards; approached swiftly."
+      },
+      {
+        "sanskrit": "तम्",
+        "iast": "tam",
+        "meaning": "him; to him."
+      },
+      {
+        "sanskrit": "अभ्यवदत्",
+        "iast": "abhyavadat",
+        "meaning": "addressed; spoke to."
+      },
+      {
+        "sanskrit": "कः",
+        "iast": "kaḥ",
+        "meaning": "who?"
+      },
+      {
+        "sanskrit": "असि",
+        "iast": "asi",
+        "meaning": "you are."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "वायुः",
+        "iast": "vāyuḥ",
+        "meaning": "Vāyu; wind."
+      },
+      {
+        "sanskrit": "वै",
+        "iast": "vai",
+        "meaning": "indeed; certainly. In connected Vedic text before a vowel it appears as वा."
+      },
+      {
+        "sanskrit": "अहम्",
+        "iast": "aham",
+        "meaning": "I."
+      },
+      {
+        "sanskrit": "अस्मि",
+        "iast": "asmi",
+        "meaning": "I am."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "अब्रवीत्",
+        "iast": "abravīt",
+        "meaning": "he said."
+      },
+      {
+        "sanskrit": "मातरिश्वा",
+        "iast": "mātariśvā",
+        "meaning": "Mātariśvan; an epithet of Vāyu, the mover in space."
+      },
+      {
+        "sanskrit": "वै",
+        "iast": "vai",
+        "meaning": "indeed; certainly. In connected Vedic text before a vowel it appears as वा."
+      },
+      {
+        "sanskrit": "अहम्",
+        "iast": "aham",
+        "meaning": "I."
+      },
+      {
+        "sanskrit": "अस्मि",
+        "iast": "asmi",
+        "meaning": "I am."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.9",
-    "title": "Indra Encounters Umā",
-    "art": "uma-encounter",
-    "section": "From seeking to receiving instruction",
-    "focus": "The mysterious presence disappears and Umā is encountered. The sought-for answer arrives through a teacher rather than through capture.",
-    "anchor": "Notice when help takes a form different from the answer you expected.",
-    "sourceGroup": "3.9–3.12",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "तस्मिँस्त्वयि किं वीर्यमित्यपीदँ सर्वमाददीय यदिदं पृथिव्यामिति ॥",
+    "shlokam": "3.9",
+    "title": "Vāyu Declares His Power",
+    "art": "vayu-power",
+    "english": "“What power is in you?” it asked. “I could carry away all this, whatever is on the earth,” he replied.",
+    "focus": "The claim concerns taking up or carrying away. It prepares the contrast with the unmoved blade of grass.",
+    "anchor": "Compare Vāyu's claim with Agni's in 3.5.",
+    "pdfPages": "28–29",
+    "section": "Vāyu and the limit of power",
+    "iast": "tasmim̐stvayi kiṃ vīryamityapīdam̐ sarvamādadīya yadidaṃ pṛthivyāmiti ||",
+    "excerpt": false,
+    "sourceGroup": "3.9",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> Indra went toward it, but the Yakṣa disappeared. In that same direction, Indra saw a most beautiful woman — Uma, daughter of Himavat.</div>",
-    "sanskrit": "स तस्मिन्नेव आकाशे स्त्रियमाजगाम<br>बहुशोभमानाम् उमां हैमवतीम्।",
-    "iast": "sa tasminn eva ākāśe striyam ājagāma<br>bahuśobhamānām umāṃ haimavatīm |"
+    "sourceNote": "Vedic nasal signs in the continuous text are retained; तस्मिन् and इदम् restore the separated forms.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145057.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.09",
+    "words": [
+      {
+        "sanskrit": "तस्मिन्",
+        "iast": "tasmin",
+        "meaning": "in that one; in you of that description."
+      },
+      {
+        "sanskrit": "त्वयि",
+        "iast": "tvayi",
+        "meaning": "in you."
+      },
+      {
+        "sanskrit": "किम्",
+        "iast": "kim",
+        "meaning": "what?"
+      },
+      {
+        "sanskrit": "वीर्यम्",
+        "iast": "vīryam",
+        "meaning": "strength; power; capacity."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "अपि",
+        "iast": "api",
+        "meaning": "indeed; even (introducing the extent of the claim)."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "सर्वम्",
+        "iast": "sarvam",
+        "meaning": "all; the whole."
+      },
+      {
+        "sanskrit": "आददीय",
+        "iast": "ādadīya",
+        "meaning": "I could take up; carry away."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "इदम्",
+        "iast": "idam",
+        "meaning": "this."
+      },
+      {
+        "sanskrit": "पृथिव्याम्",
+        "iast": "pṛthivyām",
+        "meaning": "on the earth."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.10",
-    "title": "It Was Brahman",
-    "art": "uma",
-    "section": "From seeking to receiving instruction",
-    "focus": "Umā identifies the source of the victory. Her answer returns the story to its opening confusion about ownership and agency.",
-    "anchor": "Revisit a moment of pride with gratitude for what you did not create alone.",
-    "sourceGroup": "3.9–3.12",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "तस्मै तृणं निदधावेतदादत्स्वेति तदुपप्रेयाय सर्वजवेन तन्न शशाकादातुं स तत एव निववृते नैतदशकं विज्ञातुं यदेतद्यक्षमिति ॥",
+    "shlokam": "3.10",
+    "title": "The Grass Vāyu Cannot Move",
+    "art": "wind",
+    "english": "It placed a blade of grass before him: “Take this up.” He approached with all his force but could not lift it. He returned from there, saying, “I could not discover what this wondrous being is.”",
+    "focus": "The parallel test shows that a second power has the same limit. The full return and report are part of this mantra.",
+    "anchor": "Read the two failed tests together without losing their distinct actions.",
+    "pdfPages": "29",
+    "section": "Vāyu and the limit of power",
+    "iast": "tasmai tṛṇaṃ nidadhāvetadādatsveti tadupapreyāya sarvajavena tanna śaśākādātuṃ sa tata eva nivavṛte naitadaśakaṃ vijñātuṃ yadetadyakṣamiti ||",
+    "excerpt": false,
+    "sourceGroup": "3.10",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> He asked her: &#x27;What was that Yakṣa?&#x27; She replied: &#x27;It is Brahman. In Brahman&#x27;s victory you were elated. Know — it was Brahman&#x27;s victory, not yours.&#x27;</div>",
-    "sanskrit": "तां होवाच किमेतद्यक्षमिति।<br>ब्रह्मेति होवाच।",
-    "iast": "tāṃ hovāca kim etad yakṣam iti |<br>brahmeti hovāca ||"
+    "sourceNote": "शशाकादातुम् follows the supplied PDF and Shlokam. The Wisdomlib transcription prints an anomalous avagraha sequence here.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145057.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.10",
+    "words": [
+      {
+        "sanskrit": "तस्मै",
+        "iast": "tasmai",
+        "meaning": "to him; before him."
+      },
+      {
+        "sanskrit": "तृणम्",
+        "iast": "tṛṇam",
+        "meaning": "a blade of grass; a straw."
+      },
+      {
+        "sanskrit": "निदधौ",
+        "iast": "nidadhau",
+        "meaning": "placed; set down."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "आदत्स्व",
+        "iast": "ādatsva",
+        "meaning": "take up; carry away (imperative)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "उपप्रेयाय",
+        "iast": "upapreyāya",
+        "meaning": "approached; went up to."
+      },
+      {
+        "sanskrit": "सर्वजवेन",
+        "iast": "sarvajavena",
+        "meaning": "with full speed; with all one's force."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "शशाक",
+        "iast": "śaśāka",
+        "meaning": "was able."
+      },
+      {
+        "sanskrit": "आदातुम्",
+        "iast": "ādātum",
+        "meaning": "to take up; carry away."
+      },
+      {
+        "sanskrit": "सः",
+        "iast": "saḥ",
+        "meaning": "he; that one."
+      },
+      {
+        "sanskrit": "ततः",
+        "iast": "tataḥ",
+        "meaning": "from there; then; from that."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "निववृते",
+        "iast": "nivavṛte",
+        "meaning": "returned; turned back."
+      },
+      {
+        "sanskrit": "न",
+        "iast": "na",
+        "meaning": "not."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "अशकम्",
+        "iast": "aśakam",
+        "meaning": "I was able (with न: I was unable)."
+      },
+      {
+        "sanskrit": "विज्ञातुम्",
+        "iast": "vijñātum",
+        "meaning": "to recognize; to ascertain."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "यक्षम्",
+        "iast": "yakṣam",
+        "meaning": "the mysterious, wondrous or venerable being."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "3.11",
-    "title": "Indra Receives the Recognition",
-    "art": "indra-grace",
-    "section": "From seeking to receiving instruction",
-    "focus": "Indra’s distinction is connected with nearness and received instruction, not with a stronger display of force.",
-    "anchor": "What does receiving a teaching ask of you that demonstrating a skill does not?",
-    "sourceGroup": "3.9–3.12",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "अथेन्द्रमब्रुवन्मघवन्नेतद्विजानीहि किमेतद्यक्षमिति तथेति तदभ्यद्रवत्तस्मात्तिरोदधे ॥",
+    "shlokam": "3.11",
+    "title": "Indra Approaches; It Vanishes",
+    "art": "indra-vanishing",
+    "english": "Then they said to Indra, “Maghavan, find out what this wondrous being is.” “So be it,” he replied. He ran towards it, but it disappeared from him.",
+    "focus": "Indra does not receive a third grass test. The disappearance leads into a different way of learning in the next passage.",
+    "anchor": "Pause at the disappearance before reading the explanation.",
+    "pdfPages": "29–30",
+    "section": "From seeking to receiving instruction",
+    "iast": "athendramabruvanmaghavannetadvijānīhi kimetadyakṣamiti tatheti tadabhyadravattasmāttirodadhe ||",
+    "excerpt": false,
+    "sourceGroup": "3.11",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> For this reason Indra excels all other gods — he came closest to Brahman, and Uma gave him knowledge of Brahman directly.</div>",
-    "sanskrit": "स ह्येनन्नेदिष्ठं पस्पर्श।<br>स हैनत्प्रथमो विदाञ्चकार ब्रह्मेति।",
-    "iast": "sa hy enan nediṣṭhaṃ pasparśa |<br>sa hainat prathamo vidāñcakāra brahmeti ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145058.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.11",
+    "words": [
+      {
+        "sanskrit": "अथ",
+        "iast": "atha",
+        "meaning": "now; then; therefore."
+      },
+      {
+        "sanskrit": "इन्द्रम्",
+        "iast": "indram",
+        "meaning": "Indra (as object)."
+      },
+      {
+        "sanskrit": "अब्रुवन्",
+        "iast": "abruvan",
+        "meaning": "they said."
+      },
+      {
+        "sanskrit": "मघवन्",
+        "iast": "maghavan",
+        "meaning": "O Maghavan; an epithet of Indra."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "विजानीहि",
+        "iast": "vijānīhi",
+        "meaning": "find out; recognize (imperative)."
+      },
+      {
+        "sanskrit": "किम्",
+        "iast": "kim",
+        "meaning": "what?"
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "यक्षम्",
+        "iast": "yakṣam",
+        "meaning": "the mysterious, wondrous or venerable being."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "तथा",
+        "iast": "tathā",
+        "meaning": "so; yes (in the reply)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "अभ्यद्रवत्",
+        "iast": "abhyadravat",
+        "meaning": "ran towards; approached swiftly."
+      },
+      {
+        "sanskrit": "तस्मात्",
+        "iast": "tasmāt",
+        "meaning": "from him; therefore (according to context)."
+      },
+      {
+        "sanskrit": "तिरोदधे",
+        "iast": "tirodadhe",
+        "meaning": "disappeared; withdrew from view."
+      }
+    ]
   },
   {
     "number": "3.12",
-    "title": "Those Who Came Closest",
-    "art": "proximity",
-    "section": "From seeking to receiving instruction",
-    "focus": "The narrative singles out the gods who approached the mystery. Their importance belongs to the inquiry and encounter, not to unlimited power.",
-    "anchor": "Consider how sincere approach can matter even before an answer is understood.",
-    "sourceGroup": "3.9–3.12",
     "kh": 3,
-    "excerpt": true,
+    "sanskrit": "स तस्मिन्नेवाकाशे स्त्रियमाजगाम बहुशोभमानामुमाँ हैमवतीं ताँहोवाच किमेतद्यक्षमिति ॥",
+    "shlokam": "3.12",
+    "title": "Indra Encounters Umā",
+    "art": "uma-encounter",
+    "english": "In that same space he encountered a woman of great radiance, Umā Haimavatī. He asked her, “What was this wondrous being?”",
+    "focus": "The question to Umā concludes this chapter; her answer begins 4.1. Haimavatī is traditionally explained in relation to Himavat, with an alternative explanation referring to golden adornment.",
+    "anchor": "Notice the shift from declaring power to asking for instruction.",
+    "pdfPages": "30",
+    "section": "From seeking to receiving instruction",
+    "iast": "sa tasminnevākāśe striyamājagāma bahuśobhamānāmumām̐ haimavatīṃ tām̐hovāca kimetadyakṣamiti ||",
+    "excerpt": false,
+    "sourceGroup": "3.12",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> For this reason Indra, Vāyu, and Agni are the foremost among the gods — Indra above all — for he touched Brahman most closely.</div>",
-    "sanskrit": "तस्माद्वा एते देवा अतितराम् इवान्यान् देवान्<br>यदग्निर्वायुरिन्द्रस्ते ह्येनन्नेदिष्ठं पस्पर्शुः।",
-    "iast": "tasmād vā ete devā atitarām ivānyān devān<br>yad agnir vāyur indras te hy enan nediṣṭhaṃ pasparśuḥ ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145058.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.3.12",
+    "words": [
+      {
+        "sanskrit": "सः",
+        "iast": "saḥ",
+        "meaning": "he; that one."
+      },
+      {
+        "sanskrit": "तस्मिन्",
+        "iast": "tasmin",
+        "meaning": "in that one; in you of that description."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "आकाशे",
+        "iast": "ākāśe",
+        "meaning": "in the space; in that place in the sky."
+      },
+      {
+        "sanskrit": "स्त्रियम्",
+        "iast": "striyam",
+        "meaning": "a woman (as object)."
+      },
+      {
+        "sanskrit": "आजगाम",
+        "iast": "ājagāma",
+        "meaning": "came upon; encountered."
+      },
+      {
+        "sanskrit": "बहुशोभमानाम्",
+        "iast": "bahuśobhamānām",
+        "meaning": "shining greatly; exceedingly beautiful."
+      },
+      {
+        "sanskrit": "उमाम्",
+        "iast": "umām",
+        "meaning": "Umā (as object)."
+      },
+      {
+        "sanskrit": "हैमवतीम्",
+        "iast": "haimavatīm",
+        "meaning": "Haimavatī; associated with Himavat. Traditional explanations include Himavat's daughter and one adorned with gold."
+      },
+      {
+        "sanskrit": "ताम्",
+        "iast": "tām",
+        "meaning": "her; to her."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "उवाच",
+        "iast": "uvāca",
+        "meaning": "said."
+      },
+      {
+        "sanskrit": "किम्",
+        "iast": "kim",
+        "meaning": "what?"
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "यक्षम्",
+        "iast": "yakṣam",
+        "meaning": "the mysterious, wondrous or venerable being."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "4.1",
-    "title": "Agni, Vāyu and Indra",
-    "art": "nearness",
-    "section": "Nearness and recognition",
-    "focus": "This passage identifies the three gods whose encounter brought them closest to the mystery. It gathers the narrative into a teaching about proximity.",
-    "anchor": "Recall a question that became clearer because you stayed close to it.",
-    "sourceGroup": "4.1–4.3",
     "kh": 4,
-    "excerpt": true,
+    "sanskrit": "सा ब्रह्मेति होवाच ब्रह्मणो वा एतद्विजये महीयध्वमिति ततो हैव विदाञ्चकार ब्रह्मेति ॥",
+    "shlokam": "4.1",
+    "title": "Umā Reveals Brahman",
+    "art": "uma",
+    "english": "She said, “It was Brahman. In Brahman's victory you became exalted.” From her words he came to know that it was Brahman.",
+    "focus": "Recognition follows instruction. This is the answer to the question at the end of 3.12, not a continuation of the earlier grass tests.",
+    "anchor": "Read the question and answer together across the chapter boundary.",
+    "pdfPages": "31",
+    "section": "Recognition through instruction",
+    "iast": "sā brahmeti hovāca brahmaṇo vā etadvijaye mahīyadhvamiti tato haiva vidāñcakāra brahmeti ||",
+    "excerpt": false,
+    "sourceGroup": "4.1",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading · editorial adaptation:</strong> Agni, Vāyu and Indra stand out among the gods in this account of approaching Brahman.</div>",
-    "sanskrit": "तस्माद्वा एते देवा अतितराम् इवान्यान् देवान्<br>यदग्निर्वायुरिन्द्रः।",
-    "iast": "tasmād vā ete devā atitarām ivānyān devān<br>yad agnir vāyur indraḥ |"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145060.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.4.01",
+    "words": [
+      {
+        "sanskrit": "सा",
+        "iast": "sā",
+        "meaning": "she."
+      },
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "उवाच",
+        "iast": "uvāca",
+        "meaning": "said."
+      },
+      {
+        "sanskrit": "ब्रह्मणः",
+        "iast": "brahmaṇaḥ",
+        "meaning": "of Brahman."
+      },
+      {
+        "sanskrit": "वै",
+        "iast": "vai",
+        "meaning": "indeed; certainly. In connected Vedic text before a vowel it appears as वा."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "विजये",
+        "iast": "vijaye",
+        "meaning": "in the victory."
+      },
+      {
+        "sanskrit": "महीयध्वम्",
+        "iast": "mahīyadhvam",
+        "meaning": "you have taken glory; are exalted."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "ततः",
+        "iast": "tataḥ",
+        "meaning": "from there; then; from that."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "एव",
+        "iast": "eva",
+        "meaning": "alone; precisely; indeed."
+      },
+      {
+        "sanskrit": "विदाञ्चकार",
+        "iast": "vidāñcakāra",
+        "meaning": "came to know; understood (periphrastic perfect of √vid)."
+      },
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "4.2",
-    "title": "Indra’s Nearness",
-    "art": "indra-recognition",
-    "section": "Nearness and recognition",
-    "focus": "Attention narrows from the three gods to Indra’s nearness. The emphasis is receptivity rather than a claim to control Brahman.",
-    "anchor": "Can you approach a question with less need to demonstrate mastery?",
-    "sourceGroup": "4.1–4.3",
     "kh": 4,
-    "excerpt": true,
+    "sanskrit": "तस्माद्वा एते देवा अतितरामिवान्यान्देवान्यदग्निर्वायुरिन्द्रस्ते ह्येनन्नेदिष्ठं पस्पर्शुस्ते ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥",
+    "shlokam": "4.2",
+    "title": "Agni, Vāyu and Indra",
+    "art": "proximity",
+    "english": "Therefore these gods—Agni, Vāyu and Indra—excel the other gods, as it were: they approached it most closely and were the first to know that it was Brahman.",
+    "focus": "The text praises the three who approached. Its inherited Vedic singular phrasing in the second clause is explained collectively in the commentarial reading; it is not silently rewritten into classical plural Sanskrit.",
+    "anchor": "Distinguish approaching the mystery from independently mastering it.",
+    "pdfPages": "31–32",
+    "section": "Recognition through instruction",
+    "iast": "tasmādvā ete devā atitarāmivānyāndevānyadagnirvāyurindraste hyenannediṣṭhaṃ pasparśuste hyenatprathamo vidāñcakāra brahmeti ||",
+    "excerpt": false,
+    "sourceGroup": "4.2",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading · editorial adaptation:</strong> Indra came closest to it.</div>",
-    "sanskrit": "स ह्येनन्नेदिष्ठं पस्पर्श।",
-    "iast": "sa hy enan nediṣṭhaṃ pasparśa |"
+    "sourceNote": "The inherited singular प्रथमः विदाञ्चकार is retained. The commentary explains the statement collectively; the Sanskrit has not been regularized into a plural.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145061.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.4.02",
+    "words": [
+      {
+        "sanskrit": "तस्मात्",
+        "iast": "tasmāt",
+        "meaning": "from him; therefore (according to context)."
+      },
+      {
+        "sanskrit": "वै",
+        "iast": "vai",
+        "meaning": "indeed; certainly. In connected Vedic text before a vowel it appears as वा."
+      },
+      {
+        "sanskrit": "एते",
+        "iast": "ete",
+        "meaning": "these."
+      },
+      {
+        "sanskrit": "देवाः",
+        "iast": "devāḥ",
+        "meaning": "the gods."
+      },
+      {
+        "sanskrit": "अतितराम्",
+        "iast": "atitarām",
+        "meaning": "exceedingly; far beyond."
+      },
+      {
+        "sanskrit": "इव",
+        "iast": "iva",
+        "meaning": "as if; as it were; like."
+      },
+      {
+        "sanskrit": "अन्यान्",
+        "iast": "anyān",
+        "meaning": "other (accusative plural)."
+      },
+      {
+        "sanskrit": "देवान्",
+        "iast": "devān",
+        "meaning": "gods (accusative plural)."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "अग्निः",
+        "iast": "agniḥ",
+        "meaning": "Agni; fire."
+      },
+      {
+        "sanskrit": "वायुः",
+        "iast": "vāyuḥ",
+        "meaning": "Vāyu; wind."
+      },
+      {
+        "sanskrit": "इन्द्रः",
+        "iast": "indraḥ",
+        "meaning": "Indra."
+      },
+      {
+        "sanskrit": "ते",
+        "iast": "te",
+        "meaning": "they; Agni, Vāyu and Indra."
+      },
+      {
+        "sanskrit": "हि",
+        "iast": "hi",
+        "meaning": "for; indeed."
+      },
+      {
+        "sanskrit": "एनत्",
+        "iast": "enat",
+        "meaning": "this; it (referring to Brahman)."
+      },
+      {
+        "sanskrit": "नेदिष्ठम्",
+        "iast": "nediṣṭham",
+        "meaning": "nearest; most closely."
+      },
+      {
+        "sanskrit": "पस्पर्शुः",
+        "iast": "pasparśuḥ",
+        "meaning": "they touched; approached closely. Vedic form; some texts print पस्पृशुः."
+      },
+      {
+        "sanskrit": "ते",
+        "iast": "te",
+        "meaning": "they; Agni, Vāyu and Indra."
+      },
+      {
+        "sanskrit": "हि",
+        "iast": "hi",
+        "meaning": "for; indeed."
+      },
+      {
+        "sanskrit": "एनत्",
+        "iast": "enat",
+        "meaning": "this; it (referring to Brahman)."
+      },
+      {
+        "sanskrit": "प्रथमः",
+        "iast": "prathamaḥ",
+        "meaning": "first; foremost."
+      },
+      {
+        "sanskrit": "विदाञ्चकार",
+        "iast": "vidāñcakāra",
+        "meaning": "came to know; understood (periphrastic perfect of √vid)."
+      },
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "4.3",
-    "title": "The First Recognition",
-    "art": "first-knower",
-    "section": "Nearness and recognition",
-    "focus": "The emphasis falls on the recognition “It is Brahman.” The story moves from approaching the mystery to receiving its identification.",
-    "anchor": "Distinguish the search for an answer from the moment an explanation is actually heard.",
-    "sourceGroup": "4.1–4.3",
     "kh": 4,
-    "excerpt": true,
+    "sanskrit": "तस्माद्वा इन्द्रोऽतितरामिवान्यान्देवान्स ह्येनन्नेदिष्ठं पस्पर्श स ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥",
+    "shlokam": "4.3",
+    "title": "Indra's Particular Nearness",
+    "art": "indra-recognition",
+    "english": "Therefore Indra excels the other gods, as it were: he approached it most closely and was the first to know that it was Brahman.",
+    "focus": "The preceding collective statement is now focused on Indra, who received Umā's instruction. Both reasons for his distinction are included.",
+    "anchor": "Consider the role of receiving instruction in recognition.",
+    "pdfPages": "32",
+    "section": "Recognition through instruction",
+    "iast": "tasmādvā indro’titarāmivānyāndevānsa hyenannediṣṭhaṃ pasparśa sa hyenatprathamo vidāñcakāra brahmeti ||",
+    "excerpt": false,
+    "sourceGroup": "4.3",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading · editorial adaptation:</strong> He was the first to recognize it as Brahman.</div>",
-    "sanskrit": "स हैनत्प्रथमो विदाञ्चकार ब्रह्मेति।",
-    "iast": "sa hainat prathamo vidāñcakāra brahmeti ||"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145062.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.4.03",
+    "words": [
+      {
+        "sanskrit": "तस्मात्",
+        "iast": "tasmāt",
+        "meaning": "from him; therefore (according to context)."
+      },
+      {
+        "sanskrit": "वै",
+        "iast": "vai",
+        "meaning": "indeed; certainly. In connected Vedic text before a vowel it appears as वा."
+      },
+      {
+        "sanskrit": "इन्द्रः",
+        "iast": "indraḥ",
+        "meaning": "Indra."
+      },
+      {
+        "sanskrit": "अतितराम्",
+        "iast": "atitarām",
+        "meaning": "exceedingly; far beyond."
+      },
+      {
+        "sanskrit": "इव",
+        "iast": "iva",
+        "meaning": "as if; as it were; like."
+      },
+      {
+        "sanskrit": "अन्यान्",
+        "iast": "anyān",
+        "meaning": "other (accusative plural)."
+      },
+      {
+        "sanskrit": "देवान्",
+        "iast": "devān",
+        "meaning": "gods (accusative plural)."
+      },
+      {
+        "sanskrit": "सः",
+        "iast": "saḥ",
+        "meaning": "he; that one."
+      },
+      {
+        "sanskrit": "हि",
+        "iast": "hi",
+        "meaning": "for; indeed."
+      },
+      {
+        "sanskrit": "एनत्",
+        "iast": "enat",
+        "meaning": "this; it (referring to Brahman)."
+      },
+      {
+        "sanskrit": "नेदिष्ठम्",
+        "iast": "nediṣṭham",
+        "meaning": "nearest; most closely."
+      },
+      {
+        "sanskrit": "पस्पर्श",
+        "iast": "pasparśa",
+        "meaning": "he touched; approached closely."
+      },
+      {
+        "sanskrit": "सः",
+        "iast": "saḥ",
+        "meaning": "he; that one."
+      },
+      {
+        "sanskrit": "हि",
+        "iast": "hi",
+        "meaning": "for; indeed."
+      },
+      {
+        "sanskrit": "एनत्",
+        "iast": "enat",
+        "meaning": "this; it (referring to Brahman)."
+      },
+      {
+        "sanskrit": "प्रथमः",
+        "iast": "prathamaḥ",
+        "meaning": "first; foremost."
+      },
+      {
+        "sanskrit": "विदाञ्चकार",
+        "iast": "vidāñcakāra",
+        "meaning": "came to know; understood (periphrastic perfect of √vid)."
+      },
+      {
+        "sanskrit": "ब्रह्म",
+        "iast": "brahma",
+        "meaning": "Brahman; the absolute reality (neuter, not the creator Brahmā)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "4.4",
-    "title": "The Lightning Analogy",
-    "art": "brief-flash",
-    "section": "Indication, remembrance and instruction",
-    "focus": "The lightning image points to sudden illumination. Its role is an analogy for recognition, not a demand for a dramatic experience.",
-    "anchor": "Notice how an ordinary moment can be clear before a story about it begins.",
-    "sourceGroup": "4.4–4.6",
     "kh": 4,
+    "sanskrit": "तस्यैष आदेशो यदेतद्विद्युतो व्यद्युतदा३ इतीन् न्यमीमिषदा३ इत्यधिदैवतम् ॥",
+    "shlokam": "4.4",
+    "title": "Lightning and the Blink of an Eye",
+    "art": "brief-flash",
+    "english": "This is the indication of it: like a flash of lightning, like the blink of an eye. This is the teaching with reference to the gods.",
+    "focus": "These are analogies of sudden manifestation, not definitions of Brahman. The prolonged ā, marked by ३, is read comparatively: “like” or “as it were.” Sarvananda also records an alternative reading in terms of Brahman's command in nature.",
+    "anchor": "Let the brevity of a flash suggest the limit of holding recognition as an object.",
+    "pdfPages": "33",
+    "section": "Analogy, contemplation and foundation",
+    "iast": "tasyaiṣa ādeśo yadetadvidyuto vyadyutadā3 itīn nyamīmiṣadā3 ityadhidaivatam ||",
     "excerpt": false,
+    "sourceGroup": "4.4",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading · editorial adaptation:</strong> The teaching uses a flash of lightning and the blink of an eye as its divine analogy.</div>",
-    "sanskrit": "तस्यैष आदेशो यद्विद्युत् व्यद्युतदा इतीन्न्यमीमिषदा इत्यधिदैवतम्॥",
-    "iast": "tasyaiṣa ādeśo yad vidyut vyadyutadā iti — ninyan mīmīṣadā iti — adhidaivatam |"
+    "sourceNote": "आ३ marks a prolonged ā, not a verse number. The separated sequence इति इद् न्यमीमिषत् accounts for the connected इतीन् न्यमीमिषत्. Some web transcriptions print आ उ in place of the pluta mark.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145063.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.4.04",
+    "words": [
+      {
+        "sanskrit": "तस्य",
+        "iast": "tasya",
+        "meaning": "of that; for that person."
+      },
+      {
+        "sanskrit": "एषः",
+        "iast": "eṣaḥ",
+        "meaning": "this (masculine)."
+      },
+      {
+        "sanskrit": "आदेशः",
+        "iast": "ādeśaḥ",
+        "meaning": "instruction; indication by analogy."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "विद्युतः",
+        "iast": "vidyutaḥ",
+        "meaning": "of lightning."
+      },
+      {
+        "sanskrit": "व्यद्युतत्",
+        "iast": "vyadyutat",
+        "meaning": "flashed; shone forth."
+      },
+      {
+        "sanskrit": "आ३",
+        "iast": "ā3",
+        "meaning": "like; as it were. The ३ marks a prolonged (pluta) vowel, not a verse number."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "इद्",
+        "iast": "id",
+        "meaning": "and; also (Vedic connecting particle)."
+      },
+      {
+        "sanskrit": "न्यमीमिषत्",
+        "iast": "nyamīmiṣat",
+        "meaning": "blinked; closed the eyes for an instant."
+      },
+      {
+        "sanskrit": "आ३",
+        "iast": "ā3",
+        "meaning": "like; as it were. The ३ marks a prolonged (pluta) vowel, not a verse number."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "अधिदैवतम्",
+        "iast": "adhidaivatam",
+        "meaning": "with reference to the gods; the divine or cosmic perspective."
+      }
+    ]
   },
   {
     "number": "4.5",
-    "title": "Repeated Remembrance",
-    "art": "returning-mind",
-    "section": "Indication, remembrance and instruction",
-    "focus": "The teaching turns inward: attention repeatedly returns, as though the mind were approaching what already makes its activity known.",
-    "anchor": "Let one gentle return of attention be enough; no special state needs to be forced.",
-    "sourceGroup": "4.4–4.6",
     "kh": 4,
+    "sanskrit": "अथाध्यात्मं यदेतद्गच्छतीव च मनोऽनेन चैतदुपस्मरत्यभीक्ष्णँ सङ्कल्पः ॥",
+    "shlokam": "4.5",
+    "title": "The Mind's Repeated Remembrance",
+    "art": "returning-mind",
+    "english": "Now the inward indication: the mind seems to go towards it; through the mind one repeatedly recalls it. Such is the thought or resolve directed towards it.",
+    "focus": "The “as if” matters: the mind does not travel to Brahman as to a separate physical destination. The Sanskrit verb for recollection is singular upasmarati.",
+    "anchor": "Return gently to the awareness of the present thought.",
+    "pdfPages": "34",
+    "section": "Analogy, contemplation and foundation",
+    "iast": "athādhyātmaṃ yadetadgacchatīva ca mano’nena caitadupasmaratyabhīkṣṇam̐ saṅkalpaḥ ||",
     "excerpt": false,
+    "sourceGroup": "4.5",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading · editorial adaptation:</strong> In the inward analogy, the mind seems to move toward it and repeatedly remembers it through intention.</div>",
-    "sanskrit": "अथाध्यात्मं यदेतद्गच्छतीव च मनोऽनेन<br>चैतदुपस्मरत्यभीक्ष्णं सङ्कल्पः॥",
-    "iast": "athādhyātmaṃ yad etad gacchatīva ca mano'nena caitad upasmaranty abhīkṣṇaṃ saṅkalpaḥ ||"
+    "sourceNote": "यदेतद् follows the supplied PDF and Shlokam; Sanskrit Documents prints यद्देतद्. उपस्मरति is singular; the former app’s plural IAST was incorrect.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145064.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.4.05",
+    "words": [
+      {
+        "sanskrit": "अथ",
+        "iast": "atha",
+        "meaning": "now; then; therefore."
+      },
+      {
+        "sanskrit": "अध्यात्मम्",
+        "iast": "adhyātmam",
+        "meaning": "with reference to the individual Self; the inward perspective."
+      },
+      {
+        "sanskrit": "यत्",
+        "iast": "yat",
+        "meaning": "which; that which; because (according to the construction)."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "गच्छति",
+        "iast": "gacchati",
+        "meaning": "goes; reaches."
+      },
+      {
+        "sanskrit": "इव",
+        "iast": "iva",
+        "meaning": "as if; as it were; like."
+      },
+      {
+        "sanskrit": "च",
+        "iast": "ca",
+        "meaning": "and."
+      },
+      {
+        "sanskrit": "मनः",
+        "iast": "manaḥ",
+        "meaning": "mind."
+      },
+      {
+        "sanskrit": "अनेन",
+        "iast": "anena",
+        "meaning": "by this; through this mind."
+      },
+      {
+        "sanskrit": "च",
+        "iast": "ca",
+        "meaning": "and."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "उपस्मरति",
+        "iast": "upasmarati",
+        "meaning": "recalls; remembers closely (singular)."
+      },
+      {
+        "sanskrit": "अभीक्ष्णम्",
+        "iast": "abhīkṣṇam",
+        "meaning": "repeatedly; continually."
+      },
+      {
+        "sanskrit": "सङ्कल्पः",
+        "iast": "saṅkalpaḥ",
+        "meaning": "thought; resolve; an intentional turning of the mind."
+      }
+    ]
   },
   {
     "number": "4.6",
-    "title": "The Teaching Has Been Given",
-    "art": "teaching-given",
-    "section": "Indication, remembrance and instruction",
-    "focus": "The request for another teaching is answered by pointing back to what has already been said. The task becomes assimilation rather than collecting more formulations.",
-    "anchor": "Re-read one sentence slowly before seeking another explanation.",
-    "sourceGroup": "4.4–4.6",
     "kh": 4,
+    "sanskrit": "तद्ध तद्वनं नाम तद्वनमित्युपासितव्यं स य एतदेवं वेदाभि हैनꣳ सर्वाणि भूतानि संवाञ्छन्ति ॥",
+    "shlokam": "4.6",
+    "title": "Tadvanam: The Adorable",
+    "art": "delight",
+    "english": "It is called Tadvanam, the adorable; as Tadvanam it should be contemplated. All beings are drawn towards the one who knows it in this way.",
+    "focus": "The name appears twice in the mantra. The instruction concerns contemplation under that name and its stated fruit.",
+    "anchor": "Consider what is worthy of love beyond usefulness or possession.",
+    "pdfPages": "34–35",
+    "section": "Analogy, contemplation and foundation",
+    "iast": "taddha tadvanaṃ nāma tadvanamityupāsitavyaṃ sa ya etadevaṃ vedābhi hainaṃ sarvāṇi bhūtāni saṃvāñchanti ||",
     "excerpt": false,
+    "sourceGroup": "4.6",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> The disciple asks: &#x27;Tell me the Upaniṣad.&#x27; The teacher says: &#x27;The Upaniṣad has been told to you.&#x27;</div>",
-    "sanskrit": "उपनिषदं भो ब्रूहीत्युक्ता त उपनिषत्।",
-    "iast": "upaniṣadaṃ bho brūhīty uktā ta upaniṣat |"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145065.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.4.06",
+    "words": [
+      {
+        "sanskrit": "तत्",
+        "iast": "tat",
+        "meaning": "that; it."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "तद्वनम्",
+        "iast": "tadvanam",
+        "meaning": "Tadvanam; That which is adored or desired by all."
+      },
+      {
+        "sanskrit": "नाम",
+        "iast": "nāma",
+        "meaning": "by name; called."
+      },
+      {
+        "sanskrit": "तद्वनम्",
+        "iast": "tadvanam",
+        "meaning": "Tadvanam; That which is adored or desired by all."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "उपासितव्यम्",
+        "iast": "upāsitavyam",
+        "meaning": "to be meditated upon; to be worshipped."
+      },
+      {
+        "sanskrit": "सः",
+        "iast": "saḥ",
+        "meaning": "he; that one."
+      },
+      {
+        "sanskrit": "यः",
+        "iast": "yaḥ",
+        "meaning": "who; whoever."
+      },
+      {
+        "sanskrit": "एतत्",
+        "iast": "etat",
+        "meaning": "this; that which is under discussion."
+      },
+      {
+        "sanskrit": "एवम्",
+        "iast": "evam",
+        "meaning": "thus; in this way."
+      },
+      {
+        "sanskrit": "वेद",
+        "iast": "veda",
+        "meaning": "knows; I know (as spoken in the first-person passages)."
+      },
+      {
+        "sanskrit": "अभि",
+        "iast": "abhi",
+        "meaning": "towards."
+      },
+      {
+        "sanskrit": "ह",
+        "iast": "ha",
+        "meaning": "indeed; traditionally, it is said (a Vedic particle)."
+      },
+      {
+        "sanskrit": "एनम्",
+        "iast": "enam",
+        "meaning": "him; this person."
+      },
+      {
+        "sanskrit": "सर्वाणि",
+        "iast": "sarvāṇi",
+        "meaning": "all (neuter plural)."
+      },
+      {
+        "sanskrit": "भूतानि",
+        "iast": "bhūtāni",
+        "meaning": "beings; creatures."
+      },
+      {
+        "sanskrit": "संवाञ्छन्ति",
+        "iast": "saṃvāñchanti",
+        "meaning": "long for; love; desire."
+      }
+    ]
   },
   {
     "number": "4.7",
-    "title": "The Threefold Foundation",
-    "art": "foundation",
-    "section": "Foundation, truth and establishment",
-    "focus": "Tapas, dama and karma name the practical support for knowledge. Discipline, restraint and right action give inquiry a foundation in living.",
-    "anchor": "Choose one small action today that joins steadiness, restraint and care.",
-    "sourceGroup": "4.7–4.9",
     "kh": 4,
+    "sanskrit": "उपनिषदं भो ब्रूहीत्युक्ता त उपनिषद्ब्राह्मीं वाव त उपनिषदमब्रूमेति ॥",
+    "shlokam": "4.7",
+    "title": "The Teaching Has Been Given",
+    "art": "teaching-given",
+    "english": "“Sir, teach me the Upaniṣad.” “The Upaniṣad has been told to you. We have indeed told you the Upaniṣad concerning Brahman.”",
+    "focus": "The teacher confirms the completeness of what has been taught. The second sentence, previously absent from the app, is integral to the reply.",
+    "anchor": "Review the teaching already given before looking for a further secret.",
+    "pdfPages": "35",
+    "section": "Analogy, contemplation and foundation",
+    "iast": "upaniṣadaṃ bho brūhītyuktā ta upaniṣadbrāhmīṃ vāva ta upaniṣadamabrūmeti ||",
     "excerpt": false,
+    "sourceGroup": "4.7",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> Austerity, restraint and right action are the foundation of this knowledge.</div>",
-    "sanskrit": "तस्यै तपो दमः कर्मेति प्रतिष्ठा।",
-    "iast": "tasyai tapo damaḥ karmeti pratiṣṭhā |",
-    "originalAnchor": "<div class=\"anchor-box\">\n              <div class=\"anchor-label\">Contemplation Anchor · The Final Anchor of Kena</div>\n              <div class=\"anchor-text\">Tapas — can you bear the discomfort of not-knowing without filling it with mental constructs?<br>Dama — can you withdraw the mind from its habitual outward movement, just for this moment?<br>Karma — have you acted rightly today, without demanding a particular result?<br><br>These three are the preparation. The recognition itself is the response of Brahman to this preparation — it cannot be forced. But the preparation can be made now.</div>\n            </div>"
+    "sourceNote": "Complete mantra checked against the supplied Sarvananda PDF and the linked Sanskrit witnesses.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145066.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.4.07",
+    "words": [
+      {
+        "sanskrit": "उपनिषदम्",
+        "iast": "upaniṣadam",
+        "meaning": "the Upaniṣad; the confidential teaching of Brahman (as object)."
+      },
+      {
+        "sanskrit": "भोः",
+        "iast": "bhoḥ",
+        "meaning": "Sir; a respectful form of address."
+      },
+      {
+        "sanskrit": "ब्रूहि",
+        "iast": "brūhi",
+        "meaning": "tell; teach (imperative)."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "उक्ता",
+        "iast": "uktā",
+        "meaning": "has been told."
+      },
+      {
+        "sanskrit": "ते",
+        "iast": "te",
+        "meaning": "to you; the pupil."
+      },
+      {
+        "sanskrit": "उपनिषत्",
+        "iast": "upaniṣat",
+        "meaning": "the Upaniṣad; the teaching (as subject)."
+      },
+      {
+        "sanskrit": "ब्राह्मीम्",
+        "iast": "brāhmīm",
+        "meaning": "concerning Brahman."
+      },
+      {
+        "sanskrit": "वाव",
+        "iast": "vāva",
+        "meaning": "indeed; certainly (emphatic Vedic particle)."
+      },
+      {
+        "sanskrit": "ते",
+        "iast": "te",
+        "meaning": "to you; the pupil."
+      },
+      {
+        "sanskrit": "उपनिषदम्",
+        "iast": "upaniṣadam",
+        "meaning": "the Upaniṣad; the confidential teaching of Brahman (as object)."
+      },
+      {
+        "sanskrit": "अब्रूम",
+        "iast": "abrūma",
+        "meaning": "we have spoken; told."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      }
+    ]
   },
   {
     "number": "4.8",
-    "title": "Truth Is Its Home",
-    "art": "truth-home",
-    "section": "Foundation, truth and establishment",
-    "focus": "The Vedas are described as limbs and truth as the abode. Supporting learning and truthful living belong together in this image.",
-    "anchor": "Where can your speech or conduct become a little more exact and truthful?",
-    "sourceGroup": "4.7–4.9",
     "kh": 4,
+    "sanskrit": "तस्यै तपो दमः कर्मेति प्रतिष्ठा वेदाः सर्वाङ्गानि सत्यमायतनम् ॥",
+    "shlokam": "4.8",
+    "title": "The Foundation and Its Home",
+    "art": "foundation",
+    "english": "Austerity, self-control and prescribed action are its foundation; the Vedas are all its limbs; truth is its dwelling place.",
+    "focus": "The disciplines, the Vedas and truth occur in one complete mantra. They describe the preparation and support for the teaching, not three separate revelations.",
+    "anchor": "Choose one concrete act of truthfulness or restraint to practise today.",
+    "pdfPages": "35–36",
+    "section": "Analogy, contemplation and foundation",
+    "iast": "tasyai tapo damaḥ karmeti pratiṣṭhā vedāḥ sarvāṅgāni satyamāyatanam ||",
     "excerpt": false,
+    "sourceGroup": "4.8",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>English reading:</strong> All the Vedas are the limbs of this knowledge. Truth (satya) is its home, its resting place.</div>",
-    "sanskrit": "वेदाः सर्वाङ्गानि। सत्यमायतनम्॥",
-    "iast": "vedāḥ sarvāṅgāni | satyam āyatanam ||"
+    "sourceNote": "The complete mantra includes foundation, Vedas and truth. तस्यै follows the PDF and Shlokam; Wisdomlib’s तसै is a transcription error.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145067.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.4.08",
+    "words": [
+      {
+        "sanskrit": "तस्यै",
+        "iast": "tasyai",
+        "meaning": "for it; of that teaching, in this construction."
+      },
+      {
+        "sanskrit": "तपः",
+        "iast": "tapaḥ",
+        "meaning": "austerity; disciplined practice."
+      },
+      {
+        "sanskrit": "दमः",
+        "iast": "damaḥ",
+        "meaning": "restraint; self-control."
+      },
+      {
+        "sanskrit": "कर्म",
+        "iast": "karma",
+        "meaning": "action; prescribed religious duties in this context."
+      },
+      {
+        "sanskrit": "इति",
+        "iast": "iti",
+        "meaning": "thus; marks the end of quoted speech or a designation."
+      },
+      {
+        "sanskrit": "प्रतिष्ठा",
+        "iast": "pratiṣṭhā",
+        "meaning": "foundation; support."
+      },
+      {
+        "sanskrit": "वेदाः",
+        "iast": "vedāḥ",
+        "meaning": "the Vedas."
+      },
+      {
+        "sanskrit": "सर्वाङ्गानि",
+        "iast": "sarvāṅgāni",
+        "meaning": "all the limbs; the complete supporting members."
+      },
+      {
+        "sanskrit": "सत्यम्",
+        "iast": "satyam",
+        "meaning": "truth; truthfulness, the dwelling place of the teaching."
+      },
+      {
+        "sanskrit": "आयतनम्",
+        "iast": "āyatanam",
+        "meaning": "abode; dwelling place."
+      }
+    ]
   },
   {
     "number": "4.9",
+    "kh": 4,
+    "sanskrit": "यो वा एतामेवं वेदापहत्य पाप्मानमनन्ते स्वर्गे लोके ज्येये प्रतितिष्ठति प्रतितिष्ठति ॥",
+    "shlokam": "4.9",
     "title": "Firmly Established",
     "art": "established",
-    "section": "Foundation, truth and establishment",
-    "focus": "The repeated pratitiṣṭhati gives the ending its emphasis: firm establishment, rather than a passing glimpse or an achievement to display.",
-    "anchor": "Let the closing repetition settle. What would steadiness look like in one ordinary action?",
-    "sourceGroup": "4.7–4.9",
-    "kh": 4,
+    "english": "Whoever knows this teaching thus, having dispelled evil, becomes firmly established in the limitless, highest, heavenly realm—becomes firmly established.",
+    "focus": "The closing verb is deliberately repeated. Śaṅkara interprets the highest realm as Brahman; Sarvananda explicitly offers Brahma-loka and gradual liberation as another interpretation. These readings should not be presented as unanimous.",
+    "anchor": "Read the repeated final words slowly, without turning them into a promise of a particular experience.",
+    "pdfPages": "36–37",
+    "section": "Analogy, contemplation and foundation",
+    "iast": "yo vā etāmevaṃ vedāpahatya pāpmānamanante svarge loke jyeye pratitiṣṭhati pratitiṣṭhati ||",
     "excerpt": false,
+    "sourceGroup": "4.9",
     "wordContext": null,
-    "english": "<div class=\"transl\"><strong>4.9:</strong> \"He who knows this, having repelled evil, becomes firmly established in the infinite, supreme, blissful world — he becomes firmly established.\"</div>",
-    "sanskrit": "यो वा एतामेवं वेदापहत्य पाप्मानमनन्ते स्वर्गे लोके ज्येये प्रतितिष्ठति प्रतितिष्ठति॥",
-    "iast": "yo vā etām evaṃ vedāpahatya pāpmānam anante svarge loke jyeye pratitiṣṭhati pratitiṣṭhati ||"
+    "sourceNote": "The Sanskrit is shared, but interpretations of the final realm differ: Śaṅkara identifies it with Brahman; Sarvananda discusses Brahma-loka and gradual liberation.",
+    "wisdomlib": "https://www.wisdomlib.org/hinduism/book/kena-upanishad-shankara-bhashya/d/doc145068.html",
+    "upasanayoga": "https://www.upasanayoga.org/KenU.htm#KenU.4.09",
+    "words": [
+      {
+        "sanskrit": "यः",
+        "iast": "yaḥ",
+        "meaning": "who; whoever."
+      },
+      {
+        "sanskrit": "वै",
+        "iast": "vai",
+        "meaning": "indeed; certainly. In connected Vedic text before a vowel it appears as वा."
+      },
+      {
+        "sanskrit": "एताम्",
+        "iast": "etām",
+        "meaning": "this (feminine, referring to the teaching)."
+      },
+      {
+        "sanskrit": "एवम्",
+        "iast": "evam",
+        "meaning": "thus; in this way."
+      },
+      {
+        "sanskrit": "वेद",
+        "iast": "veda",
+        "meaning": "knows; I know (as spoken in the first-person passages)."
+      },
+      {
+        "sanskrit": "अपहत्य",
+        "iast": "apahatya",
+        "meaning": "having removed; dispelled."
+      },
+      {
+        "sanskrit": "पाप्मानम्",
+        "iast": "pāpmānam",
+        "meaning": "evil; demerit."
+      },
+      {
+        "sanskrit": "अनन्ते",
+        "iast": "anante",
+        "meaning": "in the limitless; the endless."
+      },
+      {
+        "sanskrit": "स्वर्गे",
+        "iast": "svarge",
+        "meaning": "in the heavenly or blissful state."
+      },
+      {
+        "sanskrit": "लोके",
+        "iast": "loke",
+        "meaning": "in the world; realm."
+      },
+      {
+        "sanskrit": "ज्येये",
+        "iast": "jyeye",
+        "meaning": "in the highest; greatest."
+      },
+      {
+        "sanskrit": "प्रतितिष्ठति",
+        "iast": "pratitiṣṭhati",
+        "meaning": "becomes firmly established; repeated for emphasis and conclusion."
+      },
+      {
+        "sanskrit": "प्रतितिष्ठति",
+        "iast": "pratitiṣṭhati",
+        "meaning": "becomes firmly established; repeated for emphasis and conclusion."
+      }
+    ]
   }
 ]
