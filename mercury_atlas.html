@@ -208,7 +208,7 @@ button,select,input,textarea,.card,.kv{background-color:#131e16}.panel,details{b
     <label>Life dimension<select id="guidanceDimension"></select></label>
     <label>Mode<select id="guidanceMode"><option value="balanced">Balanced guidance</option><option value="opportunity">Opportunity-first</option><option value="risk">Risk-control first</option></select></label>
   </div>
-  <button id="guidanceToday" type="button">Today</button><p class="small">Selected dates are sampled at 12:00 UTC. Today follows your device’s local date; choosing a historical date pauses that following.</p><div id="guidanceOverview" class="synthesis-panel"></div>
+  <button id="guidanceToday" type="button">Live now</button><p id="guidanceTiming" class="small" aria-live="polite"></p><p class="small">Live now follows the exact current Jyotish and BaZi periods. A manually selected date uses 12:00 UTC; choose Live now to resume automatic updates.</p><div id="guidanceOverview" class="synthesis-panel"></div>
   <p class="small">Choose a horizon for its actions and reassessment triggers in a focused detail view.</p><div id="horizonGuidance" class="horizon-grid"></div>
   <p class="small">Postures are action heuristics derived from the displayed support/intensity bands—not probabilities or guarantees. “What changes this?” marks the next timing boundary or evidence condition that should trigger reassessment.</p>
 </section>
@@ -591,7 +591,7 @@ function refreshCurrentPeriod(force=false){
   renderFilters(false);
  }
  const next=periodBoundaries.find(t=>t>now);
- currentTimer=setTimeout(refreshCurrentPeriod,Math.max(1,Math.min(60000,next===undefined?60000:next-now)));
+ currentTimer=setTimeout(refreshCurrentPeriod,Math.max(1,Math.min(60000,next-now)));
 }
 refreshCurrentPeriod();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshCurrentPeriod(true)});
@@ -651,8 +651,8 @@ function renderNativeCurrent(){
 }
 function refreshNativeCurrent(){
  clearTimeout(nativeTimer);renderNativeCurrent();refreshLowerMarkers();refreshGuidanceToday();
- const now=Date.now(),next=nativeBoundaries.find(t=>t>now),midnight=(Math.floor(now/86400000)+1)*86400000;
- nativeTimer=setTimeout(refreshNativeCurrent,Math.max(1,Math.min(60000,midnight-now,next===undefined?60000:next-now)));
+ const now=Date.now(),sd=SD_DATA.find(r=>Date.parse(r.endExact)>now),nextSD=sd?Date.parse(Date.parse(sd.startExact)>now?sd.startExact:sd.endExact):Infinity,next=Math.min(nativeBoundaries.find(t=>t>now)??Infinity,nextSD),midnight=(Math.floor(now/86400000)+1)*86400000;
+ nativeTimer=setTimeout(refreshNativeCurrent,Math.max(1,Math.min(60000,midnight-now,next-now)));
 }
 
 function nPillar(s){const [a,b]=s.split(' ');return `${stemCN[a]||''}${branchCN[b]||''} · ${a} ${b}`}
@@ -840,15 +840,15 @@ function baziLuckSummary(luckName,dim){
  const rows=Object.values(NATIVE.years).filter(y=>y.luck===luckName).map(y=>({result:y.dims[dim],weight:Math.max(1,Date.parse(y.end)-Date.parse(y.start))}));
  return rows.length?aggregateDisplay(rows):null;
 }
-function nativeContextForDate(dateStr,dim){
- const n=nativeNow(Date.parse(dateStr+'T12:00:00Z'));if(!n)return null;
- const day=n.m.days.find(d=>d.date===dateStr);if(!day)return null;
+function nativeContextForDate(dateStr,dim,instant=Date.parse(dateStr+'T12:00:00Z')){
+ const n=nativeNow(instant);if(!n)return null;
+ const day=n.m.days.find(d=>d.date===n.date);if(!day)return null;
  const luck=n.luck?.pillar||n.y.luck,year={...n.y,luck,luckEnd:n.luck?.end||n.y.luckEnd};
  return {rec:{solarYear:n.year,monthPillar:n.m.pillar},year,month:n.m,day,luck,luckDim:baziLuckSummary(luck,dim),yearDim:n.y.dims[dim],monthDim:n.m.dims[dim],dayDim:day.dims[dim]};
 }
 function pdForSD(sd){return DATA.find(r=>r.ad===sd.ad&&r.pd===sd.pd)}
 function isoLocalToday(){const d=new Date(),y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`}
-function findSDByDate(dateStr){const ms=Date.parse(dateStr+'T12:00:00Z');return SD_DATA.find(r=>Date.parse(r.startExact)<=ms&&ms<Date.parse(r.endExact))}
+function findSDByDate(dateStr,ms=Date.parse(dateStr+'T12:00:00Z')){return SD_DATA.find(r=>Date.parse(r.startExact)<=ms&&ms<Date.parse(r.endExact))}
 function synthesisMechanism(j,b,jMeta={},bMeta={},dim='career'){
  const jo=orientHeat(j.heat),bo=orientHeat(b.heat),nodes=[jMeta.ad,jMeta.pd,jMeta.sd].filter(x=>x==='Rahu'||x==='Ketu');
  let title,status,cls,narrative;
@@ -917,7 +917,7 @@ function openInsight(title,html,origin){
   insightDialog.addEventListener('close',()=>{document.body.classList.remove('insight-open');if(insightOrigin?.isConnected)insightOrigin.focus({preventScroll:true})});
   insightDialog.addEventListener('click',e=>{if(e.target===insightDialog){const r=insightDialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)insightDialog.close()}});
  }
- insightOrigin=origin||document.activeElement;$('insightTitle').textContent=title;$('insightBody').innerHTML=html;
+ delete insightDialog.dataset.guidanceHorizon;insightOrigin=origin||document.activeElement;$('insightTitle').textContent=title;$('insightBody').innerHTML=html;
  $('insightBody').querySelectorAll('details').forEach(d=>{const section=document.createElement('section'),summary=d.querySelector(':scope > summary');if(summary){const h=document.createElement('h3');h.textContent=summary.textContent;section.appendChild(h);summary.remove()}while(d.firstChild)section.appendChild(d.firstChild);d.replaceWith(section)});
  document.body.classList.add('insight-open');insightDialog.showModal();insightDialog.scrollTop=0;$('insightClose').focus({preventScroll:true});
 }
@@ -931,6 +931,7 @@ function prepareInsightLinks(root){
 function openHorizon(h,origin){
  const syn=synthesisMechanism(h.j,h.b,h.sd||{},{text:h.bText},h.dim),posture=choosePosture(h.j,h.b,h.dim,$('guidanceMode').value);
  openInsight(h.label,`<p class="small">${h.horizon} · ${DIMS[h.dim].name} · ${$('guidanceDate').value}</p><span class="posture">${posture}</span><h3>Suggested actions</h3><ul class="action-list">${actionsFor(posture,h.dim).map(x=>`<li>${esc(x)}</li>`).join('')}</ul><section class="change-trigger"><h3>When to reassess</h3><p>${esc(h.change)}</p></section><h3>Independent readings</h3><div class="horizon-systems"><section class="horizon-system"><small>Jyotish · ${h.jLabel}</small><b>${h.j.mark||HEAT[h.j.heat].mark} ${h.j.post}</b>${h.j.intensity?nBars(h.j):'<small>Intensity is assessed at Sūkṣma level.</small>'}</section><section class="horizon-system bazi"><small>BaZi · ${h.bLabel}</small><b>${HEAT[h.b.heat].mark} ${nPost(h.b.heat,h.b.intensity)}</b>${nBars(h.b)}</section></div><h3>${syn.title}</h3><p>${syn.narrative}</p>`,origin);
+ insightDialog.dataset.guidanceHorizon=h.horizon;
 }
 function initMobileSpacing(){
  const nav=document.querySelector('.app-nav');const measure=()=>{document.documentElement.style.setProperty('--mobile-nav-height',nav.getBoundingClientRect().height+'px')};new ResizeObserver(measure).observe(nav);measure();
@@ -942,8 +943,8 @@ function horizonCard(h){
  const posture=choosePosture(h.j,h.b,h.dim,$('guidanceMode').value);
  return `<button type="button" class="horizon-card horizon-launch" aria-haspopup="dialog"><span class="horizon-name">${h.horizon}</span><span class="horizon-label">${h.label}</span><span class="horizon-preview"><span class="posture">${posture}</span><span class="small">View actions ↗</span></span></button>`;
 }
-function buildGuidanceContext(dateStr,dim){
- const sd=findSDByDate(dateStr);if(!sd)return null;const pd=pdForSD(sd),ctx=nativeContextForDate(dateStr,dim);if(!pd||!ctx)return null;
+function buildGuidanceContext(dateStr,dim,instant=Date.parse(dateStr+'T12:00:00Z')){
+ const sd=findSDByDate(dateStr,instant);if(!sd)return null;const pd=pdForSD(sd),ctx=nativeContextForDate(dateStr,dim,instant);if(!pd||!ctx)return null;
  const ad=jyADSummary(sd.ad,dim),pdR=pdResult(pd,dim),sdR=dimResult(sd,dim);
  const luckR=ctx.luckDim||ctx.yearDim,yearR=ctx.yearDim,monthR=ctx.monthDim||ctx.yearDim,dayR=ctx.dayDim||ctx.monthDim||ctx.yearDim;
  const pdEnd=new Date(periodBounds(pd).end).toISOString(),adRows=DATA.filter(r=>r.ad===sd.ad),adEnd=adRows.length?new Date(Math.max(...adRows.map(r=>periodBounds(r).end))).toISOString():null;
@@ -957,10 +958,15 @@ function buildGuidanceContext(dateStr,dim){
 }
 function renderGuidanceDashboard(){
  const date=$('guidanceDate')?.value||isoLocalToday(),dim=$('guidanceDimension')?.value||'career',root=$('horizonGuidance'),overview=$('guidanceOverview');if(!root||!overview)return;
- const g=buildGuidanceContext(date,dim);if(!g){overview.innerHTML='<h3>Date outside modeled range</h3><p>Choose a date between 9 Feb 2021 and 10 Feb 2038.</p>';root.innerHTML='';return}
+ const instant=guidanceFollowToday?Date.now():Date.parse(date+'T12:00:00Z'),g=buildGuidanceContext(date,dim,instant);
+ $('guidanceTiming').textContent=guidanceFollowToday?'Live now · exact current periods':'Selected date · sampled at 12:00 UTC';
+ overview.dataset.sdStart=g?.sd.startExact||'';overview.dataset.baziDay=g?.ctx.day.date||'';overview.dataset.baziMonth=g?.ctx.month.start||'';
+ if(g)$('guidanceTiming').textContent+=` · ${g.sd.ad} → ${g.sd.pd} → ${g.sd.sd} · BaZi day ${g.ctx.day.date} UTC`;
+ if(!g){if(insightDialog?.open&&insightDialog.dataset.guidanceHorizon)insightDialog.close();overview.innerHTML='<h3>Date outside modeled range</h3><p>Choose a date between 9 Feb 2021 and 10 Feb 2038.</p>';root.innerHTML='';return}
  const immediate=g.horizons.at(-1),syn=synthesisMechanism(immediate.j,immediate.b,g.sd,{text:immediate.bText},dim),posture=choosePosture(immediate.j,immediate.b,dim,$('guidanceMode').value);
  overview.innerHTML=`<div class="synthesis-tags"><span class="synthesis-tag ${syn.cls}">${syn.status}</span><span class="posture">${posture}</span></div><h3>${DIMS[dim].name} · ${date}</h3><p>${syn.narrative}</p><details class="guidance-details"><summary>Underlying mechanisms</summary><div class="mechanism-grid"><div class="mechanism"><b>Jyotish · selected date</b><p class="small">${mechanismTextJy(g.sd)}</p></div><div class="mechanism bazi"><b>BaZi · selected date</b><p class="small">${mechanismTextBa(g.ctx)}</p></div></div></details>`;
  root.innerHTML=g.horizons.map(h=>horizonCard(h)).join('');root.querySelectorAll('.horizon-launch').forEach((b,i)=>b.onclick=()=>openHorizon(g.horizons[i],b));prepareInsightLinks($('guidanceEngine'));
+ if(insightDialog?.open&&insightDialog.dataset.guidanceHorizon){const index=g.horizons.findIndex(h=>h.horizon===insightDialog.dataset.guidanceHorizon);if(index>=0){const scroll=insightDialog.scrollTop;openHorizon(g.horizons[index],root.querySelectorAll('.horizon-launch')[index]);insightDialog.scrollTop=scroll;}}
 }
 
 /* Personal journal */
@@ -1140,8 +1146,12 @@ function importJournalFile(file){
  journalStore([...merged.values()]);renderJournal();journalNotice(`Imported ${added} entries; existing entries were kept.`);
  }catch(e){journalNotice('Invalid journal backup. Nothing was changed.')}};rd.readAsText(file);
 }
-let guidanceFollowToday=true,lastGuidanceDay='';
-function refreshGuidanceToday(){if(!guidanceFollowToday||!$('guidanceDate'))return;const date=isoLocalToday();if(date!==lastGuidanceDay){lastGuidanceDay=date;$('guidanceDate').value=date;renderGuidanceDashboard()}}
+let guidanceFollowToday=true,lastGuidanceDay='',lastGuidanceKey='';
+function refreshGuidanceToday(){
+ if(!guidanceFollowToday||!$('guidanceDate'))return;const date=isoLocalToday(),now=Date.now(),sd=findSDByDate(date,now),native=nativeNow(now);
+ const key=[date,sd?.startExact,native?.year,native?.m.start,native?.luck?.start,native?.date].join('|');
+ if(key!==lastGuidanceKey||date!==lastGuidanceDay){lastGuidanceKey=key;lastGuidanceDay=date;$('guidanceDate').value=date;renderGuidanceDashboard()}
+}
 function initGuidanceAndJournal(){
  const dims=nativeDims.map(k=>`<option value="${k}">${DIMS[k].name}</option>`).join('');
  $('guidanceDimension').innerHTML=dims;$('journalDimension').innerHTML=dims;
@@ -1260,7 +1270,7 @@ function initAppSections(){
  [...timeline.children].filter(el=>el!==now&&el!==chart).forEach(el=>chart.appendChild(el));
  const jnav=sectionTabs(timeline,'jy',[['now','Now'],['timeline','Timeline']],setJyView);const life=document.createElement('button');life.type='button';life.className='life-map-link';life.dataset.jyView='life';life.textContent='Life map ↗';life.onclick=()=>showNativePage('life');const row=document.createElement('div');row.className='jy-view-nav';jnav.before(row);row.append(jnav,life);$('lifePage').querySelector('[data-jy-view="timeline"]').onclick=()=>setJyView('timeline');
  setSectionTabs('jy',jyView);setBaziView(baziView);
- const plan=$('guidanceEngine'),notes=[...plan.querySelectorAll(':scope > p')].slice(1);const help=document.createElement('button');help.className='insight-link';help.textContent='Timing & interpretation ↗';const content=notes.map(p=>p.outerHTML).join('');notes.forEach(p=>p.remove());help.onclick=()=>openInsight('Timing & interpretation',content,help);plan.appendChild(help);
+ const plan=$('guidanceEngine'),notes=[...plan.querySelectorAll(':scope > p:not(#guidanceTiming)')].slice(1);const help=document.createElement('button');help.className='insight-link';help.textContent='Timing & interpretation ↗';const content=notes.map(p=>p.outerHTML).join('');notes.forEach(p=>p.remove());help.onclick=()=>openInsight('Timing & interpretation',content,help);plan.appendChild(help);
  const compareIntro=$('comparePage').querySelector(':scope > section');compareIntro.querySelector('h2').textContent='Year & focus';compareIntro.querySelector('p').remove();
 
 }
