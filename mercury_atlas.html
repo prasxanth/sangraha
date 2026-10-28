@@ -200,17 +200,25 @@ button,select,input,textarea,.card,.kv{background-color:#131e16}.panel,details{b
 .compare-agreement{font-size:11px;line-height:1.35}.compare-rating{flex-wrap:wrap;gap:3px}.compare-columns>span{min-width:0;overflow-wrap:anywhere}
 @media(max-width:479px){.guidance-nav{grid-template-columns:repeat(3,minmax(0,1fr))}.app-nav{gap:2px;padding-inline:6px}.app-nav button{font-size:10px;line-height:1.3;padding:4px 2px}.compare-columns,.compare-month{grid-template-columns:30px repeat(3,minmax(30px,.7fr)) minmax(72px,1.4fr)}}
 
-/* Western timing uses text ratings, never heatmap fills inside buttons. */
+/* Western chips share the Jyotish heat fills and foreground contrast. */
 .western-period{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px;text-align:left;line-height:1.4}
 .western-period b{font-size:13px;line-height:1.4;margin:3px 0;overflow-wrap:anywhere}
 .western-period small{font-size:12px;line-height:1.4}
-.western-period[aria-pressed=true]{background:#66f59a12;border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
-.western-rating{background:transparent;color:var(--text)}
-.western-rating[data-heat="1"]{color:var(--h1)}.western-rating[data-heat="2"]{color:var(--h2)}.western-rating[data-heat="3"]{color:var(--h3)}.western-rating[data-heat="4"]{color:var(--h4)}.western-rating[data-heat="5"]{color:var(--h5)}
+.western-period[aria-pressed=true]{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.western-rating{background:transparent;color:inherit}
+
 .western-page .eyebrow,.western-page h2,.western-page h3,.western-card h3{color:var(--gold)}
 .western-month-picker{display:block;max-width:360px;min-width:0}
 .western-year-grid{grid-template-columns:repeat(auto-fit,minmax(min(120px,100%),1fr))}
 .western-month-grid{grid-template-columns:repeat(auto-fit,minmax(min(105px,100%),1fr))}
+
+.western-period small{color:inherit;opacity:.85}
+.western-period[aria-pressed=true]{outline:2px solid var(--gold);outline-offset:2px;box-shadow:none}
+.western-period.h1{background:var(--h1);color:white}
+.western-period.h2{background:var(--h2);color:#11130f}
+.western-period.h3{background:var(--h3);color:#11130f}
+.western-period.h4{background:var(--h4);color:#11130f}
+.western-period.h5{background:var(--h5);color:white}
 </style><script id="journalData" type="application/json">[]</script><script id="journalBaseline" type="application/json">[]</script><script id="forecastData" type="application/json">[]</script><script id="forecastBaseline" type="application/json">[]</script></head><body><main>
 <header class="app-header"><div class="eyebrow">Life Atlas</div><h1 id="pageTitle">Jyotish</h1><p class="sub">Native Jyotish + BaZi + Western · falsifiable comparison layer<br>10 life dimensions · 2021–2038</p></header><section id="timelinePage" class="app-page"><div class="native-tabs jy-native-tabs"><button type="button" data-jy-view="timeline" aria-pressed="true">Jyotish timeline</button><button type="button" data-jy-view="life" aria-pressed="false">Jyotish life map</button></div><section id="currentPeriod" class="panel now-card" aria-label="Current period"></section><div class="intensity-legend" data-intensity-legend></div><div class="panel dimension-control"><label for="focusDimension">Life dimension<select id="focusDimension"></select></label><p class="small" id="dimensionHint"></p></div>
 <details id="filters"><summary>Find a period <span class="small" id="filterCount"></span></summary><div class="filters"><label>Antardasha<select id="adFilter"><option value="">All ADs</option></select></label><label>PD support<select id="heatFilter"><option value="">All ratings</option><option value="1">1 · Max leverage</option><option value="2">2 · Leverage</option><option value="3">3 · Respect</option><option value="4">4 · Caution</option><option value="5">5 · Max caution</option></select></label><label>SD transit tone (any child)<select id="toneFilter"><option value="">All tones</option><option>SUPPORTIVE</option><option>MIXED</option><option>INTENSE</option></select></label><label>SD intensity (any child)<select id="intensityFilter"><option value="">All intensities</option><option>LOW</option><option>MEDIUM</option><option>HIGH</option><option>VERY HIGH</option></select></label><label>Search<input type="search" id="search" placeholder="Planet, theme, practice…"></label></div><div class="actions"><button id="futureOnly" aria-pressed="false">Current + future</button><button id="reset">Clear filters</button></div></details>
@@ -891,10 +899,11 @@ function renderWesternDetail(){
 function renderWesternNative(){
  if(!WESTERN.years[wYear])wYear=Object.keys(WESTERN.years)[0];
  $('westernDimension').value=wDim;$('westernYear').value=wYear;$('westernMonth').value=String(wMonth);
- const today=isoLocalToday(),dx=westernDay(today,wDim),prof=westernProfection(today);$('westernCurrent').innerHTML=dx?`<div class="eyebrow">Current Western · ${today}</div><h2>${DIMS[wDim].name}</h2>${renderAxes(dx)}<p class="small">Annual profection H${prof.house} ${prof.sign} · time lord ${prof.lord}. Daily axes use exact-day transits plus secondary progression/profection context; detailed aspect evidence is retained at monthly audit points.</p>`:'<h2>Current Western</h2><p>Today is outside the modeled range.</p>';
- $('westernYears').innerHTML=Object.keys(WESTERN.years).map(y=>{const x=westernYear(y,wDim);return `<button class="western-period" data-wyear="${y}" aria-pressed="${y===wYear}"><small>${y}</small><b class="western-rating" data-heat="${x.heat}">${x.mark} ${x.post}</b><small>A ${x.activation} · I ${x.intensityScore} · V ${x.volatilityScore}</small></button>`}).join('');
+ const today=isoLocalToday(),dx=westernDay(today,wDim),prof=westernProfection(today);$('westernCurrent').innerHTML=dx?`<div class="eyebrow">Current Western · ${today}</div><h2>${DIMS[wDim].name}</h2><div class="now-dimensions">${nativeDims.map(key=>{const d=westernDay(today,key);return `<button class="h${d.heat}" data-western-dimension="${key}" aria-pressed="${key===wDim}" aria-label="Current ${DIMS[key].name}: ${d.post}. Intensity ${d.intensity.toLowerCase()}. Show Western assessment."><b>${d.mark}</b><span>${DIMS[key].short}</span>${intensityBars(d)}</button>`}).join('')}</div><p class="small">Color = support · bars = intensity (1 low → 4 very high). Select a dimension for its assessment below.</p>${renderAxes(dx)}<p class="small">Annual profection H${prof.house} ${prof.sign} · time lord ${prof.lord}. Daily axes use exact-day transits plus secondary progression/profection context; detailed aspect evidence is retained at monthly audit points.</p>`:'<h2>Current Western</h2><p>Today is outside the modeled range.</p>';
+ $('westernCurrent').querySelectorAll('[data-western-dimension]').forEach(b=>b.onclick=()=>{wDim=b.dataset.westernDimension;renderWesternNative()});
+ $('westernYears').innerHTML=Object.keys(WESTERN.years).map(y=>{const x=westernYear(y,wDim);return `<button class="western-period h${x.heat}" data-wyear="${y}" aria-pressed="${y===wYear}"><small>${y}</small><b class="western-rating" data-heat="${x.heat}">${x.mark} ${x.post}</b><small>A ${x.activation} · I ${x.intensityScore} · V ${x.volatilityScore}</small></button>`}).join('');
  $('westernYears').querySelectorAll('button').forEach(b=>b.onclick=()=>{wYear=b.dataset.wyear;$('westernYear').value=wYear;renderWesternNative()});
- $('westernMonths').innerHTML=Array.from({length:12},(_,i)=>i+1).map(m=>{const x=westernMonth(wYear,m,wDim);return x?`<button class="western-period" data-wmonth="${m}" aria-pressed="${m===wMonth}"><small>${monthNames[m-1]}</small><b class="western-rating" data-heat="${x.heat}">${x.mark}</b><small>A ${x.activation} · I ${x.intensityScore} · V ${x.volatilityScore}</small></button>`:''}).join('');
+ $('westernMonths').innerHTML=Array.from({length:12},(_,i)=>i+1).map(m=>{const x=westernMonth(wYear,m,wDim);return x?`<button class="western-period h${x.heat}" data-wmonth="${m}" aria-pressed="${m===wMonth}"><small>${monthNames[m-1]}</small><b class="western-rating" data-heat="${x.heat}">${x.mark}</b><small>A ${x.activation} · I ${x.intensityScore} · V ${x.volatilityScore}</small></button>`:''}).join('');
  $('westernMonths').querySelectorAll('button').forEach(b=>b.onclick=()=>{wMonth=+b.dataset.wmonth;$('westernMonth').value=String(wMonth);renderWesternNative()});renderWesternDetail();
 }
 function initWestern(){
