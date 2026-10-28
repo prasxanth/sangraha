@@ -4,7 +4,12 @@ const {chromium,webkit}=require('playwright');
  for(const name of ['chromium','webkit']){
   const browser=await (name==='chromium'?chromium:webkit).launch(name==='chromium'?{executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'}:{});
   try{
-   const p=await browser.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('file://'+process.cwd()+'/mercury_atlas.html');
+   const p=await browser.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.clock.install({time:new Date('2026-10-28T12:00:00Z')});await p.clock.pauseAt(new Date('2026-10-28T12:00:00Z'));await p.goto('file://'+process.cwd()+'/mercury_atlas.html');
+   await p.locator('[data-page="western"]').click();
+   assert.equal(await p.locator('#westernYear').count(),0);
+   assert.equal(await p.locator('[data-wyear="2026"]').getAttribute('aria-pressed'),'true');
+   assert.equal(await p.locator('#westernMonth').inputValue(),'10');
+   assert.equal(await p.locator('#westernSelection').evaluate(e=>e.open),true);
    async function audit(label){
     const issues=await p.evaluate(()=>{
      const root=document.querySelector('dialog[open]')||document.querySelector('.app-page:not([hidden])'),out=[];
@@ -30,11 +35,17 @@ const {chromium,webkit}=require('playwright');
       assert.equal(await p.locator('#westernCurrent .now-dimensions button').count(),10);
       await p.locator('[data-western-dimension="wealth"]').click();assert.equal(await p.locator('#westernDimension').inputValue(),'wealth');
       const current=await p.locator('#westernCurrent').innerText();
-      await p.locator('#westernYear').selectOption('2026');await p.locator('#westernMonth').selectOption('3');
+      await p.locator('[data-wyear="2026"]').click();await p.locator('#westernMonth').selectOption('3');
       assert.match(await p.locator('#westernDetail').innerText(),/2026-03/);
       assert.equal(await p.locator('[data-wmonth="3"]').getAttribute('aria-pressed'),'true');
       assert.equal(await p.locator('#westernCurrent').innerText(),current);
       await p.locator('[data-wmonth="6"]').click();assert.equal(await p.locator('#westernMonth').inputValue(),'6');
+      await p.locator('#westernSelection').evaluate(e=>e.open=false);
+      await p.locator('[data-wyear="2030"]').click();assert.equal(await p.locator('#westernMonth').inputValue(),'10');
+      assert.equal(await p.locator('#westernSelection').evaluate(e=>e.open),true);
+      assert.match(await p.locator('#westernDetail').innerText(),/2030-10/);
+      assert.equal(await p.locator('#westernMonthHeading').evaluate(e=>document.activeElement===e),true);
+      await p.locator('[data-wyear="2026"]').click();await p.locator('[data-wmonth="6"]').click();
       assert.match(await p.locator('#westernDetail').innerText(),/2026-06/);await audit(width+' selected month');
      }
      if(view==='practice'){
