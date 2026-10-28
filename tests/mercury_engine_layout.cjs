@@ -26,6 +26,7 @@ const {chromium,webkit}=require('playwright');
       assert.equal(await p.locator('.western-card').first().evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(16, 27, 21)');
       await p.locator('#westernDimension').selectOption('reinvention');await audit(width+' Western long labels');
       assert.deepEqual(await p.locator('.western-rating').evaluateAll(es=>[...new Set(es.map(e=>getComputedStyle(e).backgroundColor))]),['rgba(0, 0, 0, 0)']);
+      assert.equal(await p.evaluate(()=>{for(let heat=1;heat<=5;heat++){const rating=document.createElement('b'),reference=document.createElement('b');rating.className='western-rating';rating.dataset.heat=heat;reference.className='h'+heat;document.body.append(rating,reference);const same=getComputedStyle(rating).color===getComputedStyle(reference).backgroundColor;rating.remove();reference.remove();if(!same)return false}return true}),true,'All five Western ratings use the shared heat palette');
       const current=await p.locator('#westernCurrent').innerText();
       await p.locator('#westernYear').selectOption('2026');await p.locator('#westernMonth').selectOption('3');
       assert.match(await p.locator('#westernDetail').innerText(),/2026-03/);

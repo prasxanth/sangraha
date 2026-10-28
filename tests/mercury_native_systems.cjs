@@ -39,9 +39,9 @@ const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
   assert.equal(await page.locator('#compareNativeDetail .agreement-cell').count(),10);
   await page.locator('#compareBack').click();await page.locator('#compareDimension').selectOption('wealth');await page.locator('[data-cmonth="8"]').click();assert((await page.locator('#compareNativeDetail').textContent()).includes('Wealth'));
   await page.locator('#compareBack').click();await page.locator('#compareYear').selectOption('2021');
-  await page.locator('[data-cmonth="0"]').first().click();assert((await page.locator('#compareNativeDetail').textContent()).includes('No Jyotish reading'));
+  await page.locator('[data-cmonth="0"]').first().click();assert.equal(await page.locator('#compareNativeDetail .engine-panel').first().locator('h3').innerText(),'Unavailable');
   await page.locator('#compareBack').click();await page.locator('#compareYear').selectOption('2038');
-  await page.locator('[data-cmonth="11"]').first().click();assert((await page.locator('#compareNativeDetail').textContent()).includes('No Jyotish reading'));
+  await page.locator('[data-cmonth="11"]').first().click();assert.equal(await page.locator('#compareNativeDetail .engine-panel').first().locator('h3').innerText(),'Unavailable');
   // Independent year, solar month, luck and UTC-day transitions, without changing browsing selections.
   for(const boundary of [data.years['2027'].start,data.years['2026'].months[7].start,data.years['2030'].luckStart,'2026-09-27T00:00:00Z']){
    const t=Date.parse(boundary);await page.clock.setSystemTime(t-1);await page.goto(url);
