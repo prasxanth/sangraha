@@ -25,6 +25,14 @@ const {chromium,webkit}=require('playwright');
      if(view==='western'){
       assert.equal(await p.locator('.western-card').first().evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(16, 27, 21)');
       await p.locator('#westernDimension').selectOption('reinvention');await audit(width+' Western long labels');
+      assert.deepEqual(await p.locator('.western-rating').evaluateAll(es=>[...new Set(es.map(e=>getComputedStyle(e).backgroundColor))]),['rgba(0, 0, 0, 0)']);
+      const current=await p.locator('#westernCurrent').innerText();
+      await p.locator('#westernYear').selectOption('2026');await p.locator('#westernMonth').selectOption('3');
+      assert.match(await p.locator('#westernDetail').innerText(),/2026-03/);
+      assert.equal(await p.locator('[data-wmonth="3"]').getAttribute('aria-pressed'),'true');
+      assert.equal(await p.locator('#westernCurrent').innerText(),current);
+      await p.locator('[data-wmonth="6"]').click();assert.equal(await p.locator('#westernMonth').inputValue(),'6');
+      assert.match(await p.locator('#westernDetail').innerText(),/2026-06/);await audit(width+' selected month');
      }
      if(view==='practice'){
       await p.locator('#guidance-tab-plan').click();await audit(width+' Plan');
