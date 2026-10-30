@@ -19,6 +19,8 @@ These instructions apply to this entire checkout and to copies cloned from GitHu
 
 ## Before committing and pushing
 
+User preference: automatically commit and push completed, validated task changes without asking again. Keep the freshness, reconciliation, and task-only staging safeguards below.
+
 1. Fetch again and compare the upstream with the version used for the work. GitHub may have received browser metadata commits during the session. Reconcile any new changes and repeat affected validation before publishing.
 2. Review the final diff and stage only task-owned files. Keep unrelated staged/unstaged changes and concurrent work intact. Run the relevant checks required by the affected directory's instructions.
 3. Push normally. Never force-push, use `reset --hard`, use `clean`, or resolve a data conflict with blanket `ours`/`theirs` to bypass synchronization. A rejected push means fetch, preserve, reconcile, validate, and retry; it does not authorize overwriting GitHub.
