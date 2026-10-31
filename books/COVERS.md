@@ -7,3 +7,9 @@ These are illustrations of the matching works, not a guarantee of the exact edit
 Still without a verified cover: **Machine Learning With Random Forests And Decision Trees: A Visual Guide For Beginners — Scott Hartshorn**. A differently subtitled catalog record was not substituted without verification.
 
 Curated selections supersede older device search caches. Metadata and its baseline are independent of this catalog and were preserved unchanged. Future maintenance should verify title, author, image content and source URL before changing a selection; never trade a correct placeholder for an unrelated cover.
+
+## Cover browsing
+
+The Library’s List / Covers toggle remembers the choice on this device. Covers use native horizontal scroll snapping, previous/next buttons and arrow keys, with reduced-motion support. Search, theme filters and sorting apply in both views; grouping remains available in List. Tap a cover or View notes & details to use the existing metadata editor.
+
+Run `tests/marginalia_coverflow.cjs` for browsing changes; set `WEBKIT=1` to run it in WebKit as well as the default Chrome. Tests mock all external cover services.
