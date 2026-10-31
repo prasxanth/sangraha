@@ -7,6 +7,9 @@ const {chromium} = require('playwright');
  const browser = await chromium.launch({executablePath:process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  try {
  const page = await browser.newPage(); const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+ await page.route(/https:\/\/[^/]+\.mzstatic\.com\//,r=>r.abort());
+ await page.route('https://books.google.com/**',r=>r.abort());
+ await page.route('https://covers.openlibrary.org/**',r=>r.abort());
  await page.route('https://itunes.apple.com/**',r=>r.fulfill({json:{results:[]}}));
  await page.route('https://www.googleapis.com/**',r=>r.fulfill({json:{items:[]}}));
  await page.route('https://openlibrary.org/search.json?*',r=>r.fulfill({json:{docs:[]}}));
