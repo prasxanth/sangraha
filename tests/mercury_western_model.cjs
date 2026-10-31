@@ -11,14 +11,14 @@ for(const layer of ['days','months','years'])for(const record of Object.values(d
 }
 (async()=>{const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});try{
  const p=await browser.newPage();await p.clock.install({time:new Date('2026-10-28T12:00:00Z')});await p.clock.pauseAt(new Date('2026-10-28T12:00:00Z'));await p.goto('file://'+process.cwd()+'/mercury_atlas.html');
- await p.locator('[data-page="western"]').click();await p.locator('#western-tab-years').click();await p.locator('[data-wyear="2026"]').click();await p.locator('#westernMonth').selectOption('10');
+ await p.locator('[data-page="western"]').click();await p.locator('#western-tab-years').click();await p.locator('[data-wyear="2026"] > :first-child').click();await p.locator('#westernMonth').selectOption('10');
  assert.equal(await p.locator('[data-wyear="2026"] .western-rating').getAttribute('data-heat'),String(data.years['2026'].d.career[0]));
  assert.equal(await p.locator('[data-wmonth="10"] .western-rating').getAttribute('data-heat'),String(data.months['2026-10'].d.career[0]));
  for(const [selector,expected] of [['#westernCurrent',data.days['2026-10-28'].d.career],['#westernDetail',data.months['2026-10'].d.career]]){
   for(const [axis,index] of [['activation',2],['intensity',3],['agency',4],['volatility',5]])assert.equal(await p.locator(selector+' .axis-card.'+axis+' b').innerText(),String(expected[index]));
  }
  assert(html.includes("const FORECAST_MODEL_VERSION='vNext-1.1-native-volatility'"));
- await p.locator('#western-tab-years').click();await p.locator('[data-wyear="2038"]').click();
+ await p.locator('#western-tab-years').click();await p.locator('[data-wyear="2038"] > :first-child').click();
  const available=Object.keys(data.months).filter(k=>k.startsWith('2038-')).map(k=>+k.slice(5));
  const nearest=available.reduce((a,b)=>Math.abs(b-10)<Math.abs(a-10)?b:a);
  assert.equal(await p.locator('#westernMonth').inputValue(),String(nearest));
