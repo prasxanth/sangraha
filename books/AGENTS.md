@@ -13,7 +13,7 @@ Marginalia stores its library in the HTML's `embeddedData` JSON block. Metadata 
 - Keep the app's fetch-before-edit/save checks, conflict blocking, baseline persistence, and SHA-checked GitHub commits. Never embed GitHub tokens or credential keys in HTML, exports, commits, logs, or tests. The user-authorized Remember on this device feature may persist a token only as AES-GCM ciphertext with a non-extractable key in device-local IndexedDB. Preserve explicit remember/change/forget controls; never seed storage with a real credential from a conversation. If implementing automatic merging later, retain field-level conflict detection and recheck the remote SHA before writing.
 - Before every commit/push, fetch again to catch metadata committed through the app while local code work was in progress. Merge those metadata changes into the updated app; never push the earlier snapshot over them.
 
-Run `tests/marginalia.cjs`, `tests/marginalia_metadata.cjs`, and `tests/marginalia_github.cjs`, and `tests/marginalia_tokens.cjs` when changing Marginalia behavior. Use mocked network responses for repeatable checks. Instruction-only changes need a diff review, not browser tests.
+Run `tests/marginalia.cjs`, `tests/marginalia_metadata.cjs`, and `tests/marginalia_github.cjs`, and `tests/marginalia_tokens.cjs` when changing Marginalia behavior. Run `tests/marginalia_covers.cjs` for cover-loading changes. Use mocked network responses for repeatable checks, including all cover providers. Instruction-only changes need a diff review, not browser tests.
 
 ## Related Life Atlas workflow
 

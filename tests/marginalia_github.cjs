@@ -8,7 +8,9 @@ const {chromium}=require('playwright');
  try {
   const page=await browser.newPage(), errors=[];page.on('pageerror',e=>errors.push(e.message));
   const original=fs.readFileSync('books/marginalia.html','utf8');let remote=original, mode='ok', puts=[];
-  await page.route('https://openlibrary.org/**',r=>r.fulfill({json:{docs:[]}}));
+  await page.route('https://itunes.apple.com/**',r=>r.fulfill({json:{results:[]}}));
+ await page.route('https://www.googleapis.com/**',r=>r.fulfill({json:{items:[]}}));
+ await page.route('https://openlibrary.org/**',r=>r.fulfill({json:{docs:[]}}));
   await page.route('https://covers.openlibrary.org/**',r=>r.abort());
   await page.route('https://raw.githubusercontent.com/**',r=>r.fulfill({contentType:'text/plain',body:remote}));
   await page.route('https://api.github.com/**',async r=>{
