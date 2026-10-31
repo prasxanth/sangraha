@@ -248,7 +248,7 @@ button,select,input,textarea,.card,.kv{background-color:#131e16}.panel,details{b
 /* Full-size, labeled readings without expanding the page or changing chip navigation. */
 .chip-axes{cursor:zoom-in}
 .axis-expand{font-size:12px;min-height:36px;margin:6px 0 10px}
-#axisReader{box-sizing:border-box;width:min(540px,calc(100vw - 24px));max-height:85dvh;overflow:auto;background:var(--panel,#101b15);color:var(--text,#e1eae4);border:1px solid #39754c;border-radius:16px;padding:16px}
+#axisReader{box-sizing:border-box;inset:0;margin:auto;min-width:0;width:min(540px,calc(100% - 24px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)));max-width:calc(100% - 24px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px));max-height:min(85dvh,calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)));overflow:auto;background:var(--panel,#101b15);color:var(--text,#e1eae4);border:1px solid #39754c;border-radius:16px;padding:16px}
 #axisReader::backdrop{background:#000b}
 #axisReader .insight-head{position:sticky;top:-16px;background:#101b15;z-index:1;padding:10px 0;display:flex;align-items:center;gap:12px;justify-content:space-between}
 #axisReader h2{font-size:18px;margin:0}
