@@ -569,6 +569,13 @@ button,.wit-tab,.chapter-nav button { border-radius:5px; }
 .appendix-verse:focus { outline:2px solid #3983ff; outline-offset:3px; }
 .appendix-verse ul { margin:14px 0 20px; padding-left:20px; color:var(--text2); font:14px/1.8 var(--sans); }
 .appendix-verse li + li { margin-top:8px; }
+/* Readable English glosses follow the same occurrence order as the pada-viccheda. */
+.literal-pada-translation { margin: 0 0 28px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+.literal-pada-translation h3 { margin: 0 0 10px; font: 12px/1.6 var(--mono); color: var(--text2); letter-spacing: .06em; }
+.literal-pada-help { margin: 0 0 14px; font-size: 13px; color: var(--text2); line-height: 1.7; }
+.literal-pada-sequence { list-style: none; margin: 0; padding: 0; font: 18px/1.9 var(--serif); overflow-wrap: anywhere; }
+.literal-pada-sequence li { display: inline; }
+.literal-pada-sequence li + li::before { content: ' · '; color: var(--text2); padding: 0 .2em; }
 </style>
 </head>
 <body>
@@ -1764,9 +1771,18 @@ function buildPadaViccheda(root){
    label.className='pada-label';label.textContent=reference;
   }
   const words=document.createElement('div');words.className='pada-viccheda';words.setAttribute('role','group');words.setAttribute('aria-label',reference);
+  const literal=document.createElement('section');literal.className='literal-pada-translation';literal.lang='en';
+  const heading=document.createElement('h3');heading.textContent='Literal English · pada by pada';
+  heading.id='literal-pada-heading-'+tableIndex;literal.setAttribute('aria-labelledby',heading.id);
+  const guidance=document.createElement('p');guidance.className='literal-pada-help';
+  guidance.textContent='Read in Sanskrit word order. Each dot separates the meaning of one pada above; repeated words are retained.';
+  const sequence=document.createElement('ol');sequence.className='literal-pada-sequence';sequence.setAttribute('role','list');
+  literal.append(heading,guidance,sequence);
   table.querySelectorAll('tbody tr').forEach(row=>{
    const cells=row.querySelectorAll('td');if(cells.length<3)return;
    const entry={sanskrit:cells[0].textContent.trim(),iast:cells[1].textContent.trim(),meaning:cells[2].innerHTML,reference};
+   const gloss=document.createElement('li');gloss.className='literal-pada';gloss.title=entry.iast;
+   gloss.innerHTML=entry.meaning;sequence.appendChild(gloss);
    const index=studyWords.push(entry)-1;
    const unit=document.createElement('span');unit.className='pada-unit';
    for(const [key,language] of [['sanskrit','sa'],['iast','sa-Latn']]){
@@ -1785,7 +1801,7 @@ function buildPadaViccheda(root){
   if(tableIndex===0){
    const help=document.createElement('p');help.className='pada-help';help.textContent='Tap a Sanskrit word or its IAST to see its meaning.';table.before(help);
   }
-  table.replaceWith(words);
+  table.replaceWith(words,literal);
  });
 }
 function openWordMeaning(button){

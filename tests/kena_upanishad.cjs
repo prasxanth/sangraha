@@ -136,12 +136,17 @@ const { chromium } = require('playwright');
               sourceWords: Array.from(source.querySelectorAll('table.wbw tbody tr'), row => ({
                 sanskrit: row.cells[0].textContent.trim(), iast: row.cells[1].textContent.trim(), meaning: row.cells[2].innerHTML,
               })),
+              literalWords: Array.from(study.querySelectorAll('.literal-pada'), e => ({iast:e.title, meaning:e.innerHTML})),
+              literalAfterPada: !!study.querySelector('.pada-viccheda + .literal-pada-translation'),
               renderedWords: studyWords.map(({sanskrit,iast,meaning}) => ({sanskrit,iast,meaning})),
             };
           });
           assert.deepEqual(preserved.rendered, preserved.original, 'Audited explanations and mantra preserved in study view');
           assert.deepEqual(preserved.renderedWords, preserved.sourceWords, 'Every audited word meaning preserved');
           assert.equal(await page.locator('#study-passage .pada-unit').count(), preserved.sourceWords.length);
+          assert(preserved.literalAfterPada, 'Literal English immediately follows pada-viccheda');
+          assert.deepEqual(preserved.literalWords, preserved.sourceWords.map(({iast,meaning})=>({iast,meaning})),
+            'Literal English includes every pada meaning in order, with all repetitions');
           if (face === 'English') {
             for (const script of ['sanskrit','iast']) {
               const word = page.locator('#study-passage .pada-'+script+' .pada-word').first();
