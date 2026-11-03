@@ -36,6 +36,7 @@ const { chromium } = require('playwright');
     assert.deepEqual(passages.map(p=>p.number), expected.map(p=>p.number), 'All 34 single-mantra units in order');
     assert.deepEqual(await page.locator('.class-num').allTextContents(), expected.map(p=>p.number));
     const padaExpected = require('./fixtures/kena_pada_sequences.json');
+    const phraseExpected = require('../docs/kena-phrase-translations.json');
     for(const [number,word,count] of [['2.4','विन्दते',3],['2.5','इह',2],['2.5','अवेदीत्',2],['2.5','भूतेषु',2],['4.6','तद्वनम्',2],['3.4','इति',3],['3.8','वै',2],['3.8','अहम्',2],['3.8','अस्मि',2],['4.9','प्रतितिष्ठति',2]]) {
       assert.equal(padaExpected.find(x=>x.number===number).sanskrit.filter(x=>x===word).length,count,number+' retains every occurrence of '+word);
     }
@@ -136,7 +137,7 @@ const { chromium } = require('playwright');
               sourceWords: Array.from(source.querySelectorAll('table.wbw tbody tr'), row => ({
                 sanskrit: row.cells[0].textContent.trim(), iast: row.cells[1].textContent.trim(), meaning: row.cells[2].innerHTML,
               })),
-              literalWords: Array.from(study.querySelectorAll('.literal-pada'), e => ({iast:e.title, meaning:e.innerHTML})),
+              literalPhrases: Array.from(study.querySelectorAll('.literal-phrase'), e => ({sanskrit:e.querySelector('.literal-phrase-sanskrit').textContent, english:e.querySelector('.literal-phrase-english').textContent})),
               literalAfterPada: !!study.querySelector('.pada-viccheda + .literal-pada-translation'),
               renderedWords: studyWords.map(({sanskrit,iast,meaning}) => ({sanskrit,iast,meaning})),
             };
@@ -145,8 +146,11 @@ const { chromium } = require('playwright');
           assert.deepEqual(preserved.renderedWords, preserved.sourceWords, 'Every audited word meaning preserved');
           assert.equal(await page.locator('#study-passage .pada-unit').count(), preserved.sourceWords.length);
           assert(preserved.literalAfterPada, 'Literal English immediately follows pada-viccheda');
-          assert.deepEqual(preserved.literalWords, preserved.sourceWords.map(({iast,meaning})=>({iast,meaning})),
-            'Literal English includes every pada meaning in order, with all repetitions');
+          assert.deepEqual(preserved.literalPhrases, phraseExpected[passages[i].number].map(({sanskrit,english})=>({sanskrit,english})),
+            'Every Sanskrit phrase is paired with its authored literal English');
+          assert.equal(preserved.literalPhrases.map(p=>p.sanskrit).join(' '), preserved.sourceWords.map(w=>w.sanskrit).join(' '),
+            'Phrase pairs cover all padas in order, including repetitions');
+          assert.equal(await page.locator('#study-passage .literal-pada-sequence').count(),0, 'Old dotted glossary removed');
           if (face === 'English') {
             for (const script of ['sanskrit','iast']) {
               const word = page.locator('#study-passage .pada-'+script+' .pada-word').first();
