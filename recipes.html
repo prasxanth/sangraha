@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Recipes">
@@ -52,7 +52,7 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); }
 body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; font-size: 15px; line-height: 1.6; }
 
 /* ─── APP SHELL ──────────────────────────────────────────── */
-#app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+#app { display: flex; flex-direction: column; height: 100vh; height: var(--app-height, 100dvh); }
 .status-bar { height: var(--safe-t); background: var(--bg); flex-shrink: 0; }
 
 /* ─── HEADER ─────────────────────────────────────────────── */
@@ -218,7 +218,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 
 /* Botanical edition — shared dark, single-accent visual language. */
 :root { color-scheme:dark; }
-#app { width:min(100%,1120px); margin:auto; padding:0 clamp(12px,2.5vw,28px) 64px; }
+#app { width:min(100%,1120px); margin:auto; padding:0 clamp(12px,2.5vw,28px); }
 #content { min-height:0; scrollbar-width:thin; scrollbar-color:var(--border2) var(--bg); }
 .app-header { height:68px; padding:0; gap:14px; border-color:var(--border2); }
 .app-header-label { opacity:1; font-size:9px; letter-spacing:.13em; }
@@ -241,10 +241,10 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .lane-badge { color:var(--text2); border:1px solid var(--border); background:transparent; font-size:8px; }
 .lane-arrow { color:var(--green); font-size:22px; }
 .section-label { color:var(--green); font-size:10px; }
-/* Match Kena and I Ching: the browser manages the safe viewport.
-   Keep the labels near its bottom edge without adding a second safe-area inset. */
-.bottom-nav { position:fixed; z-index:10; inset:auto 0 0; height:64px; background:var(--bg); border-color:var(--border2); gap:0; padding:0; }
-.nav-btn { min-height:0; justify-content:flex-end; padding-bottom:2px; border-top:2px solid transparent; }
+/* Keep navigation in the measured app viewport, not a separate fixed-position viewport.
+   The only bottom inset is the phone's home-indicator clearance. */
+.bottom-nav { position:relative; z-index:10; flex:0 0 auto; width:100vw; margin-left:calc(50% - 50vw); height:calc(56px + var(--safe-b)); background:var(--bg); border-color:var(--border2); gap:0; padding:0; }
+.nav-btn { min-height:0; justify-content:flex-end; padding-bottom:calc(4px + var(--safe-b)); border-top:2px solid transparent; }
 .nav-btn.active { border-top-color:var(--green); background:linear-gradient(var(--bg3),transparent); }
 .nav-icon { color:var(--text3); }
 .nav-icon svg { width:21px; height:21px; }
@@ -1064,6 +1064,21 @@ button { min-height:44px; }
 
 <!-- ═══ DAILY VIEW SCREEN (injected) ═══ -->
 <script>
+
+/* iOS standalone windows can size fixed bottoms differently from the visible app.
+   Measure the visible viewport on launch, resume and viewport changes. */
+function syncAppViewport(){
+  var viewport=window.visualViewport;
+  if(viewport && viewport.scale!==1)return;
+  var height=viewport ? viewport.height : window.innerHeight;
+  document.documentElement.style.setProperty('--app-height',height+'px');
+}
+syncAppViewport();
+window.addEventListener('resize',syncAppViewport);
+window.addEventListener('pageshow',syncAppViewport);
+if(window.visualViewport)window.visualViewport.addEventListener('resize',syncAppViewport);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)syncAppViewport();});
+
 // Inject daily screen
 document.getElementById('content').insertAdjacentHTML('beforeend', `
 <div class="screen" id="screen-daily">
