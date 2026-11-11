@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Recipes">
+<meta name="theme-color" content="#0d0d0b">
+<title>Recipes</title>
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23266040'/%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%234CAF80'/%3E%3Cstop offset='100%25' stop-color='%231a4a2e'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ctext x='90' y='128' font-family='serif' font-size='96' text-anchor='middle' fill='white' opacity='0.92'%3E🍃%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --bg:      #0d0d0b;
+  --bg2:     #131410;
+  --bg3:     #1a1c16;
+  --bg4:     #20231b;
+  --bg5:     #282b21;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text:    #e4e0d4;
+  --text2:   #a09c90;
+  --text3:   #5e5c54;
+  --green:   #5DC990;
+  --green2:  #9FDFBC;
+  --amber:   #D4901A;
+  --amber2:  #FAC775;
+  --teal:    #4EC4C4;
+  --teal2:   #9FDFDF;
+  --coral:   #E07060;
+  --coral2:  #F0A898;
+  --purple:  #8F87E0;
+  --purple2: #CECBF6;
+  --gold:    #c8a96e;
+  --gold2:   #e8c990;
+  --safe-b:  env(safe-area-inset-bottom, 0px);
+  --safe-t:  env(safe-area-inset-top, 0px);
+  --sans:    'Nunito', system-ui, sans-serif;
+  --serif:   'Playfair Display', Georgia, serif;
+  --mono:    'DM Mono', monospace;
+  --nav-h:   64px;
+  --r-sm:    8px;
+  --r-md:    12px;
+  --r-lg:    16px;
+}
+
+/* ─── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; background: var(--bg); }
+body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; font-size: 15px; line-height: 1.6; }
+
+/* ─── APP SHELL ──────────────────────────────────────────── */
+#app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+.status-bar { height: var(--safe-t); background: var(--bg); flex-shrink: 0; }
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+.app-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.app-header-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; white-space: nowrap; opacity: 0.5; flex: 1; }
+.app-header-logo { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--green2); letter-spacing: 0.02em; white-space: nowrap; flex-shrink: 0; padding: 0 1ch; }
+.app-header-time { font-family: var(--mono); font-size: 11px; color: var(--text2); white-space: nowrap; flex: 1; text-align: right; }
+
+/* ─── CONTENT AREA ───────────────────────────────────────── */
+#content { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
+.screen { display: none; min-height: 100%; padding: 18px 16px; padding-bottom: calc(24px + var(--safe-b)); }
+.screen.active { display: block; }
+
+/* ─── BOTTOM NAV ─────────────────────────────────────────── */
+.bottom-nav { flex-shrink: 0; display: flex; background: var(--bg2); border-top: 1px solid var(--border2); padding-bottom: var(--safe-b); }
+.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 9px 4px; border: none; background: transparent; cursor: pointer; transition: opacity 0.15s; }
+.nav-btn:active { opacity: 0.55; }
+.nav-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+.nav-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text3); transition: color 0.15s; }
+.nav-btn.active .nav-label { color: var(--green); }
+
+/* ─── SCREEN HEADER ──────────────────────────────────────── */
+.screen-header { margin-bottom: 20px; }
+.screen-header h2 { font-family: var(--serif); font-size: 24px; font-weight: 500; color: var(--green2); margin-bottom: 4px; }
+.screen-header p { font-size: 13px; color: var(--text3); font-style: italic; }
+.section-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; color: var(--text3); text-transform: uppercase; margin-bottom: 10px; }
+
+/* ─── HOME SCREEN ────────────────────────────────────────── */
+.greeting-block { margin-bottom: 22px; }
+.greeting-period { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase; margin-bottom: 4px; }
+.greeting-text { font-family: var(--serif); font-size: 26px; font-weight: 400; color: var(--text); line-height: 1.25; }
+.greeting-sub { font-size: 13px; color: var(--text3); margin-top: 6px; font-style: italic; }
+
+.lane-cards { display: flex; flex-direction: column; gap: 10px; }
+.lane-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.lane-card:active { background: var(--bg3); }
+.lane-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.lane-meta { flex: 1; min-width: 0; }
+.lane-name { font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.lane-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
+.lane-badge { font-family: var(--mono); font-size: 9px; padding: 3px 7px; border-radius: 4px; background: rgba(255,255,255,0.06); color: var(--text3); flex-shrink: 0; }
+.lane-arrow { color: var(--text3); font-size: 14px; flex-shrink: 0; }
+
+/* ─── QUICK REF BAR ──────────────────────────────────────── */
+.quick-ref { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px 14px; margin-bottom: 18px; }
+.quick-ref-title { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase; margin-bottom: 10px; }
+.qr-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.qr-pill { font-family: var(--mono); font-size: 10px; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border2); color: var(--text2); white-space: nowrap; }
+
+/* ─── RECIPE DETAIL ──────────────────────────────────────── */
+.recipe-hero {
+  border-radius: var(--r-lg);
+  padding: 18px 16px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.recipe-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.recipe-hero-icon { font-size: 32px; margin-bottom: 8px; }
+.recipe-hero-name { font-family: var(--serif); font-size: 22px; font-weight: 500; color: #fff; margin-bottom: 4px; }
+.recipe-hero-sub { font-size: 12px; color: rgba(255,255,255,0.55); letter-spacing: 0.04em; }
+.recipe-stats { display: flex; gap: 0; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--border); margin-bottom: 16px; }
+.recipe-stat { flex: 1; padding: 10px 8px; text-align: center; background: var(--bg2); border-right: 1px solid var(--border); }
+.recipe-stat:last-child { border-right: none; }
+.recipe-stat-val { font-family: var(--mono); font-size: 13px; color: var(--text); }
+.recipe-stat-key { font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; color: var(--text3); text-transform: uppercase; margin-top: 2px; }
+
+/* ─── SECTION BLOCKS ─────────────────────────────────────── */
+.detail-section { margin-bottom: 16px; }
+.detail-section-title { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+
+/* ─── INGREDIENT ROW ─────────────────────────────────────── */
+.ingr-list { display: flex; flex-direction: column; gap: 0; background: var(--bg2); border-radius: var(--r-md); border: 1px solid var(--border); overflow: hidden; }
+.ingr-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border); }
+.ingr-row:last-child { border-bottom: none; }
+.ingr-name { font-size: 13.5px; color: var(--text); }
+.ingr-amt { font-family: var(--mono); font-size: 12px; color: var(--text2); }
+
+/* ─── STEP LIST ──────────────────────────────────────────── */
+.step-list { display: flex; flex-direction: column; gap: 8px; }
+.step-item { display: flex; gap: 12px; align-items: flex-start; }
+.step-num { font-family: var(--mono); font-size: 10px; color: var(--text3); min-width: 20px; padding-top: 3px; }
+.step-body { font-size: 13.5px; color: var(--text2); line-height: 1.55; flex: 1; }
+.step-body strong { color: var(--text); }
+.step-head { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
+
+/* ─── RULE BLOCK ─────────────────────────────────────────── */
+.rule-block { background: var(--bg2); border-radius: var(--r-md); border: 1px solid var(--border); overflow: hidden; }
+.rule-row { padding: 9px 14px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text2); line-height: 1.5; }
+.rule-row:last-child { border-bottom: none; }
+.rule-row strong { color: var(--text); }
+
+/* ─── TROUBLESHOOT ───────────────────────────────────────── */
+.trouble-list { display: flex; flex-direction: column; gap: 8px; }
+.trouble-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 11px 14px; }
+.trouble-q { font-size: 13px; color: var(--text); margin-bottom: 3px; font-weight: 500; }
+.trouble-cause { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+.trouble-a { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
+
+/* ─── SYSTEM MAP (HOME) ──────────────────────────────────── */
+.system-note { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px 14px; margin-bottom: 18px; font-size: 13px; color: var(--text2); line-height: 1.55; }
+.system-note strong { color: var(--text); }
+
+/* ─── BACK BTN ───────────────────────────────────────────── */
+.back-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; cursor: pointer; }
+.back-row:active { opacity: 0.6; }
+.back-arrow { font-size: 18px; color: var(--text3); }
+.back-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; }
+
+/* ─── PULSE BADGE ────────────────────────────────────────── */
+.pulse-badge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border-radius: 20px; margin-top: 6px; }
+
+/* ─── SEARCH ─────────────────────────────────────────────── */
+#recipe-search::placeholder { color: var(--text3); }
+#recipe-search:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(93,201,144,0.08); }
+#recipe-search::-webkit-search-cancel-button { -webkit-appearance:none; width:16px;height:16px;cursor:pointer; }
+
+
+#content::-webkit-scrollbar { width: 3px; }
+#content::-webkit-scrollbar-track { background: transparent; }
+#content::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* ─── AMINO ACID / INFO CHIPS ────────────────────────────── */
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip { font-family: var(--mono); font-size: 9.5px; padding: 4px 9px; border-radius: 6px; border: 1px solid var(--border2); color: var(--text2); }
+
+/* ─── SEASONAL TABLE ─────────────────────────────────────── */
+.season-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.season-table th { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); }
+.season-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.season-table tr:last-child td { border-bottom: none; }
+.season-table .spice { color: var(--text); font-weight: 500; }
+
+/* Scrollable table wrapper */
+.table-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+
+/* ─── LOGIC CALLOUT ──────────────────────────────────────── */
+.callout { border-radius: var(--r-md); padding: 12px 14px; margin-bottom: 8px; font-size: 13px; line-height: 1.55; font-style: italic; }
+
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="status-bar"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <span class="app-header-label">health &amp; wellbeing</span>
+    <span class="app-header-logo">Recipes</span>
+    <span class="app-header-time" id="hdr-time"></span>
+  </header>
+
+  <!-- CONTENT -->
+  <div id="content">
+
+    <!-- ══════════════════════════════════════════════════════
+         SCREEN: HOME
+    ══════════════════════════════════════════════════════ -->
+    <div class="screen active" id="screen-home">
+      <div class="greeting-block">
+        <div class="greeting-period" id="greeting-period">Recipe Collection</div>
+        <div class="greeting-text" id="greeting-text">Health &amp; Wellbeing<br>Recipes.</div>
+        <div class="greeting-sub">7 recipes · powders · brews · smoothies</div>
+      </div>
+
+      <div style="position:relative;margin-bottom:18px;">
+        <span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none;opacity:0.4;">🔍</span>
+        <input
+          id="recipe-search"
+          type="search"
+          placeholder="Search recipes…"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          oninput="filterRecipes(this.value)"
+          style="
+            width:100%;
+            background:var(--bg2);
+            border:1px solid var(--border2);
+            border-radius:var(--r-md);
+            padding:11px 14px 11px 38px;
+            font-family:var(--sans);
+            font-size:15px;
+            color:var(--text);
+            outline:none;
+            -webkit-appearance:none;
+            appearance:none;
+          "
+        >
+      </div>
+
+      <div class="section-label" id="search-label" style="margin-bottom:10px;">All recipes</div>
+      <div id="no-results" style="display:none;text-align:center;padding:32px 0;font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:0.1em;">NO RESULTS</div>
+      <div class="lane-cards" id="home-cards">
+
+        <div class="lane-card" onclick="openRecipe('portfolio')">
+          <div class="lane-icon" style="background:rgba(93,201,144,0.12);">💪</div>
+          <div class="lane-meta">
+            <div class="lane-name">Portfolio+ Powder</div>
+            <div class="lane-tag" style="color:var(--green);">LDL-C · ApoB · LDL-P</div>
+          </div>
+          <span class="lane-badge">Daily</span>
+          <span class="lane-arrow">›</span>
+        </div>
+
+        <div class="lane-card" onclick="openRecipe('balt')">
+          <div class="lane-icon" style="background:rgba(212,144,26,0.12);">🌿</div>
+          <div class="lane-meta">
+            <div class="lane-name">BALT Powder</div>
+            <div class="lane-tag" style="color:var(--amber);">Black Cumin · Amla · Pippali · Turmeric</div>
+          </div>
+          <span class="lane-badge">Daily</span>
+          <span class="lane-arrow">›</span>
+        </div>
+
+        <div class="lane-card" onclick="openRecipe('smoothie')">
+          <div class="lane-icon" style="background:rgba(78,196,196,0.12);">🧊</div>
+          <div class="lane-meta">
+            <div class="lane-name">SEP Smoothie Cubes</div>
+            <div class="lane-tag" style="color:var(--teal);">β-glucan · Protein · Fiber</div>
+          </div>
+          <span class="lane-badge">Daily</span>
+          <span class="lane-arrow">›</span>
+        </div>
+
+        <div class="lane-card" onclick="openRecipe('nitric')">
+          <div class="lane-icon" style="background:rgba(224,112,96,0.12);">❤️</div>
+          <div class="lane-meta">
+            <div class="lane-name">Nitric Oxide Powder</div>
+            <div class="lane-tag" style="color:var(--coral);">Vascular · Endothelial · Mitochondrial</div>
+          </div>
+          <span class="lane-badge">Daily</span>
+          <span class="lane-arrow">›</span>
+        </div>
+
+        <div class="lane-card" onclick="openRecipe('adaptabrew')">
+          <div class="lane-icon" style="background:rgba(143,135,224,0.12);">☕</div>
+          <div class="lane-meta">
+            <div class="lane-name">Adaptabrew™ v2.2</div>
+            <div class="lane-tag" style="color:var(--purple);">Calm Focus · Adaptogenic</div>
+          </div>
+          <span class="lane-badge">Daily</span>
+          <span class="lane-arrow">›</span>
+        </div>
+
+        <div class="lane-card" onclick="openRecipe('chai')">
+          <div class="lane-icon" style="background:rgba(200,169,110,0.12);">🫖</div>
+          <div class="lane-meta">
+            <div class="lane-name">UrbanYogi Chai Masala</div>
+            <div class="lane-tag" style="color:var(--gold);">Winter · Summer · Agni</div>
+          </div>
+          <span class="lane-badge">Seasonal</span>
+          <span class="lane-arrow">›</span>
+        </div>
+
+        <div class="lane-card" onclick="openRecipe('polyphenol')">
+          <div class="lane-icon" style="background:rgba(93,201,144,0.08); border:1px dashed rgba(93,201,144,0.25);">⚡</div>
+          <div class="lane-meta">
+            <div class="lane-name">Polyphenol Pulse</div>
+            <div class="lane-tag" style="color:var(--green2);">AMPK · Autophagy · Hormesis</div>
+          </div>
+          <span class="lane-badge" style="border:1px dashed var(--border2);">2×/wk</span>
+          <span class="lane-arrow">›</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SCREEN: PORTFOLIO+
+    ══════════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-portfolio">
+      <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
+      <div class="recipe-hero" style="background:linear-gradient(135deg,#1a2e1e,#0f1a12);">
+        <div class="recipe-hero-icon">💪</div>
+        <div class="recipe-hero-name">Portfolio+ Powder</div>
+        <div class="recipe-hero-sub">Dr. Greger · LDL-C / ApoB / LDL-P backbone · sprinkle lane</div>
+      </div>
+      <div class="recipe-stats">
+        <div class="recipe-stat"><div class="recipe-stat-val">30 days</div><div class="recipe-stat-key">Batch</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">6 Tbsp</div><div class="recipe-stat-key">Daily</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">15–25m</div><div class="recipe-stat-key">Prep</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">Easy</div><div class="recipe-stat-key">Level</div></div>
+      </div>
+
+      <div class="callout" style="background:rgba(93,201,144,0.07);border-left:3px solid var(--green);color:var(--text2);">
+        "Always-on" LDL-C reduction via viscous fiber + phytosterols + flax lignans. Keep it boring and consistent — this is the backbone.
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Base Ingredients (180 Tbsp batch)</div>
+        <div class="ingr-list">
+          <div class="ingr-row"><span class="ingr-name">Ground brown flaxseed meal</span><span class="ingr-amt">90 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Psyllium husk powder (finely ground)</span><span class="ingr-amt">30 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Black sesame seed powder (raw)</span><span class="ingr-amt">10 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Sumac</span><span class="ingr-amt">5 Tbsp</span></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Micro-Mix (blend separately)</div>
+        <div class="ingr-list">
+          <div class="ingr-row"><span class="ingr-name">Taurine powder</span><span class="ingr-amt">4 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Plant sterols (powder)</span><span class="ingr-amt">4 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Artichoke extract powder</span><span class="ingr-amt">5 tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Bergamot extract powder</span><span class="ingr-amt">15 g</span></div>
+          <div class="ingr-row"><span class="ingr-name">Kelp powder</span><span class="ingr-amt">2 tsp</span></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Filler (to reach 180 Tbsp total — choose one)</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Wheat germ</strong> — if gluten-tolerant</div>
+          <div class="rule-row"><strong>Oat bran</strong> — gluten-free option</div>
+          <div class="rule-row"><strong>Defatted flax</strong> — neutral option</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Preparation Steps</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">01</span><div class="step-body"><strong>Build the base:</strong> Combine flax meal, psyllium, black sesame, sumac in a large bowl. Whisk 1–2 min until uniform. Optional: sift once to break psyllium clumps.</div></div>
+          <div class="step-item"><span class="step-num">02</span><div class="step-body"><strong>Make the micro-mix:</strong> In a separate small bowl, whisk taurine, plant sterols, artichoke extract, bergamot extract, and kelp until completely uniform.</div></div>
+          <div class="step-item"><span class="step-num">03</span><div class="step-body"><strong>Combine evenly:</strong> While stirring the base continuously, sprinkle micro-mix slowly across the surface. Keep stirring 60–90 seconds.</div></div>
+          <div class="step-item"><span class="step-num">04</span><div class="step-body"><strong>Finish:</strong> Add filler until you hit 180 Tbsp total. Transfer to airtight opaque jar. Label with name + date.</div></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Daily Dose</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>2 Tbsp</strong> with breakfast</div>
+          <div class="rule-row"><strong>2 Tbsp</strong> with lunch</div>
+          <div class="rule-row"><strong>2 Tbsp</strong> with dinner</div>
+          <div class="rule-row">Mix into dal, sambar, soup, plant curd, chutney. <strong>Never dry-swallow.</strong></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Storage</div>
+        <div class="rule-block">
+          <div class="rule-row">Keep a 7–10 day working jar in the <strong>fridge</strong></div>
+          <div class="rule-row">Bulk remainder sealed in the <strong>freezer</strong> (prevents flax rancidity)</div>
+          <div class="rule-row">Always use a <strong>dry spoon</strong> (psyllium clumps with moisture)</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Troubleshoot</div>
+        <div class="trouble-list">
+          <div class="trouble-item"><div class="trouble-q">Too thick / gels fast</div><div class="trouble-cause">High psyllium + low liquid</div><div class="trouble-a">Mix into soups or curd; add extra water; eat within 5–10 min of mixing.</div></div>
+          <div class="trouble-item"><div class="trouble-q">Gas / bloating</div><div class="trouble-cause">Fiber jump + microbiome adjustment</div><div class="trouble-a">Ramp: start at 1 Tbsp/meal for 7 days, then step up.</div></div>
+          <div class="trouble-item"><div class="trouble-q">Off / rancid smell</div><div class="trouble-cause">Flax oxidation</div><div class="trouble-a">Discard and rebuild. Store bulk in freezer; working jar in fridge.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SCREEN: BALT
+    ══════════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-balt">
+      <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
+      <div class="recipe-hero" style="background:linear-gradient(135deg,#2a1e08,#1a1006);">
+        <div class="recipe-hero-icon">🌿</div>
+        <div class="recipe-hero-name">BALT Powder</div>
+        <div class="recipe-hero-sub">Dr. Greger · Black Cumin · Amla · Long Pepper · Turmeric · swallow lane</div>
+      </div>
+      <div class="recipe-stats">
+        <div class="recipe-stat"><div class="recipe-stat-val">Daily</div><div class="recipe-stat-key">Freq</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">1 tsp</div><div class="recipe-stat-key">Dose</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">3–5m</div><div class="recipe-stat-key">Prep</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">Easy</div><div class="recipe-stat-key">Level</div></div>
+      </div>
+
+      <div class="callout" style="background:rgba(212,144,26,0.07);border-left:3px solid var(--amber);color:var(--text2);">
+        Strongest-tasting, highest-leverage powders delivered without tasting them. Swallow lane only — keep BALT separate from meal-sprinkle powders.
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Daily BALT Spec (1 tsp total)</div>
+        <div class="ingr-list">
+          <div class="ingr-row"><span class="ingr-name">Black cumin (Nigella) powder</span><span class="ingr-amt">¼ tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Amla powder</span><span class="ingr-amt">⅓ tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Long pepper (Pippali) powder</span><span class="ingr-amt">⅛ tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Turmeric powder</span><span class="ingr-amt">¼ tsp</span></div>
+        </div>
+        <div style="margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--text3);text-align:right;">Ratio B:A:L:T = 3:4:1.5:3</div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Delivery Method — Edible Film Wonton (Preferred)</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">01</span><div class="step-body"><strong>Ensure dry hands</strong> — film is instant glue with moisture.</div></div>
+          <div class="step-item"><span class="step-num">02</span><div class="step-body">Place powder mound in <strong>center</strong> of edible film sheet.</div></div>
+          <div class="step-item"><span class="step-num">03</span><div class="step-body">Fold tightly like a <strong>wonton</strong> — tight corners reduce leaks.</div></div>
+          <div class="step-item"><span class="step-num">04</span><div class="step-body">Lightly <strong>dip edge in water</strong> to seal fully. Don't half-seal and hope.</div></div>
+          <div class="step-item"><span class="step-num">05</span><div class="step-body"><strong>Swallow with plenty of water</strong> — don't sip, commit.</div></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Alternate Delivery</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Option A:</strong> Fill capsules (prefilled or DIY)</div>
+          <div class="rule-row"><strong>Option B:</strong> Curry slurry — mix powders with a little water, chug immediately</div>
+          <div class="rule-row" style="color:var(--text3);font-size:12px;">Capsules &gt; film when mobile (flights, hotels, shared spaces)</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Ayurvedic Energetics</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Nigella</strong> — pungent + bitter, warming; ↓Kapha, ↓Vata (small dose), may ↑Pitta if overdone</div>
+          <div class="rule-row"><strong>Amla</strong> — sour + astringent, cooling; ↓Pitta, ↓Vata; can be drying if taken very dry</div>
+          <div class="rule-row"><strong>Pippali</strong> — pungent, warming; ↓Kapha, supports Agni; may ↑Pitta if pushed</div>
+          <div class="rule-row"><strong>Turmeric</strong> — bitter + pungent, warming; ↓Kapha, clears Ama; may ↑Vata if very dry</div>
+          <div class="rule-row" style="color:var(--amber2);font-size:12px;">Net: warming, Agni-supporting, Kapha-reducing. Amla = cooling counterweight.</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Variations</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Gentler start:</strong> Pippali ⅟₁₆ tsp</div>
+          <div class="rule-row"><strong>Stronger push:</strong> Pippali ⅙ tsp (upper practical limit)</div>
+          <div class="rule-row"><strong>Amla-forward (cooling bias):</strong> Amla ½ tsp + Pippali ⅟₁₆ tsp</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Troubleshoot</div>
+        <div class="trouble-list">
+          <div class="trouble-item"><div class="trouble-q">Film tears</div><div class="trouble-cause">Damp hands or heavy payload</div><div class="trouble-a">Dry hands; use larger sheet; reduce payload; double-layer if needed.</div></div>
+          <div class="trouble-item"><div class="trouble-q">Burning / heat sensation</div><div class="trouble-cause">Pippali too stimulating initially</div><div class="trouble-a">Cut pippali to ⅟₁₆ tsp for 5–7 days, then restore.</div></div>
+          <div class="trouble-item"><div class="trouble-q">You dread taking it</div><div class="trouble-cause">Method friction</div><div class="trouble-a">Switch to capsules — compliance beats elegance.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SCREEN: SMOOTHIE CUBES
+    ══════════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-smoothie">
+      <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
+      <div class="recipe-hero" style="background:linear-gradient(135deg,#0e2020,#081515);">
+        <div class="recipe-hero-icon">🧊</div>
+        <div class="recipe-hero-name">SEP Smoothie Cubes v1.5</div>
+        <div class="recipe-hero-sub">β-glucan · Resistant starch · Protein · Bile acid binding</div>
+      </div>
+      <div class="recipe-stats">
+        <div class="recipe-stat"><div class="recipe-stat-val">28</div><div class="recipe-stat-key">Cubes</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">4 cubes</div><div class="recipe-stat-key">Per smoothie</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">35m+</div><div class="recipe-stat-key">Active prep</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">12–16h</div><div class="recipe-stat-key">Soak</div></div>
+      </div>
+
+      <div class="callout" style="background:rgba(78,196,196,0.07);border-left:3px solid var(--teal);color:var(--text2);">
+        Delivers exactly 2 Tbsp Portfolio+ and high protein via whole-foods. The oat bran stacking is intentional — concentrated β-glucan for aggressive triglyceride repair.
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Overnight Soak</div>
+        <div class="ingr-list">
+          <div class="ingr-row"><span class="ingr-name">Steel-cut oats</span><span class="ingr-amt">7 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Chia or basil seeds</span><span class="ingr-amt">7 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Oat bran</span><span class="ingr-amt">3 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Fenugreek powder</span><span class="ingr-amt">1–1½ tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Lemon juice or ACV</span><span class="ingr-amt">1 tsp</span></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Protein Base</div>
+        <div class="ingr-list">
+          <div class="ingr-row"><span class="ingr-name">Silken tofu (soft)</span><span class="ingr-amt">2½–3½ cups</span></div>
+          <div class="ingr-row"><span class="ingr-name">Unsweetened soy milk</span><span class="ingr-amt">2–3 cups</span></div>
+          <div class="ingr-row"><span class="ingr-name">Water to total</span><span class="ingr-amt">1.5 L</span></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">SEP Actives</div>
+        <div class="ingr-list">
+          <div class="ingr-row"><span class="ingr-name">Portfolio+ powder</span><span class="ingr-amt">14 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Flaxseed powder</span><span class="ingr-amt">7 Tbsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Amla powder</span><span class="ingr-amt">7 tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Turmeric powder</span><span class="ingr-amt">2 tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Ginger powder</span><span class="ingr-amt">2 tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Long pepper (Pippali)</span><span class="ingr-amt">⅛ tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Vanilla extract</span><span class="ingr-amt">1½ tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Cinnamon (optional)</span><span class="ingr-amt">1 tsp</span></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Preparation Steps</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">01</span><div class="step-body"><strong>Overnight soak:</strong> Combine oats, chia/basil seeds, oat bran, fenugreek, lemon/ACV. Cover with water. Soak 12–16 hours.</div></div>
+          <div class="step-item"><span class="step-num">02</span><div class="step-body"><strong>Light cook (critical):</strong> Drain. Transfer to saucepan + 2–2.5 cups fresh water. Simmer 5–6 min. <strong>Do not overcook</strong> — goal is soft and lightly viscous, not gummy.</div></div>
+          <div class="step-item"><span class="step-num">03</span><div class="step-body"><strong>Curcumin dispersion:</strong> While still warm, stir in turmeric, ginger, amla, long pepper. Let sit 5 min. Cool 5–10 min more to increase retrograded resistant starch.</div></div>
+          <div class="step-item"><span class="step-num">04</span><div class="step-body"><strong>Primary blend:</strong> Add warm mixture + silken tofu to blender. Add soy milk + water to reach 1.5 L. Blend 20–30 sec longer than usual to prevent oat bran clumps.</div></div>
+          <div class="step-item"><span class="step-num">05</span><div class="step-body"><strong>Add remaining actives:</strong> Add Portfolio+, flax, vanilla, cinnamon. Blend until homogeneous. Portfolio+ is added last to protect its sterols.</div></div>
+          <div class="step-item"><span class="step-num">06</span><div class="step-body"><strong>Freeze:</strong> Pour immediately into silicone trays → 28 large cubes. Tofu must be blended before freezing to maintain cream texture.</div></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Daily Smoothie Assembly</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>4 cubes</strong> from freezer</div>
+          <div class="rule-row">Frozen berries to <strong>⅓ blender volume</strong></div>
+          <div class="rule-row">Water or soy milk to blend</div>
+          <div class="rule-row">Optional: cinnamon + erythritol</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Never Add</div>
+        <div class="rule-block">
+          <div class="rule-row" style="color:var(--coral2);">❌ Dates, banana, or mango — high insulin noise</div>
+          <div class="rule-row" style="color:var(--coral2);">❌ Nut butters or coconut cream — fat stacking</div>
+          <div class="rule-row" style="color:var(--coral2);">❌ Firm tofu — becomes crumbly and breaks emulsion (silken only)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SCREEN: NITRIC OXIDE
+    ══════════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-nitric">
+      <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
+      <div class="recipe-hero" style="background:linear-gradient(135deg,#2a0e0e,#1a0808);">
+        <div class="recipe-hero-icon">❤️</div>
+        <div class="recipe-hero-name">Nitric Oxide Core Powder</div>
+        <div class="recipe-hero-sub">Vascular · Endothelial · Mitochondrial efficiency</div>
+      </div>
+      <div class="recipe-stats">
+        <div class="recipe-stat"><div class="recipe-stat-val">30</div><div class="recipe-stat-key">Doses</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">½ tsp</div><div class="recipe-stat-key">Daily</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">10m</div><div class="recipe-stat-key">Prep</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">Easy</div><div class="recipe-stat-key">Level</div></div>
+      </div>
+
+      <div class="callout" style="background:rgba(224,112,96,0.07);border-left:3px solid var(--coral);color:var(--text2);">
+        "You can't amplify a signal you can't deliver." NO signaling enhances downstream delivery of sulforaphane, polyphenols, and exercise signals.
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Monthly Batch Ingredients (30 doses)</div>
+        <div class="ingr-list">
+          <div class="ingr-row"><span class="ingr-name">Beetroot powder</span><span class="ingr-amt">7½ tsp (2½ Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name">Arugula (rocket) powder</span><span class="ingr-amt">7½ tsp (2½ Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name" style="color:var(--text3);">Daily dose</span><span class="ingr-amt" style="color:var(--text3);">½ tsp total</span></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Preparation</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">01</span><div class="step-body">Measure beetroot and arugula powders into a bowl. Mix thoroughly for uniform nitrate distribution.</div></div>
+          <div class="step-item"><span class="step-num">02</span><div class="step-body">Transfer to an airtight jar. Done — this is your 30-day batch.</div></div>
+          <div class="step-item"><span class="step-num">03</span><div class="step-body"><strong>Daily:</strong> Measure ½ tsp. Add to smoothie <strong>after blending</strong> or to cool/room-temperature food. Consume shortly after mixing.</div></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Critical Rules</div>
+        <div class="rule-block">
+          <div class="rule-row">Once daily. Consistency builds the effect.</div>
+          <div class="rule-row"><strong>Avoid hot foods or hot drinks</strong> around dosing — heat degrades nitrates.</div>
+          <div class="rule-row"><strong>Avoid antiseptic mouthwash ±2 hours</strong> — oral bacteria are required for nitrate → nitrite conversion. This is non-negotiable.</div>
+          <div class="rule-row"><strong>Best timing:</strong> 30–60 min before light or moderate exercise.</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Oral Microbiome Protection</div>
+        <div class="rule-block">
+          <div class="rule-row">Prefer non-antibacterial toothpaste</div>
+          <div class="rule-row">Tongue scraping is fine; antimicrobial rinses are not</div>
+          <div class="rule-row">Dental cleanings can blunt effect for 24–48 hours</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">What "Working" Feels Like</div>
+        <div class="rule-block">
+          <div class="rule-row">Subtle warmth, mild "pump," or easier breathing during activity</div>
+          <div class="rule-row">Occasionally a light head rush when standing quickly (vasodilation)</div>
+          <div class="rule-row" style="color:var(--text3);">Often no acute sensation — this is normal. Benefits accumulate over weeks.</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Troubleshoot</div>
+        <div class="trouble-list">
+          <div class="trouble-item"><div class="trouble-q">No noticeable effect</div><div class="trouble-cause">Inconsistent dosing or oral pathway disrupted</div><div class="trouble-a">Ensure daily use; avoid antiseptic mouthwash ±2 hours.</div></div>
+          <div class="trouble-item"><div class="trouble-q">Headache or flushing</div><div class="trouble-cause">Vasodilation sensitivity</div><div class="trouble-a">Reduce dose to ¼ tsp for a few days; hydrate well.</div></div>
+          <div class="trouble-item"><div class="trouble-q">GI discomfort</div><div class="trouble-cause">Dose too concentrated or empty stomach</div><div class="trouble-a">Take with food or dilute further.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SCREEN: ADAPTABREW
+    ══════════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-adaptabrew">
+      <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
+      <div class="recipe-hero" style="background:linear-gradient(135deg,#140e26,#0d0919);">
+        <div class="recipe-hero-icon">☕</div>
+        <div class="recipe-hero-name">Adaptabrew™ v2.2</div>
+        <div class="recipe-hero-sub">Calm Focus Edition · 100–200 cups per batch</div>
+      </div>
+      <div class="recipe-stats">
+        <div class="recipe-stat"><div class="recipe-stat-val">200g</div><div class="recipe-stat-key">Batch</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">1–2g</div><div class="recipe-stat-key">Per cup</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">1.5h</div><div class="recipe-stat-key">Prep</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">Intermediate</div><div class="recipe-stat-key">Level</div></div>
+      </div>
+
+      <div class="callout" style="background:rgba(143,135,224,0.07);border-left:3px solid var(--purple);color:var(--text2);">
+        Essence without sludge: aromatics via water (Path A), lipophilic actives via milk micro-decoction (Path B). Moderate caffeine + calm-alert botanicals.
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Base Blend Ingredients (200g batch)</div>
+        <div class="ingr-list">
+          <div class="ingr-row"><span class="ingr-name">Shatavari root</span><span class="ingr-amt">60g (12 Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name">Dry ginger</span><span class="ingr-amt">48g (9½ Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name">Fennel</span><span class="ingr-amt">30g (6 Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name">Ceylon Cinnamon</span><span class="ingr-amt">20g (4 Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name">Turmeric</span><span class="ingr-amt">16g (3¼ Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name">Cardamom</span><span class="ingr-amt">12g (2½ Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name">Licorice</span><span class="ingr-amt">6g (1¼ Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name">Marshmallow Root</span><span class="ingr-amt">6g (1½ Tbsp)</span></div>
+          <div class="ingr-row"><span class="ingr-name">Nutmeg</span><span class="ingr-amt">2g (½ tsp)</span></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Path A — Spice-Infusion Sachet (bright & clean)</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">01</span><div class="step-body">Place <strong>1–2 g base</strong> in a fine paper tea bag.</div></div>
+          <div class="step-item"><span class="step-num">02</span><div class="step-body"><strong>60–90 ml water @ 92–95°C.</strong> Steep 3–4:30 min. Dunk 3–5× at start → rest → finish by lifting & pressing gently. Do not wring.</div></div>
+          <div class="step-item"><span class="step-num">03</span><div class="step-body">Brew coffee liquor separately. Pour <strong>60–90 ml infusion</strong> into cup, add <strong>120–170 ml coffee</strong>. Stir 5–10 s.</div></div>
+          <div class="step-item"><span class="step-num">04</span><div class="step-body">Optional body: 10–20 ml milk or 1–2 g inulin. No sugar.</div></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Optional Add-Ins (choose 1–2)</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Gotu Kola</strong> 0.5–1.0 g — calm attention; minimal sedation; water-extractable</div>
+          <div class="rule-row"><strong>Tulsi</strong> 0.5–1.0 g — anxiolytic without dulling; pairs with coffee</div>
+          <div class="rule-row"><strong>Rose petal</strong> 0.2–0.3 g — softens acidity; pleasant top note</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Path B — Micro-Ksheerapaka Concentrate</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">—</span><div class="step-body"><strong>Batch (120–150 ml, keeps 3–4 days):</strong> 6 g base blend + optional Ashwagandha 2–3 g + 120 ml milk + 120 ml water + sunflower lecithin 0.4–0.5 g (after straining).</div></div>
+          <div class="step-item"><span class="step-num">—</span><div class="step-body">Gentle simmer 12 min → strain fine → cool → whisk lecithin → refrigerate.</div></div>
+          <div class="step-item"><span class="step-num">—</span><div class="step-body"><strong>Per cup:</strong> 15–20 ml (AM) or 20–30 ml (late AM / early PM). Warm gently; do not re-boil.</div></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Coffee Dose (AeroPress / filter)</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Calm Focus:</strong> coffee 12–14 g, water 160–170 g @ 88–90°C, 1:45–2:00 total</div>
+          <div class="rule-row"><strong>Standard:</strong> coffee 15 g, water 225 g @ 88–90°C, 2:00</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Seasonal Tweaks</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>May–Jun:</strong> Skip Path B most days; fennel-forward Path A; rose water 2–3 ml in cup</div>
+          <div class="rule-row"><strong>Nov–Jan:</strong> Use Path B 20–30 ml; optionally +2 g ginger to the monthly 200 g batch</div>
+          <div class="rule-row"><strong>Sep:</strong> Ashwagandha only in Path B; ≤20 ml AM to avoid "flatness"</div>
+          <div class="rule-row"><strong>Mar–Apr:</strong> Pepper in Path B only; Path A steep ≤4:30 for clarity</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Troubleshoot</div>
+        <div class="trouble-list">
+          <div class="trouble-item"><div class="trouble-q">Muddy / gritty</div><div class="trouble-cause">Coarse bag or bag left in too long</div><div class="trouble-a">Fine paper bag; steep in water only; remove bag on time.</div></div>
+          <div class="trouble-item"><div class="trouble-q">Jitters</div><div class="trouble-cause">Caffeine peak too high</div><div class="trouble-a">Coffee 12–14 g + bypass architecture; add 15–20 ml Path B.</div></div>
+          <div class="trouble-item"><div class="trouble-q">Flat / sedated</div><div class="trouble-cause">Too much licorice or AM ashwagandha</div><div class="trouble-a">Reduce licorice; keep AM Path B ≤20 ml; shift PM.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SCREEN: CHAI MASALA
+    ══════════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-chai">
+      <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
+      <div class="recipe-hero" style="background:linear-gradient(135deg,#261a08,#170f04);">
+        <div class="recipe-hero-icon">🫖</div>
+        <div class="recipe-hero-name">UrbanYogi Chai Masala v2.1</div>
+        <div class="recipe-hero-sub">Winter & Summer · One masala, two modes</div>
+      </div>
+      <div class="recipe-stats">
+        <div class="recipe-stat"><div class="recipe-stat-val">2 cups</div><div class="recipe-stat-key">Serves</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">10–15m</div><div class="recipe-stat-key">Spice prep</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">8–10m</div><div class="recipe-stat-key">Simmer</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">4 weeks</div><div class="recipe-stat-key">Jar keeps</div></div>
+      </div>
+
+      <div class="callout" style="background:rgba(200,169,110,0.07);border-left:3px solid var(--gold);color:var(--text2);">
+        More pepper/ginger for cold; more fennel/licorice for heat. Make one jar close to the Winter profile — then adjust dose and steep time by season.
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Spice Quantities (per 2 cups)</div>
+        <div class="table-wrap">
+          <table class="season-table">
+            <thead><tr><th>Spice</th><th>❄ Winter</th><th>☀ Summer</th></tr></thead>
+            <tbody>
+              <tr><td class="spice">Green cardamom</td><td>10–12 pods</td><td>8–10 pods</td></tr>
+              <tr><td class="spice">Black cardamom</td><td>1 pod</td><td>—</td></tr>
+              <tr><td class="spice">Star anise</td><td>½ pod</td><td>1 pod</td></tr>
+              <tr><td class="spice">Fennel seeds</td><td>½ tsp</td><td>1 tsp</td></tr>
+              <tr><td class="spice">Cloves</td><td>≈4–5</td><td>2</td></tr>
+              <tr><td class="spice">Cinnamon stick</td><td>1 stick</td><td>¼ stick</td></tr>
+              <tr><td class="spice">Black pepper</td><td>1–1.5 tsp</td><td>¼ tsp</td></tr>
+              <tr><td class="spice">Pippali (long pepper)</td><td>1 tsp</td><td>—</td></tr>
+              <tr><td class="spice">Nutmeg powder</td><td>¼ tsp</td><td>—</td></tr>
+              <tr><td class="spice">Dry ginger powder</td><td>1–1.5 tsp</td><td>¼ tsp</td></tr>
+              <tr><td class="spice">Arjun bark powder</td><td>1 tsp (opt.)</td><td>1 tsp (opt.)</td></tr>
+              <tr><td class="spice">Licorice powder</td><td>1 tsp (opt.)</td><td>1 tsp</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Base Prep (Both Seasons)</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">01</span><div class="step-body">Lightly toast whole spices on low for <strong>30–60 s</strong> until fragrant. No browning.</div></div>
+          <div class="step-item"><span class="step-num">02</span><div class="step-body">Cool fully. Grind coarse. Add nutmeg, ginger powder, Arjun, licorice after toasting (during grinding or directly to pot).</div></div>
+          <div class="step-item"><span class="step-num">03</span><div class="step-body"><strong>Masala jar:</strong> grind coarse, store airtight up to 4 weeks. Label: "Winter: 1 tsp/cup, daily: ¾ tsp/cup".</div></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">❄ Winter Brew</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">01</span><div class="step-body">2 heaped tsp winter masala (≈1 tsp/cup) + 2 cups water to saucepan.</div></div>
+          <div class="step-item"><span class="step-num">02</span><div class="step-body">Simmer gently <strong>5–7 min</strong>.</div></div>
+          <div class="step-item"><span class="step-num">03</span><div class="step-body">Add milk and tea (if using); simmer <strong>2–3 min</strong> more. Strain; sweeten as desired.</div></div>
+        </div>
+        <div style="margin-top:8px;font-size:12px;color:var(--text3);">Heat dial: max = 1.5 tsp pepper + 1 tsp pippali per 2 cups. Most people do better at ≈1 tsp total pepper family.</div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">☀ Summer Brew</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">01</span><div class="step-body">1 level tsp summer masala (≈½ tsp/cup) + 2 cups water.</div></div>
+          <div class="step-item"><span class="step-num">02</span><div class="step-body"><strong>Gentle simmer only</strong> 3–4 min (avoid rolling boil).</div></div>
+          <div class="step-item"><span class="step-num">03</span><div class="step-body">Add milk and tea; simmer <strong>1–2 min</strong>. Strain; lightly sweeten.</div></div>
+        </div>
+        <div style="margin-top:8px;font-size:12px;color:var(--text3);">Cool dial: still too hot → drop pepper to a pinch, bump fennel to 1.5 tsp.</div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Safety Limits</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Pepper family max:</strong> 1.5 tsp pepper + 1 tsp pippali / 2 cups (occasional only)</div>
+          <div class="rule-row"><strong>Nutmeg:</strong> ≤¼ tsp per pot — sedating</div>
+          <div class="rule-row"><strong>Licorice:</strong> avoid if high BP, edema, or on diuretics</div>
+          <div class="rule-row"><strong>Cardamom:</strong> if 10–12 pods feels loud, drop to 6–8</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Dosha-Oriented Tweaks</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Vata:</strong> Gentle heat, ginger + a bit of pepper, little pippali, keep fennel + licorice</div>
+          <div class="rule-row"><strong>Pitta:</strong> Summer/neutral; fennel + cardamom + star anise lead; keep pepper, pippali, cloves, nutmeg very low or none</div>
+          <div class="rule-row"><strong>Kapha:</strong> Winter or slightly hotter; more ginger, moderate pepper, minimal licorice</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Troubleshoot</div>
+        <div class="trouble-list">
+          <div class="trouble-item"><div class="trouble-q">Too hot / harsh</div><div class="trouble-cause">Pepper high</div><div class="trouble-a">Drop pepper to pinch; add fennel 1–1.5 tsp; shorten simmer.</div></div>
+          <div class="trouble-item"><div class="trouble-q">Flat / dull</div><div class="trouble-cause">Over-boiled milk or spice</div><div class="trouble-a">Gentle simmer; add aroma late; shorten total time.</div></div>
+          <div class="trouble-item"><div class="trouble-q">Curdled alt-milk</div><div class="trouble-cause">Boil too hard</div><div class="trouble-a">Simmer gently; add plant milk off heat; brief warm only.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SCREEN: POLYPHENOL PULSE
+    ══════════════════════════════════════════════════════ -->
+    <div class="screen" id="screen-polyphenol">
+      <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
+      <div class="recipe-hero" style="background:linear-gradient(135deg,#0e2018,#08130e);">
+        <div class="recipe-hero-icon">⚡</div>
+        <div class="recipe-hero-name">Polyphenol Pulse v1.1</div>
+        <div class="recipe-hero-sub">AMPK · Autophagy · Hormetic Signaling · 2× per week only</div>
+      </div>
+      <div class="recipe-stats">
+        <div class="recipe-stat"><div class="recipe-stat-val">≈8</div><div class="recipe-stat-key">Doses</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">2×/wk</div><div class="recipe-stat-key">Freq</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">5m</div><div class="recipe-stat-key">Prep</div></div>
+        <div class="recipe-stat"><div class="recipe-stat-val">Easy</div><div class="recipe-stat-key">Level</div></div>
+      </div>
+
+      <div class="callout" style="background:rgba(93,201,144,0.06);border-left:3px solid var(--green2);border-style:dashed;color:var(--text2);">
+        "Signals should arrive, resolve, and be missed." Used daily, it becomes noise. Used sparingly, it drives adaptation.
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Batch Ingredients (≈8 doses)</div>
+        <div class="ingr-list">
+          <div class="ingr-row"><span class="ingr-name">Natural cacao powder (non-alkalized)</span><span class="ingr-amt">4 tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Grape skin powder (or finely ground raisins)</span><span class="ingr-amt">3 tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name">Ceylon cinnamon powder</span><span class="ingr-amt">1 tsp</span></div>
+          <div class="ingr-row"><span class="ingr-name" style="color:var(--text3);">Per dose</span><span class="ingr-amt" style="color:var(--text3);">½–1 tsp</span></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Preparation</div>
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">01</span><div class="step-body">Measure cacao, grape skin (or raisin powder), and cinnamon into a mixing bowl.</div></div>
+          <div class="step-item"><span class="step-num">02</span><div class="step-body">Mix thoroughly to ensure even polyphenol distribution.</div></div>
+          <div class="step-item"><span class="step-num">03</span><div class="step-body">Transfer to an airtight container. Store dark and cool. Use within 4–6 weeks.</div></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Pulse Rules — Non-Negotiable</div>
+        <div class="rule-block">
+          <div class="rule-row" style="color:var(--green2);"><strong>2× per week maximum.</strong> Space doses at least 48 hours apart.</div>
+          <div class="rule-row"><strong>Do not use daily</strong> — daily exposure blunts the hormetic response.</div>
+          <div class="rule-row">Prefer <strong>lighter-calorie or lower-protein days</strong>.</div>
+          <div class="rule-row">Skip on heavy training, feasting, or illness days.</div>
+          <div class="rule-row">Avoid pairing with large protein or high-fat meals.</div>
+          <div class="rule-row" style="color:var(--text3);font-size:12px;">If you crave it daily, reduce to 1×/week for 2–3 weeks — that's the hormesis talking.</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Consumption Options</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Cold smoothie / shake</strong> — add after blending; consume immediately</div>
+          <div class="rule-row"><strong>Warm (not hot) liquid</strong> — stir into warm plant milk or water; avoid boiling</div>
+          <div class="rule-row"><strong>Yogurt / plant curd</strong> — mix into cool base; eat directly</div>
+          <div class="rule-row"><strong>Water slurry (minimalist)</strong> — mix with water; drink quickly</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Sourcing Notes</div>
+        <div class="rule-block">
+          <div class="rule-row"><strong>Cacao:</strong> Must say "natural" or "raw" — avoid Dutch-processed, alkalized, smooth cocoa. (Navitas Organics, Terrasoul, Viva Naturals)</div>
+          <div class="rule-row"><strong>Cinnamon:</strong> Ceylon only (lower coumarin load)</div>
+          <div class="rule-row"><strong>Grape skin powder:</strong> Micro Ingredients or BulkSupplements grape skin powder; no extracts</div>
+          <div class="rule-row" style="color:var(--text3);">Avoid: cocoa drink mixes, sweetened cacao blends, "antioxidant blend" powders, capsules</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-section-title">Troubleshoot</div>
+        <div class="trouble-list">
+          <div class="trouble-item"><div class="trouble-q">Jittery or overstimulated</div><div class="trouble-cause">Dose too high or cacao sensitivity</div><div class="trouble-a">Reduce to ½ tsp; avoid late-day use.</div></div>
+          <div class="trouble-item"><div class="trouble-q">GI discomfort</div><div class="trouble-cause">Too concentrated or taken empty</div><div class="trouble-a">Take with light food or dilute further.</div></div>
+          <div class="trouble-item"><div class="trouble-q">Diminishing effect over time</div><div class="trouble-cause">Too frequent use</div><div class="trouble-a">Reduce to 1×/week for 2–3 weeks, then resume 2×/week.</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" id="nav-home" onclick="navigate('home')">
+      <div class="nav-icon">🏠</div>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-btn" id="nav-daily" onclick="showDailyView()">
+      <div class="nav-icon">📋</div>
+      <span class="nav-label">Daily</span>
+    </button>
+    <button class="nav-btn" id="nav-lanes" onclick="showLanesView()">
+      <div class="nav-icon">⚗️</div>
+      <span class="nav-label">Lanes</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ═══ DAILY VIEW SCREEN (injected) ═══ -->
+<script>
+// Inject daily screen
+document.getElementById('content').insertAdjacentHTML('beforeend', `
+<div class="screen" id="screen-daily">
+  <div class="screen-header">
+    <h2>Daily Checklist</h2>
+    <p>What to make today — tap to mark done</p>
+  </div>
+
+  <div class="section-label">Always-on (every day)</div>
+  <div class="lane-cards" style="margin-bottom:18px;">
+    <div class="lane-card" id="check-portfolio" onclick="toggleCheck('portfolio')">
+      <div class="lane-icon" style="background:rgba(93,201,144,0.12);">💪</div>
+      <div class="lane-meta">
+        <div class="lane-name">Portfolio+ Powder</div>
+        <div class="lane-tag" style="color:var(--green);font-family:var(--mono);font-size:10px;">2 Tbsp × 3 meals · sprinkle into food</div>
+      </div>
+      <span class="check-mark" id="cm-portfolio" style="font-size:20px;color:var(--text3);">○</span>
+    </div>
+    <div class="lane-card" id="check-balt" onclick="toggleCheck('balt')">
+      <div class="lane-icon" style="background:rgba(212,144,26,0.12);">🌿</div>
+      <div class="lane-meta">
+        <div class="lane-name">BALT Powder</div>
+        <div class="lane-tag" style="color:var(--amber);font-family:var(--mono);font-size:10px;">1 tsp · wonton / capsule / slurry</div>
+      </div>
+      <span class="check-mark" id="cm-balt" style="font-size:20px;color:var(--text3);">○</span>
+    </div>
+    <div class="lane-card" id="check-smoothie" onclick="toggleCheck('smoothie')">
+      <div class="lane-icon" style="background:rgba(78,196,196,0.12);">🧊</div>
+      <div class="lane-meta">
+        <div class="lane-name">SEP Smoothie</div>
+        <div class="lane-tag" style="color:var(--teal);font-family:var(--mono);font-size:10px;">4 cubes + berries + liquid</div>
+      </div>
+      <span class="check-mark" id="cm-smoothie" style="font-size:20px;color:var(--text3);">○</span>
+    </div>
+    <div class="lane-card" id="check-nitric" onclick="toggleCheck('nitric')">
+      <div class="lane-icon" style="background:rgba(224,112,96,0.12);">❤️</div>
+      <div class="lane-meta">
+        <div class="lane-name">Nitric Oxide Powder</div>
+        <div class="lane-tag" style="color:var(--coral);font-family:var(--mono);font-size:10px;">½ tsp · after blending · no mouthwash ±2h</div>
+      </div>
+      <span class="check-mark" id="cm-nitric" style="font-size:20px;color:var(--text3);">○</span>
+    </div>
+    <div class="lane-card" id="check-adaptabrew" onclick="toggleCheck('adaptabrew')">
+      <div class="lane-icon" style="background:rgba(143,135,224,0.12);">☕</div>
+      <div class="lane-meta">
+        <div class="lane-name">Adaptabrew</div>
+        <div class="lane-tag" style="color:var(--purple);font-family:var(--mono);font-size:10px;">Path A sachet · coffee · optional Path B</div>
+      </div>
+      <span class="check-mark" id="cm-adaptabrew" style="font-size:20px;color:var(--text3);">○</span>
+    </div>
+  </div>
+
+  <div class="section-label">Rotational</div>
+  <div class="lane-cards" style="margin-bottom:18px;">
+    <div class="lane-card" id="check-chai" onclick="toggleCheck('chai')">
+      <div class="lane-icon" style="background:rgba(200,169,110,0.12);">🫖</div>
+      <div class="lane-meta">
+        <div class="lane-name">Chai Masala</div>
+        <div class="lane-tag" style="color:var(--gold);font-family:var(--mono);font-size:10px;">Seasonal · Winter ¾–1 tsp/cup</div>
+      </div>
+      <span class="check-mark" id="cm-chai" style="font-size:20px;color:var(--text3);">○</span>
+    </div>
+    <div class="lane-card" id="check-pulse" onclick="toggleCheck('pulse')">
+      <div class="lane-icon" style="background:rgba(93,201,144,0.06);border:1px dashed rgba(93,201,144,0.25);">⚡</div>
+      <div class="lane-meta">
+        <div class="lane-name">Polyphenol Pulse</div>
+        <div class="lane-tag" style="color:var(--green2);font-family:var(--mono);font-size:10px;">2× per week only · 48h apart</div>
+      </div>
+      <span class="check-mark" id="cm-pulse" style="font-size:20px;color:var(--text3);">○</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:10px;">
+    <button onclick="resetChecks()" style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);background:transparent;border:1px solid var(--border);border-radius:6px;padding:8px 18px;cursor:pointer;">Reset for today</button>
+  </div>
+</div>
+`);
+
+// Inject lanes screen
+document.getElementById('content').insertAdjacentHTML('beforeend', `
+<div class="screen" id="screen-lanes">
+  <div class="screen-header">
+    <h2>System Lanes</h2>
+    <p>How the seven recipes relate to each other</p>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-section-title">Swallow Lane (nasty)</div>
+    <div class="rule-block">
+      <div class="rule-row" style="cursor:pointer;" onclick="openRecipe('balt')"><strong>BALT Powder</strong> — black cumin, amla, pippali, turmeric. Strong taste hidden via wonton film or capsule. <span style="color:var(--amber);font-family:var(--mono);font-size:10px;">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-section-title">Sprinkle Lane (neutral)</div>
+    <div class="rule-block">
+      <div class="rule-row" style="cursor:pointer;" onclick="openRecipe('portfolio')"><strong>Portfolio+ Powder</strong> — LDL-C / ApoB backbone via viscous fiber + phytosterols. Mix into dal, curd, soup. <span style="color:var(--green);font-family:var(--mono);font-size:10px;">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-section-title">Tasty / Meal Lane</div>
+    <div class="rule-block">
+      <div class="rule-row" style="cursor:pointer;" onclick="openRecipe('smoothie')"><strong>SEP Smoothie Cubes</strong> — β-glucan, resistant starch, tofu protein, Portfolio+ embedded. 4 cubes + berries daily. <span style="color:var(--teal);font-family:var(--mono);font-size:10px;">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-section-title">Vascular / Mitochondrial Lane</div>
+    <div class="rule-block">
+      <div class="rule-row" style="cursor:pointer;" onclick="openRecipe('nitric')"><strong>Nitric Oxide Powder</strong> — beetroot + arugula for NO availability. Enhances delivery of all other signals. <span style="color:var(--coral);font-family:var(--mono);font-size:10px;">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-section-title">Brew Lanes</div>
+    <div class="rule-block">
+      <div class="rule-row" style="cursor:pointer;" onclick="openRecipe('adaptabrew')"><strong>Adaptabrew™</strong> — adaptogenic morning coffee with calm focus curve. Path A (water) + Path B (milk concentrate). <span style="color:var(--purple);font-family:var(--mono);font-size:10px;">›</span></div>
+      <div class="rule-row" style="cursor:pointer;" onclick="openRecipe('chai')"><strong>UrbanYogi Chai Masala</strong> — Ayurvedic decoction, seasonal modes, Agni support. <span style="color:var(--gold);font-family:var(--mono);font-size:10px;">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-section-title">Pulse / Hormetic Lane</div>
+    <div class="rule-block">
+      <div class="rule-row" style="cursor:pointer;" onclick="openRecipe('polyphenol')"><strong>Polyphenol Pulse</strong> — cacao + grape skin + cinnamon. 2× per week only. AMPK / autophagy activation. Not a daily habit. <span style="color:var(--green2);font-family:var(--mono);font-size:10px;">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-section-title">Key Interactions</div>
+    <div class="rule-block">
+      <div class="rule-row">Oat bran appears in both <strong>Portfolio+</strong> and <strong>SEP Cubes</strong> — intentional β-glucan stacking for TG repair</div>
+      <div class="rule-row">Turmeric in <strong>BALT</strong>, <strong>SEP Cubes</strong>, and <strong>Adaptabrew</strong> — Pippali in BALT + SEP Cubes activates piperine/curcumin interaction</div>
+      <div class="rule-row">Nitric Oxide powder amplifies downstream delivery of polyphenols and exercise signals from other lanes</div>
+      <div class="rule-row">Polyphenol Pulse on lighter-calorie days; not on smoothie + high-polyphenol days unless berries are reduced to ¾ cup</div>
+    </div>
+  </div>
+</div>
+`);
+</script>
+
+<script>
+/* ── SEARCH ─────────────────────────────────────────── */
+function filterRecipes(query){
+  var q=query.trim().toLowerCase();
+  var cards=document.querySelectorAll('#home-cards .lane-card');
+  var visible=0;
+  cards.forEach(function(card){
+    var text=card.textContent.toLowerCase();
+    var show=!q||text.indexOf(q)!==-1;
+    card.style.display=show?'flex':'none';
+    if(show)visible++;
+  });
+  var lbl=document.getElementById('search-label');
+  var none=document.getElementById('no-results');
+  if(!q){lbl.textContent='All recipes';lbl.style.display='block';none.style.display='none';}
+  else if(visible===0){lbl.style.display='none';none.style.display='block';}
+  else{lbl.textContent=visible+' recipe'+(visible===1?'':'s')+' found';lbl.style.display='block';none.style.display='none';}
+}
+
+/* ── CLOCK ─────────────────────────────────────────── */
+function initClock(){
+  var now=new Date(),h=now.getHours(),m=now.getMinutes();
+  var pad=function(n){return n<10?'0'+n:n};
+  document.getElementById('hdr-time').textContent=pad(h)+':'+pad(m);
+  var periods={4:'Dawn',5:'Dawn',6:'Morning',7:'Morning',8:'Morning',9:'Morning',10:'Morning',11:'Late morning',12:'Midday',13:'Afternoon',14:'Afternoon',15:'Afternoon',16:'Late afternoon',17:'Evening',18:'Evening',19:'Evening',20:'Night',21:'Night',22:'Night',23:'Night',0:'Night',1:'Night',2:'Deep night',3:'Deep night'};
+  document.getElementById('greeting-period').textContent=periods[h]||'Recipes';
+  var names=['Hello','Welcome back','Good to see you'];
+  document.getElementById('greeting-text').textContent=(h>=4&&h<12)?'Good morning,\nPrashanth.':(h>=12&&h<17)?'Good afternoon,\nPrashanth.':'Good evening,\nPrashanth.';
+}
+initClock(); setInterval(initClock,60000);
+
+/* ── NAVIGATION ─────────────────────────────────────── */
+function navigate(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+  var sc=document.getElementById('screen-'+id);
+  if(sc)sc.classList.add('active');
+  var nb=document.getElementById('nav-'+id);
+  if(nb)nb.classList.add('active');
+  document.getElementById('content').scrollTop=0;
+}
+
+function goHome(){
+  var s=document.getElementById('recipe-search');
+  if(s){s.value='';filterRecipes('');}
+  navigate('home');
+}
+
+function openRecipe(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+  var sc=document.getElementById('screen-'+id);
+  if(sc){sc.classList.add('active');}
+  document.getElementById('content').scrollTop=0;
+}
+
+function showDailyView(){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+  var sc=document.getElementById('screen-daily');
+  if(sc)sc.classList.add('active');
+  var nb=document.getElementById('nav-daily');
+  if(nb)nb.classList.add('active');
+  document.getElementById('content').scrollTop=0;
+}
+
+function showLanesView(){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+  var sc=document.getElementById('screen-lanes');
+  if(sc)sc.classList.add('active');
+  var nb=document.getElementById('nav-lanes');
+  if(nb)nb.classList.add('active');
+  document.getElementById('content').scrollTop=0;
+}
+
+/* ── DAILY CHECKLIST ─────────────────────────────────── */
+var checks={};
+function toggleCheck(id){
+  checks[id]=!checks[id];
+  var cm=document.getElementById('cm-'+id);
+  var card=document.getElementById('check-'+id);
+  if(checks[id]){
+    cm.textContent='✓';
+    cm.style.color='var(--green)';
+    card.style.opacity='0.55';
+  } else {
+    cm.textContent='○';
+    cm.style.color='var(--text3)';
+    card.style.opacity='1';
+  }
+}
+function resetChecks(){
+  checks={};
+  ['portfolio','balt','smoothie','nitric','adaptabrew','chai','pulse'].forEach(function(id){
+    var cm=document.getElementById('cm-'+id);
+    var card=document.getElementById('check-'+id);
+    if(cm){cm.textContent='○';cm.style.color='var(--text3)';}
+    if(card){card.style.opacity='1';}
+  });
+}
+</script>
+</body>
+</html>

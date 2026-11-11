@@ -6,44 +6,44 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Recipes">
-<meta name="theme-color" content="#0d0d0b">
+<meta name="theme-color" content="#060907">
 <title>Recipes</title>
 <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23266040'/%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%234CAF80'/%3E%3Cstop offset='100%25' stop-color='%231a4a2e'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ctext x='90' y='128' font-family='serif' font-size='96' text-anchor='middle' fill='white' opacity='0.92'%3E🍃%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 /* ─── TOKENS ─────────────────────────────────────────────── */
 :root {
-  --bg:      #0d0d0b;
-  --bg2:     #131410;
-  --bg3:     #1a1c16;
-  --bg4:     #20231b;
-  --bg5:     #282b21;
-  --border:  rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --text:    #e4e0d4;
-  --text2:   #a09c90;
-  --text3:   #5e5c54;
-  --green:   #5DC990;
-  --green2:  #9FDFBC;
-  --amber:   #D4901A;
-  --amber2:  #FAC775;
-  --teal:    #4EC4C4;
-  --teal2:   #9FDFDF;
-  --coral:   #E07060;
-  --coral2:  #F0A898;
-  --purple:  #8F87E0;
-  --purple2: #CECBF6;
-  --gold:    #c8a96e;
-  --gold2:   #e8c990;
+  --bg:      #060907;
+  --bg2:     #0c140f;
+  --bg3:     #132219;
+  --bg4:     #1b2e21;
+  --bg5:     #243b2b;
+  --border:  rgba(126,184,127,0.24);
+  --border2: rgba(126,184,127,0.52);
+  --text:    #e6eddf;
+  --text2:   #bdceba;
+  --text3:   #91aa90;
+  --green:   #89c486;
+  --green2:  #c0e3ac;
+  --amber:   var(--green);
+  --amber2:  var(--green2);
+  --teal:    var(--green);
+  --teal2:   var(--green2);
+  --coral:   var(--green);
+  --coral2:  var(--green2);
+  --purple:  var(--green);
+  --purple2: var(--green2);
+  --gold:    var(--green);
+  --gold2:   var(--green2);
   --safe-b:  env(safe-area-inset-bottom, 0px);
   --safe-t:  env(safe-area-inset-top, 0px);
   --sans:    'Nunito', system-ui, sans-serif;
   --serif:   'Playfair Display', Georgia, serif;
   --mono:    'DM Mono', monospace;
   --nav-h:   64px;
-  --r-sm:    8px;
-  --r-md:    12px;
-  --r-lg:    16px;
+  --r-sm:    5px;
+  --r-md:    8px;
+  --r-lg:    8px;
 }
 
 /* ─── RESET ──────────────────────────────────────────────── */
@@ -190,7 +190,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 
 /* ─── SEARCH ─────────────────────────────────────────────── */
 #recipe-search::placeholder { color: var(--text3); }
-#recipe-search:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(93,201,144,0.08); }
+#recipe-search:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(137,196,134,0.08); }
 #recipe-search::-webkit-search-cancel-button { -webkit-appearance:none; width:16px;height:16px;cursor:pointer; }
 
 
@@ -215,6 +215,89 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 /* ─── LOGIC CALLOUT ──────────────────────────────────────── */
 .callout { border-radius: var(--r-md); padding: 12px 14px; margin-bottom: 8px; font-size: 13px; line-height: 1.55; font-style: italic; }
 
+
+/* Botanical edition — shared dark, single-accent visual language. */
+:root { color-scheme:dark; }
+#app { width:min(100%,1120px); margin:auto; padding:0 clamp(12px,2.5vw,28px); }
+#content { min-height:0; scrollbar-width:thin; scrollbar-color:var(--border2) var(--bg); }
+.app-header { height:68px; padding:0; gap:14px; border-color:var(--border2); }
+.app-header-label { opacity:1; font-size:9px; letter-spacing:.13em; }
+.app-header-logo { font-size:27px; }
+.screen { padding:24px 2px 28px; }
+.screen:not(#screen-home) { max-width:780px; margin:auto; }
+.greeting-block { position:relative; isolation:isolate; overflow:hidden; padding:32px; border:1px solid var(--border2); border-radius:8px; background:linear-gradient(115deg,#1c3221,#0b140e 75%); }
+.greeting-period { color:var(--green); font-size:10px; margin-bottom:12px; }
+.greeting-text { font:italic 400 clamp(30px,4vw,44px)/1.2 var(--serif); white-space:pre-line; }
+.greeting-sub { color:var(--text2); margin-top:16px; font:11px/1.6 var(--mono); letter-spacing:.04em; }
+.botanical-art { position:absolute; z-index:-1; right:1%; bottom:-35px; width:38%; height:125%; color:var(--green); opacity:.3; }
+#recipe-search { min-height:48px; font-size:16px!important; }
+#recipe-search::placeholder { color:var(--text3); }
+#home-cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.lane-card { min-height:100px; padding:18px; background:linear-gradient(130deg,var(--bg3),var(--bg2)); transition:border-color .15s,background .15s; }
+.lane-icon { width:40px; height:44px; border-radius:5px; color:var(--green); }
+.lane-icon svg { width:26px; height:26px; }
+.lane-name { font-size:20px; line-height:1.25; margin-bottom:7px; }
+.lane-tag { font-size:9px; line-height:1.7; letter-spacing:.06em; }
+.lane-badge { color:var(--text2); border:1px solid var(--border); background:transparent; font-size:8px; }
+.lane-arrow { color:var(--green); font-size:22px; }
+.section-label { color:var(--green); font-size:10px; }
+.bottom-nav { background:var(--bg); border-color:var(--border2); gap:8px; padding-top:6px; }
+.nav-btn { min-height:58px; border-top:2px solid transparent; }
+.nav-btn.active { border-top-color:var(--green); background:linear-gradient(var(--bg3),transparent); }
+.nav-icon { color:var(--text3); }
+.nav-icon svg { width:21px; height:21px; }
+.nav-btn.active .nav-icon { color:var(--green2); }
+.nav-label { font-size:10px; }
+.recipe-hero { border:1px solid var(--border2); padding:26px; background:linear-gradient(120deg,#203b27,#0b140e); }
+.recipe-hero-icon { color:var(--green); }
+.recipe-hero-icon svg { width:36px; height:36px; }
+.recipe-hero-name { color:var(--green2); font-size:clamp(26px,4vw,36px); line-height:1.2; }
+.recipe-hero-sub { color:var(--text2); margin-top:12px; line-height:1.7; }
+.recipe-stat { padding:14px 6px; }
+.recipe-stat-val { color:var(--green2); }
+.recipe-stat-key { font-size:9px; }
+.detail-section { margin-top:26px; margin-bottom:24px; }
+.detail-section-title { color:var(--green); font-size:10px; line-height:1.6; padding-bottom:10px; margin-bottom:12px; }
+.ingr-row { gap:18px; padding:12px 16px; align-items:baseline; }
+.ingr-name { font-size:15px; }
+.ingr-amt { flex-shrink:0; text-align:right; }
+.step-list { gap:14px; }
+.step-num { color:var(--green); padding-top:5px; }
+.step-body,.rule-row { font-size:15px; line-height:1.75; }
+.rule-row { padding:12px 16px; }
+.callout { font:italic 17px/1.65 var(--serif); padding:16px 18px; }
+.trouble-item { padding:16px; }
+.trouble-q { font-size:16px; }
+.trouble-cause { color:var(--green); line-height:1.6; }
+.trouble-a { font-size:14px; line-height:1.7; }
+.season-table { font-size:14px; }
+.season-table th { color:var(--green); padding:12px 10px; }
+.screen-header h2 { font-size:32px; }
+.screen-header p { color:var(--text2); }
+.back-row { min-height:44px; width:fit-content; }
+button { min-height:44px; }
+:focus-visible { outline:2px solid var(--green2)!important; outline-offset:3px; }
+@media(hover:hover) { .lane-card:hover,.rule-row[onclick]:hover { background:var(--bg3); border-color:var(--green); } }
+@media(max-width:650px) {
+ .app-header { height:58px; gap:8px; }
+ .app-header-logo { font-size:23px; padding:0; }
+ .app-header-label { font-size:7px; letter-spacing:.03em; }
+ .app-header-time { font-size:10px; }
+ .screen { padding-top:16px; }
+ .greeting-block { padding:24px 20px; }
+ .botanical-art { right:-14%; width:65%; opacity:.16; }
+ #home-cards { grid-template-columns:1fr; gap:10px; }
+ .lane-card { padding:14px 12px; gap:10px; min-height:88px; }
+ .lane-name { font-size:18px; }
+ .lane-icon { width:32px; }
+ .lane-badge { padding:3px 5px; }
+ .recipe-hero { padding:22px 18px; }
+ .ingr-row { padding:12px; gap:10px; }
+ .ingr-name { min-width:0; }
+ .ingr-amt { max-width:40%; flex-shrink:1; }
+}
+@media(prefers-reduced-motion:reduce) { * { transition:none!important; } }
+
 </style>
 </head>
 <body>
@@ -236,6 +319,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
     ══════════════════════════════════════════════════════ -->
     <div class="screen active" id="screen-home">
       <div class="greeting-block">
+        <svg class="botanical-art" viewBox="0 0 300 280" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="175" cy="140" r="110" opacity=".3"/><path d="M85 280Q130 155 223 30M123 193Q57 165 89 101q54 23 34 92ZM145 156Q209 179 246 115q-66-12-101 41ZM168 117Q112 91 146 37q44 28 22 80ZM195 76q56 6 65-46-45 4-65 46Z"/><path d="m123 193-24-63m46 26 72-27m-49-12-14-54" opacity=".6"/></svg>
         <div class="greeting-period" id="greeting-period">Recipe Collection</div>
         <div class="greeting-text" id="greeting-text">Health &amp; Wellbeing<br>Recipes.</div>
         <div class="greeting-sub">7 recipes · powders · brews · smoothies</div>
@@ -245,6 +329,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none;opacity:0.4;">🔍</span>
         <input
           id="recipe-search"
+          aria-label="Search recipes"
           type="search"
           placeholder="Search recipes…"
           autocomplete="off"
@@ -272,7 +357,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
       <div class="lane-cards" id="home-cards">
 
         <div class="lane-card" onclick="openRecipe('portfolio')">
-          <div class="lane-icon" style="background:rgba(93,201,144,0.12);">💪</div>
+          <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16h22c-1 8-5 11-11 11S6 24 5 16ZM8 12h16M12 8h8"/></svg></div>
           <div class="lane-meta">
             <div class="lane-name">Portfolio+ Powder</div>
             <div class="lane-tag" style="color:var(--green);">LDL-C · ApoB · LDL-P</div>
@@ -282,7 +367,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         </div>
 
         <div class="lane-card" onclick="openRecipe('balt')">
-          <div class="lane-icon" style="background:rgba(212,144,26,0.12);">🌿</div>
+          <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 26C8 13 17 6 27 5c1 13-6 20-16 17M7 26 23 9M14 19l-1-7M18 15l7 1"/></svg></div>
           <div class="lane-meta">
             <div class="lane-name">BALT Powder</div>
             <div class="lane-tag" style="color:var(--amber);">Black Cumin · Amla · Pippali · Turmeric</div>
@@ -292,7 +377,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         </div>
 
         <div class="lane-card" onclick="openRecipe('smoothie')">
-          <div class="lane-icon" style="background:rgba(78,196,196,0.12);">🧊</div>
+          <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 12 7v13l-12 7-12-7V10Zm0 14 12-7M16 17 4 10M16 17v13M10 7l12 7"/></svg></div>
           <div class="lane-meta">
             <div class="lane-name">SEP Smoothie Cubes</div>
             <div class="lane-tag" style="color:var(--teal);">β-glucan · Protein · Fiber</div>
@@ -302,7 +387,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         </div>
 
         <div class="lane-card" onclick="openRecipe('nitric')">
-          <div class="lane-icon" style="background:rgba(224,112,96,0.12);">❤️</div>
+          <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 28S3 20 3 11c0-7 9-9 13-3 4-6 13-4 13 3 0 9-13 17-13 17Z"/></svg></div>
           <div class="lane-meta">
             <div class="lane-name">Nitric Oxide Powder</div>
             <div class="lane-tag" style="color:var(--coral);">Vascular · Endothelial · Mitochondrial</div>
@@ -312,7 +397,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         </div>
 
         <div class="lane-card" onclick="openRecipe('adaptabrew')">
-          <div class="lane-icon" style="background:rgba(143,135,224,0.12);">☕</div>
+          <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h17v9a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7ZM22 13h3a4 4 0 0 1 0 8h-3M9 4v4M15 3v5"/></svg></div>
           <div class="lane-meta">
             <div class="lane-name">Adaptabrew™ v2.2</div>
             <div class="lane-tag" style="color:var(--purple);">Calm Focus · Adaptogenic</div>
@@ -322,7 +407,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         </div>
 
         <div class="lane-card" onclick="openRecipe('chai')">
-          <div class="lane-icon" style="background:rgba(200,169,110,0.12);">🫖</div>
+          <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13h16l-2 14H10ZM11 9h10M16 5v4M24 14h3c4 0 3 9-4 9M8 15 2 11l3 10 5 2"/></svg></div>
           <div class="lane-meta">
             <div class="lane-name">UrbanYogi Chai Masala</div>
             <div class="lane-tag" style="color:var(--gold);">Winter · Summer · Agni</div>
@@ -332,7 +417,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         </div>
 
         <div class="lane-card" onclick="openRecipe('polyphenol')">
-          <div class="lane-icon" style="background:rgba(93,201,144,0.08); border:1px dashed rgba(93,201,144,0.25);">⚡</div>
+          <div class="lane-icon" style="background:rgba(137,196,134,0.08); border:1px dashed rgba(137,196,134,0.25);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 2-13 17h10l-1 11 13-18H17Z"/></svg></div>
           <div class="lane-meta">
             <div class="lane-name">Polyphenol Pulse</div>
             <div class="lane-tag" style="color:var(--green2);">AMPK · Autophagy · Hormesis</div>
@@ -349,8 +434,8 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-portfolio">
       <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
-      <div class="recipe-hero" style="background:linear-gradient(135deg,#1a2e1e,#0f1a12);">
-        <div class="recipe-hero-icon">💪</div>
+      <div class="recipe-hero">
+        <div class="recipe-hero-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16h22c-1 8-5 11-11 11S6 24 5 16ZM8 12h16M12 8h8"/></svg></div>
         <div class="recipe-hero-name">Portfolio+ Powder</div>
         <div class="recipe-hero-sub">Dr. Greger · LDL-C / ApoB / LDL-P backbone · sprinkle lane</div>
       </div>
@@ -361,7 +446,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <div class="recipe-stat"><div class="recipe-stat-val">Easy</div><div class="recipe-stat-key">Level</div></div>
       </div>
 
-      <div class="callout" style="background:rgba(93,201,144,0.07);border-left:3px solid var(--green);color:var(--text2);">
+      <div class="callout" style="background:rgba(137,196,134,0.07);border-left:3px solid var(--green);color:var(--text2);">
         "Always-on" LDL-C reduction via viscous fiber + phytosterols + flax lignans. Keep it boring and consistent — this is the backbone.
       </div>
 
@@ -439,8 +524,8 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-balt">
       <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
-      <div class="recipe-hero" style="background:linear-gradient(135deg,#2a1e08,#1a1006);">
-        <div class="recipe-hero-icon">🌿</div>
+      <div class="recipe-hero">
+        <div class="recipe-hero-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 26C8 13 17 6 27 5c1 13-6 20-16 17M7 26 23 9M14 19l-1-7M18 15l7 1"/></svg></div>
         <div class="recipe-hero-name">BALT Powder</div>
         <div class="recipe-hero-sub">Dr. Greger · Black Cumin · Amla · Long Pepper · Turmeric · swallow lane</div>
       </div>
@@ -451,7 +536,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <div class="recipe-stat"><div class="recipe-stat-val">Easy</div><div class="recipe-stat-key">Level</div></div>
       </div>
 
-      <div class="callout" style="background:rgba(212,144,26,0.07);border-left:3px solid var(--amber);color:var(--text2);">
+      <div class="callout" style="background:rgba(137,196,134,0.07);border-left:3px solid var(--amber);color:var(--text2);">
         Strongest-tasting, highest-leverage powders delivered without tasting them. Swallow lane only — keep BALT separate from meal-sprinkle powders.
       </div>
 
@@ -521,8 +606,8 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-smoothie">
       <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
-      <div class="recipe-hero" style="background:linear-gradient(135deg,#0e2020,#081515);">
-        <div class="recipe-hero-icon">🧊</div>
+      <div class="recipe-hero">
+        <div class="recipe-hero-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 12 7v13l-12 7-12-7V10Zm0 14 12-7M16 17 4 10M16 17v13M10 7l12 7"/></svg></div>
         <div class="recipe-hero-name">SEP Smoothie Cubes v1.5</div>
         <div class="recipe-hero-sub">β-glucan · Resistant starch · Protein · Bile acid binding</div>
       </div>
@@ -533,7 +618,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <div class="recipe-stat"><div class="recipe-stat-val">12–16h</div><div class="recipe-stat-key">Soak</div></div>
       </div>
 
-      <div class="callout" style="background:rgba(78,196,196,0.07);border-left:3px solid var(--teal);color:var(--text2);">
+      <div class="callout" style="background:rgba(137,196,134,0.07);border-left:3px solid var(--teal);color:var(--text2);">
         Delivers exactly 2 Tbsp Portfolio+ and high protein via whole-foods. The oat bran stacking is intentional — concentrated β-glucan for aggressive triglyceride repair.
       </div>
 
@@ -608,8 +693,8 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-nitric">
       <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
-      <div class="recipe-hero" style="background:linear-gradient(135deg,#2a0e0e,#1a0808);">
-        <div class="recipe-hero-icon">❤️</div>
+      <div class="recipe-hero">
+        <div class="recipe-hero-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 28S3 20 3 11c0-7 9-9 13-3 4-6 13-4 13 3 0 9-13 17-13 17Z"/></svg></div>
         <div class="recipe-hero-name">Nitric Oxide Core Powder</div>
         <div class="recipe-hero-sub">Vascular · Endothelial · Mitochondrial efficiency</div>
       </div>
@@ -620,7 +705,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <div class="recipe-stat"><div class="recipe-stat-val">Easy</div><div class="recipe-stat-key">Level</div></div>
       </div>
 
-      <div class="callout" style="background:rgba(224,112,96,0.07);border-left:3px solid var(--coral);color:var(--text2);">
+      <div class="callout" style="background:rgba(137,196,134,0.07);border-left:3px solid var(--coral);color:var(--text2);">
         "You can't amplify a signal you can't deliver." NO signaling enhances downstream delivery of sulforaphane, polyphenols, and exercise signals.
       </div>
 
@@ -685,8 +770,8 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-adaptabrew">
       <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
-      <div class="recipe-hero" style="background:linear-gradient(135deg,#140e26,#0d0919);">
-        <div class="recipe-hero-icon">☕</div>
+      <div class="recipe-hero">
+        <div class="recipe-hero-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h17v9a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7ZM22 13h3a4 4 0 0 1 0 8h-3M9 4v4M15 3v5"/></svg></div>
         <div class="recipe-hero-name">Adaptabrew™ v2.2</div>
         <div class="recipe-hero-sub">Calm Focus Edition · 100–200 cups per batch</div>
       </div>
@@ -697,7 +782,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <div class="recipe-stat"><div class="recipe-stat-val">Intermediate</div><div class="recipe-stat-key">Level</div></div>
       </div>
 
-      <div class="callout" style="background:rgba(143,135,224,0.07);border-left:3px solid var(--purple);color:var(--text2);">
+      <div class="callout" style="background:rgba(137,196,134,0.07);border-left:3px solid var(--purple);color:var(--text2);">
         Essence without sludge: aromatics via water (Path A), lipophilic actives via milk micro-decoction (Path B). Moderate caffeine + calm-alert botanicals.
       </div>
 
@@ -777,8 +862,8 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-chai">
       <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
-      <div class="recipe-hero" style="background:linear-gradient(135deg,#261a08,#170f04);">
-        <div class="recipe-hero-icon">🫖</div>
+      <div class="recipe-hero">
+        <div class="recipe-hero-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13h16l-2 14H10ZM11 9h10M16 5v4M24 14h3c4 0 3 9-4 9M8 15 2 11l3 10 5 2"/></svg></div>
         <div class="recipe-hero-name">UrbanYogi Chai Masala v2.1</div>
         <div class="recipe-hero-sub">Winter & Summer · One masala, two modes</div>
       </div>
@@ -789,7 +874,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <div class="recipe-stat"><div class="recipe-stat-val">4 weeks</div><div class="recipe-stat-key">Jar keeps</div></div>
       </div>
 
-      <div class="callout" style="background:rgba(200,169,110,0.07);border-left:3px solid var(--gold);color:var(--text2);">
+      <div class="callout" style="background:rgba(137,196,134,0.07);border-left:3px solid var(--gold);color:var(--text2);">
         More pepper/ginger for cold; more fennel/licorice for heat. Make one jar close to the Winter profile — then adjust dose and steep time by season.
       </div>
 
@@ -879,8 +964,8 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-polyphenol">
       <div class="back-row" onclick="goHome()"><span class="back-arrow">‹</span><span class="back-label">All Recipes</span></div>
-      <div class="recipe-hero" style="background:linear-gradient(135deg,#0e2018,#08130e);">
-        <div class="recipe-hero-icon">⚡</div>
+      <div class="recipe-hero">
+        <div class="recipe-hero-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 2-13 17h10l-1 11 13-18H17Z"/></svg></div>
         <div class="recipe-hero-name">Polyphenol Pulse v1.1</div>
         <div class="recipe-hero-sub">AMPK · Autophagy · Hormetic Signaling · 2× per week only</div>
       </div>
@@ -891,7 +976,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
         <div class="recipe-stat"><div class="recipe-stat-val">Easy</div><div class="recipe-stat-key">Level</div></div>
       </div>
 
-      <div class="callout" style="background:rgba(93,201,144,0.06);border-left:3px solid var(--green2);border-style:dashed;color:var(--text2);">
+      <div class="callout" style="background:rgba(137,196,134,0.06);border-left:3px solid var(--green2);border-style:dashed;color:var(--text2);">
         "Signals should arrive, resolve, and be missed." Used daily, it becomes noise. Used sparingly, it drives adaptation.
       </div>
 
@@ -961,15 +1046,15 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
     <button class="nav-btn active" id="nav-home" onclick="navigate('home')">
-      <div class="nav-icon">🏠</div>
+      <div class="nav-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 15 13-11 13 11M7 12v16h18V12M13 28V18h6v10"/></svg></div>
       <span class="nav-label">Home</span>
     </button>
     <button class="nav-btn" id="nav-daily" onclick="showDailyView()">
-      <div class="nav-icon">📋</div>
+      <div class="nav-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="20" height="24" rx="2"/><path d="M12 3h8v6h-8ZM11 16h10M11 22h10"/></svg></div>
       <span class="nav-label">Daily</span>
     </button>
     <button class="nav-btn" id="nav-lanes" onclick="showLanesView()">
-      <div class="nav-icon">⚗️</div>
+      <div class="nav-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3h8M14 3v10L5 26q-1 3 3 3h16q4 0 3-3l-9-13V3M9 21h14"/></svg></div>
       <span class="nav-label">Lanes</span>
     </button>
   </nav>
@@ -988,7 +1073,7 @@ document.getElementById('content').insertAdjacentHTML('beforeend', `
   <div class="section-label">Always-on (every day)</div>
   <div class="lane-cards" style="margin-bottom:18px;">
     <div class="lane-card" id="check-portfolio" onclick="toggleCheck('portfolio')">
-      <div class="lane-icon" style="background:rgba(93,201,144,0.12);">💪</div>
+      <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16h22c-1 8-5 11-11 11S6 24 5 16ZM8 12h16M12 8h8"/></svg></div>
       <div class="lane-meta">
         <div class="lane-name">Portfolio+ Powder</div>
         <div class="lane-tag" style="color:var(--green);font-family:var(--mono);font-size:10px;">2 Tbsp × 3 meals · sprinkle into food</div>
@@ -996,7 +1081,7 @@ document.getElementById('content').insertAdjacentHTML('beforeend', `
       <span class="check-mark" id="cm-portfolio" style="font-size:20px;color:var(--text3);">○</span>
     </div>
     <div class="lane-card" id="check-balt" onclick="toggleCheck('balt')">
-      <div class="lane-icon" style="background:rgba(212,144,26,0.12);">🌿</div>
+      <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 26C8 13 17 6 27 5c1 13-6 20-16 17M7 26 23 9M14 19l-1-7M18 15l7 1"/></svg></div>
       <div class="lane-meta">
         <div class="lane-name">BALT Powder</div>
         <div class="lane-tag" style="color:var(--amber);font-family:var(--mono);font-size:10px;">1 tsp · wonton / capsule / slurry</div>
@@ -1004,7 +1089,7 @@ document.getElementById('content').insertAdjacentHTML('beforeend', `
       <span class="check-mark" id="cm-balt" style="font-size:20px;color:var(--text3);">○</span>
     </div>
     <div class="lane-card" id="check-smoothie" onclick="toggleCheck('smoothie')">
-      <div class="lane-icon" style="background:rgba(78,196,196,0.12);">🧊</div>
+      <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 12 7v13l-12 7-12-7V10Zm0 14 12-7M16 17 4 10M16 17v13M10 7l12 7"/></svg></div>
       <div class="lane-meta">
         <div class="lane-name">SEP Smoothie</div>
         <div class="lane-tag" style="color:var(--teal);font-family:var(--mono);font-size:10px;">4 cubes + berries + liquid</div>
@@ -1012,7 +1097,7 @@ document.getElementById('content').insertAdjacentHTML('beforeend', `
       <span class="check-mark" id="cm-smoothie" style="font-size:20px;color:var(--text3);">○</span>
     </div>
     <div class="lane-card" id="check-nitric" onclick="toggleCheck('nitric')">
-      <div class="lane-icon" style="background:rgba(224,112,96,0.12);">❤️</div>
+      <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 28S3 20 3 11c0-7 9-9 13-3 4-6 13-4 13 3 0 9-13 17-13 17Z"/></svg></div>
       <div class="lane-meta">
         <div class="lane-name">Nitric Oxide Powder</div>
         <div class="lane-tag" style="color:var(--coral);font-family:var(--mono);font-size:10px;">½ tsp · after blending · no mouthwash ±2h</div>
@@ -1020,7 +1105,7 @@ document.getElementById('content').insertAdjacentHTML('beforeend', `
       <span class="check-mark" id="cm-nitric" style="font-size:20px;color:var(--text3);">○</span>
     </div>
     <div class="lane-card" id="check-adaptabrew" onclick="toggleCheck('adaptabrew')">
-      <div class="lane-icon" style="background:rgba(143,135,224,0.12);">☕</div>
+      <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h17v9a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7ZM22 13h3a4 4 0 0 1 0 8h-3M9 4v4M15 3v5"/></svg></div>
       <div class="lane-meta">
         <div class="lane-name">Adaptabrew</div>
         <div class="lane-tag" style="color:var(--purple);font-family:var(--mono);font-size:10px;">Path A sachet · coffee · optional Path B</div>
@@ -1032,7 +1117,7 @@ document.getElementById('content').insertAdjacentHTML('beforeend', `
   <div class="section-label">Rotational</div>
   <div class="lane-cards" style="margin-bottom:18px;">
     <div class="lane-card" id="check-chai" onclick="toggleCheck('chai')">
-      <div class="lane-icon" style="background:rgba(200,169,110,0.12);">🫖</div>
+      <div class="lane-icon" style="background:rgba(137,196,134,0.12);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13h16l-2 14H10ZM11 9h10M16 5v4M24 14h3c4 0 3 9-4 9M8 15 2 11l3 10 5 2"/></svg></div>
       <div class="lane-meta">
         <div class="lane-name">Chai Masala</div>
         <div class="lane-tag" style="color:var(--gold);font-family:var(--mono);font-size:10px;">Seasonal · Winter ¾–1 tsp/cup</div>
@@ -1040,7 +1125,7 @@ document.getElementById('content').insertAdjacentHTML('beforeend', `
       <span class="check-mark" id="cm-chai" style="font-size:20px;color:var(--text3);">○</span>
     </div>
     <div class="lane-card" id="check-pulse" onclick="toggleCheck('pulse')">
-      <div class="lane-icon" style="background:rgba(93,201,144,0.06);border:1px dashed rgba(93,201,144,0.25);">⚡</div>
+      <div class="lane-icon" style="background:rgba(137,196,134,0.06);border:1px dashed rgba(137,196,134,0.25);"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 2-13 17h10l-1 11 13-18H17Z"/></svg></div>
       <div class="lane-meta">
         <div class="lane-name">Polyphenol Pulse</div>
         <div class="lane-tag" style="color:var(--green2);font-family:var(--mono);font-size:10px;">2× per week only · 48h apart</div>
