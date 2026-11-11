@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Recipes">
@@ -218,7 +218,7 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 
 /* Botanical edition — shared dark, single-accent visual language. */
 :root { color-scheme:dark; }
-#app { width:min(100%,1120px); margin:auto; padding:0 clamp(12px,2.5vw,28px) calc(64px + var(--safe-b)); }
+#app { width:min(100%,1120px); margin:auto; padding:0 clamp(12px,2.5vw,28px) 64px; }
 #content { min-height:0; scrollbar-width:thin; scrollbar-color:var(--border2) var(--bg); }
 .app-header { height:68px; padding:0; gap:14px; border-color:var(--border2); }
 .app-header-label { opacity:1; font-size:9px; letter-spacing:.13em; }
@@ -241,8 +241,10 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .lane-badge { color:var(--text2); border:1px solid var(--border); background:transparent; font-size:8px; }
 .lane-arrow { color:var(--green); font-size:22px; }
 .section-label { color:var(--green); font-size:10px; }
-.bottom-nav { position:fixed; z-index:10; inset:auto 0 0; height:calc(64px + var(--safe-b)); background:var(--bg); border-color:var(--border2); gap:0; padding:0; }
-.nav-btn { min-height:0; padding-bottom:calc(9px + var(--safe-b)); border-top:2px solid transparent; }
+/* Match Kena and I Ching: the browser manages the safe viewport.
+   Keep the labels near its bottom edge without adding a second safe-area inset. */
+.bottom-nav { position:fixed; z-index:10; inset:auto 0 0; height:64px; background:var(--bg); border-color:var(--border2); gap:0; padding:0; }
+.nav-btn { min-height:0; padding-bottom:9px; border-top:2px solid transparent; }
 .nav-btn.active { border-top-color:var(--green); background:linear-gradient(var(--bg3),transparent); }
 .nav-icon { color:var(--text3); }
 .nav-icon svg { width:21px; height:21px; }
