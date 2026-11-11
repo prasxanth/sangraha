@@ -242,9 +242,9 @@ body { font-family: var(--sans); color: var(--text); overscroll-behavior: none; 
 .lane-arrow { color:var(--green); font-size:22px; }
 .section-label { color:var(--green); font-size:10px; }
 /* Keep navigation in the measured app viewport, not a separate fixed-position viewport.
-   The only bottom inset is the phone's home-indicator clearance. */
-.bottom-nav { position:relative; z-index:10; flex:0 0 auto; width:100vw; margin-left:calc(50% - 50vw); height:calc(56px + var(--safe-b)); background:var(--bg); border-color:var(--border2); gap:0; padding:0; }
-.nav-btn { min-height:0; justify-content:flex-end; padding-bottom:calc(4px + var(--safe-b)); border-top:2px solid transparent; }
+   Match the reference readers' compact 12px bottom spacing. */
+.bottom-nav { position:relative; z-index:10; flex:0 0 auto; width:100vw; margin-left:calc(50% - 50vw); height:56px; background:var(--bg); border-color:var(--border2); gap:0; padding:0; }
+.nav-btn { min-height:0; justify-content:flex-end; padding:0 4px 12px; border-top:2px solid transparent; }
 .nav-btn.active { border-top-color:var(--green); background:linear-gradient(var(--bg3),transparent); }
 .nav-icon { color:var(--text3); }
 .nav-icon svg { width:21px; height:21px; }
