@@ -17,7 +17,7 @@ for(const layer of ['days','months','years'])for(const record of Object.values(d
  for(const [selector,expected] of [['#westernCurrent',data.days['2026-10-28'].d.career],['#westernDetail',data.months['2026-10'].d.career]]){
   for(const [axis,index] of [['activation',2],['intensity',3],['agency',4],['volatility',5]])assert.equal(await p.locator(selector+' .axis-card.'+axis+' b').innerText(),String(expected[index]));
  }
- assert(html.includes("const FORECAST_MODEL_VERSION='vNext-1.1-native-volatility'"));
+ assert(html.includes("const FORECAST_MODEL_VERSION='native-volatility-kp-1'"));
  await p.locator('#western-tab-years').click();await p.locator('[data-wyear="2038"] > :first-child').click();
  const available=Object.keys(data.months).filter(k=>k.startsWith('2038-')).map(k=>+k.slice(5));
  const nearest=available.reduce((a,b)=>Math.abs(b-10)<Math.abs(a-10)?b:a);

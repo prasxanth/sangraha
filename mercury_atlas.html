@@ -260,6 +260,25 @@ button,select,input,textarea,.card,.kv{background-color:#131e16}.panel,details{b
 #axisReader .axis-meter{height:12px;margin:10px 0 6px;background:#34453a;border-radius:4px;overflow:hidden;width:100%}
 .axis-endpoints{display:flex;justify-content:space-between;gap:6px;font-size:11px;color:#c0d2c5}
 
+.precision-hero{background:linear-gradient(125deg,#142c1c,var(--panel) 78%);border-color:#39754c}
+.precision-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.precision-controls label:first-child{grid-column:1/-1}
+.precision-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:10px 0}
+.precision-card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#101812;min-width:0}
+.precision-card h3{margin:3px 0 8px;color:var(--gold)}
+.precision-verdict{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:11px;font-weight:850;letter-spacing:.05em}
+.precision-verdict.promised{color:#9bd4b0;border-color:#4a755b}.precision-verdict.conditional{color:var(--gold)}.precision-verdict.conflicted,.precision-verdict.sensitive{color:#eda49c;border-color:#7d5350}
+.kp-chain{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.kp-chain span{border:1px solid var(--line);border-radius:7px;padding:5px 7px;font-size:11px}
+.kp-house-list{display:flex;gap:5px;flex-wrap:wrap}.kp-house{border-radius:5px;padding:3px 6px;font-size:11px;border:1px solid var(--line)}.kp-house.good{color:#9bd4b0}.kp-house.bad{color:#eda49c}
+.sensitivity-table{width:100%;border-collapse:collapse}.sensitivity-table th,.sensitivity-table td{padding:5px;border-bottom:1px solid var(--line);font-size:11px;text-align:left}.sensitivity-table th{color:var(--muted)}
+.kp-window-list{display:grid;gap:7px;margin-top:10px}.kp-window{border-left:3px solid var(--gold);background:#e5c78a08;padding:8px 10px;border-radius:0 8px 8px 0}.kp-window b{display:block}
+
+.precision-note{font-size:12px;color:var(--muted)}
+#precisionPanel .precision-controls label{min-width:0}#precisionPanel input,#precisionPanel select{box-sizing:border-box;width:100%;min-width:0;max-width:100%}
+#precisionPanel [data-kp-panel]>div,#precisionPanel details{margin-top:12px}.precision-verdict{max-width:100%;box-sizing:border-box;overflow-wrap:anywhere}.kp-window small{display:block}
+.guidance-nav{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media(max-width:600px){.guidance-nav{grid-template-columns:repeat(3,minmax(0,1fr))}.precision-controls{grid-template-columns:1fr}.sensitivity-table{table-layout:fixed}.sensitivity-table td{overflow-wrap:anywhere}}
+@media(min-width:760px){.precision-grid{grid-template-columns:1fr 1fr}}
 </style><script id="journalData" type="application/json">[]</script><script id="journalBaseline" type="application/json">[]</script><script id="forecastData" type="application/json">[]</script><script id="forecastBaseline" type="application/json">[]</script></head><body><main>
 <header class="app-header"><div class="eyebrow">Life Atlas</div><h1 id="pageTitle">Jyotish</h1><p class="sub">Native Jyotish + BaZi + Western · falsifiable comparison layer<br>10 life dimensions · 2021–2038</p></header><section id="timelinePage" class="app-page"><div class="native-tabs jy-native-tabs"><button type="button" data-jy-view="timeline" aria-pressed="true">Jyotish timeline</button><button type="button" data-jy-view="life" aria-pressed="false">Jyotish life map</button></div><section id="currentPeriod" class="panel now-card" aria-label="Current period"></section><div class="intensity-legend" data-intensity-legend></div><div class="panel dimension-control"><label for="focusDimension">Life dimension<select id="focusDimension"></select></label><p class="small" id="dimensionHint"></p></div>
 <details id="filters"><summary>Find a period <span class="small" id="filterCount"></span></summary><div class="filters"><label>Antardasha<select id="adFilter"><option value="">All ADs</option></select></label><label>PD support<select id="heatFilter"><option value="">All ratings</option><option value="1">1 · Max leverage</option><option value="2">2 · Leverage</option><option value="3">3 · Respect</option><option value="4">4 · Caution</option><option value="5">5 · Max caution</option></select></label><label>SD transit tone (any child)<select id="toneFilter"><option value="">All tones</option><option>SUPPORTIVE</option><option>MIXED</option><option>INTENSE</option></select></label><label>SD intensity (any child)<select id="intensityFilter"><option value="">All intensities</option><option>LOW</option><option>MEDIUM</option><option>HIGH</option><option>VERY HIGH</option></select></label><label>Search<input type="search" id="search" placeholder="Planet, theme, practice…"></label></div><div class="actions"><button id="futureOnly" aria-pressed="false">Current + future</button><button id="reset">Clear filters</button></div></details>
@@ -320,6 +339,26 @@ button,select,input,textarea,.card,.kv{background-color:#131e16}.panel,details{b
 </section>
 
 
+<section class="panel precision-hero" id="precisionPanel">
+ <div class="eyebrow">KP event precision · promise before timing</div><h2>Event promise & timing</h2>
+ <p class="small">Choose an event to inspect its natal promise, birth-time robustness and separate KP timing.</p>
+ <div class="precision-controls">
+   <label>Event type<select id="kpEvent"></select></label>
+   <label>Assessment date<input type="date" id="kpDate" min="2021-02-09" max="2038-02-10"></label>
+
+ </div>
+ <div class="journal-actions"><button id="kpUseGuidance" class="primary">Use guidance date</button></div>
+ <div id="kpPromiseGate" class="precision-grid"></div>
+ <div id="kpDomainCoverage" class="precision-card"></div>
+ <div id="kpTimingNow" class="precision-card"></div>
+ <div id="kpSensitivity" class="precision-card"></div>
+ <div id="kpWindowControls"><div class="precision-controls">   <label>Window start<input type="date" id="kpWindowStart" min="2021-02-09" max="2038-02-10"></label>
+   <label>Window end<input type="date" id="kpWindowEnd" min="2021-02-09" max="2038-02-10"></label></div><button id="kpFindWindows">Find supportive dates</button></div><div id="kpWindows" class="precision-card"></div>
+ <details><summary>Historical structural calibration</summary><div id="kpCalibration"></div></details>
+ <details><summary>Calculation provenance · dynamic audit</summary><div id="kpDynamicAudit"></div></details>
+ <p class="precision-note"><b>Production boundary:</b> Prāṇa timing is used only after the natal promise gate. Exact KP transit-trigger scoring is deliberately held out because this self-contained Atlas does not yet carry a full day-by-day KP-ayanamsha transit ephemeris. The app therefore refuses false hour-level precision.</p>
+</section>
+
 <section class="panel" id="forecastPanel">
  <div class="eyebrow">Immutable forecast registry · vNext</div><h2>Freeze the call before reality arrives</h2>
  <p class="small">A frozen forecast preserves the model version, exact event definition, competing outcome, deadline, three-engine snapshot and context-only baseline. Forecast content is immutable after saving; only resolution can be added later.</p>
@@ -328,7 +367,7 @@ button,select,input,textarea,.card,.kv{background-color:#131e16}.panel,details{b
   <label>Window start<input type="date" id="forecastStart" min="2021-02-09" max="2038-02-10"></label>
   <label>Window end<input type="date" id="forecastEnd" min="2021-02-09" max="2038-02-10"></label>
   <label>Deadline<input type="date" id="forecastDeadline" min="2021-02-09" max="2038-12-31"></label>
-  <label>Dimension<select id="forecastDimension"></select></label>
+  <label>Dimension<select id="forecastDimension"></select></label><label>KP event gate<select id="forecastEventType"></select></label>
   <label class="full">Leading observable event<textarea id="forecastEvent" placeholder="Example: receives a formally defined cross-organizational mandate with named scope and executive sponsor"></textarea></label>
   <label class="full">Competing manifestation<textarea id="forecastAlternative" placeholder="Example: responsibility expands informally but title, budget and execution authority do not change"></textarea></label>
   <label>Context-only baseline<select id="forecastBaselineLikelihood"><option value="unlikely">Unlikely from known facts alone</option><option value="plausible" selected>Plausible from known facts alone</option><option value="likely">Likely from known facts alone</option></select></label>
@@ -450,7 +489,7 @@ button,select,input,textarea,.card,.kv{background-color:#131e16}.panel,details{b
 <section class="panel"><h2>Native Western methodology</h2><p><span class="method-status production">Production</span> Tropical natal chart, Placidus houses, major transits, secondary progressed Sun/Moon/Mercury and whole-sign annual profections. Natal calculation was independently checked against Open Ephemeris DE440: Sagittarius Ascendant 243.39°, Virgo MC 155.64°, Pisces Sun 352.95°, Scorpio Moon 220.71°.</p><p>Major aspects are conjunction, sextile, square, trine and opposition with fixed planet-specific orbs. Direction is planet/target/domain specific rather than hard-coded as “soft = good, hard = bad”: for example Jupiter hard aspects emphasize expansion/excess, while Uranus hard contacts emphasize volatility and disruption more than automatic adverse support. Annual profections primarily increase activation and mark a time lord; natal time-lord condition is only a small directional modifier. Secondary progressions use the standard 1-day-for-1-year method. Annual ratings are structural calculations, not averages of daily scores.</p><p><span class="method-status experimental">Held out</span> Solar returns are not in the production score. They can be added later only if prospective testing shows incremental value rather than merely adding interpretive flexibility.</p></section>
 <section class="panel"><h2>Forecast registry & baselines</h2><p>The forecast registry is separate from the outcome journal. Forecasts are frozen with a model version, issuance time, event hypothesis, competing outcome, deadline, system snapshots and a context-only baseline. After freezing, only resolution fields can change.</p><p>Resolution categories: Hit, Partial hit, Miss, False alarm, Timing miss or Unscorable. The registry also records whether the event was already likely from known circumstances, preventing the Atlas from claiming full credit for obvious continuations of the current situation.</p></section>
 <section class="panel"><h2>Use as an app</h2><p>Open this page in Safari and choose Share → Add to Home Screen. The app is a self-contained HTML file; its embedded data and calculations work without external services.</p></section>
-</section></main><nav class="app-nav" aria-label="Main navigation">
+<section class="panel" id="kpGuide"><h2>KP precision layer</h2><p><span class="method-status production">Precision overlay</span> KP uses the Krishnamurti sidereal ayanamsa, Placidus cusps, nakshatra star lords and Vimshottari-proportional sub-lords. The relevant cusp is tested first for event promise; only then are MD → AD → PD → Sūkṣma → Prāṇa lords used to search for timing windows.</p><p><b>Domain coverage:</b> Career, Wealth, Marriage, Family/Home, Children, Mind, Vitality, Learning, Spirituality and Reinvention all have explicit event gates. Standard KP combinations are identified as such; less-standardized applications such as mental clarity, domestic stability and career-pivot framing are labeled Atlas interpretive gates and must earn reliability prospectively rather than borrowing authority from the canonical KP rules.</p><p>Window searches evaluate one sample per civil day at 12:00 UTC, cap the interval at 366 sampled days, and group adjacent qualified samples. They can miss shorter intraday changes and do not represent complete Prāṇa intervals. The promise layer is deliberately separate from the three-engine support comparison. A KP result can qualify or veto a specific event hypothesis without changing the underlying Jyotish, BaZi or Western heat bands.</p><p><b>Birth-time sensitivity:</b> the recorded 22:55 chart is tested dynamically at −5, −2, 0, +2 and +5 minutes. The central KP cusps are derived from the Atlas tropical natal chart; off-center cusps are interpolated between two authoritative ±5-minute DE440/Placidus ephemeris anchors. The supplied model reports that validation against exact intermediate ephemeris charts showed a maximum cusp interpolation error below 0.003°. If the relevant cusp’s sub-lord/verdict changes inside ±2 minutes, the result is marked SENSITIVE and high-confidence event timing is withheld.</p><p><b>Dynamic derivation:</b> the KP significator table is not stored. At runtime the app derives mean Rahu from the Julian-date node formula, converts the existing tropical natal planets/cusps to KP sidereal longitude, determines occupation and cusp ownership, calculates nakshatra/star/sub-lords, and constructs each planet’s significator houses. The Vimshottari clock is regenerated from the natal Moon’s exact nakshatra balance. <b>Node convention:</b> mean Rahu/Ketu are used; node agency is restricted to star/sign-lord representation, with wider aspect-based node agency held out to avoid school-dependent overfitting.</p></section></section></main><nav class="app-nav" aria-label="Main navigation">
 <div class="nav-brand">Life<br>Atlas<small>Jyotish + BaZi + Western<br>Native systems</small></div>
 <button data-page="timeline" aria-current="page"><span aria-hidden="true">☉</span>Jyotish</button>
 <button data-page="bazi"><span aria-hidden="true">木</span>BaZi</button>
@@ -836,7 +875,7 @@ window.addEventListener('pageshow',()=>refreshCurrentPeriod(true));
 'use strict';
 const NATIVE=JSON.parse(document.getElementById('baziNativeData').textContent);
 const WESTERN=JSON.parse(document.getElementById('westernNativeData').textContent);
-const FORECAST_MODEL_VERSION='vNext-1.1-native-volatility';
+const FORECAST_MODEL_VERSION='native-volatility-kp-1';
 const BAZI_DIM_BASIS_NATIVE={
  career:'Officer/Power (Metal) and Wealth (Earth) are the main worldly career supports for this strong Yi-Wood chart; Fire adds output and visibility.',
  wealth:'Earth is the Wealth star and primary materialization signal; Fire generates Earth. Strong Wood can increase competition for resources.',
@@ -1684,21 +1723,257 @@ function refreshGuidanceToday(){
  if(key!==lastGuidanceKey||date!==lastGuidanceDay){lastGuidanceKey=key;lastGuidanceDay=date;$('guidanceDate').value=date;renderGuidanceDashboard()}
 }
 
+/* ---------- KP event precision: derived from supplied natal anchors ---------- */
+const KP_SOURCE={
+ birth:{utc:WESTERN.meta.utc,local:WESTERN.meta.datetime,latitude:15.55177,longitude:32.53241},
+ /* Authoritative ephemeris input, not a forecast result.  The tropical
+    natal chart already lives in WESTERN.meta; this is the KP sidereal
+    offset at the same birth instant. */
+ ayanamsaBirth:23.507095,
+ /* DE440 + KP ayanamsa + Placidus cusp anchors at exactly -5/+5 minutes.
+    Intermediate sensitivity charts are interpolated at runtime. */
+ cuspAnchors:{minus5:[218.7523956298828,247.9317626953125,278.513671875,310.8041687011719,342.97161865234375,12.436717987060547,38.752403259277344,67.9317626953125,98.51367950439453,130.80418395996094,162.9716339111328,192.4367218017578],plus5:[221.0079803466797,250.2418975830078,281.0022277832031,313.4629211425781,345.5914001464844,14.851469993591309,41.00798034667969,70.24189758300781,101.00223541259766,133.46290588378906,165.59140014648438,194.85147094726562]}
+};
+const KP_EVENTS={
+ promotion:{label:'Promotion / formal authority',cusp:10,good:[2,6,10,11],bad:[1,5,9,12],domain:'career',basis:'Conventional KP employment grouping'},
+ new_role:{label:'New job / role expansion',cusp:10,good:[2,6,10,11],bad:[1,5,9,12],domain:'career',basis:'Conventional KP employment grouping'},
+ wealth_gain:{label:'Income / wealth gain',cusp:2,good:[2,6,11],bad:[5,8,12],domain:'wealth',basis:'KP income/gain grouping'},
+ speculative_gain:{label:'Speculative gain',cusp:5,good:[2,5,6,11],bad:[8,12],domain:'wealth',basis:'Conventional KP speculation grouping; 5th is event cusp rather than treated as adverse here'},
+ marriage:{label:'Marriage / union',cusp:7,good:[2,7,11],bad:[1,6,10],domain:'marriage',basis:'Conventional KP marriage grouping'},
+ relationship_repair:{label:'Relationship repair / stabilization',cusp:7,good:[2,7,11],bad:[1,6,10],domain:'marriage',basis:'Atlas event framing using conventional KP partnership houses'},
+ family_stability:{label:'Family / domestic stability',cusp:4,good:[2,4,11],bad:[3,6,12],domain:'family',basis:'Atlas interpretive gate: 4th home + 2nd family + 11th fulfillment'},
+ property:{label:'Property / home acquisition',cusp:4,good:[4,11,12],bad:[3,6,10],domain:'family',basis:'Conventional KP property grouping'},
+ children:{label:'Childbirth / progeny',cusp:5,good:[2,5,11],bad:[1,4,10],domain:'children',basis:'Conventional KP progeny grouping'},
+ child_development:{label:'Child development / milestone support',cusp:5,good:[2,5,11],bad:[4,10],domain:'children',basis:'Atlas interpretive gate using the conventional progeny house set'},
+ mental_clarity:{label:'Mental clarity / emotional recovery',cusp:4,good:[4,5,11],bad:[6,8,12],domain:'mind',basis:'Atlas interpretive KP gate: 4th/Moon-Mercury stability + 5/11 recovery versus 6/8/12 strain'},
+ lower_reactivity:{label:'Lower interpersonal reactivity',cusp:4,good:[4,5,11],bad:[3,6,8,12],domain:'mind',basis:'Atlas interpretive gate; 3rd is added as communication-reactivity obstruction'},
+ health_recovery:{label:'Vitality / health recovery',cusp:1,good:[1,5,11],bad:[6,8,12],domain:'vitality',basis:'Conventional KP recovery grouping'},
+ sustained_energy:{label:'Sustained energy / resilience',cusp:1,good:[1,5,11],bad:[6,8,12],domain:'vitality',basis:'Atlas event framing using conventional KP recovery houses'},
+ higher_education:{label:'Higher education / credential',cusp:9,good:[4,9,11],bad:[3,8],domain:'learning',basis:'Conventional KP higher-education grouping'},
+ exam_success:{label:'Exam / competitive-learning success',cusp:6,good:[4,6,11],bad:[3,5,10],domain:'learning',basis:'Conventional KP competitive-exam grouping'},
+ spiritual_initiation:{label:'Spiritual initiation / teacher / path deepening',cusp:9,good:[5,9,12],support:[8],bad:[3,6],required:[5,9,12],domain:'spiritual',basis:'KP spirituality grouping: 5/9/12 required, 8 supportive'},
+ retreat_deepening:{label:'Retreat / contemplative deepening',cusp:12,good:[5,8,9,12],bad:[3,6],domain:'spiritual',basis:'Atlas event framing using KP spiritual houses 5/8/9/12'},
+ foreign:{label:'Foreign travel / relocation',cusp:12,good:[3,9,12],bad:[2,4,11],domain:'reinvention',basis:'Conventional KP foreign-travel grouping'},
+ career_pivot:{label:'Career pivot / reinvention',cusp:10,good:[3,6,10,11],bad:[2,4,9],domain:'reinvention',basis:'Atlas interpretive gate: change/mobility + work/status + fulfillment'}
+};
+const KP_SENSITIVITY_OFFSETS=[-5,-2,0,2,5];
+const KP_ORDER=['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
+const KP_YEARS={Ketu:7,Venus:20,Sun:6,Moon:10,Mars:7,Rahu:18,Jupiter:16,Saturn:19,Mercury:17};
+const KP_NAKS=['Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra','Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni','Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha','Mula','Purva Ashadha','Uttara Ashadha','Shravana','Dhanishta','Shatabhisha','Purva Bhadrapada','Uttara Bhadrapada','Revati'];
+const KP_SIGNS=['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+const KP_SIGN_LORDS=['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+const KP_YEAR_MS=365.25*86400000;
+
+const KP_DEFAULT_EVENT={career:'promotion',wealth:'wealth_gain',marriage:'marriage',family:'family_stability',children:'children',mind:'mental_clarity',vitality:'health_recovery',learning:'higher_education',spiritual:'spiritual_initiation',reinvention:'career_pivot'};
+const KP_CALIBRATION=[
+ {label:'First corporate job',date:'2011-08-28',event:'new_role',precision:'exact day'},
+ {label:'Civil marriage',date:'2016-09-09',event:'marriage',precision:'exact day'},
+ {label:'First-home purchase',date:'2017-03',event:'property',precision:'month precision'}
+];
+
+
+function norm360(x){x=+x%360;return x<0?x+360:x}
+function angleDelta(a,b){return ((b-a+540)%360)-180}
+function angleLerp(a,b,f){return norm360(a+angleDelta(a,b)*f)}
+function kpAyanamsa(){return KP_SOURCE.ayanamsaBirth}
+function kpCentralCusps(){
+ return WESTERN.meta.cusps.map(x=>norm360(x-kpAyanamsa()));
+}
+function kpOffsetLabel(offset){
+ const base=new Date(KP_SOURCE.birth.utc),d=new Date(+base+offset*60000);
+ return `${String(d.getUTCHours()+2).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')}`;
+}
+function kpCuspsAtOffset(offset){
+ if(offset===0)return kpCentralCusps();
+ const f=(offset+5)/10,a=KP_SOURCE.cuspAnchors.minus5,b=KP_SOURCE.cuspAnchors.plus5;
+ return a.map((x,i)=>angleLerp(x,b[i],f));
+}
+function julianDayUTC(iso){return Date.parse(iso)/86400000+2440587.5}
+function meanNodeTropical(iso){
+ const T=(julianDayUTC(iso)-2451545.0)/36525;
+ return norm360(125.04452-1934.136261*T+0.0020708*T*T+(T*T*T)/450000);
+}
+function kpNatalPlanets(){
+ const p=WESTERN.meta.points,a=kpAyanamsa(),out={};
+ for(const k of ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn'])out[k]=norm360(p[k]-a);
+ out.Rahu=norm360(meanNodeTropical(KP_SOURCE.birth.utc)-a);
+ out.Ketu=norm360(out.Rahu+180);
+ return out;
+}
+function zodiacHouseOf(lon,cusps){
+ lon=norm360(lon);
+ for(let i=0;i<12;i++){
+   const span=norm360(cusps[(i+1)%12]-cusps[i]),x=norm360(lon-cusps[i]);
+   if(x<span-1e-9)return i+1;
+ }
+ return 12;
+}
+function kpHouseOwners(cusps=kpCentralCusps()){
+ const out={};
+ cusps.forEach((c,i)=>{const lord=KP_SIGN_LORDS[Math.floor(norm360(c)/30)];(out[lord]??=[]).push(i+1)});
+ return out;
+}
+let KP_SIG_CACHE=null;
+function kpSignificators(force=false){
+ if(KP_SIG_CACHE&&!force)return KP_SIG_CACHE;
+ const planets=kpNatalPlanets(),cusps=kpCentralCusps(),owners=kpHouseOwners(cusps),occ={};
+ Object.entries(planets).forEach(([p,lon])=>occ[p]=zodiacHouseOf(lon,cusps));
+ const add=(o,h,w)=>o[h]=Math.max(o[h]||0,w),out={};
+ for(const [p,lon] of Object.entries(planets)){
+   const sig={},starLord=kpChain(lon).star;
+   add(sig,occ[starLord],4);
+   (owners[starLord]||[]).forEach(h=>add(sig,h,3));
+   add(sig,occ[p],2);
+   if(p==='Rahu'||p==='Ketu'){
+     const signLord=KP_SIGN_LORDS[Math.floor(norm360(lon)/30)];
+     add(sig,occ[signLord],3);
+     (owners[signLord]||[]).forEach(h=>add(sig,h,2));
+   }else{
+     (owners[p]||[]).forEach(h=>add(sig,h,1));
+   }
+   out[p]=sig;
+ }
+ KP_SIG_CACHE=out;return out;
+}
+function kpMajorTimeline(){
+ const moon=kpNatalPlanets().Moon,span=40/3,ni=Math.floor(moon/span),lord=KP_ORDER[ni%9],
+       nakStart=ni*span,elapsed=(moon-nakStart)/span,birth=Date.parse(KP_SOURCE.birth.utc),
+       mdStart=birth-elapsed*KP_YEARS[lord]*KP_YEAR_MS,rows=[];
+ let t=mdStart,idx=KP_ORDER.indexOf(lord);
+ for(let i=0;i<18;i++){
+   const L=KP_ORDER[(idx+i)%9],end=t+KP_YEARS[L]*KP_YEAR_MS;
+   rows.push({lord:L,start:new Date(t).toISOString(),end:new Date(end).toISOString()});t=end;
+ }
+ return rows;
+}
+function kpChain(lon){
+ lon=norm360(lon);const span=40/3,ni=Math.floor(lon/span),star=KP_ORDER[ni%9],pos=lon-ni*span,seq=KP_ORDER.slice(KP_ORDER.indexOf(star)).concat(KP_ORDER.slice(0,KP_ORDER.indexOf(star)));let cum=0,sub=star,subStart=0,subWidth=0;
+ for(const p of seq){const w=span*KP_YEARS[p]/120;if(pos<cum+w-1e-10){sub=p;subStart=cum;subWidth=w;break}cum+=w}
+ const seq2=KP_ORDER.slice(KP_ORDER.indexOf(sub)).concat(KP_ORDER.slice(0,KP_ORDER.indexOf(sub)));let c2=0,subsub=sub;
+ for(const p of seq2){const w=subWidth*KP_YEARS[p]/120;if(pos-subStart<c2+w-1e-10){subsub=p;break}c2+=w}
+ const si=Math.floor(lon/30);return {lon,sign:KP_SIGNS[si],signLord:KP_SIGN_LORDS[si],nak:KP_NAKS[ni],star,sub,subsub,degree:lon%30};
+}
+function kpEventOptions(domain=null){
+ const order=['career','wealth','marriage','family','children','mind','vitality','learning','spiritual','reinvention'];
+ if(domain)return Object.entries(KP_EVENTS).filter(([,v])=>v.domain===domain).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('');
+ return order.map(d=>{const rows=Object.entries(KP_EVENTS).filter(([,v])=>v.domain===d);return rows.length?`<optgroup label="${DIMS[d]?.name||d}">${rows.map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('')}</optgroup>`:''}).join('');
+}
+function kpPromise(eventKey,time='22:55'){
+ const e=KP_EVENTS[eventKey];if(!e)return null;const offset=typeof time==='number'?time:0,cusps=kpCuspsAtOffset(offset),chain=kpChain(cusps[e.cusp-1]),sig=kpSignificators()[chain.sub]||{};
+ const good=e.good.filter(h=>sig[h]),support=(e.support||[]).filter(h=>sig[h]),bad=e.bad.filter(h=>sig[h]),required=(e.required||[]),missingRequired=required.filter(h=>!sig[h]),goodScore=good.reduce((a,h)=>a+sig[h],0)+.5*support.reduce((a,h)=>a+sig[h],0),badScore=bad.reduce((a,h)=>a+sig[h],0),primary=!!sig[e.cusp];
+ let status;
+ if(required.length&&missingRequired.length)status=goodScore>0?'CONFLICTED':'NOT CONFIRMED';
+ else if((primary&&goodScore>0&&badScore<=goodScore)||(good.length>=2&&goodScore>badScore))status='PROMISED';
+ else if(goodScore>0&&badScore>0)status='CONFLICTED';
+ else if(goodScore>0)status='CONDITIONAL';
+ else status='NOT CONFIRMED';
+ return {eventKey,event:e,time:kpOffsetLabel(offset),offset,cusp:cusps[e.cusp-1],chain,subLord:chain.sub,sig,good,support,bad,required,missingRequired,goodScore,badScore,primary,status};
+}
+function kpRobustness(eventKey){
+ const rows=KP_SENSITIVITY_OFFSETS.map(o=>kpPromise(eventKey,o)),center=rows.find(r=>r.offset===0),near=rows.filter(r=>Math.abs(r.offset)<=2),allSame=rows.every(r=>r.subLord===center.subLord&&r.status===center.status),nearSame=near.every(r=>r.subLord===center.subLord&&r.status===center.status);
+ return {level:allSame?'ROBUST':nearSame?'MODERATE':'SENSITIVE',rows,center};
+}
+function kpPeriods(parentLord,start,end){
+ const a=Date.parse(start),b=Date.parse(end),total=b-a,idx=KP_ORDER.indexOf(parentLord),seq=KP_ORDER.slice(idx).concat(KP_ORDER.slice(0,idx));let t=a;return seq.map((lord,i)=>{const dur=i===seq.length-1?b-t:total*KP_YEARS[lord]/120,st=t,en=i===seq.length-1?b:t+dur;t=en;return {lord,start:new Date(st).toISOString(),end:new Date(en).toISOString()}});
+}
+function kpContaining(periods,ms){return periods.find(p=>Date.parse(p.start)<=ms&&ms<Date.parse(p.end))||periods.at(-1)}
+function kpActive(date){
+ const ms=typeof date==='number'?date:Date.parse(String(date).length===10?date+'T12:00:00Z':date),md=kpMajorTimeline().find(p=>Date.parse(p.start)<=ms&&ms<Date.parse(p.end));if(!md)return null;
+ const ad=kpContaining(kpPeriods(md.lord,md.start,md.end),ms),pd=kpContaining(kpPeriods(ad.lord,ad.start,ad.end),ms),sd=kpContaining(kpPeriods(pd.lord,pd.start,pd.end),ms),prana=kpContaining(kpPeriods(sd.lord,sd.start,sd.end),ms);
+ return {md,ad,pd,sd,prana};
+}
+function kpLordAlignment(lord,eventKey){
+ const e=KP_EVENTS[eventKey],sig=kpSignificators()[lord]||{},good=e.good.filter(h=>sig[h]),support=(e.support||[]).filter(h=>sig[h]),bad=e.bad.filter(h=>sig[h]),missingRequired=(e.required||[]).filter(h=>!sig[h]),g=good.reduce((a,h)=>a+sig[h],0)+.5*support.reduce((a,h)=>a+sig[h],0),b=bad.reduce((a,h)=>a+sig[h],0)+1.5*missingRequired.length,den=Math.max(1,g+b);
+ return {lord,good,support,bad,missingRequired,g,b,score:(g-b)/den};
+}
+function kpTiming(date,eventKey){
+ const a=kpActive(date);if(!a)return null;const parts=[['MD',a.md,.08],['AD',a.ad,.15],['PD',a.pd,.25],['Sūkṣma',a.sd,.30],['Prāṇa',a.prana,.22]].map(([level,p,w])=>({level,period:p,w,...kpLordAlignment(p.lord,eventKey)}));
+ const raw=parts.reduce((z,x)=>z+x.w*x.score,0),score=Math.round(raw*100),short=parts.slice(2),positive=short.filter(x=>x.score>.08).length,negative=short.filter(x=>x.score<-.08).length;
+ const band=score>=28&&positive>=2?'STRONG TIMING':score>=8?'SUPPORTIVE TIMING':score>-8?'MIXED TIMING':score>-28?'OBSTRUCTED TIMING':'HIGH OBSTRUCTION';
+ return {score,band,parts,active:a,positive,negative};
+}
+function kpPrecisionSnapshot(date,eventKey){
+ if(!eventKey||!KP_EVENTS[eventKey])return null;const promise=kpPromise(eventKey),robust=kpRobustness(eventKey),timing=kpTiming(date,eventKey);if(!timing)return {promise,robust,timing:null,verdict:'OUTSIDE KP RANGE',confidence:'LOW'};
+ let verdict,confidence=robust.level==='ROBUST'?'HIGH':robust.level==='MODERATE'?'MEDIUM':'LOW';
+ if(promise.status==='NOT CONFIRMED')verdict='ABSTAIN · NATAL PROMISE NOT CONFIRMED';
+ else if(robust.level==='SENSITIVE')verdict='ABSTAIN · BIRTH-TIME SENSITIVE';
+ else if(promise.status==='CONFLICTED')verdict=timing.score>=12?'CONDITIONAL · CONFLICTED PROMISE':'ABSTAIN · CONFLICTED PROMISE';
+ else if(timing.score>=28)verdict='QUALIFIED EVENT WINDOW';
+ else if(timing.score>=8)verdict='PROMISED · TIMING SUPPORTIVE';
+ else if(timing.score<=-8)verdict='PROMISED · TIMING OBSTRUCTED';
+ else verdict='PROMISED · WAIT / MIXED TIMING';
+ return {promise,robust,timing,verdict,confidence};
+}
+function kpCivilDay(date){return new Date(date+'T12:00:00Z')}
+function kpFindQualified(start,end,eventKey){
+ let a=kpCivilDay(start),b=kpCivilDay(end);if(!Number.isFinite(+a)||!Number.isFinite(+b)||b<a)return [];
+ const max=365;if((b-a)/86400000>max)b=new Date(+a+max*86400000);
+ const rows=[];for(let t=+a;t<=+b;t+=86400000){const date=new Date(t).toISOString().slice(0,10),x=kpPrecisionSnapshot(date,eventKey);if(!x?.timing)continue;const ok=!x.verdict.startsWith('ABSTAIN')&&x.timing.score>=8;rows.push({date,ok,score:x.timing.score,band:x.timing.band,active:x.timing.active})}
+ const groups=[];let g=null;for(const r of rows){if(r.ok){if(!g)g={start:r.date,end:r.date,peak:r.score,peakDate:r.date,active:r.active};else{g.end=r.date;if(r.score>g.peak){g.peak=r.score;g.peakDate=r.date;g.active=r.active}}}else if(g){groups.push(g);g=null}}if(g)groups.push(g);
+ return groups.sort((x,y)=>y.peak-x.peak||x.start.localeCompare(y.start)).slice(0,8);
+}
+
+function renderKPPrecision(){
+ if(!$('kpEvent'))return;const eventKey=$('kpEvent').value,date=$('kpDate').value||isoLocalToday(),instant=kpFollowGuidance&&guidanceFollowToday?Date.now():date,snap=kpPrecisionSnapshot(instant,eventKey);if(!snap)return;
+ const p=snap.promise,r=snap.robust,t=snap.timing,cls=p.status==='PROMISED'?'promised':p.status==='CONDITIONAL'?'conditional':'conflicted';
+ $('kpPromiseGate').innerHTML=`<div class="precision-card"><span class="precision-verdict ${cls}">${p.status}</span><h3>${p.event.label}</h3><p><b>Atlas domain:</b> ${DIMS[p.event.domain]?.name||p.event.domain}</p><p><b>Primary cusp:</b> H${p.event.cusp} · ${p.chain.sign} ${p.chain.degree.toFixed(2)}° · star ${p.chain.star} · <b>sub-lord ${p.subLord}</b> · sub-sub ${p.chain.subsub}</p><div class="kp-house-list">${p.good.map(h=>`<span class="kp-house good">H${h} +${p.sig[h]}</span>`).join('')}${p.support.map(h=>`<span class="kp-house">H${h} support +${p.sig[h]}</span>`).join('')}${p.bad.map(h=>`<span class="kp-house bad">H${h} −${p.sig[h]}</span>`).join('')}</div><p class="small"><b>Rule basis:</b> ${esc(p.event.basis)}.</p><p class="small">Favorable house set: ${p.event.good.join(', ')}${p.required.length?` · required: ${p.required.join(', ')}${p.missingRequired.length?` · missing: ${p.missingRequired.join(', ')}`:''}`:''}${p.event.support?.length?` · supporting: ${p.event.support.join(', ')}`:''} · obstructive set: ${p.event.bad.join(', ')}. This gate is event-specific and does not recolor the life-domain heatmap.</p></div><div class="precision-card"><span class="precision-verdict ${r.level==='SENSITIVE'?'sensitive':r.level==='ROBUST'?'promised':'conditional'}">${r.level} BIRTH-TIME ROBUSTNESS</span><h3>Precision cap · ${snap.confidence}</h3><p>${snap.verdict}</p><p class="small">High-confidence micro-timing is automatically withheld whenever the relevant cuspal sub-lord/verdict changes inside ±2 minutes.</p></div>`;
+ if(t){$('kpTimingNow').innerHTML=`<span class="precision-verdict ${t.score>=8?'promised':t.score<=-8?'conflicted':'conditional'}">${t.band} · ${t.score>0?'+':''}${t.score}</span><h3>KP micro-clock · ${date} · ${typeof instant==='number'?'live UTC':'12:00 UTC'}</h3><div class="kp-chain">${t.parts.map(x=>`<span><b>${x.level}</b> ${x.lord} · ${Math.round(x.score*100)>0?'+':''}${Math.round(x.score*100)}</span>`).join('')}</div><p class="small">Prāṇa ends ${new Date(t.active.prana.end).toISOString().replace('T',' ').replace('.000Z',' UTC')}. Timing score is an internal gate based on whether active MD/AD/PD/Sūkṣma/Prāṇa lords signify the event’s favorable versus obstructive houses. It is not a probability.</p>`}else $('kpTimingNow').innerHTML='<p>KP timing unavailable for this date.</p>';
+ $('kpSensitivity').innerHTML=`<h3>Birth-time sensitivity · relevant cusp</h3><table class="sensitivity-table"><thead><tr><th>Birth time</th><th>Cusp sub-lord</th><th>Gate</th></tr></thead><tbody>${r.rows.map(x=>`<tr><td>${x.time}</td><td>${x.subLord}</td><td>${x.status}</td></tr>`).join('')}</tbody></table><p class="small">Recorded time 22:55 is the center. This is a sensitivity audit, not a claim that the birth time has been rectified.</p>`;
+ const cal=KP_CALIBRATION.map(x=>{const q=kpPromise(x.event);return `<p><b>${x.label}</b> · ${x.date} · ${q.status} by the recorded 22:55 structural gate <span class="small">(${x.precision})</span></p>`}).join('');
+ $('kpCalibration').innerHTML=cal+`<p class="small">These known events are used only as a structural sanity check. They are not used to rewrite the sub-lord rules or tune the future timing score.</p>`;
+ const dynSigs=kpSignificators(),dynPlanets=kpNatalPlanets(),dynMajor=kpMajorTimeline(),mer= dynMajor.find(x=>x.lord==='Mercury'&&Date.parse(x.start)<Date.parse('2026-01-01T00:00:00Z'));
+ $('kpDynamicAudit').innerHTML=`<p><b>Calculated at runtime:</b> sidereal planet positions from the tropical natal source + KP ayanamsa; mean Rahu/Ketu; central KP cusps; candidate sensitivity cusps; house occupation/ownership; star/sub/sub-sub lords; all planetary significator houses; Vimshottari MD/AD/PD/Sūkṣma/Prāṇa dates.</p><p><b>Current checks:</b> Mercury MD ${mer?`${nFmt(mer.start)} → ${nFmt(mer.end)}`:'—'} · Rahu ${dynPlanets.Rahu.toFixed(3)}° · 10H cusp ${kpCentralCusps()[9].toFixed(3)}°.</p><p class="small"><b>Static inputs only:</b> birth metadata, the existing tropical natal ephemeris, one high-precision KP ayanamsa value at birth (chosen to preserve the authoritative natal Moon balance), two ±5-minute Placidus cusp ephemeris anchors, and event-house rule definitions. Inputs contain no precomputed verdicts or timing windows. Frozen forecasts retain the derived KP snapshot at issuance.</p>`;
+ const coverage=nativeDims.map(d=>{const events=Object.values(KP_EVENTS).filter(e=>e.domain===d);const conventional=events.filter(e=>/Conventional KP|KP .* grouping/i.test(e.basis)).length;return `<div class="prediction-chip"><small>${DIMS[d].name}</small><b>${events.length} gate${events.length===1?'':'s'}</b><span>${conventional===events.length?'KP-established':conventional?'Mixed KP + Atlas rules':'Atlas interpretive'}</span></div>`}).join('');
+ $('kpDomainCoverage').innerHTML=`<h3>All 10 Atlas domains covered</h3><div class="prediction-row">${coverage}</div><p class="small">“Atlas interpretive” means the event framing is derived from standard KP house meanings but is not presented as a universally canonical KP formula. Those gates remain subject to prospective validation.</p>`;
+}
+function renderKPWindows(){
+ const e=$('kpEvent').value,start=$('kpWindowStart').value,end=$('kpWindowEnd').value;if(!start||!end||end<start||!$('kpWindowStart').checkValidity()||!$('kpWindowEnd').checkValidity()){$('kpWindows').textContent='Choose a valid start and end date, with end on or after start.';return}const r=kpRobustness(e),rows=kpFindQualified(start,end,e);
+ if(r.level==='SENSITIVE'){$('kpWindows').innerHTML=`<span class="precision-verdict sensitive">ABSTAIN FROM HIGH-PRECISION TIMING</span><h3>Window search withheld</h3><p>The relevant cusp changes within ±2 minutes of the recorded birth time. Broad macro guidance remains available, but KP micro-window ranking would imply false precision.</p>`;return}
+ $('kpWindows').innerHTML=`<h3>Qualified sampled dates · ${start} → ${end}</h3>${rows.length?`<div class="kp-window-list">${rows.map(x=>`<div class="kp-window"><b>${x.start}${x.end!==x.start?' → '+x.end:''}</b><span>Peak timing score ${x.peak>0?'+':''}${x.peak} on ${x.peakDate}</span><small>PD ${x.active.pd.lord} · Sūkṣma ${x.active.sd.lord} · Prāṇa ${x.active.prana.lord}</small></div>`).join('')}</div>`:'<p>No supportive KP Prāṇa window cleared the production gate in this interval.</p>'}<p class="small">Search is capped at 366 civil days. Each date is sampled at 12:00 UTC. These are grouped supportive daily samples, not complete Prāṇa intervals or exact transit-trigger timestamps.</p>`;
+}
+let kpFollowGuidance=true,kpLiveKey='';
+function kpUseGuidance(){
+ kpFollowGuidance=true;const date=$('guidanceDate').value;
+ $('kpDate').value=date;$('kpWindowStart').value=date;
+ $('kpWindowEnd').value=new Date(Math.min(Date.parse(date+'T12:00:00Z')+90*86400000,Date.parse('2038-02-10T12:00:00Z'))).toISOString().slice(0,10);
+ $('kpEvent').value=KP_DEFAULT_EVENT[$('guidanceDimension').value]||'promotion';renderKPPrecision();renderKPWindows();
+}
+function refreshKP(){
+ if(!kpFollowGuidance)return;
+ const date=$('guidanceDate').value,instant=guidanceFollowToday?Date.now():date,active=kpActive(instant);
+ const key=[date,guidanceFollowToday,active?.prana.start].join('|');
+ if(key!==kpLiveKey){kpLiveKey=key;$('kpDate').value=date;renderKPPrecision()}
+}
+function initKPPrecision(){
+ $('kpEvent').innerHTML=kpEventOptions();kpUseGuidance();
+ $('kpEvent').onchange=()=>{renderKPPrecision();renderKPWindows()};
+ $('kpDate').onchange=()=>{kpFollowGuidance=false;if($('kpDate').checkValidity()&&$('kpDate').value)renderKPPrecision()};
+ $('kpUseGuidance').onclick=kpUseGuidance;$('kpFindWindows').onclick=renderKPWindows;
+ for(const id of ['kpWindowStart','kpWindowEnd'])$(id).onchange=()=>{$('kpWindows').textContent='Dates changed. Run the search to update results.'};
+ const root=$('precisionPanel'),panels={};
+ for(const key of ['reading','windows','audit'])panels[key]=makeSectionPanel('kp',key,root);
+ panels.reading.append($('kpPromiseGate'),$('kpTimingNow'));
+ panels.windows.append($('kpWindowControls'),$('kpWindows'));
+ panels.audit.append(root.querySelector('.precision-note'),$('kpSensitivity'),$('kpDomainCoverage'),$('kpCalibration').parentElement,$('kpDynamicAudit').parentElement);
+ sectionTabs(root,'kp',[['reading','Reading'],['windows','Windows'],['audit','Evidence']],key=>setSectionTabs('kp',key));setSectionTabs('kp','reading');
+ setInterval(refreshKP,1000);window.addEventListener('focus',refreshKP);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshKP()});
+}
+
 /* ---------- immutable forecast registry ---------- */
 const FORECAST_KEY='lifeAtlasForecastRegistryVNext1',embeddedForecast=JSON.parse($('forecastData').textContent||'[]');
 let forecastMemory=Array.isArray(embeddedForecast)?embeddedForecast:[];
 function forecastLoad(){try{const x=JSON.parse(localStorage.getItem(FORECAST_KEY)||'null');if(Array.isArray(x)){forecastMemory=x;return x}}catch(e){}return forecastMemory}
 function forecastStore(x){forecastMemory=x;try{localStorage.setItem(FORECAST_KEY,JSON.stringify(x))}catch(e){}}
 function forecastNotice(x){$('forecastStatus').textContent=x}
-function renderForecastAutoCall(){if(!$('forecastAutoCall'))return;const date=$('guidanceDate')?.value||isoLocalToday(),dim=$('forecastDimension')?.value||$('guidanceDimension')?.value||'career',f=vnextForecastSummary(date,dim);if(!f){$('forecastAutoCall').innerHTML='<p>No three-engine snapshot available.</p>';return}$('forecastAutoCall').className='forecast-call '+f.rec.cls;$('forecastAutoCall').innerHTML=`<div class="eyebrow">Atlas leading call · ${FORECAST_MODEL_VERSION}</div><h3>${f.rec.label}</h3><p>${f.rec.reason}</p><p class="small">Activation ${f.rec.activation}/100 · ${f.rec.independence}</p>`}
-function prefillForecast(){const date=$('guidanceDate').value,dim=$('guidanceDimension').value,f=vnextForecastSummary(date,dim);if(!f)return forecastNotice('No three-engine snapshot available for that date.');$('forecastDimension').value=dim;$('forecastStart').value=date;const end=new Date(date+'T12:00:00Z');end.setUTCDate(end.getUTCDate()+30);$('forecastEnd').value=end.toISOString().slice(0,10);$('forecastDeadline').value=end.toISOString().slice(0,10);$('forecastEvent').value=f.event;$('forecastAlternative').value=f.alternative;$('forecastCriterion').value=f.rec.call==='abstain'?'No directional hit criterion: this record intentionally tests whether abstention was appropriate.':'Observable event must match the leading hypothesis by the deadline; merely feeling the period is not sufficient.';renderForecastAutoCall();forecastNotice('Prefilled from the selected guidance date. Edit observable details before freezing.')}
-function freezeForecast(){const dim=$('forecastDimension').value,start=$('forecastStart').value,end=$('forecastEnd').value,deadline=$('forecastDeadline').value;if(!start||!end||!deadline||!dim)return forecastNotice('Complete the forecast dates and dimension.');const snapshot=vnextForecastSummary(start,dim);if(!snapshot)return forecastNotice('No three-engine snapshot is available at the window start.');let stance=$('forecastStance').value==='auto'?snapshot.rec.call:$('forecastStance').value;const event=$('forecastEvent').value.trim(),alt=$('forecastAlternative').value.trim(),crit=$('forecastCriterion').value.trim();if(!event||!alt||!crit)return forecastNotice('Event, competing manifestation and exact hit criterion are required.');const item={id:'F-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,6),model:FORECAST_MODEL_VERSION,issuedAt:new Date().toISOString(),windowStart:start,windowEnd:end,deadline,dimension:dim,stance,event,alternative:alt,criterion:crit,baselineLikelihood:$('forecastBaselineLikelihood').value,known:$('forecastKnown').value.trim(),snapshot:{reconciliation:snapshot.rec,j:snapshot.j,b:snapshot.b,w:snapshot.w,jyotish:snapshot.sd?{ad:snapshot.sd.ad,pd:snapshot.sd.pd,sd:snapshot.sd.sd,start:snapshot.sd.startExact,end:snapshot.sd.endExact}:null,bazi:snapshot.bc?{luck:snapshot.bc.year.luck,year:snapshot.bc.year.pillar,month:snapshot.bc.month.pillar,day:snapshot.bc.day.pillar}:null,western:{profection:westernProfection(start),audit:westernObstruction(start,dim)}},resolution:null,resolvedAt:null,resolutionNote:''};const list=forecastLoad();list.unshift(item);forecastStore(list);renderForecastRegistry();forecastNotice(`Frozen ${item.id}. Forecast content is now immutable.`)}
+function renderForecastAutoCall(){if(!$('forecastAutoCall'))return;const date=$('forecastStart')?.value||$('guidanceDate')?.value||isoLocalToday(),dim=$('forecastDimension')?.value||$('guidanceDimension')?.value||'career',f=vnextForecastSummary(date,dim);if(!f){$('forecastAutoCall').innerHTML='<p>No three-engine snapshot available.</p>';return}const eventKey=$('forecastEventType')?.value||KP_DEFAULT_EVENT[dim]||'promotion',kp=kpPrecisionSnapshot(date,eventKey);$('forecastAutoCall').className='forecast-call '+f.rec.cls;$('forecastAutoCall').innerHTML=`<div class="eyebrow">Atlas leading call · ${FORECAST_MODEL_VERSION}</div><h3>${f.rec.label}</h3><p>${f.rec.reason}</p><p class="small">Activation ${f.rec.activation}/100 · ${f.rec.independence}</p>${kp?`<p><b>KP precision overlay · ${date} at 12:00 UTC:</b> ${esc(kp.verdict)} · ${esc(kp.robust.level)} birth-time robustness · ${kp.timing?kp.timing.band:'timing unavailable'}</p>`:''}`;}
+function prefillForecast(){const date=$('guidanceDate').value,dim=$('guidanceDimension').value,f=vnextForecastSummary(date,dim);if(!f)return forecastNotice('No three-engine snapshot available for that date.');$('forecastDimension').value=dim;if($('forecastEventType')){$('forecastEventType').innerHTML=kpEventOptions(dim);$('forecastEventType').value=KP_DEFAULT_EVENT[dim]||'promotion';}$('forecastStart').value=date;const end=new Date(date+'T12:00:00Z');end.setUTCDate(end.getUTCDate()+30);$('forecastEnd').value=end.toISOString().slice(0,10);$('forecastDeadline').value=end.toISOString().slice(0,10);$('forecastEvent').value=f.event;$('forecastAlternative').value=f.alternative;$('forecastCriterion').value=f.rec.call==='abstain'?'No directional hit criterion: this record intentionally tests whether abstention was appropriate.':'Observable event must match the leading hypothesis by the deadline; merely feeling the period is not sufficient.';renderForecastAutoCall();forecastNotice('Prefilled from the selected guidance date. Edit observable details before freezing.')}
+function freezeForecast(){const dim=$('forecastDimension').value,start=$('forecastStart').value,end=$('forecastEnd').value,deadline=$('forecastDeadline').value,eventType=$('forecastEventType')?.value||KP_DEFAULT_EVENT[dim]||'promotion';if(!start||!end||!deadline||!dim)return forecastNotice('Complete the forecast dates and dimension.');const snapshot=vnextForecastSummary(start,dim);if(!snapshot)return forecastNotice('No three-engine snapshot is available at the window start.');const precision=kpPrecisionSnapshot(start,eventType);let stance=$('forecastStance').value==='auto'?snapshot.rec.call:$('forecastStance').value;if($('forecastStance').value==='auto'&&precision&&precision.verdict.startsWith('ABSTAIN'))stance='abstain';const event=$('forecastEvent').value.trim(),alt=$('forecastAlternative').value.trim(),crit=$('forecastCriterion').value.trim();if(!event||!alt||!crit)return forecastNotice('Event, competing manifestation and exact hit criterion are required.');const item={id:'F-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,6),model:FORECAST_MODEL_VERSION,issuedAt:new Date().toISOString(),windowStart:start,windowEnd:end,deadline,dimension:dim,eventType,stance,event,alternative:alt,criterion:crit,baselineLikelihood:$('forecastBaselineLikelihood').value,known:$('forecastKnown').value.trim(),snapshot:{reconciliation:snapshot.rec,j:snapshot.j,b:snapshot.b,w:snapshot.w,jyotish:snapshot.sd?{ad:snapshot.sd.ad,pd:snapshot.sd.pd,sd:snapshot.sd.sd,start:snapshot.sd.startExact,end:snapshot.sd.endExact}:null,bazi:snapshot.bc?{luck:snapshot.bc.year.luck,year:snapshot.bc.year.pillar,month:snapshot.bc.month.pillar,day:snapshot.bc.day.pillar}:null,western:{profection:westernProfection(start),audit:westernObstruction(start,dim)},kp:precision?{eventType,verdict:precision.verdict,promise:precision.promise.status,subLord:precision.promise.subLord,robustness:precision.robust.level,timingScore:precision.timing?.score??null,timingBand:precision.timing?.band??null,active:precision.timing?{md:precision.timing.active.md.lord,ad:precision.timing.active.ad.lord,pd:precision.timing.active.pd.lord,sd:precision.timing.active.sd.lord,prana:precision.timing.active.prana.lord}:null}:null},resolution:null,resolvedAt:null,resolutionNote:''};const list=forecastLoad();list.unshift(item);forecastStore(list);renderForecastRegistry();forecastNotice(`Frozen ${item.id}. Forecast content is now immutable.`)}
 function resolveForecast(id,status,note){const list=forecastLoad(),x=list.find(e=>e.id===id);if(!x)return;x.resolution=status;x.resolutionNote=note||'';x.resolvedAt=new Date().toISOString();forecastStore(list);renderForecastRegistry();forecastNotice(`Resolution saved for ${id}.`)}
 function registryScore(list){const resolved=list.filter(x=>x.resolution&&x.resolution!=='unscorable'),hits=resolved.filter(x=>['hit','partial'].includes(x.resolution)).length,miss=resolved.filter(x=>['miss','false-alarm','timing-miss'].includes(x.resolution)).length,abst=list.filter(x=>x.stance==='abstain').length;return {total:list.length,resolved:resolved.length,hits,miss,abst}}
-function renderForecastRegistry(){if(!$('forecastList'))return;const list=forecastLoad(),z=registryScore(list);$('forecastRegistrySummary').innerHTML=`<div class="registry-stat"><b>${z.total}</b><small>Frozen</small></div><div class="registry-stat"><b>${z.resolved}</b><small>Resolved</small></div><div class="registry-stat"><b>${z.abst}</b><small>Abstentions</small></div>`;$('forecastList').innerHTML=list.length?list.map(x=>`<article class="forecast-entry ${x.resolution?'resolved':''}"><div class="forecast-entry-head"><div><b>${esc(x.dimension.toUpperCase())} · ${x.windowStart} → ${x.windowEnd}</b><div class="forecast-badges"><span class="frozen-badge">Frozen · ${esc(x.model)}</span>${x.stance==='abstain'?'<span class="abstain-badge">ABSTAIN</span>':''}</div></div><small>${esc(x.id)}</small></div><p><b>Forecast:</b> ${esc(x.event)}</p><p><b>Competing outcome:</b> ${esc(x.alternative)}</p><details><summary>Frozen provenance</summary><p class="small"><b>Issued:</b> ${esc(x.issuedAt)} · <b>Deadline:</b> ${esc(x.deadline)} · <b>Context baseline:</b> ${esc(x.baselineLikelihood)}</p><p>${esc(x.known||'No known-circumstance note recorded.')}</p><p><b>Hit criterion:</b> ${esc(x.criterion)}</p><p class="small">J: ${x.snapshot.j.mark} A${x.snapshot.j.activation}/I${x.snapshot.j.intensityScore}/V${x.snapshot.j.volatilityScore} · B: ${x.snapshot.b.mark} A${x.snapshot.b.activation}/I${x.snapshot.b.intensityScore}/V${x.snapshot.b.volatilityScore} · W: ${x.snapshot.w.mark} A${x.snapshot.w.activation}/I${x.snapshot.w.intensityScore}/V${x.snapshot.w.volatilityScore}</p></details>${x.resolution?`<p><b>Resolution:</b> ${esc(x.resolution)}${x.resolutionNote?` · ${esc(x.resolutionNote)}`:''}</p>`:`<div class="resolution-controls"><label>Resolve<select data-fstatus="${x.id}"><option value="hit">Hit</option><option value="partial">Partial hit</option><option value="miss">Miss</option><option value="false-alarm">False alarm</option><option value="timing-miss">Timing miss</option><option value="unscorable">Unscorable</option></select></label><label>Resolution note<input data-fnote="${x.id}" placeholder="Observed outcome"></label><button data-fresolve="${x.id}">Save resolution</button></div>`}</article>`).join(''):'<p class="journal-empty">No frozen forecasts yet.</p>';$('forecastList').querySelectorAll('[data-fresolve]').forEach(b=>b.onclick=()=>resolveForecast(b.dataset.fresolve,$(`[data-fstatus="${b.dataset.fresolve}"]`).value,$(`[data-fnote="${b.dataset.fresolve}"]`).value))}
+function renderForecastRegistry(){if(!$('forecastList'))return;const list=forecastLoad(),z=registryScore(list);$('forecastRegistrySummary').innerHTML=`<div class="registry-stat"><b>${z.total}</b><small>Frozen</small></div><div class="registry-stat"><b>${z.resolved}</b><small>Resolved</small></div><div class="registry-stat"><b>${z.abst}</b><small>Abstentions</small></div>`;$('forecastList').innerHTML=list.length?list.map(x=>`<article class="forecast-entry ${x.resolution?'resolved':''}"><div class="forecast-entry-head"><div><b>${esc(x.dimension.toUpperCase())} · ${x.windowStart} → ${x.windowEnd}</b><div class="forecast-badges"><span class="frozen-badge">Frozen · ${esc(x.model)}</span>${x.stance==='abstain'?'<span class="abstain-badge">ABSTAIN</span>':''}</div></div><small>${esc(x.id)}</small></div><p><b>Forecast:</b> ${esc(x.event)}</p><p><b>Competing outcome:</b> ${esc(x.alternative)}</p><details><summary>Frozen provenance</summary><p class="small"><b>Issued:</b> ${esc(x.issuedAt)} · <b>Deadline:</b> ${esc(x.deadline)} · <b>Context baseline:</b> ${esc(x.baselineLikelihood)}</p><p>${esc(x.known||'No known-circumstance note recorded.')}</p><p><b>Hit criterion:</b> ${esc(x.criterion)}</p><p class="small">J: ${x.snapshot.j.mark} A${x.snapshot.j.activation}/I${x.snapshot.j.intensityScore}/V${x.snapshot.j.volatilityScore} · B: ${x.snapshot.b.mark} A${x.snapshot.b.activation}/I${x.snapshot.b.intensityScore}/V${x.snapshot.b.volatilityScore} · W: ${x.snapshot.w.mark} A${x.snapshot.w.activation}/I${x.snapshot.w.intensityScore}/V${x.snapshot.w.volatilityScore}</p>${x.snapshot.kp?`<p class="small"><b>KP:</b> ${esc(x.snapshot.kp.verdict)} · event ${esc(x.eventType||x.snapshot.kp.eventType)} · sub-lord ${esc(x.snapshot.kp.subLord)} · robustness ${esc(x.snapshot.kp.robustness)} · timing ${esc(x.snapshot.kp.timingBand||'—')} ${x.snapshot.kp.timingScore??'—'}</p>`:''}</details>${x.resolution?`<p><b>Resolution:</b> ${esc(x.resolution)}${x.resolutionNote?` · ${esc(x.resolutionNote)}`:''}</p>`:`<div class="resolution-controls"><label>Resolve<select data-fstatus="${x.id}"><option value="hit">Hit</option><option value="partial">Partial hit</option><option value="miss">Miss</option><option value="false-alarm">False alarm</option><option value="timing-miss">Timing miss</option><option value="unscorable">Unscorable</option></select></label><label>Resolution note<input data-fnote="${x.id}" placeholder="Observed outcome"></label><button data-fresolve="${x.id}">Save resolution</button></div>`}</article>`).join(''):'<p class="journal-empty">No frozen forecasts yet.</p>';$('forecastList').querySelectorAll('[data-fresolve]').forEach(b=>b.onclick=()=>resolveForecast(b.dataset.fresolve,$(`[data-fstatus="${b.dataset.fresolve}"]`).value,$(`[data-fnote="${b.dataset.fresolve}"]`).value))}
 function exportForecasts(){const blob=new Blob([JSON.stringify({version:1,model:FORECAST_MODEL_VERSION,exportedAt:new Date().toISOString(),forecasts:forecastLoad()},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='life_atlas_forecast_registry.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function importForecasts(file){if(file.size>5*1024*1024)return forecastNotice('Registry backup too large.');const rd=new FileReader();rd.onload=()=>{try{const x=JSON.parse(rd.result),arr=Array.isArray(x)?x:x.forecasts;if(!Array.isArray(arr))throw 0;const map=new Map(forecastLoad().map(f=>[f.id,f]));let n=0;arr.forEach(f=>{if(f?.id&&!map.has(f.id)){map.set(f.id,f);n++}});forecastStore([...map.values()]);renderForecastRegistry();forecastNotice(`Imported ${n} new frozen forecasts; existing records were preserved.`)}catch(e){forecastNotice('Invalid registry backup.')}};rd.readAsText(file)}
-function initForecastRegistry(){if(!$('forecastPanel'))return;const dims=nativeDims.map(k=>`<option value="${k}">${DIMS[k].name}</option>`).join('');$('forecastDimension').innerHTML=dims;$('forecastDimension').value=$('guidanceDimension')?.value||'career';$('forecastPrefill').onclick=prefillForecast;$('forecastFreeze').onclick=freezeForecast;$('forecastExport').onclick=exportForecasts;$('forecastImport').onclick=()=>$('forecastImportFile').click();$('forecastImportFile').onchange=e=>{if(e.target.files?.[0])importForecasts(e.target.files[0]);e.target.value=''};$('forecastDimension').onchange=renderForecastAutoCall;renderForecastAutoCall();renderForecastRegistry()}
+function initForecastRegistry(){if(!$('forecastPanel'))return;const dims=nativeDims.map(k=>`<option value="${k}">${DIMS[k].name}</option>`).join('');$('forecastDimension').innerHTML=dims;$('forecastDimension').value=$('guidanceDimension')?.value||'career';if($('forecastEventType')){$('forecastEventType').innerHTML=kpEventOptions($('forecastDimension').value);$('forecastEventType').value=KP_DEFAULT_EVENT[$('forecastDimension').value]||'promotion';$('forecastEventType').onchange=renderForecastAutoCall;}$('forecastStart').onchange=renderForecastAutoCall;$('forecastPrefill').onclick=prefillForecast;$('forecastFreeze').onclick=freezeForecast;$('forecastExport').onclick=exportForecasts;$('forecastImport').onclick=()=>$('forecastImportFile').click();$('forecastImportFile').onchange=e=>{if(e.target.files?.[0])importForecasts(e.target.files[0]);e.target.value=''};$('forecastDimension').onchange=()=>{if($('forecastEventType')){$('forecastEventType').innerHTML=kpEventOptions($('forecastDimension').value);$('forecastEventType').value=KP_DEFAULT_EVENT[$('forecastDimension').value]||'promotion';}renderForecastAutoCall()};renderForecastAutoCall();renderForecastRegistry()}
 
 function initGuidanceAndJournal(){
  const dims=nativeDims.map(k=>`<option value="${k}">${DIMS[k].name}</option>`).join('');
@@ -1754,7 +2029,7 @@ function initReferenceLibraries(){
   [$('guidePage'),'guide','Learn to read your atlas','Start with the visual language, then explore the logic behind a reading.',[
    ['Start here','Find your way around the app.',[[1,'Read the atlas','Colors, intensity bars, timelines and Life map.','01'],[10,'Use & keep your atlas','Home-screen access and offline use.','02']]],
    ['Understand the readings','Know what each system and each axis can tell you.',[[7,'Five-axis reference','Activation, support, intensity, agency and volatility—meaning, colors and native logic.','03'],[0,'Native systems','Independent timing and shared context.','04'],[3,'Support & intensity','Parent anchors and transit evidence.','05'],[6,'Forecasting discipline','Agreement, obstruction and abstention.','06']]],
-   ['Explore the calculations','Inspect the assumptions behind each result.',[[2,'Scoring logic','Baselines, adjustments, limits and intensity.','07'],[4,'Chart foundations','Divisional anchors and planet profiles.','08'],[5,'BaZi foundations','Solar terms, natal pillars and luck cycles.','09'],[8,'Western methodology','Structural timing and supplied model values.','10'],[9,'Forecast registry','Frozen forecasts and context baselines.','11']]]
+   ['Explore the calculations','Inspect the assumptions behind each result.',[[2,'Scoring logic','Baselines, adjustments, limits and intensity.','07'],[4,'Chart foundations','Divisional anchors and planet profiles.','08'],[5,'BaZi foundations','Solar terms, natal pillars and luck cycles.','09'],[8,'Western methodology','Structural timing and supplied model values.','10'],[9,'Forecast registry','Frozen forecasts and context baselines.','11'],[11,'KP event precision','Cuspal promise, sensitivity and a separate micro-clock.','12']]]
   ]],
   [$('guidance-view-practices'),'practices','Put a reading into practice','Choose a useful habit, or explore the tradition behind it.',[
    ['Daily actions','Small, concrete practices you can return to.',[[2,'Plan & finish','Prune, define, contain, decide and close loops.','01'],[3,'Shape your space','Order, materials and optional symbolic cues.','02'],[4,'Body & attention','Gentle movement, breathing and hobbies.','03']]],
@@ -1782,11 +2057,11 @@ function initReferenceLibraries(){
 
 function initGuidanceNavigation(){
  const root=$('practicePage'),sections=[...root.children].filter(e=>e.tagName==='SECTION');
- const groups=[['plan','Plan','Guidance for your selected date'],['forecast','Forecasts','Freeze testable calls before outcomes'],['journal','Journal','Record an outcome'],['review','Review','Patterns and saved entries'],['practices','Practices','Jyotish anchors and BaZi habits']];
+ const groups=[['plan','Plan','Guidance for your selected date'],['precision','KP','Event promise and timing'],['forecast','Forecasts','Freeze testable calls before outcomes'],['journal','Journal','Record an outcome'],['review','Review','Patterns and saved entries'],['practices','Practices','Jyotish anchors and BaZi habits']];
  const nav=document.createElement('div');nav.className='guidance-nav';nav.setAttribute('role','tablist');nav.setAttribute('aria-label','Guidance sections');
  nav.innerHTML=groups.map(([key,label],i)=>`<button type="button" id="guidance-tab-${key}" role="tab" aria-selected="${i===0}" aria-controls="guidance-view-${key}" tabindex="${i===0?0:-1}" data-guidance-view="${key}">${label}</button>`).join('');root.prepend(nav);
  const panels={};groups.forEach(([key,label,hint],i)=>{const panel=document.createElement('div');panel.id='guidance-view-'+key;panel.className='guidance-view';panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','guidance-tab-'+key);panel.hidden=i!==0;panel.innerHTML=`<p class="section-hint">${hint}</p>`;root.appendChild(panel);panels[key]=panel});
- sections.forEach(section=>{const key=section.id==='guidanceEngine'?'plan':section.id==='forecastPanel'?'forecast':section.id==='validationPanel'?'journal':section.querySelector('#calibrationSummary,#journalList')?'review':'practices';panels[key].appendChild(section)});
+ sections.forEach(section=>{const key=section.id==='guidanceEngine'?'plan':section.id==='precisionPanel'?'precision':section.id==='forecastPanel'?'forecast':section.id==='validationPanel'?'journal':section.querySelector('#calibrationSummary,#journalList')?'review':'practices';panels[key].appendChild(section)});
  const activate=key=>{groups.forEach(([k])=>{const selected=k===key;panels[k].hidden=!selected;const tab=$('guidance-tab-'+k);tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1});if(nav.getBoundingClientRect().top<0)nav.scrollIntoView({block:'start',behavior:'instant'})};
  nav.querySelectorAll('button').forEach((button,i)=>{button.onclick=()=>activate(button.dataset.guidanceView);button.onkeydown=e=>{let next;if(e.key==='ArrowRight')next=(i+1)%groups.length;else if(e.key==='ArrowLeft')next=(i+groups.length-1)%groups.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=groups.length-1;else return;e.preventDefault();const key=groups[next][0];activate(key);$('guidance-tab-'+key).focus({preventScroll:true})}});
  function fold(section){const heading=section.querySelector(':scope > h2');if(!heading)return;const details=document.createElement('details');details.className=section.className+' topic-section';const summary=document.createElement('summary');summary.textContent=heading.textContent;details.appendChild(summary);heading.remove();while(section.firstChild)details.appendChild(section.firstChild);if(section.id)details.id=section.id;section.replaceWith(details)}
@@ -1858,7 +2133,7 @@ document.querySelectorAll('[data-jy-view]').forEach(b=>b.onclick=()=>showNativeP
 // PD/SD popups live in the original script; expose only the two shared view helpers.
 window.AtlasNativeAxes=Object.freeze({jy:jyVNextAxes,prana:jyPranaAttributes,render:renderAxes,chips:chipAxes,legend:axisLegend});
 renderCurrentPeriod();
-selectNativeNow();setNativeOptions();initWestern();initGuidanceAndJournal();initForecastRegistry();initJournalSync();initGuidanceNavigation();initMobileSpacing();
+selectNativeNow();setNativeOptions();initWestern();initGuidanceAndJournal();initKPPrecision();initForecastRegistry();initJournalSync();initGuidanceNavigation();initMobileSpacing();
 $('baziNativeDimension').onchange=e=>{bDim=e.target.value;renderBaziNative()};
 $('baziNativeYear').onchange=e=>{bYear=e.target.value;bMonth=0;bDay=null;renderBaziNative()};
 $('baziNativeMonth').onchange=e=>{bMonth=+e.target.value;bDay=null;renderMonthDetail()};
