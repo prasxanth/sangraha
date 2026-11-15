@@ -22,6 +22,28 @@ assert hashlib.sha256((ROOT / 'kena_upanishad.html').read_bytes()).hexdigest() =
 audio = (ROOT / 'kena_upanishad.opus').read_bytes()
 assert hashlib.sha256(audio).hexdigest() == data['audioSha256'], 'Audio changed: verify timing before rebuilding.'
 
+def embedded_fonts():
+    """Keep the original typography available inside the standalone HTML."""
+    root = ROOT / 'assets/kena_audio/fonts'
+    manifest = json.loads((root / 'manifest.json').read_text())
+    css = (root / 'fonts.css').read_text()
+    assert hashlib.sha256((root / 'fonts.css').read_bytes()).hexdigest() == manifest['stylesheetSha256'], 'Font stylesheet changed: verify its assets.'
+    def embed(match):
+        name = match.group(1).strip("\"'")
+        assert name in manifest['assets'], 'Unknown font asset: ' + name
+        content = (root / name).read_bytes()
+        assert hashlib.sha256(content).hexdigest() == manifest['assets'][name]['sha256'], 'Font asset changed: ' + name
+        return 'url(data:font/woff2;base64,' + base64.b64encode(content).decode() + ')'
+    css = re.sub(r'url\(([^)]+)\)', embed, css)
+    licenses = []
+    for name, info in manifest['licenses'].items():
+        content = (root / name).read_bytes()
+        assert hashlib.sha256(content).hexdigest() == info['sha256'], 'Font license changed: ' + name
+        text = content.decode()
+        assert '*/' not in text, 'Font license cannot be embedded in a CSS comment.'
+        licenses.append('/* Embedded font license: ' + name + '\n' + text + '\n*/')
+    return '\n'.join(licenses) + '\n' + css
+
 def invocation_card(clip, title):
     body = '<div class="v-label">' + html.escape(title) + '</div>'
     for key, cls, lang in [('sanskrit', 'v-sanskrit', 'sa'), ('iast', 'v-translit', 'sa-Latn')]:
@@ -53,7 +75,7 @@ s = s.replace('<title>Kena Upaniṣad · केनोपनिषद्</title>'
 s = re.sub(r'<link href="https://fonts.googleapis.com[^>]+>', '', s, count=1)
 s = s.replace('const number=reference.match(/\\d+\\.\\d+/)[0];', "const number=(reference.match(/\\d+\\.\\d+/)||[reference.includes('Closing')?'closing-shanti':'shanti'])[0];")
 s = s.replace('KENA_PHRASE_TRANSLATIONS[number].forEach(phrase=>{', '(KENA_PHRASE_TRANSLATIONS[number]||[]).forEach(phrase=>{')
-s = s.replace('</style>', (ROOT / 'assets/kena_audio/player.css').read_text() + '\n</style>', 1)
+s = s.replace('</style>', embedded_fonts() + '\n' + (ROOT / 'assets/kena_audio/player.css').read_text() + '\n</style>', 1)
 s = s.replace('Read the Sanskrit. Turn to the meaning.<br>Stay with the question.', 'Listen to the chant. Follow the Sanskrit.<br>Opening and closing invocations, and all 34 verses.<span class="audio-notice" style="display:block">Audio is included in this file. Plays offline · default 0.75× · adjustable 0.25–1.0×.</span><span class="audio-notice" style="display:block">Recitation: Swami Paramarthananda · Yogamalika. <a href="https://www.youtube.com/watch?v=4YirltXJXtA" target="_blank" rel="noopener">Recording source ↗</a></span>', 1)
 s = s.replace('<span class="app-header-logo">Kena Upaniṣad</span>', '<span class="app-header-logo">Kena · Audio</span>', 1)
 s = s.replace('id="home-read" onclick="navigate(\'read\')">Read', 'id="home-read" onclick="navigate(\'read\')">Listen &amp; read', 1)

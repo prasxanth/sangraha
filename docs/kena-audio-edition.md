@@ -1,8 +1,8 @@
 # Kena Upaniṣad audio edition
 
-Open `kena_upanishad_audio.html` directly to read and listen offline. The recording and artwork are embedded in the HTML; no server, separate audio file, or internet connection is required for playback. The original study edition, `kena_upanishad.html`, is unchanged.
+Open `kena_upanishad_audio.html` directly to read and listen offline. The recording and artwork are embedded in the HTML; no server, separate audio file, or internet connection is required for playback. The original study edition, `kena_upanishad.html`, is unchanged. Its original fonts—Tiro Devanagari Sanskrit, Nunito, Playfair Display, and DM Mono—are also embedded, including their open-font licenses, so offline reading keeps the original typography.
 
-The edition has 36 sections: the opening Śānti mantra, all 34 study verses, and the repeated closing Śānti mantra with Hariḥ Om. Playback defaults to 0.75×, with speeds from 0.25× to 1.0×, verse seeking, restart, repeat, and optional continuation to the next section. Changing verses or leaving the reader pauses playback; opening Study keeps the selected verse available.
+The edition has 36 sections: the opening Śānti mantra, all 34 study verses, and the repeated closing Śānti mantra with Hariḥ Om. Playback defaults to 0.75×, with speeds from 0.25× to 1.0×, verse seeking, restart, repeat, and optional continuation to the next section. Play, Restart, and a More (`⋯`) button sit at the top right over the artwork, using no space in the reading text column. More opens a floating panel with seeking, speed, repeat, continuation, and the marker legend. Tap outside or press Escape to close it. Study uses a compact toolbar aligned right above the passage. Changing verses or leaving the reader pauses playback; opening Study keeps the selected verse available.
 
 Recitation lines follow the recording’s audible phrases. Single daṇḍa `।` marks an internal recitation pause; double daṇḍa `॥` marks the end of a verse or invocation. IAST uses matching `|` / `||` markers. Spoken sandhi and pausal forms are saved explicitly: for example, 1.3 reads **नो मनो न विद्मः ।** / **no mano na vidmaḥ |**, without an inherited stop after मनो. Study retains the audited grammatical pada-viccheda, literal translations, word meanings, and commentaries; these separated grammatical forms can differ from the joined recitation. The unrecited extra Om at the beginning of verse 1.1 is omitted in this edition: the recording's opening Om belongs to the invocation. The original edition retains its text.
 
@@ -20,7 +20,7 @@ After following the repository's freshness and preservation instructions, rebuil
 python3 scripts/build_kena_audio.py
 ```
 
-The builder reads the current source HTML, timing data, recording, and `assets/kena_audio/player.js` / `player.css`. It requires matching source and audio hashes, and writes only the separate audio edition. Reconcile and validate source-text changes before updating the timing file's source hash.
+The builder reads the current source HTML, timing data, recording, and `assets/kena_audio/player.js` / `player.css`. It also embeds the verified font assets, stylesheet, and licenses in `assets/kena_audio/fonts`. It requires matching source and audio hashes, and writes only the separate audio edition. Reconcile and validate source-text changes before updating the timing file's source hash.
 
 With Playwright available, validate with:
 
@@ -28,4 +28,4 @@ With Playwright available, validate with:
 node tests/kena_audio.cjs
 ```
 
-The test checks all 36 sections, declared recitation-form changes, matching Sanskrit/IAST pause markers, all 34 audited pada sequences, both invocation word studies, embedded-audio identity, the playback speed range, verse stopping, repeat, continuation, navigation, mobile layouts, and playback with external requests blocked.
+The test checks all 36 sections, declared recitation-form changes, matching Sanskrit/IAST pause markers, all 34 audited pada sequences, both invocation word studies, embedded-audio identity, the playback speed range, verse stopping, repeat, continuation, navigation, compact/expanded control layouts, keyboard and outside-tap dismissal, original offline fonts, mobile layouts, and playback with external requests blocked.

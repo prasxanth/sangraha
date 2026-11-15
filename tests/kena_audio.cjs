@@ -62,6 +62,24 @@ const {chromium}=require('playwright');
   await page.route('https://**',r=>{requests.push(r.request().url());r.abort()});
   await page.goto('file://'+process.cwd()+'/kena_upanishad_audio.html',{waitUntil:'load'});
   await page.locator('#home-read').click();
+  await page.evaluate(()=>document.fonts.ready);
+  assert.deepEqual(await page.evaluate(()=>KENA_AUDIO),timing,'UI-only changes preserve all embedded recitation data');
+  assert(await page.evaluate(()=>Array.from(document.fonts).some(font=>font.family.includes('Tiro Devanagari Sanskrit')&&font.status==='loaded')),'Original Sanskrit font loads offline');
+  assert((await page.locator('#reading-copy .v-sanskrit').evaluate(e=>getComputedStyle(e).fontFamily)).includes('Tiro Devanagari Sanskrit'));
+  const cdp=await page.context().newCDPSession(page);await cdp.send('DOM.enable');await cdp.send('CSS.enable');
+  const documentRoot=(await cdp.send('DOM.getDocument')).root.nodeId;
+  const fontNode=(await cdp.send('DOM.querySelector',{nodeId:documentRoot,selector:'#reading-copy .v-sanskrit .recitation-line:nth-child(2)'})).nodeId;
+  const actualFonts=(await cdp.send('CSS.getPlatformFontsForNode',{nodeId:fontNode})).fonts;
+  assert(actualFonts.some(f=>/Tiro.*Devanagari.*Sanskrit/i.test(f.familyName)&&f.isCustomFont&&f.glyphCount>0),'Sanskrit glyphs actually render in embedded Tiro, rather than a fallback');
+  await cdp.detach();
+  async function openOptions(scope='#screen-read'){
+   const toggle=page.locator(scope+' .recitation-toggle');
+   if(await toggle.getAttribute('aria-expanded')!=='true')await toggle.click();
+   assert(await page.locator(scope+' .recitation-settings').isVisible());
+  }
+  assert(!(await page.locator('#screen-read .recitation-settings').isVisible()),'Advanced controls are collapsed initially');
+  assert.equal(await page.locator('#screen-read .recitation-main button:visible').count(),3,'Play, restart and expansion affordance only');
+  assert.equal(await page.locator('.reading-text .recitation-panel').count(),0,'Audio toolbar takes no text-column space');
   assert.equal(await page.locator('#reading-picker option').count(),36);
   assert.equal(await page.locator('#reading-number').textContent(),'Śānti');
   assert.equal(await page.locator('#screen-read .recitation-speed').inputValue(),'0.75');
@@ -74,7 +92,10 @@ const {chromium}=require('playwright');
   await page.waitForFunction(()=>document.getElementById('recitation-audio').readyState>=1);
   const audioHash=crypto.createHash('sha256').update(fs.readFileSync('kena_upanishad.opus')).digest('hex');
   assert.equal(audioHash,timing.audioSha256);
-  const embedded=fs.readFileSync('kena_upanishad_audio.html','utf8').match(/id="recitation-audio"[^>]*src="data:audio\/ogg;codecs=opus;base64,([^"]+)"/)[1];
+  const editionHtml=fs.readFileSync('kena_upanishad_audio.html','utf8');
+  const embeddedFontHashes=new Set(Array.from(editionHtml.matchAll(/url\(data:font\/woff2;base64,([A-Za-z0-9+/=]+)\)/g),m=>crypto.createHash('sha256').update(Buffer.from(m[1],'base64')).digest('hex')));
+  for(const asset of Object.values(require('../assets/kena_audio/fonts/manifest.json').assets))assert(embeddedFontHashes.has(asset.sha256),'Original font asset is embedded byte-for-byte');
+  const embedded=editionHtml.match(/id="recitation-audio"[^>]*src="data:audio\/ogg;codecs=opus;base64,([^"]+)"/)[1];
   assert.equal(crypto.createHash('sha256').update(Buffer.from(embedded,'base64')).digest('hex'),audioHash,'Embedded audio is byte-for-byte identical to the recording');
   const bytes=await page.evaluate(()=>{
    const src=document.getElementById('recitation-audio').src.split(',')[1];return atob(src).length;
@@ -85,6 +106,7 @@ const {chromium}=require('playwright');
    assert.equal(await page.evaluate(()=>readingDeck[readingIndex].number),clip.number);
    assert.equal(await page.locator('#reading-copy .recitation-line').count(),clip.phrases.length*2);
    assert.equal(await page.locator('#screen-read .recitation-panel').count(),1);
+   assert.equal(await page.locator('#screen-read .recitation-toggle').getAttribute('aria-expanded'),'false','Changing cards restores compact controls');
    if(clip.number.includes('.')){
     const actual=await page.locator('#reading-copy .v-sanskrit,#reading-copy .m-sanskrit').textContent();
     assert.equal(comparable(actual),expectedRecitation(clip.number,'sanskrit'),clip.number+' changes only declared spoken forms');
@@ -97,7 +119,36 @@ const {chromium}=require('playwright');
     await page.locator('#study-back').click();
    }
   }
+  await page.selectOption('#reading-picker','3');
+  for(const [width,height] of [[390,844],[320,568],[844,390],[1440,900]]){
+   await page.setViewportSize({width,height});
+   const geometry=await page.evaluate(()=>{
+    const panel=document.querySelector('#screen-read .recitation-panel'),card=panel.closest('.reading-card'),art=card.querySelector('.reading-art'),text=card.querySelector('.reading-text'),copy=card.querySelector('.reading-copy');
+    const p=panel.getBoundingClientRect(),c=card.getBoundingClientRect(),a=art.getBoundingClientRect();
+    return {absolute:getComputedStyle(panel).position==='absolute',right:c.right-p.right,top:p.top-c.top,insideArtwork:p.bottom<=a.bottom,copyHeight:copy.clientHeight,copyInset:copy.getBoundingClientRect().top-text.getBoundingClientRect().top};
+   });
+   assert(geometry.absolute&&geometry.right>=0&&geometry.right<=15&&geometry.top>=0&&geometry.top<=15,'Toolbar sits at card top right');
+   assert(geometry.insideArtwork&&geometry.copyInset<=26&&geometry.copyHeight>=70,'Controls leave the reading text area available');
+   await openOptions();
+   const popup=await page.locator('#screen-read .recitation-settings').evaluate(el=>{
+    const r=el.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,onTop:!!document.elementFromPoint(r.x+20,r.y+20)?.closest('.recitation-settings')};
+   });
+   assert(popup.x>=10&&popup.y>=10&&popup.right<=width-10&&popup.bottom<=height-10&&popup.onTop,'Expanded controls fit on screen and escape card clipping');
+   await page.keyboard.press('Escape');
+   assert.equal(await page.locator('#screen-read .recitation-toggle').getAttribute('aria-expanded'),'false');
+   assert(await page.locator('#screen-read .recitation-toggle').evaluate(el=>el===document.activeElement),'Escape restores keyboard focus');
+   await openOptions();await page.locator('#hdr-time').click();
+   assert(!(await page.locator('#screen-read .recitation-settings').isVisible()),'Outside tap closes options');
+  }
+  await page.setViewportSize({width:320,height:568});
+  await page.selectOption('#reading-picker',String(timing.clips.length-1));
+  assert(await page.evaluate(()=>{
+   const toolbar=document.querySelector('#screen-read .recitation-main').getBoundingClientRect(),label=document.getElementById('reading-number').getBoundingClientRect();
+   return label.right+4<=toolbar.left;
+  }),'Closing invocation label does not overlap the compact controls on a narrow phone');
+  await page.setViewportSize({width:1440,height:900});
   await page.selectOption('#reading-picker','1');
+  await openOptions();
   const slider=page.locator('#screen-read .recitation-speed');
   for(const value of ['0.25','1','0.75']){
    await slider.fill(value);await slider.dispatchEvent('input');
@@ -131,6 +182,7 @@ const {chromium}=require('playwright');
   assert(await page.locator('#study-passage .pada-word').count()>44,'Closing invocation word study');
   assert((await page.locator('#study-passage').textContent()).includes('हरिः'));
   await page.locator('#study-back').click();
+  await openOptions();
   await page.locator('#screen-read .recitation-repeat').check();
   await page.locator('#screen-read .recitation-play').click();
   await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips.at(-1).end-.02);
@@ -138,6 +190,6 @@ const {chromium}=require('playwright');
   await page.evaluate(()=>navigate('home'));
   assert(await page.evaluate(()=>document.getElementById('recitation-audio').paused),'Leaving the reader pauses playback');
   assert.deepEqual(errors,[]);assert.deepEqual(requests,[],'Fully offline, no external resources requested');
-  console.log('PASS: 36 recitations, embedded audio, speeds, boundaries, repeat, continuation, study view, mobile layouts, offline operation');
+  console.log('PASS: 36 recitations, embedded audio, speeds, boundaries, repeat, continuation, study view, compact responsive controls, original offline fonts, offline operation');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exit(1)});

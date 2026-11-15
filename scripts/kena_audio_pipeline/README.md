@@ -20,13 +20,13 @@ python3 scripts/kena_audio_pipeline/pipeline.py replay --check --browser-test
 
 Playwright must be available to Node, as for the repository's other browser tests. `CHROME_PATH` can select the Chrome executable. The browser test checks the published edition after confirming that the generated candidate is byte-for-byte identical.
 
-The lightweight, already-published build step remains available independently:
+The lightweight build step remains available independently:
 
 ```sh
 python3 scripts/build_kena_audio.py
 ```
 
-That reads the reviewed `docs/kena-audio-timing.json` and writes the main audio HTML. Optional `--timing-file` and `--output` arguments let the pipeline build a candidate separately. Follow `AGENTS.md` before changing published files or publishing.
+That reads the reviewed `docs/kena-audio-timing.json` and writes the main audio HTML. Optional `--timing-file` and `--output` arguments let the pipeline build a candidate separately. The builder also embeds the original fonts and their licenses from `assets/kena_audio/fonts`, checking their hashes against that directory’s manifest. No online font requests are needed. The player sources implement the compact artwork toolbar and expandable options. Follow `AGENTS.md` before changing published files or publishing.
 
 ## What the pipeline does
 
@@ -37,7 +37,7 @@ That reads the reviewed `docs/kena-audio-timing.json` and writes the main audio 
 5. **Review invocations.** The opening mantra's text, grammatical word division, English rendering, and pause ranges were assembled separately. The repeated closing mantra and Hariḥ Om were confirmed from the ending and aligned in three windows, starting from the saved recording-specific anchor. These anchors and the opening text are preserved, rather than silently regenerated.
 6. **Measure pauses.** The decoded audio is measured in 20 ms RMS frames at −18 dB. Up to five transient frames are bridged, twice. Quiet regions lasting at least 0.38 seconds are candidates for verse boundaries; regions at least 0.60 seconds long provide major phrase breaks. Each verse cut uses the closest candidate midpoint within −1.5/+2.5 seconds of its aligned ending. A missing candidate stops the run for review.
 7. **Review, assemble, and build.** Automatic word timings propose the first layout; they are not authoritative for phrase wording or internal breaks. `checkpoints/reviewed_recitation.json` supplies the recording-specific Sanskrit/IAST phrases and their reviewed boundaries. It corrects shifted words, restores pausal forms, and uses `।` / `|` at internal pauses and `॥` / `||` at section ends, as requested by the user. For example, 1.3 has `नो मनो न विद्मः ।`, and its next phrase includes `यथैतदनुशिष्यात्`. Each difference from the source is explicitly declared in paired Sanskrit/IAST replacements. The runner rejects undeclared text changes, missing words, ambiguous replacements, gaps, misplaced markers, or a changed proposed verse boundary needing fresh review. It then adds both invocations and embeds the original Opus bytes and existing artwork. Study retains the audited grammatical pada-viccheda; the extra unrecited Om at verse 1.1 is moved to the opening invocation in this edition only.
-8. **Validate.** The replay compares timing data and HTML hashes. `tests/kena_audio.cjs` checks all sections, all 34 audited pada sequences, only declared source-text changes, paired pause markers, audio identity, speed limits/default, verse stopping, repeat, continuation, mobile layouts, and blocked-network playback.
+8. **Validate.** The replay compares timing data and HTML hashes. `tests/kena_audio.cjs` checks all sections, all 34 audited pada sequences, only declared source-text changes, paired pause markers, audio identity, speed limits/default, verse stopping, repeat, continuation, mobile layouts, compact and expanded control positioning, original font loading, and blocked-network playback.
 
 Phrase-sized unprompted recognition checks were used to review word grouping and spoken forms, with Sanskrit editorial review and the user’s correction for 1.3. Those recognizer outputs contain errors and are never copied directly as Sanskrit. Accepted text is the explicit recording-specific review layer, not an unreviewed recognition result.
 

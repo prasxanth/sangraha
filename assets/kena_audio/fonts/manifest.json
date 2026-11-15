@@ -1,0 +1,197 @@
+{
+  "stylesheetSource": "https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=DM+Mono:wght@300;400&display=swap",
+  "assets": {
+    "dm_mono_3a8d71fce7.woff2": {
+      "source": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvrGyEY2tbYf-Vlh3uA.woff2",
+      "sha256": "2dd0183d075ee3661bfbd5bba105b66f6b01732d095d684dd6543d572e07c1b1",
+      "family": "DM Mono",
+      "bytes": 5696
+    },
+    "dm_mono_3307f924d6.woff2": {
+      "source": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvrGyEYOtbYf-Vlg.woff2",
+      "sha256": "3062236ef9fbd488feca3aee905e9b1846f2f2f89e55d5eae650fa0fd79eeae9",
+      "family": "DM Mono",
+      "bytes": 8632
+    },
+    "dm_mono_53a90e281b.woff2": {
+      "source": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthSQBK6PYK3EXw.woff2",
+      "sha256": "7f8712cbbd64135f9e74a527475a97cd8c5a49d8e0a1de7a65f8e2c30c5214d9",
+      "family": "DM Mono",
+      "bytes": 5700
+    },
+    "dm_mono_cd6ed52481.woff2": {
+      "source": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBK6PYK0.woff2",
+      "sha256": "fd7521f3531a5ccfc655b25c4f22e9871df3ec141ad79bb27fde20d0df347b6d",
+      "family": "DM Mono",
+      "bytes": 8688
+    },
+    "nunito_66cf9f0cd1.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXX3I6Li01BKofIMNaORs7nczIHNHI.woff2",
+      "sha256": "e0c13ae6635f4afa282736c472f9f81acad1a6136706fbaafe53a681395628dc",
+      "family": "Nunito",
+      "bytes": 31464
+    },
+    "nunito_6712cb5122.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXX3I6Li01BKofIMNaHRs7nczIHNHI.woff2",
+      "sha256": "db9ce539bc6c7c10104b7290976e2e32084460c63b3156c58bbdb7670ed3e04b",
+      "family": "Nunito",
+      "bytes": 22944
+    },
+    "nunito_e9e731bbec.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXX3I6Li01BKofIMNaMRs7nczIHNHI.woff2",
+      "sha256": "0ab53d938d77750980a72981d145ab9f9992c22e34481988031b96c116fa93d9",
+      "family": "Nunito",
+      "bytes": 14772
+    },
+    "nunito_473d4db65b.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXX3I6Li01BKofIMNaNRs7nczIHNHI.woff2",
+      "sha256": "53d1ee66575cebe7a441ddfcfd5cacfdd757717011928bf05e9bbf7253f7a78f",
+      "family": "Nunito",
+      "bytes": 39016
+    },
+    "nunito_b2b539d389.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXX3I6Li01BKofIMNaDRs7nczIH.woff2",
+      "sha256": "60ad29f2b640800bcd6a5bf81b4583a41de31b8f5153f31e5c9894430e749a8a",
+      "family": "Nunito",
+      "bytes": 41744
+    },
+    "nunito_d8992a5338.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXV3I6Li01BKofIOOaBTMnFcQIG.woff2",
+      "sha256": "2d06f2c340ecb52c55153ec56093dc70b167699d7206246570f8ad4800190825",
+      "family": "Nunito",
+      "bytes": 28908
+    },
+    "nunito_73a6836349.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXV3I6Li01BKofIMeaBTMnFcQIG.woff2",
+      "sha256": "b63651df977d08650ff2e598a3979a490f114b59353605e091dd3fdb530f530e",
+      "family": "Nunito",
+      "bytes": 20780
+    },
+    "nunito_59c4439e43.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXV3I6Li01BKofIOuaBTMnFcQIG.woff2",
+      "sha256": "d107f72673f443b440185eea74262d7aecbe8fb70150e397334e2ab202c5d301",
+      "family": "Nunito",
+      "bytes": 13040
+    },
+    "nunito_d95b7307bf.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXV3I6Li01BKofIO-aBTMnFcQIG.woff2",
+      "sha256": "511ce967375fd2d924483d798f1086a533259fc675181f62944ec1176fe8786d",
+      "family": "Nunito",
+      "bytes": 35464
+    },
+    "nunito_dbc43460b8.woff2": {
+      "source": "https://fonts.gstatic.com/s/nunito/v32/XRXV3I6Li01BKofINeaBTMnFcQ.woff2",
+      "sha256": "20fc9b6fc618e7c3c68d3ac750a2a5dfbceb8521675458d2cea580b5693e4798",
+      "family": "Nunito",
+      "bytes": 39152
+    },
+    "playfair_display_8850c1292d.woff2": {
+      "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFkD-vYSZviVYUb_rj3ij__anPXDTnohkk7yRZrPJ-M.woff2",
+      "sha256": "baa0a049708f94c756135c0adc33edf11c10dd6c539436d511c2c666a7d0ee63",
+      "family": "Playfair Display",
+      "bytes": 23352
+    },
+    "playfair_display_31cf398692.woff2": {
+      "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFkD-vYSZviVYUb_rj3ij__anPXDTnojUk7yRZrPJ-M.woff2",
+      "sha256": "35a2bab58d032302776e37f54b9ce932bb07fa3139751053a374ba54f1b494f9",
+      "family": "Playfair Display",
+      "bytes": 9548
+    },
+    "playfair_display_7bc0ec665e.woff2": {
+      "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFkD-vYSZviVYUb_rj3ij__anPXDTnojEk7yRZrPJ-M.woff2",
+      "sha256": "4d6a56168573c731f483ecfbaa468d38a674be49335160476bfa1eaf7c399fbb",
+      "family": "Playfair Display",
+      "bytes": 23332
+    },
+    "playfair_display_79b02f847a.woff2": {
+      "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFkD-vYSZviVYUb_rj3ij__anPXDTnogkk7yRZrPA.woff2",
+      "sha256": "c68530044e7c4ce6cd3c1c239d0a93be71af53821574714f83e1380d8b393d14",
+      "family": "Playfair Display",
+      "bytes": 38888
+    },
+    "playfair_display_2dc1871151.woff2": {
+      "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgEM86xRbPQ.woff2",
+      "sha256": "d7f9db9b1034978ebebdf7312aa4aee55dff3ef6039e7ff71413780bd4a05558",
+      "family": "Playfair Display",
+      "bytes": 21144
+    },
+    "playfair_display_6a8efa5808.woff2": {
+      "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgEM86xRbPQ.woff2",
+      "sha256": "8fa67d5f0ab2a1d0b924729a0411a069b384d7a236edd96a6767ef342a6d048f",
+      "family": "Playfair Display",
+      "bytes": 9056
+    },
+    "playfair_display_0d765915e5.woff2": {
+      "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgEM86xRbPQ.woff2",
+      "sha256": "5628567856d60d714e7a35bcac9e3de08b336d63b12138f61b970990a1ee9547",
+      "family": "Playfair Display",
+      "bytes": 20980
+    },
+    "playfair_display_adf7264998.woff2": {
+      "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2",
+      "sha256": "5d91eb5d522a03081946c44c8ca17c902230dfed5f0f9b5014262135d47b15b2",
+      "family": "Playfair Display",
+      "bytes": 38460
+    },
+    "tiro_devanagari_sanskrit_efc02bff39.woff2": {
+      "source": "https://fonts.gstatic.com/s/tirodevanagarisanskrit/v7/MCoGzBbr09vVUgVBM8FWu_yZdZkhkg-I0nUlb59ZELsoqteT0LMNoSA.woff2",
+      "sha256": "5327f90568b79c37bb1601cfdc2168866673ca799ba05510b211007e0e208f4a",
+      "family": "Tiro Devanagari Sanskrit",
+      "bytes": 126180
+    },
+    "tiro_devanagari_sanskrit_f5c058b000.woff2": {
+      "source": "https://fonts.gstatic.com/s/tirodevanagarisanskrit/v7/MCoGzBbr09vVUgVBM8FWu_yZdZkhkg-I0nUlb59ZELsnqteT0LMNoSA.woff2",
+      "sha256": "16fc5e4ce9c470c5f8989fa1fe375a777e339f55f07006645b25231b2b8d1fef",
+      "family": "Tiro Devanagari Sanskrit",
+      "bytes": 8948
+    },
+    "tiro_devanagari_sanskrit_b687a92e80.woff2": {
+      "source": "https://fonts.gstatic.com/s/tirodevanagarisanskrit/v7/MCoGzBbr09vVUgVBM8FWu_yZdZkhkg-I0nUlb59ZELspqteT0LMN.woff2",
+      "sha256": "8e48fbb46317a8a5bc0af2132d2e51d4eeffb329795b0e079224065fabad17ac",
+      "family": "Tiro Devanagari Sanskrit",
+      "bytes": 20036
+    },
+    "tiro_devanagari_sanskrit_4574c6f4f4.woff2": {
+      "source": "https://fonts.gstatic.com/s/tirodevanagarisanskrit/v7/MCoAzBbr09vVUgVBM8FWu_yZdZkhkg-I0nUlb59ZFIsroNCx0oMM.woff2",
+      "sha256": "71db21efa3e6bd3282964058d5f41a2de6cdee5cb68150d1fef2146aee871e8e",
+      "family": "Tiro Devanagari Sanskrit",
+      "bytes": 119756
+    },
+    "tiro_devanagari_sanskrit_58918cce60.woff2": {
+      "source": "https://fonts.gstatic.com/s/tirodevanagarisanskrit/v7/MCoAzBbr09vVUgVBM8FWu_yZdZkhkg-I0nUlb59ZG4sroNCx0oMM.woff2",
+      "sha256": "4f82b3c84c1a7d4caf86825455990779d71e7f9b2502497f064811cc206f8adb",
+      "family": "Tiro Devanagari Sanskrit",
+      "bytes": 8960
+    },
+    "tiro_devanagari_sanskrit_0f8e57c536.woff2": {
+      "source": "https://fonts.gstatic.com/s/tirodevanagarisanskrit/v7/MCoAzBbr09vVUgVBM8FWu_yZdZkhkg-I0nUlb59ZFYsroNCx0g.woff2",
+      "sha256": "185588347e6b85745970ebd654f5be7cc02860e35df0ef23c40b71cf8063b2e5",
+      "family": "Tiro Devanagari Sanskrit",
+      "bytes": 19768
+    }
+  },
+  "stylesheetSha256": "ac99e018b1d109496e496d443c529654e30057b6b8e338e0bea4793339c44e65",
+  "licenses": {
+    "dmmono_OFL.txt": {
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/OFL.txt",
+      "sha256": "f5898de81851415b71431c1a8ea527c88a4e79caeb23936483428d2e911af40c",
+      "sourceSha256": "2bada5ea45c3c63b7f1ea1f88ce9672c9e4f0c42b2c3b7378949084fe55a3066"
+    },
+    "nunito_OFL.txt": {
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/nunito/OFL.txt",
+      "sha256": "ee9491ad3ea5d390878695bd6cce49beb3cacd5c4312f8ab574b541e9f7afa21",
+      "sourceSha256": "580df76c95a1ec5ab878ceb25bb3d85c6a076804e9c970c8c6972aea775fdf65"
+    },
+    "playfairdisplay_OFL.txt": {
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/OFL.txt",
+      "sha256": "0bb2b43ffd21233963b5d0c0eb6f1abffa776ec53c56131b5818708f2730ffd6",
+      "sourceSha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+    },
+    "tirodevanagarisanskrit_OFL.txt": {
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/tirodevanagarisanskrit/OFL.txt",
+      "sha256": "536a5cc62e475fea235a4c81c1094d1b7235c260530ce2d05039115f9323aea5",
+      "sourceSha256": "2ed6051706542c5d6d96480318152b17900bb6d4dbadb11d7d5d6464d8b3e0dd"
+    }
+  },
+  "licenseTextNormalization": "LF line endings and trailing whitespace removed; license wording preserved."
+}

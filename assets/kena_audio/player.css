@@ -1,19 +1,31 @@
-.recitation-panel { flex:none; padding:14px; margin-bottom:18px; border:1px solid var(--border2); border-radius:8px; background:var(--bg3); }
-.recitation-heading { font:11px var(--mono); color:var(--gold2); margin-bottom:10px; }
-.recitation-heading { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px; }
-.recitation-marker-key { color:var(--text3); font-size:9px; white-space:nowrap; }
-.recitation-actions { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-.recitation-time { font:11px var(--mono); color:var(--text2); margin-left:auto; }
+/* The reading toolbar overlays the artwork; it occupies no text-column space. */
+.reading-card { position:relative; }
+.recitation-panel { position:relative; z-index:5; flex:none; width:max-content; max-width:100%; margin:0 0 12px auto; }
+.reading-card > .recitation-panel { position:absolute; top:12px; right:12px; margin:0; }
+.recitation-main { display:flex; gap:4px; padding:2px; border:1px solid var(--border2); border-radius:9px; background:#07101def; box-shadow:0 3px 14px #0005; }
+.recitation-main .deck-button { display:inline-flex; justify-content:center; align-items:center; min-height:44px; height:44px; padding:0 10px; margin:0; font:11px var(--mono); border-radius:6px; }
+.recitation-main svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
+.recitation-main .recitation-more-icon { fill:currentColor; stroke:none; }
+.recitation-main .recitation-play { min-width:62px; }
+.recitation-main .recitation-restart,.recitation-main .recitation-toggle { width:44px; padding:0; font-size:23px; line-height:1; }
+.recitation-main .recitation-toggle[aria-expanded=true] { background:var(--bg5); border-color:var(--gold2); }
+.recitation-settings { position:fixed; z-index:50; box-sizing:border-box; overflow-y:auto; padding:14px; border:1px solid var(--border2); border-radius:10px; background:#0b1729; box-shadow:0 10px 35px #0009; overscroll-behavior:contain; }
+.recitation-settings[hidden] { display:none; }
+.recitation-heading { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px; font:11px var(--mono); color:var(--gold2); margin-bottom:10px; }
+.recitation-marker-key { color:var(--text3); font-size:10px; margin:10px 0 0; }
+.recitation-time { font:10px var(--mono); color:var(--text2); }
 .recitation-progress { display:flex; flex-direction:column; gap:3px; margin:10px 0; font:10px var(--mono); color:var(--text3); }
 .recitation-speed-label { display:flex; align-items:center; gap:10px; font:12px var(--mono); }
 .recitation-speed-label input { flex:1; min-width:60px; }
 .recitation-rate { min-width:5ch; text-align:right; }
-.recitation-panel input[type=range] { width:100%; accent-color:#8bbaff; min-height:30px; cursor:pointer; }
-.recitation-options { display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:9px; font-size:12px; }
-.recitation-options label { display:flex; align-items:center; gap:6px; min-height:30px; }
-.recitation-panel button { min-height:44px; }
+.recitation-settings input[type=range] { width:100%; accent-color:#8bbaff; min-height:30px; cursor:pointer; }
+.recitation-options { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:9px; font-size:12px; }
+.recitation-options label { display:flex; align-items:center; gap:6px; min-height:36px; }
 .recitation-line { display:block; border-radius:4px; transition:background .15s; }
 .recitation-line.reciting { background:#3983ff30; box-shadow:inset 3px 0 #8bbaff; }
 .audio-notice { color:var(--text3); font-size:12px; line-height:1.6; margin:10px 0; }
-#audio-status { font-size:12px; color:var(--text2); padding:3px 12px; }
+/* Announce routine playback status without consuming a row above the reader. */
+#audio-status { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+#audio-status.audio-error { position:static; width:auto; height:auto; padding:6px 12px; clip-path:none; white-space:normal; font-size:12px; color:var(--text); }
 #audio-status:empty { display:none; }
+@media(max-width:360px) { .reading-card > .recitation-panel { top:9px; right:9px; } }
