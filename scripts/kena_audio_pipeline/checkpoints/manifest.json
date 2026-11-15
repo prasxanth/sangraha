@@ -1,7 +1,7 @@
 {
   "sourceHtmlSha256": "d11d3d80d47e6f6151c6af61408ee33408366e65b111c1497a3950b184c2a301",
   "audioSha256": "6720a5ae8ae37fb158867c17421082fb2b6e5b05487c98ce3cfa711059adb7fb",
-  "htmlSha256": "fa94d3918282c7fbab2335931054277cfe5b7c79cf167cb599273461769171ae",
+  "htmlSha256": "49dd6883f80c196a9c716a6ec5cf09b1c9be81eb419f481aacf93981c49ead5b",
   "sourceUrl": "https://www.youtube.com/watch?v=4YirltXJXtA",
   "sampleRate": 16000,
   "channels": 1,
@@ -39,10 +39,12 @@
   "checkpointSha256": {
     "closing_alignment.json": "ddf6ba703077ef814a418aa369deb62d01ffed4a5e3518cbef11d0fcfaabc190",
     "opening_invocation.json": "facf21a56e4e7f391a6045dd4ab15843b080c90b15c750299c31534874312d97",
-    "metadata.json": "8c9736be45dd3e75bac98b146cc3ab3f8414443583525c811399b48fa579681e",
+    "metadata.json": "4c4b65ec56ba5ab62e54788f1678114be9f357f8eee3c6112c22a6a96ecb90e7",
     "source_verses.json": "0dba56dd91f2db86543d6aa175d85c32861d1766a92d5c111fe6ef32515f2fba",
     "verse_alignment.json": "1613fa4f4a2d51e1ef085acf90bdbc969832c1fad21eccfd50d46f6242fd011f",
-    "pauses.json": "ea610f212c6d137464cdec8947f203617ba29647776efa6ff09230c986569ab4"
+    "pauses.json": "ea610f212c6d137464cdec8947f203617ba29647776efa6ff09230c986569ab4",
+    "reviewed_recitation.json": "031a4c71c4490edc831c259810d028a4a607d7191f5a89a495aff03986c6a278",
+    "recitation_review_evidence.json": "29bd462aef273a4aec2da05566844550b4dbdff821e82ffaaa0d0973c5c175b4"
   },
   "timingFieldOrder": [
     "sourceHtmlSha256",
@@ -51,7 +53,9 @@
     "alignmentStatus",
     "clips",
     "boundaryMethod",
-    "notes"
+    "notes",
+    "recitationConvention",
+    "recitationTextSource"
   ],
   "pcmSha256": "5c32122f7ff1c2cd6cb4e0ff4fe0b4c04a716bd785c47860507e08bb622d6741",
   "alignmentEnvironment": {

@@ -1,0 +1,648 @@
+{
+  "purpose": "Unprompted phrase recognition probes used to review grouping. Transcriptions contain recognition errors and are not the Sanskrit source text.",
+  "model": "Systran/faster-whisper-tiny",
+  "settings": {
+    "language": "hi",
+    "beam_size": 3,
+    "temperature": 0,
+    "without_timestamps": true,
+    "word_timestamps": false,
+    "max_new_tokens": 128,
+    "condition_on_previous_text": false
+  },
+  "audioSha256": "6720a5ae8ae37fb158867c17421082fb2b6e5b05487c98ce3cfa711059adb7fb",
+  "probes": [
+    {
+      "number": "1.3",
+      "index": 0,
+      "start": 95.57,
+      "end": 101.07,
+      "transcript": " nata trata trata trata trata trata trata trata trata trata trata trata",
+      "printed": "न तत्र चक्षुर्गच्छति न वाग्गच्छति"
+    },
+    {
+      "number": "1.3",
+      "index": 1,
+      "start": 101.07,
+      "end": 104.4,
+      "transcript": " No manona with maher",
+      "printed": "नो मनः । न विद्मो"
+    },
+    {
+      "number": "1.3",
+      "index": 2,
+      "start": 104.4,
+      "end": 109.58,
+      "transcript": " Na vidani mu yatahi tadanu cheshyaadep",
+      "printed": "न विजानीमो"
+    },
+    {
+      "number": "1.3",
+      "index": 3,
+      "start": 109.58,
+      "end": 115.86,
+      "transcript": " Annyadevatad vidita dathu av vidita dathi",
+      "printed": "यथैतदनुशिष्यात् । अन्यदेव तद्विदितादथो"
+    },
+    {
+      "number": "1.3",
+      "index": 4,
+      "start": 115.86,
+      "end": 123.61,
+      "transcript": " 1-2-3ma pur bethan 1-2-3na satsh bhya satsh bhya satsh bhya",
+      "printed": "अविदितादधि । इति शुश्रुम पूर्वेषां ये नस्तद्व्याचचक्षिरे ॥"
+    },
+    {
+      "number": "1.2",
+      "index": 0,
+      "start": 73.15,
+      "end": 78.72,
+      "transcript": " Swrottrasya Swrottrasya Swrottrasya Swrottrasya",
+      "printed": "श्रोत्रस्य श्रोत्रं मनसो मनो यद्"
+    },
+    {
+      "number": "1.2",
+      "index": 1,
+      "start": 78.72,
+      "end": 85.9,
+      "transcript": " Vatocha vatham saupraanasya prana.",
+      "printed": "वाचो ह वाचं स उ प्राणस्य प्राणः ।"
+    },
+    {
+      "number": "1.2",
+      "index": 2,
+      "start": 85.9,
+      "end": 89.4,
+      "transcript": " Kakturati mooch jadehira har",
+      "printed": "चक्षुषश्चक्षुरतिमुच्य"
+    },
+    {
+      "number": "1.2",
+      "index": 3,
+      "start": 89.4,
+      "end": 95.57,
+      "transcript": " Prethya Swal Lokad Amrita Bhavanti",
+      "printed": "धीराः प्रेत्यास्माल्लोकादमृता भवन्ति ॥"
+    },
+    {
+      "number": "1.7",
+      "index": 0,
+      "start": 167.19,
+      "end": 174.81,
+      "transcript": " yet trottre na na trottre na na trottre na strottre midam frutam",
+      "printed": "यच्छ्रोत्रेण न शृणोति येन श्रोत्रमिदं"
+    },
+    {
+      "number": "1.7",
+      "index": 1,
+      "start": 174.81,
+      "end": 182.36,
+      "transcript": " Tadebab Brahm Hatsang Bitthini Dam Yadidam Hupasate",
+      "printed": "श्रुतम् । तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥"
+    },
+    {
+      "number": "2.1",
+      "index": 0,
+      "start": 197.66,
+      "end": 202.5,
+      "transcript": " yedi mannyase sube de ti",
+      "printed": "यदि मन्यसे"
+    },
+    {
+      "number": "2.1",
+      "index": 1,
+      "start": 202.5,
+      "end": 210.11,
+      "transcript": " Debt brahmeva pilunang tang bheet tab brahmanoru pang",
+      "printed": "सुवेदेति दभ्रमेवापि नूनं त्वं वेत्थ ब्रह्मणो"
+    },
+    {
+      "number": "2.1",
+      "index": 2,
+      "start": 210.11,
+      "end": 215.04,
+      "transcript": " Yadash yadash, yadash, yadash, yadash, yadash, yadash.",
+      "printed": "रूपम् । यदस्य त्वं यदस्य"
+    },
+    {
+      "number": "2.1",
+      "index": 3,
+      "start": 215.04,
+      "end": 221.59,
+      "transcript": " ATHANU NIMAM SYAM EVATE MENNYE BEDE TAM",
+      "printed": "देवेष्वथ नु मीमाँस्यमेव ते मन्ये विदितम् ॥"
+    },
+    {
+      "number": "3.1",
+      "index": 0,
+      "start": 292.37,
+      "end": 297.81,
+      "transcript": " Brahmin Mahadev Dev Dev Dev Dev Dev Dev Dev Dev Dev",
+      "printed": "ब्रह्म ह देवेभ्यो"
+    },
+    {
+      "number": "3.1",
+      "index": 1,
+      "start": 297.81,
+      "end": 304.87,
+      "transcript": " Satya Hab Bremhanu, Vidya Jay, Deva, Amahi Janta.",
+      "printed": "विजिग्ये तस्य ह ब्रह्मणो विजये देवा अमहीयन्त । त"
+    },
+    {
+      "number": "3.1",
+      "index": 2,
+      "start": 304.87,
+      "end": 311.22,
+      "transcript": " taikshantas maka mevadam bidadaha",
+      "printed": "ऐक्षन्तास्माकमेवायं"
+    },
+    {
+      "number": "3.1",
+      "index": 3,
+      "start": 311.22,
+      "end": 316.25,
+      "transcript": " Asma kami bajam mahi mati",
+      "printed": "विजयोऽस्माकमेवायं महिमेति ॥"
+    },
+    {
+      "number": "3.3",
+      "index": 0,
+      "start": 329.48,
+      "end": 336.66,
+      "transcript": " Take dream abruvand jata veda eta bidhadi khip",
+      "printed": "तेऽग्निमब्रुवञ्जातवेद"
+    },
+    {
+      "number": "3.3",
+      "index": 1,
+      "start": 336.66,
+      "end": 341.48,
+      "transcript": " Kime taj dhyakshami tijathevi",
+      "printed": "एतद्विजानीहि किमेतद्यक्षमिति तथेति ॥"
+    },
+    {
+      "number": "3.4",
+      "index": 0,
+      "start": 341.48,
+      "end": 352.8,
+      "transcript": " Sada bhyad bravat tamabhyavad adhyad. Poti shakt nirva, akham asli thyab bravita.",
+      "printed": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीत्यग्निर्वा"
+    },
+    {
+      "number": "3.4",
+      "index": 1,
+      "start": 352.8,
+      "end": 357.85,
+      "transcript": " Jata vedava akhamas piti",
+      "printed": "अहमस्मीत्यब्रवीज्जातवेदा वा अहमस्मीति ॥"
+    },
+    {
+      "number": "3.5",
+      "index": 0,
+      "start": 357.85,
+      "end": 362.58,
+      "transcript": " Tasmin, twajikim, vir, jamitheer.",
+      "printed": "तस्मिꣳस्त्वयि किं"
+    },
+    {
+      "number": "3.5",
+      "index": 1,
+      "start": 362.58,
+      "end": 369.87,
+      "transcript": " Apidam sarvam dhajeya indhya dedam prithyya methi",
+      "printed": "वीर्यमित्यपीदꣳ सर्वं दहेयं यदिदं पृथिव्यामिति ॥"
+    },
+    {
+      "number": "3.6",
+      "index": 0,
+      "start": 369.87,
+      "end": 375.58,
+      "transcript": " Satmai pranam nidhadha vayat adhda kithi",
+      "printed": "तस्मै तृणं निदधावेतद्दहेति ।"
+    },
+    {
+      "number": "3.6",
+      "index": 1,
+      "start": 375.58,
+      "end": 382.76,
+      "transcript": " ta dupa playja ja sarva dabe na ta nna sa sa ka da dhum",
+      "printed": "तदुपप्रेयाय सर्वजवेन तन्न शशाक"
+    },
+    {
+      "number": "3.6",
+      "index": 2,
+      "start": 382.76,
+      "end": 386.42,
+      "transcript": " Sataka je bha nibha brite",
+      "printed": "दग्धुं स तत एव"
+    },
+    {
+      "number": "3.6",
+      "index": 3,
+      "start": 386.42,
+      "end": 393.56,
+      "transcript": " Neeta Dasakam Bikdya Tuliya Deetar Daksam Biti",
+      "printed": "निववृते नैतदशकं विज्ञातुं यदेतद्यक्षमिति ॥"
+    },
+    {
+      "number": "3.7",
+      "index": 0,
+      "start": 393.56,
+      "end": 400.58,
+      "transcript": " Atha vayu madhru bhan vayabetab bidani ki",
+      "printed": "अथ वायुमब्रुवन्वायवेतद्विजानीहि"
+    },
+    {
+      "number": "3.7",
+      "index": 1,
+      "start": 400.58,
+      "end": 405.48,
+      "transcript": " kime taj jakt shaniti taj hedi",
+      "printed": "किमेतद्यक्षमिति तथेति ॥"
+    },
+    {
+      "number": "3.8",
+      "index": 0,
+      "start": 405.48,
+      "end": 416.7,
+      "transcript": " Tada bhyad dravaksam adhyavada te. Pusi te vayurva akham asmi te bravide.",
+      "printed": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीति वायुर्वा"
+    },
+    {
+      "number": "3.8",
+      "index": 1,
+      "start": 416.7,
+      "end": 422.19,
+      "transcript": " Mata Ristwaba Acha Mas Mithi",
+      "printed": "अहमस्मीत्यब्रवीन्मातरिश्वा वा अहमस्मीति ॥"
+    },
+    {
+      "number": "3.9",
+      "index": 0,
+      "start": 422.19,
+      "end": 427.38,
+      "transcript": " Tatmimku vali kim viriya mithi",
+      "printed": "तस्मिँस्त्वयि किं"
+    },
+    {
+      "number": "3.9",
+      "index": 1,
+      "start": 427.38,
+      "end": 434.98,
+      "transcript": " Apidam sarva madadya yadidam prithyam mithy",
+      "printed": "वीर्यमित्यपीदँ सर्वमाददीय यदिदं पृथिव्यामिति ॥"
+    },
+    {
+      "number": "3.10",
+      "index": 0,
+      "start": 434.98,
+      "end": 441.74,
+      "transcript": " Satmai trinam nidadha veta dada dada veta veta",
+      "printed": "तस्मै तृणं"
+    },
+    {
+      "number": "3.10",
+      "index": 1,
+      "start": 441.74,
+      "end": 449.7,
+      "transcript": " Ta dupa praya ja tharba ja bheena tannash ja ka da tu",
+      "printed": "निदधावेतदादत्स्वेति तदुपप्रेयाय सर्वजवेन तन्न"
+    },
+    {
+      "number": "3.10",
+      "index": 2,
+      "start": 449.7,
+      "end": 453.6,
+      "transcript": " Satata je var nibha brite",
+      "printed": "शशाकादातुं स तत एव निववृते"
+    },
+    {
+      "number": "3.10",
+      "index": 3,
+      "start": 453.6,
+      "end": 460.93,
+      "transcript": " Naita daca kang bikya tuyya deetad jakshameti",
+      "printed": "नैतदशकं विज्ञातुं यदेतद्यक्षमिति ॥"
+    },
+    {
+      "number": "3.11",
+      "index": 0,
+      "start": 460.93,
+      "end": 474.0,
+      "transcript": " Athendra Mabhruvan Maghavan Nesat Vidari Khi Khi Khi Khi Khi Khi Khi Khi Khi Khi Khi",
+      "printed": "अथेन्द्रमब्रुवन्मघवन्नेतद्विजानीहि किमेतद्यक्षमिति तथेति"
+    },
+    {
+      "number": "3.11",
+      "index": 1,
+      "start": 474.0,
+      "end": 479.85,
+      "transcript": " Tada bhiad drava, tasma, tiru, dadhe.",
+      "printed": "तदभ्यद्रवत्तस्मात्तिरोदधे ॥"
+    },
+    {
+      "number": "3.12",
+      "index": 0,
+      "start": 479.85,
+      "end": 486.59,
+      "transcript": " Satash minni vakashif, triyama jagama",
+      "printed": "स तस्मिन्नेवाकाशे स्त्रियमाजगाम"
+    },
+    {
+      "number": "3.12",
+      "index": 1,
+      "start": 486.59,
+      "end": 492.45,
+      "transcript": " Baku thobhamanam mam khayma vatim",
+      "printed": "बहुशोभमानामुमाँ हैमवतीं"
+    },
+    {
+      "number": "3.12",
+      "index": 2,
+      "start": 492.45,
+      "end": 498.61,
+      "transcript": " Sanghoba chakimeta dhyakhrameti",
+      "printed": "ताँहोवाच किमेतद्यक्षमिति ॥"
+    },
+    {
+      "number": "4.1",
+      "index": 0,
+      "start": 498.61,
+      "end": 503.63,
+      "transcript": " Habram hiti huva te.",
+      "printed": "सा ब्रह्मेति होवाच"
+    },
+    {
+      "number": "4.1",
+      "index": 1,
+      "start": 503.63,
+      "end": 510.62,
+      "transcript": " Brahma nuva eeta vida je mahi jad dhwamiti",
+      "printed": "ब्रह्मणो वा एतद्विजये"
+    },
+    {
+      "number": "4.1",
+      "index": 2,
+      "start": 510.62,
+      "end": 517.0,
+      "transcript": " Tato hai ba vidan chakarab bramhe bhi",
+      "printed": "महीयध्वमिति ततो हैव विदाञ्चकार ब्रह्मेति ॥"
+    },
+    {
+      "number": "4.2",
+      "index": 0,
+      "start": 517.0,
+      "end": 530.87,
+      "transcript": " tasma dva ete deva atitara libe Anyan devaan yada jnirva ju rindraha",
+      "printed": "तस्माद्वा एते देवा"
+    },
+    {
+      "number": "4.2",
+      "index": 1,
+      "start": 530.87,
+      "end": 536.76,
+      "transcript": " te khenan ne de tam pas par suhu",
+      "printed": "अतितरामिवान्यान्देवान्यदग्निर्वायुरिन्द्रस्ते ह्येनन्नेदिष्ठं"
+    },
+    {
+      "number": "4.2",
+      "index": 2,
+      "start": 536.76,
+      "end": 543.94,
+      "transcript": " te khenat ratham bidhan ka karab bhamheteep",
+      "printed": "पस्पर्शुस्ते ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥"
+    },
+    {
+      "number": "4.3",
+      "index": 0,
+      "start": 543.94,
+      "end": 551.12,
+      "transcript": " tatsma dva indru titharami vanyan devanep",
+      "printed": "तस्माद्वा"
+    },
+    {
+      "number": "4.3",
+      "index": 1,
+      "start": 551.12,
+      "end": 556.26,
+      "transcript": " Sajkheenan ni desh thang bha parhysham",
+      "printed": "इन्द्रोऽतितरामिवान्यान्देवान्स ह्येनन्नेदिष्ठं पस्पर्श स"
+    },
+    {
+      "number": "4.3",
+      "index": 2,
+      "start": 556.26,
+      "end": 563.15,
+      "transcript": " Sajkheenat Prathamo Vidan Chakarab Brahmeti",
+      "printed": "ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥"
+    },
+    {
+      "number": "4.4",
+      "index": 0,
+      "start": 563.15,
+      "end": 571.76,
+      "transcript": " Satya itha adhesu yadhe ita vidjitu yad jyukadak",
+      "printed": "तस्यैष आदेशो यदेतद्विद्युतो"
+    },
+    {
+      "number": "4.4",
+      "index": 1,
+      "start": 571.76,
+      "end": 576.52,
+      "transcript": " ITINYA MI MIHADA",
+      "printed": "व्यद्युतदा३ इतीन् न्यमीमिषदा३"
+    },
+    {
+      "number": "4.4",
+      "index": 2,
+      "start": 576.52,
+      "end": 580.16,
+      "transcript": " Iti admi dai batang.",
+      "printed": "इत्यधिदैवतम् ॥"
+    },
+    {
+      "number": "4.5",
+      "index": 0,
+      "start": 580.16,
+      "end": 587.81,
+      "transcript": " Adhath, adhath, maya, dea, adhath, geth chati bata manaha",
+      "printed": "अथाध्यात्मं यदेतद्गच्छतीव च"
+    },
+    {
+      "number": "4.5",
+      "index": 1,
+      "start": 587.81,
+      "end": 595.89,
+      "transcript": " Anayana chayita dupa sparad chyabhi nansang kalpaha",
+      "printed": "मनोऽनेन चैतदुपस्मरत्यभीक्ष्णँ सङ्कल्पः ॥"
+    },
+    {
+      "number": "4.6",
+      "index": 0,
+      "start": 595.89,
+      "end": 603.55,
+      "transcript": " Tadhadvanan nama tadvananit yupa sitaumyam",
+      "printed": "तद्ध तद्वनं नाम तद्वनमित्युपासितव्यं"
+    },
+    {
+      "number": "4.6",
+      "index": 1,
+      "start": 603.55,
+      "end": 608.21,
+      "transcript": " Sahaja Eta Devang Veda",
+      "printed": "स य एतदेवं"
+    },
+    {
+      "number": "4.6",
+      "index": 2,
+      "start": 608.21,
+      "end": 615.89,
+      "transcript": " Admi hai nam karva ni buta ni sambhan sanki",
+      "printed": "वेदाभि हैनꣳ सर्वाणि भूतानि संवाञ्छन्ति ॥"
+    },
+    {
+      "number": "4.7",
+      "index": 0,
+      "start": 615.89,
+      "end": 620.28,
+      "transcript": " Upani khadam ho vupit",
+      "printed": "उपनिषदं भो"
+    },
+    {
+      "number": "4.7",
+      "index": 1,
+      "start": 620.28,
+      "end": 623.49,
+      "transcript": " Satak Upanishadim",
+      "printed": "ब्रूहीत्युक्ता त"
+    },
+    {
+      "number": "4.7",
+      "index": 2,
+      "start": 623.49,
+      "end": 630.6,
+      "transcript": " Brahmim vavata Upanishadam abhru methi",
+      "printed": "उपनिषद्ब्राह्मीं वाव त उपनिषदमब्रूमेति ॥"
+    },
+    {
+      "number": "4.8",
+      "index": 0,
+      "start": 630.6,
+      "end": 637.18,
+      "transcript": " 10- 10- 10- 10- 10- 10- 10- 10- 10- 10- 10- 10- 10-",
+      "printed": "तस्यै तपो दमः कर्मेति प्रतिष्ठा"
+    },
+    {
+      "number": "4.8",
+      "index": 1,
+      "start": 637.18,
+      "end": 643.8,
+      "transcript": " Vedas sarvanga ni satsyama jatana",
+      "printed": "वेदाः सर्वाङ्गानि सत्यमायतनम् ॥"
+    },
+    {
+      "number": "4.9",
+      "index": 0,
+      "start": 643.8,
+      "end": 652.47,
+      "transcript": " Yuba eta nevan beda pahat yapapmanam",
+      "printed": "यो वा एतामेवं वेदापहत्य"
+    },
+    {
+      "number": "4.9",
+      "index": 1,
+      "start": 652.47,
+      "end": 660.06,
+      "transcript": " Anand tev, twerb tev, lokev, yehyhyhyhyhyhyhyhyhyhyhy",
+      "printed": "पाप्मानमनन्ते स्वर्गे लोके ज्येये प्रतितिष्ठति"
+    },
+    {
+      "number": "4.9",
+      "index": 2,
+      "start": 660.06,
+      "end": 663.22,
+      "transcript": " Pratit, Pratit, Pratit.",
+      "printed": "प्रतितिष्ठति ॥"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 0,
+      "start": 663.22,
+      "end": 666.59,
+      "transcript": " Oh!",
+      "printed": "ॐ ।"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 1,
+      "start": 666.59,
+      "end": 671.46,
+      "transcript": " Appya jantu mamangani",
+      "printed": "आप्यायन्तु ममाङ्गानि ।"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 2,
+      "start": 671.46,
+      "end": 680.6,
+      "transcript": " Vaat prana saksu strotra matho balam indriya ni takhar vani",
+      "printed": "वाक्प्राणश्चक्षुः श्रोत्रमथो बलमिन्द्रियाणि च सर्वाणि ।"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 3,
+      "start": 680.6,
+      "end": 685.26,
+      "transcript": " Sarvam Ramha Upanishadam.",
+      "printed": "सर्वं ।"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 4,
+      "start": 685.26,
+      "end": 693.59,
+      "transcript": " Maham Brahmanira kurhyam Maham Brahmanira karudya",
+      "printed": "ब्रह्मौपनिषदम् माहं ब्रह्म निराकुर्यां मा मा ब्रह्म निराकरोत् ।"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 5,
+      "start": 693.59,
+      "end": 700.24,
+      "transcript": " Anira karanamas vanira karanam me as tu",
+      "printed": "अनिराकरणमस्त्वनिराकरणं ।"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 6,
+      "start": 700.24,
+      "end": 708.28,
+      "transcript": " Tadash Manilirateja Upanitha Sudharma K.Bagi Sanghu",
+      "printed": "मेऽस्तु तदात्मनि निरते य उपनिषत्सु धर्मास्ते मयि सन्तु ।"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 7,
+      "start": 708.28,
+      "end": 711.38,
+      "transcript": " K-E-B-I-G-Thun-Du",
+      "printed": "ते मयि सन्तु ।"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 8,
+      "start": 711.38,
+      "end": 718.25,
+      "transcript": " Oh, chan, chan, chan, chan, chan, chan, chan, chan, chan.",
+      "printed": "ॐ शान्तिः शान्तिः शान्तिः ।"
+    },
+    {
+      "number": "closing-shanti",
+      "index": 9,
+      "start": 718.25,
+      "end": 725.2675,
+      "transcript": " Harivi U.",
+      "printed": "हरिः ॐ ॥"
+    }
+  ]
+}

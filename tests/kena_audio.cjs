@@ -4,6 +4,9 @@ const {chromium}=require('playwright');
 (async()=>{
  const timing=JSON.parse(fs.readFileSync('docs/kena-audio-timing.json'));
  assert.equal(timing.clips.length,36);
+ const review=require('../scripts/kena_audio_pipeline/checkpoints/reviewed_recitation.json');
+ const reviewByNumber=Object.fromEntries(review.clips.map(c=>[c.number,c]));
+ const comparable=t=>t.replace(/[\s।॥|]/gu,'');
  const expected=['shanti',...require('./fixtures/kena_individual_mantras.json').map(v=>v.number),'closing-shanti'];
  assert.deepEqual(timing.clips.map(c=>c.number),expected);
  assert.equal(timing.alignmentStatus,'aligned');
@@ -13,12 +16,43 @@ const {chromium}=require('playwright');
   assert(c.start>=0&&c.end>c.start&&c.end<=725.268,c.number+' valid bounds');
   if(i)assert(c.start>=timing.clips[i-1].end-.001,c.number+' nonoverlap');
   assert(c.phrases.length>0);
+  assert.deepEqual(c.phrases,reviewByNumber[c.number].phrases,c.number+' keeps reviewed recitation breaks and wording');
+  c.phrases.forEach((p,j)=>{
+   const last=j===c.phrases.length-1;
+   assert(p.sanskrit.endsWith(last?' ॥':' ।'),c.number+' Sanskrit marker follows the recording pause');
+   assert(!/[।॥]/u.test(p.sanskrit.slice(0,-1)),c.number+' has no inherited punctuation inside a spoken phrase');
+   const marker=last?'||':'|';assert(p.iast.endsWith(' '+marker));
+   assert(!p.iast.slice(0,-marker.length).includes('|'),c.number+' IAST marker matches Sanskrit');
+  });
   for(const p of c.phrases)assert(p.start>=c.start&&p.end<=c.end&&p.end>p.start&&p.sanskrit&&p.iast,c.number+' phrase');
  }
  const source=fs.readFileSync('kena_upanishad.html');
- const sourceVerses={};
+ const sourceVerses={},sourceIast={};
  for(const match of source.toString().matchAll(/<div class="class-item" data-mantra="([^"]+)">[\s\S]*?<div class="(?:v|m)-sanskrit"[^>]*>([\s\S]*?)<\/div>/g))sourceVerses[match[1]]=match[2].replace(/<[^>]*>/g,'').replace(/&nbsp;|&#160;/g,' ');
+ for(const match of source.toString().matchAll(/<div class="class-item" data-mantra="([^"]+)">[\s\S]*?<div class="(?:v|m)-translit"[^>]*>([\s\S]*?)<\/div>/g))sourceIast[match[1]]=match[2].replace(/<[^>]*>/g,'').replace(/&nbsp;|&#160;/g,' ');
  assert.equal(Object.keys(sourceVerses).length,34);
+ assert.equal(Object.keys(sourceIast).length,34);
+ function expectedRecitation(number,field){
+  const sourceText=field==='sanskrit'?sourceVerses[number]:sourceIast[number];
+  let text=comparable(number==='1.1'?sourceText.replace(/^ॐ\s*|^oṃ\s*/u,''):sourceText);
+  for(const change of reviewByNumber[number].sourceReplacements){
+   const before=comparable(change[field].before),after=comparable(change[field].after);
+   assert.equal(text.split(before).length-1,1,number+' declares each spoken-form change exactly once');
+   text=text.replace(before,after);
+  }
+  return text;
+ }
+ const v13=timing.clips.find(c=>c.number==='1.3');
+ assert.deepEqual(v13.phrases.map(p=>p.sanskrit),[
+  'न तत्र चक्षुर्गच्छति न वाग्गच्छति ।','नो मनो न विद्मः ।','न विजानीमो यथैतदनुशिष्यात् ।',
+  'अन्यदेव तद्विदितादथो अविदितादधि ।','इति शुश्रुम पूर्वेषां ये नस्तद्व्याचचक्षिरे ॥'
+ ]);
+ assert.equal(v13.phrases[1].iast,'no mano na vidmaḥ |');
+ assert.equal(timing.clips.find(c=>c.number==='1.2').phrases[2].start,84.58,'1.2 includes the whole cakṣuṣaḥ phrase');
+ const measuredPauses=require('../scripts/kena_audio_pipeline/checkpoints/pauses.json');
+ for(const c of timing.clips)for(const p of c.phrases.slice(0,-1)){
+  assert(measuredPauses.some(gap=>gap.start<=p.end&&p.end<=gap.end),c.number+' internal marker is placed within a measured audio pause');
+ }
  assert.equal(crypto.createHash('sha256').update(source).digest('hex'),timing.sourceHtmlSha256,'Original HTML unchanged');
  const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
  try{
@@ -52,10 +86,10 @@ const {chromium}=require('playwright');
    assert.equal(await page.locator('#reading-copy .recitation-line').count(),clip.phrases.length*2);
    assert.equal(await page.locator('#screen-read .recitation-panel').count(),1);
    if(clip.number.includes('.')){
-    const sourceVerse=sourceVerses[clip.number];
     const actual=await page.locator('#reading-copy .v-sanskrit,#reading-copy .m-sanskrit').textContent();
-    const normalize=t=>t.replace(/[\sॐ।॥]/gu,'');
-    assert.equal(normalize(actual),normalize(sourceVerse),clip.number+' preserves every Sanskrit character');
+    assert.equal(comparable(actual),expectedRecitation(clip.number,'sanskrit'),clip.number+' changes only declared spoken forms');
+    const iast=await page.locator('#reading-copy .v-translit,#reading-copy .m-translit').textContent();
+    assert.equal(comparable(iast),expectedRecitation(clip.number,'iast'),clip.number+' IAST matches the same declared forms');
     await page.locator('#reading-study').click();
     const padaFixture=require('./fixtures/kena_pada_sequences.json').find(v=>v.number===clip.number).sanskrit;
     const expectedPadas=clip.number==='1.1'?padaFixture.slice(1):padaFixture;

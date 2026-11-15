@@ -246,8 +246,8 @@
         {
           "start": 0,
           "end": 6.63,
-          "sanskrit": "ॐ",
-          "iast": "oṃ",
+          "sanskrit": "ॐ ।",
+          "iast": "oṃ |",
           "english": "Om."
         },
         {
@@ -317,8 +317,8 @@
         {
           "start": 51.55,
           "end": 57.15,
-          "sanskrit": "केनेषितं पतति प्रेषितं मनः",
-          "iast": "keneṣitaṃ patati preṣitaṃ manaḥ"
+          "sanskrit": "केनेषितं पतति प्रेषितं मनः ।",
+          "iast": "keneṣitaṃ patati preṣitaṃ manaḥ |"
         },
         {
           "start": 57.15,
@@ -329,8 +329,8 @@
         {
           "start": 62.35,
           "end": 67.49,
-          "sanskrit": "केनेषितां वाचमिमां वदन्ति",
-          "iast": "keneṣitāṃ vācamimāṃ vadanti"
+          "sanskrit": "केनेषितां वाचमिमां वदन्ति ।",
+          "iast": "keneṣitāṃ vācamimāṃ vadanti |"
         },
         {
           "start": 67.49,
@@ -350,26 +350,26 @@
         {
           "start": 73.15,
           "end": 78.72,
-          "sanskrit": "श्रोत्रस्य श्रोत्रं मनसो मनो यद्",
-          "iast": "śrotrasya śrotraṃ manaso mano yad"
+          "sanskrit": "श्रोत्रस्य श्रोत्रं मनसो मनो यद् ।",
+          "iast": "śrotrasya śrotraṃ manaso mano yad |"
         },
         {
           "start": 78.72,
-          "end": 85.9,
+          "end": 84.58,
           "sanskrit": "वाचो ह वाचं स उ प्राणस्य प्राणः ।",
           "iast": "vāco ha vācaṃ sa u prāṇasya prāṇaḥ |"
         },
         {
-          "start": 85.9,
+          "start": 84.58,
           "end": 89.4,
-          "sanskrit": "चक्षुषश्चक्षुरतिमुच्य",
-          "iast": "cakṣuṣaścakṣuratimucya"
+          "sanskrit": "चक्षुषश्चक्षुरतिमुच्य धीराः ।",
+          "iast": "cakṣuṣaścakṣuratimucya dhīrāḥ |"
         },
         {
           "start": 89.4,
           "end": 95.57,
-          "sanskrit": "धीराः प्रेत्यास्माल्लोकादमृता भवन्ति ॥",
-          "iast": "dhīrāḥ pretyāsmāllokādamṛtā bhavanti ||"
+          "sanskrit": "प्रेत्यास्माल्लोकादमृता भवन्ति ॥",
+          "iast": "pretyāsmāllokādamṛtā bhavanti ||"
         }
       ],
       "alignmentProbability": 0.271
@@ -383,32 +383,32 @@
         {
           "start": 95.57,
           "end": 101.07,
-          "sanskrit": "न तत्र चक्षुर्गच्छति न वाग्गच्छति",
-          "iast": "na tatra cakṣurgacchati na vāggacchati"
+          "sanskrit": "न तत्र चक्षुर्गच्छति न वाग्गच्छति ।",
+          "iast": "na tatra cakṣurgacchati na vāggacchati |"
         },
         {
           "start": 101.07,
           "end": 104.4,
-          "sanskrit": "नो मनः । न विद्मो",
-          "iast": "no manaḥ | na vidmo"
+          "sanskrit": "नो मनो न विद्मः ।",
+          "iast": "no mano na vidmaḥ |"
         },
         {
           "start": 104.4,
           "end": 109.58,
-          "sanskrit": "न विजानीमो",
-          "iast": "na vijānīmo"
+          "sanskrit": "न विजानीमो यथैतदनुशिष्यात् ।",
+          "iast": "na vijānīmo yathaitadanuśiṣyāt |"
         },
         {
           "start": 109.58,
           "end": 115.86,
-          "sanskrit": "यथैतदनुशिष्यात् । अन्यदेव तद्विदितादथो",
-          "iast": "yathaitadanuśiṣyāt | anyadeva tadviditādatho"
+          "sanskrit": "अन्यदेव तद्विदितादथो अविदितादधि ।",
+          "iast": "anyadeva tadviditādatho aviditādadhi |"
         },
         {
           "start": 115.86,
           "end": 123.61,
-          "sanskrit": "अविदितादधि । इति शुश्रुम पूर्वेषां ये नस्तद्व्याचचक्षिरे ॥",
-          "iast": "aviditādadhi | iti śuśruma pūrveṣāṃ ye nastadvyācacakṣire ||"
+          "sanskrit": "इति शुश्रुम पूर्वेषां ये नस्तद्व्याचचक्षिरे ॥",
+          "iast": "iti śuśruma pūrveṣāṃ ye nastadvyācacakṣire ||"
         }
       ],
       "alignmentProbability": 0.255
@@ -485,14 +485,14 @@
         {
           "start": 167.19,
           "end": 174.81,
-          "sanskrit": "यच्छ्रोत्रेण न शृणोति येन श्रोत्रमिदं",
-          "iast": "yacchrotreṇa na śṛṇoti yena śrotramidaṃ"
+          "sanskrit": "यच्छ्रोत्रेण न शृणोति येन श्रोत्रमिदं श्रुतम् ।",
+          "iast": "yacchrotreṇa na śṛṇoti yena śrotramidaṃ śrutam |"
         },
         {
           "start": 174.81,
           "end": 182.36,
-          "sanskrit": "श्रुतम् । तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
-          "iast": "śrutam | tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||"
+          "sanskrit": "तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+          "iast": "tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||"
         }
       ],
       "alignmentProbability": 0.207
@@ -527,26 +527,26 @@
         {
           "start": 197.66,
           "end": 202.5,
-          "sanskrit": "यदि मन्यसे",
-          "iast": "yadi manyase"
+          "sanskrit": "यदि मन्यसे सुवेदेति ।",
+          "iast": "yadi manyase suvedeti |"
         },
         {
           "start": 202.5,
           "end": 210.11,
-          "sanskrit": "सुवेदेति दभ्रमेवापि नूनं त्वं वेत्थ ब्रह्मणो",
-          "iast": "suvedeti dabhramevāpi nūnaṃ tvaṃ vettha brahmaṇo"
+          "sanskrit": "दभ्रमेवापि नूनं त्वं वेत्थ ब्रह्मणो रूपम् ।",
+          "iast": "dabhramevāpi nūnaṃ tvaṃ vettha brahmaṇo rūpam |"
         },
         {
           "start": 210.11,
           "end": 215.04,
-          "sanskrit": "रूपम् । यदस्य त्वं यदस्य",
-          "iast": "rūpam | yadasya tvaṃ yadasya"
+          "sanskrit": "यदस्य त्वं यदस्य देवेषु ।",
+          "iast": "yadasya tvaṃ yadasya deveṣu |"
         },
         {
           "start": 215.04,
           "end": 221.59,
-          "sanskrit": "देवेष्वथ नु मीमाँस्यमेव ते मन्ये विदितम् ॥",
-          "iast": "deveṣvatha nu mīmām̐syameva te manye viditam ||"
+          "sanskrit": "अथ नु मीमाँस्यमेव ते मन्ये विदितम् ॥",
+          "iast": "atha nu mīmām̐syameva te manye viditam ||"
         }
       ],
       "alignmentProbability": 0.25
@@ -623,8 +623,8 @@
         {
           "start": 267.81,
           "end": 273.47,
-          "sanskrit": "इह चेदवेदीदथ सत्यमस्ति",
-          "iast": "iha cedavedīdatha satyamasti"
+          "sanskrit": "इह चेदवेदीदथ सत्यमस्ति ।",
+          "iast": "iha cedavedīdatha satyamasti |"
         },
         {
           "start": 273.47,
@@ -635,8 +635,8 @@
         {
           "start": 279.63,
           "end": 285.41,
-          "sanskrit": "भूतेषु भूतेषु विचित्य धीराः",
-          "iast": "bhūteṣu bhūteṣu vicitya dhīrāḥ"
+          "sanskrit": "भूतेषु भूतेषु विचित्य धीराः ।",
+          "iast": "bhūteṣu bhūteṣu vicitya dhīrāḥ |"
         },
         {
           "start": 285.41,
@@ -656,26 +656,26 @@
         {
           "start": 292.37,
           "end": 297.81,
-          "sanskrit": "ब्रह्म ह देवेभ्यो",
-          "iast": "brahma ha devebhyo"
+          "sanskrit": "ब्रह्म ह देवेभ्यो विजिग्ये ।",
+          "iast": "brahma ha devebhyo vijigye |"
         },
         {
           "start": 297.81,
           "end": 304.87,
-          "sanskrit": "विजिग्ये तस्य ह ब्रह्मणो विजये देवा अमहीयन्त । त",
-          "iast": "vijigye tasya ha brahmaṇo vijaye devā amahīyanta | ta"
+          "sanskrit": "तस्य ह ब्रह्मणो विजये देवा अमहीयन्त ।",
+          "iast": "tasya ha brahmaṇo vijaye devā amahīyanta |"
         },
         {
           "start": 304.87,
           "end": 311.22,
-          "sanskrit": "ऐक्षन्तास्माकमेवायं",
-          "iast": "aikṣantāsmākamevāyaṃ"
+          "sanskrit": "त ऐक्षन्तास्माकमेवायं विजयः ।",
+          "iast": "ta aikṣantāsmākamevāyaṃ vijayaḥ |"
         },
         {
           "start": 311.22,
           "end": 316.25,
-          "sanskrit": "विजयोऽस्माकमेवायं महिमेति ॥",
-          "iast": "vijayo’smākamevāyaṃ mahimeti ||"
+          "sanskrit": "अस्माकमेवायं महिमेति ॥",
+          "iast": "asmākamevāyaṃ mahimeti ||"
         }
       ],
       "alignmentProbability": 0.274
@@ -689,8 +689,8 @@
         {
           "start": 316.25,
           "end": 323.84,
-          "sanskrit": "तद्धैषां विजज्ञौ तेभ्यो ह प्रादुर्बभूव",
-          "iast": "taddhaiṣāṃ vijajñau tebhyo ha prādurbabhūva"
+          "sanskrit": "तद्धैषां विजज्ञौ तेभ्यो ह प्रादुर्बभूव ।",
+          "iast": "taddhaiṣāṃ vijajñau tebhyo ha prādurbabhūva |"
         },
         {
           "start": 323.84,
@@ -710,14 +710,14 @@
         {
           "start": 329.48,
           "end": 336.66,
-          "sanskrit": "तेऽग्निमब्रुवञ्जातवेद",
-          "iast": "te’gnimabruvañjātaveda"
+          "sanskrit": "तेऽग्निमब्रुवञ्जातवेद एतद्विजानीहि ।",
+          "iast": "te’gnimabruvañjātaveda etadvijānīhi |"
         },
         {
           "start": 336.66,
           "end": 341.48,
-          "sanskrit": "एतद्विजानीहि किमेतद्यक्षमिति तथेति ॥",
-          "iast": "etadvijānīhi kimetadyakṣamiti tatheti ||"
+          "sanskrit": "किमेतद्यक्षमिति तथेति ॥",
+          "iast": "kimetadyakṣamiti tatheti ||"
         }
       ],
       "alignmentProbability": 0.228
@@ -731,14 +731,14 @@
         {
           "start": 341.48,
           "end": 352.8,
-          "sanskrit": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीत्यग्निर्वा",
-          "iast": "tadabhyadravattamabhyavadatko’sītyagnirvā"
+          "sanskrit": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीत्यग्निर्वा अहमस्मीत्यब्रवीत् ।",
+          "iast": "tadabhyadravattamabhyavadatko’sītyagnirvā ahamasmītyabravīt |"
         },
         {
           "start": 352.8,
           "end": 357.85,
-          "sanskrit": "अहमस्मीत्यब्रवीज्जातवेदा वा अहमस्मीति ॥",
-          "iast": "ahamasmītyabravījjātavedā vā ahamasmīti ||"
+          "sanskrit": "जातवेदा वा अहमस्मीति ॥",
+          "iast": "jātavedā vā ahamasmīti ||"
         }
       ],
       "alignmentProbability": 0.317
@@ -752,14 +752,14 @@
         {
           "start": 357.85,
           "end": 362.58,
-          "sanskrit": "तस्मिꣳस्त्वयि किं",
-          "iast": "tasmiṃstvayi kiṃ"
+          "sanskrit": "तस्मिꣳस्त्वयि किं वीर्यमिति ।",
+          "iast": "tasmiṃstvayi kiṃ vīryamiti |"
         },
         {
           "start": 362.58,
           "end": 369.87,
-          "sanskrit": "वीर्यमित्यपीदꣳ सर्वं दहेयं यदिदं पृथिव्यामिति ॥",
-          "iast": "vīryamityapīdaṃ sarvaṃ daheyaṃ yadidaṃ pṛthivyāmiti ||"
+          "sanskrit": "अपीदꣳ सर्वं दहेयं यदिदं पृथिव्यामिति ॥",
+          "iast": "apīdaṃ sarvaṃ daheyaṃ yadidaṃ pṛthivyāmiti ||"
         }
       ],
       "alignmentProbability": 0.212
@@ -779,20 +779,20 @@
         {
           "start": 375.58,
           "end": 382.76,
-          "sanskrit": "तदुपप्रेयाय सर्वजवेन तन्न शशाक",
-          "iast": "tadupapreyāya sarvajavena tanna śaśāka"
+          "sanskrit": "तदुपप्रेयाय सर्वजवेन तन्न शशाक दग्धुम् ।",
+          "iast": "tadupapreyāya sarvajavena tanna śaśāka dagdhum |"
         },
         {
           "start": 382.76,
           "end": 386.42,
-          "sanskrit": "दग्धुं स तत एव",
-          "iast": "dagdhuṃ sa tata eva"
+          "sanskrit": "स तत एव निववृते ।",
+          "iast": "sa tata eva nivavṛte |"
         },
         {
           "start": 386.42,
           "end": 393.56,
-          "sanskrit": "निववृते नैतदशकं विज्ञातुं यदेतद्यक्षमिति ॥",
-          "iast": "nivavṛte naitadaśakaṃ vijñātuṃ yadetadyakṣamiti ||"
+          "sanskrit": "नैतदशकं विज्ञातुं यदेतद्यक्षमिति ॥",
+          "iast": "naitadaśakaṃ vijñātuṃ yadetadyakṣamiti ||"
         }
       ],
       "alignmentProbability": 0.192
@@ -806,8 +806,8 @@
         {
           "start": 393.56,
           "end": 400.58,
-          "sanskrit": "अथ वायुमब्रुवन्वायवेतद्विजानीहि",
-          "iast": "atha vāyumabruvanvāyavetadvijānīhi"
+          "sanskrit": "अथ वायुमब्रुवन्वायवेतद्विजानीहि ।",
+          "iast": "atha vāyumabruvanvāyavetadvijānīhi |"
         },
         {
           "start": 400.58,
@@ -827,14 +827,14 @@
         {
           "start": 405.48,
           "end": 416.7,
-          "sanskrit": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीति वायुर्वा",
-          "iast": "tadabhyadravattamabhyavadatko’sīti vāyurvā"
+          "sanskrit": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीति वायुर्वा अहमस्मीत्यब्रवीत् ।",
+          "iast": "tadabhyadravattamabhyavadatko’sīti vāyurvā ahamasmītyabravīt |"
         },
         {
           "start": 416.7,
           "end": 422.19,
-          "sanskrit": "अहमस्मीत्यब्रवीन्मातरिश्वा वा अहमस्मीति ॥",
-          "iast": "ahamasmītyabravīnmātariśvā vā ahamasmīti ||"
+          "sanskrit": "मातरिश्वा वा अहमस्मीति ॥",
+          "iast": "mātariśvā vā ahamasmīti ||"
         }
       ],
       "alignmentProbability": 0.359
@@ -848,14 +848,14 @@
         {
           "start": 422.19,
           "end": 427.38,
-          "sanskrit": "तस्मिँस्त्वयि किं",
-          "iast": "tasmim̐stvayi kiṃ"
+          "sanskrit": "तस्मिँस्त्वयि किं वीर्यमिति ।",
+          "iast": "tasmim̐stvayi kiṃ vīryamiti |"
         },
         {
           "start": 427.38,
           "end": 434.98,
-          "sanskrit": "वीर्यमित्यपीदँ सर्वमाददीय यदिदं पृथिव्यामिति ॥",
-          "iast": "vīryamityapīdam̐ sarvamādadīya yadidaṃ pṛthivyāmiti ||"
+          "sanskrit": "अपीदँ सर्वमाददीय यदिदं पृथिव्यामिति ॥",
+          "iast": "apīdam̐ sarvamādadīya yadidaṃ pṛthivyāmiti ||"
         }
       ],
       "alignmentProbability": 0.215
@@ -869,20 +869,20 @@
         {
           "start": 434.98,
           "end": 441.74,
-          "sanskrit": "तस्मै तृणं",
-          "iast": "tasmai tṛṇaṃ"
+          "sanskrit": "तस्मै तृणं निदधावेतदादत्स्वेति ।",
+          "iast": "tasmai tṛṇaṃ nidadhāvetadādatsveti |"
         },
         {
           "start": 441.74,
           "end": 449.7,
-          "sanskrit": "निदधावेतदादत्स्वेति तदुपप्रेयाय सर्वजवेन तन्न",
-          "iast": "nidadhāvetadādatsveti tadupapreyāya sarvajavena tanna"
+          "sanskrit": "तदुपप्रेयाय सर्वजवेन तन्न शशाकादातुम् ।",
+          "iast": "tadupapreyāya sarvajavena tanna śaśākādātum |"
         },
         {
           "start": 449.7,
           "end": 453.6,
-          "sanskrit": "शशाकादातुं स तत एव निववृते",
-          "iast": "śaśākādātuṃ sa tata eva nivavṛte"
+          "sanskrit": "स तत एव निववृते ।",
+          "iast": "sa tata eva nivavṛte |"
         },
         {
           "start": 453.6,
@@ -902,8 +902,8 @@
         {
           "start": 460.93,
           "end": 474.0,
-          "sanskrit": "अथेन्द्रमब्रुवन्मघवन्नेतद्विजानीहि किमेतद्यक्षमिति तथेति",
-          "iast": "athendramabruvanmaghavannetadvijānīhi kimetadyakṣamiti tatheti"
+          "sanskrit": "अथेन्द्रमब्रुवन्मघवन्नेतद्विजानीहि किमेतद्यक्षमिति तथेति ।",
+          "iast": "athendramabruvanmaghavannetadvijānīhi kimetadyakṣamiti tatheti |"
         },
         {
           "start": 474.0,
@@ -923,14 +923,14 @@
         {
           "start": 479.85,
           "end": 486.59,
-          "sanskrit": "स तस्मिन्नेवाकाशे स्त्रियमाजगाम",
-          "iast": "sa tasminnevākāśe striyamājagāma"
+          "sanskrit": "स तस्मिन्नेवाकाशे स्त्रियमाजगाम ।",
+          "iast": "sa tasminnevākāśe striyamājagāma |"
         },
         {
           "start": 486.59,
           "end": 492.45,
-          "sanskrit": "बहुशोभमानामुमाँ हैमवतीं",
-          "iast": "bahuśobhamānāmumām̐ haimavatīṃ"
+          "sanskrit": "बहुशोभमानामुमाँ हैमवतीम् ।",
+          "iast": "bahuśobhamānāmumām̐ haimavatīm |"
         },
         {
           "start": 492.45,
@@ -950,20 +950,20 @@
         {
           "start": 498.61,
           "end": 503.63,
-          "sanskrit": "सा ब्रह्मेति होवाच",
-          "iast": "sā brahmeti hovāca"
+          "sanskrit": "सा ब्रह्मेति होवाच ।",
+          "iast": "sā brahmeti hovāca |"
         },
         {
           "start": 503.63,
           "end": 510.62,
-          "sanskrit": "ब्रह्मणो वा एतद्विजये",
-          "iast": "brahmaṇo vā etadvijaye"
+          "sanskrit": "ब्रह्मणो वा एतद्विजये महीयध्वमिति ।",
+          "iast": "brahmaṇo vā etadvijaye mahīyadhvamiti |"
         },
         {
           "start": 510.62,
           "end": 517.0,
-          "sanskrit": "महीयध्वमिति ततो हैव विदाञ्चकार ब्रह्मेति ॥",
-          "iast": "mahīyadhvamiti tato haiva vidāñcakāra brahmeti ||"
+          "sanskrit": "ततो हैव विदाञ्चकार ब्रह्मेति ॥",
+          "iast": "tato haiva vidāñcakāra brahmeti ||"
         }
       ],
       "alignmentProbability": 0.275
@@ -977,20 +977,20 @@
         {
           "start": 517.0,
           "end": 530.87,
-          "sanskrit": "तस्माद्वा एते देवा",
-          "iast": "tasmādvā ete devā"
+          "sanskrit": "तस्माद्वा एते देवा अतितरामिवान्यान्देवान्यदग्निर्वायुरिन्द्रः ।",
+          "iast": "tasmādvā ete devā atitarāmivānyāndevānyadagnirvāyurindraḥ |"
         },
         {
           "start": 530.87,
           "end": 536.76,
-          "sanskrit": "अतितरामिवान्यान्देवान्यदग्निर्वायुरिन्द्रस्ते ह्येनन्नेदिष्ठं",
-          "iast": "atitarāmivānyāndevānyadagnirvāyurindraste hyenannediṣṭhaṃ"
+          "sanskrit": "ते ह्येनन्नेदिष्ठं पस्पर्शुः ।",
+          "iast": "te hyenannediṣṭhaṃ pasparśuḥ |"
         },
         {
           "start": 536.76,
           "end": 543.94,
-          "sanskrit": "पस्पर्शुस्ते ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥",
-          "iast": "pasparśuste hyenatprathamo vidāñcakāra brahmeti ||"
+          "sanskrit": "ते ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥",
+          "iast": "te hyenatprathamo vidāñcakāra brahmeti ||"
         }
       ],
       "alignmentProbability": 0.29
@@ -1004,20 +1004,20 @@
         {
           "start": 543.94,
           "end": 551.12,
-          "sanskrit": "तस्माद्वा",
-          "iast": "tasmādvā"
+          "sanskrit": "तस्माद्वा इन्द्रोऽतितरामिवान्यान्देवान् ।",
+          "iast": "tasmādvā indro’titarāmivānyāndevān |"
         },
         {
           "start": 551.12,
           "end": 556.26,
-          "sanskrit": "इन्द्रोऽतितरामिवान्यान्देवान्स ह्येनन्नेदिष्ठं पस्पर्श स",
-          "iast": "indro’titarāmivānyāndevānsa hyenannediṣṭhaṃ pasparśa sa"
+          "sanskrit": "स ह्येनन्नेदिष्ठं पस्पर्श ।",
+          "iast": "sa hyenannediṣṭhaṃ pasparśa |"
         },
         {
           "start": 556.26,
           "end": 563.15,
-          "sanskrit": "ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥",
-          "iast": "hyenatprathamo vidāñcakāra brahmeti ||"
+          "sanskrit": "स ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥",
+          "iast": "sa hyenatprathamo vidāñcakāra brahmeti ||"
         }
       ],
       "alignmentProbability": 0.238
@@ -1031,14 +1031,14 @@
         {
           "start": 563.15,
           "end": 571.76,
-          "sanskrit": "तस्यैष आदेशो यदेतद्विद्युतो",
-          "iast": "tasyaiṣa ādeśo yadetadvidyuto"
+          "sanskrit": "तस्यैष आदेशो यदेतद्विद्युतो व्यद्युतदा३ ।",
+          "iast": "tasyaiṣa ādeśo yadetadvidyuto vyadyutadā3 |"
         },
         {
           "start": 571.76,
           "end": 576.52,
-          "sanskrit": "व्यद्युतदा३ इतीन् न्यमीमिषदा३",
-          "iast": "vyadyutadā3 itīn nyamīmiṣadā3"
+          "sanskrit": "इतीन् न्यमीमिषदा३ ।",
+          "iast": "itīn nyamīmiṣadā3 |"
         },
         {
           "start": 576.52,
@@ -1058,14 +1058,14 @@
         {
           "start": 580.16,
           "end": 587.81,
-          "sanskrit": "अथाध्यात्मं यदेतद्गच्छतीव च",
-          "iast": "athādhyātmaṃ yadetadgacchatīva ca"
+          "sanskrit": "अथाध्यात्मं यदेतद्गच्छतीव च मनः ।",
+          "iast": "athādhyātmaṃ yadetadgacchatīva ca manaḥ |"
         },
         {
           "start": 587.81,
           "end": 595.89,
-          "sanskrit": "मनोऽनेन चैतदुपस्मरत्यभीक्ष्णँ सङ्कल्पः ॥",
-          "iast": "mano’nena caitadupasmaratyabhīkṣṇam̐ saṅkalpaḥ ||"
+          "sanskrit": "अनेन चैतदुपस्मरत्यभीक्ष्णँ सङ्कल्पः ॥",
+          "iast": "anena caitadupasmaratyabhīkṣṇam̐ saṅkalpaḥ ||"
         }
       ],
       "alignmentProbability": 0.156
@@ -1079,20 +1079,20 @@
         {
           "start": 595.89,
           "end": 603.55,
-          "sanskrit": "तद्ध तद्वनं नाम तद्वनमित्युपासितव्यं",
-          "iast": "taddha tadvanaṃ nāma tadvanamityupāsitavyaṃ"
+          "sanskrit": "तद्ध तद्वनं नाम तद्वनमित्युपासितव्यम् ।",
+          "iast": "taddha tadvanaṃ nāma tadvanamityupāsitavyam |"
         },
         {
           "start": 603.55,
           "end": 608.21,
-          "sanskrit": "स य एतदेवं",
-          "iast": "sa ya etadevaṃ"
+          "sanskrit": "स य एतदेवं वेद ।",
+          "iast": "sa ya etadevaṃ veda |"
         },
         {
           "start": 608.21,
           "end": 615.89,
-          "sanskrit": "वेदाभि हैनꣳ सर्वाणि भूतानि संवाञ्छन्ति ॥",
-          "iast": "vedābhi hainaṃ sarvāṇi bhūtāni saṃvāñchanti ||"
+          "sanskrit": "अभि हैनꣳ सर्वाणि भूतानि संवाञ्छन्ति ॥",
+          "iast": "abhi hainaṃ sarvāṇi bhūtāni saṃvāñchanti ||"
         }
       ],
       "alignmentProbability": 0.215
@@ -1106,20 +1106,20 @@
         {
           "start": 615.89,
           "end": 620.28,
-          "sanskrit": "उपनिषदं भो",
-          "iast": "upaniṣadaṃ bho"
+          "sanskrit": "उपनिषदं भो ब्रूहि ।",
+          "iast": "upaniṣadaṃ bho brūhi |"
         },
         {
           "start": 620.28,
           "end": 623.49,
-          "sanskrit": "ब्रूहीत्युक्ता त",
-          "iast": "brūhītyuktā ta"
+          "sanskrit": "इत्युक्ता त उपनिषत् ।",
+          "iast": "ityuktā ta upaniṣat |"
         },
         {
           "start": 623.49,
           "end": 630.6,
-          "sanskrit": "उपनिषद्ब्राह्मीं वाव त उपनिषदमब्रूमेति ॥",
-          "iast": "upaniṣadbrāhmīṃ vāva ta upaniṣadamabrūmeti ||"
+          "sanskrit": "ब्राह्मीं वाव त उपनिषदमब्रूमेति ॥",
+          "iast": "brāhmīṃ vāva ta upaniṣadamabrūmeti ||"
         }
       ],
       "alignmentProbability": 0.262
@@ -1133,8 +1133,8 @@
         {
           "start": 630.6,
           "end": 637.18,
-          "sanskrit": "तस्यै तपो दमः कर्मेति प्रतिष्ठा",
-          "iast": "tasyai tapo damaḥ karmeti pratiṣṭhā"
+          "sanskrit": "तस्यै तपो दमः कर्मेति प्रतिष्ठा ।",
+          "iast": "tasyai tapo damaḥ karmeti pratiṣṭhā |"
         },
         {
           "start": 637.18,
@@ -1154,14 +1154,14 @@
         {
           "start": 643.8,
           "end": 652.47,
-          "sanskrit": "यो वा एतामेवं वेदापहत्य",
-          "iast": "yo vā etāmevaṃ vedāpahatya"
+          "sanskrit": "यो वा एतामेवं वेदापहत्य पाप्मानम् ।",
+          "iast": "yo vā etāmevaṃ vedāpahatya pāpmānam |"
         },
         {
           "start": 652.47,
           "end": 660.06,
-          "sanskrit": "पाप्मानमनन्ते स्वर्गे लोके ज्येये प्रतितिष्ठति",
-          "iast": "pāpmānamanante svarge loke jyeye pratitiṣṭhati"
+          "sanskrit": "अनन्ते स्वर्गे लोके ज्येये प्रतितिष्ठति ।",
+          "iast": "anante svarge loke jyeye pratitiṣṭhati |"
         },
         {
           "start": 660.06,
@@ -1437,26 +1437,26 @@
         {
           "start": 680.6,
           "end": 685.26,
-          "sanskrit": "सर्वं ।",
-          "iast": "sarvaṃ |"
+          "sanskrit": "सर्वं ब्रह्मौपनिषदम् ।",
+          "iast": "sarvaṃ brahmaupaniṣadam |"
         },
         {
           "start": 685.26,
           "end": 693.59,
-          "sanskrit": "ब्रह्मौपनिषदम् माहं ब्रह्म निराकुर्यां मा मा ब्रह्म निराकरोत् ।",
-          "iast": "brahmaupaniṣadam māhaṃ brahma nirākuryāṃ mā mā brahma nirākarot |"
+          "sanskrit": "माहं ब्रह्म निराकुर्यां मा मा ब्रह्म निराकरोत् ।",
+          "iast": "māhaṃ brahma nirākuryāṃ mā mā brahma nirākarot |"
         },
         {
           "start": 693.59,
           "end": 700.24,
-          "sanskrit": "अनिराकरणमस्त्वनिराकरणं ।",
-          "iast": "anirākaraṇamastvanirākaraṇaṃ |"
+          "sanskrit": "अनिराकरणमस्त्वनिराकरणं मेऽस्तु ।",
+          "iast": "anirākaraṇamastvanirākaraṇaṃ me’stu |"
         },
         {
           "start": 700.24,
           "end": 708.28,
-          "sanskrit": "मेऽस्तु तदात्मनि निरते य उपनिषत्सु धर्मास्ते मयि सन्तु ।",
-          "iast": "me’stu tadātmani nirate ya upaniṣatsu dharmāste mayi santu |"
+          "sanskrit": "तदात्मनि निरते य उपनिषत्सु धर्मास्ते मयि सन्तु ।",
+          "iast": "tadātmani nirate ya upaniṣatsu dharmāste mayi santu |"
         },
         {
           "start": 708.28,
@@ -1481,8 +1481,8 @@
         {
           "start": 0,
           "end": 6.63,
-          "sanskrit": "ॐ",
-          "iast": "oṃ",
+          "sanskrit": "ॐ ।",
+          "iast": "oṃ |",
           "english": "Om."
         },
         {
@@ -1552,7 +1552,15 @@
   "boundaryMethod": "Following-text alignment; verse cuts placed in the middle of low-energy recording pauses.",
   "notes": [
     "The opening Om is part of the invocation. The audio edition removes the unrecited additional Om from mantra 1.1 only; the original HTML remains unchanged.",
-    "Verse boundaries use following-text alignment and low-energy pauses. Recitation line breaks show major pauses; grammatical pada-viccheda remains in Study.",
-    "The recording repeats the invocation and ends with Hariḥ Om; both are retained in a closing card."
-  ]
+    "Recitation wording and phrase grouping follow the recording-specific review; grammatical word division remains in Study.",
+    "The recording repeats the invocation and ends with Hariḥ Om; both are retained in a closing card.",
+    "Single daṇḍa । marks an internal recitation pause; double daṇḍa ॥ marks the end of a verse or invocation."
+  ],
+  "recitationConvention": {
+    "internalPause": "।",
+    "sectionEnd": "॥",
+    "iastInternalPause": "|",
+    "iastSectionEnd": "||"
+  },
+  "recitationTextSource": "scripts/kena_audio_pipeline/checkpoints/reviewed_recitation.json"
 }

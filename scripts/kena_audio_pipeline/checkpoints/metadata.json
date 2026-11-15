@@ -11,7 +11,15 @@
   "boundaryMethod": "Following-text alignment; verse cuts placed in the middle of low-energy recording pauses.",
   "notes": [
     "The opening Om is part of the invocation. The audio edition removes the unrecited additional Om from mantra 1.1 only; the original HTML remains unchanged.",
-    "Verse boundaries use following-text alignment and low-energy pauses. Recitation line breaks show major pauses; grammatical pada-viccheda remains in Study.",
-    "The recording repeats the invocation and ends with Hariḥ Om; both are retained in a closing card."
-  ]
+    "Recitation wording and phrase grouping follow the recording-specific review; grammatical word division remains in Study.",
+    "The recording repeats the invocation and ends with Hariḥ Om; both are retained in a closing card.",
+    "Single daṇḍa । marks an internal recitation pause; double daṇḍa ॥ marks the end of a verse or invocation."
+  ],
+  "recitationConvention": {
+    "internalPause": "।",
+    "sectionEnd": "॥",
+    "iastInternalPause": "|",
+    "iastSectionEnd": "||"
+  },
+  "recitationTextSource": "scripts/kena_audio_pipeline/checkpoints/reviewed_recitation.json"
 }

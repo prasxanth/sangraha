@@ -66,7 +66,7 @@ const audioEdition = (() => {
   container.querySelectorAll('.recitation-panel').forEach(e=>e.remove());
   const panel=document.createElement('section');panel.className='recitation-panel';panel.dataset.number=number;
   panel.setAttribute('aria-label',clipFor(number).label+' audio');
-  panel.innerHTML=`<div class="recitation-heading">Listen · ${clipFor(number).label}</div>
+  panel.innerHTML=`<div class="recitation-heading">Listen · ${clipFor(number).label}<span class="recitation-marker-key" title="Single daṇḍa: recitation pause. Double daṇḍa: verse or section end.">। pause · ॥ end</span></div>
    <div class="recitation-actions"><button type="button" class="deck-button recitation-play">Play verse</button><button type="button" class="deck-button recitation-restart">↺ Restart</button><output class="recitation-time"></output></div>
    <label class="recitation-progress">Verse position<input class="recitation-seek" type="range" min="0" step="0.05" value="0"></label>
    <label class="recitation-speed-label">Speed <input class="recitation-speed" type="range" min="0.25" max="1" step="0.05" value="0.75"><output class="recitation-rate">0.75×</output></label>
@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  document.getElementById('reading-study').addEventListener('click',()=>{
   const number=readingDeck[readingIndex].number,container=document.getElementById('study-passage');
   audioEdition.showPhrases(container,number);audioEdition.mount(container,number);
+  const help=container.querySelector('.pada-help');if(help)help.textContent+=' Study uses separated grammatical forms.';
   if(number==='shanti'||number==='closing-shanti')document.getElementById('study-khanda').textContent=number==='shanti'?'Opening invocation':'Closing invocation';
  });
  document.querySelector('#reading-picker option[value="0"]').textContent='Śānti · Opening invocation';

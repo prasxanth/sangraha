@@ -1,0 +1,1199 @@
+{
+  "sourceHtmlSha256": "d11d3d80d47e6f6151c6af61408ee33408366e65b111c1497a3950b184c2a301",
+  "audioSha256": "6720a5ae8ae37fb158867c17421082fb2b6e5b05487c98ce3cfa711059adb7fb",
+  "markerConvention": {
+    "internalPause": "।",
+    "sectionEnd": "॥",
+    "iastInternalPause": "|",
+    "iastSectionEnd": "||"
+  },
+  "reviewBasis": [
+    "User-confirmed no mano na vidmaḥ in 1.3 and marker convention.",
+    "Phrase-sized recognition checks against the recording; recognition output is not copied as Sanskrit.",
+    "Editorial review of word grouping and reversible sandhi at the audible pauses."
+  ],
+  "clips": [
+    {
+      "number": "shanti",
+      "start": 0,
+      "end": 51.55,
+      "phrases": [
+        {
+          "start": 0,
+          "end": 6.63,
+          "sanskrit": "ॐ ।",
+          "iast": "oṃ |",
+          "english": "Om."
+        },
+        {
+          "start": 6.63,
+          "end": 11.14,
+          "sanskrit": "आप्यायन्तु ममाङ्गानि ।",
+          "iast": "āpyāyantu mamāṅgāni |",
+          "english": "May my limbs flourish."
+        },
+        {
+          "start": 11.14,
+          "end": 18.83,
+          "sanskrit": "वाक्प्राणश्चक्षुः श्रोत्रमथो बलमिन्द्रियाणि च सर्वाणि ।",
+          "iast": "vākprāṇaścakṣuḥ śrotramatho balamindriyāṇi ca sarvāṇi |",
+          "english": "May speech, vital breath, eyes, ears, strength and all the senses flourish."
+        },
+        {
+          "start": 18.83,
+          "end": 22.65,
+          "sanskrit": "सर्वं ब्रह्मौपनिषदम् ।",
+          "iast": "sarvaṃ brahmaupaniṣadam |",
+          "english": "All is Brahman as taught in the Upaniṣads."
+        },
+        {
+          "start": 22.65,
+          "end": 29.65,
+          "sanskrit": "माहं ब्रह्म निराकुर्यां मा मा ब्रह्म निराकरोत् ।",
+          "iast": "māhaṃ brahma nirākuryāṃ mā mā brahma nirākarot |",
+          "english": "May I not deny Brahman; may Brahman not deny me."
+        },
+        {
+          "start": 29.65,
+          "end": 35.25,
+          "sanskrit": "अनिराकरणमस्त्वनिराकरणं मेऽस्तु ।",
+          "iast": "anirākaraṇamastvanirākaraṇaṃ me’stu |",
+          "english": "May there be no rejection; may there be no rejection of me."
+        },
+        {
+          "start": 35.25,
+          "end": 42.25,
+          "sanskrit": "तदात्मनि निरते य उपनिषत्सु धर्मास्ते मयि सन्तु ।",
+          "iast": "tadātmani nirate ya upaniṣatsu dharmāste mayi santu |",
+          "english": "May the virtues taught in the Upaniṣads dwell in me, who am devoted to the Self."
+        },
+        {
+          "start": 42.25,
+          "end": 44.94,
+          "sanskrit": "ते मयि सन्तु ।",
+          "iast": "te mayi santu |",
+          "english": "May they dwell in me."
+        },
+        {
+          "start": 44.94,
+          "end": 51.55,
+          "sanskrit": "ॐ शान्तिः शान्तिः शान्तिः ॥",
+          "iast": "oṃ śāntiḥ śāntiḥ śāntiḥ ||",
+          "english": "Om. Peace, peace, peace."
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "1.1",
+      "start": 51.55,
+      "end": 73.15,
+      "phrases": [
+        {
+          "start": 51.55,
+          "end": 57.15,
+          "sanskrit": "केनेषितं पतति प्रेषितं मनः ।",
+          "iast": "keneṣitaṃ patati preṣitaṃ manaḥ |"
+        },
+        {
+          "start": 57.15,
+          "end": 62.35,
+          "sanskrit": "केन प्राणः प्रथमः प्रैति युक्तः ।",
+          "iast": "kena prāṇaḥ prathamaḥ praiti yuktaḥ |"
+        },
+        {
+          "start": 62.35,
+          "end": 67.49,
+          "sanskrit": "केनेषितां वाचमिमां वदन्ति ।",
+          "iast": "keneṣitāṃ vācamimāṃ vadanti |"
+        },
+        {
+          "start": 67.49,
+          "end": 73.15,
+          "sanskrit": "चक्षुः श्रोत्रं क उ देवो युनक्ति ॥",
+          "iast": "cakṣuḥ śrotraṃ ka u devo yunakti ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "1.2",
+      "start": 73.15,
+      "end": 95.57,
+      "phrases": [
+        {
+          "start": 73.15,
+          "end": 78.72,
+          "sanskrit": "श्रोत्रस्य श्रोत्रं मनसो मनो यद् ।",
+          "iast": "śrotrasya śrotraṃ manaso mano yad |"
+        },
+        {
+          "start": 78.72,
+          "end": 84.58,
+          "sanskrit": "वाचो ह वाचं स उ प्राणस्य प्राणः ।",
+          "iast": "vāco ha vācaṃ sa u prāṇasya prāṇaḥ |"
+        },
+        {
+          "start": 84.58,
+          "end": 89.4,
+          "sanskrit": "चक्षुषश्चक्षुरतिमुच्य धीराः ।",
+          "iast": "cakṣuṣaścakṣuratimucya dhīrāḥ |"
+        },
+        {
+          "start": 89.4,
+          "end": 95.57,
+          "sanskrit": "प्रेत्यास्माल्लोकादमृता भवन्ति ॥",
+          "iast": "pretyāsmāllokādamṛtā bhavanti ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "1.3",
+      "start": 95.57,
+      "end": 123.61,
+      "phrases": [
+        {
+          "start": 95.57,
+          "end": 101.07,
+          "sanskrit": "न तत्र चक्षुर्गच्छति न वाग्गच्छति ।",
+          "iast": "na tatra cakṣurgacchati na vāggacchati |"
+        },
+        {
+          "start": 101.07,
+          "end": 104.4,
+          "sanskrit": "नो मनो न विद्मः ।",
+          "iast": "no mano na vidmaḥ |"
+        },
+        {
+          "start": 104.4,
+          "end": 109.58,
+          "sanskrit": "न विजानीमो यथैतदनुशिष्यात् ।",
+          "iast": "na vijānīmo yathaitadanuśiṣyāt |"
+        },
+        {
+          "start": 109.58,
+          "end": 115.86,
+          "sanskrit": "अन्यदेव तद्विदितादथो अविदितादधि ।",
+          "iast": "anyadeva tadviditādatho aviditādadhi |"
+        },
+        {
+          "start": 115.86,
+          "end": 123.61,
+          "sanskrit": "इति शुश्रुम पूर्वेषां ये नस्तद्व्याचचक्षिरे ॥",
+          "iast": "iti śuśruma pūrveṣāṃ ye nastadvyācacakṣire ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "नो मनः न विद्मो",
+            "after": "नो मनो न विद्मः"
+          },
+          "iast": {
+            "before": "no manaḥ na vidmo",
+            "after": "no mano na vidmaḥ"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "1.4",
+      "start": 123.61,
+      "end": 138.02,
+      "phrases": [
+        {
+          "start": 123.61,
+          "end": 130.56,
+          "sanskrit": "यद्वाचाऽनभ्युदितं येन वागभ्युद्यते ।",
+          "iast": "yadvācā’nabhyuditaṃ yena vāgabhyudyate |"
+        },
+        {
+          "start": 130.56,
+          "end": 138.02,
+          "sanskrit": "तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+          "iast": "tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "1.5",
+      "start": 138.02,
+      "end": 152.27,
+      "phrases": [
+        {
+          "start": 138.02,
+          "end": 144.7,
+          "sanskrit": "यन्मनसा न मनुते येनाहुर्मनो मतम् ।",
+          "iast": "yanmanasā na manute yenāhurmano matam |"
+        },
+        {
+          "start": 144.7,
+          "end": 152.27,
+          "sanskrit": "तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+          "iast": "tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "1.6",
+      "start": 152.27,
+      "end": 167.19,
+      "phrases": [
+        {
+          "start": 152.27,
+          "end": 159.49,
+          "sanskrit": "यच्चक्षुषा न पश्यति येन चक्षूँषि पश्यति ।",
+          "iast": "yaccakṣuṣā na paśyati yena cakṣūm̐ṣi paśyati |"
+        },
+        {
+          "start": 159.49,
+          "end": 167.19,
+          "sanskrit": "तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+          "iast": "tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "1.7",
+      "start": 167.19,
+      "end": 182.36,
+      "phrases": [
+        {
+          "start": 167.19,
+          "end": 174.81,
+          "sanskrit": "यच्छ्रोत्रेण न शृणोति येन श्रोत्रमिदं श्रुतम् ।",
+          "iast": "yacchrotreṇa na śṛṇoti yena śrotramidaṃ śrutam |"
+        },
+        {
+          "start": 174.81,
+          "end": 182.36,
+          "sanskrit": "तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+          "iast": "tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "1.8",
+      "start": 182.36,
+      "end": 197.66,
+      "phrases": [
+        {
+          "start": 182.36,
+          "end": 189.81,
+          "sanskrit": "यत्प्राणेन न प्राणिति येन प्राणः प्रणीयते ।",
+          "iast": "yatprāṇena na prāṇiti yena prāṇaḥ praṇīyate |"
+        },
+        {
+          "start": 189.81,
+          "end": 197.66,
+          "sanskrit": "तदेव ब्रह्म त्वं विद्धि नेदं यदिदमुपासते ॥",
+          "iast": "tadeva brahma tvaṃ viddhi nedaṃ yadidamupāsate ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "2.1",
+      "start": 197.66,
+      "end": 221.59,
+      "phrases": [
+        {
+          "start": 197.66,
+          "end": 202.5,
+          "sanskrit": "यदि मन्यसे सुवेदेति ।",
+          "iast": "yadi manyase suvedeti |"
+        },
+        {
+          "start": 202.5,
+          "end": 210.11,
+          "sanskrit": "दभ्रमेवापि नूनं त्वं वेत्थ ब्रह्मणो रूपम् ।",
+          "iast": "dabhramevāpi nūnaṃ tvaṃ vettha brahmaṇo rūpam |"
+        },
+        {
+          "start": 210.11,
+          "end": 215.04,
+          "sanskrit": "यदस्य त्वं यदस्य देवेषु ।",
+          "iast": "yadasya tvaṃ yadasya deveṣu |"
+        },
+        {
+          "start": 215.04,
+          "end": 221.59,
+          "sanskrit": "अथ नु मीमाँस्यमेव ते मन्ये विदितम् ॥",
+          "iast": "atha nu mīmām̐syameva te manye viditam ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "देवेष्वथ",
+            "after": "देवेषु अथ"
+          },
+          "iast": {
+            "before": "deveṣvatha",
+            "after": "deveṣu atha"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "2.2",
+      "start": 221.59,
+      "end": 237.26,
+      "phrases": [
+        {
+          "start": 221.59,
+          "end": 229.46,
+          "sanskrit": "नाहं मन्ये सुवेदेति नो न वेदेति वेद च ।",
+          "iast": "nāhaṃ manye suvedeti no na vedeti veda ca |"
+        },
+        {
+          "start": 229.46,
+          "end": 237.26,
+          "sanskrit": "यो नस्तद्वेद तद्वेद नो न वेदेति वेद च ॥",
+          "iast": "yo nastadveda tadveda no na vedeti veda ca ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "2.3",
+      "start": 237.26,
+      "end": 252.69,
+      "phrases": [
+        {
+          "start": 237.26,
+          "end": 244.77,
+          "sanskrit": "यस्यामतं तस्य मतं मतं यस्य न वेद सः ।",
+          "iast": "yasyāmataṃ tasya mataṃ mataṃ yasya na veda saḥ |"
+        },
+        {
+          "start": 244.77,
+          "end": 252.69,
+          "sanskrit": "अविज्ञातं विजानतां विज्ञातमविजानताम् ॥",
+          "iast": "avijñātaṃ vijānatāṃ vijñātamavijānatām ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "2.4",
+      "start": 252.69,
+      "end": 267.81,
+      "phrases": [
+        {
+          "start": 252.69,
+          "end": 259.49,
+          "sanskrit": "प्रतिबोधविदितं मतममृतत्वं हि विन्दते ।",
+          "iast": "pratibodhaviditaṃ matamamṛtatvaṃ hi vindate |"
+        },
+        {
+          "start": 259.49,
+          "end": 267.81,
+          "sanskrit": "आत्मना विन्दते वीर्यं विद्यया विन्दतेऽमृतम् ॥",
+          "iast": "ātmanā vindate vīryaṃ vidyayā vindate’mṛtam ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "2.5",
+      "start": 267.81,
+      "end": 292.37,
+      "phrases": [
+        {
+          "start": 267.81,
+          "end": 273.47,
+          "sanskrit": "इह चेदवेदीदथ सत्यमस्ति ।",
+          "iast": "iha cedavedīdatha satyamasti |"
+        },
+        {
+          "start": 273.47,
+          "end": 279.63,
+          "sanskrit": "न चेदिहावेदीन्महती विनष्टिः ।",
+          "iast": "na cedihāvedīnmahatī vinaṣṭiḥ |"
+        },
+        {
+          "start": 279.63,
+          "end": 285.41,
+          "sanskrit": "भूतेषु भूतेषु विचित्य धीराः ।",
+          "iast": "bhūteṣu bhūteṣu vicitya dhīrāḥ |"
+        },
+        {
+          "start": 285.41,
+          "end": 292.37,
+          "sanskrit": "प्रेत्यास्माल्लोकादमृता भवन्ति ॥",
+          "iast": "pretyāsmāllokādamṛtā bhavanti ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "3.1",
+      "start": 292.37,
+      "end": 316.25,
+      "phrases": [
+        {
+          "start": 292.37,
+          "end": 297.81,
+          "sanskrit": "ब्रह्म ह देवेभ्यो विजिग्ये ।",
+          "iast": "brahma ha devebhyo vijigye |"
+        },
+        {
+          "start": 297.81,
+          "end": 304.87,
+          "sanskrit": "तस्य ह ब्रह्मणो विजये देवा अमहीयन्त ।",
+          "iast": "tasya ha brahmaṇo vijaye devā amahīyanta |"
+        },
+        {
+          "start": 304.87,
+          "end": 311.22,
+          "sanskrit": "त ऐक्षन्तास्माकमेवायं विजयः ।",
+          "iast": "ta aikṣantāsmākamevāyaṃ vijayaḥ |"
+        },
+        {
+          "start": 311.22,
+          "end": 316.25,
+          "sanskrit": "अस्माकमेवायं महिमेति ॥",
+          "iast": "asmākamevāyaṃ mahimeti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "विजयोऽस्माक",
+            "after": "विजयः अस्माक"
+          },
+          "iast": {
+            "before": "vijayo’smāka",
+            "after": "vijayaḥ asmāka"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "3.2",
+      "start": 316.25,
+      "end": 329.48,
+      "phrases": [
+        {
+          "start": 316.25,
+          "end": 323.84,
+          "sanskrit": "तद्धैषां विजज्ञौ तेभ्यो ह प्रादुर्बभूव ।",
+          "iast": "taddhaiṣāṃ vijajñau tebhyo ha prādurbabhūva |"
+        },
+        {
+          "start": 323.84,
+          "end": 329.48,
+          "sanskrit": "तन्न व्यजानत किमिदं यक्षमिति ॥",
+          "iast": "tanna vyajānata kimidaṃ yakṣamiti ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "3.3",
+      "start": 329.48,
+      "end": 341.48,
+      "phrases": [
+        {
+          "start": 329.48,
+          "end": 336.66,
+          "sanskrit": "तेऽग्निमब्रुवञ्जातवेद एतद्विजानीहि ।",
+          "iast": "te’gnimabruvañjātaveda etadvijānīhi |"
+        },
+        {
+          "start": 336.66,
+          "end": 341.48,
+          "sanskrit": "किमेतद्यक्षमिति तथेति ॥",
+          "iast": "kimetadyakṣamiti tatheti ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "3.4",
+      "start": 341.48,
+      "end": 357.85,
+      "phrases": [
+        {
+          "start": 341.48,
+          "end": 352.8,
+          "sanskrit": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीत्यग्निर्वा अहमस्मीत्यब्रवीत् ।",
+          "iast": "tadabhyadravattamabhyavadatko’sītyagnirvā ahamasmītyabravīt |"
+        },
+        {
+          "start": 352.8,
+          "end": 357.85,
+          "sanskrit": "जातवेदा वा अहमस्मीति ॥",
+          "iast": "jātavedā vā ahamasmīti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "अहमस्मीत्यब्रवीज्जातवेदा",
+            "after": "अहमस्मीत्यब्रवीत् जातवेदा"
+          },
+          "iast": {
+            "before": "ahamasmītyabravījjātavedā",
+            "after": "ahamasmītyabravīt jātavedā"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "3.5",
+      "start": 357.85,
+      "end": 369.87,
+      "phrases": [
+        {
+          "start": 357.85,
+          "end": 362.58,
+          "sanskrit": "तस्मिꣳस्त्वयि किं वीर्यमिति ।",
+          "iast": "tasmiṃstvayi kiṃ vīryamiti |"
+        },
+        {
+          "start": 362.58,
+          "end": 369.87,
+          "sanskrit": "अपीदꣳ सर्वं दहेयं यदिदं पृथिव्यामिति ॥",
+          "iast": "apīdaṃ sarvaṃ daheyaṃ yadidaṃ pṛthivyāmiti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "वीर्यमित्यपीद",
+            "after": "वीर्यमिति अपीद"
+          },
+          "iast": {
+            "before": "vīryamityapīda",
+            "after": "vīryamiti apīda"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "3.6",
+      "start": 369.87,
+      "end": 393.56,
+      "phrases": [
+        {
+          "start": 369.87,
+          "end": 375.58,
+          "sanskrit": "तस्मै तृणं निदधावेतद्दहेति ।",
+          "iast": "tasmai tṛṇaṃ nidadhāvetaddaheti |"
+        },
+        {
+          "start": 375.58,
+          "end": 382.76,
+          "sanskrit": "तदुपप्रेयाय सर्वजवेन तन्न शशाक दग्धुम् ।",
+          "iast": "tadupapreyāya sarvajavena tanna śaśāka dagdhum |"
+        },
+        {
+          "start": 382.76,
+          "end": 386.42,
+          "sanskrit": "स तत एव निववृते ।",
+          "iast": "sa tata eva nivavṛte |"
+        },
+        {
+          "start": 386.42,
+          "end": 393.56,
+          "sanskrit": "नैतदशकं विज्ञातुं यदेतद्यक्षमिति ॥",
+          "iast": "naitadaśakaṃ vijñātuṃ yadetadyakṣamiti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "दग्धुं",
+            "after": "दग्धुम्"
+          },
+          "iast": {
+            "before": "dagdhuṃ",
+            "after": "dagdhum"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "3.7",
+      "start": 393.56,
+      "end": 405.48,
+      "phrases": [
+        {
+          "start": 393.56,
+          "end": 400.58,
+          "sanskrit": "अथ वायुमब्रुवन्वायवेतद्विजानीहि ।",
+          "iast": "atha vāyumabruvanvāyavetadvijānīhi |"
+        },
+        {
+          "start": 400.58,
+          "end": 405.48,
+          "sanskrit": "किमेतद्यक्षमिति तथेति ॥",
+          "iast": "kimetadyakṣamiti tatheti ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "3.8",
+      "start": 405.48,
+      "end": 422.19,
+      "phrases": [
+        {
+          "start": 405.48,
+          "end": 416.7,
+          "sanskrit": "तदभ्यद्रवत्तमभ्यवदत्कोऽसीति वायुर्वा अहमस्मीत्यब्रवीत् ।",
+          "iast": "tadabhyadravattamabhyavadatko’sīti vāyurvā ahamasmītyabravīt |"
+        },
+        {
+          "start": 416.7,
+          "end": 422.19,
+          "sanskrit": "मातरिश्वा वा अहमस्मीति ॥",
+          "iast": "mātariśvā vā ahamasmīti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "अहमस्मीत्यब्रवीन्मातरिश्वा",
+            "after": "अहमस्मीत्यब्रवीत् मातरिश्वा"
+          },
+          "iast": {
+            "before": "ahamasmītyabravīnmātariśvā",
+            "after": "ahamasmītyabravīt mātariśvā"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "3.9",
+      "start": 422.19,
+      "end": 434.98,
+      "phrases": [
+        {
+          "start": 422.19,
+          "end": 427.38,
+          "sanskrit": "तस्मिँस्त्वयि किं वीर्यमिति ।",
+          "iast": "tasmim̐stvayi kiṃ vīryamiti |"
+        },
+        {
+          "start": 427.38,
+          "end": 434.98,
+          "sanskrit": "अपीदँ सर्वमाददीय यदिदं पृथिव्यामिति ॥",
+          "iast": "apīdam̐ sarvamādadīya yadidaṃ pṛthivyāmiti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "वीर्यमित्यपीद",
+            "after": "वीर्यमिति अपीद"
+          },
+          "iast": {
+            "before": "vīryamityapīda",
+            "after": "vīryamiti apīda"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "3.10",
+      "start": 434.98,
+      "end": 460.93,
+      "phrases": [
+        {
+          "start": 434.98,
+          "end": 441.74,
+          "sanskrit": "तस्मै तृणं निदधावेतदादत्स्वेति ।",
+          "iast": "tasmai tṛṇaṃ nidadhāvetadādatsveti |"
+        },
+        {
+          "start": 441.74,
+          "end": 449.7,
+          "sanskrit": "तदुपप्रेयाय सर्वजवेन तन्न शशाकादातुम् ।",
+          "iast": "tadupapreyāya sarvajavena tanna śaśākādātum |"
+        },
+        {
+          "start": 449.7,
+          "end": 453.6,
+          "sanskrit": "स तत एव निववृते ।",
+          "iast": "sa tata eva nivavṛte |"
+        },
+        {
+          "start": 453.6,
+          "end": 460.93,
+          "sanskrit": "नैतदशकं विज्ञातुं यदेतद्यक्षमिति ॥",
+          "iast": "naitadaśakaṃ vijñātuṃ yadetadyakṣamiti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "शशाकादातुं",
+            "after": "शशाकादातुम्"
+          },
+          "iast": {
+            "before": "śaśākādātuṃ",
+            "after": "śaśākādātum"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "3.11",
+      "start": 460.93,
+      "end": 479.85,
+      "phrases": [
+        {
+          "start": 460.93,
+          "end": 474.0,
+          "sanskrit": "अथेन्द्रमब्रुवन्मघवन्नेतद्विजानीहि किमेतद्यक्षमिति तथेति ।",
+          "iast": "athendramabruvanmaghavannetadvijānīhi kimetadyakṣamiti tatheti |"
+        },
+        {
+          "start": 474.0,
+          "end": 479.85,
+          "sanskrit": "तदभ्यद्रवत्तस्मात्तिरोदधे ॥",
+          "iast": "tadabhyadravattasmāttirodadhe ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "3.12",
+      "start": 479.85,
+      "end": 498.61,
+      "phrases": [
+        {
+          "start": 479.85,
+          "end": 486.59,
+          "sanskrit": "स तस्मिन्नेवाकाशे स्त्रियमाजगाम ।",
+          "iast": "sa tasminnevākāśe striyamājagāma |"
+        },
+        {
+          "start": 486.59,
+          "end": 492.45,
+          "sanskrit": "बहुशोभमानामुमाँ हैमवतीम् ।",
+          "iast": "bahuśobhamānāmumām̐ haimavatīm |"
+        },
+        {
+          "start": 492.45,
+          "end": 498.61,
+          "sanskrit": "ताँहोवाच किमेतद्यक्षमिति ॥",
+          "iast": "tām̐hovāca kimetadyakṣamiti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "हैमवतीं",
+            "after": "हैमवतीम्"
+          },
+          "iast": {
+            "before": "haimavatīṃ",
+            "after": "haimavatīm"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "4.1",
+      "start": 498.61,
+      "end": 517.0,
+      "phrases": [
+        {
+          "start": 498.61,
+          "end": 503.63,
+          "sanskrit": "सा ब्रह्मेति होवाच ।",
+          "iast": "sā brahmeti hovāca |"
+        },
+        {
+          "start": 503.63,
+          "end": 510.62,
+          "sanskrit": "ब्रह्मणो वा एतद्विजये महीयध्वमिति ।",
+          "iast": "brahmaṇo vā etadvijaye mahīyadhvamiti |"
+        },
+        {
+          "start": 510.62,
+          "end": 517.0,
+          "sanskrit": "ततो हैव विदाञ्चकार ब्रह्मेति ॥",
+          "iast": "tato haiva vidāñcakāra brahmeti ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "4.2",
+      "start": 517.0,
+      "end": 543.94,
+      "phrases": [
+        {
+          "start": 517.0,
+          "end": 530.87,
+          "sanskrit": "तस्माद्वा एते देवा अतितरामिवान्यान्देवान्यदग्निर्वायुरिन्द्रः ।",
+          "iast": "tasmādvā ete devā atitarāmivānyāndevānyadagnirvāyurindraḥ |"
+        },
+        {
+          "start": 530.87,
+          "end": 536.76,
+          "sanskrit": "ते ह्येनन्नेदिष्ठं पस्पर्शुः ।",
+          "iast": "te hyenannediṣṭhaṃ pasparśuḥ |"
+        },
+        {
+          "start": 536.76,
+          "end": 543.94,
+          "sanskrit": "ते ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥",
+          "iast": "te hyenatprathamo vidāñcakāra brahmeti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "रिन्द्रस्ते",
+            "after": "रिन्द्रः ते"
+          },
+          "iast": {
+            "before": "indraste",
+            "after": "indraḥ te"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        },
+        {
+          "sanskrit": {
+            "before": "पस्पर्शुस्ते",
+            "after": "पस्पर्शुः ते"
+          },
+          "iast": {
+            "before": "pasparśuste",
+            "after": "pasparśuḥ te"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "4.3",
+      "start": 543.94,
+      "end": 563.15,
+      "phrases": [
+        {
+          "start": 543.94,
+          "end": 551.12,
+          "sanskrit": "तस्माद्वा इन्द्रोऽतितरामिवान्यान्देवान् ।",
+          "iast": "tasmādvā indro’titarāmivānyāndevān |"
+        },
+        {
+          "start": 551.12,
+          "end": 556.26,
+          "sanskrit": "स ह्येनन्नेदिष्ठं पस्पर्श ।",
+          "iast": "sa hyenannediṣṭhaṃ pasparśa |"
+        },
+        {
+          "start": 556.26,
+          "end": 563.15,
+          "sanskrit": "स ह्येनत्प्रथमो विदाञ्चकार ब्रह्मेति ॥",
+          "iast": "sa hyenatprathamo vidāñcakāra brahmeti ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "4.4",
+      "start": 563.15,
+      "end": 580.16,
+      "phrases": [
+        {
+          "start": 563.15,
+          "end": 571.76,
+          "sanskrit": "तस्यैष आदेशो यदेतद्विद्युतो व्यद्युतदा३ ।",
+          "iast": "tasyaiṣa ādeśo yadetadvidyuto vyadyutadā3 |"
+        },
+        {
+          "start": 571.76,
+          "end": 576.52,
+          "sanskrit": "इतीन् न्यमीमिषदा३ ।",
+          "iast": "itīn nyamīmiṣadā3 |"
+        },
+        {
+          "start": 576.52,
+          "end": 580.16,
+          "sanskrit": "इत्यधिदैवतम् ॥",
+          "iast": "ityadhidaivatam ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "4.5",
+      "start": 580.16,
+      "end": 595.89,
+      "phrases": [
+        {
+          "start": 580.16,
+          "end": 587.81,
+          "sanskrit": "अथाध्यात्मं यदेतद्गच्छतीव च मनः ।",
+          "iast": "athādhyātmaṃ yadetadgacchatīva ca manaḥ |"
+        },
+        {
+          "start": 587.81,
+          "end": 595.89,
+          "sanskrit": "अनेन चैतदुपस्मरत्यभीक्ष्णँ सङ्कल्पः ॥",
+          "iast": "anena caitadupasmaratyabhīkṣṇam̐ saṅkalpaḥ ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "मनोऽनेन",
+            "after": "मनः अनेन"
+          },
+          "iast": {
+            "before": "mano’nena",
+            "after": "manaḥ anena"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "4.6",
+      "start": 595.89,
+      "end": 615.89,
+      "phrases": [
+        {
+          "start": 595.89,
+          "end": 603.55,
+          "sanskrit": "तद्ध तद्वनं नाम तद्वनमित्युपासितव्यम् ।",
+          "iast": "taddha tadvanaṃ nāma tadvanamityupāsitavyam |"
+        },
+        {
+          "start": 603.55,
+          "end": 608.21,
+          "sanskrit": "स य एतदेवं वेद ।",
+          "iast": "sa ya etadevaṃ veda |"
+        },
+        {
+          "start": 608.21,
+          "end": 615.89,
+          "sanskrit": "अभि हैनꣳ सर्वाणि भूतानि संवाञ्छन्ति ॥",
+          "iast": "abhi hainaṃ sarvāṇi bhūtāni saṃvāñchanti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "मित्युपासितव्यं",
+            "after": "मित्युपासितव्यम्"
+          },
+          "iast": {
+            "before": "upāsitavyaṃ",
+            "after": "upāsitavyam"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        },
+        {
+          "sanskrit": {
+            "before": "वेदाभि",
+            "after": "वेद अभि"
+          },
+          "iast": {
+            "before": "vedābhi",
+            "after": "veda abhi"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "4.7",
+      "start": 615.89,
+      "end": 630.6,
+      "phrases": [
+        {
+          "start": 615.89,
+          "end": 620.28,
+          "sanskrit": "उपनिषदं भो ब्रूहि ।",
+          "iast": "upaniṣadaṃ bho brūhi |"
+        },
+        {
+          "start": 620.28,
+          "end": 623.49,
+          "sanskrit": "इत्युक्ता त उपनिषत् ।",
+          "iast": "ityuktā ta upaniṣat |"
+        },
+        {
+          "start": 623.49,
+          "end": 630.6,
+          "sanskrit": "ब्राह्मीं वाव त उपनिषदमब्रूमेति ॥",
+          "iast": "brāhmīṃ vāva ta upaniṣadamabrūmeti ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "ब्रूहीत्युक्ता",
+            "after": "ब्रूहि इत्युक्ता"
+          },
+          "iast": {
+            "before": "brūhītyuktā",
+            "after": "brūhi ityuktā"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        },
+        {
+          "sanskrit": {
+            "before": "उपनिषद्ब्राह्मीं",
+            "after": "उपनिषत् ब्राह्मीं"
+          },
+          "iast": {
+            "before": "upaniṣadbrāhmīṃ",
+            "after": "upaniṣat brāhmīṃ"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "4.8",
+      "start": 630.6,
+      "end": 643.8,
+      "phrases": [
+        {
+          "start": 630.6,
+          "end": 637.18,
+          "sanskrit": "तस्यै तपो दमः कर्मेति प्रतिष्ठा ।",
+          "iast": "tasyai tapo damaḥ karmeti pratiṣṭhā |"
+        },
+        {
+          "start": 637.18,
+          "end": 643.8,
+          "sanskrit": "वेदाः सर्वाङ्गानि सत्यमायतनम् ॥",
+          "iast": "vedāḥ sarvāṅgāni satyamāyatanam ||"
+        }
+      ],
+      "sourceReplacements": []
+    },
+    {
+      "number": "4.9",
+      "start": 643.8,
+      "end": 663.22,
+      "phrases": [
+        {
+          "start": 643.8,
+          "end": 652.47,
+          "sanskrit": "यो वा एतामेवं वेदापहत्य पाप्मानम् ।",
+          "iast": "yo vā etāmevaṃ vedāpahatya pāpmānam |"
+        },
+        {
+          "start": 652.47,
+          "end": 660.06,
+          "sanskrit": "अनन्ते स्वर्गे लोके ज्येये प्रतितिष्ठति ।",
+          "iast": "anante svarge loke jyeye pratitiṣṭhati |"
+        },
+        {
+          "start": 660.06,
+          "end": 663.22,
+          "sanskrit": "प्रतितिष्ठति ॥",
+          "iast": "pratitiṣṭhati ||"
+        }
+      ],
+      "sourceReplacements": [
+        {
+          "sanskrit": {
+            "before": "पाप्मानमनन्ते",
+            "after": "पाप्मानम् अनन्ते"
+          },
+          "iast": {
+            "before": "pāpmānamanante",
+            "after": "pāpmānam anante"
+          },
+          "reason": "Spoken sandhi or the pausal form at the recording break."
+        }
+      ]
+    },
+    {
+      "number": "closing-shanti",
+      "start": 663.22,
+      "end": 725.2675,
+      "phrases": [
+        {
+          "start": 663.22,
+          "end": 666.59,
+          "sanskrit": "ॐ ।",
+          "iast": "oṃ |"
+        },
+        {
+          "start": 666.59,
+          "end": 671.46,
+          "sanskrit": "आप्यायन्तु ममाङ्गानि ।",
+          "iast": "āpyāyantu mamāṅgāni |"
+        },
+        {
+          "start": 671.46,
+          "end": 680.6,
+          "sanskrit": "वाक्प्राणश्चक्षुः श्रोत्रमथो बलमिन्द्रियाणि च सर्वाणि ।",
+          "iast": "vākprāṇaścakṣuḥ śrotramatho balamindriyāṇi ca sarvāṇi |"
+        },
+        {
+          "start": 680.6,
+          "end": 685.26,
+          "sanskrit": "सर्वं ब्रह्मौपनिषदम् ।",
+          "iast": "sarvaṃ brahmaupaniṣadam |"
+        },
+        {
+          "start": 685.26,
+          "end": 693.59,
+          "sanskrit": "माहं ब्रह्म निराकुर्यां मा मा ब्रह्म निराकरोत् ।",
+          "iast": "māhaṃ brahma nirākuryāṃ mā mā brahma nirākarot |"
+        },
+        {
+          "start": 693.59,
+          "end": 700.24,
+          "sanskrit": "अनिराकरणमस्त्वनिराकरणं मेऽस्तु ।",
+          "iast": "anirākaraṇamastvanirākaraṇaṃ me’stu |"
+        },
+        {
+          "start": 700.24,
+          "end": 708.28,
+          "sanskrit": "तदात्मनि निरते य उपनिषत्सु धर्मास्ते मयि सन्तु ।",
+          "iast": "tadātmani nirate ya upaniṣatsu dharmāste mayi santu |"
+        },
+        {
+          "start": 708.28,
+          "end": 711.38,
+          "sanskrit": "ते मयि सन्तु ।",
+          "iast": "te mayi santu |"
+        },
+        {
+          "start": 711.38,
+          "end": 718.25,
+          "sanskrit": "ॐ शान्तिः शान्तिः शान्तिः ।",
+          "iast": "oṃ śāntiḥ śāntiḥ śāntiḥ |"
+        },
+        {
+          "start": 718.25,
+          "end": 725.2675,
+          "sanskrit": "हरिः ॐ ॥",
+          "iast": "hariḥ oṃ ||"
+        }
+      ],
+      "sourceReplacements": []
+    }
+  ]
+}

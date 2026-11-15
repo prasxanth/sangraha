@@ -112,6 +112,51 @@ def keep_punctuation(text, pattern):
     return result
 
 
+def apply_reviewed_recitation(data):
+    """Keep recording-specific wording and breaks above automatic word timing."""
+    review = read_json(CHECKPOINTS / 'reviewed_recitation.json')
+    for key in ['sourceHtmlSha256', 'audioSha256']:
+        require(review[key] == data[key], 'Recitation review belongs to a different source or recording.')
+    require([c['number'] for c in review['clips']] == [c['number'] for c in data['clips']],
+            'Recitation review is missing or reorders sections.')
+    source_verses = {v['number']: v for v in read_json(CHECKPOINTS / 'source_verses.json')}
+    def comparable(text):
+        return re.sub(r'[\s।॥|]', '', text)
+    for clip, reviewed in zip(data['clips'], review['clips']):
+        require(abs(clip['start'] - reviewed['start']) < .000001 and abs(clip['end'] - reviewed['end']) < .000001,
+                'Proposed verse boundary changed at ' + clip['number'] + '; review the saved recitation breaks before applying it.')
+        phrases = copy.deepcopy(reviewed['phrases'])
+        for field in ['sanskrit', 'iast']:
+            source = source_verses.get(clip['number'])
+            original = source[field] if source else ' '.join(p[field] for p in clip['phrases'])
+            if clip['number'] == '1.1':
+                original = re.sub(r'^ॐ\s*|^oṃ\s*', '', original)
+            expected = comparable(original)
+            for change in reviewed['sourceReplacements']:
+                before, after = comparable(change[field]['before']), comparable(change[field]['after'])
+                require(expected.count(before) == 1, 'Recitation spelling change is ambiguous: ' + clip['number'])
+                expected = expected.replace(before, after, 1)
+            require(expected == comparable(' '.join(p[field] for p in phrases)),
+                    'Undeclared text change or missing words in recitation: ' + clip['number'] + ' ' + field)
+        require(phrases[0]['start'] == clip['start'] and phrases[-1]['end'] == clip['end'],
+                'Reviewed phrases must cover their section: ' + clip['number'])
+        for index, phrase in enumerate(phrases):
+            require(phrase['start'] < phrase['end'], 'Empty reviewed phrase: ' + clip['number'])
+            if index:
+                require(phrase['start'] == phrases[index - 1]['end'], 'Gap in reviewed phrases: ' + clip['number'])
+            terminal = index == len(phrases) - 1
+            sa, ia = ('॥', '||') if terminal else ('।', '|')
+            require(phrase['sanskrit'].endswith(' ' + sa) and not re.search('[।॥]', phrase['sanskrit'][:-len(sa)]),
+                    'Misplaced Sanskrit recitation marker: ' + clip['number'])
+            require(phrase['iast'].endswith(' ' + ia) and '|' not in phrase['iast'][:-len(ia)],
+                    'Misplaced IAST recitation marker: ' + clip['number'])
+        clip['phrases'] = phrases
+    # Literal invocation translations keep their reviewed wording and translations.
+    closing = data['clips'][-1]
+    closing['literalPhrases'] = copy.deepcopy(data['clips'][0]['phrases']) + closing['literalPhrases'][-1:]
+    return data
+
+
 def assemble(verses, rows, closing_words, pauses, manifest):
     opening = read_json(CHECKPOINTS / 'opening_invocation.json')
     clips, last = [opening], opening['end']
@@ -139,7 +184,8 @@ def assemble(verses, rows, closing_words, pauses, manifest):
                    words=opening['words'] + [['हरिः', 'hariḥ', 'Hari; a name of the Divine.'], ['ॐ', 'oṃ', 'Om; the sacred syllable.']],
                    english=opening['english'] + ' Hariḥ Om.')
     metadata['clips'] = clips + [closing]
-    return {key: metadata[key] for key in manifest['timingFieldOrder']}
+    data = {key: metadata[key] for key in manifest['timingFieldOrder']}
+    return apply_reviewed_recitation(data)
 
 
 def verify_model(path, model_manifest):
