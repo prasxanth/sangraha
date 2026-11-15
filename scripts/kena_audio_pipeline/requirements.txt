@@ -1,0 +1,7 @@
+# Observed core versions in the successful CPU alignment run (Python 3.12.2).
+# Replay needs only NumPy; the other packages are needed for realign.
+numpy==2.5.4
+faster-whisper==1.2.1
+ctranslate2==4.9.0
+tokenizers==0.23.3
+av==19.0.2

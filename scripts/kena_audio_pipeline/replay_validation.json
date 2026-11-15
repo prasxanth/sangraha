@@ -1,0 +1,10 @@
+{
+  "mode": "replay",
+  "sourceHtmlSha256": "d11d3d80d47e6f6151c6af61408ee33408366e65b111c1497a3950b184c2a301",
+  "audioSha256": "6720a5ae8ae37fb158867c17421082fb2b6e5b05487c98ce3cfa711059adb7fb",
+  "pcm_matches_original": true,
+  "timing_matches_published": true,
+  "html_matches_published": true,
+  "htmlSha256": "fa94d3918282c7fbab2335931054277cfe5b7c79cf167cb599273461769171ae",
+  "sections": 36
+}

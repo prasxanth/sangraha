@@ -8,6 +8,8 @@ Recitation lines follow major recording pauses. Joined Sanskrit forms remain in 
 
 The source recording is **Kena-Upanishad**, recited by **Swami Paramarthananda**, from Yogamalika's *Divyanadam Chanting Series, Vol. 2 & 3* (1996), downloaded from [the supplied YouTube recording](https://www.youtube.com/watch?v=4YirltXJXtA). `kena_upanishad.opus` retains the downloaded Opus stream without re-encoding. The audio edition embeds those same bytes.
 
+The complete extraction/alignment/replay workflow, model and recording hashes, saved intermediate results, and commands are in [the saved generation pipeline](../scripts/kena_audio_pipeline/README.md).
+
 ## Maintenance and validation
 
 `kena-audio-timing.json` records section and phrase ranges in source-recording seconds, independently of playback speed. Verse alignment uses the known Sanskrit with following-verse context; cuts are centered in measured recording pauses. The closing invocation is aligned separately. These are recitation boundaries, not separate word-by-word recordings.

@@ -1,0 +1,299 @@
+{
+  "number": "shanti",
+  "label": "Opening Śānti mantra",
+  "english": "Om. May my limbs, speech, vital breath, eyes, ears, strength, and all the senses flourish. All is Brahman as taught in the Upaniṣads. May I never deny Brahman; may Brahman never deny me. May there be no rejection; may there be no rejection of me. May the virtues taught in the Upaniṣads dwell in me, who am devoted to the Self. May they dwell in me. Om. Peace, peace, peace.",
+  "words": [
+    [
+      "ॐ",
+      "oṃ",
+      "Om."
+    ],
+    [
+      "आप्यायन्तु",
+      "āpyāyantu",
+      "may they flourish"
+    ],
+    [
+      "मम",
+      "mama",
+      "my"
+    ],
+    [
+      "अङ्गानि",
+      "aṅgāni",
+      "limbs"
+    ],
+    [
+      "वाक्",
+      "vāk",
+      "speech"
+    ],
+    [
+      "प्राणः",
+      "prāṇaḥ",
+      "vital breath"
+    ],
+    [
+      "चक्षुः",
+      "cakṣuḥ",
+      "eye"
+    ],
+    [
+      "श्रोत्रम्",
+      "śrotram",
+      "ear"
+    ],
+    [
+      "अथो",
+      "atho",
+      "and also"
+    ],
+    [
+      "बलम्",
+      "balam",
+      "strength"
+    ],
+    [
+      "इन्द्रियाणि",
+      "indriyāṇi",
+      "senses"
+    ],
+    [
+      "च",
+      "ca",
+      "and"
+    ],
+    [
+      "सर्वाणि",
+      "sarvāṇi",
+      "all"
+    ],
+    [
+      "सर्वम्",
+      "sarvam",
+      "all"
+    ],
+    [
+      "ब्रह्म",
+      "brahma",
+      "Brahman"
+    ],
+    [
+      "औपनिषदम्",
+      "aupaniṣadam",
+      "taught in the Upaniṣads"
+    ],
+    [
+      "मा",
+      "mā",
+      "may not"
+    ],
+    [
+      "अहम्",
+      "aham",
+      "I"
+    ],
+    [
+      "ब्रह्म",
+      "brahma",
+      "Brahman"
+    ],
+    [
+      "निराकुर्याम्",
+      "nirākuryām",
+      "reject; deny"
+    ],
+    [
+      "मा",
+      "mā",
+      "may not"
+    ],
+    [
+      "मा",
+      "mā",
+      "me"
+    ],
+    [
+      "ब्रह्म",
+      "brahma",
+      "Brahman"
+    ],
+    [
+      "निराकरोत्",
+      "nirākarot",
+      "reject"
+    ],
+    [
+      "अनिराकरणम्",
+      "anirākaraṇam",
+      "absence of rejection"
+    ],
+    [
+      "अस्तु",
+      "astu",
+      "may there be"
+    ],
+    [
+      "अनिराकरणम्",
+      "anirākaraṇam",
+      "absence of rejection"
+    ],
+    [
+      "मे",
+      "me",
+      "for me"
+    ],
+    [
+      "अस्तु",
+      "astu",
+      "may there be"
+    ],
+    [
+      "तत्",
+      "tat",
+      "that"
+    ],
+    [
+      "आत्मनि",
+      "ātmani",
+      "in the Self"
+    ],
+    [
+      "निरते",
+      "nirate",
+      "devoted to"
+    ],
+    [
+      "ये",
+      "ye",
+      "which"
+    ],
+    [
+      "उपनिषत्सु",
+      "upaniṣatsu",
+      "in the Upaniṣads"
+    ],
+    [
+      "धर्माः",
+      "dharmāḥ",
+      "virtues; disciplines"
+    ],
+    [
+      "ते",
+      "te",
+      "those"
+    ],
+    [
+      "मयि",
+      "mayi",
+      "in me"
+    ],
+    [
+      "सन्तु",
+      "santu",
+      "may they dwell"
+    ],
+    [
+      "ते",
+      "te",
+      "those"
+    ],
+    [
+      "मयि",
+      "mayi",
+      "in me"
+    ],
+    [
+      "सन्तु",
+      "santu",
+      "may they dwell"
+    ],
+    [
+      "ॐ",
+      "oṃ",
+      "Om"
+    ],
+    [
+      "शान्तिः",
+      "śāntiḥ",
+      "peace"
+    ],
+    [
+      "शान्तिः",
+      "śāntiḥ",
+      "peace"
+    ],
+    [
+      "शान्तिः",
+      "śāntiḥ",
+      "peace"
+    ]
+  ],
+  "start": 0,
+  "end": 51.55,
+  "phrases": [
+    {
+      "start": 0,
+      "end": 6.63,
+      "sanskrit": "ॐ",
+      "iast": "oṃ",
+      "english": "Om."
+    },
+    {
+      "start": 6.63,
+      "end": 11.14,
+      "sanskrit": "आप्यायन्तु ममाङ्गानि ।",
+      "iast": "āpyāyantu mamāṅgāni |",
+      "english": "May my limbs flourish."
+    },
+    {
+      "start": 11.14,
+      "end": 18.83,
+      "sanskrit": "वाक्प्राणश्चक्षुः श्रोत्रमथो बलमिन्द्रियाणि च सर्वाणि ।",
+      "iast": "vākprāṇaścakṣuḥ śrotramatho balamindriyāṇi ca sarvāṇi |",
+      "english": "May speech, vital breath, eyes, ears, strength and all the senses flourish."
+    },
+    {
+      "start": 18.83,
+      "end": 22.65,
+      "sanskrit": "सर्वं ब्रह्मौपनिषदम् ।",
+      "iast": "sarvaṃ brahmaupaniṣadam |",
+      "english": "All is Brahman as taught in the Upaniṣads."
+    },
+    {
+      "start": 22.65,
+      "end": 29.65,
+      "sanskrit": "माहं ब्रह्म निराकुर्यां मा मा ब्रह्म निराकरोत् ।",
+      "iast": "māhaṃ brahma nirākuryāṃ mā mā brahma nirākarot |",
+      "english": "May I not deny Brahman; may Brahman not deny me."
+    },
+    {
+      "start": 29.65,
+      "end": 35.25,
+      "sanskrit": "अनिराकरणमस्त्वनिराकरणं मेऽस्तु ।",
+      "iast": "anirākaraṇamastvanirākaraṇaṃ me’stu |",
+      "english": "May there be no rejection; may there be no rejection of me."
+    },
+    {
+      "start": 35.25,
+      "end": 42.25,
+      "sanskrit": "तदात्मनि निरते य उपनिषत्सु धर्मास्ते मयि सन्तु ।",
+      "iast": "tadātmani nirate ya upaniṣatsu dharmāste mayi santu |",
+      "english": "May the virtues taught in the Upaniṣads dwell in me, who am devoted to the Self."
+    },
+    {
+      "start": 42.25,
+      "end": 44.94,
+      "sanskrit": "ते मयि सन्तु ।",
+      "iast": "te mayi santu |",
+      "english": "May they dwell in me."
+    },
+    {
+      "start": 44.94,
+      "end": 51.55,
+      "sanskrit": "ॐ शान्तिः शान्तिः शान्तिः ॥",
+      "iast": "oṃ śāntiḥ śāntiḥ śāntiḥ ||",
+      "english": "Om. Peace, peace, peace."
+    }
+  ]
+}

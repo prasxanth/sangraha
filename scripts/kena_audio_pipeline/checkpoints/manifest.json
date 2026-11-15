@@ -1,0 +1,77 @@
+{
+  "sourceHtmlSha256": "d11d3d80d47e6f6151c6af61408ee33408366e65b111c1497a3950b184c2a301",
+  "audioSha256": "6720a5ae8ae37fb158867c17421082fb2b6e5b05487c98ce3cfa711059adb7fb",
+  "htmlSha256": "fa94d3918282c7fbab2335931054277cfe5b7c79cf167cb599273461769171ae",
+  "sourceUrl": "https://www.youtube.com/watch?v=4YirltXJXtA",
+  "sampleRate": 16000,
+  "channels": 1,
+  "pcmFormat": "f32le",
+  "seedAudioStart": 51,
+  "seedCursor": 72.46,
+  "closingAlignmentStart": 663.42,
+  "openingEnd": 51.55,
+  "pauseThresholdDb": -18,
+  "pauseMinimumSeconds": 0.38,
+  "phrasePauseMinimumSeconds": 0.6,
+  "bridgeFrames": 5,
+  "bridgePasses": 2,
+  "frameSeconds": 0.02,
+  "models": {
+    "seed": {
+      "repository": "Systran/faster-whisper-small",
+      "files": {
+        "model.bin": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+        "config.json": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828",
+        "tokenizer.json": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+        "vocabulary.txt": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+      }
+    },
+    "main": {
+      "repository": "Systran/faster-whisper-tiny",
+      "files": {
+        "model.bin": "dcb76c6586fc06cbdac6dd21f14cfd129cc4cdd9dce19bf4ffa62e59cbe6e6d1",
+        "config.json": "a73a28cdfe1c43ccc7202fa333d1f89c202477271407ae9a7f19afa52039cac8",
+        "tokenizer.json": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+        "vocabulary.txt": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+      }
+    }
+  },
+  "checkpointSha256": {
+    "closing_alignment.json": "ddf6ba703077ef814a418aa369deb62d01ffed4a5e3518cbef11d0fcfaabc190",
+    "opening_invocation.json": "facf21a56e4e7f391a6045dd4ab15843b080c90b15c750299c31534874312d97",
+    "metadata.json": "8c9736be45dd3e75bac98b146cc3ab3f8414443583525c811399b48fa579681e",
+    "source_verses.json": "0dba56dd91f2db86543d6aa175d85c32861d1766a92d5c111fe6ef32515f2fba",
+    "verse_alignment.json": "1613fa4f4a2d51e1ef085acf90bdbc969832c1fad21eccfd50d46f6242fd011f",
+    "pauses.json": "ea610f212c6d137464cdec8947f203617ba29647776efa6ff09230c986569ab4"
+  },
+  "timingFieldOrder": [
+    "sourceHtmlSha256",
+    "audioSha256",
+    "recording",
+    "alignmentStatus",
+    "clips",
+    "boundaryMethod",
+    "notes"
+  ],
+  "pcmSha256": "5c32122f7ff1c2cd6cb4e0ff4fe0b4c04a716bd785c47860507e08bb622d6741",
+  "alignmentEnvironment": {
+    "python": "3.12.2",
+    "faster-whisper": "1.2.1",
+    "ctranslate2": "4.9.0",
+    "numpy": "2.5.4",
+    "tokenizers": "0.23.3",
+    "av": "19.0.2",
+    "cpu_threads": 2,
+    "compute_type": "int8",
+    "language": "hi"
+  },
+  "ffmpegVersion": "6.1.1",
+  "ytDlpVersion": "2026.10.26",
+  "downloadFormat": {
+    "format_id": "251",
+    "acodec": "opus",
+    "ext": "webm",
+    "asr": 48000,
+    "abr": 112.003
+  }
+}

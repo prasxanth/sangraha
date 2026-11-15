@@ -4,6 +4,7 @@
 Does not modify the source HTML or recording. Follow AGENTS.md freshness checks first.
 """
 from pathlib import Path
+import argparse
 import base64
 import hashlib
 import html
@@ -11,8 +12,12 @@ import json
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--timing-file', type=Path, default=ROOT / 'docs/kena-audio-timing.json')
+parser.add_argument('--output', type=Path, default=ROOT / 'kena_upanishad_audio.html')
+args = parser.parse_args()
 source = (ROOT / 'kena_upanishad.html').read_text()
-data = json.loads((ROOT / 'docs/kena-audio-timing.json').read_text())
+data = json.loads(args.timing_file.read_text())
 assert hashlib.sha256((ROOT / 'kena_upanishad.html').read_bytes()).hexdigest() == data['sourceHtmlSha256'], 'Source HTML changed: reconcile the timing and source text before rebuilding.'
 audio = (ROOT / 'kena_upanishad.opus').read_bytes()
 assert hashlib.sha256(audio).hexdigest() == data['audioSha256'], 'Audio changed: verify timing before rebuilding.'
@@ -63,5 +68,5 @@ for clip in data['clips']:
     addon += 'KENA_PHRASE_TRANSLATIONS[' + key + ']=((c)=>c.literalPhrases||c.phrases)(KENA_AUDIO.clips.find(c=>c.number===' + key + " )).map(p=>({sanskrit:p.sanskrit,english:p.english||''}));\n"
 addon += (ROOT / 'assets/kena_audio/player.js').read_text() + '\n</script>\n'
 s = s.replace('</body>', addon + '</body>', 1)
-(ROOT / 'kena_upanishad_audio.html').write_text(s)
-print('Wrote audio edition:', len(s.encode()), 'bytes')
+args.output.write_text(s)
+print('Wrote audio edition:', args.output, len(s.encode()), 'bytes')

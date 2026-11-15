@@ -1,0 +1,17 @@
+{
+  "sourceHtmlSha256": "d11d3d80d47e6f6151c6af61408ee33408366e65b111c1497a3950b184c2a301",
+  "audioSha256": "6720a5ae8ae37fb158867c17421082fb2b6e5b05487c98ce3cfa711059adb7fb",
+  "recording": {
+    "title": "Kena-Upanishad",
+    "artist": "Swami Paramarthananda",
+    "source": "https://www.youtube.com/watch?v=4YirltXJXtA",
+    "duration": 725.2675
+  },
+  "alignmentStatus": "aligned",
+  "boundaryMethod": "Following-text alignment; verse cuts placed in the middle of low-energy recording pauses.",
+  "notes": [
+    "The opening Om is part of the invocation. The audio edition removes the unrecited additional Om from mantra 1.1 only; the original HTML remains unchanged.",
+    "Verse boundaries use following-text alignment and low-energy pauses. Recitation line breaks show major pauses; grammatical pada-viccheda remains in Study.",
+    "The recording repeats the invocation and ends with Hariḥ Om; both are retained in a closing card."
+  ]
+}
