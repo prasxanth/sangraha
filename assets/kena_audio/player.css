@@ -21,7 +21,8 @@
 .recitation-settings input[type=range] { width:100%; accent-color:#8bbaff; min-height:30px; cursor:pointer; }
 .recitation-options { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:9px; font-size:12px; }
 .recitation-options label { display:flex; align-items:center; gap:6px; min-height:36px; }
-.recitation-line { display:block; border-radius:4px; transition:background .15s; }
+/* Reserve space for the 3px highlight marker in both states, avoiding overlap or text movement. */
+.recitation-line { display:block; padding-inline:8px 4px; border-radius:4px; transition:background .15s; }
 .recitation-line.reciting { background:#3983ff30; box-shadow:inset 3px 0 #8bbaff; }
 .audio-notice { color:var(--text3); font-size:12px; line-height:1.6; margin:10px 0; }
 /* Announce routine playback status without consuming a row above the reader. */

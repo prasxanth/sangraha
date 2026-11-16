@@ -72,6 +72,13 @@ const {chromium}=require('playwright');
   const actualFonts=(await cdp.send('CSS.getPlatformFontsForNode',{nodeId:fontNode})).fonts;
   assert(actualFonts.some(f=>/Tiro.*Devanagari.*Sanskrit/i.test(f.familyName)&&f.isCustomFont&&f.glyphCount>0),'Sanskrit glyphs actually render in embedded Tiro, rather than a fallback');
   await cdp.detach();
+  // Wait for asynchronous seek/play setup before testing another playback action.
+  async function waitForPlayback(){
+   await page.waitForFunction(()=>{
+    const a=document.getElementById('recitation-audio'),clip=KENA_AUDIO.clips.find(c=>c.number===audioEdition.state.number);
+    return clip&&!a.paused&&!a.seeking&&a.readyState>=2&&document.getElementById('audio-status').textContent==='Playing '+clip.label;
+   });
+  }
   async function openOptions(scope='#screen-read'){
    const toggle=page.locator(scope+' .recitation-toggle');
    if(await toggle.getAttribute('aria-expanded')!=='true')await toggle.click();
@@ -155,18 +162,23 @@ const {chromium}=require('playwright');
    assert.equal(await page.evaluate(()=>document.getElementById('recitation-audio').playbackRate),Number(value));
   }
   await page.locator('#screen-read .recitation-play').click();
-  await page.waitForFunction(()=>!document.getElementById('recitation-audio').paused);
+  await waitForPlayback();
   assert(await page.evaluate(()=>Math.abs(document.getElementById('recitation-audio').currentTime-KENA_AUDIO.clips[1].start)<2));
-  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end-.08);
+  // Seek to the boundary directly: headless audio output can have a stalled hardware clock.
+  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end);
   await page.waitForFunction(()=>document.getElementById('recitation-audio').paused);
+  assert(await page.evaluate(()=>Math.abs(document.getElementById('recitation-audio').currentTime-KENA_AUDIO.clips[1].end)<.001),'Verse stop clamps playback to its boundary');
   await page.locator('#screen-read .recitation-repeat').check();
   await page.locator('#screen-read .recitation-restart').click();
+  await waitForPlayback();
   await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end-.02);
   await page.waitForFunction(()=>document.getElementById('recitation-audio').currentTime<KENA_AUDIO.clips[1].start+1);
+  await waitForPlayback();
   await page.locator('#screen-read .recitation-repeat').uncheck();
   await page.locator('#screen-read .recitation-continuous').check();
   await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end-.02);
   await page.waitForFunction(()=>document.getElementById('reading-number').textContent==='1.2');
+  await waitForPlayback();
   await page.locator('#reading-study').click();
   assert.equal(await page.locator('#study-passage .recitation-panel').count(),1);
   await page.locator('#study-passage .recitation-play').click();
@@ -185,8 +197,10 @@ const {chromium}=require('playwright');
   await openOptions();
   await page.locator('#screen-read .recitation-repeat').check();
   await page.locator('#screen-read .recitation-play').click();
+  await waitForPlayback();
   await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips.at(-1).end-.02);
   await page.waitForFunction(()=>document.getElementById('recitation-audio').currentTime<KENA_AUDIO.clips.at(-1).start+1);
+  await waitForPlayback();
   await page.evaluate(()=>navigate('home'));
   assert(await page.evaluate(()=>document.getElementById('recitation-audio').paused),'Leaving the reader pauses playback');
   assert.deepEqual(errors,[]);assert.deepEqual(requests,[],'Fully offline, no external resources requested');
