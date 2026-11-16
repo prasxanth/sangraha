@@ -10,6 +10,9 @@ import hashlib
 import html
 import json
 import re
+import sys
+sys.dont_write_bytecode = True
+from kena_audio_pipeline.segment_audio import package
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
@@ -80,7 +83,10 @@ s = s.replace('Read the Sanskrit. Turn to the meaning.<br>Stay with the question
 s = s.replace('<span class="app-header-logo">Kena Upaniṣad</span>', '<span class="app-header-logo">Kena · Audio</span>', 1)
 s = s.replace('id="home-read" onclick="navigate(\'read\')">Read', 'id="home-read" onclick="navigate(\'read\')">Listen &amp; read', 1)
 s = s.replace('  <div id="content">', '  <div id="audio-status" role="status" aria-live="polite"></div>\n  <div id="content">', 1)
-addon = '<audio id="recitation-audio" preload="metadata" src="data:audio/ogg;codecs=opus;base64,' + base64.b64encode(audio).decode() + '"></audio>\n<script>\nconst KENA_AUDIO = ' + json.dumps(data, ensure_ascii=False) + ';\n'
+section_sources, section_report = package(ROOT / 'kena_upanishad.opus', data['clips'])
+addon = '<audio id="recitation-audio" preload="metadata"></audio>\n<script>\nconst KENA_AUDIO = ' + json.dumps(data, ensure_ascii=False) + ';\n'
+addon += 'const KENA_AUDIO_SOURCES = ' + json.dumps(section_sources, separators=(',', ':')) + ';\n'
+addon += 'const KENA_AUDIO_PACKAGING = ' + json.dumps(section_report, separators=(',', ':')) + ';\n'
 for clip in data['clips']:
     if clip['number'] not in ['shanti', 'closing-shanti']:
         continue

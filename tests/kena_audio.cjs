@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict');
 const fs=require('node:fs');const crypto=require('node:crypto');
-const {chromium}=require('playwright');
+const {chromium,webkit}=require('playwright');
 (async()=>{
  const timing=JSON.parse(fs.readFileSync('docs/kena-audio-timing.json'));
  assert.equal(timing.clips.length,36);
@@ -54,7 +54,7 @@ const {chromium}=require('playwright');
   assert(measuredPauses.some(gap=>gap.start<=p.end&&p.end<=gap.end),c.number+' internal marker is placed within a measured audio pause');
  }
  assert.equal(crypto.createHash('sha256').update(source).digest('hex'),timing.sourceHtmlSha256,'Original HTML unchanged');
- const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ const browser=process.env.BROWSER==='webkit'?await webkit.launch({headless:true,executablePath:process.env.WEBKIT_PATH}):await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true,args:['--disable-audio-output']});
  try{
   const page=await browser.newPage();const errors=[], requests=[];
   page.on('pageerror',e=>errors.push(e.message));
@@ -63,21 +63,23 @@ const {chromium}=require('playwright');
   await page.goto('file://'+process.cwd()+'/kena_upanishad_audio.html',{waitUntil:'load'});
   await page.locator('#home-read').click();
   await page.evaluate(()=>document.fonts.ready);
-  assert.deepEqual(await page.evaluate(()=>KENA_AUDIO),timing,'UI-only changes preserve all embedded recitation data');
+  assert.deepEqual(await page.evaluate(()=>KENA_AUDIO),timing,'Playback packaging preserves all reviewed recitation data');
   assert(await page.evaluate(()=>Array.from(document.fonts).some(font=>font.family.includes('Tiro Devanagari Sanskrit')&&font.status==='loaded')),'Original Sanskrit font loads offline');
   assert((await page.locator('#reading-copy .v-sanskrit').evaluate(e=>getComputedStyle(e).fontFamily)).includes('Tiro Devanagari Sanskrit'));
+  if(process.env.BROWSER!=='webkit'){
   const cdp=await page.context().newCDPSession(page);await cdp.send('DOM.enable');await cdp.send('CSS.enable');
   const documentRoot=(await cdp.send('DOM.getDocument')).root.nodeId;
   const fontNode=(await cdp.send('DOM.querySelector',{nodeId:documentRoot,selector:'#reading-copy .v-sanskrit .recitation-line:nth-child(2)'})).nodeId;
   const actualFonts=(await cdp.send('CSS.getPlatformFontsForNode',{nodeId:fontNode})).fonts;
   assert(actualFonts.some(f=>/Tiro.*Devanagari.*Sanskrit/i.test(f.familyName)&&f.isCustomFont&&f.glyphCount>0),'Sanskrit glyphs actually render in embedded Tiro, rather than a fallback');
   await cdp.detach();
+  }
   // Wait for asynchronous seek/play setup before testing another playback action.
   async function waitForPlayback(){
    await page.waitForFunction(()=>{
     const a=document.getElementById('recitation-audio'),clip=KENA_AUDIO.clips.find(c=>c.number===audioEdition.state.number);
     return clip&&!a.paused&&!a.seeking&&a.readyState>=2&&document.getElementById('audio-status').textContent==='Playing '+clip.label;
-   });
+   }).catch(async error=>{const state=await page.evaluate(()=>{const a=document.getElementById('recitation-audio');return {number:audioEdition.state.number,time:a.currentTime,seeking:a.seeking,paused:a.paused,ready:a.readyState,error:a.error?.message,status:document.getElementById('audio-status').textContent};});throw new Error(error.message+' '+JSON.stringify(state));});
   }
   async function openOptions(scope='#screen-read'){
    const toggle=page.locator(scope+' .recitation-toggle');
@@ -102,11 +104,57 @@ const {chromium}=require('playwright');
   const editionHtml=fs.readFileSync('kena_upanishad_audio.html','utf8');
   const embeddedFontHashes=new Set(Array.from(editionHtml.matchAll(/url\(data:font\/woff2;base64,([A-Za-z0-9+/=]+)\)/g),m=>crypto.createHash('sha256').update(Buffer.from(m[1],'base64')).digest('hex')));
   for(const asset of Object.values(require('../assets/kena_audio/fonts/manifest.json').assets))assert(embeddedFontHashes.has(asset.sha256),'Original font asset is embedded byte-for-byte');
-  const embedded=editionHtml.match(/id="recitation-audio"[^>]*src="data:audio\/ogg;codecs=opus;base64,([^"]+)"/)[1];
-  assert.equal(crypto.createHash('sha256').update(Buffer.from(embedded,'base64')).digest('hex'),audioHash,'Embedded audio is byte-for-byte identical to the recording');
-  const bytes=await page.evaluate(()=>{
-   const src=document.getElementById('recitation-audio').src.split(',')[1];return atob(src).length;
-  });assert.equal(bytes,fs.statSync('kena_upanishad.opus').size);
+  const embeddedSources=await page.evaluate(()=>KENA_AUDIO_SOURCES);
+  const packaging=await page.evaluate(()=>KENA_AUDIO_PACKAGING);
+  // Inspect the actual WebM payloads: every section must contain an unchanged,
+  // contiguous sequence of the source's Opus packets, without re-encoding.
+  function opusPackets(buffer){
+   const result=[];let chunks=[];
+   for(let offset=0;offset<buffer.length;){
+    assert.equal(buffer.toString('ascii',offset,offset+4),'OggS');
+    const count=buffer[offset+26],laces=buffer.subarray(offset+27,offset+27+count);
+    let body=offset+27+count;
+    for(const length of laces){chunks.push(buffer.subarray(body,body+length));body+=length;
+     if(length<255){result.push(crypto.createHash('sha256').update(Buffer.concat(chunks)).digest('hex'));chunks=[];}
+    }
+    offset=body;
+   }
+   return result.slice(2);
+  }
+  function webmPackets(buffer){
+   const result=[];
+   function vint(offset,keepMarker){
+    let length=1;while(!(buffer[offset]&(128>>(length-1))))length++;
+    let value=keepMarker?buffer[offset]:buffer[offset]&((1<<(8-length))-1);
+    for(let i=1;i<length;i++)value=value*256+buffer[offset+i];
+    return {length,value};
+   }
+   function elements(start,end){
+    for(let offset=start;offset<end;){
+     const id=vint(offset,true);offset+=id.length;
+     const size=vint(offset,false);offset+=size.length;
+     const stop=Math.min(end,offset+size.value);
+     if([0x18538067,0x1f43b675,0xa0].includes(id.value))elements(offset,stop);
+     if([0xa3,0xa1].includes(id.value)){
+      const track=vint(offset,false),flags=buffer[offset+track.length+2];
+      assert.equal(flags&6,0,'Expected one unchanged Opus packet per WebM block');
+      result.push(crypto.createHash('sha256').update(buffer.subarray(offset+track.length+3,stop)).digest('hex'));
+     }
+     offset=stop;
+    }
+   }
+   elements(0,buffer.length);return result;
+  }
+  const originalPackets=opusPackets(fs.readFileSync('kena_upanishad.opus'));
+  for(const clip of timing.clips){
+   const bytes=Buffer.from(embeddedSources[clip.number].src.split(',')[1],'base64');
+   const actualPackets=webmPackets(bytes),index=originalPackets.indexOf(actualPackets[0]);
+   assert(index>=0);
+   assert.deepEqual(actualPackets,originalPackets.slice(index,index+actualPackets.length),clip.number+' preserves original audio packets');
+   assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),packaging.find(c=>c.number===clip.number).sha256);
+   assert(Math.abs(embeddedSources[clip.number].offset-clip.start)<.021,clip.number+' starts at its reviewed pause');
+   if(clip.start)assert(measuredPauses.some(p=>p.start+.021<clip.start&&clip.start<p.end-.021),clip.number+' packet rounding stays safely inside silence');
+  }
   for(let i=0;i<timing.clips.length;i++){
    await page.selectOption('#reading-picker',String(i));
    const clip=timing.clips[i];
@@ -125,6 +173,16 @@ const {chromium}=require('playwright');
     assert.deepEqual(await page.locator('#study-passage .pada-sanskrit .pada-word').allTextContents(),expectedPadas,clip.number+' preserves grammatical word division and every occurrence');
     await page.locator('#study-back').click();
    }
+  }
+  for(const clip of timing.clips.filter(c=>/^[34]\./.test(c.number)||c.number==='closing-shanti')){
+   await page.selectOption('#reading-picker',String(timing.clips.indexOf(clip)));
+   await page.locator('#screen-read .recitation-play').click();
+   await waitForPlayback();
+   const state=await page.evaluate(async()=>{const a=document.getElementById('recitation-audio'),bytes=await (await fetch(a.src)).arrayBuffer();const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');return {local:a.currentTime,sourceHash:hash,time:audioEdition.recordingTime,first:document.querySelector('#reading-copy [data-audio-phrase="0"]').classList.contains('reciting')};});
+   assert(state.local<1,clip.number+' starts its own audio at the beginning');
+   assert.equal(state.sourceHash,packaging.find(c=>c.number===clip.number).sha256,clip.number+' selects the matching section');
+   assert(Math.abs(state.time-clip.start)<1&&state.first,clip.number+' highlights the first phrase at its opening');
+   await page.locator('#screen-read .recitation-play').click();
   }
   await page.selectOption('#reading-picker','3');
   for(const [width,height] of [[390,844],[320,568],[844,390],[1440,900]]){
@@ -163,20 +221,20 @@ const {chromium}=require('playwright');
   }
   await page.locator('#screen-read .recitation-play').click();
   await waitForPlayback();
-  assert(await page.evaluate(()=>Math.abs(document.getElementById('recitation-audio').currentTime-KENA_AUDIO.clips[1].start)<2));
+  assert(await page.evaluate(()=>Math.abs(audioEdition.recordingTime-KENA_AUDIO.clips[1].start)<2));
   // Seek to the boundary directly: headless audio output can have a stalled hardware clock.
-  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end);
+  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end-KENA_AUDIO_SOURCES['1.1'].offset);
   await page.waitForFunction(()=>document.getElementById('recitation-audio').paused);
-  assert(await page.evaluate(()=>Math.abs(document.getElementById('recitation-audio').currentTime-KENA_AUDIO.clips[1].end)<.001),'Verse stop clamps playback to its boundary');
+  assert(await page.evaluate(()=>Math.abs(audioEdition.recordingTime-KENA_AUDIO.clips[1].end)<.03),'Verse stop clamps playback to its boundary');
   await page.locator('#screen-read .recitation-repeat').check();
   await page.locator('#screen-read .recitation-restart').click();
   await waitForPlayback();
-  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end-.02);
-  await page.waitForFunction(()=>document.getElementById('recitation-audio').currentTime<KENA_AUDIO.clips[1].start+1);
+  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end-KENA_AUDIO_SOURCES['1.1'].offset-.02);
+  await page.waitForFunction(()=>audioEdition.recordingTime<KENA_AUDIO.clips[1].start+1);
   await waitForPlayback();
   await page.locator('#screen-read .recitation-repeat').uncheck();
   await page.locator('#screen-read .recitation-continuous').check();
-  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end-.02);
+  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips[1].end-KENA_AUDIO_SOURCES['1.1'].offset-.02);
   await page.waitForFunction(()=>document.getElementById('reading-number').textContent==='1.2');
   await waitForPlayback();
   await page.locator('#reading-study').click();
@@ -198,8 +256,8 @@ const {chromium}=require('playwright');
   await page.locator('#screen-read .recitation-repeat').check();
   await page.locator('#screen-read .recitation-play').click();
   await waitForPlayback();
-  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips.at(-1).end-.02);
-  await page.waitForFunction(()=>document.getElementById('recitation-audio').currentTime<KENA_AUDIO.clips.at(-1).start+1);
+  await page.evaluate(()=>document.getElementById('recitation-audio').currentTime=KENA_AUDIO.clips.at(-1).end-KENA_AUDIO_SOURCES['closing-shanti'].offset-.02);
+  await page.waitForFunction(()=>audioEdition.recordingTime<KENA_AUDIO.clips.at(-1).start+1);
   await waitForPlayback();
   await page.evaluate(()=>navigate('home'));
   assert(await page.evaluate(()=>document.getElementById('recitation-audio').paused),'Leaving the reader pauses playback');

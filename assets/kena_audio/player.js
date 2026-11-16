@@ -5,16 +5,26 @@ firstMantra.querySelector('.v-translit').textContent=firstMantra.querySelector('
 const firstWord=firstMantra.querySelector('table.wbw tbody tr');
 if(firstWord?.cells[0].textContent.trim()==='ॐ')firstWord.remove();
 KENA_PHRASE_TRANSLATIONS['1.1']=KENA_PHRASE_TRANSLATIONS['1.1'].slice(1).map(p=>({...p,start:p.start-1,end:p.end-1}));
-/* One embedded recording, with bounded, independently playable recitations. */
+/* Independently embedded sections avoid long-stream Ogg seek drift. */
 const audioEdition = (() => {
  const audio = document.getElementById('recitation-audio');
  let selected = null, repeat = false, continuous = false, frame = 0, pendingSeek = null;
- let rate = .75, panelSerial = 0;
+ let rate = .75, panelSerial = 0, sourceNumber = null, playSerial = 0, sourceUrl = null;
+ const recordingTime = () => audio.currentTime + (KENA_AUDIO_SOURCES[sourceNumber]?.offset || 0);
+ function loadSection(number, restart=false) {
+  if(sourceNumber===number&&!restart)return;
+  audio.pause();sourceNumber=number;pendingSeek=null;
+  const bytes=Uint8Array.from(atob(KENA_AUDIO_SOURCES[number].src.split(',')[1]),c=>c.charCodeAt(0));
+  const previous=sourceUrl;
+  sourceUrl=URL.createObjectURL(new Blob([bytes],{type:'audio/webm;codecs=opus'}));
+  audio.src=sourceUrl;audio.load();
+  if(previous)URL.revokeObjectURL(previous);
+ }
  const format = seconds => `${Math.floor(seconds/60)}:${String(Math.floor(seconds%60)).padStart(2,'0')}`;
  const clipFor = number => KENA_AUDIO.clips.find(c => c.number === number);
  function status(text,error=false) { const output=document.getElementById('audio-status');output.textContent=text;output.classList.toggle('audio-error',error); }
  function refresh(visibleOnly=false) {
-  const clip=selected, elapsed=clip ? Math.max(0,Math.min(audio.currentTime-clip.start,clip.end-clip.start)) : 0;
+  const clip=selected, elapsed=clip ? Math.max(0,Math.min(recordingTime()-clip.start,clip.end-clip.start)) : 0;
   document.querySelectorAll('.recitation-panel').forEach(panel => {
    if(visibleOnly&&!panel.closest('.screen.active'))return;
    const number=panel.dataset.number, item=clipFor(number), active=clip && clip.number===number;
@@ -32,34 +42,42 @@ const audioEdition = (() => {
   });
   document.querySelectorAll('[data-audio-phrase]').forEach(line=>{
    const phrase=clipFor(line.dataset.audioNumber)?.phrases[Number(line.dataset.audioPhrase)];
-   line.classList.toggle('reciting',!!(phrase&&selected?.number===line.dataset.audioNumber&&!audio.paused&&audio.currentTime>=phrase.start&&audio.currentTime<phrase.end));
+   line.classList.toggle('reciting',!!(phrase&&selected?.number===line.dataset.audioNumber&&!audio.paused&&recordingTime()>=phrase.start&&recordingTime()<phrase.end));
   });
  }
  function seekTo(time) {
+  time=Math.max(0,time-KENA_AUDIO_SOURCES[sourceNumber].offset);
+  if(time===0){
+   const wasPlaying=!audio.paused;loadSection(sourceNumber,true);
+   if(wasPlaying)audio.play().catch(()=>status('Tap Play to resume.'));
+   return;
+  }
   if(audio.readyState===0){pendingSeek=time;audio.load();}else audio.currentTime=time;
  }
  async function play(number, restart=false) {
   const clip=clipFor(number);if(!clip)return;
   const changed=selected?.number!==number;
+  const serial=++playSerial;
   if(changed){audio.pause();selected=clip;}
-  if(changed||restart||audio.currentTime<clip.start||audio.currentTime>=clip.end-.04)seekTo(clip.start);
+  // Start and restart by loading the short source at its natural beginning.
+  loadSection(number,changed||restart||recordingTime()<clip.start||recordingTime()>=clip.end-.04);
   audio.playbackRate=rate;
-  try { await audio.play(); status('Playing '+clip.label); }
-  catch(error){status('Playback could not start. Tap Play to try again.',true);}
+  try { await audio.play(); if(serial===playSerial)status('Playing '+clip.label); }
+  catch(error){if(serial===playSerial)status('Playback could not start. Tap Play to try again.',true);}
   refresh();
  }
  function finish() {
   if(!selected)return;
-  if(repeat){seekTo(selected.start);if(audio.paused)audio.play().catch(()=>status('Tap Play verse to resume.'));return;}
+  if(repeat){play(selected.number,true);return;}
   if(continuous){
    const index=KENA_AUDIO.clips.indexOf(selected), next=KENA_AUDIO.clips[index+1];
    if(next){openMantra(next.number,false);play(next.number,true);return;}
   }
-  audio.pause();audio.currentTime=selected.end;status('Finished '+selected.label);refresh();
+  audio.pause();status('Finished '+selected.label);refresh();
  }
  function tick(){
   cancelAnimationFrame(frame);
-  if(!audio.paused){if(selected&&audio.currentTime>=selected.end-.025)finish();refresh(true);if(!audio.paused)frame=requestAnimationFrame(tick);}
+  if(!audio.paused){if(selected&&recordingTime()>=selected.end-.025)finish();refresh(true);if(!audio.paused)frame=requestAnimationFrame(tick);}
  }
  function positionOptions(panel){
   const options=panel.querySelector('.recitation-settings');if(options.hidden)return;
@@ -102,7 +120,7 @@ const audioEdition = (() => {
   panel.querySelector('.recitation-toggle').onclick=()=>{const open=panel.querySelector('.recitation-settings').hidden;closeOptions();setOptions(panel,open);};
   panel.querySelector('.recitation-seek').oninput=event=>{
    const item=clipFor(number);if(selected?.number!==number){audio.pause();selected=item;}
-   seekTo(item.start+Math.min(Number(event.target.value),item.end-item.start));refresh();
+   loadSection(number);seekTo(item.start+Math.min(Number(event.target.value),item.end-item.start));refresh();
   };
   panel.querySelector('.recitation-speed').oninput=event=>{rate=Number(event.target.value);audio.playbackRate=rate;refresh();};
   panel.querySelector('.recitation-repeat').onchange=event=>{repeat=event.target.checked;if(repeat)continuous=false;refresh();};
@@ -121,18 +139,19 @@ const audioEdition = (() => {
    });
   }
  }
+ loadSection('shanti');
  audio.preservesPitch=true;audio.playbackRate=rate;
  audio.addEventListener('loadedmetadata',()=>{audio.playbackRate=rate;if(pendingSeek!==null){audio.currentTime=pendingSeek;pendingSeek=null;}refresh();});
  audio.addEventListener('play',tick);
  audio.addEventListener('pause',()=>{cancelAnimationFrame(frame);refresh();});
- audio.addEventListener('timeupdate',()=>{if(!audio.paused&&selected&&audio.currentTime>=selected.end)finish();refresh();});
+ audio.addEventListener('timeupdate',()=>{if(!audio.paused&&selected&&recordingTime()>=selected.end)finish();refresh();});
  audio.addEventListener('ended',finish);
  audio.addEventListener('error',()=>status('The embedded recording could not be decoded in this browser. Try a current browser that supports Opus audio.',true));
  document.addEventListener('pointerdown',event=>document.querySelectorAll('.recitation-panel.is-expanded').forEach(panel=>{if(!panel.contains(event.target))setOptions(panel,false);}));
  document.addEventListener('keydown',event=>{if(event.key!=='Escape')return;const panel=document.querySelector('.recitation-panel.is-expanded');if(panel){setOptions(panel,false,true);event.preventDefault();}});
  document.addEventListener('scroll',event=>{if(!(event.target instanceof Element&&event.target.closest('.recitation-settings')))closeOptions();},true);
  addEventListener('resize',()=>document.querySelectorAll('.recitation-panel.is-expanded').forEach(positionOptions));
- return {mount,showPhrases,play,closeOptions,pause(){audio.pause();if(selected)status('Paused '+selected.label);},select(number){if(selected&&selected.number!==number){audio.pause();selected=null;}refresh();},get state(){return {number:selected?.number,rate,repeat,continuous};}};
+ return {mount,showPhrases,play,closeOptions,pause(){audio.pause();if(selected)status('Paused '+selected.label);},select(number){if(selected&&selected.number!==number){audio.pause();selected=null;}refresh();},get recordingTime(){return recordingTime();},get state(){return {number:selected?.number,rate,repeat,continuous};}};
 })();
 const originalRenderReading=renderReading;
 renderReading=function(){
